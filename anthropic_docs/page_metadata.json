@@ -1,0 +1,1154 @@
+{
+  "https://docs.anthropic.com/en/api": {
+    "title": "Getting started - Anthropic",
+    "url": "https://docs.anthropic.com/en/api",
+    "filename": "en_api.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/en_api.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/en_api.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/en_api.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/welcome/": {
+    "title": "Welcome to Claude - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/welcome/",
+    "filename": "welcome.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/welcome.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/welcome.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/welcome.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/getting-started/": {
+    "title": "Getting started - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/getting-started/",
+    "filename": "getting-started.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/getting-started.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/getting-started.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/getting-started.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/ip-addresses/": {
+    "title": "IP addresses - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/ip-addresses/",
+    "filename": "ip-addresses.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/ip-addresses.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/ip-addresses.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/ip-addresses.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/versioning/": {
+    "title": "Versions - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/versioning/",
+    "filename": "versioning.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/versioning.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/versioning.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/versioning.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/rate-limits/": {
+    "title": "Rate limits - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/rate-limits/",
+    "filename": "rate-limits.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/rate-limits.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/rate-limits.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/rate-limits.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/client-sdks/": {
+    "title": "Client SDKs - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/client-sdks/",
+    "filename": "client-sdks.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/client-sdks.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/client-sdks.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/client-sdks.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/errors/": {
+    "title": "Errors - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/errors/",
+    "filename": "errors.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/errors.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/errors.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/errors.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/supported-regions/": {
+    "title": "Supported regions - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/supported-regions/",
+    "filename": "supported-regions.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/supported-regions.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/supported-regions.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/supported-regions.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/getting-help/": {
+    "title": "Getting help - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/getting-help/",
+    "filename": "getting-help.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/getting-help.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/getting-help.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/getting-help.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/claude-on-amazon-bedrock/": {
+    "title": "Amazon Bedrock API - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/claude-on-amazon-bedrock/",
+    "filename": "claude-on-amazon-bedrock.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/claude-on-amazon-bedrock.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/claude-on-amazon-bedrock.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/claude-on-amazon-bedrock.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/claude-on-vertex-ai/": {
+    "title": "Vertex AI API - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/claude-on-vertex-ai/",
+    "filename": "claude-on-vertex-ai.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/claude-on-vertex-ai.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/claude-on-vertex-ai.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/claude-on-vertex-ai.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/openai-sdk/": {
+    "title": "OpenAI SDK compatibility (beta) - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/openai-sdk/",
+    "filename": "openai-sdk.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/openai-sdk.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/openai-sdk.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/openai-sdk.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/initial-setup/": {
+    "title": "Initial setup - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/initial-setup/",
+    "filename": "initial-setup.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/initial-setup.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/initial-setup.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/initial-setup.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/intro-to-claude/": {
+    "title": "Intro to Claude - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/intro-to-claude/",
+    "filename": "intro-to-claude.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/intro-to-claude.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/intro-to-claude.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/intro-to-claude.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/define-success/": {
+    "title": "Define your success criteria - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/define-success/",
+    "filename": "build-with-claude_define-success.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_define-success.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_define-success.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_define-success.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/develop-tests/": {
+    "title": "Create strong empirical evaluations - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/develop-tests/",
+    "filename": "build-with-claude_develop-tests.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_develop-tests.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_develop-tests.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_develop-tests.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/context-windows/": {
+    "title": "Context windows - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/context-windows/",
+    "filename": "build-with-claude_context-windows.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_context-windows.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_context-windows.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_context-windows.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/vision/": {
+    "title": "Vision - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/vision/",
+    "filename": "build-with-claude_vision.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_vision.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_vision.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_vision.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/multilingual-support/": {
+    "title": "Multilingual support - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/multilingual-support/",
+    "filename": "build-with-claude_multilingual-support.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_multilingual-support.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_multilingual-support.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_multilingual-support.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking/": {
+    "title": "Building with extended thinking - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking/",
+    "filename": "build-with-claude_extended-thinking.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_extended-thinking.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_extended-thinking.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_extended-thinking.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching/": {
+    "title": "Prompt caching - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching/",
+    "filename": "build-with-claude_prompt-caching.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-caching.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-caching.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-caching.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/pdf-support/": {
+    "title": "PDF support - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/pdf-support/",
+    "filename": "build-with-claude_pdf-support.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_pdf-support.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_pdf-support.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_pdf-support.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/citations/": {
+    "title": "Citations - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/citations/",
+    "filename": "build-with-claude_citations.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_citations.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_citations.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_citations.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/token-counting/": {
+    "title": "Token counting - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/token-counting/",
+    "filename": "build-with-claude_token-counting.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_token-counting.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_token-counting.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_token-counting.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/batch-processing/": {
+    "title": "Batch processing - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/batch-processing/",
+    "filename": "build-with-claude_batch-processing.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_batch-processing.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_batch-processing.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_batch-processing.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/agents-and-tools/claude-for-sheets/": {
+    "title": "Google Sheets add-on - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-for-sheets/",
+    "filename": "agents-and-tools_claude-for-sheets.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/agents-and-tools_claude-for-sheets.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/agents-and-tools_claude-for-sheets.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/agents-and-tools_claude-for-sheets.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/test-and-evaluate/eval-tool/": {
+    "title": "Using the Evaluation Tool - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/test-and-evaluate/eval-tool/",
+    "filename": "test-and-evaluate_eval-tool.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/test-and-evaluate_eval-tool.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/test-and-evaluate_eval-tool.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/test-and-evaluate_eval-tool.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/administration/administration-api/": {
+    "title": "Admin API - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/administration/administration-api/",
+    "filename": "administration_administration-api.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/administration_administration-api.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/administration_administration-api.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/administration_administration-api.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/resources/glossary/": {
+    "title": "Glossary - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/resources/glossary/",
+    "filename": "resources_glossary.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/resources_glossary.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/resources_glossary.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/resources_glossary.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/resources/model-deprecations/": {
+    "title": "Model deprecations - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/resources/model-deprecations/",
+    "filename": "resources_model-deprecations.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/resources_model-deprecations.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/resources_model-deprecations.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/resources_model-deprecations.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/resources/api-features/": {
+    "title": "API feature overview - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/resources/api-features/",
+    "filename": "resources_api-features.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/resources_api-features.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/resources_api-features.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/resources_api-features.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/about-claude/models/": {
+    "title": "All models overview - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/about-claude/models/",
+    "filename": "about-claude_models.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/about-claude_models.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/about-claude_models.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/about-claude_models.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/text-generation/": {
+    "title": "Text generation - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/text-generation/",
+    "filename": "build-with-claude_text-generation.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_text-generation.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_text-generation.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_text-generation.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/quickstart/": {
+    "title": "Initial setup - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/quickstart/",
+    "filename": "quickstart.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/quickstart.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/quickstart.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/quickstart.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/messages-streaming/": {
+    "title": "Streaming Messages - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/messages-streaming/",
+    "filename": "messages-streaming.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/messages-streaming.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/messages-streaming.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/messages-streaming.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/creating-message-batches/": {
+    "title": "Create a Message Batch - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/creating-message-batches/",
+    "filename": "creating-message-batches.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/creating-message-batches.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/creating-message-batches.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/creating-message-batches.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/apikeys/update-api-key/": {
+    "title": "Update API Keys - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/apikeys/update-api-key/",
+    "filename": "admin-api_apikeys_update-api-key.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_apikeys_update-api-key.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_apikeys_update-api-key.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_apikeys_update-api-key.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/prompt-tools-generate/": {
+    "title": "Generate a prompt - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/prompt-tools-generate/",
+    "filename": "prompt-tools-generate.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/prompt-tools-generate.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/prompt-tools-generate.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/prompt-tools-generate.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/streaming/": {
+    "title": "Streaming Text Completions - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/streaming/",
+    "filename": "streaming.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/streaming.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/streaming.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/streaming.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/messages/": {
+    "title": "Messages - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/messages/",
+    "filename": "messages.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/messages.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/messages.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/messages.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/about-claude/use-case-guides/overview/": {
+    "title": "Guides to common use cases - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/about-claude/use-case-guides/overview/",
+    "filename": "about-claude_use-case-guides_overview.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/about-claude_use-case-guides_overview.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/about-claude_use-case-guides_overview.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/about-claude_use-case-guides_overview.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/": {
+    "title": "Getting started - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/",
+    "filename": "page_29a64a70.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/page_29a64a70.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/page_29a64a70.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/page_29a64a70.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/tool-use/": {
+    "title": "Tool use with Claude - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use/",
+    "filename": "build-with-claude_tool-use.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_tool-use.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_tool-use.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_tool-use.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/about-claude/security-compliance/": {
+    "title": "Security and compliance - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/about-claude/security-compliance/",
+    "filename": "about-claude_security-compliance.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/about-claude_security-compliance.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/about-claude_security-compliance.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/about-claude_security-compliance.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/be-clear-direct/": {
+    "title": "Be clear, direct, and detailed - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/be-clear-direct/",
+    "filename": "be-clear-direct.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/be-clear-direct.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/be-clear-direct.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/be-clear-direct.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview/": {
+    "title": "Tool use with Claude - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview/",
+    "filename": "build-with-claude_tool-use_overview.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_tool-use_overview.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_tool-use_overview.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_tool-use_overview.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/messages-examples/": {
+    "title": "Messages examples - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/messages-examples/",
+    "filename": "messages-examples.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/messages-examples.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/messages-examples.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/messages-examples.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview/": {
+    "title": "Prompt engineering overview - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview/",
+    "filename": "build-with-claude_prompt-engineering_overview.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_overview.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_overview.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_overview.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/build-with-claude/extended-thinking/": {
+    "title": "Home - Anthropic",
+    "url": "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/build-with-claude/extended-thinking/",
+    "filename": "_sites_docs.anthropic.com_en_docs_build-with-claude_extended-thinking.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/_sites_docs.anthropic.com_en_docs_build-with-claude_extended-thinking.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/_sites_docs.anthropic.com_en_docs_build-with-claude_extended-thinking.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/_sites_docs.anthropic.com_en_docs_build-with-claude_extended-thinking.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/models-overview/": {
+    "title": "All models overview - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/models-overview/",
+    "filename": "models-overview.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/models-overview.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/models-overview.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/models-overview.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/context-windows/": {
+    "title": "Home - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/context-windows/",
+    "filename": "context-windows.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/context-windows.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/context-windows.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/context-windows.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/messages-count-tokens/": {
+    "title": "Count Message tokens - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/messages-count-tokens/",
+    "filename": "messages-count-tokens.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/messages-count-tokens.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/messages-count-tokens.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/messages-count-tokens.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/extended-thinking-tips/": {
+    "title": "Extended thinking tips - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/extended-thinking-tips/",
+    "filename": "build-with-claude_prompt-engineering_extended-thinking-tips.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_extended-thinking-tips.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_extended-thinking-tips.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_extended-thinking-tips.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/retrieving-message-batches/": {
+    "title": "Retrieve a Message Batch - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/retrieving-message-batches/",
+    "filename": "retrieving-message-batches.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/retrieving-message-batches.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/retrieving-message-batches.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/retrieving-message-batches.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/messages-batch-examples/": {
+    "title": "Message Batches examples - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/messages-batch-examples/",
+    "filename": "messages-batch-examples.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/messages-batch-examples.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/messages-batch-examples.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/messages-batch-examples.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/tool-use/text-editor-tool/": {
+    "title": "Text editor tool - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use/text-editor-tool/",
+    "filename": "build-with-claude_tool-use_text-editor-tool.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_tool-use_text-editor-tool.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_tool-use_text-editor-tool.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_tool-use_text-editor-tool.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/build-with-claude/citations/": {
+    "title": "Home - Anthropic",
+    "url": "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/build-with-claude/citations/",
+    "filename": "_sites_docs.anthropic.com_en_docs_build-with-claude_citations.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/_sites_docs.anthropic.com_en_docs_build-with-claude_citations.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/_sites_docs.anthropic.com_en_docs_build-with-claude_citations.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/_sites_docs.anthropic.com_en_docs_build-with-claude_citations.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prefill-claudes-response/": {
+    "title": "Prefill Claude's response for greater output control - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prefill-claudes-response/",
+    "filename": "build-with-claude_prompt-engineering_prefill-claudes-response.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_prefill-claudes-response.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_prefill-claudes-response.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_prefill-claudes-response.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/build-with-claude/batch-processing/": {
+    "title": "Home - Anthropic",
+    "url": "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/build-with-claude/batch-processing/",
+    "filename": "_sites_docs.anthropic.com_en_docs_build-with-claude_batch-processing.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/_sites_docs.anthropic.com_en_docs_build-with-claude_batch-processing.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/_sites_docs.anthropic.com_en_docs_build-with-claude_batch-processing.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/_sites_docs.anthropic.com_en_docs_build-with-claude_batch-processing.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-latency/": {
+    "title": "Reducing latency - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-latency/",
+    "filename": "test-and-evaluate_strengthen-guardrails_reduce-latency.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/test-and-evaluate_strengthen-guardrails_reduce-latency.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/test-and-evaluate_strengthen-guardrails_reduce-latency.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/test-and-evaluate_strengthen-guardrails_reduce-latency.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-generator/": {
+    "title": "Automatically generate first draft prompt templates - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-generator/",
+    "filename": "build-with-claude_prompt-engineering_prompt-generator.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_prompt-generator.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_prompt-generator.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_prompt-generator.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/admin-api/": {
+    "title": "Get User - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/",
+    "filename": "admin-api.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations/": {
+    "title": "Reduce hallucinations - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations/",
+    "filename": "test-and-evaluate_strengthen-guardrails_reduce-hallucinations.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/test-and-evaluate_strengthen-guardrails_reduce-hallucinations.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/test-and-evaluate_strengthen-guardrails_reduce-hallucinations.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/test-and-evaluate_strengthen-guardrails_reduce-hallucinations.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/resources/status/": {
+    "title": "System status - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/resources/status/",
+    "filename": "resources_status.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/resources_status.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/resources_status.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/resources_status.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/resources/courses/": {
+    "title": "Anthropic Courses - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/resources/courses/",
+    "filename": "resources_courses.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/resources_courses.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/resources_courses.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/resources_courses.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview/": {
+    "title": "Claude Code overview - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview/",
+    "filename": "agents-and-tools_claude-code_overview.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/agents-and-tools_claude-code_overview.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/agents-and-tools_claude-code_overview.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/agents-and-tools_claude-code_overview.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/about-claude/models/extended-thinking-models/": {
+    "title": "Extended thinking models - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/about-claude/models/extended-thinking-models/",
+    "filename": "about-claude_models_extended-thinking-models.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/about-claude_models_extended-thinking-models.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/about-claude_models_extended-thinking-models.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/about-claude_models_extended-thinking-models.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/about-claude/models/all-models/": {
+    "title": "All models overview - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/about-claude/models/all-models/",
+    "filename": "about-claude_models_all-models.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/about-claude_models_all-models.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/about-claude_models_all-models.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/about-claude_models_all-models.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/legacy-model-guide/": {
+    "title": "All models overview - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/legacy-model-guide/",
+    "filename": "legacy-model-guide.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/legacy-model-guide.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/legacy-model-guide.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/legacy-model-guide.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages/": {
+    "title": "Migrating from Text Completions - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages/",
+    "filename": "migrating-from-text-completions-to-messages.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/migrating-from-text-completions-to-messages.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/migrating-from-text-completions-to-messages.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/migrating-from-text-completions-to-messages.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/": {
+    "title": "Prompt engineering overview - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/",
+    "filename": "build-with-claude_prompt-engineering.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/_sites/docs.anthropic.com/en/api/messages-streaming/": {
+    "title": "Home - Anthropic",
+    "url": "https://docs.anthropic.com/_sites/docs.anthropic.com/en/api/messages-streaming/",
+    "filename": "_sites_docs.anthropic.com_en_api_messages-streaming.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/_sites_docs.anthropic.com_en_api_messages-streaming.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/_sites_docs.anthropic.com_en_api_messages-streaming.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/_sites_docs.anthropic.com_en_api_messages-streaming.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/listing-message-batches/": {
+    "title": "List Message Batches - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/listing-message-batches/",
+    "filename": "listing-message-batches.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/listing-message-batches.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/listing-message-batches.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/listing-message-batches.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/deleting-message-batches/": {
+    "title": "Delete a Message Batch - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/deleting-message-batches/",
+    "filename": "deleting-message-batches.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/deleting-message-batches.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/deleting-message-batches.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/deleting-message-batches.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/canceling-message-batches/": {
+    "title": "Cancel a Message Batch - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/canceling-message-batches/",
+    "filename": "canceling-message-batches.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/canceling-message-batches.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/canceling-message-batches.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/canceling-message-batches.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/apikeys/get-api-key/": {
+    "title": "Get API Key - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/apikeys/get-api-key/",
+    "filename": "admin-api_apikeys_get-api-key.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_apikeys_get-api-key.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_apikeys_get-api-key.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_apikeys_get-api-key.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/apikeys/list-api-keys/": {
+    "title": "List API Keys - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/apikeys/list-api-keys/",
+    "filename": "admin-api_apikeys_list-api-keys.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_apikeys_list-api-keys.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_apikeys_list-api-keys.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_apikeys_list-api-keys.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/prompt-tools-improve/": {
+    "title": "Improve a prompt - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/prompt-tools-improve/",
+    "filename": "prompt-tools-improve.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/prompt-tools-improve.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/prompt-tools-improve.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/prompt-tools-improve.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/complete/": {
+    "title": "Create a Text Completion - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/complete/",
+    "filename": "complete.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/complete.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/complete.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/complete.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/models/": {
+    "title": "Get a Model - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/models/",
+    "filename": "models.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/models.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/models.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/models.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/prompt-validation/": {
+    "title": "Prompt validation - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/prompt-validation/",
+    "filename": "prompt-validation.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/prompt-validation.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/prompt-validation.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/prompt-validation.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/about-claude/use-case-guides/content-moderation/": {
+    "title": "Content moderation - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/about-claude/use-case-guides/content-moderation/",
+    "filename": "about-claude_use-case-guides_content-moderation.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/about-claude_use-case-guides_content-moderation.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/about-claude_use-case-guides_content-moderation.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/about-claude_use-case-guides_content-moderation.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/tool-use/token-efficient-tool-use/": {
+    "title": "Token-efficient tool use (beta) - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use/token-efficient-tool-use/",
+    "filename": "build-with-claude_tool-use_token-efficient-tool-use.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_tool-use_token-efficient-tool-use.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_tool-use_token-efficient-tool-use.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_tool-use_token-efficient-tool-use.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/about-claude/use-case-guides/ticket-routing/": {
+    "title": "Ticket routing - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/about-claude/use-case-guides/ticket-routing/",
+    "filename": "about-claude_use-case-guides_ticket-routing.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/about-claude_use-case-guides_ticket-routing.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/about-claude_use-case-guides_ticket-routing.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/about-claude_use-case-guides_ticket-routing.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/build-with-claude/tool-use/overview/": {
+    "title": "Home - Anthropic",
+    "url": "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/build-with-claude/tool-use/overview/",
+    "filename": "_sites_docs.anthropic.com_en_docs_build-with-claude_tool-use_overview.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/_sites_docs.anthropic.com_en_docs_build-with-claude_tool-use_overview.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/_sites_docs.anthropic.com_en_docs_build-with-claude_tool-use_overview.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/_sites_docs.anthropic.com_en_docs_build-with-claude_tool-use_overview.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-templates-and-variables/": {
+    "title": "Use prompt templates and variables - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-templates-and-variables/",
+    "filename": "build-with-claude_prompt-engineering_prompt-templates-and-variables.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_prompt-templates-and-variables.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_prompt-templates-and-variables.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_prompt-templates-and-variables.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/about-claude/use-case-guides/customer-support-chat/": {
+    "title": "Customer support agent - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/about-claude/use-case-guides/customer-support-chat/",
+    "filename": "about-claude_use-case-guides_customer-support-chat.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/about-claude_use-case-guides_customer-support-chat.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/about-claude_use-case-guides_customer-support-chat.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/about-claude_use-case-guides_customer-support-chat.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-improver/": {
+    "title": "Use our prompt improver to optimize your prompts - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-improver/",
+    "filename": "build-with-claude_prompt-engineering_prompt-improver.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_prompt-improver.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_prompt-improver.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_prompt-improver.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/be-clear-and-direct/": {
+    "title": "Be clear, direct, and detailed - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/be-clear-and-direct/",
+    "filename": "build-with-claude_prompt-engineering_be-clear-and-direct.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_be-clear-and-direct.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_be-clear-and-direct.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_be-clear-and-direct.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/multishot-prompting/": {
+    "title": "Use examples (multishot prompting) to guide Claude's behavior - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/multishot-prompting/",
+    "filename": "build-with-claude_prompt-engineering_multishot-prompting.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_multishot-prompting.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_multishot-prompting.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_multishot-prompting.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-of-thought/": {
+    "title": "Let Claude think (chain of thought prompting) to increase performance - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-of-thought/",
+    "filename": "build-with-claude_prompt-engineering_chain-of-thought.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_chain-of-thought.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_chain-of-thought.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_chain-of-thought.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts/": {
+    "title": "Giving Claude a role with a system prompt - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts/",
+    "filename": "build-with-claude_prompt-engineering_system-prompts.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_system-prompts.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_system-prompts.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_system-prompts.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-prompts/": {
+    "title": "Chain complex prompts for stronger performance - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-prompts/",
+    "filename": "build-with-claude_prompt-engineering_chain-prompts.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_chain-prompts.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_chain-prompts.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_chain-prompts.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/vision/": {
+    "title": "Vision - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/vision/",
+    "filename": "vision.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/vision.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/vision.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/vision.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/models-list/": {
+    "title": "List Models - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/models-list/",
+    "filename": "models-list.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/models-list.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/models-list.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/models-list.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/long-context-tips/": {
+    "title": "Long context prompting tips - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/long-context-tips/",
+    "filename": "build-with-claude_prompt-engineering_long-context-tips.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_long-context-tips.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_long-context-tips.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_long-context-tips.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/increase-consistency/": {
+    "title": "Increase output consistency (JSON mode) - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/increase-consistency/",
+    "filename": "test-and-evaluate_strengthen-guardrails_increase-consistency.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/test-and-evaluate_strengthen-guardrails_increase-consistency.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/test-and-evaluate_strengthen-guardrails_increase-consistency.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/test-and-evaluate_strengthen-guardrails_increase-consistency.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags/": {
+    "title": "Use XML tags to structure your prompts - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags/",
+    "filename": "build-with-claude_prompt-engineering_use-xml-tags.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/build-with-claude_prompt-engineering_use-xml-tags.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/build-with-claude_prompt-engineering_use-xml-tags.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/build-with-claude_prompt-engineering_use-xml-tags.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks/": {
+    "title": "Mitigate jailbreaks and prompt injections - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks/",
+    "filename": "test-and-evaluate_strengthen-guardrails_mitigate-jailbreaks.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/test-and-evaluate_strengthen-guardrails_mitigate-jailbreaks.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/test-and-evaluate_strengthen-guardrails_mitigate-jailbreaks.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/test-and-evaluate_strengthen-guardrails_mitigate-jailbreaks.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/keep-claude-in-character/": {
+    "title": "Keep Claude in character with role prompting and prefilling - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/keep-claude-in-character/",
+    "filename": "test-and-evaluate_strengthen-guardrails_keep-claude-in-character.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/test-and-evaluate_strengthen-guardrails_keep-claude-in-character.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/test-and-evaluate_strengthen-guardrails_keep-claude-in-character.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/test-and-evaluate_strengthen-guardrails_keep-claude-in-character.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/admin-api/users/get-user/": {
+    "title": "Get User - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/users/get-user/",
+    "filename": "admin-api_users_get-user.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_users_get-user.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_users_get-user.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_users_get-user.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/users/list-users/": {
+    "title": "List Users - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/users/list-users/",
+    "filename": "admin-api_users_list-users.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_users_list-users.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_users_list-users.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_users_list-users.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/users/update-user/": {
+    "title": "Update User - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/users/update-user/",
+    "filename": "admin-api_users_update-user.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_users_update-user.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_users_update-user.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_users_update-user.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/users/remove-user/": {
+    "title": "Remove User - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/users/remove-user/",
+    "filename": "admin-api_users_remove-user.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_users_remove-user.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_users_remove-user.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_users_remove-user.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/resources/claude-3-model-card/": {
+    "title": "Claude 3 model card - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/resources/claude-3-model-card/",
+    "filename": "resources_claude-3-model-card.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/resources_claude-3-model-card.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/resources_claude-3-model-card.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/resources_claude-3-model-card.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/resources/cookbook/": {
+    "title": "Anthropic Cookbook - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/resources/cookbook/",
+    "filename": "resources_cookbook.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/resources_cookbook.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/resources_cookbook.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/resources_cookbook.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/troubleshooting/": {
+    "title": "Claude Code troubleshooting - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/troubleshooting/",
+    "filename": "agents-and-tools_claude-code_troubleshooting.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/agents-and-tools_claude-code_troubleshooting.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/agents-and-tools_claude-code_troubleshooting.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/agents-and-tools_claude-code_troubleshooting.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview/": {
+    "title": "Home - Anthropic",
+    "url": "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview/",
+    "filename": "_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_overview.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_overview.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_overview.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_overview.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/tutorials/": {
+    "title": "Claude Code tutorials - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/tutorials/",
+    "filename": "agents-and-tools_claude-code_tutorials.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/agents-and-tools_claude-code_tutorials.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/agents-and-tools_claude-code_tutorials.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/agents-and-tools_claude-code_tutorials.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/admin-api/workspace_members/delete-workspace-member/": {
+    "title": "Delete Workspace Member - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/workspace_members/delete-workspace-member/",
+    "filename": "admin-api_workspace_members_delete-workspace-member.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_workspace_members_delete-workspace-member.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_workspace_members_delete-workspace-member.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_workspace_members_delete-workspace-member.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/docs/prompt-generator/": {
+    "title": "Automatically generate first draft prompt templates - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/prompt-generator/",
+    "filename": "prompt-generator.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/prompt-generator.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/prompt-generator.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/prompt-generator.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/agents/claude-code/tutorials/": {
+    "title": "Claude Code tutorials - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/agents/claude-code/tutorials/",
+    "filename": "agents_claude-code_tutorials.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/agents_claude-code_tutorials.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/agents_claude-code_tutorials.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/agents_claude-code_tutorials.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/resources/claude-3-7-system-card/": {
+    "title": "Claude 3.7 system card - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/resources/claude-3-7-system-card/",
+    "filename": "resources_claude-3-7-system-card.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/resources_claude-3-7-system-card.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/resources_claude-3-7-system-card.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/resources_claude-3-7-system-card.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/docs/intro-to-prompting/": {
+    "title": "Prompt engineering overview - Anthropic",
+    "url": "https://docs.anthropic.com/en/docs/intro-to-prompting/",
+    "filename": "intro-to-prompting.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/intro-to-prompting.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/intro-to-prompting.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/intro-to-prompting.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/admin-api/invites/get-invite/": {
+    "title": "Get Invite - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/invites/get-invite/",
+    "filename": "admin-api_invites_get-invite.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_invites_get-invite.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_invites_get-invite.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_invites_get-invite.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/agents-and-tools/claude-code/tutorials/": {
+    "title": "Home - Anthropic",
+    "url": "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/agents-and-tools/claude-code/tutorials/",
+    "filename": "_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_tutorials.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_tutorials.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_tutorials.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_tutorials.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/admin-api/workspace_members/list-workspace-members/": {
+    "title": "List Workspace Members - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/workspace_members/list-workspace-members/",
+    "filename": "admin-api_workspace_members_list-workspace-members.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_workspace_members_list-workspace-members.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_workspace_members_list-workspace-members.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_workspace_members_list-workspace-members.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/agents-and-tools/claude-code/troubleshooting/": {
+    "title": "Home - Anthropic",
+    "url": "https://docs.anthropic.com/_sites/docs.anthropic.com/en/docs/agents-and-tools/claude-code/troubleshooting/",
+    "filename": "_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_troubleshooting.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_troubleshooting.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_troubleshooting.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/_sites_docs.anthropic.com_en_docs_agents-and-tools_claude-code_troubleshooting.html",
+    "is_api_doc": false
+  },
+  "https://docs.anthropic.com/en/api/admin-api/workspace_members/update-workspace-member/": {
+    "title": "Update Workspace Member - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/workspace_members/update-workspace-member/",
+    "filename": "admin-api_workspace_members_update-workspace-member.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_workspace_members_update-workspace-member.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_workspace_members_update-workspace-member.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_workspace_members_update-workspace-member.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/invites/create-invite/": {
+    "title": "Create Invite - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/invites/create-invite/",
+    "filename": "admin-api_invites_create-invite.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_invites_create-invite.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_invites_create-invite.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_invites_create-invite.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/invites/delete-invite/": {
+    "title": "Delete Invite - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/invites/delete-invite/",
+    "filename": "admin-api_invites_delete-invite.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_invites_delete-invite.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_invites_delete-invite.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_invites_delete-invite.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/workspace_members/create-workspace-member/": {
+    "title": "Add Workspace Member - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/workspace_members/create-workspace-member/",
+    "filename": "admin-api_workspace_members_create-workspace-member.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_workspace_members_create-workspace-member.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_workspace_members_create-workspace-member.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_workspace_members_create-workspace-member.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/workspaces/get-workspace/": {
+    "title": "Get Workspace - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/workspaces/get-workspace/",
+    "filename": "admin-api_workspaces_get-workspace.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_workspaces_get-workspace.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_workspaces_get-workspace.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_workspaces_get-workspace.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/workspaces/list-workspaces/": {
+    "title": "List Workspaces - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/workspaces/list-workspaces/",
+    "filename": "admin-api_workspaces_list-workspaces.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_workspaces_list-workspaces.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_workspaces_list-workspaces.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_workspaces_list-workspaces.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/workspaces/update-workspace/": {
+    "title": "Update Workspace - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/workspaces/update-workspace/",
+    "filename": "admin-api_workspaces_update-workspace.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_workspaces_update-workspace.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_workspaces_update-workspace.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_workspaces_update-workspace.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/workspaces/create-workspace/": {
+    "title": "Create Workspace - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/workspaces/create-workspace/",
+    "filename": "admin-api_workspaces_create-workspace.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_workspaces_create-workspace.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_workspaces_create-workspace.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_workspaces_create-workspace.html",
+    "is_api_doc": true
+  },
+  "https://docs.anthropic.com/en/api/admin-api/workspaces/archive-workspace/": {
+    "title": "Archive Workspace - Anthropic",
+    "url": "https://docs.anthropic.com/en/api/admin-api/workspaces/archive-workspace/",
+    "filename": "admin-api_workspaces_archive-workspace.html",
+    "html_path": "anthropic_docs/anthropic_docs_html/admin-api_workspaces_archive-workspace.html",
+    "md_path": "anthropic_docs/anthropic_docs_md/admin-api_workspaces_archive-workspace.md",
+    "full_html_path": "anthropic_docs/anthropic_docs_full_html/admin-api_workspaces_archive-workspace.html",
+    "is_api_doc": true
+  }
+}
