@@ -680,8 +680,26 @@ def extract_api_doc_content(soup, url):
     # Try to identify if this is an API reference page
     is_api_reference = API_PATH_PREFIX in url or any(keyword in url for keyword in ['api', 'reference', 'messages', 'authentication'])
     
+    # First, remove global navigation, headers, and sidebars from the full document
+    # This prevents them from being included if we have to fall back to body
+    for element in soup.select('nav, header, .header, .navbar, .navigation, .nav-wrapper, .top-bar, .site-header, .global-header, .announcement, .banner'):
+        element.decompose()
+        
+    for element in soup.select('.sidebar, aside, .aside, .toc, .table-of-contents, .side-menu, .sidenav, .left-menu, .right-menu'):
+        element.decompose()
+        
+    for element in soup.select('footer, .footer, .site-footer, .global-footer, .bottom-bar'):
+        element.decompose()
+        
+    # Custom selectors for Anthropic's specific layout
+    for element in soup.select('.sidebar-container, .navbar-sidebar, .theme-doc-sidebar-container, .top-nav, .doc-sidebar'):
+        element.decompose()
+    
     # Strategy #1: Try to find main content container using common selectors
     content_selectors = [
+        '.theme-doc-markdown',       # DocuSaurus content (used by Anthropic)
+        '.markdown',                 # Common markdown content
+        '.content-container',        # Content container
         'main',                      # Common main content wrapper
         'article',                   # Article content
         '.article-content',          # Article content class
@@ -694,6 +712,7 @@ def extract_api_doc_content(soup, url):
         '.markdown-section',         # Markdown section (common in docs)
         '.page-content',             # Page content class
         '.post-content',             # Post content class
+        '.body-content'              # Body content class
     ]
     
     content = None
@@ -727,14 +746,23 @@ def extract_api_doc_content(soup, url):
     
     # Clean up the content
     if content:
-        # Remove navigation, footer, header, and sidebar elements
+        # Remove navigation, footer, header, and sidebar elements that might be within the content area
         for element in content.select('nav, .navigation, .navbar, .nav, .menu, header, .header, footer, .footer, .sidebar, aside, .aside'):
             element.decompose()
         
         # Remove elements typically used for UI components rather than content
         for element in content.select('.pagination, .breadcrumb, .tabs, .tab, .ad, .advertisement, .cookie-banner, .social-share, .related-articles'):
             element.decompose()
+            
+        # Additional removal of common documentation UI elements
+        for element in content.select('.edit-page-link, .on-this-page, .page-nav, .prev-next-nav, .edit-link, .next-page, .prev-page, .version-selector'):
+            element.decompose()
         
+        # Remove unnecessary div wrappers that don't add content
+        for div in content.find_all('div', class_=['container', 'wrapper', 'inner-wrapper', 'outer-wrapper', 'doc-wrapper']):
+            if len(div.find_all()) == 1:  # If it has exactly one child element
+                div.replace_with(div.contents[0])
+                
         # Remove empty elements
         for element in content.find_all():
             if not element.get_text(strip=True) and not element.find_all('img'):
@@ -805,6 +833,27 @@ def extract_api_doc_content(soup, url):
 
 def improve_markdown_format(markdown_content, url):
     """Improve the formatting of generated markdown"""
+    # Remove any remaining HTML comment blocks
+    markdown_content = re.sub(r'<!--.*?-->', '', markdown_content, flags=re.DOTALL)
+    
+    # Fix duplicate line breaks (more than 2 in a row)
+    markdown_content = re.sub(r'\n{3,}', '\n\n', markdown_content)
+    
+    # Remove redundant heading markers that can appear from nested headings
+    markdown_content = re.sub(r'(^|\n)#+\s*#+\s+', r'\1## ', markdown_content)
+    
+    # Fix misformatted header levels (ensure proper spacing)
+    markdown_content = re.sub(r'(^|\n)#+(?!\s)', r'\1## ', markdown_content)
+    
+    # Ensure header text is on the same line as the hash marks
+    markdown_content = re.sub(r'(^|\n)#+(.*?)(\n\n)([^\n#])', r'\1#\2\3\4', markdown_content)
+    
+    # Fix any over-indented lists (common with markdown converters)
+    markdown_content = re.sub(r'^\s{4,}([*\-+])', r'  \1', markdown_content, flags=re.MULTILINE)
+    
+    # Remove any weird Unicode characters that might interfere with markdown
+    markdown_content = re.sub(r'[^\x00-\x7F]+', ' ', markdown_content)
+    
     # Fix code blocks - ensure proper language detection
     def fix_code_blocks(match):
         code_content = match.group(2).strip()
@@ -877,113 +926,112 @@ def improve_markdown_format(markdown_content, url):
                 processed_lines.append('| ' + ' | '.join(headers) + ' |')
                 processed_lines.append('| ' + ' | '.join(separators) + ' |')
                 
-                # Process data rows
-                for line in lines[2:]:
-                    if '|' in line:
-                        cells = [c.strip() for c in line.split('|')]
-                        cells = [c for c in cells if c != '']  # Remove empty cells from start/end
+                # Process content rows
+                for i in range(2, len(lines)):
+                    if '|' in lines[i]:
+                        cells = [c.strip() for c in lines[i].split('|')]
+                        cells = [c for c in cells if c != '']  # Remove empty cells
+                        
+                        # If we have content cells, process them
                         if cells:
                             processed_lines.append('| ' + ' | '.join(cells) + ' |')
-            else:
-                # This might not be a proper table, return as is
-                return table_content
                 
-            return '\n'.join(processed_lines)
-        
-        return table_content
-    
-    # Fix API parameters - improve formatting of parameter tables
-    def fix_api_parameters(match):
-        params_content = match.group(0)
-        
-        # Convert bullet lists of parameters to tables if they match API parameter patterns
-        if re.search(r'[*-]\s+`[a-zA-Z0-9_]+`\s+-\s+', params_content):
-            lines = params_content.split('\n')
-            param_pattern = re.compile(r'[*-]\s+`([a-zA-Z0-9_]+)`\s+-\s+(.*)')
+                return '\n'.join(processed_lines)
             
-            # Check if enough lines match the parameter pattern
-            param_matches = [param_pattern.match(line) for line in lines]
-            if sum(1 for m in param_matches if m) >= 2:  # At least 2 parameters
-                # Create a table
-                table_lines = ['| Parameter | Description |', '| --- | --- |']
-                
-                current_param = None
-                current_desc = []
-                
-                for i, line in enumerate(lines):
-                    param_match = param_pattern.match(line)
-                    if param_match:
-                        # Save previous parameter if exists
-                        if current_param:
-                            table_lines.append(f"| `{current_param}` | {' '.join(current_desc)} |")
+        # If we can't process it, return the original
+        return table_content
+        
+    # Fix API parameter sections
+    def fix_api_parameters(match):
+        param_content = match.group(0)
+        # Look for Parameter, Type, Required, Description headers
+        headers_match = re.search(r'Parameter\s+Type\s+Required\s+Description', param_content, re.IGNORECASE)
+        
+        if headers_match:
+            # This looks like a parameter table, format it properly
+            lines = param_content.split('\n')
+            new_lines = []
+            
+            for line in lines:
+                if re.search(r'^[a-zA-Z0-9_]+\s+', line):  # Parameter line
+                    parts = line.strip().split(None, 3)  # Split by whitespace, max 3 splits
+                    if len(parts) >= 3:
+                        param_name = f'`{parts[0]}`'  # Format parameter as code
+                        param_type = parts[1]
+                        required = parts[2]
+                        description = parts[3] if len(parts) > 3 else ''
                         
-                        # Start new parameter
-                        current_param = param_match.group(1)
-                        current_desc = [param_match.group(2)]
-                    elif current_param and line.strip() and not param_pattern.match(line):
-                        # Continue description on next line
-                        current_desc.append(line.strip())
-                
-                # Add the last parameter
-                if current_param:
-                    table_lines.append(f"| `{current_param}` | {' '.join(current_desc)} |")
-                
-                return '\n'.join(table_lines)
+                        # Format as markdown list item with bold and code elements
+                        new_line = f"- **{param_name}** ({param_type}) - {description}"
+                        
+                        # Add required/optional info
+                        if required.lower() in ('true', 'yes', 'required'):
+                            new_line += " [Required]"
+                        elif required.lower() in ('false', 'no', 'optional'):
+                            new_line += " [Optional]"
+                            
+                        new_lines.append(new_line)
+            
+            if new_lines:
+                return '\n\n**Parameters:**\n\n' + '\n'.join(new_lines) + '\n\n'
         
-        return params_content
+        return param_content
     
-    # Fix headers - ensure proper spacing
+    # Fix headers - ensure proper format and spacing
     def fix_headers(match):
-        level = len(match.group(1))
-        text = match.group(2).strip()
-        return f"{'#' * level} {text}\n"
+        header_level = len(match.group(1))
+        header_text = match.group(2).strip()
+        return f"{'#' * header_level} {header_text}\n\n"
     
-    # Fix lists - ensure proper indentation
+    # Fix lists - ensure proper formatting and indentation
     def fix_lists(match):
-        list_content = match.group(0)
-        lines = list_content.split('\n')
-        processed_lines = []
+        list_item = match.group(0)
         
-        for line in lines:
-            # Handle unordered lists
-            if re.match(r'^[\s]*[*-]', line):
-                indent_level = len(re.match(r'^[\s]*', line).group(0))
-                content = line.strip()
-                processed_lines.append('  ' * (indent_level // 2) + content)
-            # Handle ordered lists
-            elif re.match(r'^[\s]*\d+\.', line):
-                indent_level = len(re.match(r'^[\s]*', line).group(0))
-                content = line.strip()
-                processed_lines.append('  ' * (indent_level // 2) + content)
-            else:
-                processed_lines.append(line)
-        
-        return '\n'.join(processed_lines)
+        # Check if we need to add spacing after the list marker
+        if re.match(r'^(\s*)([\*\-\+])([^\s])', list_item):
+            list_item = re.sub(r'^(\s*)([\*\-\+])([^\s])', r'\1\2 \3', list_item)
+            
+        # Check if this is a nested list item
+        indent_level = len(match.group(1))
+        if indent_level > 0:
+            # Make sure nested list items have proper indentation (multiples of 2 spaces)
+            proper_indent = (indent_level // 2) * 2
+            if proper_indent != indent_level:
+                list_item = ' ' * proper_indent + list_item.lstrip()
+                
+        return list_item
     
-    # Apply all the fixes
+    # Remove common HTML artifacts that don't convert well to markdown
+    markdown_content = re.sub(r'&nbsp;', ' ', markdown_content)
+    markdown_content = re.sub(r'&lt;', '<', markdown_content)
+    markdown_content = re.sub(r'&gt;', '>', markdown_content)
+    markdown_content = re.sub(r'&amp;', '&', markdown_content)
+    markdown_content = re.sub(r'&quot;', '"', markdown_content)
     
-    # First, handle code blocks to avoid interference with other patterns
-    markdown_content = re.sub(r'```(.*?)\n(.*?)```', fix_code_blocks, markdown_content, flags=re.DOTALL)
+    # Apply regex replacements
+    markdown_content = re.sub(r'```(.*?)```', fix_code_blocks, markdown_content, flags=re.DOTALL)
+    markdown_content = re.sub(r'\|.*?\|\n\|[\s\-:]+\|(\n\|.*?\|)+', fix_tables, markdown_content)
+    markdown_content = re.sub(r'^(#+)(\s*.*?)$', fix_headers, markdown_content, flags=re.MULTILINE)
+    markdown_content = re.sub(r'^(\s*)([\*\-\+]).*?$', fix_lists, markdown_content, flags=re.MULTILINE)
     
-    # Fix other elements
-    markdown_content = re.sub(r'^(#+)\s*(.*?)$', fix_headers, markdown_content, flags=re.MULTILINE)
-    markdown_content = re.sub(r'(\|.*\|\n\|[-|:]*\|\n(\|.*\|\n)*)', fix_tables, markdown_content, flags=re.MULTILINE)
-    markdown_content = re.sub(r'((?:^[*-].*\n)+)', fix_api_parameters, markdown_content, flags=re.MULTILINE)
-    markdown_content = re.sub(r'((?:^[\s]*[*-].*\n)+|(?:^[\s]*\d+\..*\n)+)', fix_lists, markdown_content, flags=re.MULTILINE)
+    # Now apply parameter fixes - but only in sections that look like API reference content
+    if re.search(r'Parameters?|Arguments?|Options?|Fields?', markdown_content, re.IGNORECASE):
+        markdown_content = re.sub(r'Parameter\s+Type\s+Required\s+Description.*?(?=^#|\Z)', 
+                              fix_api_parameters, markdown_content, flags=re.DOTALL|re.MULTILINE)
     
-    # Fix consecutive newlines (max 2)
-    markdown_content = re.sub(r'\n{3,}', '\n\n', markdown_content)
+    # Clean up extraneous whitespace
+    markdown_content = re.sub(r'[ \t]+$', '', markdown_content, flags=re.MULTILINE)  # Remove trailing whitespace
+    markdown_content = re.sub(r'\n{3,}', '\n\n', markdown_content)  # Remove excess newlines
     
-    # Add a front matter section with title and source URL
-    title = url.split('/')[-1].replace('-', ' ').title()
-    front_matter = f"""---
-title: {title}
-source_url: {url}
----
-
-"""
+    # Add an anchor to the top to help with navigation when linking between files
+    if is_valid_api_url(url):
+        title = re.search(r'^# (.*?)$', markdown_content, re.MULTILINE)
+        if title:
+            title_text = title.group(1).strip()
+            anchor_link = f'<a id="{clean_filename(url)}"></a>\n\n'
+            markdown_content = anchor_link + markdown_content
     
-    return front_matter + markdown_content
+    return markdown_content
 
 def page_scraper_worker():
     """Worker thread for page scraping"""

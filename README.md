@@ -13,6 +13,14 @@ A Python tool to scrape and convert the Anthropic API documentation into markdow
 - Properly extracts API parameters and their descriptions
 - Multi-threaded for efficient downloading
 
+## Latest Improvements
+
+- **Cleaner Markdown Structure**: Headers, sidebars, and navigation elements are now removed from each file
+- **Separate Navigation System**: Table of contents and sidebar navigation files for better organization
+- **Enhanced API Parameter Formatting**: More readable formatting of parameters in documentation
+- **Improved Content Extraction**: Better detection and isolation of main content
+- **Adaptive Rate Limiting**: Intelligently backs off when rate limits are encountered
+
 ## Installation
 
 1. Clone this repository:
@@ -52,6 +60,18 @@ The improved scraper includes:
 5. **Cleaner Markdown Output**: Better conversion from HTML to Markdown
 6. **Adaptive Rate Limiting**: Intelligently backs off when rate limits are encountered
 
+### Table of Contents Generation
+
+A separate table of contents and sidebar navigation are now generated to make browsing the documentation easier:
+
+```bash
+python generate_toc.py
+```
+
+This creates:
+- `anthropic_docs/table_of_contents.md`: Main table of contents organized by category
+- `anthropic_docs/sidebar.md`: Sidebar navigation for use with documentation viewers
+
 ### Options and Configurations
 
 You can customize the scraper behavior using command-line arguments:
@@ -80,6 +100,8 @@ The scraper generates the following directories:
 - `anthropic_docs_md/`: Markdown versions of the documentation
 - `anthropic_docs_images/`: Downloaded and optimized images
 - `anthropic_docs_full_html/`: Original HTML content
+- `table_of_contents.md`: Main navigation table
+- `sidebar.md`: Sidebar navigation file
 
 ## Configuration
 

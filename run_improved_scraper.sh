@@ -129,42 +129,30 @@ done
 wait $SCRAPER_PID
 SCRAPER_EXIT_CODE=$?
 
-# When scraper finishes, create TOC and metadata if it failed to do so
-if [ ! -f "anthropic_docs/md/index.md" ] || [ ! -f "anthropic_docs/md/sidebar.md" ]; then
-    echo -e "${YELLOW}Creating index and sidebar files...${NC}"
-    python3 -c "
-import sys
-sys.path.append('.')
-from improved_scraper import create_toc, save_metadata
-try:
-    create_toc()
-    save_metadata()
-    print('Successfully created index and sidebar files')
-except Exception as e:
-    print(f'Error creating files: {e}')
-"
-fi
+# Generate table of contents and navigation
+echo -e "${BLUE}Generating table of contents and navigation...${NC}"
+python3 generate_toc.py
 
 # Check if scraper completed successfully
-if [ $SCRAPER_EXIT_CODE -eq 0 ] || [ -d "anthropic_docs/md" ]; then
+if [ $SCRAPER_EXIT_CODE -eq 0 ] || [ -d "anthropic_docs/anthropic_docs_md" ]; then
     echo ""
     echo -e "${GREEN}Scraper completed with exit code: $SCRAPER_EXIT_CODE${NC}"
     echo -e "${GREEN}The documentation has been saved to the anthropic_docs directory:${NC}"
-    echo -e "${GREEN}- HTML files: anthropic_docs/html/${NC}"
-    echo -e "${GREEN}- Markdown files: anthropic_docs/md/${NC}"
-    echo -e "${GREEN}- Full HTML files: anthropic_docs/full_html/${NC}"
-    echo -e "${GREEN}- Images: anthropic_docs/images/${NC}"
+    echo -e "${GREEN}- HTML files: anthropic_docs/anthropic_docs_html/${NC}"
+    echo -e "${GREEN}- Markdown files: anthropic_docs/anthropic_docs_md/${NC}"
+    echo -e "${GREEN}- Full HTML files: anthropic_docs/anthropic_docs_full_html/${NC}"
+    echo -e "${GREEN}- Images: anthropic_docs/anthropic_docs_images/${NC}"
     echo ""
     echo -e "${BLUE}Table of contents can be found at:${NC}"
-    echo -e "${BLUE}- anthropic_docs/md/index.md${NC}"
-    echo -e "${BLUE}- anthropic_docs/md/sidebar.md${NC}"
+    echo -e "${BLUE}- anthropic_docs/table_of_contents.md${NC}"
+    echo -e "${BLUE}- anthropic_docs/sidebar.md${NC}"
     echo ""
     echo -e "${YELLOW}Markdown Features:${NC}"
-    echo -e "${YELLOW}- Front matter with title and source URL${NC}"
     echo -e "${YELLOW}- Improved code block detection and language identification${NC}"
-    echo -e "${YELLOW}- API parameters converted to tables${NC}"
-    echo -e "${YELLOW}- Proper table formatting with alignment${NC}"
     echo -e "${YELLOW}- Clean header spacing and list indentation${NC}"
+    echo -e "${YELLOW}- Removed headers, footers, sidebars, and navigation elements${NC}"
+    echo -e "${YELLOW}- Separate navigation via table of contents${NC}"
+    echo -e "${YELLOW}- API parameters converted to organized lists${NC}"
 else
     echo ""
     echo -e "${RED}Scraper encountered errors (exit code: $SCRAPER_EXIT_CODE).${NC}"
@@ -174,9 +162,9 @@ fi
 # Count files to show summary
 echo ""
 echo -e "${BLUE}=== Summary ===${NC}"
-HTML_COUNT=$(find anthropic_docs/html -type f -name "*.html" 2>/dev/null | wc -l)
-MD_COUNT=$(find anthropic_docs/md -type f -name "*.md" 2>/dev/null | wc -l)
-IMG_COUNT=$(find anthropic_docs/images -type f 2>/dev/null | wc -l)
+HTML_COUNT=$(find anthropic_docs/anthropic_docs_html -type f -name "*.html" 2>/dev/null | wc -l)
+MD_COUNT=$(find anthropic_docs/anthropic_docs_md -type f -name "*.md" 2>/dev/null | wc -l)
+IMG_COUNT=$(find anthropic_docs/anthropic_docs_images -type f 2>/dev/null | wc -l)
 
 echo -e "${GREEN}HTML files: $HTML_COUNT${NC}"
 echo -e "${GREEN}Markdown files: $MD_COUNT${NC}"
@@ -186,6 +174,10 @@ echo -e "${BLUE}Log files:${NC}"
 echo -e "${BLUE}- scraper.log${NC}"
 echo -e "${BLUE}- scraper_stdout.log${NC}"
 echo -e "${BLUE}===== Scraper Finished =====${NC}"
+
+# Create a ZIP archive of the markdown documentation
+echo -e "${BLUE}Creating ZIP archive of documentation...${NC}"
+zip -r anthropic_docs_markdown.zip anthropic_docs/anthropic_docs_md anthropic_docs/table_of_contents.md anthropic_docs/sidebar.md
 
 # Final cleanup - add timestamp to logs
 current_date=$(date +"%Y%m%d_%H%M%S")
