@@ -1,62 +1,32 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/rate-limits/
----
+# Rate limits - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/rate-limits#rate-limits
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Using the API
-
-Rate limits
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
+# Using the APIs
 
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
+* [Overview](/en/api/overview)
+* Forming requests
+
+  + [Versions](/en/api/versioning)
+  + [Rate limits](/en/api/rate-limits)
+  + [Service tiers](/en/api/service-tiers)
+  + [Beta headers](/en/api/beta-headers)
+* Handling responses
+
+# SDKs
+
 * [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
-
-* Messages
-* Models
-* Message Batches
-* Text Completions (Legacy)
-* Admin API
-
-##### OpenAI SDK compatibility
-
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 We have two types of limits:
 
@@ -65,26 +35,26 @@ We have two types of limits:
 
 We enforce service-configured limits at the organization level, but you may also set user-configurable limits for your organization’s workspaces.
 
-[​](#about-our-limits) About our limits
----------------------------------------
+These limits apply to both Standard and Priority Tier usage. For more information about Priority Tier, which offers enhanced service levels in exchange for committed spend, see [Service Tiers](/en/api/service-tiers).
+
+# [​](#about-our-limits) About our limits
 
 * Limits are designed to prevent API abuse, while minimizing impact on common customer usage patterns.
 * Limits are defined by usage tier, where each tier is associated with a different set of spend and rate limits.
 * Your organization will increase tiers automatically as you reach certain thresholds while using the API.
   Limits are set at the organization level. You can see your organization’s limits in the [Limits page](https://console.anthropic.com/settings/limits) in the [Anthropic Console](https://console.anthropic.com/).
 * You may hit rate limits over shorter time intervals. For instance, a rate of 60 requests per minute (RPM) may be enforced as 1 request per second. Short bursts of requests at a high volume can surpass the rate limit and result in rate limit errors.
-* The limits outlined below are our standard limits. If you’re seeking higher, custom limits, contact sales through the [Anthropic Console](https://console.anthropic.com/settings/limits).
+* The limits outlined below are our standard tier limits. If you’re seeking higher, custom limits or Priority Tier for enhanced service levels, contact sales through the [Anthropic Console](https://console.anthropic.com/settings/limits).
 * We use the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) to do rate limiting. This means that your capacity is continuously replenished up to your maximum limit, rather than being reset at fixed intervals.
 * All limits described here represent maximum allowed usage, not guaranteed minimums. These limits are intended to reduce unintentional overspend and ensure fair distribution of resources among users.
 
-[​](#spend-limits) Spend limits
--------------------------------
+# [​](#spend-limits) Spend limits
 
 Each usage tier has a limit on how much you can spend on the API each calendar month. Once you reach the spend limit of your tier, until you qualify for the next tier, you will have to wait until the next month to be able to use the API again.
 
 To qualify for the next tier, you must meet a deposit requirement. To minimize the risk of overfunding your account, you cannot deposit more than your monthly spend limit.
 
-### [​](#requirements-to-advance-tier) Requirements to advance tier
+# [​](#requirements-to-advance-tier) Requirements to advance tier
 
 | Usage Tier | Credit Purchase | Max Usage per Month |
 | --- | --- | --- |
@@ -94,8 +64,7 @@ To qualify for the next tier, you must meet a deposit requirement. To minimize t
 | Tier 4 | $400 | $5,000 |
 | Monthly Invoicing | N/A | N/A |
 
-[​](#rate-limits) Rate limits
------------------------------
+# [​](#rate-limits) Rate limits
 
 Our rate limits for the Messages API are measured in requests per minute (RPM), input tokens per minute (ITPM), and output tokens per minute (OTPM) for each model class.
 If you exceed any of the rate limits you will get a [429 error](/en/api/errors) describing which rate limit was exceeded, along with a `retry-after` header indicating how long to wait.
@@ -118,17 +87,77 @@ You can check your current rate limits and behavior in the [Anthropic Console](h
 
 | Model | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | --- | --- | --- | --- |
-| Claude 3.7 Sonnet | 50 | 20,000 | 8,000 |
-| Claude 3.5 Sonnet 2024-10-22 | 50 | 40,000\* | 8,000 |
-| Claude 3.5 Sonnet 2024-06-20 | 50 | 40,000\* | 8,000 |
-| Claude 3.5 Haiku | 50 | 50,000\* | 10,000 |
-| Claude 3 Opus | 50 | 20,000\* | 4,000 |
-| Claude 3 Sonnet | 50 | 40,000\* | 8,000 |
-| Claude 3 Haiku | 50 | 50,000\* | 10,000 |
+| Claude Opus 4 | 50 | 20,000 | 8,000 |
+| Claude Sonnet 4 | 50 | 20,000 | 8,000 |
+| Claude Sonnet 3.7 | 50 | 20,000 | 8,000 |
+| Claude Sonnet 3.5 2024-10-22 | 50 | 40,000\* | 8,000 |
+| Claude Sonnet 3.5 2024-06-20 | 50 | 40,000\* | 8,000 |
+| Claude Haiku 3.5 | 50 | 50,000\* | 10,000 |
+| Claude Opus 3 | 50 | 20,000\* | 4,000 |
+| Claude Sonnet 3 | 50 | 40,000\* | 8,000 |
+| Claude Haiku 3 | 50 | 50,000\* | 10,000 |
 
 Limits marked with asterisks (\*) count [`cache_read_input_tokens`](/en/api/messages#response-usage-cache-read-input-tokens) towards ITPM usage.
 
-### [​](#message-batches-api) Message Batches API
+| Model | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
+| --- | --- | --- | --- |
+| Claude Opus 4 | 50 | 20,000 | 8,000 |
+| Claude Sonnet 4 | 50 | 20,000 | 8,000 |
+| Claude Sonnet 3.7 | 50 | 20,000 | 8,000 |
+| Claude Sonnet 3.5 2024-10-22 | 50 | 40,000\* | 8,000 |
+| Claude Sonnet 3.5 2024-06-20 | 50 | 40,000\* | 8,000 |
+| Claude Haiku 3.5 | 50 | 50,000\* | 10,000 |
+| Claude Opus 3 | 50 | 20,000\* | 4,000 |
+| Claude Sonnet 3 | 50 | 40,000\* | 8,000 |
+| Claude Haiku 3 | 50 | 50,000\* | 10,000 |
+
+Limits marked with asterisks (\*) count [`cache_read_input_tokens`](/en/api/messages#response-usage-cache-read-input-tokens) towards ITPM usage.
+
+| Model | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
+| --- | --- | --- | --- |
+| Claude Opus 4 | 1,000 | 40,000 | 16,000 |
+| Claude Sonnet 4 | 1,000 | 40,000 | 16,000 |
+| Claude Sonnet 3.7 | 1,000 | 40,000 | 16,000 |
+| Claude Sonnet 3.5 2024-10-22 | 1,000 | 80,000\* | 16,000 |
+| Claude Sonnet 3.5 2024-06-20 | 1,000 | 80,000\* | 16,000 |
+| Claude Haiku 3.5 | 1,000 | 100,000\* | 20,000 |
+| Claude Opus 3 | 1,000 | 40,000\* | 8,000 |
+| Claude Sonnet 3 | 1,000 | 80,000\* | 16,000 |
+| Claude Haiku 3 | 1,000 | 100,000\* | 20,000 |
+
+Limits marked with asterisks (\*) count [`cache_read_input_tokens`](/en/api/messages#response-usage-cache-read-input-tokens) towards ITPM usage.
+
+| Model | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
+| --- | --- | --- | --- |
+| Claude Opus 4 | 2,000 | 80,000 | 32,000 |
+| Claude Sonnet 4 | 2,000 | 80,000 | 32,000 |
+| Claude Sonnet 3.7 | 2,000 | 80,000 | 32,000 |
+| Claude Sonnet 3.5 2024-10-22 | 2,000 | 160,000\* | 32,000 |
+| Claude Sonnet 3.5 2024-06-20 | 2,000 | 160,000\* | 32,000 |
+| Claude Haiku 3.5 | 2,000 | 200,000\* | 40,000 |
+| Claude Opus 3 | 2,000 | 80,000\* | 16,000 |
+| Claude Sonnet 3 | 2,000 | 160,000\* | 32,000 |
+| Claude Haiku 3 | 2,000 | 200,000\* | 40,000 |
+
+Limits marked with asterisks (\*) count [`cache_read_input_tokens`](/en/api/messages#response-usage-cache-read-input-tokens) towards ITPM usage.
+
+| Model | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
+| --- | --- | --- | --- |
+| Claude Opus 4 | 4,000 | 200,000 | 80,000 |
+| Claude Sonnet 4 | 4,000 | 200,000 | 80,000 |
+| Claude Sonnet 3.7 | 4,000 | 200,000 | 80,000 |
+| Claude Sonnet 3.5 2024-10-22 | 4,000 | 400,000\* | 80,000 |
+| Claude Sonnet 3.5 2024-06-20 | 4,000 | 400,000\* | 80,000 |
+| Claude Haiku 3.5 | 4,000 | 400,000\* | 80,000 |
+| Claude Opus 3 | 4,000 | 400,000\* | 80,000 |
+| Claude Sonnet 3 | 4,000 | 400,000\* | 80,000 |
+| Claude Haiku 3 | 4,000 | 400,000\* | 80,000 |
+
+Limits marked with asterisks (\*) count [`cache_read_input_tokens`](/en/api/messages#response-usage-cache-read-input-tokens) towards ITPM usage.
+
+If you’re seeking higher limits for an Enterprise use case, contact sales through the [Anthropic Console](https://console.anthropic.com/settings/limits).
+
+# [​](#message-batches-api) Message Batches API
 
 The Message Batches API has its own set of rate limits which are shared across all models. These include a requests per minute (RPM) limit to all API endpoints and a limit on the number of batch requests that can be in the processing queue at the same time. A “batch request” here refers to part of a Message Batch. You may create a Message Batch containing thousands of batch requests, each of which count towards this limit. A batch request is considered part of the processing queue when it has yet to be successfully processed by the model.
 
@@ -142,8 +171,25 @@ The Message Batches API has its own set of rate limits which are shared across a
 | --- | --- | --- |
 | 50 | 100,000 | 100,000 |
 
-[​](#setting-lower-limits-for-workspaces) Setting lower limits for Workspaces
------------------------------------------------------------------------------
+| Maximum requests per minute (RPM) | Maximum batch requests in processing queue | Maximum batch requests per batch |
+| --- | --- | --- |
+| 50 | 100,000 | 100,000 |
+
+| Maximum requests per minute (RPM) | Maximum batch requests in processing queue | Maximum batch requests per batch |
+| --- | --- | --- |
+| 1,000 | 200,000 | 100,000 |
+
+| Maximum requests per minute (RPM) | Maximum batch requests in processing queue | Maximum batch requests per batch |
+| --- | --- | --- |
+| 2,000 | 300,000 | 100,000 |
+
+| Maximum requests per minute (RPM) | Maximum batch requests in processing queue | Maximum batch requests per batch |
+| --- | --- | --- |
+| 4,000 | 500,000 | 100,000 |
+
+If you’re seeking higher limits for an Enterprise use case, contact sales through the [Anthropic Console](https://console.anthropic.com/settings/limits).
+
+# [​](#setting-lower-limits-for-workspaces) Setting lower limits for Workspaces
 
 In order to protect Workspaces in your Organization from potential overuse, you can set custom spend and rate limits per Workspace.
 
@@ -156,8 +202,7 @@ Note:
 * Organization-wide limits always apply, even if Workspace limits add up to more.
 * Support for input and output token limits will be added to Workspaces in the future.
 
-[​](#response-headers) Response headers
----------------------------------------
+# [​](#response-headers) Response headers
 
 The API response includes headers that show you the rate limit enforced, current usage, and when the limit will be reset.
 
@@ -178,6 +223,12 @@ The following headers are returned:
 | `anthropic-ratelimit-output-tokens-limit` | The maximum number of output tokens allowed within any rate limit period. |
 | `anthropic-ratelimit-output-tokens-remaining` | The number of output tokens remaining (rounded to the nearest thousand) before being rate limited. |
 | `anthropic-ratelimit-output-tokens-reset` | The time when the output token rate limit will be fully replenished, provided in RFC 3339 format. |
+| `anthropic-priority-input-tokens-limit` | The maximum number of Priority Tier input tokens allowed within any rate limit period. (Priority Tier only) |
+| `anthropic-priority-input-tokens-remaining` | The number of Priority Tier input tokens remaining (rounded to the nearest thousand) before being rate limited. (Priority Tier only) |
+| `anthropic-priority-input-tokens-reset` | The time when the Priority Tier input token rate limit will be fully replenished, provided in RFC 3339 format. (Priority Tier only) |
+| `anthropic-priority-output-tokens-limit` | The maximum number of Priority Tier output tokens allowed within any rate limit period. (Priority Tier only) |
+| `anthropic-priority-output-tokens-remaining` | The number of Priority Tier output tokens remaining (rounded to the nearest thousand) before being rate limited. (Priority Tier only) |
+| `anthropic-priority-output-tokens-reset` | The time when the Priority Tier output token rate limit will be fully replenished, provided in RFC 3339 format. (Priority Tier only) |
 
 The `anthropic-ratelimit-tokens-*` headers display the values for the most restrictive limit currently in effect. For instance, if you have exceeded the Workspace per-minute token limit, the headers will contain the Workspace per-minute token rate limit values. If Workspace limits do not apply, the headers will return the total tokens remaining, where total is the sum of input and output tokens. This approach ensures that you have visibility into the most relevant constraint on your current API usage.
 
@@ -185,14 +236,6 @@ Was this page helpful?
 
 YesNo
 
-[Errors](/en/api/errors)[Client SDKs](/en/api/client-sdks)
+Versions[Service tiers](/en/api/service-tiers)
 
 On this page
-
-* [About our limits](#about-our-limits)
-* [Spend limits](#spend-limits)
-* [Requirements to advance tier](#requirements-to-advance-tier)
-* [Rate limits](#rate-limits)
-* [Message Batches API](#message-batches-api)
-* [Setting lower limits for Workspaces](#setting-lower-limits-for-workspaces)
-* [Response headers](#response-headers)

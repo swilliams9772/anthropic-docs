@@ -1,67 +1,25 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/client-sdks/
----
+# Client SDKs - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/client-sdks
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Using the API
-
-Client SDKs
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
+# SDKs
 
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
 * [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
-
-* Messages
-* Models
-* Message Batches
-* Text Completions (Legacy)
-* Admin API
-
-##### OpenAI SDK compatibility
-
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 > Additional configuration is needed to use Anthropic’s Client SDKs through a partner platform. If you are using Amazon Bedrock, see [this guide](/en/api/claude-on-amazon-bedrock); if you are using Google Cloud Vertex AI, see [this guide](/en/api/claude-on-vertex-ai).
 
-[​](#python) Python
--------------------
+# [​](#python) Python
 
 [Python library GitHub repo](https://github.com/anthropics/anthropic-sdk-python)
 
@@ -69,7 +27,7 @@ Example:
 
 Python
 
-```bash
+```
 import anthropic
 
 client = anthropic.Anthropic(
@@ -77,17 +35,17 @@ client = anthropic.Anthropic(
     api_key="my_api_key",
 )
 message = client.messages.create(
-    model="claude-3-7-sonnet-20250219",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     messages=[
         {"role": "user", "content": "Hello, Claude"}
     ]
 )
 print(message.content)
+
 ```
 
-[​](#typescript) TypeScript
----------------------------
+# [​](#typescript) TypeScript
 
 [TypeScript library GitHub repo](https://github.com/anthropics/anthropic-sdk-typescript)
 
@@ -97,7 +55,7 @@ Example:
 
 TypeScript
 
-```javascript
+```
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic({
@@ -105,15 +63,15 @@ const anthropic = new Anthropic({
 });
 
 const msg = await anthropic.messages.create({
-  model: "claude-3-7-sonnet-20250219",
+  model: "claude-sonnet-4-20250514",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude" }],
 });
 console.log(msg);
+
 ```
 
-[​](#java) Java
----------------
+# [​](#java) Java
 
 [Java library GitHub repo](https://github.com/anthropics/anthropic-sdk-java)
 
@@ -121,7 +79,7 @@ Example:
 
 Java
 
-```bash
+```
 import com.anthropic.models.Message;
 import com.anthropic.models.MessageCreateParams;
 import com.anthropic.models.Model;
@@ -129,23 +87,21 @@ import com.anthropic.models.Model;
 MessageCreateParams params = MessageCreateParams.builder()
     .maxTokens(1024L)
     .addUserMessage("Hello, Claude")
-    .model(Model.CLAUDE_3_7_SONNET)
+    .model(Model.CLAUDE_SONNET_4_0)
     .build();
 Message message = client.messages().create(params);
+
 ```
 
-[​](#go) Go
------------
+# [​](#go) Go
 
 [Go library GitHub repo](https://github.com/anthropics/anthropic-sdk-go)
-
-The Anthropic Go SDK is currently in beta. If you see any issues with it, please file an issue on GitHub!
 
 Example:
 
 Go
 
-```bash
+```
 package main
 
 import (
@@ -160,7 +116,7 @@ func main() {
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
 	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.F(anthropic.ModelClaude3_7Sonnet),
+		Model:     anthropic.F(anthropic.ModelClaudeSonnet4_0),
 		MaxTokens: anthropic.F(int64(1024)),
 		Messages: anthropic.F([]anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("What is a quaternion?")),
@@ -171,22 +127,20 @@ func main() {
 	}
 	fmt.Printf("%+v\n", message.Content)
 }
+
 ```
 
-[​](#ruby) Ruby
----------------
+# [​](#ruby) Ruby
 
 [Ruby library GitHub repo](https://github.com/anthropics/anthropic-sdk-ruby)
-
-The Anthropic Ruby SDK is currently in beta. If you see any issues with it, please file an issue on GitHub!
 
 Example:
 
 ruby
 
-```bash
+```
 require "bundler/setup"
-require "anthropic-sdk-beta"
+require "anthropic"
 
 anthropic = Anthropic::Client.new(
   api_key: "my_api_key" # defaults to ENV["ANTHROPIC_API_KEY"]
@@ -199,22 +153,17 @@ message =
       role: "user",
       content: "Hello, Claude"
     }],
-    model: "claude-3-7-sonnet-20250219"
+    model: "claude-sonnet-4-20250514"
   )
 
 puts(message.content)
+
 ```
 
 Was this page helpful?
 
 YesNo
 
-[Rate limits](/en/api/rate-limits)[Supported regions](/en/api/supported-regions)
+Prompt validation[OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
 On this page
-
-* [Python](#python)
-* [TypeScript](#typescript)
-* [Java](#java)
-* [Go](#go)
-* [Ruby](#ruby)

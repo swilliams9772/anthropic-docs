@@ -1,103 +1,75 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/quickstart/
----
+# Get started with Claude - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/quickstart
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Get started
-
-Initial setup
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
 In this example, we’ll have Claude write a Python function that checks if a string is a palindrome.
 
-[​](#prerequisites) Prerequisites
----------------------------------
+# [​](#prerequisites) Prerequisites
 
 You will need:
 
-* An Anthropic [Console account](https://console.anthropic.com/)
-* An [API key](https://console.anthropic.com/settings/keys)
-* Python 3.7+ or TypeScript 4.5+
-
 Anthropic provides [Python and TypeScript SDKs](https://docs.anthropic.com/en/api/client-sdks), although you can make direct HTTP requests to the API.
 
-[​](#start-with-the-workbench) Start with the Workbench
--------------------------------------------------------
+# [​](#start-with-the-workbench) Start with the Workbench
 
 Any API call you make—regardless of the specific task—sends a well-configured prompt to the Anthropic API. As you’re learning to make the most of Claude, we recommend that you start the development process in the Workbench, a web-based interface to Claude.
 
@@ -105,11 +77,20 @@ Log into the [Anthropic Console](https://console.anthropic.com) and click **Writ
 
 In the middle section, under User, let’s ask Claude a question.
 
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Why+is+the+ocean+salty%3F)
+
+```
+Why is the ocean salty?
+
+```
+
 Click **Run**. On the right side, you’ll see output like
 
 Response
 
-```bash
+```
 The ocean is salty due to several factors:
 
 1. Weathering of rocks: Over millions of years, rain, rivers, and streams have eroded rocks containing mineral salts. These salts are carried into the ocean by water runoff.
@@ -119,31 +100,41 @@ The ocean is salty due to several factors:
 5. Biological processes: Some marine organisms contribute to the ocean's salinity by releasing salt compounds as byproducts of their metabolism.
 
 Over time, these processes have continuously added salts to the ocean, while evaporation removes pure water, leading to the ocean's current salinity levels. It's important to note that the total amount of salt in the ocean remains relatively stable because the input of salts is balanced by the removal of salts through processes like the formation of evaporite deposits.
+
 ```
 
 This is a good answer, but let’s say we wanted to control the exact type of answer Claude gives. For example, only allowing Claude to respond to questions with poems. We can control the format, tone, and personality of the response by adding a System Prompt.
+
+System prompt
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Why+is+the+ocean+salty%3F&system=You+are+a+world-class+poet.+Respond+only+with+short+poems.)
+
+```
+You are a world-class poet. Respond only with short poems.
+
+```
 
 Click **Run** again.
 
 Response
 
-```bash
+```
 The ocean's salty brine,
 A tale of time and elements combined.
 Rocks and rain, a slow erosion,
 Minerals carried in solution.
 Eons pass, the salt remains,
 In the vast, eternal watery domain.
+
 ```
 
 See how Claude’s response has changed? LLMs respond well to clear and direct instructions. You can put the role instructions in either the system prompt or the user message. We recommend testing to see which way yields the best results for your use case.
 
-Once you’ve tweaked the inputs such that you’re pleased with the output–-and have a good sense how to use Claude–-convert your Workbench into an integration.
+Once you’ve tweaked the inputs such that you’re pleased with the output and have a good sense how to use Claude, convert your Workbench into an integration.
 
 Click **Get Code** to copy the generated code representing your Workbench session.
 
-[​](#install-the-sdk) Install the SDK
--------------------------------------
+# [​](#install-the-sdk) Install the SDK
 
 Anthropic provides SDKs for [Python](https://pypi.org/project/anthropic/) (3.7+), [TypeScript](https://www.npmjs.com/package/@anthropic-ai/sdk) (4.5+), and [Java](https://central.sonatype.com/artifact/com.anthropic/anthropic-java/) (8+). We also currently have a [Go](https://pkg.go.dev/github.com/anthropics/anthropic-sdk-go) SDK in beta.
 
@@ -153,8 +144,9 @@ Anthropic provides SDKs for [Python](https://pypi.org/project/anthropic/) (3.7+)
 
 In your project directory, create a virtual environment.
 
-```bash
+```
 python -m venv claude-env
+
 ```
 
 Activate the virtual environment using
@@ -162,41 +154,122 @@ Activate the virtual environment using
 * On macOS or Linux, `source claude-env/bin/activate`
 * On Windows, `claude-env\Scripts\activate`
 
-```bash
+```
 pip install anthropic
+
 ```
 
-[​](#set-your-api-key) Set your API key
----------------------------------------
+In your project directory, create a virtual environment.
+
+```
+python -m venv claude-env
+
+```
+
+Activate the virtual environment using
+
+* On macOS or Linux, `source claude-env/bin/activate`
+* On Windows, `claude-env\Scripts\activate`
+
+```
+pip install anthropic
+
+```
+
+Install the SDK.
+
+```
+npm install @anthropic-ai/sdk
+
+```
+
+First find the current version of the Java SDK on [Maven Central](https://central.sonatype.com/artifact/com.anthropic/anthropic-java).
+Declare the SDK as a dependency in your Gradle file:
+
+```
+implementation("com.anthropic:anthropic-java:1.0.0")
+
+```
+
+Or in your Maven file:
+
+```
+<dependency>
+  <groupId>com.anthropic</groupId>
+  <artifactId>anthropic-java</artifactId>
+  <version>1.0.0</version>
+</dependency>
+
+```
+
+# [​](#set-your-api-key) Set your API key
 
 Every API call requires a valid API key. The SDKs are designed to pull the API key from an environmental variable `ANTHROPIC_API_KEY`. You can also supply the key to the Anthropic client when initializing it.
 
-[​](#call-the-api) Call the API
--------------------------------
+# [​](#call-the-api) Call the API
 
 Call the API by passing the proper parameters to the [/messages](https://docs.anthropic.com/en/api/messages) endpoint.
 
 Note that the code provided by the Workbench sets the API key in the constructor. If you set the API key as an environment variable, you can omit that line as below.
 
+Python
+
+TypeScript
+
+Java
+
+```
+import anthropic
+
+client = anthropic.Anthropic()
+
+message = client.messages.create(
+    model="claude-opus-4-20250514",
+    max_tokens=1000,
+    temperature=1,
+    system="You are a world-class poet. Respond only with short poems.",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Why is the ocean salty?"
+                }
+            ]
+        }
+    ]
+)
+print(message.content)
+
+```
+
 Run the code using `python3 claude_quickstart.py` or `node claude_quickstart.js`.
+
+Output (Python)
+
+Output (TypeScript)
+
+Output (Java)
+
+```
+[TextBlock(text="The ocean's salty brine,\nA tale of time and design.\nRocks and rivers, their minerals shed,\nAccumulating in the ocean's bed.\nEvaporation leaves salt behind,\nIn the vast waters, forever enshrined.", type='text')]
+
+```
 
 The Workbench and code examples use default model settings for: model (name), temperature, and max tokens to sample.
 
 This quickstart shows how to develop a basic, but functional, Claude-powered application using the Console, Workbench, and API. You can use this same workflow as the foundation for much more powerful use cases.
 
-[​](#next-steps) Next steps
----------------------------
+# [​](#next-steps) Next steps
 
 Now that you have made your first Anthropic API request, it’s time to explore what else is possible:
 
-[Use Case Guides
----------------
+## Use Case Guides
 
-End to end implementation guides for common use cases.](/en/docs/about-claude/use-case-guides/overview)[Anthropic Cookbook
-------------------
+End to end implementation guides for common use cases.[## Anthropic Cookbook
 
-Learn with interactive Jupyter notebooks that demonstrate uploading PDFs, embeddings, and more.](https://github.com/anthropics/anthropic-cookbook)[Prompt Library
---------------
+Learn with interactive Jupyter notebooks that demonstrate uploading PDFs, embeddings, and more.](https://github.com/anthropics/anthropic-cookbook)[## Prompt Library
 
 Explore dozens of example prompts for inspiration across use cases.](/en/prompt-library/library)
 
@@ -204,13 +277,6 @@ Was this page helpful?
 
 YesNo
 
-[Overview](/en/docs/welcome)[Intro to Claude](/en/docs/intro-to-claude)
+Intro to Claude[Models overview](/en/docs/about-claude/models/overview)
 
 On this page
-
-* [Prerequisites](#prerequisites)
-* [Start with the Workbench](#start-with-the-workbench)
-* [Install the SDK](#install-the-sdk)
-* [Set your API key](#set-your-api-key)
-* [Call the API](#call-the-api)
-* [Next steps](#next-steps)

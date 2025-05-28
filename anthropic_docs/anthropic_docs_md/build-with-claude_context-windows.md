@@ -1,90 +1,67 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/build-with-claude/context-windows/
----
+# Context windows - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/build-with-claude/context-windows
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Build with Claude
-
-Context windows
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
-[​](#understanding-the-context-window) Understanding the context window
------------------------------------------------------------------------
+# [​](#understanding-the-context-window) Understanding the context window
 
 The “context window” refers to the entirety of the amount of text a language model can look back on and reference when generating new text plus the new text it generates. This is different from the large corpus of data the language model was trained on, and instead represents a “working memory” for the model. A larger context window allows the model to understand and respond to more complex and lengthy prompts, while a smaller context window may limit the model’s ability to handle longer prompts or maintain coherence over extended conversations.
 
@@ -99,8 +76,7 @@ The diagram below illustrates the standard context window behavior for API reque
   + **Input phase:** Contains all previous conversation history plus the current user message
   + **Output phase:** Generates a text response that becomes part of a future input
 
-[​](#the-context-window-with-extended-thinking) The context window with extended thinking
------------------------------------------------------------------------------------------
+# [​](#the-context-window-with-extended-thinking) The context window with extended thinking
 
 When using [extended thinking](/en/docs/build-with-claude/extended-thinking), all input and output tokens, including the tokens used for thinking, count toward the context window limit, with a few nuances in multi-turn situations.
 
@@ -121,8 +97,7 @@ This architecture is token efficient and allows for extensive reasoning without 
 
 You can read more about the context window and extended thinking in our [extended thinking guide](/en/docs/build-with-claude/extended-thinking).
 
-[​](#the-context-window-with-extended-thinking-and-tool-use) The context window with extended thinking and tool use
--------------------------------------------------------------------------------------------------------------------
+# [​](#the-context-window-with-extended-thinking-and-tool-use) The context window with extended thinking and tool use
 
 The diagram below illustrates the context window token management when combining extended thinking with tool use:
 
@@ -152,28 +127,28 @@ Third Step
 
 * **Considerations for tool use with extended thinking:**
   + When posting tool results, the entire unmodified thinking block that accompanies that specific tool request (including signature/redacted portions) must be included.
+  + The effective context window calculation for extended thinking with tool use becomes: `context_window = input_tokens + current_turn_tokens`.
   + The system uses cryptographic signatures to verify thinking block authenticity. Failing to preserve thinking blocks during tool use can break Claude’s reasoning continuity. Thus, if you modify thinking blocks, the API will return an error.
 
-There is no interleaving of extended thinking and tool calls - you won’t see extended thinking, then tool calls, then more extended thinking, without a non-`tool_result` user turn in between. Additionally, tool use within the extended thinking block itself is not currently supported, although Claude may reason about what tools it should use and how to call them within the thinking block.
+Claude 4 models support [interleaved thinking](/en/docs/build-with-claude/extended-thinking#interleaved-thinking), which enables Claude to think between tool calls and make more sophisticated reasoning after receiving tool results.
 
-You can read more about tool use with extended thinking [in our extended thinking guide](/en/docs/build-with-claude/extended-thinking#extended-thinking-with-tool-use)
+Claude Sonnet 3.7 does not support interleaved thinking, so there is no interleaving of extended thinking and tool calls without a non-`tool_result` user turn in between.
 
-### [​](#context-window-management-with-newer-claude-models) Context window management with newer Claude models
+For more information about using tools with extended thinking, see our [extended thinking guide](/en/docs/build-with-claude/extended-thinking#extended-thinking-with-tool-use).
 
-In newer Claude models (starting with Claude 3.7 Sonnet), if the sum of prompt tokens and output tokens exceeds the model’s context window, the system will return a validation error rather than silently truncating the context. This change provides more predictable behavior but requires more careful token management.
+# [​](#context-window-management-with-newer-claude-models) Context window management with newer Claude models
+
+In newer Claude models (starting with Claude Sonnet 3.7), if the sum of prompt tokens and output tokens exceeds the model’s context window, the system will return a validation error rather than silently truncating the context. This change provides more predictable behavior but requires more careful token management.
 
 To plan your token usage and ensure you stay within context window limits, you can use the [token counting API](/en/docs/build-with-claude/token-counting) to estimate how many tokens your messages will use before sending them to Claude.
 
 See our [model comparison](/en/docs/models-overview#model-comparison) table for a list of context window sizes by model.
 
-[​](#next-steps) Next steps
-===========================
+# [​](#next-steps) Next steps
 
-[Model comparison table
-----------------------
+## Model comparison table
 
-See our model comparison table for a list of context window sizes and input / output token pricing by model.](/en/docs/models-overview#model-comparison)[Extended thinking overview
---------------------------
+See our model comparison table for a list of context window sizes and input / output token pricing by model.[## Extended thinking overview
 
 Learn more about how extended thinking works and how to implement it alongside other features such as tool use and prompt caching.](/en/docs/build-with-claude/extended-thinking)
 
@@ -181,12 +156,6 @@ Was this page helpful?
 
 YesNo
 
-[Develop test cases](/en/docs/build-with-claude/develop-tests)[Vision](/en/docs/build-with-claude/vision)
+Legal summarization[Glossary](/en/docs/about-claude/glossary)
 
 On this page
-
-* [Understanding the context window](#understanding-the-context-window)
-* [The context window with extended thinking](#the-context-window-with-extended-thinking)
-* [The context window with extended thinking and tool use](#the-context-window-with-extended-thinking-and-tool-use)
-* [Context window management with newer Claude models](#context-window-management-with-newer-claude-models)
-* [Next steps](#next-steps)

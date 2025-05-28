@@ -1,49 +1,35 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-improver/
----
+# Use our prompt improver to optimize your prompts - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-improver
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Prompt engineering
-
-Use our prompt improver to optimize your prompts
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
 
   + [Overview](/en/docs/build-with-claude/prompt-engineering/overview)
+  + [Claude 4 best practices](/en/docs/build-with-claude/prompt-engineering/claude-4-best-practices)
   + [Prompt generator](/en/docs/build-with-claude/prompt-engineering/prompt-generator)
   + [Use prompt templates](/en/docs/build-with-claude/prompt-engineering/prompt-templates-and-variables)
   + [Prompt improver](/en/docs/build-with-claude/prompt-engineering/prompt-improver)
@@ -56,53 +42,45 @@ Use our prompt improver to optimize your prompts
   + [Chain complex prompts](/en/docs/build-with-claude/prompt-engineering/chain-prompts)
   + [Long context tips](/en/docs/build-with-claude/prompt-engineering/long-context-tips)
   + [Extended thinking tips](/en/docs/build-with-claude/prompt-engineering/extended-thinking-tips)
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
 Our prompt improver is compatible with all Claude models, including those with extended thinking capabilities. For prompting tips specific to extended thinking models, see [here](/en/docs/build-with-claude/extended-thinking).
 
 The prompt improver helps you quickly iterate and improve your prompts through automated analysis and enhancement. It excels at making prompts more robust for complex tasks that require high accuracy.
 
-[​](#before-you-begin) Before you begin
----------------------------------------
+# [​](#before-you-begin) Before you begin
 
 You’ll need:
 
@@ -110,8 +88,7 @@ You’ll need:
 * Feedback on current issues with Claude’s outputs (optional but recommended)
 * Example inputs and ideal outputs (optional but recommended)
 
-[​](#how-the-prompt-improver-works) How the prompt improver works
------------------------------------------------------------------
+# [​](#how-the-prompt-improver-works) How the prompt improver works
 
 The prompt improver enhances your prompts in 4 steps:
 
@@ -122,8 +99,7 @@ The prompt improver enhances your prompts in 4 steps:
 
 You can watch these steps happen in real-time in the improvement modal.
 
-[​](#what-you-get) What you get
--------------------------------
+# [​](#what-you-get) What you get
 
 The prompt improver generates templates with:
 
@@ -134,16 +110,14 @@ The prompt improver generates templates with:
 
 While examples appear separately in the Workbench UI, they’re included at the start of the first user message in the actual API call. View the raw format by clicking ”**</> Get Code**” or insert examples as raw text via the Examples box.
 
-[​](#how-to-use-the-prompt-improver) How to use the prompt improver
--------------------------------------------------------------------
+# [​](#how-to-use-the-prompt-improver) How to use the prompt improver
 
 1. Submit your prompt template
 2. Add any feedback about issues with Claude’s current outputs (e.g., “summaries are too basic for expert audiences”)
 3. Include example inputs and ideal outputs
 4. Review the improved prompt
 
-[​](#generate-test-examples) Generate test examples
----------------------------------------------------
+# [​](#generate-test-examples) Generate test examples
 
 Don’t have examples yet? Use our [Test Case Generator](/en/docs/test-and-evaluate/eval-tool#creating-test-cases) to:
 
@@ -152,8 +126,7 @@ Don’t have examples yet? Use our [Test Case Generator](/en/docs/test-and-evalu
 3. Edit the responses to match your ideal outputs
 4. Add the polished examples to your prompt
 
-[​](#when-to-use-the-prompt-improver) When to use the prompt improver
----------------------------------------------------------------------
+# [​](#when-to-use-the-prompt-improver) When to use the prompt improver
 
 The prompt improver works best for:
 
@@ -163,14 +136,13 @@ The prompt improver works best for:
 
 For latency or cost-sensitive applications, consider using simpler prompts. The prompt improver creates templates that produce longer, more thorough, but slower responses.
 
-[​](#example-improvement) Example improvement
----------------------------------------------
+# [​](#example-improvement) Example improvement
 
 Here’s how the prompt improver enhances a basic classification prompt:
 
 Original prompt
 
-```bash
+```
 From the following list of Wikipedia article titles, identify which article this sentence came from.
 Respond with just the article title and nothing else.
 
@@ -179,11 +151,12 @@ Article titles:
 
 Sentence to classify:
 {{sentence}}
+
 ```
 
 Improved prompt
 
-```sql
+```
 You are an intelligent text classification system specialized in matching sentences to Wikipedia article titles. Your task is to identify which Wikipedia article a given sentence most likely belongs to, based on a provided list of article titles.
 
 First, review the following list of Wikipedia article titles:
@@ -212,6 +185,7 @@ Wrap your analysis in <analysis> tags. Include the following:
 After your analysis, provide your final answer: the single most appropriate Wikipedia article title from the list.
 
 Output only the chosen article title, without any additional text or explanation.
+
 ```
 
 Notice how the improved prompt:
@@ -221,8 +195,7 @@ Notice how the improved prompt:
 * Provides explicit output formatting requirements
 * Guides Claude through the analysis process
 
-[​](#troubleshooting) Troubleshooting
--------------------------------------
+# [​](#troubleshooting) Troubleshooting
 
 Common issues and solutions:
 
@@ -230,17 +203,13 @@ Common issues and solutions:
 * **Chain of thought too verbose**: Add specific instructions about desired output length and level of detail
 * **Reasoning steps don’t match your needs**: Modify the steps section to match your specific use case
 
-[​](#next-steps) Next steps
----------------------------
+# [​](#next-steps) Next steps
 
-[Prompt library
---------------
+## Prompt library
 
-Get inspired by example prompts for various tasks.](/en/prompt-library/library)[GitHub prompting tutorial
--------------------------
+Get inspired by example prompts for various tasks.[## GitHub prompting tutorial
 
-Learn prompting best practices with our interactive tutorial.](https://github.com/anthropics/prompt-eng-interactive-tutorial)[Test your prompts
------------------
+Learn prompting best practices with our interactive tutorial.](https://github.com/anthropics/prompt-eng-interactive-tutorial)[## Test your prompts
 
 Use our evaluation tool to test your improved prompts.](/en/docs/test-and-evaluate/eval-tool)
 
@@ -248,16 +217,6 @@ Was this page helpful?
 
 YesNo
 
-[Use prompt templates](/en/docs/build-with-claude/prompt-engineering/prompt-templates-and-variables)[Be clear and direct](/en/docs/build-with-claude/prompt-engineering/be-clear-and-direct)
+Use prompt templates[Be clear and direct](/en/docs/build-with-claude/prompt-engineering/be-clear-and-direct)
 
 On this page
-
-* [Before you begin](#before-you-begin)
-* [How the prompt improver works](#how-the-prompt-improver-works)
-* [What you get](#what-you-get)
-* [How to use the prompt improver](#how-to-use-the-prompt-improver)
-* [Generate test examples](#generate-test-examples)
-* [When to use the prompt improver](#when-to-use-the-prompt-improver)
-* [Example improvement](#example-improvement)
-* [Troubleshooting](#troubleshooting)
-* [Next steps](#next-steps)

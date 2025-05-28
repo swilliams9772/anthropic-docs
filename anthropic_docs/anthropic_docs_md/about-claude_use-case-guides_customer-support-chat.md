@@ -1,36 +1,28 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/about-claude/use-case-guides/customer-support-chat/
----
+# Customer support agent - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/about-claude/use-case-guides/customer-support-chat
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Use cases
-
-Customer support agent
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
 
   + [Overview](/en/docs/about-claude/use-case-guides/overview)
@@ -38,61 +30,46 @@ Customer support agent
   + [Customer support agent](/en/docs/about-claude/use-case-guides/customer-support-chat)
   + [Content moderation](/en/docs/about-claude/use-case-guides/content-moderation)
   + [Legal summarization](/en/docs/about-claude/use-case-guides/legal-summarization)
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
-[​](#before-building-with-claude) Before building with Claude
--------------------------------------------------------------
+# [​](#before-building-with-claude) Before building with Claude
 
-### [​](#decide-whether-to-use-claude-for-support-chat) Decide whether to use Claude for support chat
+# [​](#decide-whether-to-use-claude-for-support-chat) Decide whether to use Claude for support chat
 
 Here are some key indicators that you should employ an LLM like Claude to automate portions of your customer support process:
 
@@ -108,8 +85,6 @@ Claude can quickly retrieve, process, and combine information from vast knowledg
 
 Claude can provide round-the-clock support without fatigue, whereas staffing human agents for continuous coverage can be costly and challenging.
 
-Rapid scaling during peak periods
-
 Claude can handle sudden increases in query volume without the need for hiring and training additional staff.
 
 Consistent brand voice
@@ -122,7 +97,7 @@ Some considerations for choosing Claude over other LLMs:
 * You often receive complex and open-ended queries: Claude can handle a wide range of topics and inquiries without generating canned responses or requiring extensive programming of permutations of user utterances.
 * You need scalable multilingual support: Claude’s multilingual capabilities allow it to engage in conversations in over 200 languages without the need for separate chatbots or extensive translation processes for each supported language.
 
-### [​](#define-your-ideal-chat-interaction) Define your ideal chat interaction
+# [​](#define-your-ideal-chat-interaction) Define your ideal chat interaction
 
 Outline an ideal customer interaction to define how and when you expect the customer to interact with Claude. This outline will help to determine the technical requirements of your solution.
 
@@ -146,7 +121,7 @@ Here is an example chat interaction for car insurance customer support:
 
 In the real example that you write for your own use case, you might find it useful to write out the actual words in this interaction so that you can also get a sense of the ideal tone, response length, and level of detail you want Claude to have.
 
-### [​](#break-the-interaction-into-unique-tasks) Break the interaction into unique tasks
+# [​](#break-the-interaction-into-unique-tasks) Break the interaction into unique tasks
 
 Customer support chat is a collection of multiple different tasks, from question answering to information retrieval to taking action on requests, wrapped up in a single customer interaction. Before you start building, break down your ideal customer interaction into every task you want Claude to be able to perform. This ensures you can prompt and evaluate Claude for every task, and gives you a good sense of the range of interactions you need to account for when writing test cases.
 
@@ -155,29 +130,25 @@ Customers sometimes find it helpful to visualize this as an interaction flowchar
 Here are the key tasks associated with the example insurance interaction above:
 
 1. Greeting and general guidance
-
   * Warmly greet the customer and initiate conversation
-  * Provide general information about the company and interaction
+   * Provide general information about the company and interaction
 2. Product Information
-
   * Provide information about electric vehicle coverage
 
      This will require that Claude have the necessary information in its context, and might imply that a [RAG integration](https://github.com/anthropics/anthropic-cookbook/blob/main/skills/retrieval_augmented_generation/guide.ipynb) is necessary.
-  * Answer questions related to unique electric vehicle insurance needs
-  * Answer follow-up questions about the quote or insurance details
-  * Offer links to sources when appropriate
+   * Answer questions related to unique electric vehicle insurance needs
+   * Answer follow-up questions about the quote or insurance details
+   * Offer links to sources when appropriate
 3. Conversation Management
-
   * Stay on topic (car insurance)
-  * Redirect off-topic questions back to relevant subjects
+   * Redirect off-topic questions back to relevant subjects
 4. Quote Generation
-
   * Ask appropriate questions to determine quote eligibility
-  * Adapt questions based on customer responses
-  * Submit collected information to quote generation API
-  * Present the provided quote to the customer
+   * Adapt questions based on customer responses
+   * Submit collected information to quote generation API
+   * Present the provided quote to the customer
 
-### [​](#establish-success-criteria) Establish success criteria
+# [​](#establish-success-criteria) Establish success criteria
 
 Work with your support team to [define clear success criteria](https://docs.anthropic.com/en/docs/build-with-claude/define-success) and write [detailed evaluations](https://docs.anthropic.com/en/docs/build-with-claude/develop-tests) with measurable benchmarks and goals.
 
@@ -229,26 +200,26 @@ Average handle time
 
 The average time it takes for the chatbot to resolve an inquiry. This varies widely based on the complexity of issues, but generally, aim for a lower AHT compared to human agents.
 
-[​](#how-to-implement-claude-as-a-customer-service-agent) How to implement Claude as a customer service agent
--------------------------------------------------------------------------------------------------------------
+# [​](#how-to-implement-claude-as-a-customer-service-agent) How to implement Claude as a customer service agent
 
-### [​](#choose-the-right-claude-model) Choose the right Claude model
+# [​](#choose-the-right-claude-model) Choose the right Claude model
 
 The choice of model depends on the trade-offs between cost, accuracy, and response time.
 
-For customer support chat, `claude-3-7-sonnet-20250219` is well suited to balance intelligence, latency, and cost. However, for instances where you have conversation flow with multiple prompts including RAG, tool use, and/or long-context prompts, `claude-3-haiku-20240307` may be more suitable to optimize for latency.
+For customer support chat, `claude-opus-4-20250514` is well suited to balance intelligence, latency, and cost. However, for instances where you have conversation flow with multiple prompts including RAG, tool use, and/or long-context prompts, `claude-3-haiku-20240307` may be more suitable to optimize for latency.
 
-### [​](#build-a-strong-prompt) Build a strong prompt
+# [​](#build-a-strong-prompt) Build a strong prompt
 
 Using Claude for customer support requires Claude having enough direction and context to respond appropriately, while having enough flexibility to handle a wide range of customer inquiries.
 
 Let’s start by writing the elements of a strong prompt, starting with a system prompt:
 
-```bash
-IDENTITY = """You are Eva, a friendly and knowledgeable AI assistant for Acme Insurance 
-Company. Your role is to warmly welcome customers and provide information on 
-Acme's insurance offerings, which include car insurance and electric car 
+```
+IDENTITY = """You are Eva, a friendly and knowledgeable AI assistant for Acme Insurance
+Company. Your role is to warmly welcome customers and provide information on
+Acme's insurance offerings, which include car insurance and electric car
 insurance. You can also help customers get quotes for their insurance needs."""
+
 ```
 
 While you may be tempted to put all your information inside a system prompt as a way to separate instructions from the user conversation, Claude actually works best with the bulk of its prompt content written inside the first `User` turn (with the only exception being role prompting). Read more at [Giving Claude a role with a system prompt](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts).
@@ -257,19 +228,19 @@ It’s best to break down complex prompts into subsections and write one part at
 
 We’ll put all of these pieces in a file called `config.py`.
 
-```bash
+```
 STATIC_GREETINGS_AND_GENERAL = """
 <static_context>
 Acme Auto Insurance: Your Trusted Companion on the Road
 
 About:
-At Acme Insurance, we understand that your vehicle is more than just a mode of transportation—it's your ticket to life's adventures. 
+At Acme Insurance, we understand that your vehicle is more than just a mode of transportation—it's your ticket to life's adventures.
 Since 1985, we've been crafting auto insurance policies that give drivers the confidence to explore, commute, and travel with peace of mind.
-Whether you're navigating city streets or embarking on cross-country road trips, Acme is there to protect you and your vehicle. 
+Whether you're navigating city streets or embarking on cross-country road trips, Acme is there to protect you and your vehicle.
 Our innovative auto insurance policies are designed to adapt to your unique needs, covering everything from fender benders to major collisions.
-With Acme's award-winning customer service and swift claim resolution, you can focus on the joy of driving while we handle the rest. 
+With Acme's award-winning customer service and swift claim resolution, you can focus on the joy of driving while we handle the rest.
 We're not just an insurance provider—we're your co-pilot in life's journeys.
-Choose Acme Auto Insurance and experience the assurance that comes with superior coverage and genuine care. Because at Acme, we don't just 
+Choose Acme Auto Insurance and experience the assurance that comes with superior coverage and genuine care. Because at Acme, we don't just
 insure your car—we fuel your adventures on the open road.
 
 Note: We also offer specialized coverage for electric vehicles, ensuring that drivers of all car types can benefit from our protection.
@@ -283,11 +254,12 @@ Business hours: Monday-Friday, 9 AM - 5 PM EST
 Customer service number: 1-800-123-4567
 </static_context>
 """
+
 ```
 
 We’ll then do the same for our car insurance and electric car insurance information.
 
-```bash
+```
 STATIC_CAR_INSURANCE="""
 <static_context>
 Car Insurance Coverage:
@@ -308,38 +280,39 @@ Optional coverages include:
 STATIC_ELECTRIC_CAR_INSURANCE="""
 <static_context>
 Electric Car Insurance:
-Our specialized electric car insurance goes beyond traditional auto coverage, 
+Our specialized electric car insurance goes beyond traditional auto coverage,
 offering tailored protection for your high-tech investment. In addition to standard coverages, we offer:
 - Safeguarding expensive battery systems
 - Covering home charging equipment
 - Adapting to the rapidly evolving world of electric vehicles
 
-Whether you're driving a Rivian, Nissan Leaf, Chevrolet Bolt, 
-or any other electric vehicle, our knowledgeable agents are ready to craft a policy 
+Whether you're driving a Rivian, Nissan Leaf, Chevrolet Bolt,
+or any other electric vehicle, our knowledgeable agents are ready to craft a policy
 that gives you the confidence to enjoy every electron-powered mile.
 </static_context>
 """
+
 ```
 
 Now that we have our static content, let’s add at least 4-5 sample “good” interactions to guide Claude’s responses. These examples should be representative of your ideal customer interaction and can include guardrails, tool calls, etc.
 
-```bash
+```
 EXAMPLES="""
 Here are a few examples of how you can interact with customers:
 
 <example 1>
 H: Hi, do you offer commercial insurance for small businesses?
 
-A: Ah! Unfortunately, we don't offer commercial insurance at this time. 
-However, we do provide a range of personal insurance products including car insurance and electric car insurance. 
+A: Ah! Unfortunately, we don't offer commercial insurance at this time.
+However, we do provide a range of personal insurance products including car insurance and electric car insurance.
 Would you like to know more about these offerings?
 </example 1>
 
 <example 2>
 H: Hi, what are your business hours?
 
-A: Our business hours are Monday to Friday, 9 AM to 5 PM EST. 
-If you have any questions or need assistance, feel free to reach out during those times. 
+A: Our business hours are Monday to Friday, 9 AM to 5 PM EST.
+If you have any questions or need assistance, feel free to reach out during those times.
 How else can I assist you today?
 </example 2>
 
@@ -353,14 +326,14 @@ A: Great choice! Acme's car insurance policies typically include:
 - Medical payments coverage: Pays for medical expenses after an accident
 - Uninsured/underinsured motorist coverage: Protects you from drivers with insufficient insurance
 
-We also offer optional coverages like rental car reimbursement, roadside assistance, and new car replacement. 
+We also offer optional coverages like rental car reimbursement, roadside assistance, and new car replacement.
 Would you like more details on any of these coverages, or do you have specific questions about insuring your vehicle?
 </example 3>
 
 <example 4>
 H: I'd like to hear about your electric car insurance.
 
-A: Certainly! Our electric car insurance is specially designed to meet the unique needs of electric vehicle owners. 
+A: Certainly! Our electric car insurance is specially designed to meet the unique needs of electric vehicle owners.
 In addition to all the standard coverages we offer for regular cars, our electric car policies include:
 
 - Battery coverage: Protection against damage or degradation of your vehicle's expensive battery system
@@ -369,15 +342,15 @@ In addition to all the standard coverages we offer for regular cars, our electri
 - Cybersecurity protection: Coverage against hacking or digital threats
 - Specialized roadside assistance: Includes flatbed towing to protect the vehicle's undercarriage
 
-We cover a wide range of electric vehicles, including popular models from Tesla, Rivian, Nissan, Chevrolet, and more. 
+We cover a wide range of electric vehicles, including popular models from Tesla, Rivian, Nissan, Chevrolet, and more.
 Is there a specific electric vehicle you're looking to insure, or would you like more details on any of these coverages?
 </example 4>
 
 <example 5>
 H: I'd like to get a quote for my car insurance.
 
-A: Certainly! I'd be happy to help you get a quote for your car insurance. 
-To provide you with an accurate quote, I'll need to collect some information about your vehicle and the primary driver. 
+A: Certainly! I'd be happy to help you get a quote for your car insurance.
+To provide you with an accurate quote, I'll need to collect some information about your vehicle and the primary driver.
 Let's start with the basics:
 
 1. What is the make and model of your vehicle?
@@ -388,12 +361,13 @@ Let's start with the basics:
 Once you provide this information, I'll use our quoting tool to generate a personalized insurance quote for you.
 </example 5>
 """
+
 ```
 
 You will also want to include any important instructions outlining Do’s and Don’ts for how Claude should interact with the customer.
 This may draw from brand guardrails or support policies.
 
-```bash
+```
 ADDITIONAL_GUARDRAILS = """Please adhere to the following guardrails:
 1. Only provide information about insurance types listed in our offerings.
 2. If asked about an insurance type we don't offer, politely state
@@ -403,11 +377,12 @@ that we don't provide that service.
 You only provide information and guidance.
 5. Do not mention any competitor's products or services.
 """
+
 ```
 
 Now let’s combine all these sections into a single string to use as our prompt.
 
-```bash
+```
 TASK_SPECIFIC_INSTRUCTIONS = ' '.join([
    STATIC_GREETINGS_AND_GENERAL,
    STATIC_CAR_INSURANCE,
@@ -415,9 +390,10 @@ TASK_SPECIFIC_INSTRUCTIONS = ' '.join([
    EXAMPLES,
    ADDITIONAL_GUARDRAILS,
 ])
+
 ```
 
-### [​](#add-dynamic-and-agentic-capabilities-with-tool-use) Add dynamic and agentic capabilities with tool use
+# [​](#add-dynamic-and-agentic-capabilities-with-tool-use) Add dynamic and agentic capabilities with tool use
 
 Claude is capable of taking actions and retrieving information dynamically using client-side tool use functionality. Start by listing any external tools or APIs the prompt should utilize.
 
@@ -427,7 +403,7 @@ As a reminder, this tool will not perform the actual calculation, it will just s
 
 Example insurance quote calculator:
 
-```bash
+```
 TOOLS = [{
   "name": "get_quote",
   "description": "Calculate the insurance quote based on user input. Returned value is per month premium.",
@@ -450,9 +426,10 @@ def get_quote(make, model, year, mileage, driver_age):
     # Here, we simulate a delay of 1 seconds and return a fixed quote of 100.
     time.sleep(1)
     return 100
+
 ```
 
-### [​](#deploy-your-prompts) Deploy your prompts
+# [​](#deploy-your-prompts) Deploy your prompts
 
 It’s hard to know how well your prompt works without deploying it in a test production setting and [running evaluations](https://docs.anthropic.com/en/docs/build-with-claude/develop-tests) so let’s build a small application using our prompt, the Anthropic SDK, and streamlit for a user interface.
 
@@ -460,7 +437,7 @@ In a file called `chatbot.py`, start by setting up the ChatBot class, which will
 
 The class should have two main methods: `generate_message` and `process_user_input`.
 
-```python
+```
 from anthropic import Anthropic
 from config import IDENTITY, TOOLS, MODEL, get_quote
 from dotenv import load_dotenv
@@ -532,14 +509,14 @@ class ChatBot:
                {"role": "assistant", "content": response_text}
            )
            return response_text
-      
+
        elif response_message.content[0].type == "text":
            response_text = response_message.content[0].text
            self.session_state.messages.append(
                {"role": "assistant", "content": response_text}
            )
            return response_text
-      
+
        else:
            raise Exception("An error occurred: Unexpected response type")
 
@@ -547,17 +524,18 @@ class ChatBot:
        if func_name == "get_quote":
            premium = get_quote(**func_params)
            return f"Quote generated: ${premium:.2f} per month"
-      
+
        raise Exception("An unexpected tool was used")
+
 ```
 
-### [​](#build-your-user-interface) Build your user interface
+# [​](#build-your-user-interface) Build your user interface
 
 Test deploying this code with Streamlit using a main method. This `main()` function sets up a Streamlit-based chat interface.
 
 We’ll do this in a file called `app.py`
 
-```python
+```
 import streamlit as st
 from chatbot import ChatBot
 from config import TASK_SPECIFIC_INSTRUCTIONS
@@ -591,25 +569,27 @@ def main():
 
 if __name__ == "__main__":
    main()
+
 ```
 
 Run the program with:
 
-```bash
+```
 streamlit run app.py
+
 ```
 
-### [​](#evaluate-your-prompts) Evaluate your prompts
+# [​](#evaluate-your-prompts) Evaluate your prompts
 
 Prompting often requires testing and optimization for it to be production ready. To determine the readiness of your solution, evaluate the chatbot performance using a systematic process combining quantitative and qualitative methods. Creating a [strong empirical evaluation](https://docs.anthropic.com/en/docs/build-with-claude/develop-tests#building-evals-and-test-cases) based on your defined success criteria will allow you to optimize your prompts.
 
 The [Anthropic Console](https://console.anthropic.com/dashboard) now features an Evaluation tool that allows you to test your prompts under various scenarios.
 
-### [​](#improve-performance) Improve performance
+# [​](#improve-performance) Improve performance
 
 In complex scenarios, it may be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview) & [guardrail implementation strategies](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations). Here are some common scenarios:
 
-#### [​](#reduce-long-context-latency-with-rag) Reduce long context latency with RAG
+# [​](#reduce-long-context-latency-with-rag) Reduce long context latency with RAG
 
 When dealing with large amounts of static and dynamic context, including all information in the prompt can lead to high costs, slower response times, and reaching context window limits. In this scenario, implementing Retrieval Augmented Generation (RAG) techniques can significantly improve performance and efficiency.
 
@@ -617,13 +597,13 @@ By using [embedding models like Voyage](https://docs.anthropic.com/en/docs/build
 
 Implementing RAG for support use cases [RAG recipe](https://github.com/anthropics/anthropic-cookbook/blob/82675c124e1344639b2a875aa9d3ae854709cd83/skills/classification/guide.ipynb) has been shown to increase accuracy, reduce response times, and reduce API costs in systems with extensive context requirements.
 
-#### [​](#integrate-real-time-data-with-tool-use) Integrate real-time data with tool use
+# [​](#integrate-real-time-data-with-tool-use) Integrate real-time data with tool use
 
 When dealing with queries that require real-time information, such as account balances or policy details, embedding-based RAG approaches are not sufficient. Instead, you can leverage tool use to significantly enhance your chatbot’s ability to provide accurate, real-time responses. For example, you can use tool use to look up customer information, retrieve order details, and cancel orders on behalf of the customer.
 
 This approach, [outlined in our tool use: customer service agent recipe](https://github.com/anthropics/anthropic-cookbook/blob/main/tool_use/customer_service_agent.ipynb), allows you to seamlessly integrate live data into your Claude’s responses and provide a more personalized and efficient customer experience.
 
-#### [​](#strengthen-input-and-output-guardrails) Strengthen input and output guardrails
+# [​](#strengthen-input-and-output-guardrails) Strengthen input and output guardrails
 
 When deploying a chatbot, especially in customer service scenarios, it’s crucial to prevent risks associated with misuse, out-of-scope queries, and inappropriate responses. While Claude is inherently resilient to such scenarios, here are additional steps to strengthen your chatbot guardrails:
 
@@ -635,7 +615,7 @@ When deploying a chatbot, especially in customer service scenarios, it’s cruci
 * [Keep Claude in character](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/keep-claude-in-character): Prevent Claude from changing their style of context, even during long, complex interactions.
 * Remove Personally Identifiable Information (PII): Unless explicitly required and authorized, strip out any PII from responses.
 
-#### [​](#reduce-perceived-response-time-with-streaming) Reduce perceived response time with streaming
+# [​](#reduce-perceived-response-time-with-streaming) Reduce perceived response time with streaming
 
 When dealing with potentially lengthy responses, implementing streaming can significantly improve user engagement and satisfaction. In this scenario, users receive the answer progressively instead of waiting for the entire response to be generated.
 
@@ -648,7 +628,7 @@ Here is how to implement streaming:
 
 In some cases, streaming enables the use of more advanced models with higher base latencies, as the progressive display mitigates the impact of longer processing times.
 
-#### [​](#scale-your-chatbot) Scale your Chatbot
+# [​](#scale-your-chatbot) Scale your Chatbot
 
 As the complexity of your Chatbot grows, your application architecture can evolve to match. Before you add further layers to your architecture, consider the following less exhaustive options:
 
@@ -657,24 +637,21 @@ As the complexity of your Chatbot grows, your application architecture can evolv
 
 If your Chatbot handles incredibly varied tasks, you may want to consider adding a [separate intent classifier](https://github.com/anthropics/anthropic-cookbook/blob/main/skills/classification/guide.ipynb) to route the initial customer query. For the existing application, this would involve creating a decision tree that would route customer queries through the classifier and then to specialized conversations (with their own set of tools and system prompts). Note, this method requires an additional call to Claude that can increase latency.
 
-### [​](#integrate-claude-into-your-support-workflow) Integrate Claude into your support workflow
+# [​](#integrate-claude-into-your-support-workflow) Integrate Claude into your support workflow
 
 While our examples have focused on Python functions callable within a Streamlit environment, deploying Claude for real-time support chatbot requires an API service.
 
 Here’s how you can approach this:
 
 1. Create an API wrapper: Develop a simple API wrapper around your classification function. For example, you can use Flask API or Fast API to wrap your code into a HTTP Service. Your HTTP service could accept the user input and return the Assistant response in its entirety. Thus, your service could have the following characteristics:
-
   * Server-Sent Events (SSE): SSE allows for real-time streaming of responses from the server to the client. This is crucial for providing a smooth, interactive experience when working with LLMs.
-  * Caching: Implementing caching can significantly improve response times and reduce unnecessary API calls.
-  * Context retention: Maintaining context when a user navigates away and returns is important for continuity in conversations.
+   * Caching: Implementing caching can significantly improve response times and reduce unnecessary API calls.
+   * Context retention: Maintaining context when a user navigates away and returns is important for continuity in conversations.
 2. Build a web interface: Implement a user-friendly web UI for interacting with the Claude-powered agent.
 
-[Retrieval Augmented Generation (RAG) cookbook
----------------------------------------------
+[## Retrieval Augmented Generation (RAG) cookbook
 
-Visit our RAG cookbook recipe for more example code and detailed guidance.](https://github.com/anthropics/anthropic-cookbook/blob/main/skills/retrieval_augmented_generation/guide.ipynb)[Citations cookbook
-------------------
+Visit our RAG cookbook recipe for more example code and detailed guidance.](https://github.com/anthropics/anthropic-cookbook/blob/main/skills/retrieval_augmented_generation/guide.ipynb)[## Citations cookbook
 
 Explore our Citations cookbook recipe for how to ensure accuracy and explainability of information.](https://github.com/anthropics/anthropic-cookbook/blob/main/misc/using_citations.ipynb)
 
@@ -682,26 +659,6 @@ Was this page helpful?
 
 YesNo
 
-[Ticket routing](/en/docs/about-claude/use-case-guides/ticket-routing)[Content moderation](/en/docs/about-claude/use-case-guides/content-moderation)
+Ticket routing[Content moderation](/en/docs/about-claude/use-case-guides/content-moderation)
 
 On this page
-
-* [Before building with Claude](#before-building-with-claude)
-* [Decide whether to use Claude for support chat](#decide-whether-to-use-claude-for-support-chat)
-* [Define your ideal chat interaction](#define-your-ideal-chat-interaction)
-* [Break the interaction into unique tasks](#break-the-interaction-into-unique-tasks)
-* [Establish success criteria](#establish-success-criteria)
-* [How to implement Claude as a customer service agent](#how-to-implement-claude-as-a-customer-service-agent)
-* [Choose the right Claude model](#choose-the-right-claude-model)
-* [Build a strong prompt](#build-a-strong-prompt)
-* [Add dynamic and agentic capabilities with tool use](#add-dynamic-and-agentic-capabilities-with-tool-use)
-* [Deploy your prompts](#deploy-your-prompts)
-* [Build your user interface](#build-your-user-interface)
-* [Evaluate your prompts](#evaluate-your-prompts)
-* [Improve performance](#improve-performance)
-* [Reduce long context latency with RAG](#reduce-long-context-latency-with-rag)
-* [Integrate real-time data with tool use](#integrate-real-time-data-with-tool-use)
-* [Strengthen input and output guardrails](#strengthen-input-and-output-guardrails)
-* [Reduce perceived response time with streaming](#reduce-perceived-response-time-with-streaming)
-* [Scale your Chatbot](#scale-your-chatbot)
-* [Integrate Claude into your support workflow](#integrate-claude-into-your-support-workflow)

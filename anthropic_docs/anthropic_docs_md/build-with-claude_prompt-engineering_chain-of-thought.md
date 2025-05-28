@@ -1,49 +1,35 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-of-thought/
----
+# Let Claude think (chain of thought prompting) to increase performance - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-of-thought
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Prompt engineering
-
-Let Claude think (chain of thought prompting) to increase performance
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
 
   + [Overview](/en/docs/build-with-claude/prompt-engineering/overview)
+  + [Claude 4 best practices](/en/docs/build-with-claude/prompt-engineering/claude-4-best-practices)
   + [Prompt generator](/en/docs/build-with-claude/prompt-engineering/prompt-generator)
   + [Use prompt templates](/en/docs/build-with-claude/prompt-engineering/prompt-templates-and-variables)
   + [Prompt improver](/en/docs/build-with-claude/prompt-engineering/prompt-improver)
@@ -56,69 +42,60 @@ Let Claude think (chain of thought prompting) to increase performance
   + [Chain complex prompts](/en/docs/build-with-claude/prompt-engineering/chain-prompts)
   + [Long context tips](/en/docs/build-with-claude/prompt-engineering/long-context-tips)
   + [Extended thinking tips](/en/docs/build-with-claude/prompt-engineering/extended-thinking-tips)
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
 While these tips apply broadly to all Claude models, you can find prompting tips specific to extended thinking models [here](/en/docs/build-with-claude/prompt-engineering/extended-thinking-tips).
 
 When faced with complex tasks like research, analysis, or problem-solving, giving Claude space to think can dramatically improve its performance. This technique, known as chain of thought (CoT) prompting, encourages Claude to break down problems step-by-step, leading to more accurate and nuanced outputs.
 
-[​](#before-implementing-cot) Before implementing CoT
------------------------------------------------------
+# [​](#before-implementing-cot) Before implementing CoT
 
-### [​](#why-let-claude-think) Why let Claude think?
+# [​](#why-let-claude-think%3F) Why let Claude think?
 
 * **Accuracy:** Stepping through problems reduces errors, especially in math, logic, analysis, or generally complex tasks.
 * **Coherence:** Structured thinking leads to more cohesive, well-organized responses.
 * **Debugging:** Seeing Claude’s thought process helps you pinpoint where prompts may be unclear.
 
-### [​](#why-not-let-claude-think) Why not let Claude think?
+# [​](#why-not-let-claude-think%3F) Why not let Claude think?
 
 * Increased output length may impact latency.
 * Not all tasks require in-depth thinking. Use CoT judiciously to ensure the right balance of performance and latency.
 
 Use CoT for tasks that a human would need to think through, like complex math, multi-step analysis, writing complex documents, or decisions with many factors.
 
-[​](#how-to-prompt-for-thinking) How to prompt for thinking
------------------------------------------------------------
+# [​](#how-to-prompt-for-thinking) How to prompt for thinking
 
 The chain of thought techniques below are **ordered from least to most complex**. Less complex methods take up less space in the context window, but are also generally less powerful.
 
@@ -148,7 +125,7 @@ The chain of thought techniques below are **ordered from least to most complex**
   | --- | --- |
   | User | Draft personalized emails to donors asking for contributions to this year’s Care for Kids program.Program information:<program>{{PROGRAM\_DETAILS}}</program>Donor information:<donor>{{DONOR\_DETAILS}}</donor>Think before you write the email in <thinking> tags. First, think through what messaging might appeal to this donor given their donation history and which campaigns they’ve supported in the past. Then, think through what aspects of the Care for Kids program would appeal to them, given their history. Finally, write the personalized donor email in <email> tags, using your analysis. |
 
-### [​](#examples) Examples
+# [​](#examples) Examples
 
 Example: Financial analysis without thinking
 
@@ -168,14 +145,9 @@ With step-by-step thinking, the advisor provides a much richer analysis. It calc
 | User | You’re a financial advisor. A client wants to invest $10,000. They can choose between two options: A) A stock that historically returns 12% annually but is volatile, or B) A bond that guarantees 6% annually. The client needs the money in 5 years for a down payment on a house. Which option do you recommend? Think step-by-step. |
 | Assistant | To determine the best investment option for our client, I’ll consider several factors step-by-step:<thinking>1. Understand the client’s goal and timeline: - Goal: Down payment for a house - Timeline: 5 years - Implication: This is a short-term, high-priority financial goal. The client likely cannot afford significant risk or volatility.2. Analyze Option A (Stock): - Pro: Higher historical return (12% annually) - Con: Volatile (implying potential for significant gains or losses) - Calculate potential 5-year return: - Best case (12% annually): $10,000 \* (1.12)^5 ≈ $17,623.42 - Worst case (market crash): Could lose a substantial portion, e.g., 50% crash = $5,0003. Analyze Option B (Bond): - Pro: Guaranteed return (6% annually) - Con: Lower return compared to historical stock performance - Calculate 5-year return: - Guaranteed: $10,000 \* (1.06)^5 ≈ $13,382.254. Consider risk tolerance: - Goal is a house down payment (essential, not discretionary) - Short timeline (5 years) limits ability to recover from market downturns - Conclusion: Client likely has low risk tolerance5. Historical perspective: - Stock’s 12% is historical, not guaranteed - In 5-year periods, stock market can vary wildly: - 2003-2007 (pre-financial crisis): S&P 500 up ~82% - 2007-2011 (during crisis): S&P 500 down ~2% - Conclusion: Past performance doesn’t guarantee future results, especially short-term6. Final analysis: - Option A (Stock): Higher potential return but unacceptable risk of not meeting the down payment goal - Option B (Bond): Guaranteed to meet ~80% of best-case stock scenario, 100% certainty of having funds</thinking><answer>I recommend Option B, the bond with a guaranteed 6% annual return. While the stock’s historical 12% return is tempting, the bond ensures you’ll have $13,382.25 in 5 years for your house down payment. Given the importance and short timeline of your goal, the stock’s volatility poses an unacceptable risk. The bond provides certainty, which is invaluable for such a crucial financial milestone.</answer> |
 
-[Prompt library
---------------
+## Prompt library
 
-Get inspired by a curated selection of prompts for various tasks and use cases.](/en/prompt-library/library)[GitHub prompting tutorial
--------------------------
-
-An example-filled tutorial that covers the prompt engineering concepts found in our docs.](https://github.com/anthropics/prompt-eng-interactive-tutorial)[Google Sheets prompting tutorial
---------------------------------
+Get inspired by a curated selection of prompts for various tasks and use cases.[## GitHub prompting tutorial](https://github.com/anthropics/prompt-eng-interactive-tutorial)[## Google Sheets prompting tutorial
 
 A lighter weight version of our prompt engineering tutorial via an interactive spreadsheet.](https://docs.google.com/spreadsheets/d/19jzLgRruG9kjUQNKtCg1ZjdD6l6weA6qRXG5zLIAhC8)
 
@@ -183,12 +155,6 @@ Was this page helpful?
 
 YesNo
 
-[Use examples (multishot prompting)](/en/docs/build-with-claude/prompt-engineering/multishot-prompting)[Use XML tags](/en/docs/build-with-claude/prompt-engineering/use-xml-tags)
+Use examples (multishot prompting)[Use XML tags](/en/docs/build-with-claude/prompt-engineering/use-xml-tags)
 
 On this page
-
-* [Before implementing CoT](#before-implementing-cot)
-* [Why let Claude think?](#why-let-claude-think)
-* [Why not let Claude think?](#why-not-let-claude-think)
-* [How to prompt for thinking](#how-to-prompt-for-thinking)
-* [Examples](#examples)

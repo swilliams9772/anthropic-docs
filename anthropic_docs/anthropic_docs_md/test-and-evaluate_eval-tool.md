@@ -1,90 +1,67 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/test-and-evaluate/eval-tool/
----
+# Using the Evaluation Tool - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/test-and-evaluate/eval-tool#creating-test-cases
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Test and evaluate
-
-Using the Evaluation Tool
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
-[​](#accessing-the-evaluate-feature) Accessing the Evaluate Feature
--------------------------------------------------------------------
+# [​](#accessing-the-evaluate-feature) Accessing the Evaluate Feature
 
 To get started with the Evaluation tool:
 
@@ -93,10 +70,9 @@ To get started with the Evaluation tool:
 
 Ensure your prompt includes at least 1-2 dynamic variables using the double brace syntax: {{variable}}. This is required for creating eval test sets.
 
-[​](#generating-prompts) Generating Prompts
--------------------------------------------
+# [​](#generating-prompts) Generating Prompts
 
-The Console offers a built-in [prompt generator](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-generator) powered by Claude 3.7 Sonnet:
+The Console offers a built-in [prompt generator](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-generator) powered by Claude Opus 4:
 
 1
 
@@ -118,8 +94,7 @@ Clicking the orange ‘Generate Prompt’ button at the bottom will have Claude 
 
 This feature makes it easier to create prompts with the appropriate variable syntax for evaluation.
 
-[​](#creating-test-cases) Creating Test Cases
----------------------------------------------
+# [​](#creating-test-cases) Creating Test Cases
 
 When you access the Evaluation screen, you have several options to create test cases:
 
@@ -147,14 +122,13 @@ Here’s an example of a populated Evaluation screen with several test cases:
 
 If you update your original prompt text, you can re-run the entire eval suite against the new prompt to see how changes affect performance across all test cases.
 
-[​](#tips-for-effective-evaluation) Tips for Effective Evaluation
------------------------------------------------------------------
+# [​](#tips-for-effective-evaluation) Tips for Effective Evaluation
 
 Prompt Structure for Evaluation
 
 To make the most of the Evaluation tool, structure your prompts with clear input and output formats. For example:
 
-```bash
+```
 In this task, you will generate a cute one sentence story that incorporates two elements: a color and a sound.
 The color to include in the story is:
 <color>
@@ -170,14 +144,14 @@ Here are the steps to generate the story:
 3. Describe the action, event or scene you imagined in a single, concise sentence. Focus on making the sentence cute, evocative and imaginative. For example: "A cheerful bluebird whistled a merry melody as it soared through the azure sky."
 Please keep your story to one sentence only. Aim to make that sentence as charming and engaging as possible while naturally incorporating the given color and sound.
 Write your completed one sentence story inside <story> tags.
+
 ```
 
 This structure makes it easy to vary inputs ({{COLOR}} and {{SOUND}}) and evaluate outputs consistently.
 
 Use the ‘Generate a prompt’ helper tool in the Console to quickly create prompts with the appropriate variable syntax for evaluation.
 
-[​](#understanding-and-comparing-results) Understanding and comparing results
------------------------------------------------------------------------------
+# [​](#understanding-and-comparing-results) Understanding and comparing results
 
 The Evaluation tool offers several features to help you refine your prompts:
 
@@ -193,12 +167,6 @@ Was this page helpful?
 
 YesNo
 
-[Reducing latency](/en/docs/test-and-evaluate/strengthen-guardrails/reduce-latency)[Admin API](/en/docs/administration/administration-api)
+Reducing latency[Anthropic Privacy Policy](/en/docs/legal-center/privacy)
 
 On this page
-
-* [Accessing the Evaluate Feature](#accessing-the-evaluate-feature)
-* [Generating Prompts](#generating-prompts)
-* [Creating Test Cases](#creating-test-cases)
-* [Tips for Effective Evaluation](#tips-for-effective-evaluation)
-* [Understanding and comparing results](#understanding-and-comparing-results)

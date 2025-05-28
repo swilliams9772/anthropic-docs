@@ -1,0 +1,162 @@
+# Improved Anthropic Documentation Scraper Configuration v2
+
+# URLs and paths
+urls:
+  root: "https://docs.anthropic.com"
+  base: "https://docs.anthropic.com"
+  domain: "docs.anthropic.com"
+  
+  # Comprehensive starting points for crawling
+  start_urls:
+    - "https://docs.anthropic.com/"
+    - "https://docs.anthropic.com/en/home"
+    - "https://docs.anthropic.com/en/docs/welcome"
+    - "https://docs.anthropic.com/en/api/getting-started"
+    - "https://docs.anthropic.com/en/api/messages"
+    - "https://docs.anthropic.com/en/docs/about-claude/models/overview"
+    - "https://docs.anthropic.com/en/docs/build-with-claude/overview"
+    - "https://docs.anthropic.com/en/docs/agents-and-tools/computer-use"
+    - "https://docs.anthropic.com/en/docs/test-and-evaluate/define-success"
+    - "https://docs.anthropic.com/en/docs/claude-code/overview"
+    - "https://docs.anthropic.com/en/release-notes/overview"
+
+# Valid path patterns to include
+valid_paths:
+  - "/en/docs/"
+  - "/en/api/"
+  - "/en/home"
+  - "/en/resources/"
+  - "/en/release-notes/"
+
+# Excluded patterns - more comprehensive list
+excluded_patterns:
+  - "/feedback"
+  - "/legal"
+  - "/privacy"
+  - "/terms"
+  - "/search"
+  - "/404"
+  - "?q="
+  - "/api/v1/"
+  - "twitter.com"
+  - "github.com"
+  - "linkedin.com"
+  - "facebook.com"
+  - "instagram.com"
+  - "youtube.com"
+  - "mailto:"
+  - "discord.com"
+  - "support.anthropic.com"
+  - "console.anthropic.com"
+  - "claude.ai"
+  - "anthropic.com/news"
+  - "anthropic.com/legal"
+  - "anthropic.com/careers"
+  - "anthropic.com/about"
+
+# Content extraction selectors (in order of preference)
+content_selectors:
+  # Anthropic/Docusaurus specific
+  - ".theme-doc-markdown"
+  - ".markdown"
+  - "article[role='main']"
+  - "main[role='main']"
+  - ".main-wrapper main"
+  - ".docMainContainer"
+  - ".container .row .col"
+  
+  # Generic content selectors
+  - "main"
+  - "article"
+  - ".content"
+  - ".main-content"
+  - ".page-content"
+  - ".documentation"
+  - ".doc-content"
+  - "#main-content"
+  - ".post-content"
+  - ".entry-content"
+
+# Elements to remove (unwanted content)
+unwanted_selectors:
+  - "nav"
+  - "header"
+  - "footer"
+  - ".navbar"
+  - ".navigation"
+  - ".nav-wrapper"
+  - ".top-bar"
+  - ".sidebar"
+  - ".aside"
+  - ".toc"
+  - ".table-of-contents"
+  - ".breadcrumb"
+  - ".pagination"
+  - ".edit-page-link"
+  - ".on-this-page"
+  - ".page-nav"
+  - ".prev-next-nav"
+  - ".cookie-banner"
+  - ".announcement"
+  - ".banner"
+  - ".social-share"
+  - ".related-articles"
+  - "script"
+  - "style"
+  - "noscript"
+  # Anthropic-specific
+  - ".navbar-sidebar"
+  - ".theme-doc-sidebar-container"
+  - ".sidebar-container"
+  - ".doc-sidebar"
+  - "[data-theme='navbar']"
+  - "[data-theme='sidebar']"
+
+# User agents for rotation
+user_agents:
+  - 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+  - 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15'
+  - 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0'
+  - 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+
+# Output directories
+directories:
+  output_dir: "anthropic_docs"
+  html: "anthropic_docs_html"
+  markdown: "anthropic_docs_md"
+  images: "anthropic_docs_images"
+  full_html: "anthropic_docs_full_html"
+  metadata_file: "page_metadata.json"
+
+# Thread configuration
+threading:
+  worker_threads: 6
+  image_threads: 4
+  max_crawl_depth: 8
+
+# Rate limiting - more conservative to avoid being blocked
+rate_limiting:
+  min_delay_between_requests: 0.8
+  max_retries: 3
+  base_retry_delay: 1.0
+  max_retry_delay: 15.0
+  timeout: 30
+
+# Logging
+logging:
+  log_file: "scraper_v2.log"
+  level: "INFO"
+  
+# Content processing
+content:
+  min_content_length: 50  # Minimum characters for valid content
+  max_filename_length: 100
+  
+# Features
+features:
+  save_full_html: true
+  save_processed_html: true
+  save_markdown: true
+  add_page_identifiers: true
+  improve_code_blocks: true
+  clean_markdown: true 

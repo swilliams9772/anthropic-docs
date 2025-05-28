@@ -1,157 +1,160 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/welcome/
----
+# Building with Claude - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/welcome
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Get started
-
-Welcome to Claude
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
-Introducing [Claude 3.7 Sonnet](en/docs/about-claude/models) - our most intelligent model yet. 3.7 Sonnet is the first hybrid [reasoning](en/docs/build-with-claude/extended-thinking) model on the market. Learn more in our [blog post](https://www.anthropic.com/news/claude-3-7-sonnet).
+This guide introduces Claude’s enterprise capabilities, the end-to-end flow for developing with Claude, and how to start building.
 
-Looking to chat with Claude? Visit [claude.ai](http://www.claude.ai)!
+# [​](#what-you-can-do-with-claude) What you can do with Claude
 
-[​](#get-started) Get started
------------------------------
+Claude is designed to empower enterprises at scale with strong performance across benchmark evaluations for reasoning, math, coding, and fluency in English and non-English languages.
 
-If you’re new to Claude, start here to learn the essentials and make your first API call.
+Here’s a non-exhaustive list of Claude’s capabilities and common uses.
 
-[Intro to Claude
----------------
+| Capability | Enables you to… |
+| --- | --- |
+| Text and code generation | * Adhere to brand voice for excellent customer-facing experiences such as copywriting and chatbots * Create production-level code and operate (in-line code generation, debugging, and conversational querying) within complex codebases * Build automatic translation features between languages * Conduct complex financial forecasts * Support legal use cases that require high-quality technical analysis, long context windows for processing detailed documents, and fast outputs |
+| Vision | * Process and analyze visual input, such as extracting insights from charts and graphs * Generate code from images with code snippets or templates based on diagrams * Describe an image for a user with low vision |
+| Tool use | * Interact with external client-side tools and functions, allowing Claude to reason, plan, and execute actions by generating structured outputs through API calls |
 
-Explore Claude’s capabilities and development flow.](/en/docs/intro-to-claude)[Quickstart
-----------
+# [​](#enterprise-considerations) Enterprise considerations
 
-Learn how to make your first API call in minutes.](/en/docs/quickstart)[Prompt Library
---------------
+Along with an extensive set of features, tools, and capabilities, Claude is also built to be secure, trustworthy, and scalable for wide-reaching enterprise needs.
 
-Explore example prompts for inspiration.](/en/prompt-library/library)
+| Feature | Description |
+| --- | --- |
+| **Secure** | * [Enterprise-grade](https://trust.anthropic.com/) security and data handling for API * SOC II Type 2 certified, HIPAA compliance options for API * Accessible through AWS (GA) and GCP (in private preview) |
+| **Trustworthy** | * Resistant to jailbreaks and misuse. We continuously monitor prompts and outputs for harmful, malicious use cases that violate our [AUP](https://www.anthropic.com/legal/aup). * Copyright indemnity protections for paid commercial services * Uniquely positioned to serve high trust industries that process large volumes of sensitive user data |
+| **Capable** | * 200K token context window for expanded use cases, with future support for 1M * [Tool use](/en/docs/build-with-claude/tool-use), also known as function calling, which allows seamless integration of Claude into specialized applications and custom workflows * Multimodal input capabilities with text output, allowing you to upload images (such as tables, graphs, and photos) along with text prompts for richer context and complex use cases * [Developer Console](https://console.anthropic.com) with Workbench and prompt generation tool for easier, more powerful prompting and experimentation * [SDKs](/en/api/client-sdks) and [APIs](/en/api) to expedite and enhance development |
+| **Reliable** | * Very low hallucination rates * Accurate over long documents |
+| **Global** | * Great for coding tasks and fluency in English and non-English languages like Spanish and Japanese * Enables use cases like translation services and broader global utility |
+| **Cost conscious** | * Family of models balances cost, performance, and intelligence |
 
-[​](#develop-with-claude) Develop with Claude
----------------------------------------------
+# [​](#implementing-claude) Implementing Claude
 
-Anthropic has best-in-class developer tools to build scalable applications with Claude.
+1
 
-[Developer Console
------------------
+Scope your use case
 
-Enjoy easier, more powerful prompting in your browser with the Workbench and prompt generator tool.](https://console.anthropic.com)[API Reference
--------------
+* Identify a problem to solve or tasks to automate with Claude.
+* Define requirements: features, performance, and cost.
 
-Explore, implement, and scale with the Anthropic API and SDKs.](/en/api/getting-started)[Anthropic Cookbook
-------------------
+2
 
-Learn with interactive Jupyter notebooks that demonstrate uploading PDFs, embeddings, and more.](https://github.com/anthropics/anthropic-cookbook)
+Design your integration
 
-[​](#key-capabilities) Key capabilities
----------------------------------------
+* Select Claude’s capabilities (e.g., vision, tool use) and models (Opus, Sonnet, Haiku) based on needs.
+* Choose a deployment method, such as the Anthropic API, AWS Bedrock, or Vertex AI.
 
-Claude can assist with many tasks that involve text, code, and images.
+3
 
-[Text and code generation
-------------------------
+Prepare your data
 
-Summarize text, answer questions, extract data, translate text, and explain and generate code.](/en/docs/build-with-claude/text-generation)[Vision
-------
+* Identify and clean relevant data (databases, code repos, knowledge bases) for Claude’s context.
 
-Process and analyze visual input and generate text and code from images.](/en/docs/build-with-claude/vision)
+4
 
-[​](#support) Support
----------------------
+Develop your prompts
 
-[Help Center
------------
+* Use Workbench to create evals, draft prompts, and iteratively refine based on test results.
+* Deploy polished prompts and monitor real-world performance for further refinement.
 
-Find answers to frequently asked account and billing questions.](https://support.anthropic.com/en/)[Service Status
---------------
+5
 
-Check the status of Anthropic services.](https://www.anthropic.com/status)
+Implement Claude
+
+* Set up your environment, integrate Claude with your systems (APIs, databases, UIs), and define human-in-the-loop requirements.
+
+6
+
+Test your system
+
+* Conduct red teaming for potential misuse and A/B test improvements.
+
+7
+
+Deploy to production
+
+* Once your application runs smoothly end-to-end, deploy to production.
+
+8
+
+Monitor and improve
+
+* Monitor performance and effectiveness to make ongoing improvements.
+
+# [​](#start-building-with-claude) Start building with Claude
+
+When you’re ready, start building with Claude:
+
+* Follow the [Quickstart](/en/docs/quickstart) to make your first API call
+* Check out the [API Reference](/en/api)
+* Explore the [Prompt Library](/en/prompt-library/library) for example prompts
+* Experiment and start building with the [Workbench](https://console.anthropic.com)
+* Check out the [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook) for working code examples
 
 Was this page helpful?
 
 YesNo
 
-[Initial setup](/en/docs/initial-setup)
+Pricing[Overview](/en/docs/about-claude/use-case-guides/overview)
 
 On this page
-
-* [Get started](#get-started)
-* [Develop with Claude](#develop-with-claude)
-* [Key capabilities](#key-capabilities)
-* [Support](#support)

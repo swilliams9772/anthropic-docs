@@ -1,81 +1,45 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/admin-api/users/update-user/
----
+# Update User - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/admin-api/users/update-user
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Organization Member Management
-
-Update User
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
 * Models
 * Message Batches
-* Text Completions (Legacy)
-* Admin API
-
-  + Organization Member Management
-
-    - [GET
+* Files
+* + Organization Member Management
+  - [GET
 
       Get User](/en/api/admin-api/users/get-user)
-    - [GET
+  - [GET
 
       List Users](/en/api/admin-api/users/list-users)
-    - [POST
+  - [POST
 
       Update User](/en/api/admin-api/users/update-user)
-    - [DEL
+  - [DEL
 
       Remove User](/en/api/admin-api/users/remove-user)
   + Organization Invites
   + Workspace Management
   + Workspace Member Management
-  + API Keys
+* Text Completions (Legacy)
 
-##### OpenAI SDK compatibility
+# SDKs
 
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 POST
 
@@ -95,15 +59,44 @@ users
 
 {user\_id}
 
-#### Headers
+cURL
 
-[​](#parameter-x-api-key)
+Python
 
-x-api-key
+JavaScript
 
-string
+PHP
 
-required
+Go
+
+Java
+
+```
+curl "https://api.anthropic.com/v1/organizations/users/user_01WCz1FkmYMm4gnmykNKUu3Q" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+  --data '{
+    "role": "user"
+  }'
+```
+
+200
+
+4XX
+
+```
+{
+  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "type": "user",
+  "email": "user@emaildomain.com",
+  "name": "Jane Doe",
+  "role": "user",
+  "added_at": "2024-10-30T23:58:27.427722Z"
+}
+```
+
+# Headers
 
 Your unique Admin API key for authentication.
 
@@ -121,7 +114,7 @@ The version of the Anthropic API you want to use.
 
 Read more about versioning and our version history [here](https://docs.anthropic.com/en/api/versioning).
 
-#### Path Parameters
+# Path Parameters
 
 [​](#parameter-user-id)
 
@@ -133,7 +126,7 @@ required
 
 ID of the User.
 
-#### Body
+# Body
 
 application/json
 
@@ -155,29 +148,23 @@ Available options:
 
 `billing`
 
-#### Response
+Examples:
 
-200 - application/json
+`"user"`
 
-[​](#response-added-at)
+`"developer"`
 
-added\_at
+`"billing"`
 
-string
+# Response
 
-required
+200
 
-RFC 3339 datetime string indicating when the User joined the Organization.
+2004XX
 
-[​](#response-email)
+application/json
 
-email
-
-string
-
-required
-
-Email of the User.
+Successful Response
 
 [​](#response-id)
 
@@ -189,6 +176,42 @@ required
 
 ID of the User.
 
+Examples:
+
+`"user_01WCz1FkmYMm4gnmykNKUu3Q"`
+
+[​](#response-type)
+
+type
+
+enum<string>
+
+default:user
+
+required
+
+Object type.
+
+For Users, this is always `"user"`.
+
+Available options:
+
+`user`
+
+[​](#response-email)
+
+email
+
+string
+
+required
+
+Email of the User.
+
+Examples:
+
+`"user@emaildomain.com"`
+
 [​](#response-name)
 
 name
@@ -198,6 +221,10 @@ string
 required
 
 Name of the User.
+
+Examples:
+
+`"Jane Doe"`
 
 [​](#response-role)
 
@@ -219,28 +246,69 @@ Available options:
 
 `admin`
 
-[​](#response-type)
+Examples:
 
-type
+`"user"`
 
-enum<string>
+`"developer"`
 
-default:
+`"billing"`
 
-user
+`"admin"`
+
+[​](#response-added-at)
+
+added\_at
+
+string
 
 required
 
-Object type.
+RFC 3339 datetime string indicating when the User joined the Organization.
 
-For Users, this is always `"user"`.
+Examples:
 
-Available options:
-
-`user`
+`"2024-10-30T23:58:27.427722Z"`
 
 Was this page helpful?
 
 YesNo
 
-[List Users](/en/api/admin-api/users/list-users)[Remove User](/en/api/admin-api/users/remove-user)
+List Users[Remove User](/en/api/admin-api/users/remove-user)
+
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl "https://api.anthropic.com/v1/organizations/users/user_01WCz1FkmYMm4gnmykNKUu3Q" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+  --data '{
+    "role": "user"
+  }'
+```
+
+200
+
+4XX
+
+```
+{
+  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "type": "user",
+  "email": "user@emaildomain.com",
+  "name": "Jane Doe",
+  "role": "user",
+  "added_at": "2024-10-30T23:58:27.427722Z"
+}
+```

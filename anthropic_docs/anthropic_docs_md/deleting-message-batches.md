@@ -1,40 +1,13 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/deleting-message-batches/
----
+# Delete a Message Batch - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/deleting-message-batches
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Message Batches
-
-Delete a Message Batch
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
 * Models
@@ -58,25 +31,18 @@ Delete a Message Batch
   + [DEL
 
     Delete a Message Batch](/en/api/deleting-message-batches)
-  + [Message Batches examples](/en/api/messages-batch-examples)
+* Files
 * Text Completions (Legacy)
-* Admin API
 
-##### OpenAI SDK compatibility
+# SDKs
 
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 DELETE
 
@@ -96,7 +62,36 @@ batches
 
 {message\_batch\_id}
 
-#### Headers
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl -X DELETE https://api.anthropic.com/v1/messages/batches/msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01"
+```
+
+200
+
+4XX
+
+```
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
+
+# Headers
 
 [​](#parameter-anthropic-beta)
 
@@ -120,19 +115,11 @@ The version of the Anthropic API you want to use.
 
 Read more about versioning and our version history [here](https://docs.anthropic.com/en/api/versioning).
 
-[​](#parameter-x-api-key)
-
-x-api-key
-
-string
-
-required
-
 Your unique API key for authentication.
 
 This key is required in the header of all API requests, to authenticate your account and access Anthropic's services. Get your API key through the [Console](https://console.anthropic.com/settings/keys). Each key is scoped to a Workspace.
 
-#### Path Parameters
+# Path Parameters
 
 [​](#parameter-message-batch-id)
 
@@ -144,9 +131,15 @@ required
 
 ID of the Message Batch.
 
-#### Response
+# Response
 
-200 - application/json
+200
+
+2004XX
+
+application/json
+
+Successful Response
 
 [​](#response-id)
 
@@ -158,15 +151,17 @@ required
 
 ID of the Message Batch.
 
+Examples:
+
+`"msgbatch_013Zva2CMHLNnXjNJJKqJ2EF"`
+
 [​](#response-type)
 
 type
 
 enum<string>
 
-default:
-
-message\_batch\_deleted
+default:message\_batch\_deleted
 
 required
 
@@ -182,4 +177,33 @@ Was this page helpful?
 
 YesNo
 
-[Cancel a Message Batch](/en/api/canceling-message-batches)[Message Batches examples](/en/api/messages-batch-examples)
+Cancel a Message Batch[Create a File](/en/api/files-create)
+
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl -X DELETE https://api.anthropic.com/v1/messages/batches/msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01"
+```
+
+200
+
+4XX
+
+```
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```

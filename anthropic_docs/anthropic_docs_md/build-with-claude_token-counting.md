@@ -1,87 +1,65 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/build-with-claude/token-counting/
----
+# Token counting - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/build-with-claude/token-counting
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Build with Claude
-
-Token counting
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
 Token counting enables you to determine the number of tokens in a message before sending it to Claude, helping you make informed decisions about your prompts and usage. With token counting, you can
 
@@ -89,72 +67,260 @@ Token counting enables you to determine the number of tokens in a message before
 * Make smart model routing decisions
 * Optimize prompts to be a specific length
 
-[​](#how-to-count-message-tokens) How to count message tokens
--------------------------------------------------------------
+# [​](#how-to-count-message-tokens) How to count message tokens
 
 The [token counting](/en/api/messages-count-tokens) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](/en/docs/build-with-claude/tool-use), [images](/en/docs/build-with-claude/vision), and [PDFs](/en/docs/build-with-claude/pdf-support). The response contains the total number of input tokens.
 
 The token count should be considered an **estimate**. In some cases, the actual number of input tokens used when creating a message may differ by a small amount.
 
-### [​](#supported-models) Supported models
+# [​](#supported-models) Supported models
 
 The token counting endpoint supports the following models:
 
-* Claude 3.7 Sonnet
-* Claude 3.5 Sonnet
-* Claude 3.5 Haiku
-* Claude 3 Haiku
-* Claude 3 Opus
+* Claude Opus 4
+* Claude Sonnet 4
+* Claude Sonnet 3.7
+* Claude Sonnet 3.5
+* Claude Haiku 3.5
+* Claude Haiku 3
+* Claude Opus 3
 
-### [​](#count-tokens-in-basic-messages) Count tokens in basic messages
+# [​](#count-tokens-in-basic-messages) Count tokens in basic messages
+
+Python
+
+TypeScript
+
+Shell
+
+Java
+
+```
+import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.count_tokens(
+    model="claude-opus-4-20250514",
+    system="You are a scientist",
+    messages=[{
+        "role": "user",
+        "content": "Hello, Claude"
+    }],
+)
+
+print(response.json())
+
+```
 
 JSON
 
-```json
+```
 { "input_tokens": 14 }
+
 ```
 
-### [​](#count-tokens-in-messages-with-tools) Count tokens in messages with tools
+# [​](#count-tokens-in-messages-with-tools) Count tokens in messages with tools
+
+[Server tool](/en/docs/agents-and-tools/tool-use/overview#server-tools) token counts only apply to the first sampling call.
+
+Python
+
+TypeScript
+
+Shell
+
+Java
+
+```
+import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.count_tokens(
+    model="claude-opus-4-20250514",
+    tools=[
+        {
+            "name": "get_weather",
+            "description": "Get the current weather in a given location",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The city and state, e.g. San Francisco, CA",
+                    }
+                },
+                "required": ["location"],
+            },
+        }
+    ],
+    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}]
+)
+
+print(response.json())
+
+```
 
 JSON
 
-```json
+```
 { "input_tokens": 403 }
+
 ```
 
-### [​](#count-tokens-in-messages-with-images) Count tokens in messages with images
+# [​](#count-tokens-in-messages-with-images) Count tokens in messages with images
+
+Shell
+
+Python
+
+TypeScript
+
+Java
+
+```
+#!/bin/sh
+
+IMAGE_URL="https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+IMAGE_MEDIA_TYPE="image/jpeg"
+IMAGE_BASE64=$(curl "$IMAGE_URL" | base64)
+
+curl https://api.anthropic.com/v1/messages/count_tokens \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "model": "claude-opus-4-20250514",
+    "messages": [
+        {"role": "user", "content": [
+            {"type": "image", "source": {
+                "type": "base64",
+                "media_type": "'$IMAGE_MEDIA_TYPE'",
+                "data": "'$IMAGE_BASE64'"
+            }},
+            {"type": "text", "text": "Describe this image"}
+        ]}
+    ]
+}'
+
+```
 
 JSON
 
-```json
+```
 { "input_tokens": 1551 }
+
 ```
 
-### [​](#count-tokens-in-messages-with-extended-thinking) Count tokens in messages with extended thinking
+# [​](#count-tokens-in-messages-with-extended-thinking) Count tokens in messages with extended thinking
 
 See [here](/en/docs/build-with-claude/extended-thinking#how-context-window-is-calculated-with-extended-thinking) for more details about how the context window is calculated with extended thinking
 
 * Thinking blocks from **previous** assistant turns are ignored and **do not** count toward your input tokens
 * **Current** assistant turn thinking **does** count toward your input tokens
 
+Shell
+
+Python
+
+TypeScript
+
+Java
+
+```
+curl https://api.anthropic.com/v1/messages/count_tokens \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "content-type: application/json" \
+  --header "anthropic-version: 2023-06-01" \
+  --data '{
+      "model": "claude-opus-4-20250514",
+      "thinking": {
+        "type": "enabled",
+        "budget_tokens": 16000
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "Are there an infinite number of prime numbers such that n mod 4 == 3?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "This is a nice number theory question. Lets think about it step by step...",
+              "signature": "EuYBCkQYAiJAgCs1le6/Pol5Z4/JMomVOouGrWdhYNsH3ukzUECbB6iWrSQtsQuRHJID6lWV..."
+            },
+            {
+              "type": "text",
+              "text": "Yes, there are infinitely many prime numbers p such that p mod 4 = 3..."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Can you write a formal proof?"
+        }
+      ]
+    }'
+
+```
+
 JSON
 
-```json
+```
 { "input_tokens": 88 }
+
 ```
 
-### [​](#count-tokens-in-messages-with-pdfs) Count tokens in messages with PDFs
+# [​](#count-tokens-in-messages-with-pdfs) Count tokens in messages with PDFs
 
-Token counting supports PDFs with the same [limitations](/en/docs/build-with-claude/pdf-support#pdf-support-limitations) as the Messages API.
+Shell
+
+Python
+
+TypeScript
+
+Java
+
+```
+curl https://api.anthropic.com/v1/messages/count_tokens \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "content-type: application/json" \
+  --header "anthropic-version: 2023-06-01" \
+  --data '{
+      "model": "claude-opus-4-20250514",
+      "messages": [{
+        "role": "user",
+        "content": [
+          {
+            "type": "document",
+            "source": {
+              "type": "base64",
+              "media_type": "application/pdf",
+              "data": "'$(base64 -i document.pdf)'"
+            }
+          },
+          {
+            "type": "text",
+            "text": "Please summarize this document."
+          }
+        ]
+      }]
+    }'
+
+```
 
 JSON
 
-```json
+```
 { "input_tokens": 2188 }
+
 ```
 
-[​](#pricing-and-rate-limits) Pricing and rate limits
------------------------------------------------------
+# [​](#pricing-and-rate-limits) Pricing and rate limits
 
 Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](https://docs.anthropic.com/en/api/rate-limits#rate-limits). If you need higher limits, contact sales through the [Anthropic Console](https://console.anthropic.com/settings/limits).
 
@@ -167,8 +333,7 @@ Token counting is **free to use** but subject to requests per minute rate limits
 
 Token counting and message creation have separate and independent rate limits — usage of one does not count against the limits of the other.
 
-[​](#faq) FAQ
--------------
+# [​](#faq) FAQ
 
 Does token counting use prompt caching?
 
@@ -178,16 +343,6 @@ Was this page helpful?
 
 YesNo
 
-[Citations](/en/docs/build-with-claude/citations)[Batch processing](/en/docs/build-with-claude/batch-processing)
+Multilingual support[Embeddings](/en/docs/build-with-claude/embeddings)
 
 On this page
-
-* [How to count message tokens](#how-to-count-message-tokens)
-* [Supported models](#supported-models)
-* [Count tokens in basic messages](#count-tokens-in-basic-messages)
-* [Count tokens in messages with tools](#count-tokens-in-messages-with-tools)
-* [Count tokens in messages with images](#count-tokens-in-messages-with-images)
-* [Count tokens in messages with extended thinking](#count-tokens-in-messages-with-extended-thinking)
-* [Count tokens in messages with PDFs](#count-tokens-in-messages-with-pdfs)
-* [Pricing and rate limits](#pricing-and-rate-limits)
-* [FAQ](#faq)

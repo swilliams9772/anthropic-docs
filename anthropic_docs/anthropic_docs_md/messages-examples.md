@@ -1,81 +1,52 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/messages-examples/
----
+# Messages examples - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/messages-examples#multiple-conversational-turns
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Messages
-
-Messages examples
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
+# SDKs
 
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
 * [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
-
-* Messages
-
-  + [POST
-
-    Messages](/en/api/messages)
-  + [POST
-
-    Count Message tokens](/en/api/messages-count-tokens)
-  + [Streaming Messages](/en/api/messages-streaming)
-  + [Migrating from Text Completions](/en/api/migrating-from-text-completions-to-messages)
-  + [Messages examples](/en/api/messages-examples)
-* Models
-* Message Batches
-* Text Completions (Legacy)
-* Admin API
-
-##### OpenAI SDK compatibility
-
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 See the [API reference](/en/api/messages) for full documentation on available parameters.
 
-[​](#basic-request-and-response) Basic request and response
------------------------------------------------------------
+# [​](#basic-request-and-response) Basic request and response
+
+Shell
+
+Python
+
+TypeScript
+
+```
+#!/bin/sh
+curl https://api.anthropic.com/v1/messages \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "model": "claude-opus-4-20250514",
+    "max_tokens": 1024,
+    "messages": [
+        {"role": "user", "content": "Hello, Claude"}
+    ]
+}'
+
+```
 
 JSON
 
-```json
+```
 {
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
@@ -86,7 +57,7 @@ JSON
       "text": "Hello!"
     }
   ],
-  "model": "claude-3-7-sonnet-20250219",
+  "model": "claude-opus-4-20250514",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -94,25 +65,24 @@ JSON
     "output_tokens": 6
   }
 }
+
 ```
 
-[​](#multiple-conversational-turns) Multiple conversational turns
------------------------------------------------------------------
+# [​](#multiple-conversational-turns) Multiple conversational turns
 
 The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don’t necessarily need to actually originate from Claude — you can use synthetic `assistant` messages.
 
 Shell
 
-```bash
-# !/bin/sh
-
+```
+#!/bin/sh
 curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
 '{
-    "model": "claude-3-7-sonnet-20250219",
+    "model": "claude-opus-4-20250514",
     "max_tokens": 1024,
     "messages": [
         {"role": "user", "content": "Hello, Claude"},
@@ -121,15 +91,16 @@ curl https://api.anthropic.com/v1/messages \
 
     ]
 }'
+
 ```
 
 Python
 
-```bash
+```
 import anthropic
 
 message = anthropic.Anthropic().messages.create(
-    model="claude-3-7-sonnet-20250219",
+    model="claude-opus-4-20250514",
     max_tokens=1024,
     messages=[
         {"role": "user", "content": "Hello, Claude"},
@@ -138,17 +109,18 @@ message = anthropic.Anthropic().messages.create(
     ],
 )
 print(message)
+
 ```
 
 TypeScript
 
-```javascript
+```
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic();
 
 await anthropic.messages.create({
-  model: 'claude-3-7-sonnet-20250219',
+  model: 'claude-opus-4-20250514',
   max_tokens: 1024,
   messages: [
     {"role": "user", "content": "Hello, Claude"},
@@ -156,11 +128,12 @@ await anthropic.messages.create({
     {"role": "user", "content": "Can you describe LLMs to me?"}
   ]
 });
+
 ```
 
 JSON
 
-```json
+```
 {
     "id": "msg_018gCsTGsXkYJVqYPxTgDHBU",
     "type": "message",
@@ -178,16 +151,40 @@ JSON
       "output_tokens": 309
     }
 }
+
 ```
 
-[​](#putting-words-in-claudes-mouth) Putting words in Claude’s mouth
---------------------------------------------------------------------
+# [​](#putting-words-in-claude%E2%80%99s-mouth) Putting words in Claude’s mouth
 
 You can pre-fill part of Claude’s response in the last position of the input messages list. This can be used to shape Claude’s response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
+Shell
+
+Python
+
+TypeScript
+
+```
+#!/bin/sh
+curl https://api.anthropic.com/v1/messages \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "model": "claude-opus-4-20250514",
+    "max_tokens": 1,
+    "messages": [
+        {"role": "user", "content": "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"},
+        {"role": "assistant", "content": "The answer is ("}
+    ]
+}'
+
+```
+
 JSON
 
-```json
+```
 {
   "id": "msg_01Q8Faay6S7QPTvEUUQARt7h",
   "type": "message",
@@ -198,7 +195,7 @@ JSON
       "text": "C"
     }
   ],
-  "model": "claude-3-7-sonnet-20250219",
+  "model": "claude-opus-4-20250514",
   "stop_reason": "max_tokens",
   "stop_sequence": null,
   "usage": {
@@ -206,16 +203,74 @@ JSON
     "output_tokens": 1
   }
 }
+
 ```
 
-[​](#vision) Vision
--------------------
+# [​](#vision) Vision
 
 Claude can read both text and images in requests. We support both `base64` and `url` source types for images, and the `image/jpeg`, `image/png`, `image/gif`, and `image/webp` media types. See our [vision guide](/en/docs/vision) for more details.
 
+Shell
+
+Python
+
+TypeScript
+
+```
+#!/bin/sh
+
+# Option 1: Base64-encoded image
+
+IMAGE_URL="https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+IMAGE_MEDIA_TYPE="image/jpeg"
+IMAGE_BASE64=$(curl "$IMAGE_URL" | base64)
+
+curl https://api.anthropic.com/v1/messages \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "model": "claude-opus-4-20250514",
+    "max_tokens": 1024,
+    "messages": [
+        {"role": "user", "content": [
+            {"type": "image", "source": {
+                "type": "base64",
+                "media_type": "'$IMAGE_MEDIA_TYPE'",
+                "data": "'$IMAGE_BASE64'"
+            }},
+            {"type": "text", "text": "What is in the above image?"}
+        ]}
+    ]
+}'
+
+# Option 2: URL-referenced image
+
+curl https://api.anthropic.com/v1/messages \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "model": "claude-opus-4-20250514",
+    "max_tokens": 1024,
+    "messages": [
+        {"role": "user", "content": [
+            {"type": "image", "source": {
+                "type": "url",
+                "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+            }},
+            {"type": "text", "text": "What is in the above image?"}
+        ]}
+    ]
+}'
+
+```
+
 JSON
 
-```json
+```
 {
   "id": "msg_01EcyWo6m4hyW8KHs2y2pei5",
   "type": "message",
@@ -226,7 +281,7 @@ JSON
       "text": "This image shows an ant, specifically a close-up view of an ant. The ant is shown in detail, with its distinct head, antennae, and legs clearly visible. The image is focused on capturing the intricate details and features of the ant, likely taken with a macro lens to get an extreme close-up perspective."
     }
   ],
-  "model": "claude-3-7-sonnet-20250219",
+  "model": "claude-opus-4-20250514",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -234,10 +289,10 @@ JSON
     "output_tokens": 71
   }
 }
+
 ```
 
-[​](#tool-use-json-mode-and-computer-use-beta) Tool use, JSON mode, and computer use (beta)
--------------------------------------------------------------------------------------------
+# [​](#tool-use%2C-json-mode%2C-and-computer-use-beta) Tool use, JSON mode, and computer use (beta)
 
 See our [guide](/en/docs/build-with-claude/tool-use) for examples for how to use tools with the Messages API.
 See our [computer use (beta) guide](/en/docs/build-with-claude/computer-use) for examples of how to control desktop computer environments with the Messages API.
@@ -246,12 +301,6 @@ Was this page helpful?
 
 YesNo
 
-[Migrating from Text Completions](/en/api/migrating-from-text-completions-to-messages)[List Models](/en/api/models-list)
+OpenAI SDK compatibility (beta)[Message Batches examples](/en/api/messages-batch-examples)
 
 On this page
-
-* [Basic request and response](#basic-request-and-response)
-* [Multiple conversational turns](#multiple-conversational-turns)
-* [Putting words in Claude’s mouth](#putting-words-in-claudes-mouth)
-* [Vision](#vision)
-* [Tool use, JSON mode, and computer use (beta)](#tool-use-json-mode-and-computer-use-beta)

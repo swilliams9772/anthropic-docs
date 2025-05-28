@@ -1,94 +1,71 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/intro-to-claude/
----
+# Building with Claude - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/intro-to-claude
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Get started
-
-Intro to Claude
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
 This guide introduces Claude’s enterprise capabilities, the end-to-end flow for developing with Claude, and how to start building.
 
-[​](#what-you-can-do-with-claude) What you can do with Claude
--------------------------------------------------------------
+# [​](#what-you-can-do-with-claude) What you can do with Claude
 
-Claude is designed to empower enterprises at scale with [strong performance](https://www.anthropic.com/news/claude-3-7-sonnet) across benchmark evaluations for reasoning, math, coding, and fluency in English and non-English languages.
+Claude is designed to empower enterprises at scale with strong performance across benchmark evaluations for reasoning, math, coding, and fluency in English and non-English languages.
 
 Here’s a non-exhaustive list of Claude’s capabilities and common uses.
 
@@ -98,45 +75,7 @@ Here’s a non-exhaustive list of Claude’s capabilities and common uses.
 | Vision | * Process and analyze visual input, such as extracting insights from charts and graphs * Generate code from images with code snippets or templates based on diagrams * Describe an image for a user with low vision |
 | Tool use | * Interact with external client-side tools and functions, allowing Claude to reason, plan, and execute actions by generating structured outputs through API calls |
 
-[​](#model-options) Model options
----------------------------------
-
-Enterprise use cases often mean complex needs and edge cases. Anthropic offers a range of models across the Claude 3, Claude 3.5, and Claude 3.7 families to allow you to choose the right balance of intelligence, speed, and [cost](https://www.anthropic.com/api).
-
-### [​](#claude-3-7) Claude 3.7
-
-| **Claude 3.7 Sonnet** |
-| --- |
-| **Description** | Our most intelligent model with extended thinking capabilities |
-| **Example uses** | * Complex reasoning tasks * Advanced problem-solving * Nuanced strategic analysis * Sophisticated research * Extended thinking for deeper analysis |
-| **Latest Anthropic APImodel name** | `claude-3-7-sonnet-20250219` |
-| **Latest AWS Bedrockmodel name** | `anthropic.claude-3-7-sonnet-20250219-v1:0` |
-| **Vertex AImodel name** | `claude-3-7-sonnet@20250219` |
-
-**Note:** Claude Code on Vertex AI is only available in us-east5.
-
-### [​](#claude-3-5-family) Claude 3.5 Family
-
-| **Claude 3.5 Sonnet** | **Claude 3.5 Haiku** |
-| --- | --- |
-| **Description** | Most intelligent model, combining top-tier performance with improved speed. | Fastest and most-cost effective model. |
-| **Example uses** | * Advanced research and analysis * Complex problem-solving * Sophisticated language understanding and generation * High-level strategic planning | * Code generation * Real-time chatbots * Data extraction and labeling * Content classification |
-| **Latest Anthropic APImodel name** | `claude-3-5-sonnet-20241022` | `claude-3-5-haiku-20241022` |
-| **Latest AWS Bedrockmodel name** | `anthropic.claude-3-5-sonnet-20241022-v2:0` | `anthropic.claude-3-5-haiku-20241022-v1:0` |
-| **Vertex AImodel name** | `claude-3-5-sonnet-v2@20241022` | `claude-3-5-haiku@20241022` |
-
-### [​](#claude-3-family) Claude 3 Family
-
-| **Opus** | **Sonnet** | **Haiku** |
-| --- | --- | --- |
-| **Description** | Strong performance on highly complex tasks, such as math and coding. | Balances intelligence and speed for high-throughput tasks. | Near-instant responsiveness that can mimic human interactions. |
-| **Example uses** | * Task automation across APIs and databases, and powerful coding tasks * R&D, brainstorming and hypothesis generation, and drug discovery * Strategy, advanced analysis of charts and graphs, financials and market trends, and forecasting | * Data processing over vast amounts of knowledge * Sales forecasting and targeted marketing * Code generation and quality control | * Live support chat * Translations * Content moderation * Extracting knowledge from unstructured data |
-| **Latest Anthropic APImodel name** | `claude-3-opus-20240229` | `claude-3-sonnet-20240229` | `claude-3-haiku-20240307` |
-| **Latest AWS Bedrockmodel name** | `anthropic.claude-3-opus-20240229-v1:0` | `anthropic.claude-3-sonnet-20240229-v1:0` | `anthropic.claude-3-haiku-20240307-v1:0` |
-| **Vertex AImodel name** | `claude-3-opus@20240229` | `claude-3-sonnet@20240229` | `claude-3-haiku@20240307` |
-
-[​](#enterprise-considerations) Enterprise considerations
----------------------------------------------------------
+# [​](#enterprise-considerations) Enterprise considerations
 
 Along with an extensive set of features, tools, and capabilities, Claude is also built to be secure, trustworthy, and scalable for wide-reaching enterprise needs.
 
@@ -149,8 +88,7 @@ Along with an extensive set of features, tools, and capabilities, Claude is also
 | **Global** | * Great for coding tasks and fluency in English and non-English languages like Spanish and Japanese * Enables use cases like translation services and broader global utility |
 | **Cost conscious** | * Family of models balances cost, performance, and intelligence |
 
-[​](#implementing-claude) Implementing Claude
----------------------------------------------
+# [​](#implementing-claude) Implementing Claude
 
 1
 
@@ -203,8 +141,7 @@ Monitor and improve
 
 * Monitor performance and effectiveness to make ongoing improvements.
 
-[​](#start-building-with-claude) Start building with Claude
------------------------------------------------------------
+# [​](#start-building-with-claude) Start building with Claude
 
 When you’re ready, start building with Claude:
 
@@ -218,15 +155,6 @@ Was this page helpful?
 
 YesNo
 
-[Initial setup](/en/docs/initial-setup)[Overview](/en/docs/about-claude/use-case-guides/overview)
+Pricing[Overview](/en/docs/about-claude/use-case-guides/overview)
 
 On this page
-
-* [What you can do with Claude](#what-you-can-do-with-claude)
-* [Model options](#model-options)
-* [Claude 3.7](#claude-3-7)
-* [Claude 3.5 Family](#claude-3-5-family)
-* [Claude 3 Family](#claude-3-family)
-* [Enterprise considerations](#enterprise-considerations)
-* [Implementing Claude](#implementing-claude)
-* [Start building with Claude](#start-building-with-claude)

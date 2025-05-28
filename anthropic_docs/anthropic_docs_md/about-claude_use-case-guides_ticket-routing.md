@@ -1,36 +1,28 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/about-claude/use-case-guides/ticket-routing/
----
+# Ticket routing - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/about-claude/use-case-guides/ticket-routing
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Use cases
-
-Ticket routing
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
 
   + [Overview](/en/docs/about-claude/use-case-guides/overview)
@@ -38,59 +30,44 @@ Ticket routing
   + [Customer support agent](/en/docs/about-claude/use-case-guides/customer-support-chat)
   + [Content moderation](/en/docs/about-claude/use-case-guides/content-moderation)
   + [Legal summarization](/en/docs/about-claude/use-case-guides/legal-summarization)
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
-[​](#define-whether-to-use-claude-for-ticket-routing) Define whether to use Claude for ticket routing
------------------------------------------------------------------------------------------------------
+# [​](#define-whether-to-use-claude-for-ticket-routing) Define whether to use Claude for ticket routing
 
 Here are some key indicators that you should use an LLM like Claude instead of traditional ML approaches for your classification task:
 
@@ -122,10 +99,9 @@ You need multilingual support without maintaining separate models
 
 Traditional ML approaches typically require separate models or extensive translation processes for each supported language. Claude’s multilingual capabilities allow it to classify tickets in various languages without the need for separate models or extensive translation processes, streamlining support for global customer bases.
 
-[​](#build-and-deploy-your-llm-support-workflow) Build and deploy your LLM support workflow
--------------------------------------------------------------------------------------------
+# [​](#build-and-deploy-your-llm-support-workflow) Build and deploy your LLM support workflow
 
-### [​](#understand-your-current-support-approach) Understand your current support approach
+# [​](#understand-your-current-support-approach) Understand your current support approach
 
 Before diving into automation, it’s crucial to understand your existing ticketing system. Start by investigating how your support team currently handles ticket routing.
 
@@ -139,7 +115,7 @@ Consider questions like:
 
 The more you know about how humans handle certain cases, the better you will be able to work with Claude to do the task.
 
-### [​](#define-user-intent-categories) Define user intent categories
+# [​](#define-user-intent-categories) Define user intent categories
 
 A well-defined list of user intent categories is crucial for accurate support ticket classification with Claude. Claude’s ability to route tickets effectively within your system is directly proportional to how well-defined your system’s categories are.
 
@@ -218,15 +194,9 @@ Training and education
 * Documentation inquiries
 * Webinar or workshop information
 
-Integration and API
-
-* Integration assistance
-* API usage questions
-* Third-party compatibility inquiries
-
 In addition to intent, ticket routing and prioritization may also be influenced by other factors such as urgency, customer type, SLAs, or language. Be sure to consider other routing criteria when building your automated routing system.
 
-### [​](#establish-success-criteria) Establish success criteria
+# [​](#establish-success-criteria) Establish success criteria
 
 Work with your support team to [define clear success criteria](https://docs.anthropic.com/en/docs/build-with-claude/define-success) with measurable benchmarks, thresholds, and goals.
 
@@ -302,13 +272,13 @@ Cost per ticket
 
 This metric calculates the average cost to resolve each support ticket. Efficient routing should help reduce this cost over time. While benchmarks vary widely, many organizations aim to reduce cost per ticket by 10-15% after implementing an improved routing system.
 
-### [​](#choose-the-right-claude-model) Choose the right Claude model
+# [​](#choose-the-right-claude-model) Choose the right Claude model
 
 The choice of model depends on the trade-offs between cost, accuracy, and response time.
 
-Many customers have found `claude-3-haiku-20240307` an ideal model for ticket routing, as it is the fastest and most cost-effective model in the Claude 3 family while still delivering excellent results. If your classification problem requires deep subject matter expertise or a large volume of intent categories complex reasoning, you may opt for the [larger Sonnet model](https://docs.anthropic.com/en/docs/about-claude/models).
+Many customers have found `claude-3-5-haiku-20241022` an ideal model for ticket routing, as it is the fastest and most cost-effective model in the Claude 3 family while still delivering excellent results. If your classification problem requires deep subject matter expertise or a large volume of intent categories complex reasoning, you may opt for the [larger Sonnet model](https://docs.anthropic.com/en/docs/about-claude/models).
 
-### [​](#build-a-strong-prompt) Build a strong prompt
+# [​](#build-a-strong-prompt) Build a strong prompt
 
 Ticket routing is a type of classification task. Claude analyzes the content of a support ticket and classifies it into predefined categories based on the issue type, urgency, required expertise, or other relevant factors.
 
@@ -318,10 +288,10 @@ Try the [prompt generator](https://docs.anthropic.com/en/docs/prompt-generator) 
 
 Here’s an example ticket routing classification prompt:
 
-```bash
+```
 def classify_support_request(ticket_contents):
     # Define the prompt for the classification task
-    classification_prompt = f"""You will be acting as a customer support ticket classification system. Your task is to analyze customer support requests and output the appropriate classification intent for each request, along with your reasoning. 
+    classification_prompt = f"""You will be acting as a customer support ticket classification system. Your task is to analyze customer support requests and output the appropriate classification intent for each request, along with your reasoning.
 
         Here is the customer support request you need to classify:
 
@@ -373,6 +343,7 @@ def classify_support_request(ticket_contents):
 
         Remember to always include your classification reasoning before your actual intent output. The reasoning should be enclosed in <reasoning> tags and the intent in <intent> tags. Return only the reasoning and the intent.
         """
+
 ```
 
 Let’s break down the key components of this prompt:
@@ -385,13 +356,13 @@ Let’s break down the key components of this prompt:
 
 The reason we want to have Claude split its response into various XML tag sections is so that we can use regular expressions to separately extract the reasoning and intent from the output. This allows us to create targeted next steps in the ticket routing workflow, such as using only the intent to decide which person to route the ticket to.
 
-### [​](#deploy-your-prompt) Deploy your prompt
+# [​](#deploy-your-prompt) Deploy your prompt
 
 It’s hard to know how well your prompt works without deploying it in a test production setting and [running evaluations](https://docs.anthropic.com/en/docs/build-with-claude/develop-tests).
 
 Let’s build the deployment structure. Start by defining the method signature for wrapping our call to Claude. We’ll take the method we’ve already begun to write, which has `ticket_contents` as input, and now return a tuple of `reasoning` and `intent` as output. If you have an existing automation using traditional ML, you’ll want to follow that method signature instead.
 
-```bash
+```
 import anthropic
 import re
 
@@ -401,11 +372,11 @@ client = anthropic.Anthropic()
 
 # Set the default model
 
-DEFAULT_MODEL="claude-3-haiku-20241022"
+DEFAULT_MODEL="claude-3-5-haiku-20241022"
 
 def classify_support_request(ticket_contents):
     # Define the prompt for the classification task
-    classification_prompt = f"""You will be acting as a customer support ticket classification system. 
+    classification_prompt = f"""You will be acting as a customer support ticket classification system.
         ...
         ... The reasoning should be enclosed in <reasoning> tags and the intent in <intent> tags. Return only the reasoning and the intent.
         """
@@ -430,6 +401,7 @@ def classify_support_request(ticket_contents):
     intent = intent_match.group(1).strip() if intent_match else ""
 
     return reasoning, intent
+
 ```
 
 This code:
@@ -441,14 +413,13 @@ This code:
 
 Since we need to wait for the entire reasoning and intent text to be generated before parsing, we set `stream=False` (the default).
 
-[​](#evaluate-your-prompt) Evaluate your prompt
------------------------------------------------
+# [​](#evaluate-your-prompt) Evaluate your prompt
 
 Prompting often requires testing and optimization for it to be production ready. To determine the readiness of your solution, evaluate performance based on the success criteria and thresholds you established earlier.
 
 To run your evaluation, you will need test cases to run it on. The rest of this guide assumes you have already [developed your test cases](https://docs.anthropic.com/en/docs/build-with-claude/develop-tests).
 
-### [​](#build-an-evaluation-function) Build an evaluation function
+# [​](#build-an-evaluation-function) Build an evaluation function
 
 Our example evaluation for this guide measures Claude’s performance along three key metrics:
 
@@ -459,7 +430,7 @@ You may need to assess Claude on other axes depending on what factors that are i
 
 To assess this, we first have to modify the script we wrote and add a function to compare the predicted intent with the actual intent and calculate the percentage of correct predictions. We also have to add in cost calculation and time measurement functionality.
 
-```bash
+```
 import anthropic
 import re
 
@@ -469,11 +440,11 @@ client = anthropic.Anthropic()
 
 # Set the default model
 
-DEFAULT_MODEL="claude-3-haiku-20240307"
+DEFAULT_MODEL="claude-3-5-haiku-20241022"
 
 def classify_support_request(request, actual_intent):
     # Define the prompt for the classification task
-    classification_prompt = f"""You will be acting as a customer support ticket classification system. 
+    classification_prompt = f"""You will be acting as a customer support ticket classification system.
         ...
         ...The reasoning should be enclosed in <reasoning> tags and the intent in <intent> tags. Return only the reasoning and the intent.
         """
@@ -502,6 +473,7 @@ def classify_support_request(request, actual_intent):
 
     # Return the reasoning, intent, correct, and usage.
     return reasoning, intent, correct, usage
+
 ```
 
 Let’s break down the edits we’ve made:
@@ -509,7 +481,7 @@ Let’s break down the edits we’ve made:
 * We added the `actual_intent` from our test cases into the `classify_support_request` method and set up a comparison to assess whether Claude’s intent classification matches our golden intent classification.
 * We extracted usage statistics for the API call to calculate cost based on input and output tokens used
 
-### [​](#run-your-evaluation) Run your evaluation
+# [​](#run-your-evaluation) Run your evaluation
 
 A proper evaluation requires clear thresholds and benchmarks to determine what is a good result. The script above will give us the runtime values for accuracy, response time, and cost per classification, but we still would need clearly established thresholds. For example:
 
@@ -518,12 +490,11 @@ A proper evaluation requires clear thresholds and benchmarks to determine what i
 
 Having these thresholds allows you to quickly and easily tell at scale, and with impartial empiricism, what method is best for you and what changes might need to be made to better fit your requirements.
 
-[​](#improve-performance) Improve performance
----------------------------------------------
+# [​](#improve-performance) Improve performance
 
 In complex scenarios, it may be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview) & [guardrail implementation strategies](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations). Here are some common scenarios:
 
-### [​](#use-a-taxonomic-hierarchy-for-cases-with-20-intent-categories) Use a taxonomic hierarchy for cases with 20+ intent categories
+# [​](#use-a-taxonomic-hierarchy-for-cases-with-20%2B-intent-categories) Use a taxonomic hierarchy for cases with 20+ intent categories
 
 As the number of classes grows, the number of examples required also expands, potentially making the prompt unwieldy. As an alternative, you can consider implementing a hierarchical classification system using a mixture of classifiers.
 
@@ -535,7 +506,7 @@ For example, you might have a top-level classifier that broadly categorizes tick
 * **Pros - greater nuance and accuracy:** You can create different prompts for each parent path, allowing for more targeted and context-specific classification. This can lead to improved accuracy and more nuanced handling of customer requests.
 * **Cons - increased latency:** Be advised that multiple classifiers can lead to increased latency, and we recommend implementing this approach with our fastest model, Haiku.
 
-### [​](#use-vector-databases-and-similarity-search-retrieval-to-handle-highly-variable-tickets) Use vector databases and similarity search retrieval to handle highly variable tickets
+# [​](#use-vector-databases-and-similarity-search-retrieval-to-handle-highly-variable-tickets) Use vector databases and similarity search retrieval to handle highly variable tickets
 
 Despite providing examples being the most effective way to improve performance, if support requests are highly variable, it can be hard to include enough examples in a single prompt.
 
@@ -543,7 +514,7 @@ In this scenario, you could employ a vector database to do similarity searches f
 
 This approach, outlined in detail in our [classification recipe](https://github.com/anthropics/anthropic-cookbook/blob/82675c124e1344639b2a875aa9d3ae854709cd83/skills/classification/guide.ipynb), has been shown to improve performance from 71% accuracy to 93% accuracy.
 
-### [​](#account-specifically-for-expected-edge-cases) Account specifically for expected edge cases
+# [​](#account-specifically-for-expected-edge-cases) Account specifically for expected edge cases
 
 Here are some scenarios where Claude may misclassify tickets (there may be others that are unique to your situation). In these scenarios,consider providing explicit instructions or examples in the prompt of how Claude should handle the edge case:
 
@@ -565,8 +536,7 @@ When customers present multiple issues in a single interaction, Claude may have 
 
 * **Solution:** Clarify the prioritization of intents so thatClaude can better rank the extracted intents and identify the primary concern.
 
-[​](#integrate-claude-into-your-greater-support-workflow) Integrate Claude into your greater support workflow
--------------------------------------------------------------------------------------------------------------
+# [​](#integrate-claude-into-your-greater-support-workflow) Integrate Claude into your greater support workflow
 
 Proper integration requires that you make some decisions regarding how your Claude-based ticket routing script fits into the architecture of your greater ticket routing system.There are two ways you could do this:
 
@@ -577,11 +547,9 @@ Proper integration requires that you make some decisions regarding how your Clau
 
 For either of these approaches, you will need to wrap your script in a service. The choice of approach depends on what APIs your support ticketing system provides.
 
-[Classification cookbook
------------------------
+[## Classification cookbook
 
-Visit our classification cookbook for more example code and detailed eval guidance.](https://github.com/anthropics/anthropic-cookbook/tree/main/skills/classification)[Anthropic Console
------------------
+Visit our classification cookbook for more example code and detailed eval guidance.](https://github.com/anthropics/anthropic-cookbook/tree/main/skills/classification)[## Anthropic Console
 
 Begin building and evaluating your workflow on the Anthropic Console.](https://console.anthropic.com/dashboard)
 
@@ -589,23 +557,6 @@ Was this page helpful?
 
 YesNo
 
-[Overview](/en/docs/about-claude/use-case-guides/overview)[Customer support agent](/en/docs/about-claude/use-case-guides/customer-support-chat)
+Overview[Customer support agent](/en/docs/about-claude/use-case-guides/customer-support-chat)
 
 On this page
-
-* [Define whether to use Claude for ticket routing](#define-whether-to-use-claude-for-ticket-routing)
-* [Build and deploy your LLM support workflow](#build-and-deploy-your-llm-support-workflow)
-* [Understand your current support approach](#understand-your-current-support-approach)
-* [Define user intent categories](#define-user-intent-categories)
-* [Establish success criteria](#establish-success-criteria)
-* [Choose the right Claude model](#choose-the-right-claude-model)
-* [Build a strong prompt](#build-a-strong-prompt)
-* [Deploy your prompt](#deploy-your-prompt)
-* [Evaluate your prompt](#evaluate-your-prompt)
-* [Build an evaluation function](#build-an-evaluation-function)
-* [Run your evaluation](#run-your-evaluation)
-* [Improve performance](#improve-performance)
-* [Use a taxonomic hierarchy for cases with 20+ intent categories](#use-a-taxonomic-hierarchy-for-cases-with-20-intent-categories)
-* [Use vector databases and similarity search retrieval to handle highly variable tickets](#use-vector-databases-and-similarity-search-retrieval-to-handle-highly-variable-tickets)
-* [Account specifically for expected edge cases](#account-specifically-for-expected-edge-cases)
-* [Integrate Claude into your greater support workflow](#integrate-claude-into-your-greater-support-workflow)

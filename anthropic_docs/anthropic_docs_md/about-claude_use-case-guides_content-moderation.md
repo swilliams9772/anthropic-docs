@@ -1,36 +1,28 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/about-claude/use-case-guides/content-moderation/
----
+# Content moderation - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/about-claude/use-case-guides/content-moderation
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Use cases
-
-Content moderation
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
 
   + [Overview](/en/docs/about-claude/use-case-guides/overview)
@@ -38,69 +30,52 @@ Content moderation
   + [Customer support agent](/en/docs/about-claude/use-case-guides/customer-support-chat)
   + [Content moderation](/en/docs/about-claude/use-case-guides/content-moderation)
   + [Legal summarization](/en/docs/about-claude/use-case-guides/legal-summarization)
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
 > Visit our [content moderation cookbook](https://github.com/anthropics/anthropic-cookbook/blob/main/misc/building%5Fmoderation%5Ffilter.ipynb) to see an example content moderation implementation using Claude.
 
 This guide is focused on moderating user-generated content within your application. If you’re looking for guidance on moderating interactions with Claude, please refer to our [guardrails guide](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations).
 
-[​](#before-building-with-claude) Before building with Claude
--------------------------------------------------------------
+# [​](#before-building-with-claude) Before building with Claude
 
-### [​](#decide-whether-to-use-claude-for-content-moderation) Decide whether to use Claude for content moderation
+# [​](#decide-whether-to-use-claude-for-content-moderation) Decide whether to use Claude for content moderation
 
 Here are some key indicators that you should use an LLM like Claude instead of a traditional ML or rules-based approach for content moderation:
-
-You want a cost-effective and rapid implementation
 
 Traditional ML methods require significant engineering resources, ML expertise, and infrastructure costs. Human moderation systems incur even higher costs. With Claude, you can have a sophisticated moderation system up and running in a fraction of the time for a fraction of the price.
 
@@ -130,12 +105,12 @@ Claude’s multimodal capabilities allow it to analyze and interpret content acr
 
 Anthropic has trained all Claude models to be honest, helpful and harmless. This may result in Claude moderating content deemed particularly dangerous (in line with our [Acceptable Use Policy](https://www.anthropic.com/legal/aup)), regardless of the prompt used. For example, an adult website that wants to allow users to post explicit sexual content may find that Claude still flags explicit content as requiring moderation, even if they specify in their prompt not to moderate explicit sexual content. We recommend reviewing our AUP in advance of building a moderation solution.
 
-### [​](#generate-examples-of-content-to-moderate) Generate examples of content to moderate
+# [​](#generate-examples-of-content-to-moderate) Generate examples of content to moderate
 
 Before developing a content moderation solution, first create examples of content that should be flagged and content that should not be flagged. Ensure that you include edge cases and challenging scenarios that may be difficult for a content moderation system to handle effectively. Afterwards, review your examples to create a well-defined list of moderation categories.
 For instance, the examples generated by a social media platform might include the following:
 
-```sql
+```
 allowed_user_comments = [
     'This movie was great, I really enjoyed it. The main actor really killed it!',
     'I hate Mondays.',
@@ -158,9 +133,9 @@ unsafe_categories = [
     'Child Exploitation',
     'Conspiracy Theories',
     'Hate',
-    'Indiscriminate Weapons', 
+    'Indiscriminate Weapons',
     'Intellectual Property',
-    'Non-Violent Crimes', 
+    'Non-Violent Crimes',
     'Privacy',
     'Self-Harm',
     'Sex Crimes',
@@ -168,18 +143,18 @@ unsafe_categories = [
     'Specialized Advice',
     'Violent Crimes'
 ]
+
 ```
 
 Effectively moderating these examples requires a nuanced understanding of language. In the comment, `This movie was great, I really enjoyed it. The main actor really killed it!`, the content moderation system needs to recognize that “killed it” is a metaphor, not an indication of actual violence. Conversely, despite the lack of explicit mentions of violence, the comment `Delete this post now or you better hide. I am coming after you and your family.` should be flagged by the content moderation system.
 
 The `unsafe_categories` list can be customized to fit your specific needs. For example, if you wish to prevent minors from creating content on your website, you could append “Underage Posting” to the list.
 
-[​](#how-to-moderate-content-using-claude) How to moderate content using Claude
--------------------------------------------------------------------------------
+# [​](#how-to-moderate-content-using-claude) How to moderate content using Claude
 
-### [​](#select-the-right-claude-model) Select the right Claude model
+# [​](#select-the-right-claude-model) Select the right Claude model
 
-When selecting a model, it’s important to consider the size of your data. If costs are a concern, a smaller model like Claude 3 Haiku is an excellent choice due to its cost-effectiveness. Below is an estimate of the cost to moderate text for a social media platform that receives one billion posts per month:
+When selecting a model, it’s important to consider the size of your data. If costs are a concern, a smaller model like Claude Haiku 3 is an excellent choice due to its cost-effectiveness. Below is an estimate of the cost to moderate text for a social media platform that receives one billion posts per month:
 
 * **Content size**
 
@@ -192,12 +167,12 @@ When selecting a model, it’s important to consider the size of your data. If c
   + Percentage of messages flagged: 3%
   + Output tokens per flagged message: 50
   + Total output tokens: 1.5bn
-* **Claude 3 Haiku estimated cost**
+* **Claude Haiku 3 estimated cost**
 
   + Input token cost: 2,860 MTok \* $0.25/MTok = $715
   + Output token cost: 1,500 MTok \* $1.25/MTok = $1,875
   + Monthly cost: $715 + $1,875 = $2,590
-* **Claude 3.7 Sonnet estimated cost**
+* **Claude Sonnet 4 estimated cost**
 
   + Input token cost: 2,860 MTok \* $3.00/MTok = $8,580
   + Output token cost: 1,500 MTok \* $15.00/MTok = $22,500
@@ -205,11 +180,11 @@ When selecting a model, it’s important to consider the size of your data. If c
 
 Actual costs may differ from these estimates. These estimates are based on the prompt highlighted in the section on [batch processing](/_sites/docs.anthropic.com/en/docs/about-claude/use-case-guides/content-moderation#consider-batch-processing). Output tokens can be reduced even further by removing the `explanation` field from the response.
 
-### [​](#build-a-strong-prompt) Build a strong prompt
+# [​](#build-a-strong-prompt) Build a strong prompt
 
 In order to use Claude for content moderation, Claude must understand the moderation requirements of your application. Let’s start by writing a prompt that allows you to define your moderation needs:
 
-```bash
+```
 import anthropic
 import json
 
@@ -220,12 +195,12 @@ client = anthropic.Anthropic()
 def moderate_message(message, unsafe_categories):
     # Convert the list of unsafe categories into a string, with each category on a new line
     unsafe_category_str = '\n'.join(unsafe_categories)
-    
+
     # Construct the prompt for Claude, including the message and unsafe categories
     assessment_prompt = f"""
-    Determine whether the following message warrants moderation, 
+    Determine whether the following message warrants moderation,
     based on the unsafe categories outlined below.
-    
+
     Message:
     <message>{message}</message>
 
@@ -250,17 +225,17 @@ def moderate_message(message, unsafe_categories):
             {"role": "user", "content": assessment_prompt}
         ]
     )
-    
+
     # Parse the JSON response from Claude
     assessment = json.loads(response.content[0].text)
-    
+
     # Extract the violation status from the assessment
     contains_violation = assessment['violation']
-    
+
     # If there's a violation, get the categories and explanation; otherwise, use empty defaults
     violated_categories = assessment.get('categories', []) if contains_violation else []
     explanation = assessment.get('explanation') if contains_violation else None
-    
+
     return contains_violation, violated_categories, explanation
 
 # Process each comment and print the results
@@ -268,25 +243,26 @@ def moderate_message(message, unsafe_categories):
 for comment in user_comments:
     print(f"\nComment: {comment}")
     violation, violated_categories, explanation = moderate_message(comment, unsafe_categories)
-    
+
     if violation:
         print(f"Violated Categories: {', '.join(violated_categories)}")
         print(f"Explanation: {explanation}")
     else:
         print("No issues detected.")
+
 ```
 
 In this example, the `moderate_message` function contains an assessment prompt that includes the unsafe content categories and the message we wish to evaluate. The prompt asks Claude to assess whether the message should be moderated, based on the unsafe categories we defined.
 
 The model’s assessment is then parsed to determine if there is a violation. If there is a violation, Claude also returns a list of violated categories, as well as an explanation as to why the message is unsafe.
 
-### [​](#evaluate-your-prompt) Evaluate your prompt
+# [​](#evaluate-your-prompt) Evaluate your prompt
 
 Content moderation is a classification problem. Thus, you can use the same techniques outlined in our [classification cookbook](https://github.com/anthropics/anthropic-cookbook/blob/main/skills/classification/guide.ipynb) to determine the accuracy of your content moderation system.
 
 One additional consideration is that instead of treating content moderation as a binary classification problem, you may instead create multiple categories to represent various risk levels. Creating multiple risk levels allows you to adjust the aggressiveness of your moderation. For example, you might want to automatically block user queries that are deemed high risk, while users with many medium risk queries are flagged for human review.
 
-```bash
+```
 import anthropic
 import json
 
@@ -297,12 +273,12 @@ client = anthropic.Anthropic()
 def assess_risk_level(message, unsafe_categories):
     # Convert the list of unsafe categories into a string, with each category on a new line
     unsafe_category_str = '\n'.join(unsafe_categories)
-    
+
     # Construct the prompt for Claude, including the message, unsafe categories, and risk level definitions
     assessment_prompt = f"""
-    Assess the risk level of the following message warrants moderation, 
+    Assess the risk level of the following message warrants moderation,
     based on the unsafe categories listed below.
-    
+
 Message:
 <message>{message}</message>
 
@@ -311,7 +287,7 @@ Unsafe Categories:
 {unsafe_category_str}
 </categories>
 
-Assign a risk level based on your confidence that the user's message should be moderated 
+Assign a risk level based on your confidence that the user's message should be moderated
 based on the defined unsafe categories:
 
 0 - No risk
@@ -335,15 +311,15 @@ Respond with ONLY a JSON object, using the format below:
             {"role": "user", "content": assessment_prompt}
         ]
     )
-    
+
     # Parse the JSON response from Claude
     assessment = json.loads(response.content[0].text)
-    
+
     # Extract the risk level, violated categories, and explanation from the assessment
     risk_level = assessment["risk_level"]
     violated_categories = assessment["categories"]
     explanation = assessment.get("explanation")
-    
+
     return risk_level, violated_categories, explanation
 
 # Process each comment and print the results
@@ -351,12 +327,13 @@ Respond with ONLY a JSON object, using the format below:
 for comment in user_comments:
     print(f"\nComment: {comment}")
     risk_level, violated_categories, explanation = assess_risk_level(comment, unsafe_categories)
-    
+
     print(f"Risk Level: {risk_level}")
     if violated_categories:
         print(f"Violated Categories: {', '.join(violated_categories)}")
     if explanation:
         print(f"Explanation: {explanation}")
+
 ```
 
 This code implements an `assess_risk_level` function that uses Claude to evaluate the risk level of a message. The function accepts a message and a list of unsafe categories as inputs.
@@ -365,7 +342,7 @@ Within the function, a prompt is generated for Claude, including the message to 
 
 This approach enables flexible content moderation by assigning risk levels. It can be seamlessly integrated into a larger system to automate content filtering or flag comments for human review based on their assessed risk level. For instance, when executing this code, the comment `Delete this post now or you better hide. I am coming after you and your family.` is identified as high risk due to its dangerous threat. Conversely, the comment `Stay away from the 5G cellphones!! They are using 5G to control you.` is categorized as medium risk.
 
-### [​](#deploy-your-prompt) Deploy your prompt
+# [​](#deploy-your-prompt) Deploy your prompt
 
 Once you are confident in the quality of your solution, it’s time to deploy it to production. Here are some best practices to follow when using content moderation in production:
 
@@ -373,16 +350,15 @@ Once you are confident in the quality of your solution, it’s time to deploy it
 2. **Analyze moderated content:** Keep track of the types of content being flagged by your moderation system to identify trends and potential areas for improvement.
 3. **Continuously evaluate and improve:** Regularly assess the performance of your content moderation system using metrics such as precision and recall tracking. Use this data to iteratively refine your moderation prompts, keywords, and assessment criteria.
 
-[​](#improve-performance) Improve performance
----------------------------------------------
+# [​](#improve-performance) Improve performance
 
 In complex scenarios, it may be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview). Here are some advanced strategies:
 
-### [​](#define-topics-and-provide-examples) Define topics and provide examples
+# [​](#define-topics-and-provide-examples) Define topics and provide examples
 
 In addition to listing the unsafe categories in the prompt, further improvements can be made by providing definitions and phrases related to each category.
 
-```bash
+```
 import anthropic
 import json
 
@@ -394,29 +370,29 @@ client = anthropic.Anthropic()
 
 unsafe_category_definitions = {
     'Child Exploitation': 'Content that depicts child nudity or that enables, encourages, excuses, or depicts the sexual abuse of children.',
-    'Conspiracy Theories': """Content that promotes or endorses unfounded, false, or misleading theories about events, situations, or individuals, 
+    'Conspiracy Theories': """Content that promotes or endorses unfounded, false, or misleading theories about events, situations, or individuals,
         which can incite harm or undermine public trust in institutions or facts.""",
-    'Hate': """Content that is hateful toward people on the basis of their protected characteristics 
-        (race, color, ethnicity, national origin, disability, religious affiliation, caste, sexual orientation, sex, gender identity and serious disease), 
+    'Hate': """Content that is hateful toward people on the basis of their protected characteristics
+        (race, color, ethnicity, national origin, disability, religious affiliation, caste, sexual orientation, sex, gender identity and serious disease),
         or content that perpetuates negative stereotypes.""",
-    'Indiscriminate Weapons': 'Content that enables the creation of weapons of mass destruction.', 
+    'Indiscriminate Weapons': 'Content that enables the creation of weapons of mass destruction.',
     'Intellectual Property': 'Content that violates the intellectual property rights of third parties.',
-    'Non-Violent Crimes': 'Content that enables, encourages, or excuses the commission of non-violent crimes.', 
+    'Non-Violent Crimes': 'Content that enables, encourages, or excuses the commission of non-violent crimes.',
     'Privacy': 'Content that contains sensitive, personal information about private individuals.',
     'Self-Harm': 'Content that enables, encourages, or excuses acts of intentional self-harm.',
     'Sex Crimes': 'Content that enables, encourages, or excuses the commission of sex crimes.',
     'Sexual Content': 'Content that contains erotic descriptions or explicit depictions of sex acts.',
-    'Specialized Advice': """Content that contains financial, medical, or legal advice. 
+    'Specialized Advice': """Content that contains financial, medical, or legal advice.
         Financial advice includes guidance on investments, stocks, bonds, or any financial planning.""",
-    'Violent Crimes': 'Content that enables, encourages, or excuses the commission of violent crimes.', 
+    'Violent Crimes': 'Content that enables, encourages, or excuses the commission of violent crimes.',
 }
 
 def moderate_message_with_definitions(message, unsafe_category_definitions):
     # Format unsafe categories string, with each category and its definition on a new line
-    unsafe_category_str = '\n'.join(f'{category}: {definition}' 
+    unsafe_category_str = '\n'.join(f'{category}: {definition}'
         for category, definition in unsafe_category_definitions.items()
     )
-    
+
     # Construct the prompt for Claude, including the message and unsafe categories
     assessment_prompt = f"""Determine whether the following message warrants moderation, based on the unsafe categories outlined below.
 
@@ -446,17 +422,17 @@ Respond with ONLY a JSON object, using the format below:
             {"role": "user", "content": assessment_prompt}
         ]
     )
-    
+
     # Parse the JSON response from Claude
     assessment = json.loads(response.content[0].text)
-    
+
     # Extract the violation status from the assessment
     contains_violation = assessment['violation']
-    
+
     # If there's a violation, get the categories and explanation; otherwise, use empty defaults
     violated_categories = assessment.get('categories', []) if contains_violation else []
     explanation = assessment.get('explanation') if contains_violation else None
-    
+
     return contains_violation, violated_categories, explanation
 
 # Process each comment and print the results
@@ -464,23 +440,24 @@ Respond with ONLY a JSON object, using the format below:
 for comment in user_comments:
     print(f"\nComment: {comment}")
     violation, violated_categories, explanation = moderate_message_with_definitions(comment, unsafe_category_definitions)
-    
+
     if violation:
         print(f"Violated Categories: {', '.join(violated_categories)}")
         print(f"Explanation: {explanation}")
     else:
         print("No issues detected.")
+
 ```
 
 The `moderate_message_with_definitions` function expands upon the earlier `moderate_message` function by allowing each unsafe category to be paired with a detailed definition. This occurs in the code by replacing the `unsafe_categories` list from the original function with an `unsafe_category_definitions` dictionary. This dictionary maps each unsafe category to its corresponding definition. Both the category names and their definitions are included in the prompt.
 
 Notably, the definition for the `Specialized Advice` category now specifies the types of financial advice that should be prohibited. As a result, the comment `It's a great time to invest in gold!`, which previously passed the `moderate_message` assessment, now triggers a violation.
 
-### [​](#consider-batch-processing) Consider batch processing
+# [​](#consider-batch-processing) Consider batch processing
 
 To reduce costs in situations where real-time moderation isn’t necessary, consider moderating messages in batches. Include multiple messages within the prompt’s context, and ask Claude to assess which messages should be moderated.
 
-```sql
+```
 import anthropic
 import json
 
@@ -491,10 +468,10 @@ client = anthropic.Anthropic()
 def batch_moderate_messages(messages, unsafe_categories):
     # Convert the list of unsafe categories into a string, with each category on a new line
     unsafe_category_str = '\n'.join(unsafe_categories)
-    
+
     # Format messages string, with each message wrapped in XML-like tags and given an ID
     messages_str = '\n'.join([f'<message id={idx}>{msg}</message>' for idx, msg in enumerate(messages)])
-    
+
     # Construct the prompt for Claude, including the messages and unsafe categories
     assessment_prompt = f"""Determine the messages to moderate, based on the unsafe categories outlined below.
 
@@ -533,7 +510,7 @@ Important Notes:
             {"role": "user", "content": assessment_prompt}
         ]
     )
-    
+
     # Parse the JSON response from Claude
     assessment = json.loads(response.content[0].text)
     return assessment
@@ -549,17 +526,16 @@ for violation in response_obj['violations']:
 Violated Categories: {', '.join(violation['categories'])}
 Explanation: {violation['explanation']}
 """)
+
 ```
 
 In this example, the `batch_moderate_messages` function handles the moderation of an entire batch of messages with a single Claude API call.
 Inside the function, a prompt is created that includes the list of messages to evaluate, the defined unsafe content categories, and their descriptions. The prompt directs Claude to return a JSON object listing all messages that contain violations. Each message in the response is identified by its id, which corresponds to the message’s position in the input list.
 Keep in mind that finding the optimal batch size for your specific needs may require some experimentation. While larger batch sizes can lower costs, they might also lead to a slight decrease in quality. Additionally, you may need to increase the `max_tokens` parameter in the Claude API call to accommodate longer responses. For details on the maximum number of tokens your chosen model can output, refer to the [model comparison page](https://docs.anthropic.com/en/docs/about-claude/models#model-comparison).
 
-[Content moderation cookbook
----------------------------
+[## Content moderation cookbook
 
-View a fully implemented code-based example of how to use Claude for content moderation.](https://github.com/anthropics/anthropic-cookbook/blob/main/misc/building%5Fmoderation%5Ffilter.ipynb)[Guardrails guide
-----------------
+View a fully implemented code-based example of how to use Claude for content moderation.](https://github.com/anthropics/anthropic-cookbook/blob/main/misc/building%5Fmoderation%5Ffilter.ipynb)[## Guardrails guide
 
 Explore our guardrails guide for techniques to moderate interactions with Claude.](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
 
@@ -567,18 +543,6 @@ Was this page helpful?
 
 YesNo
 
-[Customer support agent](/en/docs/about-claude/use-case-guides/customer-support-chat)[Legal summarization](/en/docs/about-claude/use-case-guides/legal-summarization)
+Customer support agent[Legal summarization](/en/docs/about-claude/use-case-guides/legal-summarization)
 
 On this page
-
-* [Before building with Claude](#before-building-with-claude)
-* [Decide whether to use Claude for content moderation](#decide-whether-to-use-claude-for-content-moderation)
-* [Generate examples of content to moderate](#generate-examples-of-content-to-moderate)
-* [How to moderate content using Claude](#how-to-moderate-content-using-claude)
-* [Select the right Claude model](#select-the-right-claude-model)
-* [Build a strong prompt](#build-a-strong-prompt)
-* [Evaluate your prompt](#evaluate-your-prompt)
-* [Deploy your prompt](#deploy-your-prompt)
-* [Improve performance](#improve-performance)
-* [Define topics and provide examples](#define-topics-and-provide-examples)
-* [Consider batch processing](#consider-batch-processing)

@@ -1,84 +1,48 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/admin-api/workspaces/list-workspaces/
----
+# List Workspaces - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/admin-api/workspaces/list-workspaces
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Workspace Management
-
-List Workspaces
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
 * Models
 * Message Batches
-* Text Completions (Legacy)
-* Admin API
-
-  + Organization Member Management
+* Files
+* + Organization Member Management
   + Organization Invites
   + Workspace Management
-
-    - [GET
+  - [GET
 
       Get Workspace](/en/api/admin-api/workspaces/get-workspace)
-    - [GET
+  - [GET
 
       List Workspaces](/en/api/admin-api/workspaces/list-workspaces)
-    - [POST
+  - [POST
 
       Update Workspace](/en/api/admin-api/workspaces/update-workspace)
-    - [POST
+  - [POST
 
       Create Workspace](/en/api/admin-api/workspaces/create-workspace)
-    - [POST
+  - [POST
 
       Archive Workspace](/en/api/admin-api/workspaces/archive-workspace)
   + Workspace Member Management
-  + API Keys
+* Text Completions (Legacy)
 
-##### OpenAI SDK compatibility
+# SDKs
 
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 GET
 
@@ -94,15 +58,48 @@ organizations
 
 workspaces
 
-#### Headers
+cURL
 
-[​](#parameter-x-api-key)
+Python
 
-x-api-key
+JavaScript
 
-string
+PHP
 
-required
+Go
+
+Java
+
+```
+curl "https://api.anthropic.com/v1/organizations/workspaces" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+```
+
+200
+
+4XX
+
+```
+{
+  "data": [
+    {
+      "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+      "type": "workspace",
+      "name": "Workspace Name",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "archived_at": "2024-11-01T23:59:27.427722Z",
+      "display_color": "#6C5BB9"
+    }
+  ],
+  "has_more": true,
+  "first_id": "<string>",
+  "last_id": "<string>"
+}
+```
+
+# Headers
 
 Your unique Admin API key for authentication.
 
@@ -120,7 +117,7 @@ The version of the Anthropic API you want to use.
 
 Read more about versioning and our version history [here](https://docs.anthropic.com/en/api/versioning).
 
-#### Query Parameters
+# Query Parameters
 
 [​](#parameter-include-archived)
 
@@ -128,9 +125,7 @@ include\_archived
 
 boolean
 
-default:
-
-false
+default:false
 
 Whether to include Workspaces that have been archived in the response
 
@@ -156,19 +151,23 @@ limit
 
 integer
 
-default:
-
-20
+default:20
 
 Number of items to return per page.
 
 Defaults to `20`. Ranges from `1` to `1000`.
 
-Required range: `1 < x < 1000`
+Required range: `1 <= x <= 1000`
 
-#### Response
+# Response
 
-200 - application/json
+200
+
+2004XX
+
+application/json
+
+Successful Response
 
 [​](#response-data)
 
@@ -180,36 +179,6 @@ required
 
 Show child attributes
 
-[​](#response-data-archived-at)
-
-data.archived\_at
-
-string | null
-
-required
-
-RFC 3339 datetime string indicating when the Workspace was archived, or null if the Workspace is not archived.
-
-[​](#response-data-created-at)
-
-data.created\_at
-
-string
-
-required
-
-RFC 3339 datetime string indicating when the Workspace was created.
-
-[​](#response-data-display-color)
-
-data.display\_color
-
-string
-
-required
-
-Hex color code representing the Workspace in the Anthropic Console.
-
 [​](#response-data-id)
 
 data.id
@@ -220,15 +189,9 @@ required
 
 ID of the Workspace.
 
-[​](#response-data-name)
+Examples:
 
-data.name
-
-string
-
-required
-
-Name of the Workspace.
+`"wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"`
 
 [​](#response-data-type)
 
@@ -236,9 +199,7 @@ data.type
 
 enum<string>
 
-default:
-
-workspace
+default:workspace
 
 required
 
@@ -250,15 +211,61 @@ Available options:
 
 `workspace`
 
-[​](#response-first-id)
+[​](#response-data-name)
 
-first\_id
+data.name
+
+string
+
+required
+
+Name of the Workspace.
+
+Examples:
+
+`"Workspace Name"`
+
+[​](#response-data-created-at)
+
+data.created\_at
+
+string
+
+required
+
+RFC 3339 datetime string indicating when the Workspace was created.
+
+Examples:
+
+`"2024-10-30T23:58:27.427722Z"`
+
+[​](#response-data-archived-at)
+
+data.archived\_at
 
 string | null
 
 required
 
-First ID in the `data` list. Can be used as the `before_id` for the previous page.
+RFC 3339 datetime string indicating when the Workspace was archived, or null if the Workspace is not archived.
+
+Examples:
+
+`"2024-11-01T23:59:27.427722Z"`
+
+[​](#response-data-display-color)
+
+data.display\_color
+
+string
+
+required
+
+Hex color code representing the Workspace in the Anthropic Console.
+
+Examples:
+
+`"#6C5BB9"`
 
 [​](#response-has-more)
 
@@ -269,6 +276,16 @@ boolean
 required
 
 Indicates if there are more results in the requested page direction.
+
+[​](#response-first-id)
+
+first\_id
+
+string | null
+
+required
+
+First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
 [​](#response-last-id)
 
@@ -284,4 +301,45 @@ Was this page helpful?
 
 YesNo
 
-[Get Workspace](/en/api/admin-api/workspaces/get-workspace)[Update Workspace](/en/api/admin-api/workspaces/update-workspace)
+Get Workspace[Update Workspace](/en/api/admin-api/workspaces/update-workspace)
+
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl "https://api.anthropic.com/v1/organizations/workspaces" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+```
+
+200
+
+4XX
+
+```
+{
+  "data": [
+    {
+      "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+      "type": "workspace",
+      "name": "Workspace Name",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "archived_at": "2024-11-01T23:59:27.427722Z",
+      "display_color": "#6C5BB9"
+    }
+  ],
+  "has_more": true,
+  "first_id": "<string>",
+  "last_id": "<string>"
+}
+```

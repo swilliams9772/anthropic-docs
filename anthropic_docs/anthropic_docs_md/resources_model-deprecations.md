@@ -1,94 +1,71 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/resources/model-deprecations/
----
+# Model deprecations - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/resources/model-deprecations
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Resources
-
-Model deprecations
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
 As we launch safer and more capable models, we regularly retire older models. Applications relying on Anthropic models may need occasional updates to keep working. Impacted customers will always be notified by email and in our documentation.
 
 This page lists all API deprecations, along with recommended replacements.
 
-[​](#overview) Overview
------------------------
+# [​](#overview) Overview
 
 Anthropic uses the following terms to describe the lifecycle of our models:
 
@@ -97,20 +74,19 @@ Anthropic uses the following terms to describe the lifecycle of our models:
 * **Deprecated**: The model is no longer available for new customers but continues to be available for existing users until retirement. We assign a retirement date at this point.
 * **Retired**: The model is no longer available for use. Requests to retired models will fail.
 
-[​](#migrating-to-replacements) Migrating to replacements
----------------------------------------------------------
+# [​](#migrating-to-replacements) Migrating to replacements
 
 Once a model is deprecated, please migrate all usage to a suitable replacement before the retirement date. Requests to models past the retirement date will fail.
 
 To help measure the performance of replacement models on your tasks, we recommend thorough testing of your applications with the new models well before the retirement date.
 
-[​](#notifications) Notifications
----------------------------------
+For specific instructions on migrating from Claude 3.7 to Claude 4 models, see [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4).
+
+# [​](#notifications) Notifications
 
 Anthropic notifies customers with active deployments for models with upcoming retirements. We provide at least 6 months† notice before model retirement for publicly released models.
 
-[​](#auditing-model-usage) Auditing model usage
------------------------------------------------
+# [​](#auditing-model-usage) Auditing model usage
 
 To help identify usage of deprecated models, customers can access an audit of their API usage. Follow these steps:
 
@@ -120,8 +96,7 @@ To help identify usage of deprecated models, customers can access an audit of th
 
 This audit will help you locate any instances where your application is still using deprecated models, allowing you to prioritize updates to newer models before the retirement date.
 
-[​](#model-status) Model status
--------------------------------
+# [​](#model-status) Model status
 
 All publicly released models are listed below with their status:
 
@@ -143,15 +118,16 @@ All publicly released models are listed below with their status:
 | `claude-3-5-haiku-20241022` | Active | N/A | N/A |
 | `claude-3-5-sonnet-20241022` | Active | N/A | N/A |
 | `claude-3-7-sonnet-20250219` | Active | N/A | N/A |
+| `claude-sonnet-4-20250514` | Active | N/A | N/A |
+| `claude-opus-4-20250514` | Active | N/A | N/A |
 
-[​](#deprecation-history) Deprecation history
----------------------------------------------
+# [​](#deprecation-history) Deprecation history
 
 All deprecations are listed below, with the most recent announcements at the top.
 
-### [​](#2025-01-21-claude-2-claude-2-1-and-claude-3-sonnet-models) 2025-01-21: Claude 2, Claude 2.1, and Claude 3 Sonnet models
+# [​](#2025-01-21%3A-claude-2%2C-claude-2-1%2C-and-claude-sonnet-3-models) 2025-01-21: Claude 2, Claude 2.1, and Claude Sonnet 3 models
 
-On January 21, 2025, we notified developers using Claude 2, Claude 2.1, and Claude 3 Sonnet models of their upcoming retirements.
+On January 21, 2025, we notified developers using Claude 2, Claude 2.1, and Claude Sonnet 3 models of their upcoming retirements.
 
 | Retirement Date | Deprecated Model | Recommended Replacement |
 | --- | --- | --- |
@@ -159,7 +135,7 @@ On January 21, 2025, we notified developers using Claude 2, Claude 2.1, and Clau
 | July 21, 2025 | `claude-2.1` | `claude-3-5-sonnet-20241022` |
 | July 21, 2025 | `claude-3-sonnet-20240229` | `claude-3-5-sonnet-20241022` |
 
-### [​](#2024-09-04-claude-1-and-instant-models) 2024-09-04: Claude 1 and Instant models
+# [​](#2024-09-04%3A-claude-1-and-instant-models) 2024-09-04: Claude 1 and Instant models
 
 On September 4, 2024, we notified developers using Claude 1 and Instant models of their upcoming retirements.
 
@@ -173,8 +149,7 @@ On September 4, 2024, we notified developers using Claude 1 and Instant models o
 | November 6, 2024 | `claude-instant-1.1` | `claude-3-5-haiku-20241022` |
 | November 6, 2024 | `claude-instant-1.2` | `claude-3-5-haiku-20241022` |
 
-[​](#best-practices) Best practices
------------------------------------
+# [​](#best-practices) Best practices
 
 1. Regularly check our documentation for updates on model deprecations.
 2. Test your applications with newer models well before the retirement date of your current model.
@@ -187,16 +162,6 @@ Was this page helpful?
 
 YesNo
 
-[Glossary](/en/docs/resources/glossary)[System status](/en/docs/resources/status)
+Migrating to Claude 4[Pricing](/en/docs/about-claude/pricing)
 
 On this page
-
-* [Overview](#overview)
-* [Migrating to replacements](#migrating-to-replacements)
-* [Notifications](#notifications)
-* [Auditing model usage](#auditing-model-usage)
-* [Model status](#model-status)
-* [Deprecation history](#deprecation-history)
-* [2025-01-21: Claude 2, Claude 2.1, and Claude 3 Sonnet models](#2025-01-21-claude-2-claude-2-1-and-claude-3-sonnet-models)
-* [2024-09-04: Claude 1 and Instant models](#2024-09-04-claude-1-and-instant-models)
-* [Best practices](#best-practices)

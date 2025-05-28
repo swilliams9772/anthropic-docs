@@ -1,76 +1,40 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages/
----
+# Migrating from Text Completions - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Messages
-
-Migrating from Text Completions
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
-
-  + [POST
-
-    Messages](/en/api/messages)
-  + [POST
-
-    Count Message tokens](/en/api/messages-count-tokens)
-  + [Streaming Messages](/en/api/messages-streaming)
-  + [Migrating from Text Completions](/en/api/migrating-from-text-completions-to-messages)
-  + [Messages examples](/en/api/messages-examples)
 * Models
 * Message Batches
+* Files
 * Text Completions (Legacy)
-* Admin API
 
-##### OpenAI SDK compatibility
+  + [Migrating from Text Completions](/en/api/migrating-from-text-completions-to-messages)
+  + [POST
 
+    Create a Text Completion](/en/api/complete)
+  + [Streaming Text Completions](/en/api/streaming)
+  + [Prompt validation](/en/api/prompt-validation)
+
+# SDKs
+
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 When migrating from from [Text Completions](/en/api/complete) to [Messages](/en/api/messages), consider the following changes.
 
-### [​](#inputs-and-outputs) Inputs and outputs
+# [​](#inputs-and-outputs) Inputs and outputs
 
 The largest change between Text Completions and the Messages is the way in which you specify model inputs and receive outputs from the model.
 
@@ -78,11 +42,25 @@ With Text Completions, inputs are raw strings:
 
 Python
 
-```bash
+```
 prompt = "\n\nHuman: Hello there\n\nAssistant: Hi, I'm Claude. How can I help?\n\nHuman: Can you explain Glycolysis to me?\n\nAssistant:"
+
 ```
 
 With Messages, you specify a list of input messages instead of a raw prompt:
+
+Shorthand
+
+Expanded
+
+```
+messages = [
+  {"role": "user", "content": "Hello there."},
+  {"role": "assistant", "content": "Hi, I'm Claude. How can I help?"},
+  {"role": "user", "content": "Can you explain Glycolysis to me?"},
+]
+
+```
 
 Each input message has a `role` and `content`.
 
@@ -94,70 +72,76 @@ With Text Completions, the model’s generated text is returned in the `completi
 
 Python
 
-```bash
+```
 >>> response = anthropic.completions.create(...)
 >>> response.completion
 " Hi, I'm Claude"
+
 ```
 
 With Messages, the response is the `content` value, which is a list of content blocks:
 
 Python
 
-```bash
+```
 >>> response = anthropic.messages.create(...)
 >>> response.content
 [{"type": "text", "text": "Hi, I'm Claude"}]
+
 ```
 
-### [​](#putting-words-in-claudes-mouth) Putting words in Claude’s mouth
+# [​](#putting-words-in-claude%E2%80%99s-mouth) Putting words in Claude’s mouth
 
 With Text Completions, you can pre-fill part of Claude’s response:
 
 Python
 
-```bash
+```
 prompt = "\n\nHuman: Hello\n\nAssistant: Hello, my name is"
+
 ```
 
 With Messages, you can achieve the same result by making the last input message have the `assistant` role:
 
 Python
 
-```bash
+```
 messages = [
   {"role": "human", "content": "Hello"},
   {"role": "assistant", "content": "Hello, my name is"},
 ]
+
 ```
 
 When doing so, response `content` will continue from the last input message `content`:
 
 JSON
 
-```json
+```
 {
   "role": "assistant",
   "content": [{"type": "text", "text": " Claude. How can I assist you today?" }],
   ...
 }
+
 ```
 
-### [​](#system-prompt) System prompt
+# [​](#system-prompt) System prompt
 
 With Text Completions, the [system prompt](/en/docs/system-prompts) is specified by adding text before the first `\n\nHuman:` turn:
 
 Python
 
-```bash
+```
 prompt = "Today is January 1, 2024.\n\nHuman: Hello, Claude\n\nAssistant:"
+
 ```
 
 With Messages, you specify the system prompt with the `system` parameter:
 
 Python
 
-```bash
+```
 anthropic.Anthropic().messages.create(
     model="claude-3-opus-20240229",
     max_tokens=1024,
@@ -166,15 +150,16 @@ anthropic.Anthropic().messages.create(
         {"role": "user", "content": "Hello, Claude"}
     ]
 )
+
 ```
 
-### [​](#model-names) Model names
+# [​](#model-names) Model names
 
 The Messages API requires that you specify the full model version (e.g. `claude-3-opus-20240229`).
 
 We previously supported specifying only the major version number (e.g. `claude-2`), which resulted in automatic upgrades to minor versions. However, we no longer recommend this integration pattern, and Messages do not support it.
 
-### [​](#stop-reason) Stop reason
+# [​](#stop-reason) Stop reason
 
 Text Completions always have a `stop_reason` of either:
 
@@ -187,12 +172,12 @@ Messages have a `stop_reason` of one of the following values:
 * `"stop_sequence"`: One of your specified custom stop sequences was generated.
 * `"max_tokens"`: (unchanged)
 
-### [​](#specifying-max-tokens) Specifying max tokens
+# [​](#specifying-max-tokens) Specifying max tokens
 
 * Text Completions: `max_tokens_to_sample` parameter. No validation, but capped values per-model.
 * Messages: `max_tokens` parameter. If passing a value higher than the model supports, returns a validation error.
 
-### [​](#streaming-format) Streaming format
+# [​](#streaming-format) Streaming format
 
 When using `"stream": true` in with Text Completions, the response included any of `completion`, `ping`, and `error` server-sent-events. See [Text Completions streaming](https://anthropic.readme.io/claude/reference/streaming) for details.
 
@@ -202,14 +187,6 @@ Was this page helpful?
 
 YesNo
 
-[Streaming Messages](/en/api/messages-streaming)[Messages examples](/en/api/messages-examples)
+Templatize a prompt[Create a Text Completion](/en/api/complete)
 
 On this page
-
-* [Inputs and outputs](#inputs-and-outputs)
-* [Putting words in Claude’s mouth](#putting-words-in-claudes-mouth)
-* [System prompt](#system-prompt)
-* [Model names](#model-names)
-* [Stop reason](#stop-reason)
-* [Specifying max tokens](#specifying-max-tokens)
-* [Streaming format](#streaming-format)

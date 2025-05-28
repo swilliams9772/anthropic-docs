@@ -1,68 +1,36 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/streaming/
----
+# Streaming Text Completions - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/streaming
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Text Completions (Legacy)
-
-Streaming Text Completions
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
 * Models
 * Message Batches
+* Files
 * Text Completions (Legacy)
 
+  + [Migrating from Text Completions](/en/api/migrating-from-text-completions-to-messages)
   + [POST
 
     Create a Text Completion](/en/api/complete)
   + [Streaming Text Completions](/en/api/streaming)
   + [Prompt validation](/en/api/prompt-validation)
-* Admin API
 
-##### OpenAI SDK compatibility
+# SDKs
 
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 **Legacy API**
 
@@ -70,17 +38,16 @@ The Text Completions API is a legacy API. Future models and features will requir
 
 When creating a Text Completion, you can set `"stream": true` to incrementally stream the response using [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent%5Fevents/Using%5Fserver-sent%5Fevents) (SSE). If you are using our [client libraries](/en/api/client-sdks), parsing these events will be handled for you automatically. However, if you are building a direct API integration, you will need to handle these events yourself.
 
-[​](#example) Example
----------------------
+# [​](#example) Example
 
-Request
+Shell
 
-```bash
+```
 curl https://api.anthropic.com/v1/complete \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --data '
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --data '
 {
   "model": "claude-2",
   "prompt": "\n\nHuman: Hello, world!\n\nAssistant:",
@@ -88,11 +55,12 @@ curl https://api.anthropic.com/v1/complete \
   "stream": true
 }
 '
+
 ```
 
 Response
 
-```bash
+```
 event: completion
 data: {"type": "completion", "completion": " Hello", "stop_reason": null, "model": "claude-2.0"}
 
@@ -119,31 +87,31 @@ data: {"type": "completion", "completion": ".", "stop_reason": null, "model": "c
 
 event: completion
 data: {"type": "completion", "completion": "", "stop_reason": "stop_sequence", "model": "claude-2.0"}
+
 ```
 
-[​](#events) Events
--------------------
+# [​](#events) Events
 
 Each event includes a named event type and associated JSON data.
 
 Event types: `completion`, `ping`, `error`.
 
-### [​](#error-event-types) Error event types
+# [​](#error-event-types) Error event types
 
 We may occasionally send [errors](/en/api/errors) in the event stream. For example, during periods of high usage, you may receive an `overloaded_error`, which would normally correspond to an HTTP 529 in a non-streaming context:
 
 Example error
 
-```bash
+```
 event: completion
 data: {"completion": " Hello", "stop_reason": null, "model": "claude-2.0"}
 
 event: error
 data: {"error": {"type": "overloaded_error", "message": "Overloaded"}}
+
 ```
 
-[​](#older-api-versions) Older API versions
--------------------------------------------
+# [​](#older-api-versions) Older API versions
 
 If you are using an [API version](/en/api/versioning) prior to `2023-06-01`, the response shape will be different. See [versioning](/en/api/versioning) for details.
 
@@ -151,11 +119,6 @@ Was this page helpful?
 
 YesNo
 
-[Create a Text Completion](/en/api/complete)[Prompt validation](/en/api/prompt-validation)
+Create a Text Completion[Prompt validation](/en/api/prompt-validation)
 
 On this page
-
-* [Example](#example)
-* [Events](#events)
-* [Error event types](#error-event-types)
-* [Older API versions](#older-api-versions)

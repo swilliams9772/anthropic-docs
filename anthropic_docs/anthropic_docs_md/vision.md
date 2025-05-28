@@ -1,109 +1,85 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/vision/
----
+# Vision - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/vision
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Build with Claude
-
-Vision
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
 This guide describes how to work with images in Claude, including best practices, code examples, and limitations to keep in mind.
 
-[​](#how-to-use-vision) How to use vision
------------------------------------------
+# [​](#how-to-use-vision) How to use vision
 
 Use Claude’s vision capabilities via:
 
 * [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
-* The [Console Workbench](https://console.anthropic.com/workbench/). If you select a model that accepts images (Claude 3 models only), a button to add images appears at the top right of every User message block.
+* The [Console Workbench](https://console.anthropic.com/workbench/). If you select a model that accepts images (Claude 3 and 4 models only), a button to add images appears at the top right of every User message block.
 * **API request**. See the examples in this guide.
 
-[​](#before-you-upload) Before you upload
------------------------------------------
+# [​](#before-you-upload) Before you upload
 
-### [​](#basics-and-limits) Basics and Limits
+# [​](#basics-and-limits) Basics and Limits
 
 You can include multiple images in a single request (up to 20 for [claude.ai](https://claude.ai/) and 100 for API requests). Claude will analyze all provided images when formulating its response. This can be helpful for comparing or contrasting images.
 
 If you submit an image larger than 8000x8000 px, it will be rejected. If you submit more than 20 images in one API request, this limit is 2000x2000 px.
 
-### [​](#evaluate-image-size) Evaluate image size
+# [​](#evaluate-image-size) Evaluate image size
 
 For optimal performance, we recommend resizing images before uploading if they are too large. If your image’s long edge is more than 1568 pixels, or your image is more than ~1,600 tokens, it will first be scaled down, preserving aspect ratio, until it’s within the size limits.
 
@@ -113,7 +89,7 @@ To improve [time-to-first-token](/en/docs/resources/glossary), we recommend
 resizing images to no more than 1.15 megapixels (and within 1568 pixels in
 both dimensions).
 
-Here is a table of maximum image sizes accepted by our API that will not be resized for common aspect ratios. With the Claude 3.7 Sonnet model, these images use approximately 1,600 tokens and around $4.80/1K images.
+Here is a table of maximum image sizes accepted by our API that will not be resized for common aspect ratios. With the Claude Sonnet 3.7 model, these images use approximately 1,600 tokens and around $4.80/1K images.
 
 | Aspect ratio | Image size |
 | --- | --- |
@@ -123,13 +99,13 @@ Here is a table of maximum image sizes accepted by our API that will not be resi
 | 9:16 | 819x1456 px |
 | 1:2 | 784x1568 px |
 
-### [​](#calculate-image-costs) Calculate image costs
+# [​](#calculate-image-costs) Calculate image costs
 
 Each image you include in a request to Claude counts towards your token usage. To calculate the approximate cost, multiply the approximate number of image tokens by the [per-token price of the model](https://anthropic.com/pricing) you’re using.
 
 If your image does not need to be resized, you can estimate the number of tokens used through this algorithm: `tokens = (width px * height px)/750`
 
-Here are examples of approximate tokenization and costs for different image sizes within our API’s size constraints based on Claude 3.7 Sonnet per-token price of $3 per million input tokens:
+Here are examples of approximate tokenization and costs for different image sizes within our API’s size constraints based on Claude Sonnet 3.7 per-token price of $3 per million input tokens:
 
 | Image size | # of Tokens | Cost / image | Cost / 1K images |
 | --- | --- | --- | --- |
@@ -137,7 +113,7 @@ Here are examples of approximate tokenization and costs for different image size
 | 1000x1000 px(1 megapixel) | ~1334 | ~$0.004 | ~$4.00 |
 | 1092x1092 px(1.19 megapixels) | ~1590 | ~$0.0048 | ~$4.80 |
 
-### [​](#ensuring-image-quality) Ensuring image quality
+# [​](#ensuring-image-quality) Ensuring image quality
 
 When providing images to Claude, keep the following in mind for best results:
 
@@ -145,8 +121,7 @@ When providing images to Claude, keep the following in mind for best results:
 * **Image clarity**: Ensure images are clear and not too blurry or pixelated.
 * **Text**: If the image contains important text, make sure it’s legible and not too small. Avoid cropping out key visual context just to enlarge the text.
 
-[​](#prompt-examples) Prompt examples
--------------------------------------
+# [​](#prompt-examples) Prompt examples
 
 Many of the [prompting techniques](/en/docs/build-with-claude/prompt-engineering/overview) that work well for text-based interactions with Claude can also be applied to image-based prompts.
 
@@ -157,20 +132,170 @@ before text. Images placed after text or interpolated with text will still
 perform well, but if your use case allows it, we recommend an image-then-text
 structure.
 
-### [​](#about-the-prompt-examples) About the prompt examples
+# [​](#about-the-prompt-examples) About the prompt examples
 
-The following examples demonstrate how to use Claude’s vision capabilities using various programming languages and approaches. You can provide images to Claude in two ways:
+The following examples demonstrate how to use Claude’s vision capabilities using various programming languages and approaches. You can provide images to Claude in three ways:
 
 1. As a base64-encoded image in `image` content blocks
 2. As a URL reference to an image hosted online
+3. Using the Files API (upload once, use multiple times)
 
 The base64 example prompts use these variables:
 
+Shell
+
+Python
+
+TypeScript
+
+Java
+
+```
+    # For URL-based images, you can use the URL directly in your JSON request
+
+    # For base64-encoded images, you need to first encode the image
+    # Example of how to encode an image to base64 in bash:
+    BASE64_IMAGE_DATA=$(curl -s "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg" | base64)
+
+    # The encoded data can now be used in your API calls
+
+```
+
 Below are examples of how to include images in a Messages API request using base64-encoded images and URL references:
 
-### [​](#base64-encoded-image-example) Base64-encoded image example
+# [​](#base64-encoded-image-example) Base64-encoded image example
 
-### [​](#url-based-image-example) URL-based image example
+Shell
+
+Python
+
+TypeScript
+
+Java
+
+```
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-sonnet-4-20250514",
+    "max_tokens": 1024,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image",
+            "source": {
+              "type": "base64",
+              "media_type": "image/jpeg",
+              "data": "'"$BASE64_IMAGE_DATA"'"
+            }
+          },
+          {
+            "type": "text",
+            "text": "Describe this image."
+          }
+        ]
+      }
+    ]
+  }'
+
+```
+
+# [​](#url-based-image-example) URL-based image example
+
+Shell
+
+Python
+
+TypeScript
+
+Java
+
+```
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-sonnet-4-20250514",
+    "max_tokens": 1024,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image",
+            "source": {
+              "type": "url",
+              "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+            }
+          },
+          {
+            "type": "text",
+            "text": "Describe this image."
+          }
+        ]
+      }
+    ]
+  }'
+
+```
+
+# [​](#files-api-image-example) Files API image example
+
+For images you’ll use repeatedly or when you want to avoid encoding overhead, use the [Files API](/en/docs/build-with-claude/files):
+
+Shell
+
+Python
+
+TypeScript
+
+Java
+
+```
+# First, upload your image to the Files API
+
+curl -X POST https://api.anthropic.com/v1/files \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14" \
+  -F "file=@image.jpg"
+
+# Then use the returned file_id in your message
+
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-sonnet-4-20250514",
+    "max_tokens": 1024,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image",
+            "source": {
+              "type": "file",
+              "file_id": "file_abc123"
+            }
+          },
+          {
+            "type": "text",
+            "text": "Describe this image."
+          }
+        ]
+      }
+    ]
+  }'
+
+```
 
 See [Messages API examples](/en/api/messages) for more example code and parameter details.
 
@@ -184,16 +309,16 @@ Ask Claude to describe one image.
 | --- | --- |
 | User | [Image] Describe this image. |
 
-Here is the corresponding API call using the Claude 3.7 Sonnet model.
+Here is the corresponding API call using the Claude Sonnet 3.7 model.
 
 * Using Base64
 * Using URL
 
 Python
 
-```bash
+```
 message = client.messages.create(
-    model="claude-3-7-sonnet-20250219",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     messages=[
         {
@@ -215,6 +340,64 @@ message = client.messages.create(
         }
     ],
 )
+
+```
+
+Python
+
+```
+message = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": image1_media_type,
+                        "data": image1_data,
+                    },
+                },
+                {
+                    "type": "text",
+                    "text": "Describe this image."
+                }
+            ],
+        }
+    ],
+)
+
+```
+
+Python
+
+```
+message = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "url",
+                        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+                    },
+                },
+                {
+                    "type": "text",
+                    "text": "Describe this image."
+                }
+            ],
+        }
+    ],
+)
+
 ```
 
 Example: Multiple images
@@ -227,16 +410,16 @@ Ask Claude to describe the differences between multiple images.
 | --- | --- |
 | User | Image 1: [Image 1] Image 2: [Image 2] How are these images different? |
 
-Here is the corresponding API call using the Claude 3.7 Sonnet model.
+Here is the corresponding API call using the Claude Sonnet 3.7 model.
 
 * Using Base64
 * Using URL
 
 Python
 
-```bash
+```
 message = client.messages.create(
-    model="claude-3-7-sonnet-20250219",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     messages=[
         {
@@ -274,6 +457,95 @@ message = client.messages.create(
         }
     ],
 )
+
+```
+
+Python
+
+```
+message = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Image 1:"
+                },
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": image1_media_type,
+                        "data": image1_data,
+                    },
+                },
+                {
+                    "type": "text",
+                    "text": "Image 2:"
+                },
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": image2_media_type,
+                        "data": image2_data,
+                    },
+                },
+                {
+                    "type": "text",
+                    "text": "How are these images different?"
+                }
+            ],
+        }
+    ],
+)
+
+```
+
+Python
+
+```
+message = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Image 1:"
+                },
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "url",
+                        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+                    },
+                },
+                {
+                    "type": "text",
+                    "text": "Image 2:"
+                },
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "url",
+                        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Iridescent.green.sweat.bee1.jpg",
+                    },
+                },
+                {
+                    "type": "text",
+                    "text": "How are these images different?"
+                }
+            ],
+        }
+    ],
+)
+
 ```
 
 Example: Multiple images with a system prompt
@@ -285,16 +557,16 @@ Ask Claude to describe the differences between multiple images, while giving it 
 | System | Respond only in Spanish. |
 | User | Image 1: [Image 1] Image 2: [Image 2] How are these images different? |
 
-Here is the corresponding API call using the Claude 3.7 Sonnet model.
+Here is the corresponding API call using the Claude Sonnet 3.7 model.
 
 * Using Base64
 * Using URL
 
 Python
 
-```bash
+```
 message = client.messages.create(
-    model="claude-3-7-sonnet-20250219",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     system="Respond only in Spanish.",
     messages=[
@@ -333,6 +605,97 @@ message = client.messages.create(
         }
     ],
 )
+
+```
+
+Python
+
+```
+message = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    system="Respond only in Spanish.",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Image 1:"
+                },
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": image1_media_type,
+                        "data": image1_data,
+                    },
+                },
+                {
+                    "type": "text",
+                    "text": "Image 2:"
+                },
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": image2_media_type,
+                        "data": image2_data,
+                    },
+                },
+                {
+                    "type": "text",
+                    "text": "How are these images different?"
+                }
+            ],
+        }
+    ],
+)
+
+```
+
+Python
+
+```
+message = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    system="Respond only in Spanish.",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Image 1:"
+                },
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "url",
+                        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+                    },
+                },
+                {
+                    "type": "text",
+                    "text": "Image 2:"
+                },
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "url",
+                        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Iridescent.green.sweat.bee1.jpg",
+                    },
+                },
+                {
+                    "type": "text",
+                    "text": "How are these images different?"
+                }
+            ],
+        }
+    ],
+)
+
 ```
 
 Example: Four images across two conversation turns
@@ -350,8 +713,7 @@ Ask Claude to contrast two images, then ask a follow-up question comparing the f
 
 When using the API, simply insert new images into the array of Messages in the `user` role as part of any standard [multiturn conversation](/en/api/messages-examples#multiple-conversational-turns) structure.
 
-[​](#limitations) Limitations
------------------------------
+# [​](#limitations) Limitations
 
 While Claude’s image understanding capabilities are cutting-edge, there are some limitations to be aware of:
 
@@ -365,8 +727,7 @@ While Claude’s image understanding capabilities are cutting-edge, there are so
 
 Always carefully review and verify Claude’s image interpretations, especially for high-stakes use cases. Do not use Claude for tasks requiring perfect precision or sensitive image analysis without human oversight.
 
-[​](#faq) FAQ
--------------
+# [​](#faq) FAQ
 
 What image file types does Claude support?
 
@@ -383,7 +744,7 @@ Yes, Claude can now process images from URLs with our URL image source blocks in
 Simply use the “url” source type instead of “base64” in your API requests.
 Example:
 
-```json
+```
 {
   "type": "image",
   "source": {
@@ -391,23 +752,18 @@ Example:
     "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
   }
 }
+
 ```
 
 Is there a limit to the image file size I can upload?
 
 Yes, there are limits:
 
-* API: Maximum 5MB per image
-* claude.ai: Maximum 10MB per image
-
 Images larger than these limits will be rejected and return an error when using our API.
 
 How many images can I include in one request?
 
 The image limits are:
-
-* Messages API: Up to 100 images per request
-* claude.ai: Up to 20 images per turn
 
 Requests exceeding these limits will be rejected and return an error.
 
@@ -441,8 +797,7 @@ Can Claude generate or edit images?
 
 No, Claude is an image understanding model only. It can interpret and analyze images, but it cannot generate, produce, edit, manipulate, or create images.
 
-[​](#dive-deeper-into-vision) Dive deeper into vision
------------------------------------------------------
+# [​](#dive-deeper-into-vision) Dive deeper into vision
 
 Ready to start building with images using Claude? Here are a few helpful resources:
 
@@ -455,20 +810,6 @@ Was this page helpful?
 
 YesNo
 
-[Context windows](/en/docs/build-with-claude/context-windows)[Overview](/en/docs/build-with-claude/prompt-engineering/overview)
+Embeddings[PDF support](/en/docs/build-with-claude/pdf-support)
 
 On this page
-
-* [How to use vision](#how-to-use-vision)
-* [Before you upload](#before-you-upload)
-* [Basics and Limits](#basics-and-limits)
-* [Evaluate image size](#evaluate-image-size)
-* [Calculate image costs](#calculate-image-costs)
-* [Ensuring image quality](#ensuring-image-quality)
-* [Prompt examples](#prompt-examples)
-* [About the prompt examples](#about-the-prompt-examples)
-* [Base64-encoded image example](#base64-encoded-image-example)
-* [URL-based image example](#url-based-image-example)
-* [Limitations](#limitations)
-* [FAQ](#faq)
-* [Dive deeper into vision](#dive-deeper-into-vision)

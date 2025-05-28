@@ -1,87 +1,65 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/build-with-claude/pdf-support/
----
+# PDF support - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/build-with-claude/pdf-support
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Build with Claude
-
-PDF support
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
 You can now ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:
 
@@ -90,10 +68,9 @@ You can now ask Claude about any text, pictures, charts, and tables in PDFs you 
 * Translation assistance for documents
 * Converting document information into structured formats
 
-[​](#before-you-begin) Before you begin
----------------------------------------
+# [​](#before-you-begin) Before you begin
 
-### [​](#check-pdf-requirements) Check PDF requirements
+# [​](#check-pdf-requirements) Check PDF requirements
 
 Claude works with any standard PDF. However, you should ensure your request size meet these requirements when using PDF support:
 
@@ -107,29 +84,169 @@ Please note that both limits are on the entire request payload, including any ot
 
 Since PDF support relies on Claude’s vision capabilities, it is subject to the same [limitations and considerations](/en/docs/build-with-claude/vision#limitations) as other vision tasks.
 
-### [​](#supported-platforms-and-models) Supported platforms and models
+# [​](#supported-platforms-and-models) Supported platforms and models
 
-PDF support is currently available on Claude 3.7 Sonnet (`claude-3-7-sonnet-20250219`), both Claude 3.5 Sonnet models (`claude-3-5-sonnet-20241022`, `claude-3-5-sonnet-20240620`), and Claude 3.5 Haiku (`claude-3-5-haiku-20241022`) via direct API access and Google Vertex AI. This functionality will be supported on Amazon Bedrock soon.
+PDF support is currently supported via direct API access and Google Vertex AI on:
 
-[​](#process-pdfs-with-claude) Process PDFs with Claude
--------------------------------------------------------
+* Claude Opus 4 (`claude-opus-4-20250514`)
+* Claude Sonnet 4 (`claude-sonnet-4-20250514`)
+* Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`)
+* Claude Sonnet 3.5 models (`claude-3-5-sonnet-20241022`, `claude-3-5-sonnet-20240620`)
+* Claude Haiku 3.5 (`claude-3-5-haiku-20241022`)
 
-### [​](#send-your-first-pdf-request) Send your first PDF request
+This functionality will be supported on Amazon Bedrock soon.
 
-Let’s start with a simple example using the Messages API. You can provide PDFs to Claude in two ways:
+# [​](#process-pdfs-with-claude) Process PDFs with Claude
 
-1. As a base64-encoded PDF in `document` content blocks
-2. As a URL reference to a PDF hosted online
+# [​](#send-your-first-pdf-request) Send your first PDF request
 
-#### [​](#option-1-url-based-pdf-document) Option 1: URL-based PDF document
+Let’s start with a simple example using the Messages API. You can provide PDFs to Claude in three ways:
+
+1. As a URL reference to a PDF hosted online
+2. As a base64-encoded PDF in `document` content blocks
+3. By a `file_id` from the [Files API](/en/docs/build-with-claude/files)
+
+# [​](#option-1%3A-url-based-pdf-document) Option 1: URL-based PDF document
 
 The simplest approach is to reference a PDF directly from a URL:
 
-#### [​](#option-2-base64-encoded-pdf-document) Option 2: Base64-encoded PDF document
+Shell
+
+Python
+
+TypeScript
+
+Java
+
+```
+ curl https://api.anthropic.com/v1/messages \
+   -H "content-type: application/json" \
+   -H "x-api-key: $ANTHROPIC_API_KEY" \
+   -H "anthropic-version: 2023-06-01" \
+   -d '{
+     "model": "claude-opus-4-20250514",
+     "max_tokens": 1024,
+     "messages": [{
+         "role": "user",
+         "content": [{
+             "type": "document",
+             "source": {
+                 "type": "url",
+                 "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+             }
+         },
+         {
+             "type": "text",
+             "text": "What are the key findings in this document?"
+         }]
+     }]
+ }'
+
+```
+
+# [​](#option-2%3A-base64-encoded-pdf-document) Option 2: Base64-encoded PDF document
 
 If you need to send PDFs from your local system or when a URL isn’t available:
 
-### [​](#how-pdf-support-works) How PDF support works
+Shell
+
+Python
+
+TypeScript
+
+Java
+
+```
+# Method 1: Fetch and encode a remote PDF
+
+curl -s "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
+
+# Method 2: Encode a local PDF file
+
+# base64 document.pdf | tr -d '\n' > pdf_base64.txt
+
+# Create a JSON request file using the pdf_base64.txt content
+
+jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
+    "model": "claude-opus-4-20250514",
+    "max_tokens": 1024,
+    "messages": [{
+        "role": "user",
+        "content": [{
+            "type": "document",
+            "source": {
+                "type": "base64",
+                "media_type": "application/pdf",
+                "data": $PDF_BASE64
+            }
+        },
+        {
+            "type": "text",
+            "text": "What are the key findings in this document?"
+        }]
+    }]
+}' > request.json
+
+# Send the API request using the JSON file
+
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d @request.json
+
+```
+
+# [​](#option-3%3A-files-api) Option 3: Files API
+
+For PDFs you’ll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](/en/docs/build-with-claude/files):
+
+Shell
+
+Python
+
+TypeScript
+
+Java
+
+```
+# First, upload your PDF to the Files API
+
+curl -X POST https://api.anthropic.com/v1/files \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14" \
+  -F "file=@document.pdf"
+
+# Then use the returned file_id in your message
+
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14" \
+  -d '{
+    "model": "claude-opus-4-20250514",
+    "max_tokens": 1024,
+    "messages": [{
+      "role": "user",
+      "content": [{
+        "type": "document",
+        "source": {
+          "type": "file",
+          "file_id": "file_abc123"
+        }
+      },
+      {
+        "type": "text",
+        "text": "What are the key findings in this document?"
+      }]
+    }]
+  }'
+
+```
+
+# [​](#how-pdf-support-works) How PDF support works
 
 When you send a PDF to Claude, the following steps occur:
 
@@ -157,7 +274,7 @@ Claude can reference both textual and visual content when it responds. You can f
 * **Batch processing**: For high-volume document processing.
 * **Tool use**: To extract specific information from documents for use as tool inputs.
 
-### [​](#estimate-your-costs) Estimate your costs
+# [​](#estimate-your-costs) Estimate your costs
 
 The token count of a PDF file depends on the total text extracted from the document as well as the number of pages:
 
@@ -166,10 +283,9 @@ The token count of a PDF file depends on the total text extracted from the docum
 
 You can use [token counting](/en/docs/build-with-claude/token-counting) to estimate costs for your specific PDFs.
 
-[​](#optimize-pdf-processing) Optimize PDF processing
------------------------------------------------------
+# [​](#optimize-pdf-processing) Optimize PDF processing
 
-### [​](#improve-performance) Improve performance
+# [​](#improve-performance) Improve performance
 
 Follow these best practices for optimal results:
 
@@ -181,49 +297,146 @@ Follow these best practices for optimal results:
 * Split large PDFs into chunks when needed
 * Enable prompt caching for repeated analysis
 
-### [​](#scale-your-implementation) Scale your implementation
+# [​](#scale-your-implementation) Scale your implementation
 
 For high-volume processing, consider these approaches:
 
-#### [​](#use-prompt-caching) Use prompt caching
+# [​](#use-prompt-caching) Use prompt caching
 
 Cache PDFs to improve performance on repeated queries:
 
-#### [​](#process-document-batches) Process document batches
+Shell
+
+Python
+
+TypeScript
+
+Java
+
+```
+# Create a JSON request file using the pdf_base64.txt content
+
+jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
+    "model": "claude-opus-4-20250514",
+    "max_tokens": 1024,
+    "messages": [{
+        "role": "user",
+        "content": [{
+            "type": "document",
+            "source": {
+                "type": "base64",
+                "media_type": "application/pdf",
+                "data": $PDF_BASE64
+            },
+            "cache_control": {
+              "type": "ephemeral"
+            }
+        },
+        {
+            "type": "text",
+            "text": "Which model has the highest human preference win rates across each use-case?"
+        }]
+    }]
+}' > request.json
+
+# Then make the API call using the JSON file
+
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d @request.json
+
+```
+
+# [​](#process-document-batches) Process document batches
 
 Use the Message Batches API for high-volume workflows:
 
-[​](#next-steps) Next steps
----------------------------
+Shell
 
-[Try PDF examples
-----------------
+Python
 
-Explore practical examples of PDF processing in our cookbook recipe.](https://github.com/anthropics/anthropic-cookbook/tree/main/multimodal)[View API reference
-------------------
+TypeScript
 
-See complete API documentation for PDF support.](/en/api/messages)
+Java
 
-Was this page helpful?
+```
+# Create a JSON request file using the pdf_base64.txt content
 
-YesNo
+jq -n --rawfile PDF_BASE64 pdf_base64.txt '
+{
+  "requests": [
+      {
+          "custom_id": "my-first-request",
+          "params": {
+              "model": "claude-opus-4-20250514",
+              "max_tokens": 1024,
+              "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "document",
+                            "source": {
+                                "type": "base64",
+                                "media_type": "application/pdf",
+                                "data": $PDF_BASE64
+                            }
+                        },
+                        {
+                            "type": "text",
+                            "text": "Which model has the highest human preference win rates across each use-case?"
+                        }
+                    ]
+                }
+              ]
+          }
+      },
+      {
+          "custom_id": "my-second-request",
+          "params": {
+              "model": "claude-opus-4-20250514",
+              "max_tokens": 1024,
+              "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "document",
+                            "source": {
+                                "type": "base64",
+                                "media_type": "application/pdf",
+                                "data": $PDF_BASE64
+                            }
+                        },
+                        {
+                            "type": "text",
+                            "text": "Extract 5 key insights from this document."
+                        }
+                    ]
+                }
+              ]
+          }
+      }
+  ]
+}
+' > request.json
 
-[Prompt caching](/en/docs/build-with-claude/prompt-caching)[Citations](/en/docs/build-with-claude/citations)
+# Then make the API call using the JSON file
+
+curl https://api.anthropic.com/v1/messages/batches \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d @request.json
+
+```
+
+# [​](#next-steps) Next steps
+
+[## Try PDF examples
+
+Explore practical examples of PDF processing in our cookbook recipe.](https://github.com/anthropics/anthropic-cookbook/tree/main/multimodal)
 
 On this page
-
-* [Before you begin](#before-you-begin)
-* [Check PDF requirements](#check-pdf-requirements)
-* [Supported platforms and models](#supported-platforms-and-models)
-* [Process PDFs with Claude](#process-pdfs-with-claude)
-* [Send your first PDF request](#send-your-first-pdf-request)
-* [Option 1: URL-based PDF document](#option-1-url-based-pdf-document)
-* [Option 2: Base64-encoded PDF document](#option-2-base64-encoded-pdf-document)
-* [How PDF support works](#how-pdf-support-works)
-* [Estimate your costs](#estimate-your-costs)
-* [Optimize PDF processing](#optimize-pdf-processing)
-* [Improve performance](#improve-performance)
-* [Scale your implementation](#scale-your-implementation)
-* [Use prompt caching](#use-prompt-caching)
-* [Process document batches](#process-document-batches)
-* [Next steps](#next-steps)

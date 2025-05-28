@@ -1,65 +1,23 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/errors/
----
+# Errors - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/errors#http-errors
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Using the API
-
-Errors
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
+# SDKs
 
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
 * [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
-
-* Messages
-* Models
-* Message Batches
-* Text Completions (Legacy)
-* Admin API
-
-##### OpenAI SDK compatibility
-
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
-
-[​](#http-errors) HTTP errors
------------------------------
+# [​](#http-errors) HTTP errors
 
 Our API follows a predictable HTTP error code format:
 
@@ -72,19 +30,18 @@ Our API follows a predictable HTTP error code format:
 * 500 - `api_error`: An unexpected error has occurred internal to Anthropic’s systems.
 * 529 - `overloaded_error`: Anthropic’s API is temporarily overloaded.
 
-  Sudden large increases in usage may lead to an increased rate of 529 errors.
-  We recommend ramping up gradually and maintaining consistent usage patterns.
+  529 errors can occur when Anthropic APIs experience high traffic across all users. In rare cases, if your organization has a sharp increase in usage, you might see this type of error.
+  To avoid 529 errors, ramp up your traffic gradually and maintain consistent usage patterns.
 
 When receiving a [streaming](/en/api/streaming) response via SSE, it’s possible that an error can occur after returning a 200 response, in which case error handling wouldn’t follow these standard mechanisms.
 
-[​](#error-shapes) Error shapes
--------------------------------
+# [​](#error-shapes) Error shapes
 
 Errors are always returned as JSON, with a top-level `error` object that always includes a `type` and `message` value. For example:
 
 JSON
 
-```json
+```
 {
   "type": "error",
   "error": {
@@ -92,19 +49,38 @@ JSON
     "message": "The requested resource could not be found."
   }
 }
+
 ```
 
 In accordance with our [versioning](/en/api/versioning) policy, we may expand the values within these objects, and it is possible that the `type` values will grow over time.
 
-[​](#request-id) Request id
----------------------------
+# [​](#request-id) Request id
 
 Every API response includes a unique `request-id` header. This header contains a value such as `req_018EeWyXxfu5pfWkrYcMdjWG`. When contacting support about a specific request, please include this ID to help us quickly resolve your issue.
 
 Our official SDKs provide this value as a property on top-level response objects, containing the value of the `x-request-id` header:
 
-[​](#long-requests) Long requests
----------------------------------
+Python
+
+TypeScript
+
+```
+import anthropic
+
+client = anthropic.Anthropic()
+
+message = client.messages.create(
+    model="claude-opus-4-20250514",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "Hello, Claude"}
+    ]
+)
+print(f"Request ID: {message._request_id}")
+
+```
+
+# [​](#long-requests) Long requests
 
 We highly encourage using the [streaming Messages API](/en/api/messages-streaming) or [Message Batches API](/en/api/creating-message-batches) for long running requests, especially those over 10 minutes.
 
@@ -125,11 +101,6 @@ Was this page helpful?
 
 YesNo
 
-[Versions](/en/api/versioning)[Rate limits](/en/api/rate-limits)
+Beta headers[Handling stop reasons](/en/api/handling-stop-reasons)
 
 On this page
-
-* [HTTP errors](#http-errors)
-* [Error shapes](#error-shapes)
-* [Request id](#request-id)
-* [Long requests](#long-requests)

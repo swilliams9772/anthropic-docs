@@ -1,40 +1,13 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/messages-count-tokens/
----
+# Count Message tokens - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/messages-count-tokens
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Messages
-
-Count Message tokens
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
 
@@ -44,29 +17,20 @@ Count Message tokens
   + [POST
 
     Count Message tokens](/en/api/messages-count-tokens)
-  + [Streaming Messages](/en/api/messages-streaming)
-  + [Migrating from Text Completions](/en/api/migrating-from-text-completions-to-messages)
-  + [Messages examples](/en/api/messages-examples)
 * Models
 * Message Batches
+* Files
 * Text Completions (Legacy)
-* Admin API
 
-##### OpenAI SDK compatibility
+# SDKs
 
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 POST
 
@@ -82,7 +46,43 @@ messages
 
 count\_tokens
 
-#### Headers
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl https://api.anthropic.com/v1/messages/count_tokens \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "model": "claude-3-7-sonnet-20250219",
+    "messages": [
+        {"role": "user", "content": "Hello, world"}
+    ]
+}'
+```
+
+200
+
+4XX
+
+```
+{
+  "input_tokens": 2095
+}
+```
+
+# Headers
 
 [​](#parameter-anthropic-beta)
 
@@ -106,19 +106,11 @@ The version of the Anthropic API you want to use.
 
 Read more about versioning and our version history [here](https://docs.anthropic.com/en/api/versioning).
 
-[​](#parameter-x-api-key)
-
-x-api-key
-
-string
-
-required
-
 Your unique API key for authentication.
 
 This key is required in the header of all API requests, to authenticate your account and access Anthropic's services. Get your API key through the [Console](https://console.anthropic.com/settings/keys). Each key is scoped to a Workspace.
 
-#### Body
+# Body
 
 application/json
 
@@ -140,42 +132,47 @@ If the final message uses the `assistant` role, the response content will contin
 
 Example with a single `user` message:
 
-```bash
+```
 [{"role": "user", "content": "Hello, Claude"}]
+
 ```
 
 Example with multiple conversational turns:
 
-```bash
+```
 [
   {"role": "user", "content": "Hello there."},
   {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
   {"role": "user", "content": "Can you explain LLMs in plain English?"},
 ]
+
 ```
 
 Example with a partially-filled response from Claude:
 
-```bash
+```
 [
   {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
   {"role": "assistant", "content": "The best answer is ("},
 ]
+
 ```
 
 Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-```json
+```
 {"role": "user", "content": "Hello, Claude"}
+
 ```
 
-```json
+```
 {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+
 ```
 
 Starting with Claude 3 models, you can also send image content blocks:
 
-```json
+```
 {"role": "user", "content": [
   {
     "type": "image",
@@ -187,6 +184,7 @@ Starting with Claude 3 models, you can also send image content blocks:
   },
   {"type": "text", "text": "What is in this image?"}
 ]}
+
 ```
 
 We currently support the `base64` source type for images, and the `image/jpeg`, `image/png`, `image/gif`, and `image/webp` media types.
@@ -235,6 +233,74 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Required string length: `1 - 256`
 
+Examples:
+
+`"claude-3-7-sonnet-20250219"`
+
+[​](#body-mcp-servers)
+
+mcp\_servers
+
+object[]
+
+MCP servers to be utilized in this request
+
+Show child attributes
+
+[​](#body-mcp-servers-name)
+
+mcp\_servers.name
+
+string
+
+required
+
+[​](#body-mcp-servers-type)
+
+mcp\_servers.type
+
+enum<string>
+
+required
+
+Available options:
+
+`url`
+
+[​](#body-mcp-servers-url)
+
+mcp\_servers.url
+
+string
+
+required
+
+[​](#body-mcp-servers-authorization-token)
+
+mcp\_servers.authorization\_token
+
+string | null
+
+[​](#body-mcp-servers-tool-configuration)
+
+mcp\_servers.tool\_configuration
+
+object | null
+
+Show child attributes
+
+[​](#body-mcp-servers-tool-configuration-allowed-tools)
+
+mcp\_servers.tool\_configuration.allowed\_tools
+
+string[] | null
+
+[​](#body-mcp-servers-tool-configuration-enabled)
+
+mcp\_servers.tool\_configuration.enabled
+
+boolean | null
+
 [​](#body-system)
 
 system
@@ -244,6 +310,20 @@ stringobject[]
 System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
+
+Examples:
+
+```
+[
+  {
+    "text": "Today's date is 2024-06-01.",
+    "type": "text"
+  }
+]
+
+```
+
+`"Today's date is 2023-01-01."`
 
 [​](#body-thinking)
 
@@ -276,7 +356,7 @@ Must be ≥1024 and less than `max_tokens`.
 
 See [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Required range: `x > 1024`
+Required range: `x >= 1024`
 
 [​](#body-thinking-type)
 
@@ -301,7 +381,7 @@ How the model should use the provided tools. The model can use a specific tool, 
 * Auto
 * Any
 * Tool
-* ToolChoiceNone
+* None
 
 Show child attributes
 
@@ -345,7 +425,7 @@ Each tool definition includes:
 
 For example, if you defined `tools` as:
 
-```bash
+```
 [
   {
     "name": "get_stock_price",
@@ -362,11 +442,12 @@ For example, if you defined `tools` as:
     }
   }
 ]
+
 ```
 
 And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
-```bash
+```
 [
   {
     "type": "tool_use",
@@ -375,11 +456,12 @@ And then asked the model "What's the S&P 500 at today?", the model might produce
     "input": { "ticker": "^GSPC" }
   }
 ]
+
 ```
 
 You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
-```bash
+```
 [
   {
     "type": "tool_result",
@@ -387,21 +469,39 @@ You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an 
     "content": "259.75 USD"
   }
 ]
+
 ```
 
 Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
 See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
 
-* Custom Tool
-* ComputerUseTool\_20241022
-* BashTool\_20241022
-* TextEditor\_20241022
-* ComputerUseTool\_20250124
-* BashTool\_20250124
-* TextEditor\_20250124
+* Custom tool
+* Computer use tool (2024-01-22)
+* Bash tool (2024-10-22)
+* Text editor tool (2024-10-22)
+* Computer use tool (2025-01-24)
+* Bash tool (2025-01-24)
+* Text editor tool (2025-01-24)
+* TextEditor\_20250429
+* Web search tool (2025-03-05)
+* Code execution tool (2025-05-22)
 
 Show child attributes
+
+[​](#body-tools-name)
+
+tools.name
+
+string
+
+required
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Required string length: `1 - 64`
 
 [​](#body-tools-input-schema)
 
@@ -435,25 +535,57 @@ tools.input\_schema.properties
 
 object | null
 
-[​](#body-tools-name)
+Examples:
 
-tools.name
+```
+{
+  "properties": {
+    "location": {
+      "description": "The city and state, e.g. San Francisco, CA",
+      "type": "string"
+    },
+    "unit": {
+      "description": "Unit for the output - one of (celsius, fahrenheit)",
+      "type": "string"
+    }
+  },
+  "required": ["location"],
+  "type": "object"
+}
+
+```
+
+[​](#body-tools-type)
+
+tools.type
+
+enum<string> | null
+
+Available options:
+
+`custom`
+
+[​](#body-tools-description)
+
+tools.description
 
 string
 
-required
+Description of what this tool does.
 
-Name of the tool.
+Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-This is how the tool will be called by the model and in tool\_use blocks.
+Examples:
 
-Required string length: `1 - 64`
+`"Get the current weather in a given location"`
 
 [​](#body-tools-cache-control)
 
 tools.cache\_control
 
 object | null
+
+Create a cache control breakpoint at this content block.
 
 Show child attributes
 
@@ -469,29 +601,60 @@ Available options:
 
 `ephemeral`
 
-[​](#body-tools-description)
+[​](#body-tools-cache-control-ttl)
 
-tools.description
+tools.cache\_control.ttl
 
-string
+enum<string>
 
-Description of what this tool does.
+The time-to-live for the cache control breakpoint.
 
-Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+This may be one the following values:
 
-[​](#body-tools-type)
+* `5m`: 5 minutes
+* `1h`: 1 hour
 
-tools.type
-
-enum<string> | null
+Defaults to `5m`.
 
 Available options:
 
-`custom`
+`5m`,
 
-#### Response
+`1h`
 
-200 - application/json
+Examples:
+
+```
+{
+  "description": "Get the current weather in a given location",
+  "input_schema": {
+    "properties": {
+      "location": {
+        "description": "The city and state, e.g. San Francisco, CA",
+        "type": "string"
+      },
+      "unit": {
+        "description": "Unit for the output - one of (celsius, fahrenheit)",
+        "type": "string"
+      }
+    },
+    "required": ["location"],
+    "type": "object"
+  },
+  "name": "get_weather"
+}
+
+```
+
+# Response
+
+200
+
+2004XX
+
+application/json
+
+Successful Response
 
 [​](#response-input-tokens)
 
@@ -503,8 +666,48 @@ required
 
 The total number of tokens across the provided list of messages, system prompt, and tools.
 
+Examples:
+
+`2095`
+
 Was this page helpful?
 
 YesNo
 
-[Messages](/en/api/messages)[Streaming Messages](/en/api/messages-streaming)
+Messages[List Models](/en/api/models-list)
+
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl https://api.anthropic.com/v1/messages/count_tokens \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "model": "claude-3-7-sonnet-20250219",
+    "messages": [
+        {"role": "user", "content": "Hello, world"}
+    ]
+}'
+```
+
+200
+
+4XX
+
+```
+{
+  "input_tokens": 2095
+}
+```

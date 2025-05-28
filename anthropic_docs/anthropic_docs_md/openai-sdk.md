@@ -1,88 +1,68 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/openai-sdk/
----
+# OpenAI SDK compatibility (beta) - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/openai-sdk
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-OpenAI SDK compatibility
-
-OpenAI SDK compatibility (beta)
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
+# SDKs
 
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
 * [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
-
-* Messages
-* Models
-* Message Batches
-* Text Completions (Legacy)
-* Admin API
-
-##### OpenAI SDK compatibility
-
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 Submit feedback or bugs related to the OpenAI SDK compatibility feature [here](https://forms.gle/oQV4McQNiuuNbz9n8).
 
-[​](#before-you-begin) Before you begin
----------------------------------------
+# [​](#before-you-begin) Before you begin
 
 This compatibility layer is intended to test and compare model capabilities with minimal development effort and is not considered a long-term or production-ready solution for most use cases. For the best experience and access to Anthropic API full feature set ([PDF processing](/en/docs/build-with-claude/pdf-support), [citations](/en/docs/build-with-claude/citations), [extended thinking](/en/docs/build-with-claude/extended-thinking), and [prompt caching](/en/docs/build-with-claude/prompt-caching)), we recommend using the native [Anthropic API](/en/api/getting-started).
 
-[​](#getting-started-with-the-openai-sdk) Getting started with the OpenAI SDK
------------------------------------------------------------------------------
+# [​](#getting-started-with-the-openai-sdk) Getting started with the OpenAI SDK
 
 To use the OpenAI SDK compatibility feature, you’ll need to:
 
 1. Use an official OpenAI SDK
 2. Change the following
-  * Update your base URL to point to Anthropic’s API
-  * Replace your API key with an [Anthropic API key](https://console.anthropic.com/settings/keys)
-  * Update your model name to use a [Claude model](/en/docs/about-claude/models#model-names)
+   * Update your base URL to point to Anthropic’s API
+   * Replace your API key with an [Anthropic API key](https://console.anthropic.com/settings/keys)
+   * Update your model name to use a [Claude model](/en/docs/about-claude/models#model-names)
 3. Review the documentation below for what features are supported
 
-### [​](#quick-start-example) Quick start example
+# [​](#quick-start-example) Quick start example
 
-[​](#important-openai-compatibility-limitations) Important OpenAI compatibility limitations
--------------------------------------------------------------------------------------------
+Python
 
-#### [​](#api-behavior) API behavior
+TypeScript
+
+```
+from openai import OpenAI
+
+client = OpenAI(
+    api_key="ANTHROPIC_API_KEY",  # Your Anthropic API key
+    base_url="https://api.anthropic.com/v1/"  # Anthropic's API endpoint
+)
+
+response = client.chat.completions.create(
+    model="claude-opus-4-20250514", # Anthropic model name
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Who are you?"}
+    ],
+)
+
+print(response.choices[0].message.content)
+
+```
+
+# [​](#important-openai-compatibility-limitations) Important OpenAI compatibility limitations
+
+# [​](#api-behavior) API behavior
 
 Here are the most substantial differences from using OpenAI:
 
@@ -93,29 +73,42 @@ Here are the most substantial differences from using OpenAI:
 
 Most unsupported fields are silently ignored rather than producing errors. These are all documented below.
 
-#### [​](#output-quality-considerations) Output quality considerations
+# [​](#output-quality-considerations) Output quality considerations
 
 If you’ve done lots of tweaking to your prompt, it’s likely to be well-tuned to OpenAI specifically. Consider using our [prompt improver in the Anthropic Console](https://console.anthropic.com/dashboard) as a good starting point.
 
-#### [​](#system-developer-message-hoisting) System / Developer message hoisting
+# [​](#system-%2F-developer-message-hoisting) System / Developer message hoisting
 
 Most of the inputs to the OpenAI SDK clearly map directly to Anthropic’s API parameters, but one distinct difference is the handling of system / developer prompts. These two prompts can be put throughout a chat conversation via OpenAI. Since Anthropic only supports an initial system message, we take all system/developer messages and concatenate them together with a single newline (`\n`) in between them. This full string is then supplied as a single system message at the start of the messages.
 
-#### [​](#extended-thinking-support) Extended thinking support
+# [​](#extended-thinking-support) Extended thinking support
 
 You can enable [extended thinking](/en/docs/build-with-claude/extended-thinking) capabilities by adding the `thinking` parameter. While this will improve Claude’s reasoning for complex tasks, the OpenAI SDK won’t return Claude’s detailed thought process. For full extended thinking features, including access to Claude’s step-by-step reasoning output, use the native Anthropic API.
 
-[​](#rate-limits) Rate limits
------------------------------
+Python
+
+TypeScript
+
+```
+response = client.chat.completions.create(
+    model="claude-opus-4-20250514",
+    messages=...,
+    extra_body={
+        "thinking": { "type": "enabled", "budget_tokens": 2000 }
+    }
+)
+
+```
+
+# [​](#rate-limits) Rate limits
 
 Rate limits follow Anthropic’s [standard limits](/en/api/rate-limits) for the `/v1/messages` endpoint.
 
-[​](#detailed-openai-compatible-api-support) Detailed OpenAI Compatible API Support
------------------------------------------------------------------------------------
+# [​](#detailed-openai-compatible-api-support) Detailed OpenAI Compatible API Support
 
-### [​](#request-fields) Request fields
+# [​](#request-fields) Request fields
 
-#### [​](#simple-fields) Simple fields
+# [​](#simple-fields) Simple fields
 
 | Field | Support status |
 | --- | --- |
@@ -145,7 +138,7 @@ Rate limits follow Anthropic’s [standard limits](/en/api/rate-limits) for the 
 | `top_logprobs` | Ignored |
 | `Reasoning_effort` | Ignored |
 
-#### [​](#tools-functions-fields) `tools` / `functions` fields
+# [​](#tools-%2F-functions-fields) `tools` / `functions` fields
 
 Show fields
 
@@ -161,7 +154,27 @@ Show fields
 | `parameters` | Fully supported |
 | `strict` | Ignored |
 
-#### [​](#messages-array-fields) `messages` array fields
+`tools[n].function` fields
+
+| Field | Support status |
+| --- | --- |
+| `name` | Fully supported |
+| `description` | Fully supported |
+| `parameters` | Fully supported |
+| `strict` | Ignored |
+
+`functions[n]` fields
+
+OpenAI has deprecated the `functions` field and suggests using `tools` instead.
+
+| Field | Support status |
+| --- | --- |
+| `name` | Fully supported |
+| `description` | Fully supported |
+| `parameters` | Fully supported |
+| `strict` | Ignored |
+
+# [​](#messages-array-fields) `messages` array fields
 
 Show fields
 
@@ -181,7 +194,68 @@ Developer messages are hoisted to beginning of conversation as part of the initi
 | `content` | Fully supported, but hoisted |
 | `name` | Ignored |
 
-### [​](#response-fields) Response fields
+Fields for `messages[n].role == "developer"`
+
+Developer messages are hoisted to beginning of conversation as part of the initial system message
+
+| Field | Support status |
+| --- | --- |
+| `content` | Fully supported, but hoisted |
+| `name` | Ignored |
+
+Fields for `messages[n].role == "system"`
+
+System messages are hoisted to beginning of conversation as part of the initial system message
+
+| Field | Support status |
+| --- | --- |
+| `content` | Fully supported, but hoisted |
+| `name` | Ignored |
+
+Fields for `messages[n].role == "user"`
+
+| Field | Variant | Sub-field | Support status |
+| --- | --- | --- | --- |
+| `content` | `string` | Fully supported |
+| `array`, `type == "text"` | Fully supported |
+| `array`, `type == "image_url"` | `url` | Fully supported |
+| `detail` | Ignored |
+| `array`, `type == "input_audio"` | Ignored |
+| `array`, `type == "file"` | Ignored |
+| `name` | Ignored |
+
+Fields for `messages[n].role == "assistant"`
+
+| Field | Variant | Support status |
+| --- | --- | --- |
+| `content` | `string` | Fully supported |
+| `array`, `type == "text"` | Fully supported |
+| `array`, `type == "refusal"` | Ignored |
+| `tool_calls` | Fully supported |
+| `function_call` | Fully supported |
+| `audio` | Ignored |
+| `refusal` | Ignored |
+
+Fields for `messages[n].role == "tool"`
+
+| Field | Variant | Support status |
+| --- | --- | --- |
+| `content` | `string` | Fully supported |
+| `array`, `type == "text"` | Fully supported |
+| `tool_call_id` | Fully supported |
+| `tool_choice` | Fully supported |
+| `name` | Ignored |
+
+Fields for `messages[n].role == "function"`
+
+| Field | Variant | Support status |
+| --- | --- | --- |
+| `content` | `string` | Fully supported |
+| `array`, `type == "text"` | Fully supported |
+| `tool_choice` | Fully supported |
+| `name` | Ignored |
+
+# [​](#response-fields) Response fields
 
 | Field | Support status |
 | --- | --- |
@@ -208,11 +282,11 @@ Developer messages are hoisted to beginning of conversation as part of the initi
 | `service_tier` | Always empty |
 | `system_fingerprint` | Always empty |
 
-### [​](#error-message-compatibility) Error message compatibility
+# [​](#error-message-compatibility) Error message compatibility
 
 The compatibility layer maintains consistent error formats with the OpenAI API. However, the detailed error messages will not be equivalent. We recommend only using the error messages for logging and debugging.
 
-### [​](#header-compatibility) Header compatibility
+# [​](#header-compatibility) Header compatibility
 
 While the OpenAI SDK automatically manages headers, here is the complete list of headers supported by Anthropic’s API for developers who need to work with them directly.
 
@@ -234,24 +308,6 @@ Was this page helpful?
 
 YesNo
 
-[Update API Keys](/en/api/admin-api/apikeys/update-api-key)[Generate a prompt](/en/api/prompt-tools-generate)
+Client SDKs[Messages examples](/en/api/messages-examples)
 
 On this page
-
-* [Before you begin](#before-you-begin)
-* [Getting started with the OpenAI SDK](#getting-started-with-the-openai-sdk)
-* [Quick start example](#quick-start-example)
-* [Important OpenAI compatibility limitations](#important-openai-compatibility-limitations)
-* [API behavior](#api-behavior)
-* [Output quality considerations](#output-quality-considerations)
-* [System / Developer message hoisting](#system-developer-message-hoisting)
-* [Extended thinking support](#extended-thinking-support)
-* [Rate limits](#rate-limits)
-* [Detailed OpenAI Compatible API Support](#detailed-openai-compatible-api-support)
-* [Request fields](#request-fields)
-* [Simple fields](#simple-fields)
-* [tools / functions fields](#tools-functions-fields)
-* [messages array fields](#messages-array-fields)
-* [Response fields](#response-fields)
-* [Error message compatibility](#error-message-compatibility)
-* [Header compatibility](#header-compatibility)

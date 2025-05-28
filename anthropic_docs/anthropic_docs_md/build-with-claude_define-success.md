@@ -1,94 +1,71 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/build-with-claude/define-success/
----
+# Define your success criteria - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/build-with-claude/define-success
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Build with Claude
-
-Define your success criteria
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
 Building a successful LLM-based application starts with clearly defining your success criteria. How will you know when your application is good enough to publish?
 
 Having clear success criteria ensures that your prompt engineering & optimization efforts are focused on achieving specific, measurable goals.
 
-[​](#building-strong-criteria) Building strong criteria
--------------------------------------------------------
+# [​](#building-strong-criteria) Building strong criteria
 
 Good success criteria are:
 
@@ -132,8 +109,7 @@ Example task fidelity criteria for sentiment analysis
 
 \**More on held-out test sets in the next section*
 
-[​](#common-success-criteria-to-consider) Common success criteria to consider
------------------------------------------------------------------------------
+# [​](#common-success-criteria-to-consider) Common success criteria to consider
 
 Here are some criteria that might be important for your use case. This list is non-exhaustive.
 
@@ -180,14 +156,11 @@ Example multidimensional criteria for sentiment analysis
 
 \**In reality, we would also define what “inconvenience” and “egregious” means.*
 
-[​](#next-steps) Next steps
----------------------------
+# [​](#next-steps) Next steps
 
-[Brainstorm criteria
--------------------
+[## Brainstorm criteria
 
-Brainstorm success criteria for your use case with Claude on claude.ai.**Tip**: Drop this page into the chat as guidance for Claude!](https://claude.ai/)[Design evaluations
-------------------
+Brainstorm success criteria for your use case with Claude on claude.ai.**Tip**: Drop this page into the chat as guidance for Claude!](https://claude.ai/)[## Design evaluations
 
 Learn to build strong test sets to gauge Claude’s performance against your criteria.](/en/docs/be-clear-direct)
 
@@ -195,10 +168,6 @@ Was this page helpful?
 
 YesNo
 
-[Security and compliance](/en/docs/about-claude/security-compliance)[Develop test cases](/en/docs/build-with-claude/develop-tests)
+Google Sheets add-on[Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 
 On this page
-
-* [Building strong criteria](#building-strong-criteria)
-* [Common success criteria to consider](#common-success-criteria-to-consider)
-* [Next steps](#next-steps)

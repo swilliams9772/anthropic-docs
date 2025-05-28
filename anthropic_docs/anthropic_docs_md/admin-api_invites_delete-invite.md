@@ -1,81 +1,45 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/admin-api/invites/delete-invite/
----
+# Delete Invite - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/admin-api/invites/delete-invite
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Organization Invites
-
-Delete Invite
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
 * Models
 * Message Batches
-* Text Completions (Legacy)
-* Admin API
-
-  + Organization Member Management
+* Files
+* + Organization Member Management
   + Organization Invites
-
-    - [GET
+  - [GET
 
       Get Invite](/en/api/admin-api/invites/get-invite)
-    - [GET
+  - [GET
 
       List Invites](/en/api/admin-api/invites/list-invites)
-    - [POST
+  - [POST
 
       Create Invite](/en/api/admin-api/invites/create-invite)
-    - [DEL
+  - [DEL
 
       Delete Invite](/en/api/admin-api/invites/delete-invite)
   + Workspace Management
   + Workspace Member Management
-  + API Keys
+* Text Completions (Legacy)
 
-##### OpenAI SDK compatibility
+# SDKs
 
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 DELETE
 
@@ -95,17 +59,39 @@ invites
 
 {invite\_id}
 
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl --request DELETE "https://api.anthropic.com/v1/organizations/invites/invite_015gWxCN9Hfg2QhZwTK7Mdeu" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+```
+
+200
+
+4XX
+
+```
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "type": "invite_deleted"
+}
+```
+
 **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 
-#### Headers
-
-[​](#parameter-x-api-key)
-
-x-api-key
-
-string
-
-required
+# Headers
 
 Your unique Admin API key for authentication.
 
@@ -123,7 +109,7 @@ The version of the Anthropic API you want to use.
 
 Read more about versioning and our version history [here](https://docs.anthropic.com/en/api/versioning).
 
-#### Path Parameters
+# Path Parameters
 
 [​](#parameter-invite-id)
 
@@ -135,9 +121,15 @@ required
 
 ID of the Invite.
 
-#### Response
+# Response
 
-200 - application/json
+200
+
+2004XX
+
+application/json
+
+Successful Response
 
 [​](#response-id)
 
@@ -149,15 +141,17 @@ required
 
 ID of the Invite.
 
+Examples:
+
+`"invite_015gWxCN9Hfg2QhZwTK7Mdeu"`
+
 [​](#response-type)
 
 type
 
 enum<string>
 
-default:
-
-invite\_deleted
+default:invite\_deleted
 
 required
 
@@ -173,4 +167,34 @@ Was this page helpful?
 
 YesNo
 
-[Create Invite](/en/api/admin-api/invites/create-invite)[Get Workspace](/en/api/admin-api/workspaces/get-workspace)
+Create Invite[Get Workspace](/en/api/admin-api/workspaces/get-workspace)
+
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl --request DELETE "https://api.anthropic.com/v1/organizations/invites/invite_015gWxCN9Hfg2QhZwTK7Mdeu" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+```
+
+200
+
+4XX
+
+```
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "type": "invite_deleted"
+}
+```

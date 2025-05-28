@@ -1,72 +1,39 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/prompt-tools-generate/
----
+# Generate a prompt - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/prompt-tools-generate
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Prompt tools
-
-Generate a prompt
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
 * Models
 * Message Batches
+* Files
+* + Prompt tools
+  - [POST
+
+      Generate a prompt](/en/api/prompt-tools-generate)
+  - [POST
+
+      Improve a prompt](/en/api/prompt-tools-improve)
+  - [POST
+
+      Templatize a prompt](/en/api/prompt-tools-templatize)
 * Text Completions (Legacy)
-* Admin API
 
-##### OpenAI SDK compatibility
+# SDKs
 
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-  + [POST
-
-    Generate a prompt](/en/api/prompt-tools-generate)
-  + [POST
-
-    Improve a prompt](/en/api/prompt-tools-improve)
-  + [POST
-
-    Templatize a prompt](/en/api/prompt-tools-templatize)
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 POST
 
@@ -82,17 +49,65 @@ experimental
 
 generate\_prompt
 
-The prompt tools APIs are in a closed research preview. [Request to join the closed research preview](https://forms.gle/LajXBafpsf1SuJHp7).
+cURL
 
-[​](#before-you-begin) Before you begin
----------------------------------------
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl -X POST https://api.anthropic.com/v1/experimental/generate_prompt \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "anthropic-beta: prompt-tools-2025-04-02" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "task": "a chef for a meal prep planning service",
+    "target_model": "claude-3-7-sonnet-20250219"
+}'
+```
+
+200
+
+4XX
+
+```
+{
+  "messages": [
+    {
+      "content": [
+        {
+          "text": "<generated prompt>",
+          "type": "text"
+        }
+      ],
+      "role": "user"
+    }
+  ],
+  "system": "",
+  "usage": [
+    {
+      "input_tokens": 490,
+      "output_tokens": 661
+    }
+  ]
+}
+```
+
+# [​](#before-you-begin) Before you begin
 
 The prompt tools are a set of APIs to generate and improve prompts. Unlike our other APIs, this is an experimental API: you’ll need to request access, and it doesn’t have the same level of commitment to long-term support as other APIs.
 
 These APIs are similar to what’s available in the [Anthropic Workbench](https://console.anthropic.com/workbench), and are intented for use by other prompt engineering platforms and playgrounds.
 
-[​](#getting-started-with-the-prompt-generator) Getting started with the prompt generator
------------------------------------------------------------------------------------------
+# [​](#getting-started-with-the-prompt-generator) Getting started with the prompt generator
 
 To use the prompt generation API, you’ll need to:
 
@@ -100,12 +115,9 @@ To use the prompt generation API, you’ll need to:
 2. Use the API directly, rather than the SDK
 3. Add the beta header `prompt-tools-2025-04-02`
 
-This API is not available in the SDK
+# [​](#generate-a-prompt) Generate a prompt
 
-[​](#generate-a-prompt) Generate a prompt
------------------------------------------
-
-#### Headers
+# Headers
 
 [​](#parameter-anthropic-beta)
 
@@ -117,19 +129,11 @@ Optional header to specify the beta version(s) you want to use.
 
 To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-[​](#parameter-x-api-key)
-
-x-api-key
-
-string
-
-required
-
 Your unique API key for authentication.
 
 This key is required in the header of all API requests, to authenticate your account and access Anthropic's services. Get your API key through the [Console](https://console.anthropic.com/settings/keys). Each key is scoped to a Workspace.
 
-#### Body
+# Body
 
 application/json
 
@@ -147,9 +151,14 @@ The `task` parameter tells Claude what the prompt should do or what kind of role
 
 Example:
 
-```json
-{"task": "a chef for a meal prep planning service"}
 ```
+{"task": "a chef for a meal prep planning service"}
+
+```
+
+Examples:
+
+`"a chef for a meal prep planning service"`
 
 [​](#body-target-model)
 
@@ -163,18 +172,26 @@ The model this prompt will be used for. This optional parameter helps us underst
 
 Example:
 
-```bash
+```
 "claude-3-7-sonnet-20250219"
+
 ```
 
 Required string length: `1 - 256`
 
-#### Response
+Examples:
 
-200 - application/json
+`"claude-3-7-sonnet-20250219"`
 
-* Response Generate Prompt V1 Experimental Generate Prompt Post
-* Response Generate Prompt V1 Experimental Generate Prompt Post
+# Response
+
+200
+
+2004XX
+
+application/json
+
+Successful Response
 
 [​](#response-messages)
 
@@ -190,7 +207,7 @@ These messages can be used directly in a Messages API request to start a convers
 
 Example:
 
-```json
+```
 {
   "messages": [
     {
@@ -213,6 +230,7 @@ Example:
     }
   ]
 }
+
 ```
 
 Show child attributes
@@ -239,6 +257,23 @@ Available options:
 
 `assistant`
 
+Examples:
+
+```
+[
+  {
+    "content": [
+      {
+        "text": "<generated prompt>",
+        "type": "text"
+      }
+    ],
+    "role": "user"
+  }
+]
+
+```
+
 [​](#response-system)
 
 system
@@ -253,6 +288,10 @@ Currently, the `system` field is always returned as an empty string (""). In fut
 
 Directions similar to what would normally be included in a system prompt are included in `messages` when generating a prompt.
 
+Examples:
+
+`""`
+
 [​](#response-usage)
 
 usage
@@ -265,6 +304,46 @@ Usage information
 
 Show child attributes
 
+[​](#response-usage-cache-creation)
+
+usage.cache\_creation
+
+object | null
+
+required
+
+Breakdown of cached tokens by TTL
+
+Show child attributes
+
+[​](#response-usage-cache-creation-ephemeral-1h-input-tokens)
+
+usage.cache\_creation.ephemeral\_1h\_input\_tokens
+
+integer
+
+default:0
+
+required
+
+The number of input tokens used to create the 1 hour cache entry.
+
+Required range: `x >= 0`
+
+[​](#response-usage-cache-creation-ephemeral-5m-input-tokens)
+
+usage.cache\_creation.ephemeral\_5m\_input\_tokens
+
+integer
+
+default:0
+
+required
+
+The number of input tokens used to create the 5 minute cache entry.
+
+Required range: `x >= 0`
+
 [​](#response-usage-cache-creation-input-tokens)
 
 usage.cache\_creation\_input\_tokens
@@ -275,7 +354,11 @@ required
 
 The number of input tokens used to create the cache entry.
 
-Required range: `x > 0`
+Required range: `x >= 0`
+
+Examples:
+
+`2051`
 
 [​](#response-usage-cache-read-input-tokens)
 
@@ -287,7 +370,11 @@ required
 
 The number of input tokens read from the cache.
 
-Required range: `x > 0`
+Required range: `x >= 0`
+
+Examples:
+
+`2051`
 
 [​](#response-usage-input-tokens)
 
@@ -299,7 +386,11 @@ required
 
 The number of input tokens which were used.
 
-Required range: `x > 0`
+Required range: `x >= 0`
+
+Examples:
+
+`2095`
 
 [​](#response-usage-output-tokens)
 
@@ -311,10 +402,99 @@ required
 
 The number of output tokens which were used.
 
-Required range: `x > 0`
+Required range: `x >= 0`
 
-Was this page helpful?
+Examples:
 
-YesNo
+`503`
 
-[OpenAI SDK compatibility (beta)](/en/api/openai-sdk)[Improve a prompt](/en/api/prompt-tools-improve)
+[​](#response-usage-server-tool-use)
+
+usage.server\_tool\_use
+
+object | null
+
+required
+
+The number of server tool requests.
+
+Show child attributes
+
+[​](#response-usage-service-tier)
+
+usage.service\_tier
+
+enum<string> | null
+
+required
+
+If the request used the priority, standard, or batch tier.
+
+Available options:
+
+`standard`,
+
+`priority`,
+
+`batch`
+
+Examples:
+
+```
+[
+  { "input_tokens": 490, "output_tokens": 661 }
+]
+
+```
+
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl -X POST https://api.anthropic.com/v1/experimental/generate_prompt \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "anthropic-beta: prompt-tools-2025-04-02" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "task": "a chef for a meal prep planning service",
+    "target_model": "claude-3-7-sonnet-20250219"
+}'
+```
+
+200
+
+4XX
+
+```
+{
+  "messages": [
+    {
+      "content": [
+        {
+          "text": "<generated prompt>",
+          "type": "text"
+        }
+      ],
+      "role": "user"
+    }
+  ],
+  "system": "",
+  "usage": [
+    {
+      "input_tokens": 490,
+      "output_tokens": 661
+    }
+  ]
+}
+```

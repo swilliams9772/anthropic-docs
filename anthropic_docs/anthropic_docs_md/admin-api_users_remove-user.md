@@ -1,81 +1,45 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/admin-api/users/remove-user/
----
+# Remove User - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/admin-api/users/remove-user
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Organization Member Management
-
-Remove User
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
 * Models
 * Message Batches
-* Text Completions (Legacy)
-* Admin API
-
-  + Organization Member Management
-
-    - [GET
+* Files
+* + Organization Member Management
+  - [GET
 
       Get User](/en/api/admin-api/users/get-user)
-    - [GET
+  - [GET
 
       List Users](/en/api/admin-api/users/list-users)
-    - [POST
+  - [POST
 
       Update User](/en/api/admin-api/users/update-user)
-    - [DEL
+  - [DEL
 
       Remove User](/en/api/admin-api/users/remove-user)
   + Organization Invites
   + Workspace Management
   + Workspace Member Management
-  + API Keys
+* Text Completions (Legacy)
 
-##### OpenAI SDK compatibility
+# SDKs
 
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 DELETE
 
@@ -95,15 +59,37 @@ users
 
 {user\_id}
 
-#### Headers
+cURL
 
-[​](#parameter-x-api-key)
+Python
 
-x-api-key
+JavaScript
 
-string
+PHP
 
-required
+Go
+
+Java
+
+```
+curl --request DELETE "https://api.anthropic.com/v1/organizations/users/user_01WCz1FkmYMm4gnmykNKUu3Q" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+```
+
+200
+
+4XX
+
+```
+{
+  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "type": "user_deleted"
+}
+```
+
+# Headers
 
 Your unique Admin API key for authentication.
 
@@ -121,7 +107,7 @@ The version of the Anthropic API you want to use.
 
 Read more about versioning and our version history [here](https://docs.anthropic.com/en/api/versioning).
 
-#### Path Parameters
+# Path Parameters
 
 [​](#parameter-user-id)
 
@@ -133,9 +119,15 @@ required
 
 ID of the User.
 
-#### Response
+# Response
 
-200 - application/json
+200
+
+2004XX
+
+application/json
+
+Successful Response
 
 [​](#response-id)
 
@@ -147,15 +139,17 @@ required
 
 ID of the User.
 
+Examples:
+
+`"user_01WCz1FkmYMm4gnmykNKUu3Q"`
+
 [​](#response-type)
 
 type
 
 enum<string>
 
-default:
-
-user\_deleted
+default:user\_deleted
 
 required
 
@@ -171,4 +165,34 @@ Was this page helpful?
 
 YesNo
 
-[Update User](/en/api/admin-api/users/update-user)[Get Invite](/en/api/admin-api/invites/get-invite)
+Update User[Get Invite](/en/api/admin-api/invites/get-invite)
+
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl --request DELETE "https://api.anthropic.com/v1/organizations/users/user_01WCz1FkmYMm4gnmykNKUu3Q" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+```
+
+200
+
+4XX
+
+```
+{
+  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "type": "user_deleted"
+}
+```

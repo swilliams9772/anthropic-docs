@@ -1,81 +1,45 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/admin-api/users/list-users/
----
+# List Users - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/admin-api/users/list-users
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Organization Member Management
-
-List Users
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
 * Models
 * Message Batches
-* Text Completions (Legacy)
-* Admin API
-
-  + Organization Member Management
-
-    - [GET
+* Files
+* + Organization Member Management
+  - [GET
 
       Get User](/en/api/admin-api/users/get-user)
-    - [GET
+  - [GET
 
       List Users](/en/api/admin-api/users/list-users)
-    - [POST
+  - [POST
 
       Update User](/en/api/admin-api/users/update-user)
-    - [DEL
+  - [DEL
 
       Remove User](/en/api/admin-api/users/remove-user)
   + Organization Invites
   + Workspace Management
   + Workspace Member Management
-  + API Keys
+* Text Completions (Legacy)
 
-##### OpenAI SDK compatibility
+# SDKs
 
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 GET
 
@@ -91,15 +55,48 @@ organizations
 
 users
 
-#### Headers
+cURL
 
-[​](#parameter-x-api-key)
+Python
 
-x-api-key
+JavaScript
 
-string
+PHP
 
-required
+Go
+
+Java
+
+```
+curl "https://api.anthropic.com/v1/organizations/users" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+```
+
+200
+
+4XX
+
+```
+{
+  "data": [
+    {
+      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "type": "user",
+      "email": "user@emaildomain.com",
+      "name": "Jane Doe",
+      "role": "user",
+      "added_at": "2024-10-30T23:58:27.427722Z"
+    }
+  ],
+  "has_more": true,
+  "first_id": "<string>",
+  "last_id": "<string>"
+}
+```
+
+# Headers
 
 Your unique Admin API key for authentication.
 
@@ -117,7 +114,7 @@ The version of the Anthropic API you want to use.
 
 Read more about versioning and our version history [here](https://docs.anthropic.com/en/api/versioning).
 
-#### Query Parameters
+# Query Parameters
 
 [​](#parameter-before-id)
 
@@ -141,15 +138,13 @@ limit
 
 integer
 
-default:
-
-20
+default:20
 
 Number of items to return per page.
 
 Defaults to `20`. Ranges from `1` to `1000`.
 
-Required range: `1 < x < 1000`
+Required range: `1 <= x <= 1000`
 
 [​](#parameter-email)
 
@@ -159,9 +154,15 @@ string
 
 Filter by user email.
 
-#### Response
+# Response
 
-200 - application/json
+200
+
+2004XX
+
+application/json
+
+Successful Response
 
 [​](#response-data)
 
@@ -173,15 +174,37 @@ required
 
 Show child attributes
 
-[​](#response-data-added-at)
+[​](#response-data-id)
 
-data.added\_at
+data.id
 
 string
 
 required
 
-RFC 3339 datetime string indicating when the User joined the Organization.
+ID of the User.
+
+Examples:
+
+`"user_01WCz1FkmYMm4gnmykNKUu3Q"`
+
+[​](#response-data-type)
+
+data.type
+
+enum<string>
+
+default:user
+
+required
+
+Object type.
+
+For Users, this is always `"user"`.
+
+Available options:
+
+`user`
 
 [​](#response-data-email)
 
@@ -193,15 +216,9 @@ required
 
 Email of the User.
 
-[​](#response-data-id)
+Examples:
 
-data.id
-
-string
-
-required
-
-ID of the User.
+`"user@emaildomain.com"`
 
 [​](#response-data-name)
 
@@ -212,6 +229,10 @@ string
 required
 
 Name of the User.
+
+Examples:
+
+`"Jane Doe"`
 
 [​](#response-data-role)
 
@@ -233,35 +254,29 @@ Available options:
 
 `admin`
 
-[​](#response-data-type)
+Examples:
 
-data.type
+`"user"`
 
-enum<string>
+`"developer"`
 
-default:
+`"billing"`
 
-user
+`"admin"`
 
-required
+[​](#response-data-added-at)
 
-Object type.
+data.added\_at
 
-For Users, this is always `"user"`.
-
-Available options:
-
-`user`
-
-[​](#response-first-id)
-
-first\_id
-
-string | null
+string
 
 required
 
-First ID in the `data` list. Can be used as the `before_id` for the previous page.
+RFC 3339 datetime string indicating when the User joined the Organization.
+
+Examples:
+
+`"2024-10-30T23:58:27.427722Z"`
 
 [​](#response-has-more)
 
@@ -272,6 +287,16 @@ boolean
 required
 
 Indicates if there are more results in the requested page direction.
+
+[​](#response-first-id)
+
+first\_id
+
+string | null
+
+required
+
+First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
 [​](#response-last-id)
 
@@ -287,4 +312,45 @@ Was this page helpful?
 
 YesNo
 
-[Get User](/en/api/admin-api/users/get-user)[Update User](/en/api/admin-api/users/update-user)
+Get User[Update User](/en/api/admin-api/users/update-user)
+
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl "https://api.anthropic.com/v1/organizations/users" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+```
+
+200
+
+4XX
+
+```
+{
+  "data": [
+    {
+      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "type": "user",
+      "email": "user@emaildomain.com",
+      "name": "Jane Doe",
+      "role": "user",
+      "added_at": "2024-10-30T23:58:27.427722Z"
+    }
+  ],
+  "has_more": true,
+  "first_id": "<string>",
+  "last_id": "<string>"
+}
+```

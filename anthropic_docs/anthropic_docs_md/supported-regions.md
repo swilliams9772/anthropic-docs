@@ -1,62 +1,21 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/supported-regions/
----
+# Supported regions - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/supported-regions
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Using the API
-
-Supported regions
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
+# SDKs
 
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
 * [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
-
-* Messages
-* Models
-* Message Batches
-* Text Completions (Legacy)
-* Admin API
-
-##### OpenAI SDK compatibility
-
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 * Albania
 * Algeria
@@ -233,9 +192,3 @@ Supported regions
 * Vietnam
 * Zambia
 * Zimbabwe
-
-Was this page helpful?
-
-YesNo
-
-[Client SDKs](/en/api/client-sdks)[Getting help](/en/api/getting-help)

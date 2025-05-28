@@ -1,40 +1,13 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/creating-message-batches/
----
+# Create a Message Batch - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/creating-message-batches
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Message Batches
-
-Create a Message Batch
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
 * Models
@@ -58,25 +31,18 @@ Create a Message Batch
   + [DEL
 
     Delete a Message Batch](/en/api/deleting-message-batches)
-  + [Message Batches examples](/en/api/messages-batch-examples)
+* Files
 * Text Completions (Legacy)
-* Admin API
 
-##### OpenAI SDK compatibility
+# SDKs
 
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 POST
 
@@ -92,14 +58,82 @@ messages
 
 batches
 
-[​](#feature-support) Feature Support
--------------------------------------
+cURL
 
-The Message Batches API supports the following models: Claude 3 Haiku, Claude 3 Opus, Claude 3.5 Sonnet, Claude 3.5 Sonnet v2, and Claude 3.7 Sonnet. All features available in the Messages API, including beta features, are available through the Message Batches API.
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl https://api.anthropic.com/v1/messages/batches \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "requests": [
+        {
+            "custom_id": "my-first-request",
+            "params": {
+                "model": "claude-3-7-sonnet-20250219",
+                "max_tokens": 1024,
+                "messages": [
+                    {"role": "user", "content": "Hello, world"}
+                ]
+            }
+        },
+        {
+            "custom_id": "my-second-request",
+            "params": {
+                "model": "claude-3-7-sonnet-20250219",
+                "max_tokens": 1024,
+                "messages": [
+                    {"role": "user", "content": "Hi again, friend"}
+                ]
+            }
+        }
+    ]
+}'
+```
+
+200
+
+4XX
+
+```
+{
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+# [​](#feature-support) Feature Support
+
+The Message Batches API supports the following models: Claude Haiku 3, Claude Opus 3, Claude Sonnet 3.5, Claude Sonnet 3.5 v2, Claude Sonnet 3.7, Claude Sonnet 4, and Claude Opus 4. All features available in the Messages API, including beta features, are available through the Message Batches API.
 
 Batches may contain up to 100,000 requests and be up to 256 MB in total size.
 
-#### Headers
+# Headers
 
 [​](#parameter-anthropic-beta)
 
@@ -123,19 +157,11 @@ The version of the Anthropic API you want to use.
 
 Read more about versioning and our version history [here](https://docs.anthropic.com/en/api/versioning).
 
-[​](#parameter-x-api-key)
-
-x-api-key
-
-string
-
-required
-
 Your unique API key for authentication.
 
 This key is required in the header of all API requests, to authenticate your account and access Anthropic's services. Get your API key through the [Console](https://console.anthropic.com/settings/keys). Each key is scoped to a Workspace.
 
-#### Body
+# Body
 
 application/json
 
@@ -165,6 +191,10 @@ Must be unique for each request within the Message Batch.
 
 Required string length: `1 - 64`
 
+Examples:
+
+`"my-custom-id-1"`
+
 [​](#body-requests-params)
 
 requests.params
@@ -179,21 +209,23 @@ See the [Messages API reference](/en/api/messages) for full documentation on ava
 
 Show child attributes
 
-[​](#body-requests-params-max-tokens)
+[​](#body-requests-params-model)
 
-requests.params.max\_tokens
+requests.params.model
 
-integer
+string
 
 required
 
-The maximum number of tokens to generate before stopping.
+The model that will complete your prompt.
 
-Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Different models have different maximum values for this parameter. See [models](https://docs.anthropic.com/en/docs/models-overview) for details.
+Required string length: `1 - 256`
 
-Required range: `x > 1`
+Examples:
+
+`"claude-3-7-sonnet-20250219"`
 
 [​](#body-requests-params-messages)
 
@@ -213,42 +245,47 @@ If the final message uses the `assistant` role, the response content will contin
 
 Example with a single `user` message:
 
-```bash
+```
 [{"role": "user", "content": "Hello, Claude"}]
+
 ```
 
 Example with multiple conversational turns:
 
-```bash
+```
 [
   {"role": "user", "content": "Hello there."},
   {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
   {"role": "user", "content": "Can you explain LLMs in plain English?"},
 ]
+
 ```
 
 Example with a partially-filled response from Claude:
 
-```bash
+```
 [
   {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
   {"role": "assistant", "content": "The best answer is ("},
 ]
+
 ```
 
 Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-```json
+```
 {"role": "user", "content": "Hello, Claude"}
+
 ```
 
-```json
+```
 {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+
 ```
 
 Starting with Claude 3 models, you can also send image content blocks:
 
-```json
+```
 {"role": "user", "content": [
   {
     "type": "image",
@@ -260,6 +297,7 @@ Starting with Claude 3 models, you can also send image content blocks:
   },
   {"type": "text", "text": "What is in this image?"}
 ]}
+
 ```
 
 We currently support the `base64` source type for images, and the `image/jpeg`, `image/png`, `image/gif`, and `image/webp` media types.
@@ -294,19 +332,97 @@ Available options:
 
 `assistant`
 
-[​](#body-requests-params-model)
+[​](#body-requests-params-max-tokens)
 
-requests.params.model
+requests.params.max\_tokens
+
+integer
+
+required
+
+The maximum number of tokens to generate before stopping.
+
+Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+
+Different models have different maximum values for this parameter. See [models](https://docs.anthropic.com/en/docs/models-overview) for details.
+
+Required range: `x >= 1`
+
+Examples:
+
+`1024`
+
+[​](#body-requests-params-container)
+
+requests.params.container
+
+string | null
+
+Container identifier for reuse across requests.
+
+[​](#body-requests-params-mcp-servers)
+
+requests.params.mcp\_servers
+
+object[]
+
+MCP servers to be utilized in this request
+
+Show child attributes
+
+[​](#body-requests-params-mcp-servers-name)
+
+requests.params.mcp\_servers.name
 
 string
 
 required
 
-The model that will complete your prompt.
+[​](#body-requests-params-mcp-servers-type)
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+requests.params.mcp\_servers.type
 
-Required string length: `1 - 256`
+enum<string>
+
+required
+
+Available options:
+
+`url`
+
+[​](#body-requests-params-mcp-servers-url)
+
+requests.params.mcp\_servers.url
+
+string
+
+required
+
+[​](#body-requests-params-mcp-servers-authorization-token)
+
+requests.params.mcp\_servers.authorization\_token
+
+string | null
+
+[​](#body-requests-params-mcp-servers-tool-configuration)
+
+requests.params.mcp\_servers.tool\_configuration
+
+object | null
+
+Show child attributes
+
+[​](#body-requests-params-mcp-servers-tool-configuration-allowed-tools)
+
+requests.params.mcp\_servers.tool\_configuration.allowed\_tools
+
+string[] | null
+
+[​](#body-requests-params-mcp-servers-tool-configuration-enabled)
+
+requests.params.mcp\_servers.tool\_configuration.enabled
+
+boolean | null
 
 [​](#body-requests-params-metadata)
 
@@ -329,6 +445,26 @@ An external identifier for the user who is associated with the request.
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
 Maximum length: `256`
+
+Examples:
+
+`"13803d75-b4b5-4c3e-b2a2-6f21399b021b"`
+
+[​](#body-requests-params-service-tier)
+
+requests.params.service\_tier
+
+enum<string>
+
+Determines whether to use priority capacity (if available) or standard capacity for this request.
+
+Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+
+Available options:
+
+`auto`,
+
+`standard_only`
 
 [​](#body-requests-params-stop-sequences)
 
@@ -362,6 +498,20 @@ System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
 
+Examples:
+
+```
+[
+  {
+    "text": "Today's date is 2024-06-01.",
+    "type": "text"
+  }
+]
+
+```
+
+`"Today's date is 2023-01-01."`
+
 [​](#body-requests-params-temperature)
 
 requests.params.temperature
@@ -374,7 +524,11 @@ Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
 
 Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-Required range: `0 < x < 1`
+Required range: `0 <= x <= 1`
+
+Examples:
+
+`1`
 
 [​](#body-requests-params-thinking)
 
@@ -407,7 +561,7 @@ Must be ≥1024 and less than `max_tokens`.
 
 See [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Required range: `x > 1024`
+Required range: `x >= 1024`
 
 [​](#body-requests-params-thinking-type)
 
@@ -432,7 +586,7 @@ How the model should use the provided tools. The model can use a specific tool, 
 * Auto
 * Any
 * Tool
-* ToolChoiceNone
+* None
 
 Show child attributes
 
@@ -476,7 +630,7 @@ Each tool definition includes:
 
 For example, if you defined `tools` as:
 
-```bash
+```
 [
   {
     "name": "get_stock_price",
@@ -493,11 +647,12 @@ For example, if you defined `tools` as:
     }
   }
 ]
+
 ```
 
 And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
-```bash
+```
 [
   {
     "type": "tool_use",
@@ -506,11 +661,12 @@ And then asked the model "What's the S&P 500 at today?", the model might produce
     "input": { "ticker": "^GSPC" }
   }
 ]
+
 ```
 
 You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
-```bash
+```
 [
   {
     "type": "tool_result",
@@ -518,21 +674,39 @@ You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an 
     "content": "259.75 USD"
   }
 ]
+
 ```
 
 Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
 See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
 
-* Custom Tool
-* ComputerUseTool\_20241022
-* BashTool\_20241022
-* TextEditor\_20241022
-* ComputerUseTool\_20250124
-* BashTool\_20250124
-* TextEditor\_20250124
+* Custom tool
+* Computer use tool (2024-01-22)
+* Bash tool (2024-10-22)
+* Text editor tool (2024-10-22)
+* Computer use tool (2025-01-24)
+* Bash tool (2025-01-24)
+* Text editor tool (2025-01-24)
+* TextEditor\_20250429
+* Web search tool (2025-03-05)
+* Code execution tool (2025-05-22)
 
 Show child attributes
+
+[​](#body-requests-params-tools-name)
+
+requests.params.tools.name
+
+string
+
+required
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Required string length: `1 - 64`
 
 [​](#body-requests-params-tools-input-schema)
 
@@ -566,25 +740,57 @@ requests.params.tools.input\_schema.properties
 
 object | null
 
-[​](#body-requests-params-tools-name)
+Examples:
 
-requests.params.tools.name
+```
+{
+  "properties": {
+    "location": {
+      "description": "The city and state, e.g. San Francisco, CA",
+      "type": "string"
+    },
+    "unit": {
+      "description": "Unit for the output - one of (celsius, fahrenheit)",
+      "type": "string"
+    }
+  },
+  "required": ["location"],
+  "type": "object"
+}
+
+```
+
+[​](#body-requests-params-tools-type)
+
+requests.params.tools.type
+
+enum<string> | null
+
+Available options:
+
+`custom`
+
+[​](#body-requests-params-tools-description)
+
+requests.params.tools.description
 
 string
 
-required
+Description of what this tool does.
 
-Name of the tool.
+Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-This is how the tool will be called by the model and in tool\_use blocks.
+Examples:
 
-Required string length: `1 - 64`
+`"Get the current weather in a given location"`
 
 [​](#body-requests-params-tools-cache-control)
 
 requests.params.tools.cache\_control
 
 object | null
+
+Create a cache control breakpoint at this content block.
 
 Show child attributes
 
@@ -600,25 +806,50 @@ Available options:
 
 `ephemeral`
 
-[​](#body-requests-params-tools-description)
+[​](#body-requests-params-tools-cache-control-ttl)
 
-requests.params.tools.description
+requests.params.tools.cache\_control.ttl
 
-string
+enum<string>
 
-Description of what this tool does.
+The time-to-live for the cache control breakpoint.
 
-Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+This may be one the following values:
 
-[​](#body-requests-params-tools-type)
+* `5m`: 5 minutes
+* `1h`: 1 hour
 
-requests.params.tools.type
-
-enum<string> | null
+Defaults to `5m`.
 
 Available options:
 
-`custom`
+`5m`,
+
+`1h`
+
+Examples:
+
+```
+{
+  "description": "Get the current weather in a given location",
+  "input_schema": {
+    "properties": {
+      "location": {
+        "description": "The city and state, e.g. San Francisco, CA",
+        "type": "string"
+      },
+      "unit": {
+        "description": "Unit for the output - one of (celsius, fahrenheit)",
+        "type": "string"
+      }
+    },
+    "required": ["location"],
+    "type": "object"
+  },
+  "name": "get_weather"
+}
+
+```
 
 [​](#body-requests-params-top-k)
 
@@ -632,7 +863,11 @@ Used to remove "long tail" low probability responses. [Learn more technical deta
 
 Recommended for advanced use cases only. You usually only need to use `temperature`.
 
-Required range: `x > 0`
+Required range: `x >= 0`
+
+Examples:
+
+`5`
 
 [​](#body-requests-params-top-p)
 
@@ -646,11 +881,34 @@ In nucleus sampling, we compute the cumulative distribution over all the options
 
 Recommended for advanced use cases only. You usually only need to use `temperature`.
 
-Required range: `0 < x < 1`
+Required range: `0 <= x <= 1`
 
-#### Response
+Examples:
 
-200 - application/json
+`0.7`
+
+Example:
+
+```
+{
+  "max_tokens": 1024,
+  "messages": [
+    { "content": "Hello, world", "role": "user" }
+  ],
+  "model": "claude-3-7-sonnet-20250219"
+}
+
+```
+
+# Response
+
+200
+
+2004XX
+
+application/json
+
+Successful Response
 
 [​](#response-archived-at)
 
@@ -662,6 +920,10 @@ required
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+Examples:
+
+`"2024-08-20T18:37:24.100435Z"`
+
 [​](#response-cancel-initiated-at)
 
 cancel\_initiated\_at
@@ -672,6 +934,10 @@ required
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+Examples:
+
+`"2024-08-20T18:37:24.100435Z"`
+
 [​](#response-created-at)
 
 created\_at
@@ -681,6 +947,10 @@ string
 required
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+Examples:
+
+`"2024-08-20T18:37:24.100435Z"`
 
 [​](#response-ended-at)
 
@@ -694,6 +964,10 @@ RFC 3339 datetime string representing the time at which processing for the Messa
 
 Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+Examples:
+
+`"2024-08-20T18:37:24.100435Z"`
+
 [​](#response-expires-at)
 
 expires\_at
@@ -703,6 +977,10 @@ string
 required
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+Examples:
+
+`"2024-08-20T18:37:24.100435Z"`
 
 [​](#response-id)
 
@@ -715,6 +993,10 @@ required
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+Examples:
+
+`"msgbatch_013Zva2CMHLNnXjNJJKqJ2EF"`
 
 [​](#response-processing-status)
 
@@ -754,9 +1036,7 @@ request\_counts.canceled
 
 integer
 
-default:
-
-0
+default:0
 
 required
 
@@ -764,15 +1044,17 @@ Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
+Examples:
+
+`10`
+
 [​](#response-request-counts-errored)
 
 request\_counts.errored
 
 integer
 
-default:
-
-0
+default:0
 
 required
 
@@ -780,15 +1062,17 @@ Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
+Examples:
+
+`30`
+
 [​](#response-request-counts-expired)
 
 request\_counts.expired
 
 integer
 
-default:
-
-0
+default:0
 
 required
 
@@ -796,19 +1080,25 @@ Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
+Examples:
+
+`10`
+
 [​](#response-request-counts-processing)
 
 request\_counts.processing
 
 integer
 
-default:
-
-0
+default:0
 
 required
 
 Number of requests in the Message Batch that are processing.
+
+Examples:
+
+`100`
 
 [​](#response-request-counts-succeeded)
 
@@ -816,15 +1106,17 @@ request\_counts.succeeded
 
 integer
 
-default:
-
-0
+default:0
 
 required
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
+
+Examples:
+
+`50`
 
 [​](#response-results-url)
 
@@ -844,9 +1136,7 @@ type
 
 enum<string>
 
-default:
-
-message\_batch
+default:message\_batch
 
 required
 
@@ -862,4 +1152,73 @@ Was this page helpful?
 
 YesNo
 
-[Get a Model](/en/api/models)[Retrieve a Message Batch](/en/api/retrieving-message-batches)
+Get a Model[Retrieve a Message Batch](/en/api/retrieving-message-batches)
+
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl https://api.anthropic.com/v1/messages/batches \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "requests": [
+        {
+            "custom_id": "my-first-request",
+            "params": {
+                "model": "claude-3-7-sonnet-20250219",
+                "max_tokens": 1024,
+                "messages": [
+                    {"role": "user", "content": "Hello, world"}
+                ]
+            }
+        },
+        {
+            "custom_id": "my-second-request",
+            "params": {
+                "model": "claude-3-7-sonnet-20250219",
+                "max_tokens": 1024,
+                "messages": [
+                    {"role": "user", "content": "Hi again, friend"}
+                ]
+            }
+        }
+    ]
+}'
+```
+
+200
+
+4XX
+
+```
+{
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```

@@ -1,40 +1,13 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/api/messages/
----
+# Messages - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/api/messages#response-usage-cache-read-input-tokens
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Messages
-
-Messages
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Using the API
-
-* [Getting started](/en/api/getting-started)
-* [IP addresses](/en/api/ip-addresses)
-* [Versions](/en/api/versioning)
-* [Errors](/en/api/errors)
-* [Rate limits](/en/api/rate-limits)
-* [Client SDKs](/en/api/client-sdks)
-* [Supported regions](/en/api/supported-regions)
-* [Getting help](/en/api/getting-help)
-
-##### Anthropic APIs
+# API reference
 
 * Messages
 
@@ -44,29 +17,20 @@ Messages
   + [POST
 
     Count Message tokens](/en/api/messages-count-tokens)
-  + [Streaming Messages](/en/api/messages-streaming)
-  + [Migrating from Text Completions](/en/api/migrating-from-text-completions-to-messages)
-  + [Messages examples](/en/api/messages-examples)
 * Models
 * Message Batches
+* Files
 * Text Completions (Legacy)
-* Admin API
 
-##### OpenAI SDK compatibility
+# SDKs
 
+* [Client SDKs](/en/api/client-sdks)
 * [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Experimental APIs
+# Examples
 
-* Prompt tools
-
-##### Amazon Bedrock API
-
-* [Amazon Bedrock API](/en/api/claude-on-amazon-bedrock)
-
-##### Vertex AI
-
-* [Vertex AI API](/en/api/claude-on-vertex-ai)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 POST
 
@@ -78,7 +42,59 @@ v1
 
 messages
 
-#### Headers
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl https://api.anthropic.com/v1/messages \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "model": "claude-3-7-sonnet-20250219",
+    "max_tokens": 1024,
+    "messages": [
+        {"role": "user", "content": "Hello, world"}
+    ]
+}'
+```
+
+200
+
+4XX
+
+```
+{
+  "content": [
+    {
+      "text": "Hi! My name is Claude.",
+      "type": "text"
+    }
+  ],
+  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
+  "model": "claude-3-7-sonnet-20250219",
+  "role": "assistant",
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+    "input_tokens": 2095,
+    "output_tokens": 503
+  }
+}
+```
+
+# Headers
 
 [​](#parameter-anthropic-beta)
 
@@ -102,37 +118,31 @@ The version of the Anthropic API you want to use.
 
 Read more about versioning and our version history [here](https://docs.anthropic.com/en/api/versioning).
 
-[​](#parameter-x-api-key)
+Your unique API key for authentication.
 
-x-api-key
+This key is required in the header of all API requests, to authenticate your account and access Anthropic's services. Get your API key through the [Console](https://console.anthropic.com/settings/keys). Each key is scoped to a Workspace.
+
+# Body
+
+application/json
+
+[​](#body-model)
+
+model
 
 string
 
 required
 
-Your unique API key for authentication.
+The model that will complete your prompt.
 
-This key is required in the header of all API requests, to authenticate your account and access Anthropic's services. Get your API key through the [Console](https://console.anthropic.com/settings/keys). Each key is scoped to a Workspace.
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-#### Body
+Required string length: `1 - 256`
 
-application/json
+Examples:
 
-[​](#body-max-tokens)
-
-max\_tokens
-
-integer
-
-required
-
-The maximum number of tokens to generate before stopping.
-
-Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
-
-Different models have different maximum values for this parameter. See [models](https://docs.anthropic.com/en/docs/models-overview) for details.
-
-Required range: `x > 1`
+`"claude-3-7-sonnet-20250219"`
 
 [​](#body-messages)
 
@@ -152,42 +162,47 @@ If the final message uses the `assistant` role, the response content will contin
 
 Example with a single `user` message:
 
-```bash
+```
 [{"role": "user", "content": "Hello, Claude"}]
+
 ```
 
 Example with multiple conversational turns:
 
-```bash
+```
 [
   {"role": "user", "content": "Hello there."},
   {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
   {"role": "user", "content": "Can you explain LLMs in plain English?"},
 ]
+
 ```
 
 Example with a partially-filled response from Claude:
 
-```bash
+```
 [
   {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
   {"role": "assistant", "content": "The best answer is ("},
 ]
+
 ```
 
 Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-```json
+```
 {"role": "user", "content": "Hello, Claude"}
+
 ```
 
-```json
+```
 {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+
 ```
 
 Starting with Claude 3 models, you can also send image content blocks:
 
-```json
+```
 {"role": "user", "content": [
   {
     "type": "image",
@@ -199,6 +214,7 @@ Starting with Claude 3 models, you can also send image content blocks:
   },
   {"type": "text", "text": "What is in this image?"}
 ]}
+
 ```
 
 We currently support the `base64` source type for images, and the `image/jpeg`, `image/png`, `image/gif`, and `image/webp` media types.
@@ -233,19 +249,97 @@ Available options:
 
 `assistant`
 
-[​](#body-model)
+[​](#body-max-tokens)
 
-model
+max\_tokens
+
+integer
+
+required
+
+The maximum number of tokens to generate before stopping.
+
+Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+
+Different models have different maximum values for this parameter. See [models](https://docs.anthropic.com/en/docs/models-overview) for details.
+
+Required range: `x >= 1`
+
+Examples:
+
+`1024`
+
+[​](#body-container)
+
+container
+
+string | null
+
+Container identifier for reuse across requests.
+
+[​](#body-mcp-servers)
+
+mcp\_servers
+
+object[]
+
+MCP servers to be utilized in this request
+
+Show child attributes
+
+[​](#body-mcp-servers-name)
+
+mcp\_servers.name
 
 string
 
 required
 
-The model that will complete your prompt.
+[​](#body-mcp-servers-type)
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+mcp\_servers.type
 
-Required string length: `1 - 256`
+enum<string>
+
+required
+
+Available options:
+
+`url`
+
+[​](#body-mcp-servers-url)
+
+mcp\_servers.url
+
+string
+
+required
+
+[​](#body-mcp-servers-authorization-token)
+
+mcp\_servers.authorization\_token
+
+string | null
+
+[​](#body-mcp-servers-tool-configuration)
+
+mcp\_servers.tool\_configuration
+
+object | null
+
+Show child attributes
+
+[​](#body-mcp-servers-tool-configuration-allowed-tools)
+
+mcp\_servers.tool\_configuration.allowed\_tools
+
+string[] | null
+
+[​](#body-mcp-servers-tool-configuration-enabled)
+
+mcp\_servers.tool\_configuration.enabled
+
+boolean | null
 
 [​](#body-metadata)
 
@@ -268,6 +362,26 @@ An external identifier for the user who is associated with the request.
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
 Maximum length: `256`
+
+Examples:
+
+`"13803d75-b4b5-4c3e-b2a2-6f21399b021b"`
+
+[​](#body-service-tier)
+
+service\_tier
+
+enum<string>
+
+Determines whether to use priority capacity (if available) or standard capacity for this request.
+
+Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+
+Available options:
+
+`auto`,
+
+`standard_only`
 
 [​](#body-stop-sequences)
 
@@ -301,6 +415,20 @@ System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
 
+Examples:
+
+```
+[
+  {
+    "text": "Today's date is 2024-06-01.",
+    "type": "text"
+  }
+]
+
+```
+
+`"Today's date is 2023-01-01."`
+
 [​](#body-temperature)
 
 temperature
@@ -313,7 +441,11 @@ Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
 
 Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-Required range: `0 < x < 1`
+Required range: `0 <= x <= 1`
+
+Examples:
+
+`1`
 
 [​](#body-thinking)
 
@@ -346,7 +478,7 @@ Must be ≥1024 and less than `max_tokens`.
 
 See [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Required range: `x > 1024`
+Required range: `x >= 1024`
 
 [​](#body-thinking-type)
 
@@ -371,7 +503,7 @@ How the model should use the provided tools. The model can use a specific tool, 
 * Auto
 * Any
 * Tool
-* ToolChoiceNone
+* None
 
 Show child attributes
 
@@ -415,7 +547,7 @@ Each tool definition includes:
 
 For example, if you defined `tools` as:
 
-```bash
+```
 [
   {
     "name": "get_stock_price",
@@ -432,11 +564,12 @@ For example, if you defined `tools` as:
     }
   }
 ]
+
 ```
 
 And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
-```bash
+```
 [
   {
     "type": "tool_use",
@@ -445,11 +578,12 @@ And then asked the model "What's the S&P 500 at today?", the model might produce
     "input": { "ticker": "^GSPC" }
   }
 ]
+
 ```
 
 You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
-```bash
+```
 [
   {
     "type": "tool_result",
@@ -457,21 +591,39 @@ You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an 
     "content": "259.75 USD"
   }
 ]
+
 ```
 
 Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
 See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
 
-* Custom Tool
-* ComputerUseTool\_20241022
-* BashTool\_20241022
-* TextEditor\_20241022
-* ComputerUseTool\_20250124
-* BashTool\_20250124
-* TextEditor\_20250124
+* Custom tool
+* Computer use tool (2024-01-22)
+* Bash tool (2024-10-22)
+* Text editor tool (2024-10-22)
+* Computer use tool (2025-01-24)
+* Bash tool (2025-01-24)
+* Text editor tool (2025-01-24)
+* TextEditor\_20250429
+* Web search tool (2025-03-05)
+* Code execution tool (2025-05-22)
 
 Show child attributes
+
+[​](#body-tools-name)
+
+tools.name
+
+string
+
+required
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Required string length: `1 - 64`
 
 [​](#body-tools-input-schema)
 
@@ -505,25 +657,57 @@ tools.input\_schema.properties
 
 object | null
 
-[​](#body-tools-name)
+Examples:
 
-tools.name
+```
+{
+  "properties": {
+    "location": {
+      "description": "The city and state, e.g. San Francisco, CA",
+      "type": "string"
+    },
+    "unit": {
+      "description": "Unit for the output - one of (celsius, fahrenheit)",
+      "type": "string"
+    }
+  },
+  "required": ["location"],
+  "type": "object"
+}
+
+```
+
+[​](#body-tools-type)
+
+tools.type
+
+enum<string> | null
+
+Available options:
+
+`custom`
+
+[​](#body-tools-description)
+
+tools.description
 
 string
 
-required
+Description of what this tool does.
 
-Name of the tool.
+Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-This is how the tool will be called by the model and in tool\_use blocks.
+Examples:
 
-Required string length: `1 - 64`
+`"Get the current weather in a given location"`
 
 [​](#body-tools-cache-control)
 
 tools.cache\_control
 
 object | null
+
+Create a cache control breakpoint at this content block.
 
 Show child attributes
 
@@ -539,25 +723,50 @@ Available options:
 
 `ephemeral`
 
-[​](#body-tools-description)
+[​](#body-tools-cache-control-ttl)
 
-tools.description
+tools.cache\_control.ttl
 
-string
+enum<string>
 
-Description of what this tool does.
+The time-to-live for the cache control breakpoint.
 
-Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+This may be one the following values:
 
-[​](#body-tools-type)
+* `5m`: 5 minutes
+* `1h`: 1 hour
 
-tools.type
-
-enum<string> | null
+Defaults to `5m`.
 
 Available options:
 
-`custom`
+`5m`,
+
+`1h`
+
+Examples:
+
+```
+{
+  "description": "Get the current weather in a given location",
+  "input_schema": {
+    "properties": {
+      "location": {
+        "description": "The city and state, e.g. San Francisco, CA",
+        "type": "string"
+      },
+      "unit": {
+        "description": "Unit for the output - one of (celsius, fahrenheit)",
+        "type": "string"
+      }
+    },
+    "required": ["location"],
+    "type": "object"
+  },
+  "name": "get_weather"
+}
+
+```
 
 [​](#body-top-k)
 
@@ -571,7 +780,11 @@ Used to remove "long tail" low probability responses. [Learn more technical deta
 
 Recommended for advanced use cases only. You usually only need to use `temperature`.
 
-Required range: `x > 0`
+Required range: `x >= 0`
+
+Examples:
+
+`5`
 
 [​](#body-top-p)
 
@@ -585,11 +798,73 @@ In nucleus sampling, we compute the cumulative distribution over all the options
 
 Recommended for advanced use cases only. You usually only need to use `temperature`.
 
-Required range: `0 < x < 1`
+Required range: `0 <= x <= 1`
 
-#### Response
+Examples:
 
-200 - application/json
+`0.7`
+
+# Response
+
+200
+
+2004XX
+
+application/json
+
+Message object.
+
+[​](#response-id)
+
+id
+
+string
+
+required
+
+Unique object identifier.
+
+The format and length of IDs may change over time.
+
+Examples:
+
+`"msg_013Zva2CMHLNnXjNJJKqJ2EF"`
+
+[​](#response-type)
+
+type
+
+enum<string>
+
+default:message
+
+required
+
+Object type.
+
+For Messages, this is always `"message"`.
+
+Available options:
+
+`message`
+
+[​](#response-role)
+
+role
+
+enum<string>
+
+default:assistant
+
+required
+
+Conversational role of the generated message.
+
+This will always be `"assistant"`.
+
+Available options:
+
+`assistant`
 
 [​](#response-content)
 
@@ -605,121 +880,67 @@ This is an array of content blocks, each of which has a `type` that determines i
 
 Example:
 
-```bash
+```
 [{"type": "text", "text": "Hi, I'm Claude."}]
+
 ```
 
 If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
 For example, if the input `messages` were:
 
-```bash
+```
 [
   {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
   {"role": "assistant", "content": "The best answer is ("}
 ]
+
 ```
 
 Then the response `content` might be:
 
-```bash
+```
 [{"type": "text", "text": "B)"}]
+
 ```
 
-* Text
-* Tool Use
+* Tool use
+* ResponseServerToolUseBlock
+* ResponseWebSearchToolResultBlock
+* ResponseCodeExecutionToolResultBlock
+* ResponseMCPToolUseBlock
+* ResponseMCPToolResultBlock
+* ResponseContainerUploadBlock
 * Thinking
-* Redacted Thinking
+* Redacted thinking
 
 Show child attributes
 
-[​](#response-content-citations)
+[​](#response-content-id)
 
-content.citations
-
-object[] | null
-
-required
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-* Character Location
-* Page Location
-* Content Block Location
-
-Show child attributes
-
-[​](#response-content-citations-cited-text)
-
-content.citations.cited\_text
+content.id
 
 string
 
 required
 
-[​](#response-content-citations-document-index)
+[​](#response-content-input)
 
-content.citations.document\_index
+content.input
 
-integer
-
-required
-
-Required range: `x > 0`
-
-[​](#response-content-citations-document-title)
-
-content.citations.document\_title
-
-string | null
+object
 
 required
 
-[​](#response-content-citations-end-char-index)
+[​](#response-content-name)
 
-content.citations.end\_char\_index
-
-integer
-
-required
-
-[​](#response-content-citations-start-char-index)
-
-content.citations.start\_char\_index
-
-integer
-
-required
-
-Required range: `x > 0`
-
-[​](#response-content-citations-type)
-
-content.citations.type
-
-enum<string>
-
-default:
-
-char\_location
-
-required
-
-Available options:
-
-`char_location`
-
-[​](#response-content-text)
-
-content.text
+content.name
 
 string
 
 required
 
-Maximum length: `5000000`
+Minimum length: `1`
 
 [​](#response-content-type)
 
@@ -727,27 +948,25 @@ content.type
 
 enum<string>
 
-default:
-
-text
+default:tool\_use
 
 required
 
 Available options:
 
-`text`
+`tool_use`
 
-[​](#response-id)
+Examples:
 
-id
+```
+[
+  {
+    "text": "Hi! My name is Claude.",
+    "type": "text"
+  }
+]
 
-string
-
-required
-
-Unique object identifier.
-
-The format and length of IDs may change over time.
+```
 
 [​](#response-model)
 
@@ -761,25 +980,9 @@ The model that handled the request.
 
 Required string length: `1 - 256`
 
-[​](#response-role)
+Examples:
 
-role
-
-enum<string>
-
-default:
-
-assistant
-
-required
-
-Conversational role of the generated message.
-
-This will always be `"assistant"`.
-
-Available options:
-
-`assistant`
+`"claude-3-7-sonnet-20250219"`
 
 [​](#response-stop-reason)
 
@@ -808,7 +1011,11 @@ Available options:
 
 `stop_sequence`,
 
-`tool_use`
+`tool_use`,
+
+`pause_turn`,
+
+`refusal`
 
 [​](#response-stop-sequence)
 
@@ -821,26 +1028,6 @@ required
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
-
-[​](#response-type)
-
-type
-
-enum<string>
-
-default:
-
-message
-
-required
-
-Object type.
-
-For Messages, this is always `"message"`.
-
-Available options:
-
-`message`
 
 [​](#response-usage)
 
@@ -862,6 +1049,46 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 Show child attributes
 
+[​](#response-usage-cache-creation)
+
+usage.cache\_creation
+
+object | null
+
+required
+
+Breakdown of cached tokens by TTL
+
+Show child attributes
+
+[​](#response-usage-cache-creation-ephemeral-1h-input-tokens)
+
+usage.cache\_creation.ephemeral\_1h\_input\_tokens
+
+integer
+
+default:0
+
+required
+
+The number of input tokens used to create the 1 hour cache entry.
+
+Required range: `x >= 0`
+
+[​](#response-usage-cache-creation-ephemeral-5m-input-tokens)
+
+usage.cache\_creation.ephemeral\_5m\_input\_tokens
+
+integer
+
+default:0
+
+required
+
+The number of input tokens used to create the 5 minute cache entry.
+
+Required range: `x >= 0`
+
 [​](#response-usage-cache-creation-input-tokens)
 
 usage.cache\_creation\_input\_tokens
@@ -872,7 +1099,11 @@ required
 
 The number of input tokens used to create the cache entry.
 
-Required range: `x > 0`
+Required range: `x >= 0`
+
+Examples:
+
+`2051`
 
 [​](#response-usage-cache-read-input-tokens)
 
@@ -884,7 +1115,11 @@ required
 
 The number of input tokens read from the cache.
 
-Required range: `x > 0`
+Required range: `x >= 0`
+
+Examples:
+
+`2051`
 
 [​](#response-usage-input-tokens)
 
@@ -896,7 +1131,11 @@ required
 
 The number of input tokens which were used.
 
-Required range: `x > 0`
+Required range: `x >= 0`
+
+Examples:
+
+`2095`
 
 [​](#response-usage-output-tokens)
 
@@ -908,10 +1147,140 @@ required
 
 The number of output tokens which were used.
 
-Required range: `x > 0`
+Required range: `x >= 0`
+
+Examples:
+
+`503`
+
+[​](#response-usage-server-tool-use)
+
+usage.server\_tool\_use
+
+object | null
+
+required
+
+The number of server tool requests.
+
+Show child attributes
+
+[​](#response-usage-service-tier)
+
+usage.service\_tier
+
+enum<string> | null
+
+required
+
+If the request used the priority, standard, or batch tier.
+
+Available options:
+
+`standard`,
+
+`priority`,
+
+`batch`
+
+Examples:
+
+```
+{
+  "input_tokens": 2095,
+  "output_tokens": 503
+}
+
+```
+
+[​](#response-container)
+
+container
+
+object | null
+
+required
+
+Information about the container used in this request.
+
+This will be non-null if a container tool (e.g. code execution) was used.
+
+Show child attributes
+
+[​](#response-container-expires-at)
+
+container.expires\_at
+
+string
+
+required
+
+The time at which the container will expire.
+
+[​](#response-container-id)
+
+container.id
+
+string
+
+required
+
+Identifier for the container used in this request
 
 Was this page helpful?
 
 YesNo
 
-[Getting help](/en/api/getting-help)[Count Message tokens](/en/api/messages-count-tokens)
+Handling stop reasons[Count Message tokens](/en/api/messages-count-tokens)
+
+cURL
+
+Python
+
+JavaScript
+
+PHP
+
+Go
+
+Java
+
+```
+curl https://api.anthropic.com/v1/messages \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data \
+'{
+    "model": "claude-3-7-sonnet-20250219",
+    "max_tokens": 1024,
+    "messages": [
+        {"role": "user", "content": "Hello, world"}
+    ]
+}'
+```
+
+200
+
+4XX
+
+```
+{
+  "content": [
+    {
+      "text": "Hi! My name is Claude.",
+      "type": "text"
+    }
+  ],
+  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
+  "model": "claude-3-7-sonnet-20250219",
+  "role": "assistant",
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+    "input_tokens": 2095,
+    "output_tokens": 503
+  }
+}
+```

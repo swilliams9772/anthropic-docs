@@ -1,49 +1,35 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/extended-thinking-tips/
----
+# Extended thinking tips - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/extended-thinking-tips
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Prompt engineering
-
-Extended thinking tips
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
 
   + [Overview](/en/docs/build-with-claude/prompt-engineering/overview)
+  + [Claude 4 best practices](/en/docs/build-with-claude/prompt-engineering/claude-4-best-practices)
   + [Prompt generator](/en/docs/build-with-claude/prompt-engineering/prompt-generator)
   + [Use prompt templates](/en/docs/build-with-claude/prompt-engineering/prompt-templates-and-variables)
   + [Prompt improver](/en/docs/build-with-claude/prompt-engineering/prompt-improver)
@@ -56,77 +42,90 @@ Extended thinking tips
   + [Chain complex prompts](/en/docs/build-with-claude/prompt-engineering/chain-prompts)
   + [Long context tips](/en/docs/build-with-claude/prompt-engineering/long-context-tips)
   + [Extended thinking tips](/en/docs/build-with-claude/prompt-engineering/extended-thinking-tips)
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
-This guide provides advanced strategies and techniques for getting the most out of Claude’s extended thinking feature. Extended thinking allows Claude to work through complex problems step-by-step, improving performance on difficult tasks. When you enable extended thinking, Claude shows its reasoning process before providing a final answer, giving you transparency into how it arrived at its conclusion.
+This guide provides advanced strategies and techniques for getting the most out of Claude’s extended thinking features. Extended thinking allows Claude to work through complex problems step-by-step, improving performance on difficult tasks.
 
-See [Extended thinking models](/en/docs/about-claude/models/extended-thinking-models) for guidance on deciding when to use extended thinking vs. standard thinking modes.
+See [Extended thinking models](/en/docs/about-claude/models/extended-thinking-models) for guidance on deciding when to use extended thinking.
 
-[​](#before-diving-in) Before diving in
----------------------------------------
+# [​](#before-diving-in) Before diving in
 
-This guide presumes that you have already decided to use extended thinking mode over standard mode and have reviewed our basic steps on [how to get started with extended thinking](/en/docs/about-claude/models/extended-thinking-models#getting-started-with-claude-3-7-sonnet) as well as our [extended thinking implementation guide](/en/docs/build-with-claude/extended-thinking).
+This guide presumes that you have already decided to use extended thinking mode and have reviewed our basic steps on [how to get started with extended thinking](/en/docs/about-claude/models/extended-thinking-models#getting-started-with-extended-thinking-models) as well as our [extended thinking implementation guide](/en/docs/build-with-claude/extended-thinking).
 
-### [​](#technical-considerations-for-extended-thinking) Technical considerations for extended thinking
+# [​](#technical-considerations-for-extended-thinking) Technical considerations for extended thinking
 
 * Thinking tokens have a minimum budget of 1024 tokens. We recommend that you start with the minimum thinking budget and incrementally increase to adjust based on your needs and task complexity.
 * For workloads where the optimal thinking budget is above 32K, we recommend that you use [batch processing](/en/docs/build-with-claude/batch-processing) to avoid networking issues. Requests pushing the model to think above 32K tokens causes long running requests that might run up against system timeouts and open connection limits.
 * Extended thinking performs best in English, though final outputs can be in [any language Claude supports](/en/docs/build-with-claude/multilingual-support).
 * If you need thinking below the minimum budget, we recommend using standard mode, with thinking turned off, with traditional chain-of-thought prompting with XML tags (like `<thinking>`). See [chain of thought prompting](/en/docs/build-with-claude/prompt-engineering/chain-of-thought).
 
-[​](#prompting-techniques-for-extended-thinking) Prompting techniques for extended thinking
--------------------------------------------------------------------------------------------
+# [​](#prompting-techniques-for-extended-thinking) Prompting techniques for extended thinking
 
-### [​](#use-general-instructions-first-then-troubleshoot-with-more-step-by-step-instructions) Use general instructions first, then troubleshoot with more step-by-step instructions
+# [​](#use-general-instructions-first%2C-then-troubleshoot-with-more-step-by-step-instructions) Use general instructions first, then troubleshoot with more step-by-step instructions
 
 Claude often performs better with high level instructions to just think deeply about a task rather than step-by-step prescriptive guidance. The model’s creativity in approaching problems may exceed a human’s ability to prescribe the optimal thinking process.
 
 For example, instead of:
 
+User
+
+```
+Think through this math problem step by step:
+1. First, identify the variables
+2. Then, set up the equation
+3. Next, solve for x
+...
+
+```
+
 Consider:
+
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Please+think+about+this+math+problem+thoroughly+and+in+great+detail.+%0AConsider+multiple+approaches+and+show+your+complete+reasoning.%0ATry+different+methods+if+your+first+approach+doesn%27t+work.&thinking.budget_tokens=16000)
+
+```
+Please think about this math problem thoroughly and in great detail.
+Consider multiple approaches and show your complete reasoning.
+Try different methods if your first approach doesn't work.
+
+```
 
 That said, Claude can still effectively follow complex structured execution steps when needed. The model can handle even longer lists with more complex instructions than previous versions. We recommend that you start with more generalized instructions, then read Claude’s thinking output and iterate to provide more specific instructions to steer its thinking from there.
 
-### [​](#multishot-prompting-with-extended-thinking) Multishot prompting with extended thinking
+# [​](#multishot-prompting-with-extended-thinking) Multishot prompting with extended thinking
 
 [Multishot prompting](/en/docs/build-with-claude/prompt-engineering/multishot-prompting) works well with extended thinking. When you provide Claude examples of how to think through problems, it will follow similar reasoning patterns within its extended thinking blocks.
 
@@ -136,7 +135,29 @@ Claude will generalize the pattern to the formal extended thinking process. Howe
 
 Example:
 
-### [​](#maximizing-instruction-following-with-extended-thinking) Maximizing instruction following with extended thinking
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=I%27m+going+to+show+you+how+to+solve+a+math+problem%2C+then+I+want+you+to+solve+a+similar+one.%0A%0AProblem+1%3A+What+is+15%25+of+80%3F%0A%0A%3Cthinking%3E%0ATo+find+15%25+of+80%3A%0A1.+Convert+15%25+to+a+decimal%3A+15%25+%3D+0.15%0A2.+Multiply%3A+0.15+%C3%97+80+%3D+12%0A%3C%2Fthinking%3E%0A%0AThe+answer+is+12.%0A%0ANow+solve+this+one%3A%0AProblem+2%3A+What+is+35%25+of+240%3F&thinking.budget_tokens=16000)
+
+```
+I'm going to show you how to solve a math problem, then I want you to solve a similar one.
+
+Problem 1: What is 15% of 80?
+
+<thinking>
+To find 15% of 80:
+1. Convert 15% to a decimal: 15% = 0.15
+2. Multiply: 0.15 × 80 = 12
+</thinking>
+
+The answer is 12.
+
+Now solve this one:
+Problem 2: What is 35% of 240?
+
+```
+
+# [​](#maximizing-instruction-following-with-extended-thinking) Maximizing instruction following with extended thinking
 
 Claude shows significantly improved instruction following when extended thinking is enabled. The model typically:
 
@@ -149,7 +170,7 @@ To maximize instruction following:
 * For complex instructions, consider breaking them into numbered steps that Claude should work through methodically
 * Allow Claude enough budget to process the instructions fully in its extended thinking
 
-### [​](#using-extended-thinking-to-debug-and-steer-claudes-behavior) Using extended thinking to debug and steer Claude’s behavior
+# [​](#using-extended-thinking-to-debug-and-steer-claude%E2%80%99s-behavior) Using extended thinking to debug and steer Claude’s behavior
 
 You can use Claude’s thinking output to debug Claude’s logic, although this method is not always perfectly reliable.
 
@@ -162,9 +183,7 @@ When extended thinking is turned off, standard `assistant` response text [prefil
 
 Sometimes Claude may repeat its extended thinking in the assistant output text. If you want a clean response, instruct Claude not to repeat its extended thinking and to only output the answer.
 
-### [​](#making-the-best-of-long-outputs-and-longform-thinking) Making the best of long outputs and longform thinking
-
-Claude with extended thinking enabled and [extended output capabilities (beta)](/en/docs/about-claude/models/extended-thinking-models#extended-output-capabilities-beta) excels at generating large amounts of bulk data and longform text.
+# [​](#making-the-best-of-long-outputs-and-longform-thinking) Making the best of long outputs and longform thinking
 
 For dataset generation use cases, try prompts such as “Please create an extremely detailed table of…” for generating comprehensive datasets.
 
@@ -184,7 +203,45 @@ Complex STEM problems require Claude to build mental models, apply specialized k
 * Standard prompt
 * Enhanced prompt
 
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Write+a+python+script+for+a+bouncing+yellow+ball+within+a+square%2C%0Amake+sure+to+handle+collision+detection+properly.%0AMake+the+square+slowly+rotate.&thinking.budget_tokens=16000)
+
+```
+Write a python script for a bouncing yellow ball within a square,
+make sure to handle collision detection properly.
+Make the square slowly rotate.
+
+```
+
 This simpler task typically results in only about a few seconds of thinking time.
+
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Write+a+python+script+for+a+bouncing+yellow+ball+within+a+square%2C%0Amake+sure+to+handle+collision+detection+properly.%0AMake+the+square+slowly+rotate.&thinking.budget_tokens=16000)
+
+```
+Write a python script for a bouncing yellow ball within a square,
+make sure to handle collision detection properly.
+Make the square slowly rotate.
+
+```
+
+This simpler task typically results in only about a few seconds of thinking time.
+
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Write+a+Python+script+for+a+bouncing+yellow+ball+within+a+tesseract%2C+%0Amaking+sure+to+handle+collision+detection+properly.+%0AMake+the+tesseract+slowly+rotate.+%0AMake+sure+the+ball+stays+within+the+tesseract.&thinking.budget_tokens=16000)
+
+```
+Write a Python script for a bouncing yellow ball within a tesseract,
+making sure to handle collision detection properly.
+Make the tesseract slowly rotate.
+Make sure the ball stays within the tesseract.
+
+```
+
+This complex 4D visualization challenge makes the best use of long extended thinking time as Claude works through the mathematical and programming complexity.
 
 Constraint optimization problems
 
@@ -193,7 +250,46 @@ Constraint optimization challenges Claude to satisfy multiple competing requirem
 * Standard prompt
 * Enhanced prompt
 
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Plan+a+week-long+vacation+to+Japan.&thinking.budget_tokens=16000)
+
+```
+Plan a week-long vacation to Japan.
+
+```
+
 This open-ended request typically results in only about a few seconds of thinking time.
+
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Plan+a+week-long+vacation+to+Japan.&thinking.budget_tokens=16000)
+
+```
+Plan a week-long vacation to Japan.
+
+```
+
+This open-ended request typically results in only about a few seconds of thinking time.
+
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Plan+a+7-day+trip+to+Japan+with+the+following+constraints%3A%0A-+Budget+of+%242%2C500%0A-+Must+include+Tokyo+and+Kyoto%0A-+Need+to+accommodate+a+vegetarian+diet%0A-+Preference+for+cultural+experiences+over+shopping%0A-+Must+include+one+day+of+hiking%0A-+No+more+than+2+hours+of+travel+between+locations+per+day%0A-+Need+free+time+each+afternoon+for+calls+back+home%0A-+Must+avoid+crowds+where+possible&thinking.budget_tokens=16000)
+
+```
+Plan a 7-day trip to Japan with the following constraints:
+- Budget of $2,500
+- Must include Tokyo and Kyoto
+- Need to accommodate a vegetarian diet
+- Preference for cultural experiences over shopping
+- Must include one day of hiking
+- No more than 2 hours of travel between locations per day
+- Need free time each afternoon for calls back home
+- Must avoid crowds where possible
+
+```
+
+With multiple constraints to balance, Claude will naturally perform best when given more space to think through how to satisfy all requirements optimally.
 
 Thinking frameworks
 
@@ -202,9 +298,57 @@ Structured thinking frameworks give Claude an explicit methodology to follow, wh
 * Standard prompt
 * Enhanced prompt
 
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Develop+a+comprehensive+strategy+for+Microsoft+%0Aentering+the+personalized+medicine+market+by+2027.&thinking.budget_tokens=16000)
+
+```
+Develop a comprehensive strategy for Microsoft
+entering the personalized medicine market by 2027.
+
+```
+
 This broad strategic question typically results in only about a few seconds of thinking time.
 
-### [​](#have-claude-reflect-on-and-check-its-work-for-improved-consistency-and-error-handling) Have Claude reflect on and check its work for improved consistency and error handling
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Develop+a+comprehensive+strategy+for+Microsoft+%0Aentering+the+personalized+medicine+market+by+2027.&thinking.budget_tokens=16000)
+
+```
+Develop a comprehensive strategy for Microsoft
+entering the personalized medicine market by 2027.
+
+```
+
+This broad strategic question typically results in only about a few seconds of thinking time.
+
+User
+
+[Try in Console](https://console.anthropic.com/workbench/new?user=Develop+a+comprehensive+strategy+for+Microsoft+entering+%0Athe+personalized+medicine+market+by+2027.%0A%0ABegin+with%3A%0A1.+A+Blue+Ocean+Strategy+canvas%0A2.+Apply+Porter%27s+Five+Forces+to+identify+competitive+pressures%0A%0ANext%2C+conduct+a+scenario+planning+exercise+with+four+%0Adistinct+futures+based+on+regulatory+and+technological+variables.%0A%0AFor+each+scenario%3A%0A-+Develop+strategic+responses+using+the+Ansoff+Matrix%0A%0AFinally%2C+apply+the+Three+Horizons+framework+to%3A%0A-+Map+the+transition+pathway%0A-+Identify+potential+disruptive+innovations+at+each+stage&thinking.budget_tokens=16000)
+
+```
+Develop a comprehensive strategy for Microsoft entering
+the personalized medicine market by 2027.
+
+Begin with:
+1. A Blue Ocean Strategy canvas
+2. Apply Porter's Five Forces to identify competitive pressures
+
+Next, conduct a scenario planning exercise with four
+distinct futures based on regulatory and technological variables.
+
+For each scenario:
+- Develop strategic responses using the Ansoff Matrix
+
+Finally, apply the Three Horizons framework to:
+- Map the transition pathway
+- Identify potential disruptive innovations at each stage
+
+```
+
+By specifying multiple analytical frameworks that must be applied sequentially, thinking time naturally increases as Claude works through each framework methodically.
+
+# [​](#have-claude-reflect-on-and-check-its-work-for-improved-consistency-and-error-handling) Have Claude reflect on and check its work for improved consistency and error handling
 
 You can use simple natural language prompting to improve consistency and reduce errors:
 
@@ -214,14 +358,26 @@ You can use simple natural language prompting to improve consistency and reduce 
 
 Example:
 
-[​](#next-steps) Next steps
----------------------------
+User
 
-[Extended thinking cookbook
---------------------------
+[Try in Console](https://console.anthropic.com/workbench/new?user=Write+a+function+to+calculate+the+factorial+of+a+number.+%0ABefore+you+finish%2C+please+verify+your+solution+with+test+cases+for%3A%0A-+n%3D0%0A-+n%3D1%0A-+n%3D5%0A-+n%3D10%0AAnd+fix+any+issues+you+find.&thinking.budget_tokens=16000)
 
-Explore practical examples of extended thinking in our cookbook.](https://github.com/anthropics/anthropic-cookbook/tree/main/extended_thinking)[Extended thinking guide
------------------------
+```
+Write a function to calculate the factorial of a number.
+Before you finish, please verify your solution with test cases for:
+- n=0
+- n=1
+- n=5
+- n=10
+And fix any issues you find.
+
+```
+
+# [​](#next-steps) Next steps
+
+[## Extended thinking cookbook
+
+Explore practical examples of extended thinking in our cookbook.](https://github.com/anthropics/anthropic-cookbook/tree/main/extended_thinking)[## Extended thinking guide
 
 See complete technical documentation for implementing extended thinking.](/en/docs/build-with-claude/extended-thinking)
 
@@ -229,17 +385,6 @@ Was this page helpful?
 
 YesNo
 
-[Long context tips](/en/docs/build-with-claude/prompt-engineering/long-context-tips)[Extended thinking](/en/docs/build-with-claude/extended-thinking)
+Long context tips[Features overview](/en/docs/build-with-claude/overview)
 
 On this page
-
-* [Before diving in](#before-diving-in)
-* [Technical considerations for extended thinking](#technical-considerations-for-extended-thinking)
-* [Prompting techniques for extended thinking](#prompting-techniques-for-extended-thinking)
-* [Use general instructions first, then troubleshoot with more step-by-step instructions](#use-general-instructions-first-then-troubleshoot-with-more-step-by-step-instructions)
-* [Multishot prompting with extended thinking](#multishot-prompting-with-extended-thinking)
-* [Maximizing instruction following with extended thinking](#maximizing-instruction-following-with-extended-thinking)
-* [Using extended thinking to debug and steer Claude’s behavior](#using-extended-thinking-to-debug-and-steer-claudes-behavior)
-* [Making the best of long outputs and longform thinking](#making-the-best-of-long-outputs-and-longform-thinking)
-* [Have Claude reflect on and check its work for improved consistency and error handling](#have-claude-reflect-on-and-check-its-work-for-improved-consistency-and-error-handling)
-* [Next steps](#next-steps)

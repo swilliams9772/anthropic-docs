@@ -286,22 +286,22 @@ def fetch_url(url, max_retries=3, retry_delay=1, timeout=30):
     
     while retry_count < max_retries:
         try:
+            logging.info(f"Fetching URL: {url}")
             response = requests.get(url, headers=headers, timeout=timeout)
             
             # Handle rate limiting response
             if response.status_code == 429:
                 retry_count += 1
                 # Exponential backoff with jitter for retry delay
-                current_retry_delay = min(current_retry_delay * 2 + random.uniform(0.1, 1.0), MAX_RETRY_DELAY)
+                current_retry_delay = min(current_retry_delay * 2 + random.uniform(0.1, 1.0), 15.0)
                 
                 if retry_count < max_retries:
                     logging.warning(f"Error 429 for URL: {url}, retrying in {current_retry_delay:.1f}s (attempt {retry_count}/{max_retries})")
                     time.sleep(current_retry_delay)
                     
                     # Increase the global request delay if adaptive rate limiting is enabled
-                    if ADAPTIVE_RATE_LIMITING:
-                        REQUEST_DELAY = min(REQUEST_DELAY * 1.5, 2.0)
-                        logging.info(f"Adaptive rate limiting: increased delay to {REQUEST_DELAY:.2f}s")
+                    REQUEST_DELAY = min(REQUEST_DELAY * 1.5, 2.0)
+                    logging.info(f"Adaptive rate limiting: increased delay to {REQUEST_DELAY:.2f}s")
                     
                     continue
                 else:
@@ -309,24 +309,41 @@ def fetch_url(url, max_retries=3, retry_delay=1, timeout=30):
                     return None
             
             # If we got a 200 response and we previously increased the delay, we can slightly decrease it
-            if response.status_code == 200 and ADAPTIVE_RATE_LIMITING and REQUEST_DELAY > CONFIG['rate_limiting'].get('min_delay_between_requests', 0.25):
-                REQUEST_DELAY = max(REQUEST_DELAY * 0.9, CONFIG['rate_limiting'].get('min_delay_between_requests', 0.25))
+            if response.status_code == 200 and REQUEST_DELAY > 0.25:
+                REQUEST_DELAY = max(REQUEST_DELAY * 0.9, 0.25)
                 logging.debug(f"Adaptive rate limiting: decreased delay to {REQUEST_DELAY:.2f}s")
             
-            response.raise_for_status()
+            # Check for any non-200 status
+            if response.status_code != 200:
+                logging.warning(f"Received status code {response.status_code} for URL: {url}")
+                if retry_count < max_retries - 1:
+                    retry_count += 1
+                    logging.warning(f"Retrying in {current_retry_delay:.1f}s (attempt {retry_count}/{max_retries})")
+                    time.sleep(current_retry_delay)
+                    current_retry_delay = min(current_retry_delay * 2, 15.0)
+                    continue
+                else:
+                    logging.error(f"Failed to fetch page with status {response.status_code}: {url}")
+                    return None
+            
+            logging.info(f"Successfully fetched URL: {url}")
             return response.text
             
         except requests.exceptions.RequestException as e:
             retry_count += 1
+            logging.warning(f"Error fetching URL {url}: {e.__class__.__name__} - {str(e)}")
             
             if retry_count < max_retries:
-                logging.warning(f"Error fetching URL: {url}, retrying in {current_retry_delay:.1f}s (attempt {retry_count}/{max_retries})")
+                logging.warning(f"Retrying in {current_retry_delay:.1f}s (attempt {retry_count}/{max_retries})")
                 time.sleep(current_retry_delay)
                 # Exponential backoff
-                current_retry_delay = min(current_retry_delay * 2, MAX_RETRY_DELAY)
+                current_retry_delay = min(current_retry_delay * 2, 15.0)
             else:
-                logging.error(f"Failed to fetch page: {url}")
+                logging.error(f"Failed to fetch page after {max_retries} attempts: {url}")
                 return None
+        except Exception as e:
+            logging.error(f"Unexpected error fetching {url}: {e.__class__.__name__} - {str(e)}")
+            return None
 
 def clean_filename(url, is_image=False):
     """Convert URL to a clean filename"""
@@ -532,8 +549,13 @@ def is_valid_api_url(url):
         if pattern in url:
             return False
     
+    # The main fix: Update the condition to include the Anthropic documentation paths
     # Only follow URLs in the API path or docs path
-    return API_PATH_PREFIX in url or '/en/docs/' in url
+    return (API_PATH_PREFIX in url or          # Match API paths
+            '/en/docs/' in url or              # Match docs paths
+            parsed_url.path.startswith('/en/api') or  # Match API root directory 
+            parsed_url.path == '/' or          # Match homepage
+            '/claude' in parsed_url.path)      # Match Claude-specific pages
 
 def process_links(soup, current_url):
     """Find all links on the page, filter them, and update URLs to point to local files"""
@@ -585,95 +607,110 @@ def process_links(soup, current_url):
 
 def process_page(url, depth):
     """Process a single page, extract content, and queue new links"""
-    global processed_pages
+    global processed_pages, error_pages
     
     if stop_event.is_set():
-        return
+        return False
     
     if depth > MAX_CRAWL_DEPTH:
         logging.debug(f"Maximum depth reached for URL: {url}")
-        return
+        return False
         
     if url in visited_urls:
         logging.debug(f"URL already visited: {url}")
-        return
+        return True  # Already processed successfully
         
     if not is_valid_api_url(url):
         skipped_urls.add(url)
         logging.debug(f"Skipping URL (not in API domain or path): {url}")
-        return
+        return False
     
     visited_urls.add(url)
     
     # Get the content
     html_content = fetch_url(url)
     if not html_content:
-        return
+        error_pages += 1
+        logging.error(f"Failed to fetch content for URL: {url}")
+        return False
         
     # Parse the HTML
-    soup = BeautifulSoup(html_content, 'html.parser')
+    try:
+        soup = BeautifulSoup(html_content, 'html.parser')
+    except Exception as e:
+        error_pages += 1
+        logging.error(f"Error parsing HTML for URL {url}: {e}")
+        return False
     
-    # Process any images found on the page
-    image_links = process_images(soup, url, url)
-    logging.info(f"Queued {len(image_links)} images from {url}")
-    
-    # Process any new links
-    new_links = process_links(soup, url)
-    logging.info(f"Found {len(new_links)} new links on page {url}")
-    
-    # Extract the main content
-    extracted_soup = extract_api_doc_content(soup, url)
-    
-    # Save the full HTML
-    filename = clean_filename(url)
-    full_html_file = os.path.join(FULL_HTML_DIR, f"{filename}.html")
-    with open(full_html_file, 'w', encoding='utf-8') as f:
-        f.write(html_content)
-    logging.info(f"Saved full HTML: {full_html_file}")
-    
-    # Save the processed HTML
-    html_file = os.path.join(HTML_DIR, f"{filename}.html")
-    with open(html_file, 'w', encoding='utf-8') as f:
-        f.write(str(extracted_soup))
-    logging.info(f"Saved HTML: {html_file}")
-    
-    # Convert to Markdown
-    markdown_content = md_convert(str(extracted_soup), heading_style="ATX")
-    
-    # Improve the markdown formatting
-    improved_markdown = improve_markdown_format(markdown_content, url)
-    
-    # Save the Markdown
-    md_file = os.path.join(MD_DIR, f"{filename}.md")
-    with open(md_file, 'w', encoding='utf-8') as f:
-        f.write(improved_markdown)
-    logging.info(f"Saved Markdown: {md_file}")
-    
-    # Update page metadata
-    with metadata_lock:
-        title = soup.title.text.strip() if soup.title else os.path.basename(url)
-        page_metadata[url] = {
-            'title': title,
-            'filename': filename,
-            'url': url,
-            'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            'html_size': os.path.getsize(html_file),
-            'md_size': os.path.getsize(md_file),
-            'full_html_size': os.path.getsize(full_html_file),
-            'image_count': len(image_links),
-            'depth': depth
-        }
-    
-    processed_pages += 1
-    logging.info(f"Processed page {processed_pages}: {url}")
-    
-    # Add new links to the queue for crawling
-    for link in new_links:
-        if link not in visited_urls and link not in queued_urls:
-            queued_urls.add(link)
-            page_queue.put((link, depth + 1))
-    
-    return True
+    try:
+        # Process any images found on the page
+        image_links = process_images(soup, url, url)
+        logging.info(f"Queued {len(image_links)} images from {url}")
+        
+        # Process any new links
+        new_links = process_links(soup, url)
+        logging.info(f"Found {len(new_links)} new links on page {url}")
+        
+        # Extract the main content
+        extracted_soup = extract_api_doc_content(soup, url)
+        
+        # Save the full HTML
+        filename = clean_filename(url)
+        full_html_file = os.path.join(FULL_HTML_DIR, f"{filename}.html")
+        with open(full_html_file, 'w', encoding='utf-8') as f:
+            f.write(html_content)
+        logging.info(f"Saved full HTML: {full_html_file}")
+        
+        # Save the processed HTML
+        html_file = os.path.join(HTML_DIR, f"{filename}.html")
+        with open(html_file, 'w', encoding='utf-8') as f:
+            f.write(str(extracted_soup))
+        logging.info(f"Saved HTML: {html_file}")
+        
+        # Convert to Markdown
+        markdown_content = md_convert(str(extracted_soup), heading_style="ATX")
+        
+        # Improve the markdown formatting
+        improved_markdown = improve_markdown_format(markdown_content, url)
+        
+        # Save the Markdown
+        md_file = os.path.join(MD_DIR, f"{filename}.md")
+        with open(md_file, 'w', encoding='utf-8') as f:
+            f.write(improved_markdown)
+        logging.info(f"Saved Markdown: {md_file}")
+        
+        # Update page metadata
+        with metadata_lock:
+            title = soup.title.text.strip() if soup.title else os.path.basename(url)
+            page_metadata[url] = {
+                'title': title,
+                'filename': filename,
+                'url': url,
+                'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                'html_size': os.path.getsize(html_file),
+                'md_size': os.path.getsize(md_file),
+                'full_html_size': os.path.getsize(full_html_file),
+                'image_count': len(image_links),
+                'depth': depth
+            }
+        
+        processed_pages += 1
+        logging.info(f"Processed page {processed_pages}: {url}")
+        
+        # Add new links to the queue for crawling
+        for link in new_links:
+            if link not in visited_urls and link not in queued_urls:
+                queued_urls.add(link)
+                page_queue.put((link, depth + 1))
+        
+        return True
+        
+    except Exception as e:
+        error_pages += 1
+        logging.error(f"Error processing page {url}: {e}")
+        import traceback
+        logging.error(traceback.format_exc())
+        return False
 
 def extract_api_doc_content(soup, url):
     """Extract and clean API documentation content from HTML"""
@@ -856,38 +893,57 @@ def improve_markdown_format(markdown_content, url):
     
     # Fix code blocks - ensure proper language detection
     def fix_code_blocks(match):
-        code_content = match.group(2).strip()
-        
-        # Detect language
-        language = "bash"  # Default language
-        
-        # Check for common language patterns in the code
-        if re.search(r'import\s+[a-zA-Z0-9_]+\s+from|const\s+[a-zA-Z0-9_]+\s+=|let\s+[a-zA-Z0-9_]+\s+=|var\s+[a-zA-Z0-9_]+\s+=', code_content):
-            if "import" in code_content and "from" in code_content and ";" not in code_content:
-                language = "python"
-            elif "const" in code_content or "let" in code_content or "var" in code_content:
-                language = "javascript"
-        elif re.search(r'function\s+[a-zA-Z0-9_]+\s*\(|class\s+[a-zA-Z0-9_]+\s*[\{:]', code_content):
-            if "{" in code_content and ";" in code_content:
-                language = "javascript"
-            else:
-                language = "python"
-        elif re.search(r'#include|int\s+main\(|void\s+[a-zA-Z0-9_]+\s*\(', code_content):
-            language = "cpp"
-        elif re.search(r'public\s+static\s+void\s+main|public\s+class', code_content):
-            language = "java"
-        elif re.search(r'curl\s+', code_content):
-            language = "bash"
-        elif re.search(r'SELECT|INSERT|UPDATE|DELETE|CREATE\s+TABLE', code_content, re.IGNORECASE):
-            language = "sql"
-        elif re.search(r'<?php', code_content):
-            language = "php"
-        elif re.search(r'<html>|<div>|<body>', code_content):
-            language = "html"
-        elif re.search(r'^\s*{', code_content) and re.search(r'}\s*$', code_content):
-            language = "json"
-        
-        return f"```{language}\n{code_content}\n```"
+        # Fixed - properly extract the content between ``` markers
+        code_block = match.group(0)
+        # Extract just the content between the opening and closing ```
+        if '```' in code_block:
+            parts = code_block.split('```', 2)
+            if len(parts) >= 3:
+                # parts[0] is content before the first ```, usually empty
+                # parts[1] could contain the language identifier
+                # parts[2] is the actual code content
+                
+                language_line = parts[1].strip()
+                code_content = parts[2].strip()
+                
+                # Check if the first line specifies a language
+                language = language_line if language_line and not language_line.startswith('\n') else "bash"
+                
+                # If no language specified, try to detect it from the code content
+                if not language or language.startswith('\n'):
+                    # Detect language based on code patterns
+                    if re.search(r'import\s+[a-zA-Z0-9_]+\s+from|const\s+[a-zA-Z0-9_]+\s+=|let\s+[a-zA-Z0-9_]+\s+=|var\s+[a-zA-Z0-9_]+\s+=', code_content):
+                        if "import" in code_content and "from" in code_content and ";" not in code_content:
+                            language = "python"
+                        elif "const" in code_content or "let" in code_content or "var" in code_content:
+                            language = "javascript"
+                    elif re.search(r'function\s+[a-zA-Z0-9_]+\s*\(|class\s+[a-zA-Z0-9_]+\s*[\{:]', code_content):
+                        if "{" in code_content and ";" in code_content:
+                            language = "javascript"
+                        else:
+                            language = "python"
+                    elif re.search(r'#include|int\s+main\(|void\s+[a-zA-Z0-9_]+\s*\(', code_content):
+                        language = "cpp"
+                    elif re.search(r'public\s+static\s+void\s+main|public\s+class', code_content):
+                        language = "java"
+                    elif re.search(r'curl\s+', code_content):
+                        language = "bash"
+                    elif re.search(r'SELECT|INSERT|UPDATE|DELETE|CREATE\s+TABLE', code_content, re.IGNORECASE):
+                        language = "sql"
+                    elif re.search(r'<?php', code_content):
+                        language = "php"
+                    elif re.search(r'<html>|<div>|<body>', code_content):
+                        language = "html"
+                    elif re.search(r'^\s*{', code_content) and re.search(r'}\s*$', code_content):
+                        language = "json"
+                
+                return f"```{language}\n{code_content}\n```"
+            
+        # If we couldn't properly parse the code block, return it unchanged
+        return match.group(0)
+    
+    # Apply the code block fix - updated regex to properly match code blocks
+    markdown_content = re.sub(r'```.*?```', fix_code_blocks, markdown_content, flags=re.DOTALL)
     
     # Fix tables - ensure proper alignment
     def fix_tables(match):
@@ -1038,21 +1094,31 @@ def page_scraper_worker():
     while not stop_event.is_set():
         try:
             # Get a page from the queue with a timeout
-            url, depth = page_queue.get(timeout=1)
+            try:
+                url, depth = page_queue.get(timeout=1)
+                logging.debug(f"Processing URL: {url} (depth: {depth})")
+            except queue.Empty:
+                # Queue is empty, check if all URLs have been processed
+                if visited_urls and (queued_urls <= visited_urls) and page_queue.empty():
+                    logging.info("No more pages to process, exiting worker")
+                    break
+                continue
             
             # Process the page
-            process_page(url, depth)
+            success = process_page(url, depth)
+            
+            # Log a warning if processing failed
+            if not success and url not in visited_urls:
+                logging.warning(f"Failed to process page: {url}")
             
             # Mark task as done
             page_queue.task_done()
             
-        except queue.Empty:
-            # Queue is empty, check if all URLs have been processed
-            if queued_urls <= visited_urls and page_queue.empty():
-                logging.info("No more pages to process, exiting worker")
-                break
         except Exception as e:
             logging.error(f"Error in page scraper worker: {e}")
+            # Log the full traceback for debugging
+            import traceback
+            logging.error(traceback.format_exc())
 
 def image_downloader_worker():
     """Worker thread for image downloading"""

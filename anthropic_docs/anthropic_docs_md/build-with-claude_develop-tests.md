@@ -1,109 +1,85 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/build-with-claude/develop-tests/
----
+# Create strong empirical evaluations - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/build-with-claude/develop-tests#building-evals-and-test-cases
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Build with Claude
-
-Create strong empirical evaluations
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
 After defining your success criteria, the next step is designing evaluations to measure LLM performance against those criteria. This is a vital part of the prompt engineering cycle.
 
 This guide focuses on how to develop your test cases.
 
-[​](#building-evals-and-test-cases) Building evals and test cases
------------------------------------------------------------------
+# [​](#building-evals-and-test-cases) Building evals and test cases
 
-### [​](#eval-design-principles) Eval design principles
+# [​](#eval-design-principles) Eval design principles
 
 1. **Be task-specific**: Design evals that mirror your real-world task distribution. Don’t forget to factor in edge cases!
 
    Example edge cases
-
   * Irrelevant or nonexistent input data
-  * Overly long input data or user input
-  * [Chat use cases] Poor, harmful, or irrelevant user input
-  * Ambiguous test cases where even humans would find it hard to reach an assessment consensus
+   * Overly long input data or user input
+   * [Chat use cases] Poor, harmful, or irrelevant user input
+   * Ambiguous test cases where even humans would find it hard to reach an assessment consensus
 2. **Automate when possible**: Structure questions to allow for automated grading (e.g., multiple-choice, string match, code-graded, LLM-graded).
 3. **Prioritize volume over quality**: More questions with slightly lower signal automated grading is better than fewer questions with high-quality human hand-graded evals.
 
-### [​](#example-evals) Example evals
+# [​](#example-evals) Example evals
 
 Task fidelity (sentiment analysis) - exact match evaluation
 
@@ -111,7 +87,7 @@ Task fidelity (sentiment analysis) - exact match evaluation
 
 **Example eval test cases**: 1000 tweets with human-labeled sentiments.
 
-```bash
+```
 import anthropic
 
 tweets = [
@@ -126,7 +102,7 @@ client = anthropic.Anthropic()
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-3-7-sonnet-20250219",
+        model="claude-opus-4-20250514",
         max_tokens=50,
         messages=[
         {"role": "user", "content": prompt}
@@ -140,6 +116,7 @@ def evaluate_exact_match(model_output, correct_answer):
 outputs = [get_completion(f"Classify this as 'positive', 'negative', 'neutral', or 'mixed': {tweet['text']}") for tweet in tweets]
 accuracy = sum(evaluate_exact_match(output, tweet['sentiment']) for output, tweet in zip(outputs, tweets)) / len(tweets)
 print(f"Sentiment Analysis Accuracy: {accuracy * 100}%")
+
 ```
 
 Consistency (FAQ bot) - cosine similarity evaluation
@@ -148,7 +125,7 @@ Consistency (FAQ bot) - cosine similarity evaluation
 
 **Example eval test cases**: 50 groups with a few paraphrased versions each.
 
-```sql
+```
 from sentence_transformers import SentenceTransformer
 import numpy as np
 import anthropic
@@ -164,7 +141,7 @@ client = anthropic.Anthropic()
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-3-7-sonnet-20250219",
+        model="claude-opus-4-20250514",
         max_tokens=2048,
         messages=[
         {"role": "user", "content": prompt}
@@ -183,6 +160,7 @@ for faq in faq_variations:
     outputs = [get_completion(question) for question in faq["questions"]]
     similarity_score = evaluate_cosine_similarity(outputs)
     print(f"FAQ Consistency Score: {similarity_score * 100}%")
+
 ```
 
 Relevance and coherence (summarization) - ROUGE-L evaluation
@@ -191,7 +169,7 @@ Relevance and coherence (summarization) - ROUGE-L evaluation
 
 **Example eval test cases**: 200 articles with reference summaries.
 
-```bash
+```
 from rouge import Rouge
 import anthropic
 
@@ -206,7 +184,7 @@ client = anthropic.Anthropic()
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-3-7-sonnet-20250219",
+        model="claude-opus-4-20250514",
         max_tokens=1024,
         messages=[
         {"role": "user", "content": prompt}
@@ -222,6 +200,7 @@ def evaluate_rouge_l(model_output, true_summary):
 outputs = [get_completion(f"Summarize this article in 1-2 sentences:\n\n{article['text']}") for article in articles]
 relevance_scores = [evaluate_rouge_l(output, article['summary']) for output, article in zip(outputs, articles)]
 print(f"Average ROUGE-L F1 Score: {sum(relevance_scores) / len(relevance_scores)}")
+
 ```
 
 Tone and style (customer service) - LLM-based Likert scale
@@ -230,7 +209,7 @@ Tone and style (customer service) - LLM-based Likert scale
 
 **Example eval test cases**: 100 customer inquiries with target tone (empathetic, professional, concise).
 
-```bash
+```
 import anthropic
 
 inquiries = [
@@ -244,7 +223,7 @@ client = anthropic.Anthropic()
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-3-7-sonnet-20250219",
+        model="claude-opus-4-20250514",
         max_tokens=2048,
         messages=[
         {"role": "user", "content": prompt}
@@ -259,13 +238,14 @@ def evaluate_likert(model_output, target_tone):
     5: Perfectly {target_tone}
     Output only the number."""
 
-    # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output 
+    # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     response = client.messages.create(model="claude-3-opus-20240229", max_tokens=50, messages=[{"role": "user", "content": tone_prompt}])
     return int(response.content[0].text.strip())
 
 outputs = [get_completion(f"Respond to this customer inquiry: {inquiry['text']}") for inquiry in inquiries]
 tone_scores = [evaluate_likert(output, inquiry['tone']) for output, inquiry in zip(outputs, inquiries)]
 print(f"Average Tone Score: {sum(tone_scores) / len(tone_scores)}")
+
 ```
 
 Privacy preservation (medical chatbot) - LLM-based binary classification
@@ -274,7 +254,7 @@ Privacy preservation (medical chatbot) - LLM-based binary classification
 
 **Example eval test cases**: 500 simulated patient queries, some with PHI.
 
-```bash
+```
 import anthropic
 
 patient_queries = [
@@ -289,7 +269,7 @@ client = anthropic.Anthropic()
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-3-7-sonnet-20250219",
+        model="claude-opus-4-20250514",
         max_tokens=1024,
         messages=[
         {"role": "user", "content": prompt}
@@ -304,10 +284,10 @@ def evaluate_binary(model_output, query_contains_phi):
     binary_prompt = """Does this response contain or reference any Personal Health Information (PHI)?
     PHI refers to any individually identifiable health data that is created, used, or disclosed in the course of providing healthcare services. This includes information related to an individual's physical or mental health condition, the provision of healthcare to that individual, or payment for such care.
     Key aspects of PHI include:
-    - Identifiers: Names, addresses, birthdates, Social Security numbers, medical record numbers, etc.
-    - Health data: Diagnoses, treatment plans, test results, medication records, etc.
-    - Financial information: Insurance details, payment records, etc.
-    - Communication: Notes from healthcare providers, emails or messages about health.
+  - Identifiers: Names, addresses, birthdates, Social Security numbers, medical record numbers, etc.
+  - Health data: Diagnoses, treatment plans, test results, medication records, etc.
+  - Financial information: Insurance details, payment records, etc.
+  - Communication: Notes from healthcare providers, emails or messages about health.
 
     <response>{model_output}</response>
     Output only 'yes' or 'no'."""
@@ -319,6 +299,7 @@ def evaluate_binary(model_output, query_contains_phi):
 outputs = [get_completion(f"You are a medical assistant. Never reveal any PHI in your responses. PHI refers to any individually identifiable health data that is created, used, or disclosed in the course of providing healthcare services. This includes information related to an individual's physical or mental health condition, the provision of healthcare to that individual, or payment for such care. Here is the question: {query['query']}") for query in patient_queries]
 privacy_scores = [evaluate_binary(output, query['contains_phi']) for output, query in zip(outputs, patient_queries)]
 print(f"Privacy Preservation Score: {sum(privacy_scores) / len(privacy_scores) * 100}%")
+
 ```
 
 Context utilization (conversation assistant) - LLM-based ordinal scale
@@ -327,7 +308,7 @@ Context utilization (conversation assistant) - LLM-based ordinal scale
 
 **Example eval test cases**: 100 multi-turn conversations with context-dependent questions.
 
-```bash
+```
 import anthropic
 
 conversations = [
@@ -353,7 +334,7 @@ client = anthropic.Anthropic()
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-3-7-sonnet-20250219",
+        model="claude-opus-4-20250514",
         max_tokens=1024,
         messages=[
         {"role": "user", "content": prompt}
@@ -378,25 +359,24 @@ def evaluate_ordinal(model_output, conversation):
 outputs = [get_completion(conversation) for conversation in conversations]
 context_scores = [evaluate_ordinal(output, conversation) for output, conversation in zip(outputs, conversations)]
 print(f"Average Context Utilization Score: {sum(context_scores) / len(context_scores)}")
+
 ```
 
 Writing hundreds of test cases can be hard to do by hand! Get Claude to help you generate more from a baseline set of example test cases.
 
 If you don’t know what eval methods might be useful to assess for your success criteria, you can also brainstorm with Claude!
 
-[​](#grading-evals) Grading evals
----------------------------------
+# [​](#grading-evals) Grading evals
 
 When deciding which method to use to grade evals, choose the fastest, most reliable, most scalable method:
 
 1. **Code-based grading**: Fastest and most reliable, extremely scalable, but also lacks nuance for more complex judgements that require less rule-based rigidity.
-
   * Exact match: `output == golden_answer`
-  * String match: `key_phrase in output`
+   * String match: `key_phrase in output`
 2. **Human grading**: Most flexible and high quality, but slow and expensive. Avoid if possible.
 3. **LLM-based grading**: Fast and flexible, scalable and suitable for complex judgement. Test to ensure reliability first then scale.
 
-### [​](#tips-for-llm-based-grading) Tips for LLM-based grading
+# [​](#tips-for-llm-based-grading) Tips for LLM-based grading
 
 * **Have detailed, clear rubrics**: “The answer should always mention ‘Acme Inc.’ in the first sentence. If it does not, the answer is automatically graded as ‘incorrect.’”
 
@@ -406,7 +386,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
 Example: LLM-based grading
 
-```bash
+```
 import anthropic
 
 def build_grader_prompt(answer, rubric):
@@ -433,7 +413,7 @@ eval_data = [
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-3-7-sonnet-20250219",
+        model="claude-opus-4-20250514",
         max_tokens=1024,
         messages=[
         {"role": "user", "content": prompt}
@@ -444,16 +424,14 @@ def get_completion(prompt: str):
 outputs = [get_completion(q["question"]) for q in eval_data]
 grades = [grade_completion(output, a["golden_answer"]) for output, a in zip(outputs, eval_data)]
 print(f"Score: {grades.count('correct') / len(grades) * 100}%")
+
 ```
 
-[​](#next-steps) Next steps
----------------------------
+# [​](#next-steps) Next steps
 
-[Brainstorm evaluations
-----------------------
+## Brainstorm evaluations
 
-Learn how to craft prompts that maximize your eval scores.](/en/docs/build-with-claude/prompt-engineering/overview)[Evals cookbook
---------------
+Learn how to craft prompts that maximize your eval scores.[## Evals cookbook
 
 More code examples of human-, code-, and LLM-graded evals.](https://github.com/anthropics/anthropic-cookbook/blob/main/misc/building%5Fevals.ipynb)
 
@@ -461,13 +439,6 @@ Was this page helpful?
 
 YesNo
 
-[Define success criteria](/en/docs/build-with-claude/define-success)[Context windows](/en/docs/build-with-claude/context-windows)
+Define success criteria[Reduce hallucinations](/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
 
 On this page
-
-* [Building evals and test cases](#building-evals-and-test-cases)
-* [Eval design principles](#eval-design-principles)
-* [Example evals](#example-evals)
-* [Grading evals](#grading-evals)
-* [Tips for LLM-based grading](#tips-for-llm-based-grading)
-* [Next steps](#next-steps)

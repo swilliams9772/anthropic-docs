@@ -1,124 +1,99 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/build-with-claude/multilingual-support/
----
+# Multilingual support - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/build-with-claude/multilingual-support
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Build with Claude
-
-Multilingual support
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# First steps
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Intro to Claude](/en/docs/welcome)
+* [Get started](/en/docs/get-started)
 
-##### Learn about Claude
+# Models & pricing
 
+* [Models overview](/en/docs/about-claude/models/overview)
+* [Choosing a model](/en/docs/about-claude/models/choosing-a-model)
+* [Migrating to Claude 4](/en/docs/about-claude/models/migrating-to-claude-4)
+* [Model deprecations](/en/docs/about-claude/model-deprecations)
+* [Pricing](/en/docs/about-claude/pricing)
+
+# Learn about Claude
+
+* [Building with Claude](/en/docs/overview)
 * Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
 * [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
+* [Glossary](/en/docs/about-claude/glossary)
 * Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
+
+# Explore features
+
+* [Features overview](/en/docs/build-with-claude/overview)
 * [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
+* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
+* [Streaming Messages](/en/docs/build-with-claude/streaming)
 * [Batch processing](/en/docs/build-with-claude/batch-processing)
+* [Citations](/en/docs/build-with-claude/citations)
+* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
+* [Token counting](/en/docs/build-with-claude/token-counting)
 * [Embeddings](/en/docs/build-with-claude/embeddings)
+* [Vision](/en/docs/build-with-claude/vision)
+* [PDF support](/en/docs/build-with-claude/pdf-support)
 
-##### Agents and tools
+# Agent components
 
-* Claude Code
+* Tools
+* Model Context Protocol (MCP)
 * [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
 * [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
 
-##### Test and evaluate
+# Test & evaluate
 
+* [Define success criteria](/en/docs/test-and-evaluate/define-success)
+* [Develop test cases](/en/docs/test-and-evaluate/develop-tests)
 * Strengthen guardrails
 * [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
 
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
+# Legal center
 
 * [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Security and compliance](https://trust.anthropic.com/)
 
-[​](#overview) Overview
------------------------
+# [​](#overview) Overview
 
 Claude demonstrates robust multilingual capabilities, with particularly strong performance in zero-shot tasks across languages. The model maintains consistent relative performance across both widely-spoken and lower-resource languages, making it a reliable choice for multilingual applications.
 
 Note that Claude is capable in many languages beyond those benchmarked below. We encourage testing with any languages relevant to your specific use cases.
 
-[​](#performance-data) Performance data
----------------------------------------
+# [​](#performance-data) Performance data
 
-Below are the zero-shot chain-of-thought evaluation scores for Claude 3.7 Sonnet and Claude 3.5 models across different languages, shown as a percent relative to English performance (100%):
+Below are the zero-shot chain-of-thought evaluation scores for Claude 4, Claude 3.7 Sonnet and Claude 3.5 models across different languages, shown as a percent relative to English performance (100%):
 
-| Language | Claude 3.7 Sonnet1 | Claude 3.5 Sonnet (New) | Claude 3.5 Haiku |
-| --- | --- | --- | --- |
-| English (baseline, fixed to 100%) | 100% | 100% | 100% |
-| Spanish | 97.6% | 96.9% | 94.6% |
-| Portuguese (Brazil) | 97.3% | 96.0% | 94.6% |
-| Italian | 97.2% | 95.6% | 95.0% |
-| French | 96.9% | 96.2% | 95.3% |
-| Indonesian | 96.3% | 94.0% | 91.2% |
-| German | 96.2% | 94.0% | 92.5% |
-| Arabic | 95.4% | 92.5% | 84.7% |
-| Chinese (Simplified) | 95.3% | 92.8% | 90.9% |
-| Korean | 95.2% | 92.8% | 89.1% |
-| Japanese | 95.0% | 92.7% | 90.8% |
-| Hindi | 94.2% | 89.3% | 80.1% |
-| Bengali | 92.4% | 85.9% | 72.9% |
-| Swahili | 89.2% | 83.9% | 64.7% |
-| Yoruba | 76.7% | 64.9% | 46.1% |
+| Language | Claude Opus 41 | Claude Sonnet 41 | Claude Sonnet 3.71 | Claude Sonnet 3.5 v2 | Claude Haiku 3.5 |
+| --- | --- | --- | --- | --- | --- |
+| English (baseline, fixed to 100%) | 100% | 100% | 100% | 100% | 100% |
+| Spanish | 98.0% | 97.5% | 97.6% | 96.9% | 94.6% |
+| Portuguese (Brazil) | 97.3% | 97.2% | 97.3% | 96.0% | 94.6% |
+| Italian | 97.5% | 97.3% | 97.2% | 95.6% | 95.0% |
+| French | 97.7% | 97.1% | 96.9% | 96.2% | 95.3% |
+| Indonesian | 97.2% | 96.2% | 96.3% | 94.0% | 91.2% |
+| German | 97.1% | 94.7% | 96.2% | 94.0% | 92.5% |
+| Arabic | 96.9% | 96.1% | 95.4% | 92.5% | 84.7% |
+| Chinese (Simplified) | 96.7% | 95.9% | 95.3% | 92.8% | 90.9% |
+| Korean | 96.4% | 95.9% | 95.2% | 92.8% | 89.1% |
+| Japanese | 96.2% | 95.6% | 95.0% | 92.7% | 90.8% |
+| Hindi | 96.7% | 95.8% | 94.2% | 89.3% | 80.1% |
+| Bengali | 95.2% | 94.4% | 92.4% | 85.9% | 72.9% |
+| Swahili | 89.5% | 87.1% | 89.2% | 83.9% | 64.7% |
+| Yoruba | 78.9% | 76.4% | 76.7% | 64.9% | 46.1% |
 
-1 With [extended thinking](/en/docs/build-with-claude/extended-thinking) and 16,000 `budget_tokens`.
+1 With [extended thinking](/en/docs/build-with-claude/extended-thinking).
 
 These metrics are based on [MMLU (Massive Multitask Language Understanding)](https://en.wikipedia.org/wiki/MMLU) English test sets that were translated into 14 additional languages by professional human translators, as documented in [OpenAI’s simple-evals repository](https://github.com/openai/simple-evals/blob/main/multilingual_mmlu_benchmark_results.md). The use of human translators for this evaluation ensures high-quality translations, particularly important for languages with fewer digital resources.
 
-[​](#best-practices) Best practices
------------------------------------
+# [​](#best-practices) Best practices
 
 When working with multilingual content:
 
@@ -128,18 +103,15 @@ When working with multilingual content:
 
 We also suggest following our general [prompt engineering guidelines](/en/docs/build-with-claude/prompt-engineering/overview) to better improve Claude’s performance.
 
-[​](#language-support-considerations) Language support considerations
----------------------------------------------------------------------
+# [​](#language-support-considerations) Language support considerations
 
 * Claude processes input and generates output in most world languages that use standard Unicode characters
 * Performance varies by language, with particularly strong capabilities in widely-spoken languages
 * Even in languages with fewer digital resources, Claude maintains meaningful capabilities
 
-[Prompt Engineering Guide
-------------------------
+## Prompt Engineering Guide
 
-Master the art of prompt crafting to get the most out of Claude.](/en/docs/build-with-claude/prompt-engineering/overview)[Prompt Library
---------------
+Master the art of prompt crafting to get the most out of Claude.[## Prompt Library
 
 Find a wide range of pre-crafted prompts for various tasks and industries. Perfect for inspiration or quick starts.](/en/prompt-library)
 
@@ -147,11 +119,6 @@ Was this page helpful?
 
 YesNo
 
-[Extended thinking](/en/docs/build-with-claude/extended-thinking)[Overview](/en/docs/build-with-claude/tool-use/overview)
+Citations[Token counting](/en/docs/build-with-claude/token-counting)
 
 On this page
-
-* [Overview](#overview)
-* [Performance data](#performance-data)
-* [Best practices](#best-practices)
-* [Language support considerations](#language-support-considerations)

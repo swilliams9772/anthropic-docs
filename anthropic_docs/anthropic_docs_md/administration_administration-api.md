@@ -1,87 +1,21 @@
----
-title: 
-source_url: https://docs.anthropic.com/en/docs/administration/administration-api/
----
+# Using the Admin API - Anthropic
 
-[Anthropic home page](/)
+**Source:** https://docs.anthropic.com/en/docs/administration/administration-api
 
-English
-
-Search...
-
-Search...
-
-Navigation
-
-Administration
-
-Admin API
-
-[Welcome](/en/home)[User Guides](/en/docs/welcome)[API Reference](/en/api/getting-started)[Prompt Library](/en/prompt-library/library)[Release Notes](/en/release-notes/overview)
-
+- [Documentation](/en/home)
 - [Developer Console](https://console.anthropic.com/)
 - [Developer Discord](https://www.anthropic.com/discord)
 - [Support](https://support.anthropic.com/)
 
-##### Get started
+# SDKs
 
-* [Overview](/en/docs/welcome)
-* [Initial setup](/en/docs/initial-setup)
-* [Intro to Claude](/en/docs/intro-to-claude)
+* [Client SDKs](/en/api/client-sdks)
+* [OpenAI SDK compatibility (beta)](/en/api/openai-sdk)
 
-##### Learn about Claude
+# Examples
 
-* Use cases
-* Models & pricing
-* [Security and compliance](https://trust.anthropic.com/)
-
-##### Build with Claude
-
-* [Define success criteria](/en/docs/build-with-claude/define-success)
-* [Develop test cases](/en/docs/build-with-claude/develop-tests)
-* [Context windows](/en/docs/build-with-claude/context-windows)
-* [Vision](/en/docs/build-with-claude/vision)
-* Prompt engineering
-* [Extended thinking](/en/docs/build-with-claude/extended-thinking)
-* [Multilingual support](/en/docs/build-with-claude/multilingual-support)
-* Tool use (function calling)
-* [Prompt caching](/en/docs/build-with-claude/prompt-caching)
-* [PDF support](/en/docs/build-with-claude/pdf-support)
-* [Citations](/en/docs/build-with-claude/citations)
-* [Token counting](/en/docs/build-with-claude/token-counting)
-* [Batch processing](/en/docs/build-with-claude/batch-processing)
-* [Embeddings](/en/docs/build-with-claude/embeddings)
-
-##### Agents and tools
-
-* Claude Code
-* [Computer use (beta)](/en/docs/agents-and-tools/computer-use)
-* [Model Context Protocol (MCP)](/en/docs/agents-and-tools/mcp)
-* [Google Sheets add-on](/en/docs/agents-and-tools/claude-for-sheets)
-
-##### Test and evaluate
-
-* Strengthen guardrails
-* [Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)
-
-##### Administration
-
-* [Admin API](/en/docs/administration/administration-api)
-
-##### Resources
-
-* [Glossary](/en/docs/resources/glossary)
-* [Model deprecations](/en/docs/resources/model-deprecations)
-* [System status](https://status.anthropic.com/)
-* [Claude 3 model card](https://assets.anthropic.com/m/61e7d27f8c8f5919/original/Claude-3-Model-Card.pdf)
-* [Claude 3.7 system card](https://anthropic.com/claude-3-7-sonnet-system-card)
-* [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-* [Anthropic Courses](https://github.com/anthropics/courses)
-* [API features](/en/docs/resources/api-features)
-
-##### Legal center
-
-* [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+* [Messages examples](/en/api/messages-examples)
+* [Message Batches examples](/en/api/messages-batch-examples)
 
 **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 
@@ -91,17 +25,12 @@ The [Admin API](/en/api/admin-api) allows you to programmatically manage your or
 
 The Admin API requires a special Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the Anthropic Console.
 
-[​](#how-the-admin-api-works) How the Admin API works
------------------------------------------------------
+# [​](#how-the-admin-api-works) How the Admin API works
 
 When you use the Admin API:
 
 1. You make requests using your Admin API key in the `x-api-key` header
 2. The API allows you to manage:
-  * Organization members and their roles
-  * Organization member invites
-  * Workspaces and their members
-  * API keys
 
 This is useful for:
 
@@ -109,8 +38,7 @@ This is useful for:
 * Programmatically managing workspace access
 * Monitoring and managing API key usage
 
-[​](#organization-roles-and-permissions) Organization roles and permissions
----------------------------------------------------------------------------
+# [​](#organization-roles-and-permissions) Organization roles and permissions
 
 There are five organization-level roles.
 
@@ -122,31 +50,161 @@ There are five organization-level roles.
 | billing | Can use Workbench and manage billing details |
 | admin | Can do all of the above, plus manage users |
 
-[​](#key-concepts) Key concepts
--------------------------------
+# [​](#key-concepts) Key concepts
 
-### [​](#organization-members) Organization Members
+# [​](#organization-members) Organization Members
 
 You can list organization members, update member roles, and remove members.
 
-### [​](#organization-invites) Organization Invites
+Shell
+
+```
+# List organization members
+
+curl "https://api.anthropic.com/v1/organizations/users?limit=10" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+
+# Update member role
+
+curl "https://api.anthropic.com/v1/organizations/users/{user_id}" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+  --data '{"role": "developer"}'
+
+# Remove member
+
+curl --request DELETE "https://api.anthropic.com/v1/organizations/users/{user_id}" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+
+```
+
+# [​](#organization-invites) Organization Invites
 
 You can invite users to organizations and manage those invites.
 
-### [​](#workspaces) Workspaces
+Shell
+
+```
+# Create invite
+
+curl --request POST "https://api.anthropic.com/v1/organizations/invites" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+  --data '{
+    "email": "newuser@domain.com",
+    "role": "developer"
+  }'
+
+# List invites
+
+curl "https://api.anthropic.com/v1/organizations/invites?limit=10" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+
+# Delete invite
+
+curl --request DELETE "https://api.anthropic.com/v1/organizations/invites/{invite_id}" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+
+```
+
+# [​](#workspaces) Workspaces
 
 Create and manage [workspaces](https://console.anthropic.com/settings/workspaces) to organize your resources:
 
-### [​](#workspace-members) Workspace Members
+Shell
+
+```
+# Create workspace
+
+curl --request POST "https://api.anthropic.com/v1/organizations/workspaces" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+  --data '{"name": "Production"}'
+
+# List workspaces
+
+curl "https://api.anthropic.com/v1/organizations/workspaces?limit=10&include_archived=false" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+
+# Archive workspace
+
+curl --request POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/archive" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+
+```
+
+# [​](#workspace-members) Workspace Members
 
 Manage user access to specific workspaces:
 
-### [​](#api-keys) API Keys
+Shell
+
+```
+# Add member to workspace
+
+curl --request POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+  --data '{
+    "user_id": "user_xxx",
+    "workspace_role": "workspace_developer"
+  }'
+
+# List workspace members
+
+curl "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members?limit=10" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+
+# Update member role
+
+curl --request POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+  --data '{
+    "workspace_role": "workspace_admin"
+  }'
+
+# Remove member from workspace
+
+curl --request DELETE "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+
+```
+
+# [​](#api-keys) API Keys
 
 Monitor and manage API keys:
 
-[​](#best-practices) Best practices
------------------------------------
+Shell
+
+```
+# List API keys
+
+curl "https://api.anthropic.com/v1/organizations/api_keys?limit=10&status=active&workspace_id=wrkspc_xxx" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+
+# Update API key
+
+curl --request POST "https://api.anthropic.com/v1/organizations/api_keys/{api_key_id}" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+  --data '{
+    "status": "inactive",
+    "name": "New Key Name"
+  }'
+
+```
+
+# [​](#best-practices) Best practices
 
 To effectively use the Admin API:
 
@@ -156,24 +214,13 @@ To effectively use the Admin API:
 * Clean up unused workspaces and expired invites
 * Monitor API key usage and rotate keys periodically
 
-[​](#faq) FAQ
--------------
-
-What permissions are needed to use the Admin API?
+# [​](#faq) FAQ
 
 Only organization members with the admin role can use the Admin API. They must also have a special Admin API key (starting with `sk-ant-admin`).
 
-Can I create new API keys through the Admin API?
-
 No, new API keys can only be created through the Anthropic Console for security reasons. The Admin API can only manage existing API keys.
 
-What happens to API keys when removing a user?
-
 API keys persist in their current state as they are scoped to the Organization, not to individual users.
-
-Can organization admins be removed via the API?
-
-No, organization members with the admin role cannot be removed via the API for security reasons.
 
 How long do organization invites last?
 
@@ -207,17 +254,6 @@ Was this page helpful?
 
 YesNo
 
-[Using the Evaluation Tool](/en/docs/test-and-evaluate/eval-tool)[Glossary](/en/docs/resources/glossary)
+Supported regions[Getting help](/en/api/getting-help)
 
 On this page
-
-* [How the Admin API works](#how-the-admin-api-works)
-* [Organization roles and permissions](#organization-roles-and-permissions)
-* [Key concepts](#key-concepts)
-* [Organization Members](#organization-members)
-* [Organization Invites](#organization-invites)
-* [Workspaces](#workspaces)
-* [Workspace Members](#workspace-members)
-* [API Keys](#api-keys)
-* [Best practices](#best-practices)
-* [FAQ](#faq)
