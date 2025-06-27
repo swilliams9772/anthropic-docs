@@ -15,11 +15,13 @@ A Python tool to scrape and convert the Anthropic API documentation into markdow
 
 ## Latest Improvements
 
-- **Cleaner Markdown Structure**: Headers, sidebars, and navigation elements are now removed from each file
+- **Clean Markdown Structure**: Headers, sidebars, and navigation elements are removed from each file
 - **Separate Navigation System**: Table of contents and sidebar navigation files for better organization
 - **Enhanced API Parameter Formatting**: More readable formatting of parameters in documentation
 - **Improved Content Extraction**: Better detection and isolation of main content
 - **Adaptive Rate Limiting**: Intelligently backs off when rate limits are encountered
+- **Clean File Names**: No more `.html.md` extensions or encoded characters in filenames
+- **Quality Content Filtering**: Only substantial documentation content is included
 
 ## Installation
 
@@ -36,33 +38,34 @@ pip install -r requirements.txt
 
 ## Usage
 
-### Improved Scraper (Recommended)
+### Main Scraper (Recommended)
 
-Run the improved scraper with better error handling, image optimization, and URL management:
+Run the Anthropic documentation scraper with enhanced error handling, image optimization, and clean output:
 
 ```bash
-python improved_scraper.py
+python anthropic_scraper.py
 ```
 
 Or use the convenient shell script to run everything in one step:
 
 ```bash
-chmod +x run_improved_scraper.sh
-./run_improved_scraper.sh
+chmod +x run_scraper.sh
+./run_scraper.sh
 ```
 
-The improved scraper includes:
+The scraper includes:
 
-1. **Better Image Handling**: Properly detects and handles image formats
-2. **More Robust URL Processing**: Improved normalization and validation of URLs  
-3. **Enhanced Error Recovery**: Better handling of errors and retries for failed requests
-4. **Smarter Content Extraction**: Improved detection of main content areas
-5. **Cleaner Markdown Output**: Better conversion from HTML to Markdown
-6. **Adaptive Rate Limiting**: Intelligently backs off when rate limits are encountered
+1. **Enhanced Content Quality**: Filters out navigation-heavy pages, ensuring substantial content
+2. **Clean File Names**: Proper `.md` extensions without encoded characters
+3. **Professional Formatting**: Clean markdown with titles and source URLs
+4. **Better Image Handling**: Properly detects and handles image formats
+5. **Robust URL Processing**: Improved normalization and validation of URLs  
+6. **Enhanced Error Recovery**: Better handling of errors and retries for failed requests
+7. **Adaptive Rate Limiting**: Intelligently backs off when rate limits are encountered
 
 ### Table of Contents Generation
 
-A separate table of contents and sidebar navigation are now generated to make browsing the documentation easier:
+Generate a table of contents and sidebar navigation to make browsing the documentation easier:
 
 ```bash
 python generate_toc.py
@@ -77,7 +80,7 @@ This creates:
 You can customize the scraper behavior using command-line arguments:
 
 ```bash
-python improved_scraper.py --start-url https://docs.anthropic.com/en/api --threads 4 --image-threads 4 --delay 1.0
+python anthropic_scraper.py --start-url https://docs.anthropic.com/en/api --threads 4 --image-threads 4 --delay 1.0
 ```
 
 Available options:
@@ -97,11 +100,10 @@ Available options:
 The scraper generates the following directories:
 
 - `anthropic_docs_html/`: Processed HTML files
-- `anthropic_docs_md/`: Markdown versions of the documentation
+- `anthropic_docs_md/`: Markdown versions of the documentation (clean `.md` files)
 - `anthropic_docs_images/`: Downloaded and optimized images
 - `anthropic_docs_full_html/`: Original HTML content
-- `table_of_contents.md`: Main navigation table
-- `sidebar.md`: Sidebar navigation file
+- `page_metadata.json`: Comprehensive metadata about all scraped pages
 
 ## Configuration
 
@@ -130,14 +132,42 @@ rate_limiting:
   max_retry_delay: 20.0
 ```
 
+## Quality Assurance
+
+The current scraper ensures:
+
+- ✅ **Clean filenames** - All files have proper `.md` extensions
+- ✅ **Substantial content** - Minimum 200 characters of actual documentation content
+- ✅ **Professional formatting** - Proper markdown structure with titles and source URLs
+- ✅ **Navigation filtering** - Removes sidebar and navigation clutter
+- ✅ **Error-free processing** - Robust error handling and recovery
+
 ## Troubleshooting
 
 If you encounter issues with the scraper:
 
-1. Check the `scraper.log` file for detailed error messages
+1. Check the `scraper_run.log` file for detailed error messages
 2. Try increasing the delay between requests (`--delay 2.0`)
-3. Look at `skipped_urls.txt` to see which URLs were skipped
-4. For image issues, try the `--no-images` flag to skip image processing
+3. For image issues, try the `--no-images` flag to skip image processing
+
+## Files in this Repository
+
+### Main Tools
+- `anthropic_scraper.py` - Main scraper with all improvements
+- `run_scraper.sh` - Convenient shell script to run the scraper
+- `generate_toc.py` - Generates table of contents and navigation
+- `build_documentation.py` - Additional documentation processing
+- `convert_to_pdf.py` - Converts documentation to PDF format
+
+### Configuration
+- `config.yaml` - Main configuration file
+- `requirements.txt` - Python dependencies
+
+### Documentation
+- `README.md` - This file
+- `SCRAPER_V3_RESULTS_SUMMARY.md` - Results summary of the latest scraper improvements
+- `SCRAPER_ANALYSIS_AND_IMPROVEMENTS_V3.md` - Technical details of improvements
+- `FINAL_REPORT.md` - Comprehensive analysis report
 
 ## License
 
