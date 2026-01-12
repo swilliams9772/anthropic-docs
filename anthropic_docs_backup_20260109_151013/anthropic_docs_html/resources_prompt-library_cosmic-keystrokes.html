@@ -1,0 +1,293 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><blockquote>
+<p>Copy this prompt into our developer <a class="link" href="https://console.anthropic.com/dashboard" rel="noreferrer" target="_blank">Console</a> to try it for yourself!</p>
+</blockquote>
+<table><thead><tr><th>Content</th></tr></thead><tbody><tr><td>User</td><td>Write me a fully complete web app as a single HTML file. The app should contain a simple side-scrolling game where I use WASD to move around. When moving around the world, occasionally the character/sprite will encounter words. When a word is encountered, the player must correctly type the word as fast as possible.The faster the word is successfully typed, the more point the player gets. We should have a counter in the top-right to keep track of points. Words should be random and highly variable to keep the game interesting.You should make the website very aesthetic and use Tailwind.</td></tr></tbody></table>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="example-output"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#example-output">​</a></div><span class="cursor-pointer">Example Output</span></h2>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-html"><code class="language-html"><span class=""><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span></span>
+<span class=""><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></span>
+<span class="">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></span>
+<span class="">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.tailwindcss.com<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Side-Scrolling Typing Game<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>bg-gray-900 text-white<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span></span>
+<span class="">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fixed top-4 right-4 text-2xl<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span></span>
+<span class="">      Score: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>score<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>game<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>h-screen w-screen overflow-hidden relative<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span></span>
+<span class="">      &lt;div</span>
+<span class="">        id="player"</span>
+<span class="">        class="absolute bottom-10 left-10 w-8 h-8 bg-blue-500"</span>
+<span class="">      &gt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">    &lt;div</span>
+<span class="">      id="word-input"</span>
+<span class="">      class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-black p-4 rounded hidden"</span>
+<span class="">    &gt;</span>
+<span class="">      &lt;input</span>
+<span class="">        type="text"</span>
+<span class="">        id="typed-word"</span>
+<span class="">        class="border border-gray-300 rounded px-2 py-1 mb-2 w-full"</span>
+<span class="">      /&gt;</span>
+<span class="">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit-word<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>bg-blue-500 text-white px-4 py-2 rounded<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span></span>
+<span class="">        Submit</span>
+<span class="">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">      const words = [</span>
+<span class="">        'ability',</span>
+<span class="">        'able',</span>
+<span class="">        'about',</span>
+<span class="">        'above',</span>
+<span class="">        'accept',</span>
+<span class="">        'according',</span>
+<span class="">        'account',</span>
+<span class="">        'across',</span>
+<span class="">        'action',</span>
+<span class="">        'activity',</span>
+<span class="">        'actually',</span>
+<span class="">        'address',</span>
+<span class="">        'administration',</span>
+<span class="">        'admit',</span>
+<span class="">        'adult',</span>
+<span class="">        'affect',</span>
+<span class="">        'after',</span>
+<span class="">        'again',</span>
+<span class="">        'against',</span>
+<span class="">        'agency',</span>
+<span class="">        'agent',</span>
+<span class="">        'ago',</span>
+<span class="">        'agree',</span>
+<span class="">        'agreement',</span>
+<span class="">        'ahead',</span>
+<span class="">        'air',</span>
+<span class="">        'all',</span>
+<span class="">        'allow',</span>
+<span class="">        'almost',</span>
+<span class="">        'alone',</span>
+<span class="">        'along',</span>
+<span class="">        'already',</span>
+<span class="">        'also',</span>
+<span class="">        'although',</span>
+<span class="">        'always',</span>
+<span class="">        'American',</span>
+<span class="">        'among',</span>
+<span class="">        'amount',</span>
+<span class="">        'analysis',</span>
+<span class="">        'and',</span>
+<span class="">        'animal',</span>
+<span class="">        'another',</span>
+<span class="">        'answer',</span>
+<span class="">        'any',</span>
+<span class="">        'anyone',</span>
+<span class="">        'anything',</span>
+<span class="">        'appear',</span>
+<span class="">        'apply',</span>
+<span class="">        'approach',</span>
+<span class="">        'area',</span>
+<span class="">        'argue',</span>
+<span class="">        'arm',</span>
+<span class="">        'around',</span>
+<span class="">        'arrive',</span>
+<span class="">        'art',</span>
+<span class="">        'article',</span>
+<span class="">        'artist',</span>
+<span class="">        'as',</span>
+<span class="">        'ask',</span>
+<span class="">        'assume',</span>
+<span class="">        'at',</span>
+<span class="">        'attack',</span>
+<span class="">        'attention',</span>
+<span class="">        'attorney',</span>
+<span class="">        'audience',</span>
+<span class="">        'author',</span>
+<span class="">        'authority',</span>
+<span class="">        'available',</span>
+<span class="">        'avoid',</span>
+<span class="">        'away',</span>
+<span class="">        'baby',</span>
+<span class="">        'back',</span>
+<span class="">        'bad',</span>
+<span class="">        'bag',</span>
+<span class="">        'ball',</span>
+<span class="">        'bank',</span>
+<span class="">        'bar',</span>
+<span class="">        'base',</span>
+<span class="">        'be',</span>
+<span class="">        'beat',</span>
+<span class="">        'beautiful',</span>
+<span class="">        'because',</span>
+<span class="">        'become',</span>
+<span class="">        'bed',</span>
+<span class="">        'before',</span>
+<span class="">        'begin',</span>
+<span class="">        'behavior',</span>
+<span class="">        'behind',</span>
+<span class="">        'believe',</span>
+<span class="">        'benefit',</span>
+<span class="">        'best',</span>
+<span class="">        'better',</span>
+<span class="">        'between',</span>
+<span class="">        'beyond',</span>
+<span class="">        'big',</span>
+<span class="">        'bill',</span>
+<span class="">        'billion',</span>
+<span class="">        'bit',</span>
+<span class="">        'black',</span>
+<span class="">        'blood',</span>
+<span class="">        'blue',</span>
+<span class="">        'board',</span>
+<span class="">        'body',</span>
+<span class="">        'book',</span>
+<span class="">        'born',</span>
+<span class="">        'both',</span>
+<span class="">        'box',</span>
+<span class="">        'boy',</span>
+<span class="">        'break',</span>
+<span class="">        'bring',</span>
+<span class="">        'brother',</span>
+<span class="">        'budget',</span>
+<span class="">        'build',</span>
+<span class="">        'building',</span>
+<span class="">        'business',</span>
+<span class="">        'but',</span>
+<span class="">        'buy',</span>
+<span class="">        'by',</span>
+<span class="">        'call',</span>
+<span class="">        'camera',</span>
+<span class="">        'campaign',</span>
+<span class="">      ];</span>
+<!-- -->
+<span class="">      let score = 0;</span>
+<span class="">      let currentWord;</span>
+<span class="">      let startTime;</span>
+<!-- -->
+<span class="">      const game = document.getElementById('game');</span>
+<span class="">      const player = document.getElementById('player');</span>
+<span class="">      const wordInput = document.getElementById('word-input');</span>
+<span class="">      const typedWord = document.getElementById('typed-word');</span>
+<span class="">      const submitWord = document.getElementById('submit-word');</span>
+<span class="">      const scoreDisplay = document.getElementById('score');</span>
+<!-- -->
+<span class="">      let playerX = 10;</span>
+<span class="">      let playerY = game.offsetHeight - 50;</span>
+<span class="">      const speed = 5;</span>
+<!-- -->
+<span class="">      function placeWord() {</span>
+<span class="">        const word = document.createElement('div');</span>
+<span class="">        word.textContent = words[Math.floor(Math.random() * words.length)];</span>
+<span class="">        word.className = 'absolute text-2xl';</span>
+<span class="">        word.style.left = `${game.offsetWidth + 10}px`;</span>
+<span class="">        word.style.top = `${Math.random() * (game.offsetHeight - 50)}px`;</span>
+<span class="">        game.appendChild(word);</span>
+<span class="">        return word;</span>
+<span class="">      }</span>
+<!-- -->
+<span class="">      function checkCollision(word) {</span>
+<span class="">        const playerRect = player.getBoundingClientRect();</span>
+<span class="">        const wordRect = word.getBoundingClientRect();</span>
+<span class="">        return !(</span>
+<span class="">          playerRect.right &lt; wordRect.left ||</span>
+<span class="">          playerRect.left &gt; wordRect.right ||</span>
+<span class="">          playerRect.bottom &lt; wordRect.top ||</span>
+<span class="">          playerRect.top &gt; wordRect.bottom</span>
+<span class="">        );</span>
+<span class="">      }</span>
+<!-- -->
+<span class="">      function startInput(word) {</span>
+<span class="">        currentWord = word.textContent;</span>
+<span class="">        wordInput.style.display = 'block';</span>
+<span class="">        typedWord.value = '';</span>
+<span class="">        typedWord.focus();</span>
+<span class="">        startTime = Date.now();</span>
+<span class="">      }</span>
+<!-- -->
+<span class="">      function endInput() {</span>
+<span class="">        wordInput.style.display = 'none';</span>
+<span class="">        const endTime = Date.now();</span>
+<span class="">        const elapsedTime = endTime - startTime;</span>
+<span class="">        const timeBonus = Math.max(2000 - elapsedTime, 0);</span>
+<span class="">        score += Math.round(1000 + timeBonus);</span>
+<span class="">        scoreDisplay.textContent = score;</span>
+<span class="">      }</span>
+<!-- -->
+<span class="">      function checkInput() {</span>
+<span class="">        if (typedWord.value === currentWord) {</span>
+<span class="">          endInput();</span>
+<span class="">        }</span>
+<span class="">      }</span>
+<!-- -->
+<span class="">      function gameLoop() {</span>
+<span class="">        playerY = Math.max(</span>
+<span class="">          0,</span>
+<span class="">          Math.min(playerY, game.offsetHeight - player.offsetHeight)</span>
+<span class="">        );</span>
+<span class="">        playerX = Math.max(</span>
+<span class="">          0,</span>
+<span class="">          Math.min(playerX, game.offsetWidth - player.offsetWidth)</span>
+<span class="">        );</span>
+<span class="">        player.style.top = `${playerY}px`;</span>
+<span class="">        player.style.left = `${playerX}px`;</span>
+<!-- -->
+<span class="">        const words = Array.from(</span>
+<span class="">          document.querySelectorAll('#game &gt; div:not(#player)')</span>
+<span class="">        );</span>
+<span class="">        words.forEach((word) =&gt; {</span>
+<span class="">          const currentLeft = parseInt(word.style.left);</span>
+<span class="">          word.style.left = `${currentLeft - speed}px`;</span>
+<span class="">          if (checkCollision(word)) {</span>
+<span class="">            startInput(word);</span>
+<span class="">          }</span>
+<span class="">          if (currentLeft &lt; -word.offsetWidth) {</span>
+<span class="">            word.remove();</span>
+<span class="">          }</span>
+<span class="">        });</span>
+<!-- -->
+<span class="">        if (Math.random() &lt; 0.01) {</span>
+<span class="">          placeWord();</span>
+<span class="">        }</span>
+<!-- -->
+<span class="">        requestAnimationFrame(gameLoop);</span>
+<span class="">      }</span>
+<!-- -->
+<span class="">      document.addEventListener('keydown', (e) =&gt; {</span>
+<span class="">        if (e.key === 'w') playerY -= speed;</span>
+<span class="">        if (e.key === 'a') playerX -= speed;</span>
+<span class="">        if (e.key === 's') playerY += speed;</span>
+<span class="">        if (e.key === 'd') playerX += speed;</span>
+<span class="">      });</span>
+<!-- -->
+<span class="">      typedWord.addEventListener('input', checkInput);</span>
+<span class="">      submitWord.addEventListener('click', checkInput);</span>
+<!-- -->
+<span class="">      gameLoop();</span>
+<span class="">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span>
+<span class="">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span></span>
+<span class=""><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="api-request"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#api-request">​</a></div><span class="cursor-pointer">API Request</span></h2>
+<div class="code-group mt-5 mb-8 flex flex-col not-prose relative overflow-hidden rounded-2xl dark:border-gray-800/50 bg-[#0F1117] border border-transparent dark:bg-codeblock text-gray-50 codeblock-dark" id="code-group"><div class="relative border-b border-gray-900/80 bg-[#0F1117] dark:bg-codeblock" data-component-part="code-group-tab-bar"><div aria-orientation="horizontal" class="text-xs leading-6 rounded-t-xl flex overflow-x-auto overflow-y-hidden mr-12 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25" role="tablist"><button aria-selected="true" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-primary-light" data-headlessui-state="selected" id="headlessui-tabs-tab-:R2mmmpkql6:" role="tab" tabindex="0" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R4mmmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">TypeScript</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R6mmmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">AWS Bedrock Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R8mmmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">AWS Bedrock TypeScript</div></button></div></div><div class="flex flex-1 overflow-hidden"><div class="relative min-w-full w-full transition-[height] duration-300 ease-in-out" data-headlessui-state="selected" id="headlessui-tabs-panel-:Rqmmpkql6:" role="tabpanel" style="font-variant-ligatures:none;height:auto" tabindex="0"><div class="flex-none p-5 overflow-x-auto text-sm h-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25 leading-6" data-component-part="code-group-tab-content"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span></span>
+<span class="">    <span class="token comment"># defaults to os.environ.get("ANTHROPIC_API_KEY")</span></span>
+<span class="">    api_key<span class="token operator">=</span><span class="token string">"my_api_key"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">    model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">    max_tokens<span class="token operator">=</span><span class="token number">2000</span><span class="token punctuation">,</span></span>
+<span class="">    temperature<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span></span>
+<span class="">    messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">                <span class="token punctuation">{</span></span>
+<span class="">                    <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">                    <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">"Write me a fully complete web app as a single HTML file. The app should contain a simple side-scrolling game where I use WASD to move around.  When moving around the world, occasionally the character/sprite will encounter words. When a word is encountered, the player must correctly type the word as fast as possible.The faster the word is successfully typed, the more point the player gets. We should have a counter in the top-right to keep track of points. Words should be random and highly variable to keep the game interesting.  \n  \nYou should make the website very aesthetic and use Tailwind."</span></span>
+<span class="">                <span class="token punctuation">}</span></span>
+<span class="">            <span class="token punctuation">]</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+</code></pre></div></div></div></div></div>

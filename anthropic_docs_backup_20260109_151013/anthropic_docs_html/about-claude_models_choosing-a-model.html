@@ -1,0 +1,61 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><h2 class="flex whitespace-pre-wrap group font-semibold" id="establish-key-criteria"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#establish-key-criteria">​</a></div><span class="cursor-pointer">Establish key criteria</span></h2>
+<p>When choosing a Claude model, we recommend first evaluating these factors:</p>
+<ul>
+<li><strong>Capabilities:</strong> What specific features or capabilities will you need the model to have in order to meet your needs?</li>
+<li><strong>Speed:</strong> How quickly does the model need to respond in your application?</li>
+<li><strong>Cost:</strong> What’s your budget for both development and production usage?</li>
+</ul>
+<p>Knowing these answers in advance will make narrowing down and deciding which model to use much easier.</p>
+
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="choose-the-best-model-to-start-with"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#choose-the-best-model-to-start-with">​</a></div><span class="cursor-pointer">Choose the best model to start with</span></h2>
+<p>There are two general approaches you can use to start testing which Claude model best works for your needs.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="option-1%3A-start-with-a-fast%2C-cost-effective-model"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#option-1%3A-start-with-a-fast%2C-cost-effective-model">​</a></div><span class="cursor-pointer">Option 1: Start with a fast, cost-effective model</span></h3>
+<p>For many applications, starting with a faster, more cost-effective model like Claude 3.5 Haiku can be the optimal approach:</p>
+<ol>
+<li>Begin implementation with Claude 3.5 Haiku</li>
+<li>Test your use case thoroughly</li>
+<li>Evaluate if performance meets your requirements</li>
+<li>Upgrade only if necessary for specific capability gaps</li>
+</ol>
+<p>This approach allows for quick iteration, lower development costs, and is often sufficient for many common applications. This approach is best for:</p>
+<ul>
+<li>Initial prototyping and development</li>
+<li>Applications with tight latency requirements</li>
+<li>Cost-sensitive implementations</li>
+<li>High-volume, straightforward tasks</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="option-2%3A-start-with-the-most-capable-model"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#option-2%3A-start-with-the-most-capable-model">​</a></div><span class="cursor-pointer">Option 2: Start with the most capable model</span></h3>
+<p>For complex tasks where intelligence and advanced capabilities are paramount, you may want to start with the most capable model and then consider optimizing to more efficient models down the line:</p>
+<ol>
+<li>Implement with Claude Opus 4.1, Claude Opus 4, or Claude Sonnet 4</li>
+<li>Optimize your prompts for these models</li>
+<li>Evaluate if performance meets your requirements</li>
+<li>Consider increasing efficiency by downgrading intelligence over time with greater workflow optimization</li>
+</ol>
+<p>This approach is best for:</p>
+<ul>
+<li>Complex reasoning tasks</li>
+<li>Scientific or mathematical applications</li>
+<li>Tasks requiring nuanced understanding</li>
+<li>Applications where accuracy outweighs cost considerations</li>
+<li>Advanced coding</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="model-selection-matrix"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#model-selection-matrix">​</a></div><span class="cursor-pointer">Model selection matrix</span></h2>
+<table><thead><tr><th>When you need…</th><th>We recommend starting with…</th><th>Example use cases</th></tr></thead><tbody><tr><td>Highest intelligence and reasoning, superior capabilities for the most complex tasks, such as multi agent coding</td><td>Claude Opus 4.1</td><td>Multi agent frameworks, complex codebase refactoring, nuanced creative writing, complex financial or scientific analysis</td></tr><tr><td>Balance of intelligence and speed, strong performance but with faster response times</td><td>Claude Sonnet 4</td><td>Complex customer chatbot inquiries, complex code generation, straightforward agentic loops, data analysis</td></tr><tr><td>Fast responses at lower cost, optimized for high volume, straightforward applications with no need for extended thinking</td><td>Claude 3.5 Haiku</td><td>Basic customer support, high volume formulaic content generation, straightforward data extraction</td></tr></tbody></table>
+
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="decide-whether-to-upgrade-or-change-models"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#decide-whether-to-upgrade-or-change-models">​</a></div><span class="cursor-pointer">Decide whether to upgrade or change models</span></h2>
+<p>To determine if you need to upgrade or change models, you should:</p>
+<ol>
+<li><a class="link" href="/en/docs/test-and-evaluate/develop-tests">Create benchmark tests</a> specific to your use case - having a good evaluation set is the most important step in the process</li>
+<li>Test with your actual prompts and data</li>
+<li>Compare performance across models for:<!-- -->
+<ul>
+<li>Accuracy of responses</li>
+<li>Response quality</li>
+<li>Handling of edge cases</li>
+</ul>
+</li>
+<li>Weigh performance and cost tradeoffs</li>
+</ol>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="next-steps"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#next-steps">​</a></div><span class="cursor-pointer">Next steps</span></h2>
+<div class="card-group not-prose grid gap-x-4 sm:grid-cols-3"><a class="card block font-normal group relative my-2 ring-2 ring-transparent rounded-2xl bg-white dark:bg-background-dark border border-gray-950/10 dark:border-white/10 overflow-hidden w-full cursor-pointer hover:!border-primary dark:hover:!border-primary-light" href="/en/docs/about-claude/models/overview"><div class="px-6 py-5 relative" data-component-part="card-content-container"><div><h2 class="not-prose font-semibold text-base text-gray-800 dark:text-white mt-4" contenteditable="false" data-component-part="card-title">Model comparison chart</h2><div class="prose mt-1 font-normal text-sm leading-6 text-gray-600 dark:text-gray-400" data-component-part="card-content"><p>See detailed specifications and pricing for the latest Claude models</p></div></div></div></a><a class="card block font-normal group relative my-2 ring-2 ring-transparent rounded-2xl bg-white dark:bg-background-dark border border-gray-950/10 dark:border-white/10 overflow-hidden w-full cursor-pointer hover:!border-primary dark:hover:!border-primary-light" href="/en/docs/about-claude/models/migrating-to-claude-4"><div class="px-6 py-5 relative" data-component-part="card-content-container"><div><h2 class="not-prose font-semibold text-base text-gray-800 dark:text-white mt-4" contenteditable="false" data-component-part="card-title">Migrate to Claude 4</h2><div class="prose mt-1 font-normal text-sm leading-6 text-gray-600 dark:text-gray-400" data-component-part="card-content"><p>Follow the checklist for an easy migration to Claude 4</p></div></div></div></a></div></div>

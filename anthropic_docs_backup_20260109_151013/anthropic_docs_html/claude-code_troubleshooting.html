@@ -1,0 +1,151 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><h2 class="flex whitespace-pre-wrap group font-semibold" id="common-installation-issues"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#common-installation-issues">​</a></div><span class="cursor-pointer">Common installation issues</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="windows-installation-issues%3A-errors-in-wsl"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#windows-installation-issues%3A-errors-in-wsl">​</a></div><span class="cursor-pointer">Windows installation issues: errors in WSL</span></h3>
+<p>You might encounter the following issues in WSL:</p>
+<p><strong>OS/platform detection issues</strong>: If you receive an error during installation, WSL may be using Windows <code>npm</code>. Try:</p>
+<ul>
+<li>Run <code>npm config set os linux</code> before installation</li>
+<li>Install with <code>npm install -g @anthropic-ai/claude-code --force --no-os-check</code> (Do NOT use <code>sudo</code>)</li>
+</ul>
+<p><strong>Node not found errors</strong>: If you see <code>exec: node: not found</code> when running <code>claude</code>, your WSL environment may be using a Windows installation of Node.js. You can confirm this with <code>which npm</code> and <code>which node</code>, which should point to Linux paths starting with <code>/usr/</code> rather than <code>/mnt/c/</code>. To fix this, try installing Node via your Linux distribution’s package manager or via <a class="link" href="https://github.com/nvm-sh/nvm" rel="noreferrer" target="_blank"><code>nvm</code></a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="linux-and-mac-installation-issues%3A-permission-or-command-not-found-errors"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#linux-and-mac-installation-issues%3A-permission-or-command-not-found-errors">​</a></div><span class="cursor-pointer">Linux and Mac installation issues: permission or command not found errors</span></h3>
+<p>When installing Claude Code with npm, <code>PATH</code> problems may prevent access to <code>claude</code>.
+You may also encounter permission errors if your npm global prefix is not user writable (eg. <code>/usr</code>, or <code>/usr/local</code>).</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="recommended-solution%3A-native-claude-code-installation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#recommended-solution%3A-native-claude-code-installation">​</a></div><span class="cursor-pointer">Recommended solution: Native Claude Code installation</span></h4>
+<p>Claude Code has a native installation that doesn’t depend on npm or Node.js.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>The native Claude Code installer is currently in beta.</p></div></div>
+<p>Use the following command to run the native installer.</p>
+<p><strong>macOS, Linux, WSL:</strong></p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash language-bash"><code class="language-bash"><span class=""><span class="token comment"># Install stable version (default)</span></span>
+<span class=""><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://claude.ai/install.sh <span class="token operator">|</span> <span class="token function">bash</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Install latest version</span></span>
+<span class=""><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://claude.ai/install.sh <span class="token operator">|</span> <span class="token function">bash</span> <span class="token parameter variable">-s</span> latest</span>
+<!-- -->
+<span class=""><span class="token comment"># Install specific version number</span></span>
+<span class=""><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://claude.ai/install.sh <span class="token operator">|</span> <span class="token function">bash</span> <span class="token parameter variable">-s</span> <span class="token number">1.0</span>.58</span>
+</code></pre></div></div></div>
+<p><strong>Windows PowerShell:</strong></p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-powershell"><code class="language-powershell"><span class=""><span class="token comment"># Install stable version (default)</span></span>
+<span class=""><span class="token function">irm</span> https:<span class="token operator">/</span><span class="token operator">/</span>claude<span class="token punctuation">.</span>ai/install<span class="token punctuation">.</span>ps1 <span class="token punctuation">|</span> <span class="token function">iex</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Install latest version</span></span>
+<span class="">&amp; <span class="token punctuation">(</span><span class="token namespace">[scriptblock]</span>::Create<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">irm</span> https:<span class="token operator">/</span><span class="token operator">/</span>claude<span class="token punctuation">.</span>ai/install<span class="token punctuation">.</span>ps1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> latest</span>
+<!-- -->
+<span class=""><span class="token comment"># Install specific version number</span></span>
+<span class="">&amp; <span class="token punctuation">(</span><span class="token namespace">[scriptblock]</span>::Create<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">irm</span> https:<span class="token operator">/</span><span class="token operator">/</span>claude<span class="token punctuation">.</span>ai/install<span class="token punctuation">.</span>ps1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 1<span class="token punctuation">.</span>0<span class="token punctuation">.</span>58</span>
+<!-- -->
+</code></pre></div></div></div>
+<p>This command installs the appropriate build of Claude Code for your operating system and architecture and adds a symlink to the installation at <code>~/.local/bin/claude</code>.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>Make sure that you have the installation directory in your system PATH.</p></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="alternative-solution%3A-migrate-to-local-installation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#alternative-solution%3A-migrate-to-local-installation">​</a></div><span class="cursor-pointer">Alternative solution: Migrate to local installation</span></h4>
+<p>Alternatively, if Claude Code will run, you can migrate to a local installation:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class="">claude migrate-installer</span>
+</code></pre></div></div></div>
+<p>This moves Claude Code to <code>~/.claude/local/</code> and sets up an alias in your shell configuration. No <code>sudo</code> is required for future updates.</p>
+<p>After migration, restart your shell, and then verify your installation:</p>
+<p>On macOS/Linux/WSL:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token function">which</span> claude  <span class="token comment"># Should show an alias to ~/.claude/local/claude</span></span>
+</code></pre></div></div></div>
+<p>On Windows:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-powershell"><code class="language-powershell"><span class="">where claude  <span class="token comment"># Should show path to claude executable</span></span>
+</code></pre></div></div></div>
+<p>Verify installation:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class="">claude doctor <span class="token comment"># Check installation health</span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="permissions-and-authentication"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#permissions-and-authentication">​</a></div><span class="cursor-pointer">Permissions and authentication</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="repeated-permission-prompts"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#repeated-permission-prompts">​</a></div><span class="cursor-pointer">Repeated permission prompts</span></h3>
+<p>If you find yourself repeatedly approving the same commands, you can allow specific tools
+to run without approval using the <code>/permissions</code> command. See <a class="link" href="/en/docs/claude-code/iam#configuring-permissions">Permissions docs</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="authentication-issues"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#authentication-issues">​</a></div><span class="cursor-pointer">Authentication issues</span></h3>
+<p>If you’re experiencing authentication problems:</p>
+<ol>
+<li>Run <code>/logout</code> to sign out completely</li>
+<li>Close Claude Code</li>
+<li>Restart with <code>claude</code> and complete the authentication process again</li>
+</ol>
+<p>If problems persist, try:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token function">rm</span> <span class="token parameter variable">-rf</span> ~/.config/claude-code/auth.json</span>
+<span class="">claude</span>
+</code></pre></div></div></div>
+<p>This removes your stored authentication information and forces a clean login.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="performance-and-stability"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#performance-and-stability">​</a></div><span class="cursor-pointer">Performance and stability</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="high-cpu-or-memory-usage"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#high-cpu-or-memory-usage">​</a></div><span class="cursor-pointer">High CPU or memory usage</span></h3>
+<p>Claude Code is designed to work with most development environments, but may consume significant resources when processing large codebases. If you’re experiencing performance issues:</p>
+<ol>
+<li>Use <code>/compact</code> regularly to reduce context size</li>
+<li>Close and restart Claude Code between major tasks</li>
+<li>Consider adding large build directories to your <code>.gitignore</code> file</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="command-hangs-or-freezes"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#command-hangs-or-freezes">​</a></div><span class="cursor-pointer">Command hangs or freezes</span></h3>
+<p>If Claude Code seems unresponsive:</p>
+<ol>
+<li>Press Ctrl+C to attempt to cancel the current operation</li>
+<li>If unresponsive, you may need to close the terminal and restart</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="esc-key-not-working-in-jetbrains-intellij%2C-pycharm%2C-etc-terminals"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#esc-key-not-working-in-jetbrains-intellij%2C-pycharm%2C-etc-terminals">​</a></div><span class="cursor-pointer">ESC key not working in JetBrains (IntelliJ, PyCharm, etc.) terminals</span></h3>
+<p>If you’re using Claude Code in JetBrains terminals and the ESC key doesn’t interrupt the agent as expected, this is likely due to a keybinding clash with JetBrains’ default shortcuts.</p>
+<p>To fix this issue:</p>
+<ol>
+<li>Go to Settings → Tools → Terminal</li>
+<li>Click the “Configure terminal keybindings” hyperlink next to “Override IDE Shortcuts”</li>
+<li>Within the terminal keybindings, scroll down to “Switch focus to Editor” and delete that shortcut</li>
+</ol>
+<p>This will allow the ESC key to properly function for canceling Claude Code operations instead of being captured by PyCharm’s “Switch focus to Editor” action.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="markdown-formatting-issues"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#markdown-formatting-issues">​</a></div><span class="cursor-pointer">Markdown formatting issues</span></h2>
+<p>Claude Code sometimes generates markdown files with missing language tags on code fences, which can affect syntax highlighting and readability in GitHub, editors, and documentation tools.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="missing-language-tags-in-code-blocks"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#missing-language-tags-in-code-blocks">​</a></div><span class="cursor-pointer">Missing language tags in code blocks</span></h3>
+<p>If you notice code blocks like this in generated markdown:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-markdown"><code class="language-markdown"><span class="">```</span>
+<span class="">function example() {</span>
+<span class="">  return "hello";</span>
+<span class="">}</span>
+<span class="">```</span>
+</code></pre></div></div></div>
+<p>Instead of properly tagged blocks like:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-markdown"><code class="language-markdown"><span class="">```javascript</span>
+<span class="">function example() {</span>
+<span class="">  return "hello";</span>
+<span class="">}</span>
+<span class="">```</span>
+</code></pre></div></div></div>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li>
+<p><strong>Ask Claude to add language tags</strong>: Simply request “Please add appropriate language tags to all code blocks in this markdown file.”</p>
+</li>
+<li>
+<p><strong>Use post-processing hooks</strong>: Set up automatic formatting hooks to detect and add missing language tags. See the <a class="link" href="/en/docs/claude-code/hooks-guide#markdown-formatting-hook">markdown formatting hook example</a> for implementation details.</p>
+</li>
+<li>
+<p><strong>Manual verification</strong>: After generating markdown files, review them for proper code block formatting and request corrections if needed.</p>
+</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="inconsistent-spacing-and-formatting"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#inconsistent-spacing-and-formatting">​</a></div><span class="cursor-pointer">Inconsistent spacing and formatting</span></h3>
+<p>If generated markdown has excessive blank lines or inconsistent spacing:</p>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li>
+<p><strong>Request formatting corrections</strong>: Ask Claude to “Fix spacing and formatting issues in this markdown file.”</p>
+</li>
+<li>
+<p><strong>Use formatting tools</strong>: Set up hooks to run markdown formatters like <code>prettier</code> or custom formatting scripts on generated markdown files.</p>
+</li>
+<li>
+<p><strong>Specify formatting preferences</strong>: Include formatting requirements in your prompts or project <a class="link" href="/en/docs/claude-code/memory">memory</a> files.</p>
+</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="best-practices-for-markdown-generation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#best-practices-for-markdown-generation">​</a></div><span class="cursor-pointer">Best practices for markdown generation</span></h3>
+<p>To minimize formatting issues:</p>
+<ul>
+<li><strong>Be explicit in requests</strong>: Ask for “properly formatted markdown with language-tagged code blocks”</li>
+<li><strong>Use project conventions</strong>: Document your preferred markdown style in <a class="link" href="/en/docs/claude-code/memory">CLAUDE.md</a></li>
+<li><strong>Set up validation hooks</strong>: Use post-processing hooks to automatically verify and fix common formatting issues</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="getting-more-help"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#getting-more-help">​</a></div><span class="cursor-pointer">Getting more help</span></h2>
+<p>If you’re experiencing issues not covered here:</p>
+<ol>
+<li>Use the <code>/bug</code> command within Claude Code to report problems directly to Anthropic</li>
+<li>Check the <a class="link" href="https://github.com/anthropics/claude-code" rel="noreferrer" target="_blank">GitHub repository</a> for known issues</li>
+<li>Run <code>/doctor</code> to check the health of your Claude Code installation</li>
+<li>Ask Claude directly about its capabilities and features - Claude has built-in access to its documentation</li>
+</ol></div>

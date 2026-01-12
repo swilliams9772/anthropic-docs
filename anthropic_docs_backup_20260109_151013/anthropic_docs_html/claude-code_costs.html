@@ -1,0 +1,77 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>Claude Code consumes tokens for each interaction. The average cost is $6 per developer per day, with daily costs remaining below $12 for 90% of users.</p>
+<p>For team usage, Claude Code charges by API token consumption. On average, Claude Code costs ~$100-200/developer per month with Sonnet 4 though there is large variance depending on how many instances users are running and whether they’re using it in automation.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="track-your-costs"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#track-your-costs">​</a></div><span class="cursor-pointer">Track your costs</span></h2>
+<ul>
+<li>Use <code>/cost</code> to see current session usage</li>
+<li><strong>Anthropic Console users</strong>:<!-- -->
+<ul>
+<li>Check <a class="link" href="https://support.anthropic.com/en/articles/9534590-cost-and-usage-reporting-in-console" rel="noreferrer" target="_blank">historical usage</a> in the Anthropic Console (requires Admin or Billing role)</li>
+<li>Set <a class="link" href="https://support.anthropic.com/en/articles/9796807-creating-and-managing-workspaces" rel="noreferrer" target="_blank">workspace spend limits</a> for the Claude Code workspace (requires Admin role)</li>
+</ul>
+</li>
+<li><strong>Pro and Max plan users</strong>: Usage is included in your subscription</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="managing-costs-for-teams"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#managing-costs-for-teams">​</a></div><span class="cursor-pointer">Managing costs for teams</span></h2>
+<p>When using Anthropic API, you can limit the total Claude Code workspace spend. To configure, <a class="link" href="https://support.anthropic.com/en/articles/9796807-creating-and-managing-workspaces" rel="noreferrer" target="_blank">follow these instructions</a>. Admins can view cost and usage reporting by <a class="link" href="https://support.anthropic.com/en/articles/9534590-cost-and-usage-reporting-in-console" rel="noreferrer" target="_blank">following these instructions</a>.</p>
+<p>On Bedrock and Vertex, Claude Code does not send metrics from your cloud. In order to get cost metrics, several large enterprises reported using <a class="link" href="/en/docs/claude-code/bedrock-vertex-proxies#litellm">LiteLLM</a>, which is an open-source tool that helps companies <a class="link" href="https://docs.litellm.ai/docs/proxy/virtual_keys#tracking-spend" rel="noreferrer" target="_blank">track spend by key</a>. This project is unaffiliated with Anthropic and we have not audited its security.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="rate-limit-recommendations"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#rate-limit-recommendations">​</a></div><span class="cursor-pointer">Rate limit recommendations</span></h3>
+<p>When setting up Claude Code for teams, consider these Token Per Minute (TPM) and Request Per Minute (RPM) per-user recommendations based on your organization size:</p>
+<table><thead><tr><th>Team size</th><th>TPM per user</th><th>RPM per user</th></tr></thead><tbody><tr><td>1-5 users</td><td>200k-300k</td><td>5-7</td></tr><tr><td>5-20 users</td><td>100k-150k</td><td>2.5-3.5</td></tr><tr><td>20-50 users</td><td>50k-75k</td><td>1.25-1.75</td></tr><tr><td>50-100 users</td><td>25k-35k</td><td>0.62-0.87</td></tr><tr><td>100-500 users</td><td>15k-20k</td><td>0.37-0.47</td></tr><tr><td>500+ users</td><td>10k-15k</td><td>0.25-0.35</td></tr></tbody></table>
+<p>For example, if you have 200 users, you might request 20k TPM for each user, or 4 million total TPM (200*20,000 = 4 million).</p>
+<p>The TPM per user decreases as team size grows because we expect fewer users to use Claude Code concurrently in larger organizations. These rate limits apply at the organization level, not per individual user, which means individual users can temporarily consume more than their calculated share when others aren’t actively using the service.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>If you anticipate scenarios with unusually high concurrent usage (such as live training sessions with large groups), you may need higher TPM allocations per user.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="reduce-token-usage"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#reduce-token-usage">​</a></div><span class="cursor-pointer">Reduce token usage</span></h2>
+<ul>
+<li>
+<p><strong>Compact conversations:</strong></p>
+<ul>
+<li>
+<p>Claude uses auto-compact by default when context exceeds 95% capacity</p>
+</li>
+<li>
+<p>Toggle auto-compact: Run <code>/config</code> and navigate to “Auto-compact enabled”</p>
+</li>
+<li>
+<p>Use <code>/compact</code> manually when context gets large</p>
+</li>
+<li>
+<p>Add custom instructions: <code>/compact Focus on code samples and API usage</code></p>
+</li>
+<li>
+<p>Customize compaction by adding to CLAUDE.md:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-markdown"><code class="language-markdown"><span class=""><span class="token title important"><span class="token punctuation">#</span> Summary instructions</span></span>
+<!-- -->
+<span class="">When you are using compact, please focus on test output and code changes</span>
+</code></pre></div></div></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Write specific queries:</strong> Avoid vague requests that trigger unnecessary scanning</p>
+</li>
+<li>
+<p><strong>Break down complex tasks:</strong> Split large tasks into focused interactions</p>
+</li>
+<li>
+<p><strong>Clear history between tasks:</strong> Use <code>/clear</code> to reset context</p>
+</li>
+</ul>
+<p>Costs can vary significantly based on:</p>
+<ul>
+<li>Size of codebase being analyzed</li>
+<li>Complexity of queries</li>
+<li>Number of files being searched or modified</li>
+<li>Length of conversation history</li>
+<li>Frequency of compacting conversations</li>
+<li>Background processes (haiku generation, conversation summarization)</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="background-token-usage"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#background-token-usage">​</a></div><span class="cursor-pointer">Background token usage</span></h2>
+<p>Claude Code uses tokens for some background functionality even when idle:</p>
+<ul>
+<li><strong>Haiku generation</strong>: Small creative messages that appear while you type (approximately 1 cent per day)</li>
+<li><strong>Conversation summarization</strong>: Background jobs that summarize previous conversations for the <code>claude --resume</code> feature</li>
+<li><strong>Command processing</strong>: Some commands like <code>/cost</code> may generate requests to check status</li>
+</ul>
+<p>These background processes consume a small amount of tokens (typically under $0.04 per session) even without active interaction.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>For team deployments, we recommend starting with a small pilot group to
+establish usage patterns before wider rollout.</p></div></div></div>

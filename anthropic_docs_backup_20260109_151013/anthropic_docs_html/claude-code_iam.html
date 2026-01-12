@@ -1,0 +1,123 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><h2 class="flex whitespace-pre-wrap group font-semibold" id="authentication-methods"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#authentication-methods">​</a></div><span class="cursor-pointer">Authentication methods</span></h2>
+<p>Setting up Claude Code requires access to Anthropic models. For teams, you can set up Claude Code access in one of three ways:</p>
+
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="anthropic-api-authentication"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#anthropic-api-authentication">​</a></div><span class="cursor-pointer">Anthropic API authentication</span></h3>
+<p><strong>To set up Claude Code access for your team via Anthropic API:</strong></p>
+<ol>
+<li>Use your existing Anthropic Console account or create a new Anthropic Console account</li>
+<li>You can add users through either method below:<!-- -->
+<ul>
+<li>Bulk invite users from within the Console (Console -&gt; Settings -&gt; Members -&gt; Invite)</li>
+<li><a class="link" href="https://support.anthropic.com/en/articles/10280258-setting-up-single-sign-on-on-the-api-console" rel="noreferrer" target="_blank">Set up SSO</a></li>
+</ul>
+</li>
+<li>When inviting users, they need one of the following roles:<!-- -->
+<ul>
+<li>“Claude Code” role means users can only create Claude Code API keys</li>
+<li>“Developer” role means users can create any kind of API key</li>
+</ul>
+</li>
+<li>Each invited user needs to complete these steps:<!-- -->
+<ul>
+<li>Accept the Console invite</li>
+<li><a class="link" href="/en/docs/claude-code/setup#system-requirements">Check system requirements</a></li>
+<li><a class="link" href="/en/docs/claude-code/setup#installation">Install Claude Code</a></li>
+<li>Login with Console account credentials</li>
+</ul>
+</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="cloud-provider-authentication"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#cloud-provider-authentication">​</a></div><span class="cursor-pointer">Cloud provider authentication</span></h3>
+<p><strong>To set up Claude Code access for your team via Bedrock or Vertex:</strong></p>
+<ol>
+<li>Follow the <a class="link" href="/en/docs/claude-code/amazon-bedrock">Bedrock docs</a> or <a class="link" href="/en/docs/claude-code/google-vertex-ai">Vertex docs</a></li>
+<li>Distribute the environment variables and instructions for generating cloud credentials to your users. Read more about how to <a class="link" href="/en/docs/claude-code/settings">manage configuration here</a>.</li>
+<li>Users can <a class="link" href="/en/docs/claude-code/setup#installation">install Claude Code</a></li>
+</ol>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="access-control-and-permissions"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#access-control-and-permissions">​</a></div><span class="cursor-pointer">Access control and permissions</span></h2>
+<p>We support fine-grained permissions so that you’re able to specify exactly what the agent is allowed to do (e.g. run tests, run linter) and what it is not allowed to do (e.g. update cloud infrastructure). These permission settings can be checked into version control and distributed to all developers in your organization, as well as customized by individual developers.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="permission-system"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#permission-system">​</a></div><span class="cursor-pointer">Permission system</span></h3>
+<p>Claude Code uses a tiered permission system to balance power and safety:</p>
+<table><thead><tr><th style="text-align:left">Tool Type</th><th style="text-align:left">Example</th><th style="text-align:left">Approval Required</th><th style="text-align:left">”Yes, don’t ask again” Behavior</th></tr></thead><tbody><tr><td style="text-align:left">Read-only</td><td style="text-align:left">File reads, LS, Grep</td><td style="text-align:left">No</td><td style="text-align:left">N/A</td></tr><tr><td style="text-align:left">Bash Commands</td><td style="text-align:left">Shell execution</td><td style="text-align:left">Yes</td><td style="text-align:left">Permanently per project directory and command</td></tr><tr><td style="text-align:left">File Modification</td><td style="text-align:left">Edit/write files</td><td style="text-align:left">Yes</td><td style="text-align:left">Until session end</td></tr></tbody></table>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="configuring-permissions"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#configuring-permissions">​</a></div><span class="cursor-pointer">Configuring permissions</span></h3>
+<p>You can view &amp; manage Claude Code’s tool permissions with <code>/permissions</code>. This UI lists all permission rules and the settings.json file they are sourced from.</p>
+<ul>
+<li><strong>Allow</strong> rules will allow Claude Code to use the specified tool without further manual approval.</li>
+<li><strong>Ask</strong> rules will ask the user for confirmation whenever Claude Code tries to use the specified tool. Ask rules take precedence over allow rules.</li>
+<li><strong>Deny</strong> rules will prevent Claude Code from using the specified tool. Deny rules take precedence over allow and ask rules.</li>
+<li><strong>Additional directories</strong> extend Claude’s file access to directories beyond the initial working directory.</li>
+<li><strong>Default mode</strong> controls Claude’s permission behavior when encountering new requests.</li>
+</ul>
+<p>Permission rules use the format: <code>Tool</code> or <code>Tool(optional-specifier)</code></p>
+<p>A rule that is just the tool name matches any use of that tool. For example, adding <code>Bash</code> to the list of allow rules would allow Claude Code to use the Bash tool without requiring user approval.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="permission-modes"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#permission-modes">​</a></div><span class="cursor-pointer">Permission modes</span></h4>
+<p>Claude Code supports several permission modes that can be set as the <code>defaultMode</code> in <a class="link" href="/en/docs/claude-code/settings#settings-files">settings files</a>:</p>
+<table><thead><tr><th style="text-align:left">Mode</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td style="text-align:left"><code>default</code></td><td style="text-align:left">Standard behavior - prompts for permission on first use of each tool</td></tr><tr><td style="text-align:left"><code>acceptEdits</code></td><td style="text-align:left">Automatically accepts file edit permissions for the session</td></tr><tr><td style="text-align:left"><code>plan</code></td><td style="text-align:left">Plan mode - Claude can analyze but not modify files or execute commands</td></tr><tr><td style="text-align:left"><code>bypassPermissions</code></td><td style="text-align:left">Skips all permission prompts (requires safe environment - see warning below)</td></tr></tbody></table>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="working-directories"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#working-directories">​</a></div><span class="cursor-pointer">Working directories</span></h4>
+<p>By default, Claude has access to files in the directory where it was launched. You can extend this access:</p>
+<ul>
+<li><strong>During startup</strong>: Use <code>--add-dir &lt;path&gt;</code> CLI argument</li>
+<li><strong>During session</strong>: Use <code>/add-dir</code> slash command</li>
+<li><strong>Persistent configuration</strong>: Add to <code>additionalDirectories</code> in <a class="link" href="/en/docs/claude-code/settings#settings-files">settings files</a></li>
+</ul>
+<p>Files in additional directories follow the same permission rules as the original working directory - they become readable without prompts, and file editing permissions follow the current permission mode.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="tool-specific-permission-rules"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#tool-specific-permission-rules">​</a></div><span class="cursor-pointer">Tool-specific permission rules</span></h4>
+<p>Some tools support more fine-grained permission controls:</p>
+<p><strong>Bash</strong></p>
+<ul>
+<li><code>Bash(npm run build)</code> Matches the exact Bash command <code>npm run build</code></li>
+<li><code>Bash(npm run test:*)</code> Matches Bash commands starting with <code>npm run test</code>.</li>
+</ul>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>Claude Code is aware of shell operators (like <code>&amp;&amp;</code>) so a prefix match rule like <code>Bash(safe-cmd:*)</code> won’t give it permission to run the command <code>safe-cmd &amp;&amp; other-cmd</code></p></div></div>
+<p><strong>Read &amp; Edit</strong></p>
+<p><code>Edit</code> rules apply to all built-in tools that edit files. Claude will make a best-effort attempt to apply <code>Read</code> rules to all built-in tools that read files like Grep, Glob, and LS.</p>
+<p>Read &amp; Edit rules both follow the <a class="link" href="https://git-scm.com/docs/gitignore" rel="noreferrer" target="_blank">gitignore</a> specification. Patterns are resolved relative to the directory containing <code>.claude/settings.json</code>. To reference an absolute path, use <code>//</code>. For a path relative to your home directory, use <code>~/</code>.</p>
+<ul>
+<li><code>Edit(docs/**)</code> Matches edits to files in the <code>docs</code> directory of your project</li>
+<li><code>Read(~/.zshrc)</code> Matches reads to your <code>~/.zshrc</code> file</li>
+<li><code>Edit(//tmp/scratch.txt)</code> Matches edits to <code>/tmp/scratch.txt</code></li>
+</ul>
+<p><strong>WebFetch</strong></p>
+<ul>
+<li><code>WebFetch(domain:example.com)</code> Matches fetch requests to example.com</li>
+</ul>
+<p><strong>MCP</strong></p>
+<ul>
+<li><code>mcp__puppeteer</code> Matches any tool provided by the <code>puppeteer</code> server (name configured in Claude Code)</li>
+<li><code>mcp__puppeteer__puppeteer_navigate</code> Matches the <code>puppeteer_navigate</code> tool provided by the <code>puppeteer</code> server</li>
+</ul>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-amber-500/20 bg-amber-50/50 dark:border-amber-500/30 dark:bg-amber-500/10" data-callout-type="warning"><div class="text-sm prose min-w-0 w-full text-amber-900 dark:text-amber-200" data-component-part="callout-content"><p>Unlike other permission types, MCP permissions do NOT support wildcards (<code>*</code>).</p><p>To approve all tools from an MCP server:</p><ul>
+<li>✅ Use: <code>mcp__github</code> (approves ALL GitHub tools)</li>
+<li>❌ Don’t use: <code>mcp__github__*</code> (wildcards are not supported)</li>
+</ul><p>To approve specific tools only, list each one:</p><ul>
+<li>✅ Use: <code>mcp__github__get_issue</code></li>
+<li>✅ Use: <code>mcp__github__list_issues</code></li>
+</ul></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="additional-permission-control-with-hooks"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#additional-permission-control-with-hooks">​</a></div><span class="cursor-pointer">Additional permission control with hooks</span></h3>
+<p><a class="link" href="/en/docs/claude-code/hooks-guide">Claude Code hooks</a> provide a way to register custom shell commands to perform permission evaluation at runtime. When Claude Code makes a tool call, PreToolUse hooks run before the permission system runs, and the hook output can determine whether to approve or deny the tool call in place of the permission system.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="enterprise-managed-policy-settings"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#enterprise-managed-policy-settings">​</a></div><span class="cursor-pointer">Enterprise managed policy settings</span></h3>
+<p>For enterprise deployments of Claude Code, we support enterprise managed policy settings that take precedence over user and project settings. This allows system administrators to enforce security policies that users cannot override.</p>
+<p>System administrators can deploy policies to:</p>
+<ul>
+<li>macOS: <code>/Library/Application Support/ClaudeCode/managed-settings.json</code></li>
+<li>Linux and WSL: <code>/etc/claude-code/managed-settings.json</code></li>
+<li>Windows: <code>C:\ProgramData\ClaudeCode\managed-settings.json</code></li>
+</ul>
+<p>These policy files follow the same format as regular <a class="link" href="/en/docs/claude-code/settings#settings-files">settings files</a> but cannot be overridden by user or project settings. This ensures consistent security policies across your organization.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="settings-precedence"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#settings-precedence">​</a></div><span class="cursor-pointer">Settings precedence</span></h3>
+<p>When multiple settings sources exist, they are applied in the following order (highest to lowest precedence):</p>
+<ol>
+<li>Enterprise policies</li>
+<li>Command line arguments</li>
+<li>Local project settings (<code>.claude/settings.local.json</code>)</li>
+<li>Shared project settings (<code>.claude/settings.json</code>)</li>
+<li>User settings (<code>~/.claude/settings.json</code>)</li>
+</ol>
+<p>This hierarchy ensures that organizational policies are always enforced while still allowing flexibility at the project and user levels where appropriate.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="credential-management"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#credential-management">​</a></div><span class="cursor-pointer">Credential management</span></h2>
+<p>Claude Code securely manages your authentication credentials:</p>
+<ul>
+<li><strong>Storage location</strong>: On macOS, API keys, OAuth tokens, and other credentials are stored in the encrypted macOS Keychain.</li>
+<li><strong>Supported authentication types</strong>: Claude.ai credentials, Anthropic API credentials, Bedrock Auth, and Vertex Auth.</li>
+<li><strong>Custom credential scripts</strong>: The <a class="link" href="/en/docs/claude-code/settings#available-settings"><code>apiKeyHelper</code></a> setting can be configured to run a shell script that returns an API key.</li>
+<li><strong>Refresh intervals</strong>: By default, <code>apiKeyHelper</code> is called after 5 minutes or on HTTP 401 response. Set <code>CLAUDE_CODE_API_KEY_HELPER_TTL_MS</code> environment variable for custom refresh intervals.</li>
+</ul></div>

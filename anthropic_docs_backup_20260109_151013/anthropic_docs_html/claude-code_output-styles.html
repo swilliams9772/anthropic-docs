@@ -1,0 +1,83 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>Output styles allow you to use Claude Code as any type of agent while keeping
+its core capabilities, such as running local scripts, reading/writing files, and
+tracking TODOs.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="built-in-output-styles"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#built-in-output-styles">​</a></div><span class="cursor-pointer">Built-in output styles</span></h2>
+<p>Claude Code’s <strong>Default</strong> output style is the existing system prompt, designed
+to help you complete software engineering tasks efficiently.</p>
+<p>There are two additional built-in output styles focused on teaching you the
+codebase and how Claude operates:</p>
+<ul>
+<li>
+<p><strong>Explanatory</strong>: Provides educational “Insights” in between helping you
+complete software engineering tasks. Helps you understand implementation
+choices and codebase patterns.</p>
+</li>
+<li>
+<p><strong>Learning</strong>: Collaborative, learn-by-doing mode where Claude will not only
+share “Insights” while coding, but also ask you to contribute small, strategic
+pieces of code yourself. Claude Code will add <code>TODO(human)</code> markers in your
+code for you to implement.</p>
+</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="how-output-styles-work"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#how-output-styles-work">​</a></div><span class="cursor-pointer">How output styles work</span></h2>
+<p>Output styles directly modify Claude Code’s system prompt.</p>
+<ul>
+<li>Non-default output styles exclude instructions specific to code generation and
+efficient output normally built into Claude Code (such as responding concisely
+and verifying code with tests).</li>
+<li>Instead, these output styles have their own custom instructions added to the
+system prompt.</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="change-your-output-style"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#change-your-output-style">​</a></div><span class="cursor-pointer">Change your output style</span></h2>
+<p>You can either:</p>
+<ul>
+<li>
+<p>Run <code>/output-style</code> to access the menu and select your output style (this can
+also be accessed from the <code>/config</code> menu)</p>
+</li>
+<li>
+<p>Run <code>/output-style [style]</code>, such as <code>/output-style explanatory</code>, to directly
+switch to a style</p>
+</li>
+</ul>
+<p>These changes apply to the <a class="link" href="/en/docs/claude-code/settings">local project level</a>
+and are saved in <code>.claude/settings.local.json</code>.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="create-a-custom-output-style"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#create-a-custom-output-style">​</a></div><span class="cursor-pointer">Create a custom output style</span></h2>
+<p>To set up a new output style with Claude’s help, run
+<code>/output-style:new I want an output style that ...</code></p>
+<p>By default, output styles created through <code>/output-style:new</code> are saved as
+markdown files at the user level in <code>~/.claude/output-styles</code> and can be used
+across projects. They have the following structure:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-markdown"><code class="language-markdown"><span class=""><span class="token hr punctuation">---</span></span>
+<span class="">name: My Custom Style</span>
+<span class="">description:</span>
+<span class="">  A brief description of what this style does, to be displayed to the user</span>
+<span class=""><span class="token hr punctuation">---</span></span>
+<!-- -->
+<span class=""><span class="token title important"><span class="token punctuation">#</span> Custom Style Instructions</span></span>
+<!-- -->
+<span class="">You are an interactive CLI tool that helps users with software engineering</span>
+<span class="">tasks. [Your custom instructions here...]</span>
+<!-- -->
+<span class=""><span class="token title important"><span class="token punctuation">##</span> Specific Behaviors</span></span>
+<!-- -->
+<span class="">[Define how the assistant should behave in this style...]</span>
+</code></pre></div></div></div>
+<p>You can also create your own output style Markdown files and save them either at
+the user level (<code>~/.claude/output-styles</code>) or the project level
+(<code>.claude/output-styles</code>).</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="comparisons-to-related-features"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#comparisons-to-related-features">​</a></div><span class="cursor-pointer">Comparisons to related features</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="output-styles-vs-claude-md-vs-%E2%80%94append-system-prompt"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#output-styles-vs-claude-md-vs-%E2%80%94append-system-prompt">​</a></div><span class="cursor-pointer">Output Styles vs. CLAUDE.md vs. —append-system-prompt</span></h3>
+<p>Output styles completely “turn off” the parts of Claude Code’s default system
+prompt specific to software engineering. Neither CLAUDE.md nor
+<code>--append-system-prompt</code> edit Claude Code’s default system prompt. CLAUDE.md
+adds the contents as a user message <em>following</em> Claude Code’s default system
+prompt. <code>--append-system-prompt</code> appends the content to the system prompt.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="output-styles-vs-agents"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#output-styles-vs-agents">​</a></div><span class="cursor-pointer">Output Styles vs. <a class="link" href="/en/docs/claude-code/sub-agents">Agents</a></span></h3>
+<p>Output styles directly affect the main agent loop and only affect the system
+prompt. Agents are invoked to handle specific tasks and can include additional
+settings like the model to use, the tools they have available, and some context
+about when to use the agent.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="output-styles-vs-custom-slash-commands"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#output-styles-vs-custom-slash-commands">​</a></div><span class="cursor-pointer">Output Styles vs. <a class="link" href="/en/docs/claude-code/slash-commands">Custom Slash Commands</a></span></h3>
+<p>You can think of output styles as “stored system prompts” and custom slash
+commands as “stored prompts”.</p></div>

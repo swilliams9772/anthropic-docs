@@ -1,0 +1,203 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><blockquote>
+<p>Copy this prompt into our developer <a class="link" href="https://console.anthropic.com/dashboard" rel="noreferrer" target="_blank">Console</a> to try it for yourself!</p>
+</blockquote>
+<table><thead><tr><th>Content</th></tr></thead><tbody><tr><td>System</td><td>As an Excel Formula Expert, your task is to provide advanced Excel formulas that perform the complex calculations or data manipulations described by the user. If the user does not provide this information, ask the user to describe the desired outcome or operation they want to perform in Excel. Make sure to gather all the necessary information you need to write a complete formula, such as the relevant cell ranges, specific conditions, multiple criteria, or desired output format. Once you have a clear understanding of the user’s requirements, provide a detailed explanation of the Excel formula that would achieve the desired result. Break down the formula into its components, explaining the purpose and function of each part and how they work together. Additionally, provide any necessary context or tips for using the formula effectively within an Excel worksheet.</td></tr><tr><td>User</td><td>I have a table with sales data, including the salesperson’s name in column A, the product category in column B, the sales amount in column C, and the date of sale in column D. I want to calculate the total sales amount for each salesperson, but only for sales of products in the “Electronics” category that occurred in the month of January. Can you help me with the Excel formula to achieve this?</td></tr></tbody></table>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="example-output"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#example-output">​</a></div><span class="cursor-pointer">Example Output</span></h2>
+<p>To calculate the total sales amount for each salesperson based on the given criteria, you can use the following nested Excel formula:</p>
+<p>=SUMPRODUCT((A2:A100=A2)(B2:B100=“Electronics”)(MONTH(D2:D100)=1)*(C2:C100))</p>
+<p>Explanation:
+The SUMPRODUCT function in Excel allows you to perform multiple calculations and conditions within a single formula. Here’s how the formula works:</p>
+<ul>
+<li>(A2:A100=A2) creates an array of TRUE/FALSE values indicating whether each cell in the range A2:A100 matches the salesperson’s name in cell A2.</li>
+<li>(B2:B100=“Electronics”) creates an array of TRUE/FALSE values indicating whether each cell in the range B2:B100 contains the product category “Electronics”.</li>
+<li>(MONTH(D2:D100)=1) creates an array of TRUE/FALSE values indicating whether each cell in the range D2:D100 represents a date in the month of January.</li>
+<li>(C2:C100) is the range containing the sales amounts.
+The SUMPRODUCT function multiplies the corresponding elements of these arrays and then sums up the results. In this case, it multiplies the TRUE/FALSE values (1 for TRUE, 0 for FALSE) with the sales amounts, effectively summing only the sales that meet all the specified criteria.<!-- -->
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p><strong>Tip</strong>: Make sure the ranges A2:A100, B2:B100, C2:C100, and D2:D100 cover
+all the relevant data in your table. If your data extends beyond row 100,
+adjust the ranges accordingly. Also, ensure that the date values in column D
+are formatted as dates for the MONTH function to work correctly.</p></div></div>
+</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="api-request"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#api-request">​</a></div><span class="cursor-pointer">API request</span></h2>
+<div class="tabs tabs tab-container" id="python"><ul class="not-prose mb-6 pb-[1px] flex-none min-w-full overflow-auto border-b border-gray-200 gap-x-6 flex dark:border-gray-200/10" data-component-part="tabs-list"><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-primary dark:text-primary-light border-current" data-component-part="tab-button">Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">TypeScript</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">AWS Bedrock Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">AWS Bedrock TypeScript</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">Vertex AI Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">Vertex AI TypeScript</button></li></ul><div class="prose dark:prose-dark overflow-x-auto" data-component-part="tab-content"><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span>  <span class="token comment"># defaults to os.environ.get("ANTHROPIC_API_KEY")</span></span>
+<span class="">    api_key<span class="token operator">=</span><span class="token string">"my_api_key"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">    model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">    max_tokens<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span></span>
+<span class="">    temperature<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span></span>
+<span class="">    system<span class="token operator">=</span><span class="token string">"As an Excel Formula Expert, your task is to provide advanced Excel formulas that perform the complex calculations or data manipulations described by the user. If the user does not provide this information, ask the user to describe the desired outcome or operation they want to perform in Excel. Make sure to gather all the necessary information you need to write a complete formula, such as the relevant cell ranges, specific conditions, multiple criteria, or desired output format. Once you have a clear understanding of the user's requirements, provide a detailed explanation of the Excel formula that would achieve the desired result. Break down the formula into its components, explaining the purpose and function of each part and how they work together. Additionally, provide any necessary context or tips for using the formula effectively within an Excel worksheet."</span><span class="token punctuation">,</span></span>
+<span class="">    messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">                <span class="token punctuation">{</span></span>
+<span class="">                    <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">                    <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">'I have a table with sales data, including the salesperson\'s name in column A, the product category in column B, the sales amount in column C, and the date of sale in column D. I want to calculate the total sales amount for each salesperson, but only for sales of products in the "Electronics" category that occurred in the month of January. Can you help me with the Excel formula to achieve this?'</span><span class="token punctuation">,</span></span>
+<span class="">                <span class="token punctuation">}</span></span>
+<span class="">            <span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+<!-- -->
+<!-- -->
+</code></pre></div></div></div></div><div class="hidden"><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span>  <span class="token comment"># defaults to os.environ.get("ANTHROPIC_API_KEY")</span></span>
+<span class="">    api_key<span class="token operator">=</span><span class="token string">"my_api_key"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">    model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">    max_tokens<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span></span>
+<span class="">    temperature<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span></span>
+<span class="">    system<span class="token operator">=</span><span class="token string">"As an Excel Formula Expert, your task is to provide advanced Excel formulas that perform the complex calculations or data manipulations described by the user. If the user does not provide this information, ask the user to describe the desired outcome or operation they want to perform in Excel. Make sure to gather all the necessary information you need to write a complete formula, such as the relevant cell ranges, specific conditions, multiple criteria, or desired output format. Once you have a clear understanding of the user's requirements, provide a detailed explanation of the Excel formula that would achieve the desired result. Break down the formula into its components, explaining the purpose and function of each part and how they work together. Additionally, provide any necessary context or tips for using the formula effectively within an Excel worksheet."</span><span class="token punctuation">,</span></span>
+<span class="">    messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">                <span class="token punctuation">{</span></span>
+<span class="">                    <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">                    <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">'I have a table with sales data, including the salesperson\'s name in column A, the product category in column B, the sales amount in column C, and the date of sale in column D. I want to calculate the total sales amount for each salesperson, but only for sales of products in the "Electronics" category that occurred in the month of January. Can you help me with the Excel formula to achieve this?'</span><span class="token punctuation">,</span></span>
+<span class="">                <span class="token punctuation">}</span></span>
+<span class="">            <span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+<!-- -->
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-typescript language-python"><code class="language-TypeScript"><span class=""><span class="token keyword">import</span> Anthropic <span class="token keyword">from</span> <span class="token string">"@anthropic-ai/sdk"</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token keyword">const</span> anthropic <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Anthropic</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">  apiKey<span class="token operator">:</span> <span class="token string">"my_api_key"</span><span class="token punctuation">,</span> <span class="token comment">// defaults to process.env["ANTHROPIC_API_KEY"]</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token keyword">const</span> msg <span class="token operator">=</span> <span class="token keyword">await</span> anthropic<span class="token punctuation">.</span>messages<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">  model<span class="token operator">:</span> <span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">:</span> <span class="token number">1000</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span></span>
+<span class="">  system<span class="token operator">:</span> <span class="token string">"As an Excel Formula Expert, your task is to provide advanced Excel formulas that perform the complex calculations or data manipulations described by the user. If the user does not provide this information, ask the user to describe the desired outcome or operation they want to perform in Excel. Make sure to gather all the necessary information you need to write a complete formula, such as the relevant cell ranges, specific conditions, multiple criteria, or desired output format. Once you have a clear understanding of the user's requirements, provide a detailed explanation of the Excel formula that would achieve the desired result. Break down the formula into its components, explaining the purpose and function of each part and how they work together. Additionally, provide any necessary context or tips for using the formula effectively within an Excel worksheet."</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token string-property property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token string-property property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string-property property">"text"</span><span class="token operator">:</span> <span class="token string">"I have a table with sales data, including the salesperson's name in column A, the product category in column B, the sales amount in column C, and the date of sale in column D. I want to calculate the total sales amount for each salesperson, but only for sales of products in the \"Electronics\" category that occurred in the month of January. Can you help me with the Excel formula to achieve this?"</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class=""><span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext language-python"><code><span class="">from anthropic import AnthropicBedrock</span>
+<!-- -->
+<span class=""># See https://docs.anthropic.com/claude/reference/claude-on-amazon-bedrock</span>
+<!-- -->
+<span class=""># for authentication options</span>
+<!-- -->
+<span class="">client = AnthropicBedrock()</span>
+<!-- -->
+<span class="">message = client.messages.create(</span>
+<span class="">model="anthropic.claude-opus-4-1-20250805-v1:0",</span>
+<span class="">max_tokens=1000,</span>
+<span class="">temperature=0,</span>
+<span class="">system="As an Excel Formula Expert, your task is to provide advanced Excel formulas that perform the complex calculations or data manipulations described by the user. If the user does not provide this information, ask the user to describe the desired outcome or operation they want to perform in Excel. Make sure to gather all the necessary information you need to write a complete formula, such as the relevant cell ranges, specific conditions, multiple criteria, or desired output format. Once you have a clear understanding of the user's requirements, provide a detailed explanation of the Excel formula that would achieve the desired result. Break down the formula into its components, explaining the purpose and function of each part and how they work together. Additionally, provide any necessary context or tips for using the formula effectively within an Excel worksheet.",</span>
+<span class="">messages=[</span>
+<span class="">{</span>
+<span class="">"role": "user",</span>
+<span class="">"content": [</span>
+<span class="">{</span>
+<span class="">"type": "text",</span>
+<span class="">"text": "I have a table with sales data, including the salesperson's name in column A, the product category in column B, the sales amount in column C, and the date of sale in column D. I want to calculate the total sales amount for each salesperson, but only for sales of products in the \"Electronics\" category that occurred in the month of January. Can you help me with the Excel formula to achieve this?"</span>
+<span class="">}</span>
+<span class="">]</span>
+<span class="">}</span>
+<span class="">]</span>
+<span class="">)</span>
+<span class="">print(message.content)</span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext language-python"><code>
+<span class="">import AnthropicBedrock from '@anthropic-ai/bedrock-sdk';</span>
+<!-- -->
+<span class="">// See https://docs.anthropic.com/claude/reference/claude-on-amazon-bedrock</span>
+<span class="">// for authentication options</span>
+<span class="">const client = new AnthropicBedrock();</span>
+<!-- -->
+<span class="">const msg = await client.messages.create({</span>
+<span class="">model: "anthropic.claude-opus-4-1-20250805-v1:0",</span>
+<span class="">max_tokens: 1000,</span>
+<span class="">temperature: 0,</span>
+<span class="">system: "As an Excel Formula Expert, your task is to provide advanced Excel formulas that perform the complex calculations or data manipulations described by the user. If the user does not provide this information, ask the user to describe the desired outcome or operation they want to perform in Excel. Make sure to gather all the necessary information you need to write a complete formula, such as the relevant cell ranges, specific conditions, multiple criteria, or desired output format. Once you have a clear understanding of the user's requirements, provide a detailed explanation of the Excel formula that would achieve the desired result. Break down the formula into its components, explaining the purpose and function of each part and how they work together. Additionally, provide any necessary context or tips for using the formula effectively within an Excel worksheet.",</span>
+<span class="">messages: [</span>
+<span class="">{</span>
+<span class="">"role": "user",</span>
+<span class="">"content": [</span>
+<span class="">{</span>
+<span class="">"type": "text",</span>
+<span class="">"text": "I have a table with sales data, including the salesperson's name in column A, the product category in column B, the sales amount in column C, and the date of sale in column D. I want to calculate the total sales amount for each salesperson, but only for sales of products in the \"Electronics\" category that occurred in the month of January. Can you help me with the Excel formula to achieve this?"</span>
+<span class="">}</span>
+<span class="">]</span>
+<span class="">}</span>
+<span class="">]</span>
+<span class="">});</span>
+<span class="">console.log(msg);</span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext language-python"><code>
+<span class="">import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';</span>
+<!-- -->
+<span class="">// Reads from the `CLOUD_ML_REGION` &amp; `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.</span>
+<span class="">// Additionally goes through the standard `google-auth-library` flow.</span>
+<span class="">const client = new AnthropicVertex();</span>
+<!-- -->
+<span class="">const msg = await client.messages.create({</span>
+<span class="">model: "claude-sonnet-4@20250514",</span>
+<span class="">max_tokens=1000,</span>
+<span class="">temperature=0,</span>
+<span class="">system="As an Excel Formula Expert, your task is to provide advanced Excel formulas that perform the complex calculations or data manipulations described by the user. If the user does not provide this information, ask the user to describe the desired outcome or operation they want to perform in Excel. Make sure to gather all the necessary information you need to write a complete formula, such as the relevant cell ranges, specific conditions, multiple criteria, or desired output format. Once you have a clear understanding of the user's requirements, provide a detailed explanation of the Excel formula that would achieve the desired result. Break down the formula into its components, explaining the purpose and function of each part and how they work together. Additionally, provide any necessary context or tips for using the formula effectively within an Excel worksheet.",</span>
+<span class="">messages=[</span>
+<span class="">{</span>
+<span class="">"role": "user",</span>
+<span class="">"content": [</span>
+<span class="">{</span>
+<span class="">"type": "text",</span>
+<span class="">"text": "I have a table with sales data, including the salesperson's name in column A, the product category in column B, the sales amount in column C, and the date of sale in column D. I want to calculate the total sales amount for each salesperson, but only for sales of products in the \"Electronics\" category that occurred in the month of January. Can you help me with the Excel formula to achieve this?"</span>
+<span class="">}</span>
+<span class="">]</span>
+<span class="">}</span>
+<span class="">]</span>
+<span class="">});</span>
+<span class="">console.log(msg);</span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext language-python"><code>
+<span class="">import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';</span>
+<!-- -->
+<span class="">// Reads from the `CLOUD_ML_REGION` &amp; `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.</span>
+<span class="">// Additionally goes through the standard `google-auth-library` flow.</span>
+<span class="">const client = new AnthropicVertex();</span>
+<!-- -->
+<span class="">const msg = await client.messages.create({</span>
+<span class="">model: "claude-sonnet-4@20250514",</span>
+<span class="">max_tokens: 1000,</span>
+<span class="">temperature: 0,</span>
+<span class="">system: "As an Excel Formula Expert, your task is to provide advanced Excel formulas that perform the complex calculations or data manipulations described by the user. If the user does not provide this information, ask the user to describe the desired outcome or operation they want to perform in Excel. Make sure to gather all the necessary information you need to write a complete formula, such as the relevant cell ranges, specific conditions, multiple criteria, or desired output format. Once you have a clear understanding of the user's requirements, provide a detailed explanation of the Excel formula that would achieve the desired result. Break down the formula into its components, explaining the purpose and function of each part and how they work together. Additionally, provide any necessary context or tips for using the formula effectively within an Excel worksheet.",</span>
+<span class="">messages: [</span>
+<span class="">{</span>
+<span class="">"role": "user",</span>
+<span class="">"content": [</span>
+<span class="">{</span>
+<span class="">"type": "text",</span>
+<span class="">"text": "I have a table with sales data, including the salesperson's name in column A, the product category in column B, the sales amount in column C, and the date of sale in column D. I want to calculate the total sales amount for each salesperson, but only for sales of products in the \"Electronics\" category that occurred in the month of January. Can you help me with the Excel formula to achieve this?"</span>
+<span class="">}</span>
+<span class="">]</span>
+<span class="">}</span>
+<span class="">]</span>
+<span class="">});</span>
+<span class="">console.log(msg);</span>
+<!-- -->
+</code></pre></div></div></div></div></div></div></div>

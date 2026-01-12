@@ -2,112 +2,91 @@
 # -*- coding: utf-8 -*-
 
 """
-Improved Anthropic Documentation Scraper v3
--------------------------------------------
-This script scrapes the Anthropic API documentation with significantly improved:
-- Clean filename generation (no .html.md extensions)
-- Better content extraction (removes navigation/sidebar content)
-- Enhanced markdown formatting
-- Improved URL handling and validation
+Anthropic Documentation Scraper v4 (Playwright Edition)
+--------------------------------------------------------
+This script scrapes the Anthropic API documentation using Playwright
+for full JavaScript/React support on the new platform.claude.com site.
 
-Key improvements over v2:
-- Proper filename generation without encoded characters
-- Better content filtering to avoid navigation-only files
-- Enhanced markdown post-processing
-- Improved URL normalization
+Key features:
+- Playwright for JavaScript rendering
+- Clean filename generation
+- Better content extraction
+- Enhanced markdown formatting
+- Multi-language support (English focus)
 """
 
 import os
 import re
 import time
 import json
-import queue
-import signal
+import asyncio
 import logging
 import hashlib
-import threading
-import concurrent.futures
-import argparse
-import yaml
-import random
 import urllib.parse
-from io import BytesIO
-from urllib.parse import urljoin, urlparse, unquote
+from urllib.parse import urljoin, urlparse
 import sys
 from datetime import datetime
 
-import requests
 from bs4 import BeautifulSoup
 from markdownify import markdownify as md_convert
-from PIL import Image, UnidentifiedImageError
 
-# User agents for rotation
-USER_AGENTS = [
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15',
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0',
-    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-]
+# Check for Playwright
+try:
+    from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
+    PLAYWRIGHT_AVAILABLE = True
+except ImportError:
+    PLAYWRIGHT_AVAILABLE = False
+    print("Playwright not installed. Installing...")
+    import subprocess
+    subprocess.run([sys.executable, "-m", "pip", "install", "playwright"], check=True)
+    subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], check=True)
+    from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
 
-# Global configuration variables
-CONFIG = {}
-ROOT_URL = "https://docs.anthropic.com"
-BASE_URL = "https://docs.anthropic.com"
-API_DOMAIN = "docs.anthropic.com"
+# Configuration
+ROOT_URL = "https://platform.claude.com"
+BASE_URL = "https://platform.claude.com"
+ALLOWED_DOMAINS = ["platform.claude.com", "support.claude.com"]
 OUTPUT_DIR = "anthropic_docs"
 HTML_DIR = os.path.join(OUTPUT_DIR, "anthropic_docs_html")
 MD_DIR = os.path.join(OUTPUT_DIR, "anthropic_docs_md")
 IMAGES_DIR = os.path.join(OUTPUT_DIR, "anthropic_docs_images")
 FULL_HTML_DIR = os.path.join(OUTPUT_DIR, "anthropic_docs_full_html")
 METADATA_FILE = os.path.join(OUTPUT_DIR, "page_metadata.json")
-WORKER_THREADS = 6
-IMAGE_THREADS = 4
-REQUEST_DELAY = 0.8
-MAX_CRAWL_DEPTH = 8
-LOG_FILE = "scraper_v3.log"
-MAX_IMAGE_SIZE = 800
-IMAGE_QUALITY = 85
+LOG_FILE = "scraper_v4.log"
 
-# Excluded paths and patterns
-EXCLUDED_EXTENSIONS = ['.pdf', '.zip', '.tar', '.gz', '.mp4', '.avi', '.mov', '.mpg', '.exe', '.dmg', '.pkg', '.js', '.css']
+# Scraping settings
+MAX_CONCURRENT = 3  # Concurrent browser pages
+REQUEST_DELAY = 1.0  # Delay between requests
+PAGE_TIMEOUT = 30000  # 30 seconds
+MAX_CRAWL_DEPTH = 10
+LANGUAGES = ["en"]  # Focus on English only, add "es", "de", etc. if needed
+
+# Excluded patterns
 EXCLUDED_PATTERNS = [
-    '/feedback', '/legal', '/privacy', '/terms', '/search', '/404',
-    '?q=', '/api/v1/', 'twitter.com', 'github.com', 'linkedin.com',
-    'facebook.com', 'instagram.com', 'youtube.com', 'mailto:',
-    'discord.com', 'support.anthropic.com', 'console.anthropic.com',
-    'claude.ai', 'anthropic.com/news', 'anthropic.com/legal',
-    'anthropic.com/careers', 'anthropic.com/about'
+    '/login', '/signup', '/feedback', '/legal', '/privacy', '/terms',
+    'twitter.com', 'github.com', 'linkedin.com', 'facebook.com',
+    'instagram.com', 'youtube.com', 'mailto:', 'discord.com',
+    'console.anthropic.com', 'claude.ai/chat', '/settings',
 ]
 
 # Global state
 visited_urls = set()
 queued_urls = set()
-skipped_urls = set()
-url_to_filename = {}
 page_metadata = {}
 processed_pages = 0
-image_counter = 0
-total_images = 0
 error_pages = 0
-failed_images = 0
 
-# Queues and threading
-page_queue = queue.Queue()
-image_queue = queue.Queue()
-stop_event = threading.Event()
-metadata_lock = threading.Lock()
-request_lock = threading.Lock()
-last_request_time = 0
 
 def setup_directories():
     """Create necessary directories"""
     for directory in [OUTPUT_DIR, HTML_DIR, MD_DIR, IMAGES_DIR, FULL_HTML_DIR]:
         os.makedirs(directory, exist_ok=True)
 
-def setup_logging(log_level="INFO"):
+
+def setup_logging():
     """Setup logging configuration"""
     logging.basicConfig(
-        level=getattr(logging, log_level.upper()),
+        level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(message)s',
         handlers=[
             logging.FileHandler(LOG_FILE, encoding='utf-8'),
@@ -115,82 +94,17 @@ def setup_logging(log_level="INFO"):
         ]
     )
 
-def signal_handler(sig, frame):
-    """Handle interrupt signals gracefully"""
-    logging.info("Interrupt received, stopping scraper...")
-    stop_event.set()
-
-def fetch_url(url, max_retries=3, retry_delay=1, timeout=30):
-    """Fetch URL with retries and rate limiting"""
-    global last_request_time
-    
-    # Rate limiting
-    with request_lock:
-        current_time = time.time()
-        time_since_last = current_time - last_request_time
-        if time_since_last < REQUEST_DELAY:
-            time.sleep(REQUEST_DELAY - time_since_last)
-        last_request_time = time.time()
-    
-    headers = {
-        'User-Agent': random.choice(USER_AGENTS),
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.5',
-        'Accept-Encoding': 'gzip, deflate',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1',
-    }
-    
-    for attempt in range(max_retries):
-        try:
-            response = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
-            
-            if response.status_code == 200:
-                return response.text
-            elif response.status_code == 429:  # Rate limited
-                wait_time = retry_delay * (2 ** attempt) + random.uniform(0, 1)
-                logging.warning(f"Rate limited for {url}, waiting {wait_time:.2f}s")
-                time.sleep(wait_time)
-            elif response.status_code in [403, 404]:
-                logging.warning(f"Access denied or not found for {url}: {response.status_code}")
-                return None
-            else:
-                logging.warning(f"HTTP {response.status_code} for {url}")
-                
-        except requests.exceptions.Timeout:
-            logging.warning(f"Timeout for {url} (attempt {attempt + 1})")
-        except requests.exceptions.RequestException as e:
-            logging.warning(f"Request error for {url}: {e} (attempt {attempt + 1})")
-        
-        if attempt < max_retries - 1:
-            wait_time = retry_delay * (2 ** attempt) + random.uniform(0, 1)
-            time.sleep(wait_time)
-    
-    logging.error(f"Failed to fetch {url} after {max_retries} attempts")
-    return None
 
 def clean_filename(url):
-    """Convert URL to a clean, descriptive filename without .html.md extension"""
+    """Convert URL to a clean, descriptive filename"""
     parsed_url = urlparse(url)
     path = parsed_url.path.strip('/')
     
-    # Handle root URL
     if not path:
         return "index"
     
-    # Remove common prefixes to make filenames cleaner
-    prefixes_to_remove = [
-        'en/api/',
-        'en/docs/',
-        'api/',
-        'docs/',
-        'en/',
-    ]
-    
-    for prefix in prefixes_to_remove:
-        if path.startswith(prefix):
-            path = path[len(prefix):]
-            break
+    # Remove /docs/ prefix and language codes for cleaner names
+    path = re.sub(r'^docs/', '', path)
     
     # Convert path to filename
     filename = path.replace('/', '_')
@@ -201,128 +115,86 @@ def clean_filename(url):
     # Decode URL encoding
     filename = urllib.parse.unquote(filename)
     
-    # Clean up filename - be more aggressive about cleaning
+    # Clean up filename
     filename = re.sub(r'[^a-zA-Z0-9_.-]', '_', filename)
-    filename = re.sub(r'_+', '_', filename)  # Remove multiple underscores
+    filename = re.sub(r'_+', '_', filename)
     filename = filename.strip('_')
     
-    # Remove common suffixes that don't add value
-    suffixes_to_remove = ['.html', '.htm', '.php', '.asp']
-    for suffix in suffixes_to_remove:
-        if filename.endswith(suffix):
-            filename = filename[:-len(suffix)]
-    
-    # Ensure we have a valid filename
     if not filename or filename == '_':
-        # Use a hash of the URL as fallback
         url_hash = hashlib.md5(url.encode('utf-8')).hexdigest()[:8]
         filename = f"page_{url_hash}"
     
-    # Limit filename length
     if len(filename) > 100:
         filename = filename[:100]
     
     return filename
 
+
 def is_valid_url(url):
     """Check if a URL should be crawled"""
     parsed_url = urlparse(url)
     
-    # Only crawl URLs on the target domain
-    if parsed_url.netloc != API_DOMAIN:
+    # Only crawl URLs on allowed domains
+    if parsed_url.netloc not in ALLOWED_DOMAINS:
         return False
     
-    # Skip excluded extensions
-    path = parsed_url.path.lower()
-    for ext in EXCLUDED_EXTENSIONS:
-        if path.endswith(ext):
-            return False
-    
-    # Skip URLs matching excluded patterns
+    # Skip excluded patterns
     for pattern in EXCLUDED_PATTERNS:
         if pattern in url.lower():
             return False
     
-    # Include documentation and API paths
-    valid_paths = [
-        '/en/docs/',
-        '/en/api/',
-        '/en/home',
-        '/en/resources/',
-        '/en/release-notes/',
-    ]
+    path = parsed_url.path.lower()
     
-    # Check if URL matches any valid path or is the root
-    if path == '/' or path == '':
-        return True
-        
-    return any(path.startswith(valid_path) for valid_path in valid_paths)
+    # For platform.claude.com, focus on /docs/ paths
+    if parsed_url.netloc == "platform.claude.com":
+        if not path.startswith('/docs/'):
+            return False
+        # Focus on specified languages
+        lang_match = re.match(r'^/docs/([a-z]{2})/', path)
+        if lang_match and lang_match.group(1) not in LANGUAGES:
+            return False
+    
+    # For support.claude.com, include /en/ paths
+    if parsed_url.netloc == "support.claude.com":
+        if not path.startswith('/en/'):
+            return False
+    
+    return True
+
 
 def extract_main_content(soup, url):
-    """Extract the main content from the page with improved selectors for Anthropic docs"""
+    """Extract the main content from the page"""
     
-    # Remove unwanted elements first - be more aggressive
+    # Remove unwanted elements
     unwanted_selectors = [
         'nav', 'header', 'footer',
-        '.navbar', '.navigation', '.nav-wrapper', '.top-bar',
-        '.sidebar', '.aside', '.toc', '.table-of-contents',
-        '.breadcrumb', '.pagination', '.edit-page-link',
-        '.on-this-page', '.page-nav', '.prev-next-nav',
-        '.cookie-banner', '.announcement', '.banner',
-        '.social-share', '.related-articles',
+        '.navbar', '.navigation', '.nav-wrapper',
+        '.sidebar', '.aside', '.toc',
+        '.breadcrumb', '.pagination',
+        '.cookie-banner', '.announcement',
         'script', 'style', 'noscript',
-        # Anthropic-specific selectors
-        '.navbar-sidebar', '.theme-doc-sidebar-container',
-        '.sidebar-container', '.doc-sidebar',
-        '[data-theme="navbar"]', '[data-theme="sidebar"]',
-        # Additional navigation elements
-        '.theme-doc-sidebar-menu', '.menu__list',
-        '.navbar__inner', '.navbar__items',
-        '.theme-doc-breadcrumbs', '.breadcrumbs',
-        '.theme-doc-toc-mobile', '.table-of-contents__link',
-        # Search and language selectors
-        '.DocSearch', '.navbar__search',
-        '.navbar__locale', '.dropdown',
-        # Footer and legal
-        '.footer', '.theme-doc-footer',
-        # Edit links and metadata
-        '.theme-edit-this-page', '.lastUpdated',
-        # Mobile navigation
-        '.navbar-sidebar__backdrop', '.navbar-sidebar__brand',
+        '[data-testid="sidebar"]',
+        '[data-testid="navbar"]',
+        '.DocSearch',
+        '.intercom-lightweight-app',
     ]
     
     for selector in unwanted_selectors:
         for element in soup.select(selector):
             element.decompose()
     
-    # Try to find main content using various selectors
+    # Try to find main content
     content_selectors = [
-        # Anthropic/Docusaurus specific - most specific first
-        '.theme-doc-markdown.markdown',
-        '.theme-doc-markdown',
-        '.markdown',
-        'article[role="main"]',
-        'main[role="main"]',
-        '.main-wrapper main',
-        '.docMainContainer',
-        '.container .row .col',
-        
-        # Generic content selectors
+        'main article',
+        'main .prose',
+        'main [data-testid="doc-content"]',
+        'main .markdown',
+        'main .content',
+        '[role="main"]',
         'main',
         'article',
         '.content',
         '.main-content',
-        '.page-content',
-        '.documentation',
-        '.doc-content',
-        '#main-content',
-        '.post-content',
-        '.entry-content',
-        
-        # Fallback selectors
-        '.container',
-        '#content',
-        'body'
     ]
     
     content = None
@@ -330,59 +202,24 @@ def extract_main_content(soup, url):
         elements = soup.select(selector)
         for element in elements:
             text_content = element.get_text(strip=True)
-            # Look for substantial content (more than just navigation)
-            if len(text_content) > 300:  # Increased threshold
+            if len(text_content) > 200:
                 content = element
-                logging.debug(f"Found content using selector: {selector}")
                 break
         if content:
             break
     
     if not content:
-        # Last resort: use body but try to clean it up
         content = soup.body if soup.body else soup
-        logging.debug("Using body as content (last resort)")
-    
-    # Additional cleanup within the content
-    if content:
-        # Remove any remaining navigation elements
-        for element in content.select('.nav, .menu, .navigation, .breadcrumb'):
-            element.decompose()
-        
-        # Remove elements that are likely navigation based on text content
-        for element in content.find_all(['div', 'ul', 'ol']):
-            text = element.get_text(strip=True)
-            # Remove elements that look like navigation
-            if (len(text) < 100 and 
-                any(nav_word in text.lower() for nav_word in 
-                    ['navigation', 'menu', 'search', 'home', 'docs', 'api', 'welcome'])):
-                element.decompose()
-        
-        # Remove empty elements
-        for element in content.find_all():
-            if not element.get_text(strip=True) and not element.find_all(['img', 'video', 'audio', 'iframe']):
-                element.decompose()
-        
-        # Improve code blocks
-        for pre in content.find_all('pre'):
-            # Add language detection for better markdown conversion
-            code_text = pre.get_text()
-            if 'curl' in code_text.lower() or code_text.strip().startswith('curl'):
-                pre['class'] = pre.get('class', []) + ['language-bash']
-            elif code_text.strip().startswith('{') and code_text.strip().endswith('}'):
-                pre['class'] = pre.get('class', []) + ['language-json']
-            elif 'import ' in code_text or 'def ' in code_text:
-                pre['class'] = pre.get('class', []) + ['language-python']
     
     return content
 
+
 def improve_markdown(markdown_content, url, title=""):
-    """Improve the markdown formatting significantly"""
+    """Improve the markdown formatting"""
     if not markdown_content:
         return ""
     
-    # Add page header with title and URL
-    filename = clean_filename(url)
+    # Add page header
     header = f"# {title}\n\n" if title and title != "Untitled" else ""
     header += f"**Source:** {url}\n\n"
     
@@ -394,68 +231,80 @@ def improve_markdown(markdown_content, url, title=""):
     # Fix header formatting
     markdown_content = re.sub(r'^#+\s*#+\s*', '# ', markdown_content, flags=re.MULTILINE)
     
-    # Ensure proper spacing around headers
-    markdown_content = re.sub(r'\n(#{1,6}\s+[^\n]+)\n(?!\n)', r'\n\1\n\n', markdown_content)
-    
-    # Fix list formatting
-    markdown_content = re.sub(r'^\s{4,}([*\-+])', r'  \1', markdown_content, flags=re.MULTILINE)
-    
-    # Clean up any remaining HTML comments
+    # Clean up HTML comments
     markdown_content = re.sub(r'<!--.*?-->', '', markdown_content, flags=re.DOTALL)
     
     # Remove excessive whitespace
     markdown_content = re.sub(r'[ \t]+\n', '\n', markdown_content)
     
-    # Fix broken links (remove navigation-style links)
-    markdown_content = re.sub(r'\[([^\]]+)\]\(/[^)]*\)(?=\s*\[)', r'\1', markdown_content)
-    
-    # Remove standalone navigation links at the beginning
-    lines = markdown_content.split('\n')
-    cleaned_lines = []
-    skip_navigation = True
-    
-    for line in lines:
-        # Stop skipping once we hit substantial content
-        if skip_navigation and len(line.strip()) > 50 and not re.match(r'^\[.*\]\(.*\)$', line.strip()):
-            skip_navigation = False
-        
-        if not skip_navigation or not re.match(r'^\[.*\]\(.*\)$', line.strip()):
-            cleaned_lines.append(line)
-    
-    markdown_content = '\n'.join(cleaned_lines)
-    
-    # Ensure the content ends with a single newline
+    # Ensure single newline at end
     markdown_content = markdown_content.rstrip() + '\n'
     
     return markdown_content
 
-def process_page(url, depth=0):
+
+async def fetch_page_with_playwright(page, url, retries=2):
+    """Fetch a page using Playwright with retries"""
+    for attempt in range(retries + 1):
+        try:
+            # Navigate to the page
+            response = await page.goto(url, wait_until='networkidle', timeout=PAGE_TIMEOUT)
+            
+            if response is None:
+                logging.warning(f"No response for {url}")
+                return None
+            
+            if response.status >= 400:
+                logging.warning(f"HTTP {response.status} for {url}")
+                return None
+            
+            # Wait for content to load
+            await page.wait_for_load_state('networkidle')
+            
+            # Additional wait for React/JS content
+            await asyncio.sleep(1)
+            
+            # Try to wait for main content
+            try:
+                await page.wait_for_selector('main', timeout=5000)
+            except:
+                pass
+            
+            # Get the rendered HTML
+            html_content = await page.content()
+            return html_content
+            
+        except PlaywrightTimeout:
+            logging.warning(f"Timeout for {url} (attempt {attempt + 1})")
+            if attempt < retries:
+                await asyncio.sleep(2)
+        except Exception as e:
+            logging.warning(f"Error fetching {url}: {e} (attempt {attempt + 1})")
+            if attempt < retries:
+                await asyncio.sleep(2)
+    
+    return None
+
+
+async def process_page(page, url, depth=0):
     """Process a single page"""
     global processed_pages, error_pages
     
-    if stop_event.is_set():
+    if depth > MAX_CRAWL_DEPTH:
         return False, []
     
-    if depth > MAX_CRAWL_DEPTH:
-        logging.debug(f"Maximum depth reached for URL: {url}")
-        return False, []
-        
     if url in visited_urls:
-        logging.debug(f"URL already visited: {url}")
         return True, []
-        
+    
     if not is_valid_url(url):
-        skipped_urls.add(url)
-        logging.debug(f"Skipping URL: {url}")
         return False, []
     
     visited_urls.add(url)
     
     # Fetch the content
-    html_content = fetch_url(url)
+    html_content = await fetch_page_with_playwright(page, url)
     if not html_content:
         error_pages += 1
-        logging.error(f"Failed to fetch content for URL: {url}")
         return False, []
     
     try:
@@ -465,9 +314,7 @@ def process_page(url, depth=0):
         title = "Untitled"
         if soup.title:
             title = soup.title.get_text().strip()
-            # Clean up title
-            title = re.sub(r'\s*\|\s*.*$', '', title)  # Remove site name after |
-            title = title.strip()
+            title = re.sub(r'\s*[-|]\s*.*$', '', title).strip()
         elif soup.find('h1'):
             title = soup.find('h1').get_text().strip()
         
@@ -482,17 +329,9 @@ def process_page(url, depth=0):
             error_pages += 1
             return False, []
         
-        # Check content quality - be more strict
         content_text = content.get_text(strip=True)
-        if len(content_text) < 200:  # Increased threshold
-            logging.warning(f"Insufficient content for {url} (only {len(content_text)} characters)")
-            error_pages += 1
-            return False, []
-        
-        # Check if content is mostly navigation
-        navigation_indicators = ['navigation', 'search', 'menu', 'home', 'docs', 'api', 'welcome']
-        if any(indicator in content_text.lower()[:500] for indicator in navigation_indicators) and len(content_text) < 1000:
-            logging.warning(f"Content appears to be mostly navigation for {url}")
+        if len(content_text) < 100:
+            logging.warning(f"Insufficient content for {url} ({len(content_text)} chars)")
             error_pages += 1
             return False, []
         
@@ -506,14 +345,14 @@ def process_page(url, depth=0):
         with open(html_file, 'w', encoding='utf-8') as f:
             f.write(str(content))
         
-        # Convert to Markdown with improved processing
+        # Convert to Markdown
         markdown_content = md_convert(str(content), heading_style="ATX")
-        improved_markdown_content = improve_markdown(markdown_content, url, title)
+        improved_markdown = improve_markdown(markdown_content, url, title)
         
-        # Save Markdown with .md extension (not .html.md)
+        # Save Markdown
         md_file = os.path.join(MD_DIR, f"{filename}.md")
         with open(md_file, 'w', encoding='utf-8') as f:
-            f.write(improved_markdown_content)
+            f.write(improved_markdown)
         
         # Find new links
         new_links = []
@@ -523,130 +362,201 @@ def process_page(url, depth=0):
                 continue
             
             absolute_url = urljoin(url, href)
+            # Normalize URL (remove trailing slash, fragments)
+            absolute_url = absolute_url.split('#')[0].rstrip('/')
+            
             if is_valid_url(absolute_url) and absolute_url not in visited_urls and absolute_url not in queued_urls:
                 new_links.append(absolute_url)
                 queued_urls.add(absolute_url)
         
         # Update metadata
-        with metadata_lock:
-            page_metadata[url] = {
-                'title': title,
-                'filename': filename,
-                'url': url,
-                'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                'content_length': len(improved_markdown_content),
-                'content_text_length': len(content_text),
-                'depth': depth,
-                'links_found': len(new_links)
-            }
+        page_metadata[url] = {
+            'title': title,
+            'filename': filename,
+            'url': url,
+            'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'content_length': len(improved_markdown),
+            'content_text_length': len(content_text),
+            'depth': depth,
+            'links_found': len(new_links)
+        }
         
         processed_pages += 1
-        logging.info(f"Processed page {processed_pages}: {title} ({url}) -> {filename}.md")
+        logging.info(f"[{processed_pages}] {title} -> {filename}.md ({len(content_text)} chars)")
         
         return True, new_links
         
     except Exception as e:
         error_pages += 1
-        logging.error(f"Error processing page {url}: {e}")
+        logging.error(f"Error processing {url}: {e}")
         import traceback
         logging.error(traceback.format_exc())
         return False, []
 
-def worker():
-    """Worker thread function"""
-    while not stop_event.is_set():
-        try:
-            url, depth = page_queue.get(timeout=1)
-            success, new_links = process_page(url, depth)
-            
-            # Add new links to queue
-            for link in new_links:
-                if not stop_event.is_set():
-                    page_queue.put((link, depth + 1))
-            
-            page_queue.task_done()
-            
-        except queue.Empty:
-            continue
-        except Exception as e:
-            logging.error(f"Worker error: {e}")
 
-def save_metadata():
-    """Save metadata to file"""
-    try:
-        with open(METADATA_FILE, 'w', encoding='utf-8') as f:
-            json.dump(page_metadata, f, indent=2, ensure_ascii=False)
-        logging.info(f"Saved metadata for {len(page_metadata)} pages")
-    except Exception as e:
-        logging.error(f"Error saving metadata: {e}")
-
-def main():
-    """Main function"""
-    # Setup
-    setup_directories()
-    setup_logging()
-    signal.signal(signal.SIGINT, signal_handler)
+async def crawl_with_playwright():
+    """Main crawl function using Playwright"""
+    global processed_pages, error_pages
     
-    # Starting URLs - comprehensive list for Anthropic docs
+    # Starting URLs for platform.claude.com
     start_urls = [
-        "https://docs.anthropic.com/",
-        "https://docs.anthropic.com/en/home",
-        "https://docs.anthropic.com/en/docs/welcome",
-        "https://docs.anthropic.com/en/api/getting-started",
-        "https://docs.anthropic.com/en/api/messages",
-        "https://docs.anthropic.com/en/docs/about-claude/models/overview",
-        "https://docs.anthropic.com/en/docs/build-with-claude/overview",
-        "https://docs.anthropic.com/en/docs/agents-and-tools/computer-use",
-        "https://docs.anthropic.com/en/docs/test-and-evaluate/define-success",
-        "https://docs.anthropic.com/en/docs/claude-code/overview",
-        "https://docs.anthropic.com/en/release-notes/overview",
+        # Main documentation sections
+        "https://platform.claude.com/docs/en/home",
+        "https://platform.claude.com/docs/en/intro",
+        "https://platform.claude.com/docs/en/api/overview",
+        "https://platform.claude.com/docs/en/api/messages",
+        "https://platform.claude.com/docs/en/api/messages/create",
+        "https://platform.claude.com/docs/en/api/messages/count_tokens",
+        "https://platform.claude.com/docs/en/api/messages-batches",
+        "https://platform.claude.com/docs/en/api/admin-api",
+        "https://platform.claude.com/docs/en/about-claude/models/overview",
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://platform.claude.com/docs/en/about-claude/glossary",
+        # Build with Claude
+        "https://platform.claude.com/docs/en/build-with-claude/overview",
+        "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
+        "https://platform.claude.com/docs/en/build-with-claude/vision",
+        "https://platform.claude.com/docs/en/build-with-claude/pdf-support",
+        "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
+        "https://platform.claude.com/docs/en/build-with-claude/streaming",
+        "https://platform.claude.com/docs/en/build-with-claude/batch-processing",
+        "https://platform.claude.com/docs/en/build-with-claude/citations",
+        "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "https://platform.claude.com/docs/en/build-with-claude/embeddings",
+        "https://platform.claude.com/docs/en/build-with-claude/files",
+        # Prompt Engineering
+        "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview",
+        "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/system-prompts",
+        "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/multishot-prompting",
+        "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/chain-of-thought",
+        "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/chain-prompts",
+        "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/extended-thinking-tips",
+        "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/long-context-tips",
+        "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prefill-claudes-response",
+        "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/be-clear-and-direct",
+        "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/use-xml-tags",
+        # Agents and Tools
+        "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
+        "https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use",
+        "https://platform.claude.com/docs/en/agents-and-tools/computer-use",
+        "https://platform.claude.com/docs/en/agents-and-tools/mcp",
+        "https://platform.claude.com/docs/en/agents-and-tools/mcp-connector",
+        "https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers",
+        "https://platform.claude.com/docs/en/agents-and-tools/claude-for-sheets",
+        "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview",
+        # Agent SDK
+        "https://platform.claude.com/docs/en/agent-sdk/quickstart",
+        "https://platform.claude.com/docs/en/agent-sdk/overview",
+        "https://platform.claude.com/docs/en/agent-sdk/python",
+        "https://platform.claude.com/docs/en/agent-sdk/typescript",
+        # Claude Code
+        "https://platform.claude.com/docs/en/claude-code/overview",
+        "https://platform.claude.com/docs/en/claude-code/quickstart",
+        "https://platform.claude.com/docs/en/claude-code/cli-reference",
+        "https://platform.claude.com/docs/en/claude-code/ide-integrations",
+        "https://platform.claude.com/docs/en/claude-code/memory",
+        "https://platform.claude.com/docs/en/claude-code/settings",
+        "https://platform.claude.com/docs/en/claude-code/mcp",
+        "https://platform.claude.com/docs/en/claude-code/hooks",
+        "https://platform.claude.com/docs/en/claude-code/sdk",
+        "https://platform.claude.com/docs/en/claude-code/github-actions",
+        "https://platform.claude.com/docs/en/claude-code/amazon-bedrock",
+        "https://platform.claude.com/docs/en/claude-code/google-vertex-ai",
+        # Test and Evaluate
+        "https://platform.claude.com/docs/en/test-and-evaluate/overview",
+        "https://platform.claude.com/docs/en/test-and-evaluate/define-success",
+        "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests",
+        "https://platform.claude.com/docs/en/test-and-evaluate/eval-tool",
+        "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations",
+        # Resources
+        "https://platform.claude.com/docs/en/resources/overview",
+        "https://platform.claude.com/docs/en/resources/glossary",
+        "https://platform.claude.com/docs/en/resources/model-card",
+        "https://platform.claude.com/docs/en/resources/system-status",
+        "https://platform.claude.com/docs/en/resources/prompt-library/library",
+        # Release Notes
+        "https://platform.claude.com/docs/en/release-notes/overview",
+        "https://platform.claude.com/docs/en/release-notes/api",
+        "https://platform.claude.com/docs/en/release-notes/claude-apps",
+        "https://platform.claude.com/docs/en/release-notes/claude-code",
+        "https://platform.claude.com/docs/en/release-notes/system-prompts",
+        # Third-party platforms
+        "https://platform.claude.com/docs/en/third-party-platforms/claude-on-amazon-bedrock",
+        "https://platform.claude.com/docs/en/third-party-platforms/claude-on-vertex-ai",
     ]
     
-    # Add starting URLs to queue
-    for url in start_urls:
-        if url not in queued_urls:
+    logging.info(f"Starting Playwright-based scraper with {len(start_urls)} seed URLs")
+    
+    async with async_playwright() as p:
+        # Launch browser
+        browser = await p.chromium.launch(headless=True)
+        context = await browser.new_context(
+            viewport={'width': 1920, 'height': 1080},
+            user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        )
+        
+        # Create pages for concurrent processing
+        pages = [await context.new_page() for _ in range(MAX_CONCURRENT)]
+        
+        # Initialize queue with start URLs
+        url_queue = [(url, 0) for url in start_urls]  # (url, depth)
+        for url in start_urls:
             queued_urls.add(url)
-            page_queue.put((url, 0))
+        
+        try:
+            while url_queue:
+                # Process batch of URLs
+                batch = []
+                while url_queue and len(batch) < MAX_CONCURRENT:
+                    batch.append(url_queue.pop(0))
+                
+                # Process batch concurrently
+                tasks = []
+                for i, (url, depth) in enumerate(batch):
+                    page = pages[i % len(pages)]
+                    tasks.append(process_page(page, url, depth))
+                
+                results = await asyncio.gather(*tasks)
+                
+                # Add new links to queue
+                for success, new_links in results:
+                    for link in new_links:
+                        url_queue.append((link, depth + 1))
+                
+                # Progress update
+                queue_size = len(url_queue)
+                logging.info(f"Progress: {processed_pages} processed, {queue_size} queued, {error_pages} errors")
+                
+                # Rate limiting
+                await asyncio.sleep(REQUEST_DELAY)
+                
+        except KeyboardInterrupt:
+            logging.info("Interrupted by user")
+        finally:
+            await browser.close()
     
-    logging.info(f"Starting improved scraper v3 with {len(start_urls)} initial URLs")
-    logging.info(f"Using {WORKER_THREADS} worker threads")
+    # Save metadata
+    with open(METADATA_FILE, 'w', encoding='utf-8') as f:
+        json.dump(page_metadata, f, indent=2, ensure_ascii=False)
     
-    # Start worker threads
-    threads = []
-    for i in range(WORKER_THREADS):
-        t = threading.Thread(target=worker, name=f"Worker-{i}")
-        t.daemon = True
-        t.start()
-        threads.append(t)
-    
-    # Monitor progress
-    try:
-        while not stop_event.is_set():
-            queue_size = page_queue.qsize()
-            if queue_size == 0 and all(not t.is_alive() for t in threads):
-                break
-            
-            logging.info(f"Progress: {processed_pages} pages processed, {queue_size} in queue, {error_pages} errors")
-            time.sleep(10)
-            
-    except KeyboardInterrupt:
-        logging.info("Interrupted by user")
-        stop_event.set()
-    
-    # Wait for completion
-    logging.info("Waiting for workers to finish...")
-    for t in threads:
-        t.join(timeout=5)
-    
-    # Save final metadata
-    save_metadata()
-    
-    # Final statistics
     logging.info(f"Scraping completed!")
     logging.info(f"Pages processed: {processed_pages}")
     logging.info(f"Pages with errors: {error_pages}")
-    logging.info(f"URLs skipped: {len(skipped_urls)}")
     logging.info(f"Total URLs visited: {len(visited_urls)}")
 
+
+def main():
+    """Main function"""
+    setup_directories()
+    setup_logging()
+    
+    logging.info("=" * 60)
+    logging.info("Anthropic Documentation Scraper v4 (Playwright Edition)")
+    logging.info("=" * 60)
+    
+    # Run the async crawler
+    asyncio.run(crawl_with_playwright())
+
+
 if __name__ == "__main__":
-    main() 
+    main()

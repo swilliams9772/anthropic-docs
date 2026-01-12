@@ -1,0 +1,55 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><h3 class="flex whitespace-pre-wrap group font-semibold" id="themes-and-appearance"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#themes-and-appearance">​</a></div><span class="cursor-pointer">Themes and appearance</span></h3>
+<p>Claude cannot control the theme of your terminal. That’s handled by your terminal application. You can match Claude Code’s theme to your terminal any time via the <code>/config</code> command.</p>
+<p>For additional customization of the Claude Code interface itself, you can configure a <a class="link" href="/en/docs/claude-code/statusline">custom status line</a> to display contextual information like the current model, working directory, or git branch at the bottom of your terminal.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="line-breaks"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#line-breaks">​</a></div><span class="cursor-pointer">Line breaks</span></h3>
+<p>You have several options for entering linebreaks into Claude Code:</p>
+<ul>
+<li><strong>Quick escape</strong>: Type <code>\</code> followed by Enter to create a newline</li>
+<li><strong>Keyboard shortcut</strong>: Set up a keybinding to insert a newline</li>
+</ul>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="set-up-shift%2Benter-vs-code-or-iterm2-%3A"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#set-up-shift%2Benter-vs-code-or-iterm2-%3A">​</a></div><span class="cursor-pointer">Set up Shift+Enter (VS Code or iTerm2):</span></h4>
+<p>Run <code>/terminal-setup</code> within Claude Code to automatically configure Shift+Enter.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="set-up-option%2Benter-vs-code%2C-iterm2-or-macos-terminal-app-%3A"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#set-up-option%2Benter-vs-code%2C-iterm2-or-macos-terminal-app-%3A">​</a></div><span class="cursor-pointer">Set up Option+Enter (VS Code, iTerm2 or macOS Terminal.app):</span></h4>
+<p><strong>For Mac Terminal.app:</strong></p>
+<ol>
+<li>Open Settings → Profiles → Keyboard</li>
+<li>Check “Use Option as Meta Key”</li>
+</ol>
+<p><strong>For iTerm2 and VS Code terminal:</strong></p>
+<ol>
+<li>Open Settings → Profiles → Keys</li>
+<li>Under General, set Left/Right Option key to “Esc+“</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="notification-setup"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#notification-setup">​</a></div><span class="cursor-pointer">Notification setup</span></h3>
+<p>Never miss when Claude completes a task with proper notification configuration:</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="terminal-bell-notifications"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#terminal-bell-notifications">​</a></div><span class="cursor-pointer">Terminal bell notifications</span></h4>
+<p>Enable sound alerts when tasks complete:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-sh"><code class="language-sh"><span class="">claude config <span class="token builtin class-name">set</span> <span class="token parameter variable">--global</span> preferredNotifChannel terminal_bell</span>
+</code></pre></div></div></div>
+<p><strong>For macOS users</strong>: Don’t forget to enable notification permissions in System Settings → Notifications → [Your Terminal App].</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="iterm-2-system-notifications"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#iterm-2-system-notifications">​</a></div><span class="cursor-pointer">iTerm 2 system notifications</span></h4>
+<p>For iTerm 2 alerts when tasks complete:</p>
+<ol>
+<li>Open iTerm 2 Preferences</li>
+<li>Navigate to Profiles → Terminal</li>
+<li>Enable “Silence bell” and Filter Alerts → “Send escape sequence-generated alerts”</li>
+<li>Set your preferred notification delay</li>
+</ol>
+<p>Note that these notifications are specific to iTerm 2 and not available in the default macOS Terminal.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="custom-notification-hooks"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#custom-notification-hooks">​</a></div><span class="cursor-pointer">Custom notification hooks</span></h4>
+<p>For advanced notification handling, you can create <a class="link" href="/en/docs/claude-code/hooks#notification">notification hooks</a> to run your own logic.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="handling-large-inputs"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#handling-large-inputs">​</a></div><span class="cursor-pointer">Handling large inputs</span></h3>
+<p>When working with extensive code or long instructions:</p>
+<ul>
+<li><strong>Avoid direct pasting</strong>: Claude Code may struggle with very long pasted content</li>
+<li><strong>Use file-based workflows</strong>: Write content to a file and ask Claude to read it</li>
+<li><strong>Be aware of VS Code limitations</strong>: The VS Code terminal is particularly prone to truncating long pastes</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="vim-mode"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#vim-mode">​</a></div><span class="cursor-pointer">Vim Mode</span></h3>
+<p>Claude Code supports a subset of Vim keybindings that can be enabled with <code>/vim</code> or configured via <code>/config</code>.</p>
+<p>The supported subset includes:</p>
+<ul>
+<li>Mode switching: <code>Esc</code> (to NORMAL), <code>i</code>/<code>I</code>, <code>a</code>/<code>A</code>, <code>o</code>/<code>O</code> (to INSERT)</li>
+<li>Navigation: <code>h</code>/<code>j</code>/<code>k</code>/<code>l</code>, <code>w</code>/<code>e</code>/<code>b</code>, <code>0</code>/<code>$</code>/<code>^</code>, <code>gg</code>/<code>G</code></li>
+<li>Editing: <code>x</code>, <code>dw</code>/<code>de</code>/<code>db</code>/<code>dd</code>/<code>D</code>, <code>cw</code>/<code>ce</code>/<code>cb</code>/<code>cc</code>/<code>C</code>, <code>.</code> (repeat)</li>
+</ul></div>

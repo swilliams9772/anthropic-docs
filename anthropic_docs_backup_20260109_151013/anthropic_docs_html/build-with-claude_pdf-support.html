@@ -1,0 +1,301 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>You can now ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:</p>
+<ul>
+<li>Analyzing financial reports and understanding charts/tables</li>
+<li>Extracting key information from legal documents</li>
+<li>Translation assistance for documents</li>
+<li>Converting document information into structured formats</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="before-you-begin"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#before-you-begin">​</a></div><span class="cursor-pointer">Before you begin</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="check-pdf-requirements"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#check-pdf-requirements">​</a></div><span class="cursor-pointer">Check PDF requirements</span></h3>
+<p>Claude works with any standard PDF. However, you should ensure your request size meets these requirements when using PDF support:</p>
+<table><thead><tr><th>Requirement</th><th>Limit</th></tr></thead><tbody><tr><td>Maximum request size</td><td>32MB</td></tr><tr><td>Maximum pages per request</td><td>100</td></tr><tr><td>Format</td><td>Standard PDF (no passwords/encryption)</td></tr></tbody></table>
+<p>Please note that both limits are on the entire request payload, including any other content sent alongside PDFs.</p>
+<p>Since PDF support relies on Claude’s vision capabilities, it is subject to the same <a class="link" href="/en/docs/build-with-claude/vision#limitations">limitations and considerations</a> as other vision tasks.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="supported-platforms-and-models"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#supported-platforms-and-models">​</a></div><span class="cursor-pointer">Supported platforms and models</span></h3>
+<p>PDF support is currently supported via direct API access and Google Vertex AI on:</p>
+<ul>
+<li>Claude Opus 4.1 (<code>claude-opus-4-1-20250805</code>)</li>
+<li>Claude Opus 4 (<code>claude-opus-4-20250514</code>)</li>
+<li>Claude Sonnet 4 (<code>claude-sonnet-4-20250514</code>)</li>
+<li>Claude Sonnet 3.7 (<code>claude-3-7-sonnet-20250219</code>)</li>
+<li>Claude Sonnet 3.5 models (<a class="link" href="/en/docs/about-claude/model-deprecations">deprecated</a>) (<code>claude-3-5-sonnet-20241022</code>, <code>claude-3-5-sonnet-20240620</code>)</li>
+<li>Claude Haiku 3.5 (<code>claude-3-5-haiku-20241022</code>)</li>
+</ul>
+<p>PDF support is now available on Amazon Bedrock with the following considerations:</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="amazon-bedrock-pdf-support"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#amazon-bedrock-pdf-support">​</a></div><span class="cursor-pointer">Amazon Bedrock PDF Support</span></h3>
+<p>When using PDF support through Amazon Bedrock’s Converse API, there are two distinct document processing modes:</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p><strong>Important</strong>: To access Claude’s full visual PDF understanding capabilities in the Converse API, you must enable citations. Without citations enabled, the API falls back to basic text extraction only. Learn more about <a class="link" href="/en/docs/build-with-claude/citations">working with citations</a>.</p></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="document-processing-modes"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#document-processing-modes">​</a></div><span class="cursor-pointer">Document Processing Modes</span></h4>
+<ol>
+<li>
+<p><strong>Converse Document Chat</strong> (Original mode - Text extraction only)</p>
+<ul>
+<li>Provides basic text extraction from PDFs</li>
+<li>Cannot analyze images, charts, or visual layouts within PDFs</li>
+<li>Uses approximately 1,000 tokens for a 3-page PDF</li>
+<li>Automatically used when citations are not enabled</li>
+</ul>
+</li>
+<li>
+<p><strong>Claude PDF Chat</strong> (New mode - Full visual understanding)</p>
+<ul>
+<li>Provides complete visual analysis of PDFs</li>
+<li>Can understand and analyze charts, graphs, images, and visual layouts</li>
+<li>Processes each page as both text and image for comprehensive understanding</li>
+<li>Uses approximately 7,000 tokens for a 3-page PDF</li>
+<li><strong>Requires citations to be enabled</strong> in the Converse API</li>
+</ul>
+</li>
+</ol>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="key-limitations"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#key-limitations">​</a></div><span class="cursor-pointer">Key Limitations</span></h4>
+<ul>
+<li><strong>Converse API</strong>: Visual PDF analysis requires citations to be enabled. There is currently no option to use visual analysis without citations (unlike the InvokeModel API).</li>
+<li><strong>InvokeModel API</strong>: Provides full control over PDF processing without forced citations.</li>
+</ul>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="common-issues"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#common-issues">​</a></div><span class="cursor-pointer">Common Issues</span></h4>
+<p>If customers report that Claude isn’t seeing images or charts in their PDFs when using the Converse API, they likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>This is a known constraint with the Converse API that we’re working to address. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.</p></div></div>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>For non-PDF files like .csv, .xlsx, .docx, .md, or .txt files, see <a class="link" href="/en/docs/build-with-claude/files#working-with-other-file-formats">Working with other file formats</a>.</p></div></div>
+
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="process-pdfs-with-claude"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#process-pdfs-with-claude">​</a></div><span class="cursor-pointer">Process PDFs with Claude</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="send-your-first-pdf-request"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#send-your-first-pdf-request">​</a></div><span class="cursor-pointer">Send your first PDF request</span></h3>
+<p>Let’s start with a simple example using the Messages API. You can provide PDFs to Claude in three ways:</p>
+<ol>
+<li>As a URL reference to a PDF hosted online</li>
+<li>As a base64-encoded PDF in <code>document</code> content blocks</li>
+<li>By a <code>file_id</code> from the <a class="link" href="/en/docs/build-with-claude/files">Files API</a></li>
+</ol>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="option-1%3A-url-based-pdf-document"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#option-1%3A-url-based-pdf-document">​</a></div><span class="cursor-pointer">Option 1: URL-based PDF document</span></h4>
+<p>The simplest approach is to reference a PDF directly from a URL:</p>
+<div class="code-group mt-5 mb-8 flex flex-col not-prose relative overflow-hidden rounded-2xl dark:border-gray-800/50 bg-[#0F1117] border border-transparent dark:bg-codeblock text-gray-50 codeblock-dark" id="code-group"><div class="relative border-b border-gray-900/80 bg-[#0F1117] dark:bg-codeblock" data-component-part="code-group-tab-bar"><div aria-orientation="horizontal" class="text-xs leading-6 rounded-t-xl flex overflow-x-auto overflow-y-hidden mr-12 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25" role="tablist"><button aria-selected="true" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-primary-light" data-headlessui-state="selected" id="headlessui-tabs-tab-:Rljqmpkql6:" role="tab" tabindex="0" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Shell</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R15jqmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R1ljqmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">TypeScript</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R25jqmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Java</div></button></div></div><div class="flex flex-1 overflow-hidden"><div class="relative min-w-full w-full transition-[height] duration-300 ease-in-out" data-headlessui-state="selected" id="headlessui-tabs-panel-:R6jqmpkql6:" role="tabpanel" style="font-variant-ligatures:none;height:auto" tabindex="0"><div class="flex-none p-5 overflow-x-auto text-sm h-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25 leading-6" data-component-part="code-group-tab-content"><pre class="language-bash language-bash"><code class="language-bash"><span class=""> <span class="token function">curl</span> https://api.anthropic.com/v1/messages <span class="token punctuation">\</span></span>
+<span class="">   <span class="token parameter variable">-H</span> <span class="token string">"content-type: application/json"</span> <span class="token punctuation">\</span></span>
+<span class="">   <span class="token parameter variable">-H</span> <span class="token string">"x-api-key: <span class="token variable">$ANTHROPIC_API_KEY</span>"</span> <span class="token punctuation">\</span></span>
+<span class="">   <span class="token parameter variable">-H</span> <span class="token string">"anthropic-version: 2023-06-01"</span> <span class="token punctuation">\</span></span>
+<span class="">   <span class="token parameter variable">-d</span> '<span class="token punctuation">{</span></span>
+<span class="">     <span class="token string">"model"</span><span class="token builtin class-name">:</span> <span class="token string">"claude-opus-4-1-20250805"</span>,</span>
+<span class="">     <span class="token string">"max_tokens"</span><span class="token builtin class-name">:</span> <span class="token number">1024</span>,</span>
+<span class="">     <span class="token string">"messages"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span></span>
+<span class="">         <span class="token string">"role"</span><span class="token builtin class-name">:</span> <span class="token string">"user"</span>,</span>
+<span class="">         <span class="token string">"content"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span></span>
+<span class="">             <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"document"</span>,</span>
+<span class="">             <span class="token string">"source"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span></span>
+<span class="">                 <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"url"</span>,</span>
+<span class="">                 <span class="token string">"url"</span><span class="token builtin class-name">:</span> <span class="token string">"https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"</span></span>
+<span class="">             <span class="token punctuation">}</span></span>
+<span class="">         <span class="token punctuation">}</span>,</span>
+<span class="">         <span class="token punctuation">{</span></span>
+<span class="">             <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"text"</span>,</span>
+<span class="">             <span class="token string">"text"</span><span class="token builtin class-name">:</span> <span class="token string">"What are the key findings in this document?"</span></span>
+<span class="">         <span class="token punctuation">}</span><span class="token punctuation">]</span></span>
+<span class="">     <span class="token punctuation">}</span><span class="token punctuation">]</span></span>
+<span class=""> <span class="token punctuation">}</span>'</span>
+</code></pre></div></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="option-2%3A-base64-encoded-pdf-document"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#option-2%3A-base64-encoded-pdf-document">​</a></div><span class="cursor-pointer">Option 2: Base64-encoded PDF document</span></h4>
+<p>If you need to send PDFs from your local system or when a URL isn’t available:</p>
+<div class="code-group mt-5 mb-8 flex flex-col not-prose relative overflow-hidden rounded-2xl dark:border-gray-800/50 bg-[#0F1117] border border-transparent dark:bg-codeblock text-gray-50 codeblock-dark" id="code-group"><div class="relative border-b border-gray-900/80 bg-[#0F1117] dark:bg-codeblock" data-component-part="code-group-tab-bar"><div aria-orientation="horizontal" class="text-xs leading-6 rounded-t-xl flex overflow-x-auto overflow-y-hidden mr-12 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25" role="tablist"><button aria-selected="true" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-primary-light" data-headlessui-state="selected" id="headlessui-tabs-tab-:Rlk6mpkql6:" role="tab" tabindex="0" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Shell</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R15k6mpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R1lk6mpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">TypeScript</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R25k6mpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Java</div></button></div></div><div class="flex flex-1 overflow-hidden"><div class="relative min-w-full w-full transition-[height] duration-300 ease-in-out" data-headlessui-state="selected" id="headlessui-tabs-panel-:R6k6mpkql6:" role="tabpanel" style="font-variant-ligatures:none;height:auto" tabindex="0"><div class="flex-none p-5 overflow-x-auto text-sm h-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25 leading-6" data-component-part="code-group-tab-content"><pre class="language-bash language-bash"><code class="language-bash"><span class=""><span class="token comment"># Method 1: Fetch and encode a remote PDF</span></span>
+<span class=""><span class="token function">curl</span> <span class="token parameter variable">-s</span> <span class="token string">"https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"</span> <span class="token operator">|</span> base64 <span class="token operator">|</span> <span class="token function">tr</span> <span class="token parameter variable">-d</span> <span class="token string">'\n'</span> <span class="token operator">&gt;</span> pdf_base64.txt</span>
+<!-- -->
+<span class=""><span class="token comment"># Method 2: Encode a local PDF file</span></span>
+<span class=""><span class="token comment"># base64 document.pdf | tr -d '\n' &gt; pdf_base64.txt</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Create a JSON request file using the pdf_base64.txt content</span></span>
+<span class="">jq <span class="token parameter variable">-n</span> <span class="token parameter variable">--rawfile</span> PDF_BASE64 pdf_base64.txt '<span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"model"</span><span class="token builtin class-name">:</span> <span class="token string">"claude-opus-4-1-20250805"</span>,</span>
+<span class="">    <span class="token string">"max_tokens"</span><span class="token builtin class-name">:</span> <span class="token number">1024</span>,</span>
+<span class="">    <span class="token string">"messages"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span></span>
+<span class="">        <span class="token string">"role"</span><span class="token builtin class-name">:</span> <span class="token string">"user"</span>,</span>
+<span class="">        <span class="token string">"content"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"document"</span>,</span>
+<span class="">            <span class="token string">"source"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span></span>
+<span class="">                <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"base64"</span>,</span>
+<span class="">                <span class="token string">"media_type"</span><span class="token builtin class-name">:</span> <span class="token string">"application/pdf"</span>,</span>
+<span class="">                <span class="token string">"data"</span><span class="token builtin class-name">:</span> <span class="token variable">$PDF_BASE64</span></span>
+<span class="">            <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">}</span>,</span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"text"</span>,</span>
+<span class="">            <span class="token string">"text"</span><span class="token builtin class-name">:</span> <span class="token string">"What are the key findings in this document?"</span></span>
+<span class="">        <span class="token punctuation">}</span><span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span><span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span>' <span class="token operator">&gt;</span> request.json</span>
+<!-- -->
+<span class=""><span class="token comment"># Send the API request using the JSON file</span></span>
+<span class=""><span class="token function">curl</span> https://api.anthropic.com/v1/messages <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"content-type: application/json"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"x-api-key: <span class="token variable">$ANTHROPIC_API_KEY</span>"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"anthropic-version: 2023-06-01"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-d</span> @request.json</span>
+</code></pre></div></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="option-3%3A-files-api"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#option-3%3A-files-api">​</a></div><span class="cursor-pointer">Option 3: Files API</span></h4>
+<p>For PDFs you’ll use repeatedly, or when you want to avoid encoding overhead, use the <a class="link" href="/en/docs/build-with-claude/files">Files API</a>:</p>
+<div class="code-group mt-5 mb-8 flex flex-col not-prose relative overflow-hidden rounded-2xl dark:border-gray-800/50 bg-[#0F1117] border border-transparent dark:bg-codeblock text-gray-50 codeblock-dark" id="code-group"><div class="relative border-b border-gray-900/80 bg-[#0F1117] dark:bg-codeblock" data-component-part="code-group-tab-bar"><div aria-orientation="horizontal" class="text-xs leading-6 rounded-t-xl flex overflow-x-auto overflow-y-hidden mr-12 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25" role="tablist"><button aria-selected="true" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-primary-light" data-headlessui-state="selected" id="headlessui-tabs-tab-:Rlkimpkql6:" role="tab" tabindex="0" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Shell</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R15kimpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R1lkimpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">TypeScript</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R25kimpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Java</div></button></div></div><div class="flex flex-1 overflow-hidden"><div class="relative min-w-full w-full transition-[height] duration-300 ease-in-out" data-headlessui-state="selected" id="headlessui-tabs-panel-:R6kimpkql6:" role="tabpanel" style="font-variant-ligatures:none;height:auto" tabindex="0"><div class="flex-none p-5 overflow-x-auto text-sm h-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25 leading-6" data-component-part="code-group-tab-content"><pre class="language-bash language-bash"><code class="language-bash"><span class=""><span class="token comment"># First, upload your PDF to the Files API</span></span>
+<span class=""><span class="token function">curl</span> <span class="token parameter variable">-X</span> POST https://api.anthropic.com/v1/files <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"x-api-key: <span class="token variable">$ANTHROPIC_API_KEY</span>"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"anthropic-version: 2023-06-01"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"anthropic-beta: files-api-2025-04-14"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-F</span> <span class="token string">"file=@document.pdf"</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Then use the returned file_id in your message</span></span>
+<span class=""><span class="token function">curl</span> https://api.anthropic.com/v1/messages <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"content-type: application/json"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"x-api-key: <span class="token variable">$ANTHROPIC_API_KEY</span>"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"anthropic-version: 2023-06-01"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"anthropic-beta: files-api-2025-04-14"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-d</span> '<span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"model"</span><span class="token builtin class-name">:</span> <span class="token string">"claude-opus-4-1-20250805"</span>, </span>
+<span class="">    <span class="token string">"max_tokens"</span><span class="token builtin class-name">:</span> <span class="token number">1024</span>,</span>
+<span class="">    <span class="token string">"messages"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span></span>
+<span class="">      <span class="token string">"role"</span><span class="token builtin class-name">:</span> <span class="token string">"user"</span>,</span>
+<span class="">      <span class="token string">"content"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span></span>
+<span class="">        <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"document"</span>,</span>
+<span class="">        <span class="token string">"source"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"file"</span>,</span>
+<span class="">          <span class="token string">"file_id"</span><span class="token builtin class-name">:</span> <span class="token string">"file_abc123"</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">}</span>,</span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"text"</span>,</span>
+<span class="">        <span class="token string">"text"</span><span class="token builtin class-name">:</span> <span class="token string">"What are the key findings in this document?"</span></span>
+<span class="">      <span class="token punctuation">}</span><span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span><span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span>'</span>
+</code></pre></div></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="how-pdf-support-works"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#how-pdf-support-works">​</a></div><span class="cursor-pointer">How PDF support works</span></h3>
+<p>When you send a PDF to Claude, the following steps occur:</p>
+<div class="steps ml-3.5 mt-10 mb-6" role="list"><div class="step relative flex items-start pb-2" role="listitem"><div class="absolute ml-[-14px] py-2" contenteditable="false" data-component-part="step-number"><div class="w-7 h-7 shrink-0 rounded-lg bg-gray-100 dark:text-white dark:bg-[#26292E] text-sm text-gray-800 font-semibold flex items-center justify-center">1</div></div><div class="w-full overflow-hidden pl-12 pr-px"><p class="mt-2 font-semibold prose dark:prose-invert text-gray-900 dark:text-gray-200" contenteditable="false" data-component-part="step-title">The system extracts the contents of the document.</p><div data-component-part="step-content"><ul>
+<li>The system converts each page of the document into an image.</li>
+<li>The text from each page is extracted and provided alongside each page’s image.</li>
+</ul></div></div></div><div class="step relative flex items-start pb-2" role="listitem"><div class="absolute ml-[-14px] py-2" contenteditable="false" data-component-part="step-number"><div class="w-7 h-7 shrink-0 rounded-lg bg-gray-100 dark:text-white dark:bg-[#26292E] text-sm text-gray-800 font-semibold flex items-center justify-center">2</div></div><div class="w-full overflow-hidden pl-12 pr-px"><p class="mt-2 font-semibold prose dark:prose-invert text-gray-900 dark:text-gray-200" contenteditable="false" data-component-part="step-title">Claude analyzes both the text and images to better understand the document.</p><div data-component-part="step-content"><ul>
+<li>Documents are provided as a combination of text and images for analysis.</li>
+<li>This allows users to ask for insights on visual elements of a PDF, such as charts, diagrams, and other non-textual content.</li>
+</ul></div></div></div><div class="step relative flex items-start pb-2" role="listitem"><div class="absolute ml-[-14px] py-2" contenteditable="false" data-component-part="step-number"><div class="w-7 h-7 shrink-0 rounded-lg bg-gray-100 dark:text-white dark:bg-[#26292E] text-sm text-gray-800 font-semibold flex items-center justify-center">3</div></div><div class="w-full overflow-hidden pl-12 pr-px"><p class="mt-2 font-semibold prose dark:prose-invert text-gray-900 dark:text-gray-200" contenteditable="false" data-component-part="step-title">Claude responds, referencing the PDF's contents if relevant.</p><div data-component-part="step-content"><p>Claude can reference both textual and visual content when it responds. You can further improve performance by integrating PDF support with:</p><ul>
+<li><strong>Prompt caching</strong>: To improve performance for repeated analysis.</li>
+<li><strong>Batch processing</strong>: For high-volume document processing.</li>
+<li><strong>Tool use</strong>: To extract specific information from documents for use as tool inputs.</li>
+</ul></div></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="estimate-your-costs"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#estimate-your-costs">​</a></div><span class="cursor-pointer">Estimate your costs</span></h3>
+<p>The token count of a PDF file depends on the total text extracted from the document as well as the number of pages:</p>
+<ul>
+<li>Text token costs: Each page typically uses 1,500-3,000 tokens per page depending on content density. Standard API pricing applies with no additional PDF fees.</li>
+<li>Image token costs: Since each page is converted into an image, the same <a class="link" href="/en/docs/build-with-claude/vision#evaluate-image-size">image-based cost calculations</a> are applied.</li>
+</ul>
+<p>You can use <a class="link" href="/en/docs/build-with-claude/token-counting">token counting</a> to estimate costs for your specific PDFs.</p>
+
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="optimize-pdf-processing"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#optimize-pdf-processing">​</a></div><span class="cursor-pointer">Optimize PDF processing</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="improve-performance"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#improve-performance">​</a></div><span class="cursor-pointer">Improve performance</span></h3>
+<p>Follow these best practices for optimal results:</p>
+<ul>
+<li>Place PDFs before text in your requests</li>
+<li>Use standard fonts</li>
+<li>Ensure text is clear and legible</li>
+<li>Rotate pages to proper upright orientation</li>
+<li>Use logical page numbers (from PDF viewer) in prompts</li>
+<li>Split large PDFs into chunks when needed</li>
+<li>Enable prompt caching for repeated analysis</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="scale-your-implementation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#scale-your-implementation">​</a></div><span class="cursor-pointer">Scale your implementation</span></h3>
+<p>For high-volume processing, consider these approaches:</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="use-prompt-caching"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#use-prompt-caching">​</a></div><span class="cursor-pointer">Use prompt caching</span></h4>
+<p>Cache PDFs to improve performance on repeated queries:</p>
+<div class="code-group mt-5 mb-8 flex flex-col not-prose relative overflow-hidden rounded-2xl dark:border-gray-800/50 bg-[#0F1117] border border-transparent dark:bg-codeblock text-gray-50 codeblock-dark" id="code-group"><div class="relative border-b border-gray-900/80 bg-[#0F1117] dark:bg-codeblock" data-component-part="code-group-tab-bar"><div aria-orientation="horizontal" class="text-xs leading-6 rounded-t-xl flex overflow-x-auto overflow-y-hidden mr-12 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25" role="tablist"><button aria-selected="true" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-primary-light" data-headlessui-state="selected" id="headlessui-tabs-tab-:Rlmmmpkql6:" role="tab" tabindex="0" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Shell</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R15mmmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R1lmmmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">TypeScript</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R25mmmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Java</div></button></div></div><div class="flex flex-1 overflow-hidden"><div class="relative min-w-full w-full transition-[height] duration-300 ease-in-out" data-headlessui-state="selected" id="headlessui-tabs-panel-:R6mmmpkql6:" role="tabpanel" style="font-variant-ligatures:none;height:auto" tabindex="0"><div class="flex-none p-5 overflow-x-auto text-sm h-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25 leading-6" data-component-part="code-group-tab-content"><pre class="language-bash language-bash"><code class="language-bash"><span class=""><span class="token comment"># Create a JSON request file using the pdf_base64.txt content</span></span>
+<span class="">jq <span class="token parameter variable">-n</span> <span class="token parameter variable">--rawfile</span> PDF_BASE64 pdf_base64.txt '<span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"model"</span><span class="token builtin class-name">:</span> <span class="token string">"claude-opus-4-1-20250805"</span>,</span>
+<span class="">    <span class="token string">"max_tokens"</span><span class="token builtin class-name">:</span> <span class="token number">1024</span>,</span>
+<span class="">    <span class="token string">"messages"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span></span>
+<span class="">        <span class="token string">"role"</span><span class="token builtin class-name">:</span> <span class="token string">"user"</span>,</span>
+<span class="">        <span class="token string">"content"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"document"</span>,</span>
+<span class="">            <span class="token string">"source"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span></span>
+<span class="">                <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"base64"</span>,</span>
+<span class="">                <span class="token string">"media_type"</span><span class="token builtin class-name">:</span> <span class="token string">"application/pdf"</span>,</span>
+<span class="">                <span class="token string">"data"</span><span class="token builtin class-name">:</span> <span class="token variable">$PDF_BASE64</span></span>
+<span class="">            <span class="token punctuation">}</span>,</span>
+<span class="">            <span class="token string">"cache_control"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span></span>
+<span class="">              <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"ephemeral"</span></span>
+<span class="">            <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">}</span>,</span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"text"</span>,</span>
+<span class="">            <span class="token string">"text"</span><span class="token builtin class-name">:</span> <span class="token string">"Which model has the highest human preference win rates across each use-case?"</span></span>
+<span class="">        <span class="token punctuation">}</span><span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span><span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span>' <span class="token operator">&gt;</span> request.json</span>
+<!-- -->
+<span class=""><span class="token comment"># Then make the API call using the JSON file</span></span>
+<span class=""><span class="token function">curl</span> https://api.anthropic.com/v1/messages <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"content-type: application/json"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"x-api-key: <span class="token variable">$ANTHROPIC_API_KEY</span>"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"anthropic-version: 2023-06-01"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-d</span> @request.json</span>
+</code></pre></div></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="process-document-batches"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#process-document-batches">​</a></div><span class="cursor-pointer">Process document batches</span></h4>
+<p>Use the Message Batches API for high-volume workflows:</p>
+<div class="code-group mt-5 mb-8 flex flex-col not-prose relative overflow-hidden rounded-2xl dark:border-gray-800/50 bg-[#0F1117] border border-transparent dark:bg-codeblock text-gray-50 codeblock-dark" id="code-group"><div class="relative border-b border-gray-900/80 bg-[#0F1117] dark:bg-codeblock" data-component-part="code-group-tab-bar"><div aria-orientation="horizontal" class="text-xs leading-6 rounded-t-xl flex overflow-x-auto overflow-y-hidden mr-12 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25" role="tablist"><button aria-selected="true" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-primary-light" data-headlessui-state="selected" id="headlessui-tabs-tab-:Rln2mpkql6:" role="tab" tabindex="0" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Shell</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R15n2mpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R1ln2mpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">TypeScript</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R25n2mpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Java</div></button></div></div><div class="flex flex-1 overflow-hidden"><div class="relative min-w-full w-full transition-[height] duration-300 ease-in-out" data-headlessui-state="selected" id="headlessui-tabs-panel-:R6n2mpkql6:" role="tabpanel" style="font-variant-ligatures:none;height:auto" tabindex="0"><div class="flex-none p-5 overflow-x-auto text-sm h-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25 leading-6" data-component-part="code-group-tab-content"><pre class="language-bash language-bash"><code class="language-bash"><span class=""><span class="token comment"># Create a JSON request file using the pdf_base64.txt content</span></span>
+<span class="">jq <span class="token parameter variable">-n</span> <span class="token parameter variable">--rawfile</span> PDF_BASE64 pdf_base64.txt '</span>
+<span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token string">"requests"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string">"custom_id"</span><span class="token builtin class-name">:</span> <span class="token string">"my-first-request"</span>,</span>
+<span class="">          <span class="token string">"params"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span></span>
+<span class="">              <span class="token string">"model"</span><span class="token builtin class-name">:</span> <span class="token string">"claude-opus-4-1-20250805"</span>,</span>
+<span class="">              <span class="token string">"max_tokens"</span><span class="token builtin class-name">:</span> <span class="token number">1024</span>,</span>
+<span class="">              <span class="token string">"messages"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span></span>
+<span class="">                <span class="token punctuation">{</span></span>
+<span class="">                    <span class="token string">"role"</span><span class="token builtin class-name">:</span> <span class="token string">"user"</span>,</span>
+<span class="">                    <span class="token string">"content"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span></span>
+<span class="">                        <span class="token punctuation">{</span></span>
+<span class="">                            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"document"</span>,</span>
+<span class="">                            <span class="token string">"source"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span></span>
+<span class="">                                <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"base64"</span>,</span>
+<span class="">                                <span class="token string">"media_type"</span><span class="token builtin class-name">:</span> <span class="token string">"application/pdf"</span>,</span>
+<span class="">                                <span class="token string">"data"</span><span class="token builtin class-name">:</span> <span class="token variable">$PDF_BASE64</span></span>
+<span class="">                            <span class="token punctuation">}</span></span>
+<span class="">                        <span class="token punctuation">}</span>,</span>
+<span class="">                        <span class="token punctuation">{</span></span>
+<span class="">                            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"text"</span>,</span>
+<span class="">                            <span class="token string">"text"</span><span class="token builtin class-name">:</span> <span class="token string">"Which model has the highest human preference win rates across each use-case?"</span></span>
+<span class="">                        <span class="token punctuation">}</span></span>
+<span class="">                    <span class="token punctuation">]</span></span>
+<span class="">                <span class="token punctuation">}</span></span>
+<span class="">              <span class="token punctuation">]</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">}</span>,</span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string">"custom_id"</span><span class="token builtin class-name">:</span> <span class="token string">"my-second-request"</span>,</span>
+<span class="">          <span class="token string">"params"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span></span>
+<span class="">              <span class="token string">"model"</span><span class="token builtin class-name">:</span> <span class="token string">"claude-opus-4-1-20250805"</span>,</span>
+<span class="">              <span class="token string">"max_tokens"</span><span class="token builtin class-name">:</span> <span class="token number">1024</span>,</span>
+<span class="">              <span class="token string">"messages"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span></span>
+<span class="">                <span class="token punctuation">{</span></span>
+<span class="">                    <span class="token string">"role"</span><span class="token builtin class-name">:</span> <span class="token string">"user"</span>,</span>
+<span class="">                    <span class="token string">"content"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span></span>
+<span class="">                        <span class="token punctuation">{</span></span>
+<span class="">                            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"document"</span>,</span>
+<span class="">                            <span class="token string">"source"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span></span>
+<span class="">                                <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"base64"</span>,</span>
+<span class="">                                <span class="token string">"media_type"</span><span class="token builtin class-name">:</span> <span class="token string">"application/pdf"</span>,</span>
+<span class="">                                <span class="token string">"data"</span><span class="token builtin class-name">:</span> <span class="token variable">$PDF_BASE64</span></span>
+<span class="">                            <span class="token punctuation">}</span></span>
+<span class="">                        <span class="token punctuation">}</span>,</span>
+<span class="">                        <span class="token punctuation">{</span></span>
+<span class="">                            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"text"</span>,</span>
+<span class="">                            <span class="token string">"text"</span><span class="token builtin class-name">:</span> <span class="token string">"Extract 5 key insights from this document."</span></span>
+<span class="">                        <span class="token punctuation">}</span></span>
+<span class="">                    <span class="token punctuation">]</span></span>
+<span class="">                <span class="token punctuation">}</span></span>
+<span class="">              <span class="token punctuation">]</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+<span class="">' <span class="token operator">&gt;</span> request.json</span>
+<!-- -->
+<span class=""><span class="token comment"># Then make the API call using the JSON file</span></span>
+<span class=""><span class="token function">curl</span> https://api.anthropic.com/v1/messages/batches <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"content-type: application/json"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"x-api-key: <span class="token variable">$ANTHROPIC_API_KEY</span>"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"anthropic-version: 2023-06-01"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-d</span> @request.json</span>
+</code></pre></div></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="next-steps"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#next-steps">​</a></div><span class="cursor-pointer">Next steps</span></h2>
+<div class="card-group not-prose grid gap-x-4 sm:grid-cols-2"><a class="card block font-normal group relative my-2 ring-2 ring-transparent rounded-2xl bg-white dark:bg-background-dark border border-gray-950/10 dark:border-white/10 overflow-hidden w-full cursor-pointer hover:!border-primary dark:hover:!border-primary-light" href="https://github.com/anthropics/anthropic-cookbook/tree/main/multimodal" rel="noreferrer" target="_blank"><div class="px-6 py-5 relative" data-component-part="card-content-container"><div><h2 class="not-prose font-semibold text-base text-gray-800 dark:text-white mt-4" contenteditable="false" data-component-part="card-title">Try PDF examples</h2><div class="prose mt-1 font-normal text-sm leading-6 text-gray-600 dark:text-gray-400" data-component-part="card-content"><p>Explore practical examples of PDF processing in our cookbook recipe.</p></div></div></div></a></div></div>

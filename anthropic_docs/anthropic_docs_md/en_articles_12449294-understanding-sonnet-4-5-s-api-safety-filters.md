@@ -1,0 +1,55 @@
+# Understanding Sonnet 4.5's API Safety Filters
+
+**Source:** https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters
+
+Claude Sonnet 4.5 includes new AI Safety Level 3 (ASL-3) protections designed to prevent misuse related to chemical, biological, radiological, and nuclear (CBRN) weapons. These safety measures use Constitutional Classifiers that monitor inputs and outputs to block a narrow category of harmful content.
+
+# Why was my API request blocked?
+
+Sonnet 4.5's safety filters are narrowly focused on preventing assistance with CBRN weapons-related tasks. If your request was blocked, the filters detected content that matched patterns associated with these specific threats.
+
+**These filters are still being refined.** As with any automated system, false positives can occur—meaning legitimate requests may occasionally be flagged incorrectly. We're actively working to improve the precision of these classifiers to minimize disruption while maintaining safety.
+
+# What you can do
+
+If your API request is blocked, here are steps you can take:
+
+# Avoid patterns that trigger false positives
+
+The classifiers are sensitive to certain patterns that may resemble jailbreak attempts or obfuscation techniques:
+
+* **Avoid cipher-like content**: Base64-encoded strings, git commit hashes, hexadecimal sequences, and other encoded data can trigger the filters. If you need to include such content, consider whether it's essential to your use case.
+* **Simplify system instructions**: Overly long or complex system prompts that include intricate conditional logic may resemble attempts to obfuscate behavior. Keep system instructions clear and straightforward.
+* **Be cautious with biology-related content**: If your application doesn't specifically require biological or chemical information, consider rephrasing requests to avoid these topics when possible.
+
+# Switch to Sonnet 4
+
+Use Sonnet 4 instead of Sonnet 4.5 in your API calls. Sonnet 4 uses different safety measures and may be able to process your request successfully.
+
+# Implement fallback logic
+
+Build error handling into your application that can:
+
+* Detect when a request is blocked by safety filters.
+* Automatically retry with Sonnet 4 as a fallback.
+* Log incidents for your review to identify patterns in false positives.
+
+# Provide feedback
+
+If you believe your request was incorrectly blocked, contact our [API support team](https://support.claude.com/en/articles/9015913-how-to-get-support#h_beb6d0c9ce). Your feedback helps us improve filter accuracy and reduce false positives for legitimate use cases.
+
+# Why the new filters?
+
+As AI models become more capable, they require stronger protections against potential misuse. Sonnet 4.5's ASL-3 deployment measures are part of Anthropic's [Responsible Scaling Policy](https://www.anthropic.com/news/activating-asl3-protections), which ensures that increasingly capable models have appropriate safeguards.
+
+The filters are specifically designed to prevent extended, end-to-end CBRN workflows that could pose catastrophic risks. They are **not** intended to block general scientific discussion, educational content, or commonly available information.
+
+# For researchers and dual-use applications
+
+If you're building applications for scientific research or dual-use technology fields and need access for legitimate purposes, we've established access control systems for vetted users. Contact our [API support team](https://support.claude.com/en/articles/9015913-how-to-get-support#h_beb6d0c9ce) to learn more about exemptions.
+
+---
+
+Related Articles
+
+[Our Approach to User Safety](https://support.claude.com/en/articles/8106465-our-approach-to-user-safety)[Model Safety Bug Bounty Program](https://support.claude.com/en/articles/12119250-model-safety-bug-bounty-program)[Getting the most out of Sonnet 4.5 in Claude.ai](https://support.claude.com/en/articles/12439373-getting-the-most-out-of-sonnet-4-5-in-claude-ai)[Create professional results across tools with Claude Sonnet 4.5](https://support.claude.com/en/articles/12439380-create-professional-results-across-tools-with-claude-sonnet-4-5)[Applying Claude Opus 4.5’s strengths to your everyday work](https://support.claude.com/en/articles/12920969-applying-claude-opus-4-5-s-strengths-to-your-everyday-work)

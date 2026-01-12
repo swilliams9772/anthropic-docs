@@ -1,0 +1,296 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. Claude automatically cites sources from search results as part of its answer.</p>
+
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="supported-models"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#supported-models">​</a></div><span class="cursor-pointer">Supported models</span></h2>
+<p>Web search is available on:</p>
+<ul>
+<li>Claude Opus 4.1 (<code>claude-opus-4-1-20250805</code>)</li>
+<li>Claude Opus 4 (<code>claude-opus-4-20250514</code>)</li>
+<li>Claude Sonnet 4 (<code>claude-sonnet-4-20250514</code>)</li>
+<li>Claude Sonnet 3.7 (<code>claude-3-7-sonnet-20250219</code>)</li>
+<li>Claude Sonnet 3.5 v2 (<a class="link" href="/en/docs/about-claude/model-deprecations">deprecated</a>) (<code>claude-3-5-sonnet-latest</code>)</li>
+<li>Claude Haiku 3.5 (<code>claude-3-5-haiku-latest</code>)</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="how-web-search-works"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#how-web-search-works">​</a></div><span class="cursor-pointer">How web search works</span></h2>
+<p>When you add the web search tool to your API request:</p>
+<ol>
+<li>Claude decides when to search based on the prompt.</li>
+<li>The API executes the searches and provides Claude with the results. This process may repeat multiple times throughout a single request.</li>
+<li>At the end of its turn, Claude provides a final response with cited sources.</li>
+</ol>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="how-to-use-web-search"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#how-to-use-web-search">​</a></div><span class="cursor-pointer">How to use web search</span></h2>
+
+<p>Provide the web search tool in your API request:</p>
+<div class="code-group mt-5 mb-8 flex flex-col not-prose relative overflow-hidden rounded-2xl dark:border-gray-800/50 bg-[#0F1117] border border-transparent dark:bg-codeblock text-gray-50 codeblock-dark" id="code-group"><div class="relative border-b border-gray-900/80 bg-[#0F1117] dark:bg-codeblock" data-component-part="code-group-tab-bar"><div aria-orientation="horizontal" class="text-xs leading-6 rounded-t-xl flex overflow-x-auto overflow-y-hidden mr-12 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25" role="tablist"><button aria-selected="true" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-primary-light" data-headlessui-state="selected" id="headlessui-tabs-tab-:Rlhempkql6:" role="tab" tabindex="0" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Shell</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R15hempkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R1lhempkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">TypeScript</div></button></div></div><div class="flex flex-1 overflow-hidden"><div class="relative min-w-full w-full transition-[height] duration-300 ease-in-out" data-headlessui-state="selected" id="headlessui-tabs-panel-:R6hempkql6:" role="tabpanel" style="font-variant-ligatures:none;height:auto" tabindex="0"><div class="flex-none p-5 overflow-x-auto text-sm h-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25 leading-6" data-component-part="code-group-tab-content"><pre class="language-bash language-bash"><code class="language-bash"><span class=""><span class="token function">curl</span> https://api.anthropic.com/v1/messages <span class="token punctuation">\</span></span>
+<span class="">    <span class="token parameter variable">--header</span> <span class="token string">"x-api-key: <span class="token variable">$ANTHROPIC_API_KEY</span>"</span> <span class="token punctuation">\</span></span>
+<span class="">    <span class="token parameter variable">--header</span> <span class="token string">"anthropic-version: 2023-06-01"</span> <span class="token punctuation">\</span></span>
+<span class="">    <span class="token parameter variable">--header</span> <span class="token string">"content-type: application/json"</span> <span class="token punctuation">\</span></span>
+<span class="">    <span class="token parameter variable">--data</span> '<span class="token punctuation">{</span></span>
+<span class="">        <span class="token string">"model"</span><span class="token builtin class-name">:</span> <span class="token string">"claude-opus-4-1-20250805"</span>,</span>
+<span class="">        <span class="token string">"max_tokens"</span><span class="token builtin class-name">:</span> <span class="token number">1024</span>,</span>
+<span class="">        <span class="token string">"messages"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span></span>
+<span class="">            <span class="token punctuation">{</span></span>
+<span class="">                <span class="token string">"role"</span><span class="token builtin class-name">:</span> <span class="token string">"user"</span>,</span>
+<span class="">                <span class="token string">"content"</span><span class="token builtin class-name">:</span> <span class="token string">"How do I update a web app to TypeScript 5.5?"</span></span>
+<span class="">            <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">]</span>,</span>
+<span class="">        <span class="token string">"tools"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"web_search_20250305"</span>,</span>
+<span class="">            <span class="token string">"name"</span><span class="token builtin class-name">:</span> <span class="token string">"web_search"</span>,</span>
+<span class="">            <span class="token string">"max_uses"</span><span class="token builtin class-name">:</span> <span class="token number">5</span></span>
+<span class="">        <span class="token punctuation">}</span><span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span>'</span>
+</code></pre></div></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="tool-definition"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#tool-definition">​</a></div><span class="cursor-pointer">Tool definition</span></h3>
+<p>The web search tool supports the following parameters:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="flex rounded-t-2xl text-gray-400 text-xs leading-6 border-b font-medium bg-black/40 border-gray-900/80" data-component-part="code-block-tab-bar"><div class="flex-none border-b px-4 pt-2.5 pb-2 flex items-center text-primary-light border-primary-light" data-component-part="code-block-tab-bar-filename">JSON</div></div><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"web_search_20250305"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"web_search"</span><span class="token punctuation">,</span></span>
+<!-- -->
+<span class="">  <span class="token comment">// Optional: Limit the number of searches per request</span></span>
+<span class="">  <span class="token property">"max_uses"</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span></span>
+<!-- -->
+<span class="">  <span class="token comment">// Optional: Only include results from these domains</span></span>
+<span class="">  <span class="token property">"allowed_domains"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"example.com"</span><span class="token punctuation">,</span> <span class="token string">"trusteddomain.org"</span><span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<!-- -->
+<span class="">  <span class="token comment">// Optional: Never include results from these domains</span></span>
+<span class="">  <span class="token property">"blocked_domains"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"untrustedsource.com"</span><span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<!-- -->
+<span class="">  <span class="token comment">// Optional: Localize search results</span></span>
+<span class="">  <span class="token property">"user_location"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"approximate"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"city"</span><span class="token operator">:</span> <span class="token string">"San Francisco"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"region"</span><span class="token operator">:</span> <span class="token string">"California"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"country"</span><span class="token operator">:</span> <span class="token string">"US"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"timezone"</span><span class="token operator">:</span> <span class="token string">"America/Los_Angeles"</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="max-uses"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#max-uses">​</a></div><span class="cursor-pointer">Max uses</span></h4>
+<p>The <code>max_uses</code> parameter limits the number of searches performed. If Claude attempts more searches than allowed, the <code>web_search_tool_result</code> will be an error with the <code>max_uses_exceeded</code> error code.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="domain-filtering"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#domain-filtering">​</a></div><span class="cursor-pointer">Domain filtering</span></h4>
+<p>When using domain filters:</p>
+<ul>
+<li>Domains should not include the HTTP/HTTPS scheme (use <code>example.com</code> instead of <code>https://example.com</code>)</li>
+<li>Subdomains are automatically included (<code>example.com</code> covers <code>docs.example.com</code>)</li>
+<li>Subpaths are supported (<code>example.com/blog</code>)</li>
+<li>You can use either <code>allowed_domains</code> or <code>blocked_domains</code>, but not both in the same request.</li>
+</ul>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>Request-level domain restrictions must be compatible with organization-level domain restrictions configured in the Console. Request-level domains can only further restrict domains, not override or expand beyond the organization-level list. If your request includes domains that conflict with organization settings, the API will return a validation error.</p></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="localization"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#localization">​</a></div><span class="cursor-pointer">Localization</span></h4>
+<p>The <code>user_location</code> parameter allows you to localize search results based on a user’s location.</p>
+<ul>
+<li><code>type</code>: The type of location (must be <code>approximate</code>)</li>
+<li><code>city</code>: The city name</li>
+<li><code>region</code>: The region or state</li>
+<li><code>country</code>: The country</li>
+<li><code>timezone</code>: The <a class="link" href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" rel="noreferrer" target="_blank">IANA timezone ID</a>.</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="response"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#response">​</a></div><span class="cursor-pointer">Response</span></h3>
+<p>Here’s an example response structure:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"assistant"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token comment">// 1. Claude's decision to search</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"text"</span><span class="token operator">:</span> <span class="token string">"I'll search for when Claude Shannon was born."</span></span>
+<span class="">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token comment">// 2. The search query used</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"server_tool_use"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"srvtoolu_01WYG3ziw53XMcoyKL4XcZmE"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"web_search"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"input"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">        <span class="token property">"query"</span><span class="token operator">:</span> <span class="token string">"claude shannon birth date"</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token comment">// 3. Search results</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"web_search_tool_result"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"tool_use_id"</span><span class="token operator">:</span> <span class="token string">"srvtoolu_01WYG3ziw53XMcoyKL4XcZmE"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"web_search_result"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"https://en.wikipedia.org/wiki/Claude_Shannon"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token property">"title"</span><span class="token operator">:</span> <span class="token string">"Claude Shannon - Wikipedia"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token property">"encrypted_content"</span><span class="token operator">:</span> <span class="token string">"EqgfCioIARgBIiQ3YTAwMjY1Mi1mZjM5LTQ1NGUtODgxNC1kNjNjNTk1ZWI3Y..."</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token property">"page_age"</span><span class="token operator">:</span> <span class="token string">"April 30, 2025"</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"text"</span><span class="token operator">:</span> <span class="token string">"Based on the search results, "</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span></span>
+<span class="">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token comment">// 4. Claude's response with citations</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"text"</span><span class="token operator">:</span> <span class="token string">"Claude Shannon was born on April 30, 1916, in Petoskey, Michigan"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"citations"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"web_search_result_location"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"https://en.wikipedia.org/wiki/Claude_Shannon"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token property">"title"</span><span class="token operator">:</span> <span class="token string">"Claude Shannon - Wikipedia"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token property">"encrypted_index"</span><span class="token operator">:</span> <span class="token string">"Eo8BCioIAhgBIiQyYjQ0OWJmZi1lNm.."</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token property">"cited_text"</span><span class="token operator">:</span> <span class="token string">"Claude Elwood Shannon (April 30, 1916 – February 24, 2001) was an American mathematician, electrical engineer, computer scientist, cryptographer and i..."</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"msg_a930390d3a"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"usage"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"input_tokens"</span><span class="token operator">:</span> <span class="token number">6039</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"output_tokens"</span><span class="token operator">:</span> <span class="token number">931</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"server_tool_use"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"web_search_requests"</span><span class="token operator">:</span> <span class="token number">1</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"stop_reason"</span><span class="token operator">:</span> <span class="token string">"end_turn"</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="search-results"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#search-results">​</a></div><span class="cursor-pointer">Search results</span></h4>
+<p>Search results include:</p>
+<ul>
+<li><code>url</code>: The URL of the source page</li>
+<li><code>title</code>: The title of the source page</li>
+<li><code>page_age</code>: When the site was last updated</li>
+<li><code>encrypted_content</code>: Encrypted content that must be passed back in multi-turn conversations for citations</li>
+</ul>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="citations"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#citations">​</a></div><span class="cursor-pointer">Citations</span></h4>
+<p>Citations are always enabled for web search, and each <code>web_search_result_location</code> includes:</p>
+<ul>
+<li><code>url</code>: The URL of the cited source</li>
+<li><code>title</code>: The title of the cited source</li>
+<li><code>encrypted_index</code>: A reference that must be passed back for multi-turn conversations.</li>
+<li><code>cited_text</code>: Up to 150 characters of the cited content</li>
+</ul>
+<p>The web search citation fields <code>cited_text</code>, <code>title</code>, and <code>url</code> do not count towards input or output token usage.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>When displaying web results or information contained in web results to end users, inline citations must be made clearly visible and clickable in your user interface.</p></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="errors"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#errors">​</a></div><span class="cursor-pointer">Errors</span></h4>
+<p>When the web search tool encounters an error (such as hitting rate limits), the Anthropic API still returns a 200 (success) response. The error is represented within the response body using the following structure:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"web_search_tool_result"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"tool_use_id"</span><span class="token operator">:</span> <span class="token string">"servertoolu_a93jad"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"content"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"web_search_tool_result_error"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"error_code"</span><span class="token operator">:</span> <span class="token string">"max_uses_exceeded"</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>These are the possible error codes:</p>
+<ul>
+<li><code>too_many_requests</code>: Rate limit exceeded</li>
+<li><code>invalid_input</code>: Invalid search query parameter</li>
+<li><code>max_uses_exceeded</code>: Maximum web search tool uses exceeded</li>
+<li><code>query_too_long</code>: Query exceeds maximum length</li>
+<li><code>unavailable</code>: An internal error occurred</li>
+</ul>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="pause-turn-stop-reason"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#pause-turn-stop-reason">​</a></div><span class="cursor-pointer"><code>pause_turn</code> stop reason</span></h4>
+<p>The response may include a <code>pause_turn</code> stop reason, which indicates that the API paused a long-running turn. You may provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you wish to interrupt the conversation.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="prompt-caching"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#prompt-caching">​</a></div><span class="cursor-pointer">Prompt caching</span></h2>
+<p>Web search works with <a class="link" href="/en/docs/build-with-claude/prompt-caching">prompt caching</a>. To enable prompt caching, add at least one <code>cache_control</code> breakpoint in your request. The system will automatically cache up until the last <code>web_search_tool_result</code> block when executing the tool.</p>
+<p>For multi-turn conversations, set a <code>cache_control</code> breakpoint on or after the last <code>web_search_tool_result</code> block to reuse cached content.</p>
+<p>For example, to use prompt caching with web search for a multi-turn conversation:</p>
+<div class="code-group mt-5 mb-8 flex flex-col not-prose relative overflow-hidden rounded-2xl dark:border-gray-800/50 bg-[#0F1117] border border-transparent dark:bg-codeblock text-gray-50 codeblock-dark" id="code-group"><div class="flex flex-1 overflow-hidden"><div class="relative min-w-full w-full transition-[height] duration-300 ease-in-out" data-headlessui-state="selected" id="headlessui-tabs-panel-:R6lqmpkql6:" role="tabpanel" style="font-variant-ligatures:none;height:auto" tabindex="0"><div class="flex-none p-5 overflow-x-auto text-sm h-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25 leading-6" data-component-part="code-group-tab-content"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class=""><span class="token comment"># First request with web search and cache breakpoint</span></span>
+<span class="">messages <span class="token operator">=</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">        <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token string">"What's the current weather in San Francisco today?"</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">]</span></span>
+<!-- -->
+<span class="">response1 <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">    model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">    max_tokens<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">,</span></span>
+<span class="">    messages<span class="token operator">=</span>messages<span class="token punctuation">,</span></span>
+<span class="">    tools<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">{</span></span>
+<span class="">        <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"web_search_20250305"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"web_search"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"user_location"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"approximate"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"city"</span><span class="token punctuation">:</span> <span class="token string">"San Francisco"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"region"</span><span class="token punctuation">:</span> <span class="token string">"California"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"country"</span><span class="token punctuation">:</span> <span class="token string">"US"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"timezone"</span><span class="token punctuation">:</span> <span class="token string">"America/Los_Angeles"</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">}</span><span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Add Claude's response to the conversation</span></span>
+<span class="">messages<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"assistant"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token string">"content"</span><span class="token punctuation">:</span> response1<span class="token punctuation">.</span>content</span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Second request with cache breakpoint after the search results</span></span>
+<span class="">messages<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token string">"Should I expect rain later this week?"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token string">"cache_control"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ephemeral"</span><span class="token punctuation">}</span>  <span class="token comment"># Cache up to this point</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class="">response2 <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">    model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">    max_tokens<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">,</span></span>
+<span class="">    messages<span class="token operator">=</span>messages<span class="token punctuation">,</span></span>
+<span class="">    tools<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">{</span></span>
+<span class="">        <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"web_search_20250305"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"web_search"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"user_location"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"approximate"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"city"</span><span class="token punctuation">:</span> <span class="token string">"San Francisco"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"region"</span><span class="token punctuation">:</span> <span class="token string">"California"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"country"</span><span class="token punctuation">:</span> <span class="token string">"US"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"timezone"</span><span class="token punctuation">:</span> <span class="token string">"America/Los_Angeles"</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">}</span><span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token comment"># The second response will benefit from cached search results</span></span>
+<span class=""><span class="token comment"># while still being able to perform new searches if needed</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Cache read tokens: </span><span class="token interpolation"><span class="token punctuation">{</span>response2<span class="token punctuation">.</span>usage<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'cache_read_input_tokens'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></span>
+</code></pre></div></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="streaming"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#streaming">​</a></div><span class="cursor-pointer">Streaming</span></h2>
+<p>With streaming enabled, you’ll receive search events as part of the stream. There will be a pause while the search executes:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-javascript"><code class="language-javascript"><span class=""><span class="token literal-property property">event</span><span class="token operator">:</span> message_start</span>
+<span class=""><span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"message_start"</span><span class="token punctuation">,</span> <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token string">"msg_abc123"</span><span class="token punctuation">,</span> <span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"message"</span><span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<!-- -->
+<span class=""><span class="token literal-property property">event</span><span class="token operator">:</span> content_block_start</span>
+<span class=""><span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"content_block_start"</span><span class="token punctuation">,</span> <span class="token string-property property">"index"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string-property property">"content_block"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span> <span class="token string-property property">"text"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<!-- -->
+<span class=""><span class="token comment">// Claude's decision to search</span></span>
+<!-- -->
+<span class=""><span class="token literal-property property">event</span><span class="token operator">:</span> content_block_start</span>
+<span class=""><span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"content_block_start"</span><span class="token punctuation">,</span> <span class="token string-property property">"index"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string-property property">"content_block"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"server_tool_use"</span><span class="token punctuation">,</span> <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token string">"srvtoolu_xyz789"</span><span class="token punctuation">,</span> <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"web_search"</span><span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<!-- -->
+<span class=""><span class="token comment">// Search query streamed</span></span>
+<span class=""><span class="token literal-property property">event</span><span class="token operator">:</span> content_block_delta</span>
+<span class=""><span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"content_block_delta"</span><span class="token punctuation">,</span> <span class="token string-property property">"index"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string-property property">"delta"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"input_json_delta"</span><span class="token punctuation">,</span> <span class="token string-property property">"partial_json"</span><span class="token operator">:</span> <span class="token string">"{\"query\":\"latest quantum computing breakthroughs 2025\"}"</span><span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<!-- -->
+<span class=""><span class="token comment">// Pause while search executes</span></span>
+<!-- -->
+<span class=""><span class="token comment">// Search results streamed</span></span>
+<span class=""><span class="token literal-property property">event</span><span class="token operator">:</span> content_block_start</span>
+<span class=""><span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"content_block_start"</span><span class="token punctuation">,</span> <span class="token string-property property">"index"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string-property property">"content_block"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"web_search_tool_result"</span><span class="token punctuation">,</span> <span class="token string-property property">"tool_use_id"</span><span class="token operator">:</span> <span class="token string">"srvtoolu_xyz789"</span><span class="token punctuation">,</span> <span class="token string-property property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"web_search_result"</span><span class="token punctuation">,</span> <span class="token string-property property">"title"</span><span class="token operator">:</span> <span class="token string">"Quantum Computing Breakthroughs in 2025"</span><span class="token punctuation">,</span> <span class="token string-property property">"url"</span><span class="token operator">:</span> <span class="token string">"https://example.com"</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<!-- -->
+<span class=""><span class="token comment">// Claude's response with citations (omitted in this example)</span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="batch-requests"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#batch-requests">​</a></div><span class="cursor-pointer">Batch requests</span></h2>
+<p>You can include the web search tool in the <a class="link" href="/en/docs/build-with-claude/batch-processing">Messages Batches API</a>. Web search tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="usage-and-pricing"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#usage-and-pricing">​</a></div><span class="cursor-pointer">Usage and pricing</span></h2>
+<p>Web search usage is charged in addition to token usage:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json"><code class="language-json"><span class=""><span class="token property">"usage"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"input_tokens"</span><span class="token operator">:</span> <span class="token number">105</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"output_tokens"</span><span class="token operator">:</span> <span class="token number">6039</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"cache_read_input_tokens"</span><span class="token operator">:</span> <span class="token number">7123</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"cache_creation_input_tokens"</span><span class="token operator">:</span> <span class="token number">7345</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"server_tool_use"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"web_search_requests"</span><span class="token operator">:</span> <span class="token number">1</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>Web search is available on the Anthropic API for <strong>$10 per 1,000 searches</strong>, plus standard token costs for search-generated content. Web search results retrieved throughout a conversation are counted as input tokens, in search iterations executed during a single turn and in subsequent conversation turns.</p>
+<p>Each web search counts as one use, regardless of the number of results returned. If an error occurs during web search, the web search will not be billed.</p></div>

@@ -1,0 +1,143 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><h2 class="flex whitespace-pre-wrap group font-semibold" id="prerequisites"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#prerequisites">​</a></div><span class="cursor-pointer">Prerequisites</span></h2>
+<p>Before configuring Claude Code with Bedrock, ensure you have:</p>
+<ul>
+<li>An AWS account with Bedrock access enabled</li>
+<li>Access to desired Claude models (e.g., Claude Sonnet 4) in Bedrock</li>
+<li>AWS CLI installed and configured (optional - only needed if you don’t have another mechanism for getting credentials)</li>
+<li>Appropriate IAM permissions</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="setup"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#setup">​</a></div><span class="cursor-pointer">Setup</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="1-enable-model-access"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#1-enable-model-access">​</a></div><span class="cursor-pointer">1. Enable model access</span></h3>
+<p>First, ensure you have access to the required Claude models in your AWS account:</p>
+<ol>
+<li>Navigate to the <a class="link" href="https://console.aws.amazon.com/bedrock/" rel="noreferrer" target="_blank">Amazon Bedrock console</a></li>
+<li>Go to <strong>Model access</strong> in the left navigation</li>
+<li>Request access to desired Claude models (e.g., Claude Sonnet 4)</li>
+<li>Wait for approval (usually instant for most regions)</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="2-configure-aws-credentials"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#2-configure-aws-credentials">​</a></div><span class="cursor-pointer">2. Configure AWS credentials</span></h3>
+<p>Claude Code uses the default AWS SDK credential chain. Set up your credentials using one of these methods:</p>
+<p><strong>Option A: AWS CLI configuration</strong></p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class="">aws configure</span>
+</code></pre></div></div></div>
+<p><strong>Option B: Environment variables (access key)</strong></p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">AWS_ACCESS_KEY_ID</span><span class="token operator">=</span>your-access-key-id</span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">AWS_SECRET_ACCESS_KEY</span><span class="token operator">=</span>your-secret-access-key</span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">AWS_SESSION_TOKEN</span><span class="token operator">=</span>your-session-token</span>
+</code></pre></div></div></div>
+<p><strong>Option C: Environment variables (SSO profile)</strong></p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class="">aws sso login <span class="token parameter variable">--profile</span><span class="token operator">=</span><span class="token operator">&lt;</span>your-profile-name<span class="token operator">&gt;</span></span>
+<!-- -->
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">AWS_PROFILE</span><span class="token operator">=</span>your-profile-name</span>
+</code></pre></div></div></div>
+<p><strong>Option D: Bedrock API keys</strong></p>
+
+<p>Bedrock API keys provide a simpler authentication method without needing full AWS credentials. <a class="link" href="https://aws.amazon.com/blogs/machine-learning/accelerate-ai-development-with-amazon-bedrock-api-keys/" rel="noreferrer" target="_blank">Learn more about Bedrock API keys</a>.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="advanced-credential-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#advanced-credential-configuration">​</a></div><span class="cursor-pointer">Advanced credential configuration</span></h4>
+<p>Claude Code supports automatic credential refresh for AWS SSO and corporate identity providers. Add these settings to your Claude Code settings file (see <a class="link" href="/en/docs/claude-code/settings">Settings</a> for file locations).</p>
+<p>When Claude Code detects that your AWS credentials are expired (either locally based on their timestamp or when Bedrock returns a credential error), it will automatically run your configured <code>awsAuthRefresh</code> and/or <code>awsCredentialExport</code> commands to obtain new credentials before retrying the request.</p>
+<h5>Example configuration</h5>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"awsAuthRefresh"</span><span class="token operator">:</span> <span class="token string">"aws sso login --profile myprofile"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"env"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"AWS_PROFILE"</span><span class="token operator">:</span> <span class="token string">"myprofile"</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h5>Configuration settings explained</h5>
+<p><strong><code>awsAuthRefresh</code></strong>: Use this for commands that modify the <code>.aws</code> directory (e.g., updating credentials, SSO cache, or config files). Output is shown to the user (but user input is not supported), making it suitable for browser-based authentication flows where the CLI displays a code to enter in the browser.</p>
+<p><strong><code>awsCredentialExport</code></strong>: Only use this if you cannot modify <code>.aws</code> and must directly return credentials. Output is captured silently (not shown to the user). The command must output JSON in this format:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"Credentials"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"AccessKeyId"</span><span class="token operator">:</span> <span class="token string">"value"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"SecretAccessKey"</span><span class="token operator">:</span> <span class="token string">"value"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"SessionToken"</span><span class="token operator">:</span> <span class="token string">"value"</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="3-configure-claude-code"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#3-configure-claude-code">​</a></div><span class="cursor-pointer">3. Configure Claude Code</span></h3>
+<p>Set the following environment variables to enable Bedrock:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token comment"># Enable Bedrock integration</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">CLAUDE_CODE_USE_BEDROCK</span><span class="token operator">=</span><span class="token number">1</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">AWS_REGION</span><span class="token operator">=</span>us-east-1  <span class="token comment"># or your preferred region</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Optional: Override the region for the small/fast model (Haiku)</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION</span><span class="token operator">=</span>us-west-2</span>
+</code></pre></div></div></div>
+<p>When enabling Bedrock for Claude Code, keep the following in mind:</p>
+<ul>
+<li><code>AWS_REGION</code> is a required environment variable. Claude Code does not read from the <code>.aws</code> config file for this setting.</li>
+<li>When using Bedrock, the <code>/login</code> and <code>/logout</code> commands are disabled since authentication is handled through AWS credentials.</li>
+<li>You can use settings files for environment variables like <code>AWS_PROFILE</code> that you don’t want to leak to other processes. See <a class="link" href="/en/docs/claude-code/settings">Settings</a> for more information.</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="4-model-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#4-model-configuration">​</a></div><span class="cursor-pointer">4. Model configuration</span></h3>
+<p>Claude Code uses these default models for Bedrock:</p>
+<table><thead><tr><th style="text-align:left">Model type</th><th style="text-align:left">Default value</th></tr></thead><tbody><tr><td style="text-align:left">Primary model</td><td style="text-align:left"><code>us.anthropic.claude-3-7-sonnet-20250219-v1:0</code></td></tr><tr><td style="text-align:left">Small/fast model</td><td style="text-align:left"><code>us.anthropic.claude-3-5-haiku-20241022-v1:0</code></td></tr></tbody></table>
+<p>To customize models, use one of these methods:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token comment"># Using inference profile ID</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_MODEL</span><span class="token operator">=</span><span class="token string">'us.anthropic.claude-opus-4-1-20250805-v1:0'</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_SMALL_FAST_MODEL</span><span class="token operator">=</span><span class="token string">'us.anthropic.claude-3-5-haiku-20241022-v1:0'</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Using application inference profile ARN</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_MODEL</span><span class="token operator">=</span><span class="token string">'arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Optional: Disable prompt caching if needed</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">DISABLE_PROMPT_CACHING</span><span class="token operator">=</span><span class="token number">1</span></span>
+</code></pre></div></div></div>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p><a class="link" href="/en/docs/build-with-claude/prompt-caching">Prompt caching</a> may not be available in all regions</p></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="5-output-token-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#5-output-token-configuration">​</a></div><span class="cursor-pointer">5. Output token configuration</span></h3>
+<p>When using Claude Code with Amazon Bedrock, we recommend the following token settings:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token comment"># Recommended output token settings for Bedrock</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">CLAUDE_CODE_MAX_OUTPUT_TOKENS</span><span class="token operator">=</span><span class="token number">4096</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">MAX_THINKING_TOKENS</span><span class="token operator">=</span><span class="token number">1024</span></span>
+</code></pre></div></div></div>
+<p><strong>Why these values:</strong></p>
+<ul>
+<li>
+<p><strong><code>CLAUDE_CODE_MAX_OUTPUT_TOKENS=4096</code></strong>: Bedrock’s burndown throttling logic sets a minimum of 4096 tokens as the max_token penalty. Setting this lower won’t reduce costs but may cut off long tool uses, causing the Claude Code agent loop to fail persistently. Claude Code typically uses less than 4096 output tokens without extended thinking, but may need this headroom for tasks involving significant file creation or Write tool usage.</p>
+</li>
+<li>
+<p><strong><code>MAX_THINKING_TOKENS=1024</code></strong>: This provides space for extended thinking without cutting off tool use responses, while still maintaining focused reasoning chains. This balance helps prevent trajectory changes that aren’t always helpful for coding tasks specifically.</p>
+</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="iam-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#iam-configuration">​</a></div><span class="cursor-pointer">IAM configuration</span></h2>
+<p>Create an IAM policy with the required permissions for Claude Code:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"Version"</span><span class="token operator">:</span> <span class="token string">"2012-10-17"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"Statement"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"Effect"</span><span class="token operator">:</span> <span class="token string">"Allow"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"Action"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token string">"bedrock:InvokeModel"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"bedrock:InvokeModelWithResponseStream"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"bedrock:ListInferenceProfiles"</span></span>
+<span class="">      <span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"Resource"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token string">"arn:aws:bedrock:*:*:inference-profile/*"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"arn:aws:bedrock:*:*:application-inference-profile/*"</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>For more restrictive permissions, you can limit the Resource to specific inference profile ARNs.</p>
+<p>For details, see <a class="link" href="https://docs.aws.amazon.com/bedrock/latest/userguide/security-iam.html" rel="noreferrer" target="_blank">Bedrock IAM documentation</a>.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>We recommend creating a dedicated AWS account for Claude Code to simplify cost tracking and access control.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="troubleshooting"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#troubleshooting">​</a></div><span class="cursor-pointer">Troubleshooting</span></h2>
+<p>If you encounter region issues:</p>
+<ul>
+<li>Check model availability: <code>aws bedrock list-inference-profiles --region your-region</code></li>
+<li>Switch to a supported region: <code>export AWS_REGION=us-east-1</code></li>
+<li>Consider using inference profiles for cross-region access</li>
+</ul>
+<p>If you receive an error “on-demand throughput isn’t supported”:</p>
+<ul>
+<li>Specify the model as an <a class="link" href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html" rel="noreferrer" target="_blank">inference profile</a> ID</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="additional-resources"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#additional-resources">​</a></div><span class="cursor-pointer">Additional resources</span></h2>
+<ul>
+<li><a class="link" href="https://docs.aws.amazon.com/bedrock/" rel="noreferrer" target="_blank">Bedrock documentation</a></li>
+<li><a class="link" href="https://aws.amazon.com/bedrock/pricing/" rel="noreferrer" target="_blank">Bedrock pricing</a></li>
+<li><a class="link" href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html" rel="noreferrer" target="_blank">Bedrock inference profiles</a></li>
+<li><a class="link" href="https://community.aws/content/2tXkZKrZzlrlu0KfH8gST5Dkppq/claude-code-on-amazon-bedrock-quick-setup-guide" rel="noreferrer" target="_blank">Claude Code on Amazon Bedrock: Quick Setup Guide</a></li>
+</ul></div>

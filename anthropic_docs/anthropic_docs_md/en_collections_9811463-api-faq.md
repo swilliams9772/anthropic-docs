@@ -1,0 +1,13 @@
+# API FAQ
+
+**Source:** https://support.claude.com/en/collections/9811463-api-faq
+
+[All Collections](/en/)[Claude API and Console](https://support.claude.com/en/collections/5370014-claude-api-and-console)
+
+API FAQ
+
+# API FAQ
+
+5 articles
+
+[How large is the Claude API’s context window?](https://support.claude.com/en/articles/8606395-how-large-is-the-claude-api-s-context-window)[Can I have a Claude account and a Console account?](https://support.claude.com/en/articles/8987223-can-i-have-a-claude-account-and-a-console-account)[Can I use the Claude API for individual use?](https://support.claude.com/en/articles/8987200-can-i-use-the-claude-api-for-individual-use)[What is the External Researcher Access Program?](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program)[How can I delete my Claude Console account?](https://support.claude.com/en/articles/10366376-how-can-i-delete-my-claude-console-account)

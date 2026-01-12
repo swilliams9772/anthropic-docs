@@ -1,0 +1,59 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>The reference <a class="link" href="https://github.com/anthropics/claude-code/tree/main/.devcontainer" rel="noreferrer" target="_blank">devcontainer setup</a> and associated <a class="link" href="https://github.com/anthropics/claude-code/blob/main/.devcontainer/Dockerfile" rel="noreferrer" target="_blank">Dockerfile</a> offer a preconfigured development container that you can use as is, or customize for your needs. This devcontainer works with the Visual Studio Code <a class="link" href="https://code.visualstudio.com/docs/devcontainers/containers" rel="noreferrer" target="_blank">Dev Containers extension</a> and similar tools.</p>
+<p>The container’s enhanced security measures (isolation and firewall rules) allow you to run <code>claude --dangerously-skip-permissions</code> to bypass permission prompts for unattended operation.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-amber-500/20 bg-amber-50/50 dark:border-amber-500/30 dark:bg-amber-500/10" data-callout-type="warning"><div class="text-sm prose min-w-0 w-full text-amber-900 dark:text-amber-200" data-component-part="callout-content"><p>While the devcontainer provides substantial protections, no system is completely immune to all attacks.
+When executed with <code>--dangerously-skip-permissions</code>, devcontainers do not prevent a malicious project from exfiltrating anything accessible in the devcontainer including Claude Code credentials.
+We recommend only using devcontainers when developing with trusted repositories.
+Always maintain good security practices and monitor Claude’s activities.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="key-features"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#key-features">​</a></div><span class="cursor-pointer">Key features</span></h2>
+<ul>
+<li><strong>Production-ready Node.js</strong>: Built on Node.js 20 with essential development dependencies</li>
+<li><strong>Security by design</strong>: Custom firewall restricting network access to only necessary services</li>
+<li><strong>Developer-friendly tools</strong>: Includes git, ZSH with productivity enhancements, fzf, and more</li>
+<li><strong>Seamless VS Code integration</strong>: Pre-configured extensions and optimized settings</li>
+<li><strong>Session persistence</strong>: Preserves command history and configurations between container restarts</li>
+<li><strong>Works everywhere</strong>: Compatible with macOS, Windows, and Linux development environments</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="getting-started-in-4-steps"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#getting-started-in-4-steps">​</a></div><span class="cursor-pointer">Getting started in 4 steps</span></h2>
+<ol>
+<li>Install VS Code and the Remote - Containers extension</li>
+<li>Clone the <a class="link" href="https://github.com/anthropics/claude-code/tree/main/.devcontainer" rel="noreferrer" target="_blank">Claude Code reference implementation</a> repository</li>
+<li>Open the repository in VS Code</li>
+<li>When prompted, click “Reopen in Container” (or use Command Palette: Cmd+Shift+P → “Remote-Containers: Reopen in Container”)</li>
+</ol>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="configuration-breakdown"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#configuration-breakdown">​</a></div><span class="cursor-pointer">Configuration breakdown</span></h2>
+<p>The devcontainer setup consists of three primary components:</p>
+<ul>
+<li><a class="link" href="https://github.com/anthropics/claude-code/blob/main/.devcontainer/devcontainer.json" rel="noreferrer" target="_blank"><strong>devcontainer.json</strong></a>: Controls container settings, extensions, and volume mounts</li>
+<li><a class="link" href="https://github.com/anthropics/claude-code/blob/main/.devcontainer/Dockerfile" rel="noreferrer" target="_blank"><strong>Dockerfile</strong></a>: Defines the container image and installed tools</li>
+<li><a class="link" href="https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh" rel="noreferrer" target="_blank"><strong>init-firewall.sh</strong></a>: Establishes network security rules</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="security-features"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#security-features">​</a></div><span class="cursor-pointer">Security features</span></h2>
+<p>The container implements a multi-layered security approach with its firewall configuration:</p>
+<ul>
+<li><strong>Precise access control</strong>: Restricts outbound connections to whitelisted domains only (npm registry, GitHub, Anthropic API, etc.)</li>
+<li><strong>Allowed outbound connections</strong>: The firewall permits outbound DNS and SSH connections</li>
+<li><strong>Default-deny policy</strong>: Blocks all other external network access</li>
+<li><strong>Startup verification</strong>: Validates firewall rules when the container initializes</li>
+<li><strong>Isolation</strong>: Creates a secure development environment separated from your main system</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="customization-options"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#customization-options">​</a></div><span class="cursor-pointer">Customization options</span></h2>
+<p>The devcontainer configuration is designed to be adaptable to your needs:</p>
+<ul>
+<li>Add or remove VS Code extensions based on your workflow</li>
+<li>Modify resource allocations for different hardware environments</li>
+<li>Adjust network access permissions</li>
+<li>Customize shell configurations and developer tooling</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="example-use-cases"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#example-use-cases">​</a></div><span class="cursor-pointer">Example use cases</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="secure-client-work"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#secure-client-work">​</a></div><span class="cursor-pointer">Secure client work</span></h3>
+<p>Use devcontainers to isolate different client projects, ensuring code and credentials never mix between environments.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="team-onboarding"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#team-onboarding">​</a></div><span class="cursor-pointer">Team onboarding</span></h3>
+<p>New team members can get a fully configured development environment in minutes, with all necessary tools and settings pre-installed.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="consistent-ci%2Fcd-environments"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#consistent-ci%2Fcd-environments">​</a></div><span class="cursor-pointer">Consistent CI/CD environments</span></h3>
+<p>Mirror your devcontainer configuration in CI/CD pipelines to ensure development and production environments match.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="related-resources"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#related-resources">​</a></div><span class="cursor-pointer">Related resources</span></h2>
+<ul>
+<li><a class="link" href="https://code.visualstudio.com/docs/devcontainers/containers" rel="noreferrer" target="_blank">VS Code devcontainers documentation</a></li>
+<li><a class="link" href="/en/docs/claude-code/security">Claude Code security best practices</a></li>
+<li><a class="link" href="/en/docs/claude-code/corporate-proxy">Corporate proxy configuration</a></li>
+</ul></div>

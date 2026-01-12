@@ -1,0 +1,75 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><blockquote>
+<p>Copy this prompt into our developer <a class="link" href="https://console.anthropic.com/dashboard" rel="noreferrer" target="_blank">Console</a> to try it for yourself!</p>
+</blockquote>
+<table><thead><tr><th>Content</th></tr></thead><tbody><tr><td>System</td><td>Your task is to take the code snippet provided and explain it in simple, easy-to-understand language. Break down the code’s functionality, purpose, and key components. Use analogies, examples, and plain terms to make the explanation accessible to someone with minimal coding knowledge. Avoid using technical jargon unless absolutely necessary, and provide clear explanations for any jargon used. The goal is to help the reader understand what the code does and how it works at a high level.</td></tr><tr><td>User</td><td>import random def bubble*sort(arr): n = len(arr) for i in range(n-1): for j in range(n-i-1): if arr[j] &gt; arr[j+1]: arr[j], arr[j+1] = arr[j+1], arr[j] return arr numbers = [random.randint(1, 100) for * in range(10)] print(“Unsorted array:”, numbers) sorted_numbers = bubble_sort(numbers) print(“Sorted array:”, sorted_numbers)</td></tr></tbody></table>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="example-output"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#example-output">​</a></div><span class="cursor-pointer">Example Output</span></h3>
+<blockquote>
+<p>This code demonstrates the implementation of the bubble sort algorithm, which is used to sort a list of numbers in ascending order. Let’s break it down step by step:</p>
+<ol>
+<li>
+<p>The code starts by importing the ‘random’ module, which will be used to generate random numbers for the example.</p>
+</li>
+<li>
+<p>The ‘bubble_sort’ function is defined, which takes an array (list) of numbers as input. This function will perform the sorting operation.</p>
+</li>
+<li>
+<p>Inside the ‘bubble_sort’ function, the variable ‘n’ is assigned the length of the input array. This will be used to determine the number of iterations needed for sorting.</p>
+</li>
+<li>
+<p>The first loop, controlled by the variable ‘i’, iterates ‘n-1’ times. This is because after ‘n-1’ passes, the largest number will be at the end of the array, so we don’t need to compare it again.</p>
+</li>
+<li>
+<p>The second loop, controlled by the variable ‘j’, iterates ‘n-i-1’ times. This is because after each pass, the largest number among the unsorted elements will be placed at the end, so we don’t need to compare it in the next pass.</p>
+</li>
+<li>
+<p>Inside the second loop, there is an if statement that compares adjacent elements in the array. If the element at index ‘j’ is greater than the element at index ‘j+1’, they are swapped. This ensures that the larger element moves towards the end of the array.</p>
+</li>
+<li>
+<p>The swapping is done using the Python syntax ‘arr[j], arr[j+1] = arr[j+1], arr[j]’, which simultaneously assigns the values of ‘arr[j+1]’ to ‘arr[j]’ and ‘arr[j]’ to ‘arr[j+1]’.</p>
+</li>
+<li>
+<p>After all the iterations are complete, the sorted array is returned by the ‘bubble_sort’ function.</p>
+</li>
+<li>
+<p>In the example code, a list of 10 random numbers between 1 and 100 is generated using a list comprehension: ‘[random.randint(1, 100) for _ in range(10)]’. The underscore ’_’ is used as a placeholder variable since we don’t need the index values.</p>
+</li>
+<li>
+<p>The unsorted array is printed to show the initial order of the numbers.</p>
+</li>
+<li>
+<p>The ‘bubble_sort’ function is called with the ‘numbers’ array as input, and the sorted array is stored in the ‘sorted_numbers’ variable.</p>
+</li>
+<li>
+<p>Finally, the sorted array is printed to display the numbers in ascending order.</p>
+</li>
+</ol>
+<p>In simpler terms, imagine you have a list of numbers that are out of order. The bubble sort algorithm works by comparing each number with the one next to it, and if they are in the wrong order, it swaps them. This process is repeated multiple times until the entire list is sorted. It’s like bubbles rising to the surface, with the larger numbers gradually moving towards the end of the list in each pass.</p>
+</blockquote>
+
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="api-request"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#api-request">​</a></div><span class="cursor-pointer">API request</span></h3>
+<div class="code-group mt-5 mb-8 flex flex-col not-prose relative overflow-hidden rounded-2xl dark:border-gray-800/50 bg-[#0F1117] border border-transparent dark:bg-codeblock text-gray-50 codeblock-dark" id="code-group"><div class="relative border-b border-gray-900/80 bg-[#0F1117] dark:bg-codeblock" data-component-part="code-group-tab-bar"><div aria-orientation="horizontal" class="text-xs leading-6 rounded-t-xl flex overflow-x-auto overflow-y-hidden mr-12 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25" role="tablist"><button aria-selected="true" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-primary-light" data-headlessui-state="selected" id="headlessui-tabs-tab-:R2mqmpkql6:" role="tab" tabindex="0" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R4mqmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">TypeScript</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R6mqmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">AWS Bedrock Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:R8mqmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">AWS Bedrock TypeScript</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:Ramqmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Vertex AI Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:Rcmqmpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Vertex AI TypeScript</div></button></div></div><div class="flex flex-1 overflow-hidden"><div class="relative min-w-full w-full transition-[height] duration-300 ease-in-out" data-headlessui-state="selected" id="headlessui-tabs-panel-:Rqqmpkql6:" role="tabpanel" style="font-variant-ligatures:none;height:auto" tabindex="0"><div class="flex-none p-5 overflow-x-auto text-sm h-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25 leading-6" data-component-part="code-group-tab-content"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span></span>
+<span class="">    <span class="token comment"># defaults to os.environ.get("ANTHROPIC_API_KEY")</span></span>
+<span class="">    api_key<span class="token operator">=</span><span class="token string">"my_api_key"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">    model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">    max_tokens<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span></span>
+<span class="">    temperature<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span></span>
+<span class="">    system<span class="token operator">=</span><span class="token string">"Your task is to take the code snippet provided and explain it in simple, easy-to-understand language. Break down the code's functionality, purpose, and key components. Use analogies, examples, and plain terms to make the explanation accessible to someone with minimal coding knowledge. Avoid using technical jargon unless absolutely necessary, and provide clear explanations for any jargon used. The goal is to help the reader understand what the code does and how it works at a high level."</span><span class="token punctuation">,</span></span>
+<span class="">    messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">                <span class="token punctuation">{</span></span>
+<span class="">                    <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">                    <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">"import random\n\ndef bubble_sort(arr):\n    n = len(arr)\n    for i in range(n-1):\n        for j in range(n-i-1):\n            if arr[j] &gt; arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nnumbers = [random.randint(1, 100) for _ in range(10)]\nprint(\"Unsorted array:\", numbers)\nsorted_numbers = bubble_sort(numbers)\nprint(\"Sorted array:\", sorted_numbers)"</span></span>
+<span class="">                <span class="token punctuation">}</span></span>
+<span class="">            <span class="token punctuation">]</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+<!-- -->
+</code></pre></div></div></div></div></div>

@@ -1,0 +1,405 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>Claude Code GitHub Actions brings AI-powered automation to your GitHub workflow. With a simple <code>@claude</code> mention in any PR or issue, Claude can analyze your code, create pull requests, implement features, and fix bugs - all while following your project’s standards.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-zinc-500/20 bg-zinc-50/50 dark:border-zinc-500/30 dark:bg-zinc-500/10" data-callout-type="info"><div class="text-sm prose min-w-0 w-full text-zinc-900 dark:text-zinc-200" data-component-part="callout-content"><p>Claude Code GitHub Actions is currently in beta. Features and functionality may evolve as we refine the experience.</p></div></div>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>Claude Code GitHub Actions is built on top of the <a class="link" href="/en/docs/claude-code/sdk">Claude Code SDK</a>, which enables programmatic integration of Claude Code into your applications. You can use the SDK to build custom automation workflows beyond GitHub Actions.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="why-use-claude-code-github-actions%3F"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#why-use-claude-code-github-actions%3F">​</a></div><span class="cursor-pointer">Why use Claude Code GitHub Actions?</span></h2>
+<ul>
+<li><strong>Instant PR creation</strong>: Describe what you need, and Claude creates a complete PR with all necessary changes</li>
+<li><strong>Automated code implementation</strong>: Turn issues into working code with a single command</li>
+<li><strong>Follows your standards</strong>: Claude respects your <code>CLAUDE.md</code> guidelines and existing code patterns</li>
+<li><strong>Simple setup</strong>: Get started in minutes with our installer and API key</li>
+<li><strong>Secure by default</strong>: Your code stays on Github’s runners</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="what-can-claude-do%3F"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#what-can-claude-do%3F">​</a></div><span class="cursor-pointer">What can Claude do?</span></h2>
+<p>Claude Code provides powerful GitHub Actions that transform how you work with code:</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="claude-code-action"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#claude-code-action">​</a></div><span class="cursor-pointer">Claude Code Action</span></h3>
+<p>This GitHub Action allows you to run Claude Code within your GitHub Actions workflows. You can use this to build any custom workflow on top of Claude Code.</p>
+<p><a class="link" href="https://github.com/anthropics/claude-code-action" rel="noreferrer" target="_blank">View repository →</a></p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="claude-code-action-base"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#claude-code-action-base">​</a></div><span class="cursor-pointer">Claude Code Action (Base)</span></h3>
+<p>The foundation for building custom GitHub workflows with Claude. This extensible framework gives you full access to Claude’s capabilities for creating tailored automation.</p>
+<p><a class="link" href="https://github.com/anthropics/claude-code-base-action" rel="noreferrer" target="_blank">View repository →</a></p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="setup"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#setup">​</a></div><span class="cursor-pointer">Setup</span></h2>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="quick-setup"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#quick-setup">​</a></div><span class="cursor-pointer">Quick setup</span></h2>
+<p>The easiest way to set up this action is through Claude Code in the terminal. Just open claude and run <code>/install-github-app</code>.</p>
+<p>This command will guide you through setting up the GitHub app and required secrets.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><ul>
+<li>You must be a repository admin to install the GitHub app and add secrets</li>
+<li>This quickstart method is only available for direct Anthropic API users. If you’re using AWS Bedrock or Google Vertex AI, please see the <a class="link" href="/_sites/docs.anthropic.com/en/docs/claude-code/github-actions#using-with-aws-bedrock-%26-google-vertex-ai">Using with AWS Bedrock &amp; Google Vertex AI</a> section.</li>
+</ul></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="manual-setup"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#manual-setup">​</a></div><span class="cursor-pointer">Manual setup</span></h2>
+<p>If the <code>/install-github-app</code> command fails or you prefer manual setup, please follow these manual setup instructions:</p>
+<ol>
+<li><strong>Install the Claude GitHub app</strong> to your repository: <a class="link" href="https://github.com/apps/claude" rel="noreferrer" target="_blank">https://github.com/apps/claude</a></li>
+<li><strong>Add ANTHROPIC_API_KEY</strong> to your repository secrets (<a class="link" href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" rel="noreferrer" target="_blank">Learn how to use secrets in GitHub Actions</a>)</li>
+<li><strong>Copy the workflow file</strong> from <a class="link" href="https://github.com/anthropics/claude-code-action/blob/main/examples/claude.yml" rel="noreferrer" target="_blank">examples/claude.yml</a> into your repository’s <code>.github/workflows/</code></li>
+</ol>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>After completing either the quickstart or manual setup, test the action by tagging <code>@claude</code> in an issue or PR comment!</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="example-use-cases"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#example-use-cases">​</a></div><span class="cursor-pointer">Example use cases</span></h2>
+<p>Claude Code GitHub Actions can help you with a variety of tasks. For complete working examples, see the <a class="link" href="https://github.com/anthropics/claude-code-action/tree/main/examples" rel="noreferrer" target="_blank">examples directory</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="turn-issues-into-prs"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#turn-issues-into-prs">​</a></div><span class="cursor-pointer">Turn issues into PRs</span></h3>
+<p>In an issue comment:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext"><code><span class="">@claude implement this feature based on the issue description</span>
+</code></pre></div></div></div>
+<p>Claude will analyze the issue, write the code, and create a PR for review.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="get-implementation-help"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#get-implementation-help">​</a></div><span class="cursor-pointer">Get implementation help</span></h3>
+<p>In a PR comment:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext"><code><span class="">@claude how should I implement user authentication for this endpoint?</span>
+</code></pre></div></div></div>
+<p>Claude will analyze your code and provide specific implementation guidance.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="fix-bugs-quickly"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#fix-bugs-quickly">​</a></div><span class="cursor-pointer">Fix bugs quickly</span></h3>
+<p>In an issue:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-yaml"><code class="language-yaml"><span class="">@claude fix the TypeError in the user dashboard component</span>
+</code></pre></div></div></div>
+<p>Claude will locate the bug, implement a fix, and create a PR.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="best-practices"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#best-practices">​</a></div><span class="cursor-pointer">Best practices</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="claude-md-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#claude-md-configuration">​</a></div><span class="cursor-pointer">CLAUDE.md configuration</span></h3>
+<p>Create a <code>CLAUDE.md</code> file in your repository root to define code style guidelines, review criteria, project-specific rules, and preferred patterns. This file guides Claude’s understanding of your project standards.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="security-considerations"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#security-considerations">​</a></div><span class="cursor-pointer">Security considerations</span></h3>
+
+<p>Always use GitHub Secrets for API keys:</p>
+<ul>
+<li>Add your API key as a repository secret named <code>ANTHROPIC_API_KEY</code></li>
+<li>Reference it in workflows: <code>anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}</code></li>
+<li>Limit action permissions to only what’s necessary</li>
+<li>Review Claude’s suggestions before merging</li>
+</ul>
+<p>Always use GitHub Secrets (e.g., <code>${{ secrets.ANTHROPIC_API_KEY }}</code>) rather than hardcoding API keys directly in your workflow files.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="optimizing-performance"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#optimizing-performance">​</a></div><span class="cursor-pointer">Optimizing performance</span></h3>
+<p>Use issue templates to provide context, keep your <code>CLAUDE.md</code> concise and focused, and configure appropriate timeouts for your workflows.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="ci-costs"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#ci-costs">​</a></div><span class="cursor-pointer">CI costs</span></h3>
+<p>When using Claude Code GitHub Actions, be aware of the associated costs:</p>
+<p><strong>GitHub Actions costs:</strong></p>
+<ul>
+<li>Claude Code runs on GitHub-hosted runners, which consume your GitHub Actions minutes</li>
+<li>See <a class="link" href="https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions/about-billing-for-github-actions" rel="noreferrer" target="_blank">GitHub’s billing documentation</a> for detailed pricing and minute limits</li>
+</ul>
+<p><strong>API costs:</strong></p>
+<ul>
+<li>Each Claude interaction consumes API tokens based on the length of prompts and responses</li>
+<li>Token usage varies by task complexity and codebase size</li>
+<li>See <a class="link" href="https://www.anthropic.com/api" rel="noreferrer" target="_blank">Claude’s pricing page</a> for current token rates</li>
+</ul>
+<p><strong>Cost optimization tips:</strong></p>
+<ul>
+<li>Use specific <code>@claude</code> commands to reduce unnecessary API calls</li>
+<li>Configure appropriate <code>max_turns</code> limits to prevent excessive iterations</li>
+<li>Set reasonable <code>timeout_minutes</code> to avoid runaway workflows</li>
+<li>Consider using GitHub’s concurrency controls to limit parallel runs</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="configuration-examples"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#configuration-examples">​</a></div><span class="cursor-pointer">Configuration examples</span></h2>
+<p>For ready-to-use workflow configurations for different use cases, including:</p>
+<ul>
+<li>Basic workflow setup for issue and PR comments</li>
+<li>Automated code reviews on pull requests</li>
+<li>Custom implementations for specific needs</li>
+</ul>
+<p>Visit the <a class="link" href="https://github.com/anthropics/claude-code-action/tree/main/examples" rel="noreferrer" target="_blank">examples directory</a> in the Claude Code Action repository.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>The examples repository includes complete, tested workflows that you can copy directly into your <code>.github/workflows/</code> directory.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="using-with-aws-bedrock-%26-google-vertex-ai"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#using-with-aws-bedrock-%26-google-vertex-ai">​</a></div><span class="cursor-pointer">Using with AWS Bedrock &amp; Google Vertex AI</span></h2>
+<p>For enterprise environments, you can use Claude Code GitHub Actions with your own cloud infrastructure. This approach gives you control over data residency and billing while maintaining the same functionality.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="prerequisites"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#prerequisites">​</a></div><span class="cursor-pointer">Prerequisites</span></h3>
+<p>Before setting up Claude Code GitHub Actions with cloud providers, you need:</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="for-google-cloud-vertex-ai%3A"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#for-google-cloud-vertex-ai%3A">​</a></div><span class="cursor-pointer">For Google Cloud Vertex AI:</span></h4>
+<ol>
+<li>A Google Cloud Project with Vertex AI enabled</li>
+<li>Workload Identity Federation configured for GitHub Actions</li>
+<li>A service account with the required permissions</li>
+<li>A GitHub App (recommended) or use the default GITHUB_TOKEN</li>
+</ol>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="for-aws-bedrock%3A"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#for-aws-bedrock%3A">​</a></div><span class="cursor-pointer">For AWS Bedrock:</span></h4>
+<ol>
+<li>An AWS account with Amazon Bedrock enabled</li>
+<li>GitHub OIDC Identity Provider configured in AWS</li>
+<li>An IAM role with Bedrock permissions</li>
+<li>A GitHub App (recommended) or use the default GITHUB_TOKEN</li>
+</ol>
+<div class="steps ml-3.5 mt-10 mb-6" role="list"><div class="step relative flex items-start pb-2" role="listitem"><div class="absolute ml-[-14px] py-2" contenteditable="false" data-component-part="step-number"><div class="w-7 h-7 shrink-0 rounded-lg bg-gray-100 dark:text-white dark:bg-[#26292E] text-sm text-gray-800 font-semibold flex items-center justify-center">1</div></div><div class="w-full overflow-hidden pl-12 pr-px"><p class="mt-2 font-semibold prose dark:prose-invert text-gray-900 dark:text-gray-200" contenteditable="false" data-component-part="step-title">Create a custom GitHub App (Recommended for 3P Providers)</p><div data-component-part="step-content"><p>For best control and security when using 3P providers like Vertex AI or Bedrock, we recommend creating your own GitHub App:</p><ol>
+<li>Go to <a class="link" href="https://github.com/settings/apps/new" rel="noreferrer" target="_blank">https://github.com/settings/apps/new</a></li>
+<li>Fill in the basic information:<!-- -->
+<ul>
+<li><strong>GitHub App name</strong>: Choose a unique name (e.g., “YourOrg Claude Assistant”)</li>
+<li><strong>Homepage URL</strong>: Your organization’s website or the repository URL</li>
+</ul>
+</li>
+<li>Configure the app settings:<!-- -->
+<ul>
+<li><strong>Webhooks</strong>: Uncheck “Active” (not needed for this integration)</li>
+</ul>
+</li>
+<li>Set the required permissions:<!-- -->
+<ul>
+<li><strong>Repository permissions</strong>:<!-- -->
+<ul>
+<li>Contents: Read &amp; Write</li>
+<li>Issues: Read &amp; Write</li>
+<li>Pull requests: Read &amp; Write</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Click “Create GitHub App”</li>
+<li>After creation, click “Generate a private key” and save the downloaded <code>.pem</code> file</li>
+<li>Note your App ID from the app settings page</li>
+<li>Install the app to your repository:<!-- -->
+<ul>
+<li>From your app’s settings page, click “Install App” in the left sidebar</li>
+<li>Select your account or organization</li>
+<li>Choose “Only select repositories” and select the specific repository</li>
+<li>Click “Install”</li>
+</ul>
+</li>
+<li>Add the private key as a secret to your repository:<!-- -->
+<ul>
+<li>Go to your repository’s Settings → Secrets and variables → Actions</li>
+<li>Create a new secret named <code>APP_PRIVATE_KEY</code> with the contents of the <code>.pem</code> file</li>
+</ul>
+</li>
+<li>Add the App ID as a secret:</li>
+</ol><ul>
+<li>Create a new secret named <code>APP_ID</code> with your GitHub App’s ID</li>
+</ul><div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>This app will be used with the <a class="link" href="https://github.com/actions/create-github-app-token" rel="noreferrer" target="_blank">actions/create-github-app-token</a> action to generate authentication tokens in your workflows.</p></div></div><p><strong>Alternative for Anthropic API or if you don’t want to setup your own Github app</strong>: Use the official Anthropic app:</p><ol>
+<li>Install from: <a class="link" href="https://github.com/apps/claude" rel="noreferrer" target="_blank">https://github.com/apps/claude</a></li>
+<li>No additional configuration needed for authentication</li>
+</ol></div></div></div><div class="step relative flex items-start pb-2" role="listitem"><div class="absolute ml-[-14px] py-2" contenteditable="false" data-component-part="step-number"><div class="w-7 h-7 shrink-0 rounded-lg bg-gray-100 dark:text-white dark:bg-[#26292E] text-sm text-gray-800 font-semibold flex items-center justify-center">2</div></div><div class="w-full overflow-hidden pl-12 pr-px"><p class="mt-2 font-semibold prose dark:prose-invert text-gray-900 dark:text-gray-200" contenteditable="false" data-component-part="step-title">Configure cloud provider authentication</p><div data-component-part="step-content"><p>Choose your cloud provider and set up secure authentication:</p><div class="accordion-group [&amp;&gt;div]:border-0 [&amp;&gt;div]:rounded-none [&amp;&gt;div&gt;button]:rounded-none [&amp;&gt;div]:mb-0 overflow-hidden mt-0 mb-3 rounded-xl prose prose-gray dark:prose-invert divide-y divide-inherit border dark:border-gray-800/50"><div class="accordion border-standard rounded-2xl mb-3 overflow-hidden bg-background-light dark:bg-codeblock cursor-default" role="button"><button aria-controls="aws-bedrock accordion children" aria-expanded="false" class="relative not-prose flex flex-row items-center content-center w-full py-4 px-5 space-x-2 hover:bg-gray-100 hover:dark:bg-gray-800 rounded-t-xl" data-component-part="accordion-button"><div class="leading-tight text-left" contenteditable="false" data-component-part="accordion-title-container"><p class="m-0 font-medium text-gray-900 dark:text-gray-200" data-component-part="accordion-title">AWS Bedrock</p></div></button><div class="mt-2 mb-4 mx-6 hidden overflow-x-auto cursor-default" data-component-part="accordion-content" id="aws-bedrock accordion children" role="contentinfo"><p><strong>Configure AWS to allow GitHub Actions to authenticate securely without storing credentials.</strong></p><blockquote>
+<p><strong>Security Note</strong>: Use repository-specific configurations and grant only the minimum required permissions.</p>
+</blockquote><p><strong>Required Setup</strong>:</p><ol>
+<li>
+<p><strong>Enable Amazon Bedrock</strong>:</p>
+<ul>
+<li>Request access to Claude models in Amazon Bedrock</li>
+<li>For cross-region models, request access in all required regions</li>
+</ul>
+</li>
+<li>
+<p><strong>Set up GitHub OIDC Identity Provider</strong>:</p>
+<ul>
+<li>Provider URL: <code>https://token.actions.githubusercontent.com</code></li>
+<li>Audience: <code>sts.amazonaws.com</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Create IAM Role for GitHub Actions</strong>:</p>
+<ul>
+<li>Trusted entity type: Web identity</li>
+<li>Identity provider: <code>token.actions.githubusercontent.com</code></li>
+<li>Permissions: <code>AmazonBedrockFullAccess</code> policy</li>
+<li>Configure trust policy for your specific repository</li>
+</ul>
+</li>
+</ol><p><strong>Required Values</strong>:</p><p>After setup, you’ll need:</p><ul>
+<li><strong>AWS_ROLE_TO_ASSUME</strong>: The ARN of the IAM role you created</li>
+</ul><div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>OIDC is more secure than using static AWS access keys because credentials are temporary and automatically rotated.</p></div></div><p>See <a class="link" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html" rel="noreferrer" target="_blank">AWS documentation</a> for detailed OIDC setup instructions.</p></div></div><div class="accordion border-standard rounded-2xl mb-3 overflow-hidden bg-background-light dark:bg-codeblock cursor-default" role="button"><button aria-controls="google-vertex-ai accordion children" aria-expanded="false" class="relative not-prose flex flex-row items-center content-center w-full py-4 px-5 space-x-2 hover:bg-gray-100 hover:dark:bg-gray-800 rounded-t-xl" data-component-part="accordion-button"><div class="leading-tight text-left" contenteditable="false" data-component-part="accordion-title-container"><p class="m-0 font-medium text-gray-900 dark:text-gray-200" data-component-part="accordion-title">Google Vertex AI</p></div></button><div class="mt-2 mb-4 mx-6 hidden overflow-x-auto cursor-default" data-component-part="accordion-content" id="google-vertex-ai accordion children" role="contentinfo"><p><strong>Configure Google Cloud to allow GitHub Actions to authenticate securely without storing credentials.</strong></p><blockquote>
+<p><strong>Security Note</strong>: Use repository-specific configurations and grant only the minimum required permissions.</p>
+</blockquote><p><strong>Required Setup</strong>:</p><ol>
+<li>
+<p><strong>Enable APIs</strong> in your Google Cloud project:</p>
+
+</li>
+<li>
+<p><strong>Create Workload Identity Federation resources</strong>:</p>
+<ul>
+<li>Create a Workload Identity Pool</li>
+<li>Add a GitHub OIDC provider with:<!-- -->
+<ul>
+<li>Issuer: <code>https://token.actions.githubusercontent.com</code></li>
+<li>Attribute mappings for repository and owner</li>
+<li><strong>Security recommendation</strong>: Use repository-specific attribute conditions</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Create a Service Account</strong>:</p>
+<ul>
+<li>Grant only <code>Vertex AI User</code> role</li>
+<li><strong>Security recommendation</strong>: Create a dedicated service account per repository</li>
+</ul>
+</li>
+<li>
+<p><strong>Configure IAM bindings</strong>:</p>
+<ul>
+<li>Allow the Workload Identity Pool to impersonate the service account</li>
+<li><strong>Security recommendation</strong>: Use repository-specific principal sets</li>
+</ul>
+</li>
+</ol><p><strong>Required Values</strong>:</p><p>After setup, you’ll need:</p><ul>
+<li><strong>GCP_WORKLOAD_IDENTITY_PROVIDER</strong>: The full provider resource name</li>
+<li><strong>GCP_SERVICE_ACCOUNT</strong>: The service account email address</li>
+</ul><div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>Workload Identity Federation eliminates the need for downloadable service account keys, improving security.</p></div></div><p>For detailed setup instructions, consult the <a class="link" href="https://cloud.google.com/iam/docs/workload-identity-federation" rel="noreferrer" target="_blank">Google Cloud Workload Identity Federation documentation</a>.</p></div></div></div></div></div></div><div class="step relative flex items-start pb-2" role="listitem"><div class="absolute ml-[-14px] py-2" contenteditable="false" data-component-part="step-number"><div class="w-7 h-7 shrink-0 rounded-lg bg-gray-100 dark:text-white dark:bg-[#26292E] text-sm text-gray-800 font-semibold flex items-center justify-center">3</div></div><div class="w-full overflow-hidden pl-12 pr-px"><p class="mt-2 font-semibold prose dark:prose-invert text-gray-900 dark:text-gray-200" contenteditable="false" data-component-part="step-title">Add Required Secrets</p><div data-component-part="step-content"><p>Add the following secrets to your repository (Settings → Secrets and variables → Actions):</p><h4 class="flex whitespace-pre-wrap group font-semibold" id="for-anthropic-api-direct-%3A"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#for-anthropic-api-direct-%3A">​</a></div><span class="cursor-pointer">For Anthropic API (Direct):</span></h4><ol>
+<li>
+<p><strong>For API Authentication</strong>:</p>
+
+</li>
+<li>
+<p><strong>For GitHub App (if using your own app)</strong>:</p>
+<ul>
+<li><code>APP_ID</code>: Your GitHub App’s ID</li>
+<li><code>APP_PRIVATE_KEY</code>: The private key (.pem) content</li>
+</ul>
+</li>
+</ol><h4 class="flex whitespace-pre-wrap group font-semibold" id="for-google-cloud-vertex-ai"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#for-google-cloud-vertex-ai">​</a></div><span class="cursor-pointer">For Google Cloud Vertex AI</span></h4><ol>
+<li>
+<p><strong>For GCP Authentication</strong>:</p>
+<ul>
+<li><code>GCP_WORKLOAD_IDENTITY_PROVIDER</code></li>
+<li><code>GCP_SERVICE_ACCOUNT</code></li>
+</ul>
+</li>
+<li>
+<p><strong>For GitHub App (if using your own app)</strong>:</p>
+<ul>
+<li><code>APP_ID</code>: Your GitHub App’s ID</li>
+<li><code>APP_PRIVATE_KEY</code>: The private key (.pem) content</li>
+</ul>
+</li>
+</ol><h4 class="flex whitespace-pre-wrap group font-semibold" id="for-aws-bedrock"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#for-aws-bedrock">​</a></div><span class="cursor-pointer">For AWS Bedrock</span></h4><ol>
+<li>
+<p><strong>For AWS Authentication</strong>:</p>
+<ul>
+<li><code>AWS_ROLE_TO_ASSUME</code></li>
+</ul>
+</li>
+<li>
+<p><strong>For GitHub App (if using your own app)</strong>:</p>
+<ul>
+<li><code>APP_ID</code>: Your GitHub App’s ID</li>
+<li><code>APP_PRIVATE_KEY</code>: The private key (.pem) content</li>
+</ul>
+</li>
+</ol></div></div></div><div class="step relative flex items-start pb-2" role="listitem"><div class="absolute ml-[-14px] py-2" contenteditable="false" data-component-part="step-number"><div class="w-7 h-7 shrink-0 rounded-lg bg-gray-100 dark:text-white dark:bg-[#26292E] text-sm text-gray-800 font-semibold flex items-center justify-center">4</div></div><div class="w-full overflow-hidden pl-12 pr-px"><p class="mt-2 font-semibold prose dark:prose-invert text-gray-900 dark:text-gray-200" contenteditable="false" data-component-part="step-title">Create workflow files</p><div data-component-part="step-content"><p>Create GitHub Actions workflow files that integrate with your cloud provider. The examples below show complete configurations for both AWS Bedrock and Google Vertex AI:</p><div class="accordion-group [&amp;&gt;div]:border-0 [&amp;&gt;div]:rounded-none [&amp;&gt;div&gt;button]:rounded-none [&amp;&gt;div]:mb-0 overflow-hidden mt-0 mb-3 rounded-xl prose prose-gray dark:prose-invert divide-y divide-inherit border dark:border-gray-800/50"><div class="accordion border-standard rounded-2xl mb-3 overflow-hidden bg-background-light dark:bg-codeblock cursor-default" role="button"><button aria-controls="aws-bedrock-workflow accordion children" aria-expanded="false" class="relative not-prose flex flex-row items-center content-center w-full py-4 px-5 space-x-2 hover:bg-gray-100 hover:dark:bg-gray-800 rounded-t-xl" data-component-part="accordion-button"><div class="leading-tight text-left" contenteditable="false" data-component-part="accordion-title-container"><p class="m-0 font-medium text-gray-900 dark:text-gray-200" data-component-part="accordion-title">AWS Bedrock workflow</p></div></button><div class="mt-2 mb-4 mx-6 hidden overflow-x-auto cursor-default" data-component-part="accordion-content" id="aws-bedrock-workflow accordion children" role="contentinfo"><p><strong>Prerequisites:</strong></p><ul>
+<li>AWS Bedrock access enabled with Claude model permissions</li>
+<li>GitHub configured as an OIDC identity provider in AWS</li>
+<li>IAM role with Bedrock permissions that trusts GitHub Actions</li>
+</ul><p><strong>Required GitHub secrets:</strong></p><table><thead><tr><th>Secret Name</th><th>Description</th></tr></thead><tbody><tr><td><code>AWS_ROLE_TO_ASSUME</code></td><td>ARN of the IAM role for Bedrock access</td></tr><tr><td><code>APP_ID</code></td><td>Your GitHub App ID (from app settings)</td></tr><tr><td><code>APP_PRIVATE_KEY</code></td><td>The private key you generated for your GitHub App</td></tr></tbody></table><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-yaml"><code class="language-yaml"><span class=""><span class="token key atrule">name</span><span class="token punctuation">:</span> Claude PR Action </span>
+<!-- -->
+<span class="">permissions<span class="token punctuation">:</span></span>
+<span class="">  <span class="token key atrule">contents</span><span class="token punctuation">:</span> write</span>
+<span class="">  <span class="token key atrule">pull-requests</span><span class="token punctuation">:</span> write</span>
+<span class="">  <span class="token key atrule">issues</span><span class="token punctuation">:</span> write</span>
+<span class="">  <span class="token key atrule">id-token</span><span class="token punctuation">:</span> write </span>
+<!-- -->
+<span class="">on<span class="token punctuation">:</span></span>
+<span class="">  issue_comment<span class="token punctuation">:</span></span>
+<span class="">    <span class="token key atrule">types</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>created<span class="token punctuation">]</span></span>
+<span class="">  pull_request_review_comment<span class="token punctuation">:</span></span>
+<span class="">    <span class="token key atrule">types</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>created<span class="token punctuation">]</span></span>
+<span class="">  issues<span class="token punctuation">:</span></span>
+<span class="">    <span class="token key atrule">types</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>opened<span class="token punctuation">,</span> assigned<span class="token punctuation">]</span></span>
+<!-- -->
+<span class="">jobs<span class="token punctuation">:</span></span>
+<span class="">  claude<span class="token punctuation">-</span>pr<span class="token punctuation">:</span></span>
+<span class="">    <span class="token key atrule">if</span><span class="token punctuation">:</span> <span class="token punctuation">|</span></span>
+<span class="">      (github.event_name == 'issue_comment' <span class="token important">&amp;&amp;</span> contains(github.event.comment.body<span class="token punctuation">,</span> '@claude')) <span class="token punctuation">|</span><span class="token punctuation">|</span></span>
+<span class="">      (github.event_name == 'pull_request_review_comment' <span class="token important">&amp;&amp;</span> contains(github.event.comment.body<span class="token punctuation">,</span> '@claude')) <span class="token punctuation">|</span><span class="token punctuation">|</span></span>
+<span class="">      (github.event_name == 'issues' <span class="token important">&amp;&amp;</span> contains(github.event.issue.body<span class="token punctuation">,</span> '@claude'))</span>
+<span class="">    <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest</span>
+<span class="">    env<span class="token punctuation">:</span></span>
+<span class="">      <span class="token key atrule">AWS_REGION</span><span class="token punctuation">:</span> us<span class="token punctuation">-</span>west<span class="token punctuation">-</span><span class="token number">2</span></span>
+<span class="">    steps<span class="token punctuation">:</span></span>
+<span class="">      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Checkout repository</span>
+<span class="">        <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/checkout@v4</span>
+<!-- -->
+<span class="">      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Generate GitHub App token</span>
+<span class="">        <span class="token key atrule">id</span><span class="token punctuation">:</span> app<span class="token punctuation">-</span>token</span>
+<span class="">        <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/create<span class="token punctuation">-</span>github<span class="token punctuation">-</span>app<span class="token punctuation">-</span>token@v2</span>
+<span class="">        with<span class="token punctuation">:</span></span>
+<span class="">          <span class="token key atrule">app-id</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.APP_ID <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<span class="">          <span class="token key atrule">private-key</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.APP_PRIVATE_KEY <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<!-- -->
+<span class="">      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Configure AWS Credentials (OIDC)</span>
+<span class="">        <span class="token key atrule">uses</span><span class="token punctuation">:</span> aws<span class="token punctuation">-</span>actions/configure<span class="token punctuation">-</span>aws<span class="token punctuation">-</span>credentials@v4</span>
+<span class="">        with<span class="token punctuation">:</span></span>
+<span class="">          <span class="token key atrule">role-to-assume</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.AWS_ROLE_TO_ASSUME <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<span class="">          <span class="token key atrule">aws-region</span><span class="token punctuation">:</span> us<span class="token punctuation">-</span>west<span class="token punctuation">-</span><span class="token number">2</span></span>
+<!-- -->
+<span class="">      <span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> ./.github/actions/claude<span class="token punctuation">-</span>pr<span class="token punctuation">-</span>action</span>
+<span class="">        with<span class="token punctuation">:</span></span>
+<span class="">          <span class="token key atrule">trigger_phrase</span><span class="token punctuation">:</span> <span class="token string">"@claude"</span></span>
+<span class="">          <span class="token key atrule">timeout_minutes</span><span class="token punctuation">:</span> <span class="token string">"60"</span></span>
+<span class="">          <span class="token key atrule">github_token</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> steps.app<span class="token punctuation">-</span>token.outputs.token <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<span class="">          <span class="token key atrule">use_bedrock</span><span class="token punctuation">:</span> <span class="token string">"true"</span></span>
+<span class="">          <span class="token key atrule">model</span><span class="token punctuation">:</span> <span class="token string">"us.anthropic.claude-3-7-sonnet-20250219-v1:0"</span></span>
+</code></pre></div></div></div><div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>The model ID format for Bedrock includes the region prefix (e.g., <code>us.anthropic.claude...</code>) and version suffix.</p></div></div></div></div><div class="accordion border-standard rounded-2xl mb-3 overflow-hidden bg-background-light dark:bg-codeblock cursor-default" role="button"><button aria-controls="google-vertex-ai-workflow accordion children" aria-expanded="false" class="relative not-prose flex flex-row items-center content-center w-full py-4 px-5 space-x-2 hover:bg-gray-100 hover:dark:bg-gray-800 rounded-t-xl" data-component-part="accordion-button"><div class="leading-tight text-left" contenteditable="false" data-component-part="accordion-title-container"><p class="m-0 font-medium text-gray-900 dark:text-gray-200" data-component-part="accordion-title">Google Vertex AI workflow</p></div></button><div class="mt-2 mb-4 mx-6 hidden overflow-x-auto cursor-default" data-component-part="accordion-content" id="google-vertex-ai-workflow accordion children" role="contentinfo"><p><strong>Prerequisites:</strong></p><ul>
+<li>Vertex AI API enabled in your GCP project</li>
+<li>Workload Identity Federation configured for GitHub</li>
+<li>Service account with Vertex AI permissions</li>
+</ul><p><strong>Required GitHub secrets:</strong></p><table><thead><tr><th>Secret Name</th><th>Description</th></tr></thead><tbody><tr><td><code>GCP_WORKLOAD_IDENTITY_PROVIDER</code></td><td>Workload identity provider resource name</td></tr><tr><td><code>GCP_SERVICE_ACCOUNT</code></td><td>Service account email with Vertex AI access</td></tr><tr><td><code>APP_ID</code></td><td>Your GitHub App ID (from app settings)</td></tr><tr><td><code>APP_PRIVATE_KEY</code></td><td>The private key you generated for your GitHub App</td></tr></tbody></table><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-yaml"><code class="language-yaml"><span class=""><span class="token key atrule">name</span><span class="token punctuation">:</span> Claude PR Action</span>
+<!-- -->
+<span class="">permissions<span class="token punctuation">:</span></span>
+<span class="">  <span class="token key atrule">contents</span><span class="token punctuation">:</span> write</span>
+<span class="">  <span class="token key atrule">pull-requests</span><span class="token punctuation">:</span> write</span>
+<span class="">  <span class="token key atrule">issues</span><span class="token punctuation">:</span> write</span>
+<span class="">  <span class="token key atrule">id-token</span><span class="token punctuation">:</span> write  </span>
+<!-- -->
+<span class="">on<span class="token punctuation">:</span></span>
+<span class="">  issue_comment<span class="token punctuation">:</span></span>
+<span class="">    <span class="token key atrule">types</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>created<span class="token punctuation">]</span></span>
+<span class="">  pull_request_review_comment<span class="token punctuation">:</span></span>
+<span class="">    <span class="token key atrule">types</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>created<span class="token punctuation">]</span></span>
+<span class="">  issues<span class="token punctuation">:</span></span>
+<span class="">    <span class="token key atrule">types</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>opened<span class="token punctuation">,</span> assigned<span class="token punctuation">]</span></span>
+<!-- -->
+<span class="">jobs<span class="token punctuation">:</span></span>
+<span class="">  claude<span class="token punctuation">-</span>pr<span class="token punctuation">:</span></span>
+<span class="">    <span class="token key atrule">if</span><span class="token punctuation">:</span> <span class="token punctuation">|</span></span>
+<span class="">      (github.event_name == 'issue_comment' <span class="token important">&amp;&amp;</span> contains(github.event.comment.body<span class="token punctuation">,</span> '@claude')) <span class="token punctuation">|</span><span class="token punctuation">|</span></span>
+<span class="">      (github.event_name == 'pull_request_review_comment' <span class="token important">&amp;&amp;</span> contains(github.event.comment.body<span class="token punctuation">,</span> '@claude')) <span class="token punctuation">|</span><span class="token punctuation">|</span></span>
+<span class="">      (github.event_name == 'issues' <span class="token important">&amp;&amp;</span> contains(github.event.issue.body<span class="token punctuation">,</span> '@claude'))</span>
+<span class="">    <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest</span>
+<span class="">    steps<span class="token punctuation">:</span></span>
+<span class="">      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Checkout repository</span>
+<span class="">        <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/checkout@v4</span>
+<!-- -->
+<span class="">      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Generate GitHub App token</span>
+<span class="">        <span class="token key atrule">id</span><span class="token punctuation">:</span> app<span class="token punctuation">-</span>token</span>
+<span class="">        <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/create<span class="token punctuation">-</span>github<span class="token punctuation">-</span>app<span class="token punctuation">-</span>token@v2</span>
+<span class="">        with<span class="token punctuation">:</span></span>
+<span class="">          <span class="token key atrule">app-id</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.APP_ID <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<span class="">          <span class="token key atrule">private-key</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.APP_PRIVATE_KEY <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<!-- -->
+<span class="">      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Authenticate to Google Cloud</span>
+<span class="">        <span class="token key atrule">id</span><span class="token punctuation">:</span> auth</span>
+<span class="">        <span class="token key atrule">uses</span><span class="token punctuation">:</span> google<span class="token punctuation">-</span>github<span class="token punctuation">-</span>actions/auth@v2</span>
+<span class="">        with<span class="token punctuation">:</span></span>
+<span class="">          <span class="token key atrule">workload_identity_provider</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.GCP_WORKLOAD_IDENTITY_PROVIDER <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<span class="">          <span class="token key atrule">service_account</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.GCP_SERVICE_ACCOUNT <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<!-- -->      <!-- -->
+<span class="">      <span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> ./.github/actions/claude<span class="token punctuation">-</span>pr<span class="token punctuation">-</span>action</span>
+<span class="">        with<span class="token punctuation">:</span></span>
+<span class="">          <span class="token key atrule">trigger_phrase</span><span class="token punctuation">:</span> <span class="token string">"@claude"</span></span>
+<span class="">          <span class="token key atrule">timeout_minutes</span><span class="token punctuation">:</span> <span class="token string">"60"</span></span>
+<span class="">          <span class="token key atrule">github_token</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> steps.app<span class="token punctuation">-</span>token.outputs.token <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<span class="">          <span class="token key atrule">use_vertex</span><span class="token punctuation">:</span> <span class="token string">"true"</span></span>
+<span class="">          <span class="token key atrule">model</span><span class="token punctuation">:</span> <span class="token string">"claude-3-7-sonnet@20250219"</span></span>
+<span class="">        env<span class="token punctuation">:</span></span>
+<span class="">          <span class="token key atrule">ANTHROPIC_VERTEX_PROJECT_ID</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> steps.auth.outputs.project_id <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<span class="">          <span class="token key atrule">CLOUD_ML_REGION</span><span class="token punctuation">:</span> us<span class="token punctuation">-</span>east5</span>
+<span class="">          <span class="token key atrule">VERTEX_REGION_CLAUDE_3_7_SONNET</span><span class="token punctuation">:</span> us<span class="token punctuation">-</span>east5</span>
+</code></pre></div></div></div><div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>The project ID is automatically retrieved from the Google Cloud authentication step, so you don’t need to hardcode it.</p></div></div></div></div></div></div></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="troubleshooting"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#troubleshooting">​</a></div><span class="cursor-pointer">Troubleshooting</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="claude-not-responding-to-%40claude-commands"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#claude-not-responding-to-%40claude-commands">​</a></div><span class="cursor-pointer">Claude not responding to @claude commands</span></h3>
+<p>Verify the GitHub App is installed correctly, check that workflows are enabled, ensure API key is set in repository secrets, and confirm the comment contains <code>@claude</code> (not <code>/claude</code>).</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="ci-not-running-on-claude%E2%80%99s-commits"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#ci-not-running-on-claude%E2%80%99s-commits">​</a></div><span class="cursor-pointer">CI not running on Claude’s commits</span></h3>
+<p>Ensure you’re using the GitHub App or custom app (not Actions user), check workflow triggers include the necessary events, and verify app permissions include CI triggers.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="authentication-errors"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#authentication-errors">​</a></div><span class="cursor-pointer">Authentication errors</span></h3>
+<p>Confirm API key is valid and has sufficient permissions. For Bedrock/Vertex, check credentials configuration and ensure secrets are named correctly in workflows.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="advanced-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#advanced-configuration">​</a></div><span class="cursor-pointer">Advanced configuration</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="action-parameters"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#action-parameters">​</a></div><span class="cursor-pointer">Action parameters</span></h3>
+<p>The Claude Code Action supports these key parameters:</p>
+<table><thead><tr><th>Parameter</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code>prompt</code></td><td>The prompt to send to Claude</td><td>Yes*</td></tr><tr><td><code>prompt_file</code></td><td>Path to file containing prompt</td><td>Yes*</td></tr><tr><td><code>anthropic_api_key</code></td><td>Anthropic API key</td><td>Yes**</td></tr><tr><td><code>max_turns</code></td><td>Maximum conversation turns</td><td>No</td></tr><tr><td><code>timeout_minutes</code></td><td>Execution timeout</td><td>No</td></tr></tbody></table>
+<p>*Either <code>prompt</code> or <code>prompt_file</code> required
+<!-- -->**Required for direct Anthropic API, not for Bedrock/Vertex</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="alternative-integration-methods"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#alternative-integration-methods">​</a></div><span class="cursor-pointer">Alternative integration methods</span></h3>
+<p>While the <code>/install-github-app</code> command is the recommended approach, you can also:</p>
+<ul>
+<li><strong>Custom GitHub App</strong>: For organizations needing branded usernames or custom authentication flows. Create your own GitHub App with required permissions (contents, issues, pull requests) and use the actions/create-github-app-token action to generate tokens in your workflows.</li>
+<li><strong>Manual GitHub Actions</strong>: Direct workflow configuration for maximum flexibility</li>
+<li><strong>MCP Configuration</strong>: Dynamic loading of Model Context Protocol servers</li>
+</ul>
+<p>See the <a class="link" href="https://github.com/anthropics/claude-code-action" rel="noreferrer" target="_blank">Claude Code Action repository</a> for detailed documentation.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="customizing-claude%E2%80%99s-behavior"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#customizing-claude%E2%80%99s-behavior">​</a></div><span class="cursor-pointer">Customizing Claude’s behavior</span></h3>
+<p>You can configure Claude’s behavior in two ways:</p>
+<ol>
+<li><strong>CLAUDE.md</strong>: Define coding standards, review criteria, and project-specific rules in a <code>CLAUDE.md</code> file at the root of your repository. Claude will follow these guidelines when creating PRs and responding to requests. Check out our <a class="link" href="/en/docs/claude-code/memory">Memory documentation</a> for more details.</li>
+<li><strong>Custom prompts</strong>: Use the <code>prompt</code> parameter in the workflow file to provide workflow-specific instructions. This allows you to customize Claude’s behavior for different workflows or tasks.</li>
+</ol>
+<p>Claude will follow these guidelines when creating PRs and responding to requests.</p></div>

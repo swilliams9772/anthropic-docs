@@ -1,0 +1,230 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><blockquote>
+<p>Copy this prompt into our developer <a class="link" href="https://console.anthropic.com/dashboard" rel="noreferrer" target="_blank">Console</a> to try it for yourself!</p>
+</blockquote>
+<table><thead><tr><th>Content</th></tr></thead><tbody><tr><td>System</td><td>Your task is to generate personalized recipe ideas based on the user’s input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user’s dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment.</td></tr><tr><td>User</td><td>Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  Dietary preferences: gluten free</td></tr></tbody></table>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="example-output"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#example-output">​</a></div><span class="cursor-pointer">Example Output</span></h2>
+<p>Suggested recipes:</p>
+<p>Honey Garlic Chicken Stir-Fry</p>
+<p>Description: A quick and flavorful stir-fry featuring tender chicken breast, crisp vegetables, and a sweet and savory honey garlic sauce.
+<!-- -->Ingredients:</p>
+<ul>
+<li>2 chicken breasts, cut into bite-sized pieces</li>
+<li>2 cups broccoli florets</li>
+<li>1 cup sliced carrots</li>
+<li>1 onion, diced</li>
+<li>3 cloves garlic, minced</li>
+<li>2 tbsp olive oil</li>
+<li>1/4 cup soy sauce (gluten-free)</li>
+<li>2 tbsp honey</li>
+</ul>
+<p>Instructions:</p>
+<ol>
+<li>In a large skillet or wok, heat olive oil over medium-high heat.</li>
+<li>Add diced onion and minced garlic, and sauté until fragrant, about 2 minutes.</li>
+<li>Add chicken pieces and cook until no longer pink, about 5-7 minutes.</li>
+<li>Add broccoli and carrots, and stir-fry until vegetables are tender-crisp, about 5 minutes.</li>
+<li>In a small bowl, whisk together soy sauce and honey.</li>
+<li>Pour the sauce over the chicken and vegetables, and stir to coat evenly.</li>
+<li>Cook for an additional 2-3 minutes, or until the sauce has thickened slightly.</li>
+<li>Serve hot with steamed rice.</li>
+</ol>
+<p>Chicken and Veggie Rice Bowls</p>
+<p>Description: A hearty and nutritious rice bowl topped with seasoned chicken, roasted vegetables, and a drizzle of soy sauce.</p>
+<p>Ingredients:</p>
+<ul>
+<li>2 chicken breasts, cut into bite-sized pieces</li>
+<li>2 cups broccoli florets</li>
+<li>1 cup sliced carrots</li>
+<li>1 onion, diced</li>
+<li>2 cloves garlic, minced</li>
+<li>2 tbsp olive oil</li>
+<li>1/4 cup soy sauce (gluten-free)</li>
+<li>2 cups cooked rice</li>
+</ul>
+<p>Instructions:</p>
+<ol>
+<li>Preheat the oven to 400°F (200°C).</li>
+<li>In a large bowl, combine chicken pieces, broccoli, carrots, onion, and garlic.</li>
+<li>Drizzle with olive oil and half of the soy sauce, and toss to coat evenly.</li>
+<li>Spread the chicken and vegetables on a baking sheet and roast in the preheated oven for 20-25 minutes, or until the chicken is cooked through and the vegetables are tender.</li>
+<li>Divide cooked rice among serving bowls.</li>
+<li>Top each bowl with the roasted chicken and vegetables.</li>
+<li>Drizzle the remaining soy sauce over the top of each bowl.</li>
+<li>Serve hot and enjoy!</li>
+</ol>
+
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="api-request"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#api-request">​</a></div><span class="cursor-pointer">API request</span></h2>
+<div class="tabs tabs tab-container" id="python"><ul class="not-prose mb-6 pb-[1px] flex-none min-w-full overflow-auto border-b border-gray-200 gap-x-6 flex dark:border-gray-200/10" data-component-part="tabs-list"><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-primary dark:text-primary-light border-current" data-component-part="tab-button">Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">TypeScript</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">AWS Bedrock Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">AWS Bedrock TypeScript</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">Vertex AI Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">Vertex AI TypeScript</button></li></ul><div class="prose dark:prose-dark overflow-x-auto" data-component-part="tab-content"><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-Python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span></span>
+<span class="">  <span class="token comment"># defaults to os.environ.get("ANTHROPIC_API_KEY")</span></span>
+<span class="">  api_key<span class="token operator">=</span><span class="token string">"my_api_key"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">  model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">=</span><span class="token number">2000</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span></span>
+<span class="">  system<span class="token operator">=</span><span class="token string">"Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment."</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">"Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey \nDietary preferences: gluten free"</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div class="hidden"><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-Python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span></span>
+<span class="">  <span class="token comment"># defaults to os.environ.get("ANTHROPIC_API_KEY")</span></span>
+<span class="">  api_key<span class="token operator">=</span><span class="token string">"my_api_key"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">  model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">=</span><span class="token number">2000</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span></span>
+<span class="">  system<span class="token operator">=</span><span class="token string">"Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment."</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">"Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey \nDietary preferences: gluten free"</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-typescript language-python"><code class="language-TypeScript"><span class=""><span class="token keyword">import</span> Anthropic <span class="token keyword">from</span> <span class="token string">"@anthropic-ai/sdk"</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token keyword">const</span> anthropic <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Anthropic</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">  apiKey<span class="token operator">:</span> <span class="token string">"my_api_key"</span><span class="token punctuation">,</span> <span class="token comment">// defaults to process.env["ANTHROPIC_API_KEY"]</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token keyword">const</span> msg <span class="token operator">=</span> <span class="token keyword">await</span> anthropic<span class="token punctuation">.</span>messages<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">  model<span class="token operator">:</span> <span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">:</span> <span class="token number">2000</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">:</span> <span class="token number">0.5</span><span class="token punctuation">,</span></span>
+<span class="">  system<span class="token operator">:</span> <span class="token string">"Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment."</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token string-property property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token string-property property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string-property property">"text"</span><span class="token operator">:</span> <span class="token string">"Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class=""><span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext language-python"><code><span class="">from anthropic import AnthropicBedrock</span>
+<!-- -->
+<span class=""># See https://docs.anthropic.com/claude/reference/claude-on-amazon-bedrock</span>
+<span class=""># for authentication options</span>
+<span class="">client = AnthropicBedrock()</span>
+<!-- -->
+<span class="">message = client.messages.create(</span>
+<span class="">    model="anthropic.claude-opus-4-1-20250805-v1:0",</span>
+<span class="">    max_tokens=2000,</span>
+<span class="">    temperature=0.5,</span>
+<span class="">    system="Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment.",</span>
+<span class="">    messages=[</span>
+<span class="">        {</span>
+<span class="">            "role": "user",</span>
+<span class="">            "content": [</span>
+<span class="">                {</span>
+<span class="">                    "type": "text",</span>
+<span class="">                    "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"</span>
+<span class="">                }</span>
+<span class="">            ]</span>
+<span class="">        }</span>
+<span class="">    ]</span>
+<span class="">)</span>
+<span class="">print(message.content)</span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext language-python"><code><span class="">import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";</span>
+<!-- -->
+<span class="">// See https://docs.anthropic.com/claude/reference/claude-on-amazon-bedrock</span>
+<span class="">// for authentication options</span>
+<span class="">const client = new AnthropicBedrock();</span>
+<!-- -->
+<span class="">const msg = await client.messages.create({</span>
+<span class="">  model: "anthropic.claude-opus-4-1-20250805-v1:0",</span>
+<span class="">  max_tokens: 2000,</span>
+<span class="">  temperature: 0.5,</span>
+<span class="">  system: "Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment.",</span>
+<span class="">  messages: [</span>
+<span class="">    {</span>
+<span class="">      "role": "user",</span>
+<span class="">      "content": [</span>
+<span class="">        {</span>
+<span class="">          "type": "text",</span>
+<span class="">          "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"</span>
+<span class="">        }</span>
+<span class="">      ]</span>
+<span class="">    }</span>
+<span class="">  ]</span>
+<span class="">});</span>
+<span class="">console.log(msg);</span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext language-python"><code><span class="">from anthropic import AnthropicVertex</span>
+<!-- -->
+<span class="">client = AnthropicVertex()</span>
+<!-- -->
+<span class="">message = client.messages.create(</span>
+<span class="">    model="claude-sonnet-4@20250514",</span>
+<span class="">    max_tokens=2000,</span>
+<span class="">    temperature=0.5,</span>
+<span class="">    system="Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment.",</span>
+<span class="">    messages=[</span>
+<span class="">        {</span>
+<span class="">            "role": "user",</span>
+<span class="">            "content": [</span>
+<span class="">                {</span>
+<span class="">                    "type": "text",</span>
+<span class="">                    "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"</span>
+<span class="">                }</span>
+<span class="">            ]</span>
+<span class="">        }</span>
+<span class="">    ]</span>
+<span class="">)</span>
+<span class="">print(message.content)</span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext language-python"><code><span class="">import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';</span>
+<!-- -->
+<span class="">// Reads from the `CLOUD_ML_REGION` &amp; `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.</span>
+<span class="">// Additionally goes through the standard `google-auth-library` flow.</span>
+<span class="">const client = new AnthropicVertex();</span>
+<!-- -->
+<span class="">const msg = await client.messages.create({</span>
+<span class="">  model: "claude-sonnet-4@20250514",</span>
+<span class="">  max_tokens: 2000,</span>
+<span class="">  temperature: 0.5,</span>
+<span class="">  system: "Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment.",</span>
+<span class="">  messages: [</span>
+<span class="">    {</span>
+<span class="">      "role": "user",</span>
+<span class="">      "content": [</span>
+<span class="">        {</span>
+<span class="">          "type": "text",</span>
+<span class="">          "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"</span>
+<span class="">        }</span>
+<span class="">      ]</span>
+<span class="">    }</span>
+<span class="">  ]</span>
+<span class="">});</span>
+<span class="">console.log(msg);</span>
+<!-- -->
+</code></pre></div></div></div></div></div></div></div>

@@ -1,0 +1,183 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><blockquote>
+<p>Copy this prompt into our developer <a class="link" href="https://console.anthropic.com/dashboard" rel="noreferrer" target="_blank">Console</a> to try it for yourself!</p>
+</blockquote>
+<table><thead><tr><th>Content</th></tr></thead><tbody><tr><td>System</td><td>Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with “Unable to determine a HEX color code for the given mood.”</td></tr><tr><td>User</td><td>A passionate, intense, and fiery emotion, full of love and desire.</td></tr></tbody></table>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="example-output"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#example-output">​</a></div><span class="cursor-pointer">Example Output</span></h2>
+<p><code># FF1744</code></p>
+<p>This HEX color code represents a vivid, bold shade of red. Red is commonly associated with passion, intensity, love, and desire. The specific shade chosen here is a fiery, energetic red that captures the heat and fervor of the described emotion. Red is known to stimulate feelings of excitement and passion, making it an appropriate choice for representing this mood.</p>
+
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="api-request"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#api-request">​</a></div><span class="cursor-pointer">API Request</span></h2>
+<div class="tabs tabs tab-container" id="python"><ul class="not-prose mb-6 pb-[1px] flex-none min-w-full overflow-auto border-b border-gray-200 gap-x-6 flex dark:border-gray-200/10" data-component-part="tabs-list"><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-primary dark:text-primary-light border-current" data-component-part="tab-button">Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">TypeScript</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">AWS Bedrock Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">AWS Bedrock TypeScript</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">Vertex AI Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">Vertex AI TypeScript</button></li></ul><div class="prose dark:prose-dark overflow-x-auto" data-component-part="tab-content"><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span></span>
+<span class="">  <span class="token comment"># defaults to os.environ.get("ANTHROPIC_API_KEY")</span></span>
+<span class="">  api_key<span class="token operator">=</span><span class="token string">"my_api_key"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">  model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">=</span><span class="token number">500</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span></span>
+<span class="">  system<span class="token operator">=</span><span class="token string">"Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\""</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">"A passionate, intense, and fiery emotion, full of love and desire."</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div class="hidden"><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span></span>
+<span class="">  <span class="token comment"># defaults to os.environ.get("ANTHROPIC_API_KEY")</span></span>
+<span class="">  api_key<span class="token operator">=</span><span class="token string">"my_api_key"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">  model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">=</span><span class="token number">500</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span></span>
+<span class="">  system<span class="token operator">=</span><span class="token string">"Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\""</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">"A passionate, intense, and fiery emotion, full of love and desire."</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-typescript language-python"><code class="language-TypeScript"><span class=""><span class="token keyword">import</span> Anthropic <span class="token keyword">from</span> <span class="token string">"@anthropic-ai/sdk"</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token keyword">const</span> anthropic <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Anthropic</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">  apiKey<span class="token operator">:</span> <span class="token string">"my_api_key"</span><span class="token punctuation">,</span> <span class="token comment">// defaults to process.env["ANTHROPIC_API_KEY"]</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token keyword">const</span> msg <span class="token operator">=</span> <span class="token keyword">await</span> anthropic<span class="token punctuation">.</span>messages<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">  model<span class="token operator">:</span> <span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">:</span> <span class="token number">500</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">:</span> <span class="token number">0.5</span><span class="token punctuation">,</span></span>
+<span class="">  system<span class="token operator">:</span> <span class="token string">"Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\""</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token string-property property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token string-property property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string-property property">"text"</span><span class="token operator">:</span> <span class="token string">"A passionate, intense, and fiery emotion, full of love and desire."</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class=""><span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-Python"><span class=""><span class="token keyword">from</span> anthropic <span class="token keyword">import</span> AnthropicBedrock</span>
+<!-- -->
+<span class=""><span class="token comment"># See https://docs.anthropic.com/claude/reference/claude-on-amazon-bedrock</span></span>
+<span class=""><span class="token comment"># for authentication options</span></span>
+<span class="">client <span class="token operator">=</span> AnthropicBedrock<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">    model<span class="token operator">=</span><span class="token string">"anthropic.claude-opus-4-1-20250805-v1:0"</span><span class="token punctuation">,</span></span>
+<span class="">    max_tokens<span class="token operator">=</span><span class="token number">500</span><span class="token punctuation">,</span></span>
+<span class="">    temperature<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span></span>
+<span class="">    system<span class="token operator">=</span><span class="token string">"Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\""</span><span class="token punctuation">,</span></span>
+<span class="">    messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">                <span class="token punctuation">{</span></span>
+<span class="">                    <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">                    <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">"A passionate, intense, and fiery emotion, full of love and desire."</span></span>
+<span class="">                <span class="token punctuation">}</span></span>
+<span class="">            <span class="token punctuation">]</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-typescript language-python"><code class="language-TypeScript"><span class=""><span class="token keyword">import</span> AnthropicBedrock <span class="token keyword">from</span> <span class="token string">"@anthropic-ai/bedrock-sdk"</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token comment">// See https://docs.anthropic.com/claude/reference/claude-on-amazon-bedrock</span></span>
+<span class=""><span class="token comment">// for authentication options</span></span>
+<span class=""><span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AnthropicBedrock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token keyword">const</span> msg <span class="token operator">=</span> <span class="token keyword">await</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">  model<span class="token operator">:</span> <span class="token string">"anthropic.claude-opus-4-1-20250805-v1:0"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">:</span> <span class="token number">500</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">:</span> <span class="token number">0.5</span><span class="token punctuation">,</span></span>
+<span class="">  system<span class="token operator">:</span> <span class="token string">"Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\""</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token string-property property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token string-property property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string-property property">"text"</span><span class="token operator">:</span> <span class="token string">"A passionate, intense, and fiery emotion, full of love and desire."</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class=""><span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-Python"><span class=""><span class="token keyword">from</span> anthropic <span class="token keyword">import</span> AnthropicVertex</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> AnthropicVertex<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">    model<span class="token operator">=</span><span class="token string">"claude-sonnet-4@20250514"</span><span class="token punctuation">,</span></span>
+<span class="">    max_tokens<span class="token operator">=</span><span class="token number">500</span><span class="token punctuation">,</span></span>
+<span class="">    temperature<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span></span>
+<span class="">    system<span class="token operator">=</span><span class="token string">"Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\""</span><span class="token punctuation">,</span></span>
+<span class="">    messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">                <span class="token punctuation">{</span></span>
+<span class="">                    <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">                    <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">"A passionate, intense, and fiery emotion, full of love and desire."</span></span>
+<span class="">                <span class="token punctuation">}</span></span>
+<span class="">            <span class="token punctuation">]</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-typescript language-python"><code class="language-TypeScript"><span class=""><span class="token keyword">import</span> <span class="token punctuation">{</span> AnthropicVertex <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@anthropic-ai/vertex-sdk'</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token comment">// Reads from the `CLOUD_ML_REGION` &amp; `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.</span></span>
+<span class=""><span class="token comment">// Additionally goes through the standard `google-auth-library` flow.</span></span>
+<span class=""><span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AnthropicVertex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token keyword">const</span> msg <span class="token operator">=</span> <span class="token keyword">await</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">  model<span class="token operator">:</span> <span class="token string">"claude-sonnet-4@20250514"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">:</span> <span class="token number">500</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">:</span> <span class="token number">0.5</span><span class="token punctuation">,</span></span>
+<span class="">  system<span class="token operator">:</span> <span class="token string">"Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\""</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token string-property property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token string-property property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string-property property">"text"</span><span class="token operator">:</span> <span class="token string">"A passionate, intense, and fiery emotion, full of love and desire."</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class=""><span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+</code></pre></div></div></div></div></div></div></div>

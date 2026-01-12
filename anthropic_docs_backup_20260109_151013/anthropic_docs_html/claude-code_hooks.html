@@ -1,0 +1,620 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>For a quickstart guide with examples, see <a class="link" href="/en/docs/claude-code/hooks-guide">Get started with Claude Code hooks</a>.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#configuration">​</a></div><span class="cursor-pointer">Configuration</span></h2>
+<p>Claude Code hooks are configured in your <a class="link" href="/en/docs/claude-code/settings">settings files</a>:</p>
+<ul>
+<li><code>~/.claude/settings.json</code> - User settings</li>
+<li><code>.claude/settings.json</code> - Project settings</li>
+<li><code>.claude/settings.local.json</code> - Local project settings (not committed)</li>
+<li>Enterprise managed policy settings</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="structure"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#structure">​</a></div><span class="cursor-pointer">Structure</span></h3>
+<p>Hooks are organized by matchers, where each matcher can have multiple hooks:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"EventName"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token property">"matcher"</span><span class="token operator">:</span> <span class="token string">"ToolPattern"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">          <span class="token punctuation">{</span></span>
+<span class="">            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"command"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"your-command-here"</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">]</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<ul>
+<li><strong>matcher</strong>: Pattern to match tool names, case-sensitive (only applicable for
+<code>PreToolUse</code> and <code>PostToolUse</code>)<!-- -->
+<ul>
+<li>Simple strings match exactly: <code>Write</code> matches only the Write tool</li>
+<li>Supports regex: <code>Edit|Write</code> or <code>Notebook.*</code></li>
+<li>Use <code>*</code> to match all tools. You can also use empty string (<code>""</code>) or leave
+<code>matcher</code> blank.</li>
+</ul>
+</li>
+<li><strong>hooks</strong>: Array of commands to execute when the pattern matches<!-- -->
+<ul>
+<li><code>type</code>: Currently only <code>"command"</code> is supported</li>
+<li><code>command</code>: The bash command to execute (can use <code>$CLAUDE_PROJECT_DIR</code>
+environment variable)</li>
+<li><code>timeout</code>: (Optional) How long a command should run, in seconds, before
+canceling that specific command.</li>
+</ul>
+</li>
+</ul>
+<p>For events like <code>UserPromptSubmit</code>, <code>Notification</code>, <code>Stop</code>, and <code>SubagentStop</code>
+that don’t use matchers, you can omit the matcher field:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"UserPromptSubmit"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">          <span class="token punctuation">{</span></span>
+<span class="">            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"command"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"/path/to/prompt-validator.py"</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">]</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="project-specific-hook-scripts"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#project-specific-hook-scripts">​</a></div><span class="cursor-pointer">Project-Specific Hook Scripts</span></h3>
+<p>You can use the environment variable <code>CLAUDE_PROJECT_DIR</code> (only available when
+Claude Code spawns the hook command) to reference scripts stored in your project,
+ensuring they work regardless of Claude’s current directory:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"PostToolUse"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token property">"matcher"</span><span class="token operator">:</span> <span class="token string">"Write|Edit"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">          <span class="token punctuation">{</span></span>
+<span class="">            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"command"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"$CLAUDE_PROJECT_DIR/.claude/hooks/check-style.sh"</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">]</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="hook-events"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#hook-events">​</a></div><span class="cursor-pointer">Hook Events</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="pretooluse"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#pretooluse">​</a></div><span class="cursor-pointer">PreToolUse</span></h3>
+<p>Runs after Claude creates tool parameters and before processing the tool call.</p>
+<p><strong>Common matchers:</strong></p>
+<ul>
+<li><code>Task</code> - Subagent tasks (see <a class="link" href="/en/docs/claude-code/sub-agents">subagents documentation</a>)</li>
+<li><code>Bash</code> - Shell commands</li>
+<li><code>Glob</code> - File pattern matching</li>
+<li><code>Grep</code> - Content search</li>
+<li><code>Read</code> - File reading</li>
+<li><code>Edit</code>, <code>MultiEdit</code> - File editing</li>
+<li><code>Write</code> - File writing</li>
+<li><code>WebFetch</code>, <code>WebSearch</code> - Web operations</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="posttooluse"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#posttooluse">​</a></div><span class="cursor-pointer">PostToolUse</span></h3>
+<p>Runs immediately after a tool completes successfully.</p>
+<p>Recognizes the same matcher values as PreToolUse.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="notification"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#notification">​</a></div><span class="cursor-pointer">Notification</span></h3>
+<p>Runs when Claude Code sends notifications. Notifications are sent when:</p>
+<ol>
+<li>Claude needs your permission to use a tool. Example: “Claude needs your
+permission to use Bash”</li>
+<li>The prompt input has been idle for at least 60 seconds. “Claude is waiting
+for your input”</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="userpromptsubmit"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#userpromptsubmit">​</a></div><span class="cursor-pointer">UserPromptSubmit</span></h3>
+<p>Runs when the user submits a prompt, before Claude processes it. This allows you
+to add additional context based on the prompt/conversation, validate prompts, or
+block certain types of prompts.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="stop"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#stop">​</a></div><span class="cursor-pointer">Stop</span></h3>
+<p>Runs when the main Claude Code agent has finished responding. Does not run if
+the stoppage occurred due to a user interrupt.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="subagentstop"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#subagentstop">​</a></div><span class="cursor-pointer">SubagentStop</span></h3>
+<p>Runs when a Claude Code subagent (Task tool call) has finished responding.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="precompact"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#precompact">​</a></div><span class="cursor-pointer">PreCompact</span></h3>
+<p>Runs before Claude Code is about to run a compact operation.</p>
+<p><strong>Matchers:</strong></p>
+<ul>
+<li><code>manual</code> - Invoked from <code>/compact</code></li>
+<li><code>auto</code> - Invoked from auto-compact (due to full context window)</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="sessionstart"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#sessionstart">​</a></div><span class="cursor-pointer">SessionStart</span></h3>
+<p>Runs when Claude Code starts a new session or resumes an existing session (which
+currently does start a new session under the hood). Useful for loading in
+development context like existing issues or recent changes to your codebase.</p>
+<p><strong>Matchers:</strong></p>
+<ul>
+<li><code>startup</code> - Invoked from startup</li>
+<li><code>resume</code> - Invoked from <code>--resume</code>, <code>--continue</code>, or <code>/resume</code></li>
+<li><code>clear</code> - Invoked from <code>/clear</code></li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="hook-input"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#hook-input">​</a></div><span class="cursor-pointer">Hook Input</span></h2>
+<p>Hooks receive JSON data via stdin containing session information and
+event-specific data:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-typescript language-json"><code class="language-typescript"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token comment">// Common fields</span></span>
+<span class="">  session_id<span class="token operator">:</span> <span class="token builtin">string</span></span>
+<span class="">  transcript_path<span class="token operator">:</span> <span class="token builtin">string</span>  <span class="token comment">// Path to conversation JSON</span></span>
+<span class="">  cwd<span class="token operator">:</span> <span class="token builtin">string</span>              <span class="token comment">// The current working directory when the hook is invoked</span></span>
+<!-- -->
+<span class="">  <span class="token comment">// Event-specific fields</span></span>
+<span class="">  hook_event_name<span class="token operator">:</span> <span class="token builtin">string</span></span>
+<span class="">  <span class="token operator">...</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="pretooluse-input"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#pretooluse-input">​</a></div><span class="cursor-pointer">PreToolUse Input</span></h3>
+<p>The exact schema for <code>tool_input</code> depends on the tool.</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"session_id"</span><span class="token operator">:</span> <span class="token string">"abc123"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"transcript_path"</span><span class="token operator">:</span> <span class="token string">"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"/Users/..."</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"hook_event_name"</span><span class="token operator">:</span> <span class="token string">"PreToolUse"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"tool_name"</span><span class="token operator">:</span> <span class="token string">"Write"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"tool_input"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"file_path"</span><span class="token operator">:</span> <span class="token string">"/path/to/file.txt"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"file content"</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="posttooluse-input"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#posttooluse-input">​</a></div><span class="cursor-pointer">PostToolUse Input</span></h3>
+<p>The exact schema for <code>tool_input</code> and <code>tool_response</code> depends on the tool.</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"session_id"</span><span class="token operator">:</span> <span class="token string">"abc123"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"transcript_path"</span><span class="token operator">:</span> <span class="token string">"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"/Users/..."</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"hook_event_name"</span><span class="token operator">:</span> <span class="token string">"PostToolUse"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"tool_name"</span><span class="token operator">:</span> <span class="token string">"Write"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"tool_input"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"file_path"</span><span class="token operator">:</span> <span class="token string">"/path/to/file.txt"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"file content"</span></span>
+<span class="">  <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"tool_response"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"filePath"</span><span class="token operator">:</span> <span class="token string">"/path/to/file.txt"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"success"</span><span class="token operator">:</span> <span class="token boolean">true</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="notification-input"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#notification-input">​</a></div><span class="cursor-pointer">Notification Input</span></h3>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"session_id"</span><span class="token operator">:</span> <span class="token string">"abc123"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"transcript_path"</span><span class="token operator">:</span> <span class="token string">"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"/Users/..."</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"hook_event_name"</span><span class="token operator">:</span> <span class="token string">"Notification"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"message"</span><span class="token operator">:</span> <span class="token string">"Task completed successfully"</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="userpromptsubmit-input"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#userpromptsubmit-input">​</a></div><span class="cursor-pointer">UserPromptSubmit Input</span></h3>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"session_id"</span><span class="token operator">:</span> <span class="token string">"abc123"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"transcript_path"</span><span class="token operator">:</span> <span class="token string">"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"/Users/..."</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"hook_event_name"</span><span class="token operator">:</span> <span class="token string">"UserPromptSubmit"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"prompt"</span><span class="token operator">:</span> <span class="token string">"Write a function to calculate the factorial of a number"</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="stop-and-subagentstop-input"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#stop-and-subagentstop-input">​</a></div><span class="cursor-pointer">Stop and SubagentStop Input</span></h3>
+<p><code>stop_hook_active</code> is true when Claude Code is already continuing as a result of
+a stop hook. Check this value or process the transcript to prevent Claude Code
+from running indefinitely.</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"session_id"</span><span class="token operator">:</span> <span class="token string">"abc123"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"transcript_path"</span><span class="token operator">:</span> <span class="token string">"~/.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"hook_event_name"</span><span class="token operator">:</span> <span class="token string">"Stop"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"stop_hook_active"</span><span class="token operator">:</span> <span class="token boolean">true</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="precompact-input"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#precompact-input">​</a></div><span class="cursor-pointer">PreCompact Input</span></h3>
+<p>For <code>manual</code>, <code>custom_instructions</code> comes from what the user passes into
+<code>/compact</code>. For <code>auto</code>, <code>custom_instructions</code> is empty.</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"session_id"</span><span class="token operator">:</span> <span class="token string">"abc123"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"transcript_path"</span><span class="token operator">:</span> <span class="token string">"~/.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"hook_event_name"</span><span class="token operator">:</span> <span class="token string">"PreCompact"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"trigger"</span><span class="token operator">:</span> <span class="token string">"manual"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"custom_instructions"</span><span class="token operator">:</span> <span class="token string">""</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="sessionstart-input"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#sessionstart-input">​</a></div><span class="cursor-pointer">SessionStart Input</span></h3>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"session_id"</span><span class="token operator">:</span> <span class="token string">"abc123"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"transcript_path"</span><span class="token operator">:</span> <span class="token string">"~/.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"hook_event_name"</span><span class="token operator">:</span> <span class="token string">"SessionStart"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"source"</span><span class="token operator">:</span> <span class="token string">"startup"</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="hook-output"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#hook-output">​</a></div><span class="cursor-pointer">Hook Output</span></h2>
+<p>There are two ways for hooks to return output back to Claude Code. The output
+communicates whether to block and any feedback that should be shown to Claude
+and the user.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="simple%3A-exit-code"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#simple%3A-exit-code">​</a></div><span class="cursor-pointer">Simple: Exit Code</span></h3>
+<p>Hooks communicate status through exit codes, stdout, and stderr:</p>
+<ul>
+<li><strong>Exit code 0</strong>: Success. <code>stdout</code> is shown to the user in transcript mode
+(CTRL-R), except for <code>UserPromptSubmit</code> and <code>SessionStart</code>, where stdout is
+added to the context.</li>
+<li><strong>Exit code 2</strong>: Blocking error. <code>stderr</code> is fed back to Claude to process
+automatically. See per-hook-event behavior below.</li>
+<li><strong>Other exit codes</strong>: Non-blocking error. <code>stderr</code> is shown to the user and
+execution continues.</li>
+</ul>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-amber-500/20 bg-amber-50/50 dark:border-amber-500/30 dark:bg-amber-500/10" data-callout-type="warning"><div class="text-sm prose min-w-0 w-full text-amber-900 dark:text-amber-200" data-component-part="callout-content"><p>Reminder: Claude Code does not see stdout if the exit code is 0, except for
+the <code>UserPromptSubmit</code> hook where stdout is injected as context.</p></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="exit-code-2-behavior"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#exit-code-2-behavior">​</a></div><span class="cursor-pointer">Exit Code 2 Behavior</span></h4>
+<table><thead><tr><th>Hook Event</th><th>Behavior</th></tr></thead><tbody><tr><td><code>PreToolUse</code></td><td>Blocks the tool call, shows stderr to Claude</td></tr><tr><td><code>PostToolUse</code></td><td>Shows stderr to Claude (tool already ran)</td></tr><tr><td><code>Notification</code></td><td>N/A, shows stderr to user only</td></tr><tr><td><code>UserPromptSubmit</code></td><td>Blocks prompt processing, erases prompt, shows stderr to user only</td></tr><tr><td><code>Stop</code></td><td>Blocks stoppage, shows stderr to Claude</td></tr><tr><td><code>SubagentStop</code></td><td>Blocks stoppage, shows stderr to Claude subagent</td></tr><tr><td><code>PreCompact</code></td><td>N/A, shows stderr to user only</td></tr><tr><td><code>SessionStart</code></td><td>N/A, shows stderr to user only</td></tr></tbody></table>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="advanced%3A-json-output"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#advanced%3A-json-output">​</a></div><span class="cursor-pointer">Advanced: JSON Output</span></h3>
+<p>Hooks can return structured JSON in <code>stdout</code> for more sophisticated control:</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="common-json-fields"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#common-json-fields">​</a></div><span class="cursor-pointer">Common JSON Fields</span></h4>
+<p>All hook types can include these optional fields:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"continue"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Whether Claude should continue after hook execution (default: true)</span></span>
+<span class="">  <span class="token property">"stopReason"</span><span class="token operator">:</span> <span class="token string">"string"</span> <span class="token comment">// Message shown when continue is false</span></span>
+<span class="">  <span class="token property">"suppressOutput"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Hide stdout from transcript mode (default: false)</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>If <code>continue</code> is false, Claude stops processing after the hooks run.</p>
+<ul>
+<li>For <code>PreToolUse</code>, this is different from <code>"permissionDecision": "deny"</code>, which
+only blocks a specific tool call and provides automatic feedback to Claude.</li>
+<li>For <code>PostToolUse</code>, this is different from <code>"decision": "block"</code>, which
+provides automated feedback to Claude.</li>
+<li>For <code>UserPromptSubmit</code>, this prevents the prompt from being processed.</li>
+<li>For <code>Stop</code> and <code>SubagentStop</code>, this takes precedence over any
+<code>"decision": "block"</code> output.</li>
+<li>In all cases, <code>"continue" = false</code> takes precedence over any
+<code>"decision": "block"</code> output.</li>
+</ul>
+<p><code>stopReason</code> accompanies <code>continue</code> with a reason shown to the user, not shown
+to Claude.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="pretooluse-decision-control"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#pretooluse-decision-control">​</a></div><span class="cursor-pointer"><code>PreToolUse</code> Decision Control</span></h4>
+<p><code>PreToolUse</code> hooks can control whether a tool call proceeds.</p>
+<ul>
+<li><code>"allow"</code> bypasses the permission system. <code>permissionDecisionReason</code> is shown
+to the user but not to Claude. (<em>Deprecated <code>"approve"</code> value + <code>reason</code> has
+the same behavior.</em>)</li>
+<li><code>"deny"</code> prevents the tool call from executing. <code>permissionDecisionReason</code> is
+shown to Claude. (<em><code>"block"</code> value + <code>reason</code> has the same behavior.</em>)</li>
+<li><code>"ask"</code> asks the user to confirm the tool call in the UI.
+<code>permissionDecisionReason</code> is shown to the user but not to Claude.</li>
+</ul>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"hookSpecificOutput"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"hookEventName"</span><span class="token operator">:</span> <span class="token string">"PreToolUse"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"permissionDecision"</span><span class="token operator">:</span> <span class="token string">"allow"</span> | <span class="token string">"deny"</span> | <span class="token string">"ask"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"permissionDecisionReason"</span><span class="token operator">:</span> <span class="token string">"My reason here (shown to user)"</span></span>
+<span class="">  <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"decision"</span><span class="token operator">:</span> <span class="token string">"approve"</span> | <span class="token string">"block"</span> | undefined<span class="token punctuation">,</span> <span class="token comment">// Deprecated for PreToolUse but still supported</span></span>
+<span class="">  <span class="token property">"reason"</span><span class="token operator">:</span> <span class="token string">"Explanation for decision"</span> <span class="token comment">// Deprecated for PreToolUse but still supported</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="posttooluse-decision-control"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#posttooluse-decision-control">​</a></div><span class="cursor-pointer"><code>PostToolUse</code> Decision Control</span></h4>
+<p><code>PostToolUse</code> hooks can control whether a tool call proceeds.</p>
+<ul>
+<li><code>"block"</code> automatically prompts Claude with <code>reason</code>.</li>
+<li><code>undefined</code> does nothing. <code>reason</code> is ignored.</li>
+</ul>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"decision"</span><span class="token operator">:</span> <span class="token string">"block"</span> | undefined<span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"reason"</span><span class="token operator">:</span> <span class="token string">"Explanation for decision"</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="userpromptsubmit-decision-control"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#userpromptsubmit-decision-control">​</a></div><span class="cursor-pointer"><code>UserPromptSubmit</code> Decision Control</span></h4>
+<p><code>UserPromptSubmit</code> hooks can control whether a user prompt is processed.</p>
+<ul>
+<li><code>"block"</code> prevents the prompt from being processed. The submitted prompt is
+erased from context. <code>"reason"</code> is shown to the user but not added to context.</li>
+<li><code>undefined</code> allows the prompt to proceed normally. <code>"reason"</code> is ignored.</li>
+<li><code>"hookSpecificOutput.additionalContext"</code> adds the string to the context if not
+blocked.</li>
+</ul>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"decision"</span><span class="token operator">:</span> <span class="token string">"block"</span> | undefined<span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"reason"</span><span class="token operator">:</span> <span class="token string">"Explanation for decision"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"hookSpecificOutput"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"hookEventName"</span><span class="token operator">:</span> <span class="token string">"UserPromptSubmit"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"additionalContext"</span><span class="token operator">:</span> <span class="token string">"My additional context here"</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="stop%2Fsubagentstop-decision-control"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#stop%2Fsubagentstop-decision-control">​</a></div><span class="cursor-pointer"><code>Stop</code>/<code>SubagentStop</code> Decision Control</span></h4>
+<p><code>Stop</code> and <code>SubagentStop</code> hooks can control whether Claude must continue.</p>
+<ul>
+<li><code>"block"</code> prevents Claude from stopping. You must populate <code>reason</code> for Claude
+to know how to proceed.</li>
+<li><code>undefined</code> allows Claude to stop. <code>reason</code> is ignored.</li>
+</ul>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"decision"</span><span class="token operator">:</span> <span class="token string">"block"</span> | undefined<span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"reason"</span><span class="token operator">:</span> <span class="token string">"Must be provided when Claude is blocked from stopping"</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="sessionstart-decision-control"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#sessionstart-decision-control">​</a></div><span class="cursor-pointer"><code>SessionStart</code> Decision Control</span></h4>
+<p><code>SessionStart</code> hooks allow you to load in context at the start of a session.</p>
+<ul>
+<li><code>"hookSpecificOutput.additionalContext"</code> adds the string to the context.</li>
+</ul>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"hookSpecificOutput"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"hookEventName"</span><span class="token operator">:</span> <span class="token string">"SessionStart"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"additionalContext"</span><span class="token operator">:</span> <span class="token string">"My additional context here"</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="exit-code-example%3A-bash-command-validation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#exit-code-example%3A-bash-command-validation">​</a></div><span class="cursor-pointer">Exit Code Example: Bash Command Validation</span></h4>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token comment">#!/usr/bin/env python3</span></span>
+<span class=""><span class="token keyword">import</span> json</span>
+<span class=""><span class="token keyword">import</span> re</span>
+<span class=""><span class="token keyword">import</span> sys</span>
+<!-- -->
+<span class=""><span class="token comment"># Define validation rules as a list of (regex pattern, message) tuples</span></span>
+<span class="">VALIDATION_RULES <span class="token operator">=</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">(</span></span>
+<span class="">        <span class="token string">r"\bgrep\b(?!.*\|)"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"Use 'rg' (ripgrep) instead of 'grep' for better performance and features"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token punctuation">)</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token punctuation">(</span></span>
+<span class="">        <span class="token string">r"\bfind\s+\S+\s+-name\b"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"Use 'rg --files | rg pattern' or 'rg --files -g pattern' instead of 'find -name' for better performance"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token punctuation">)</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">]</span></span>
+<!-- -->
+<!-- -->
+<span class=""><span class="token keyword">def</span> <span class="token function">validate_command</span><span class="token punctuation">(</span>command<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">list</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span><span class="token punctuation">:</span></span>
+<span class="">    issues <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span></span>
+<span class="">    <span class="token keyword">for</span> pattern<span class="token punctuation">,</span> message <span class="token keyword">in</span> VALIDATION_RULES<span class="token punctuation">:</span></span>
+<span class="">        <span class="token keyword">if</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> command<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">            issues<span class="token punctuation">.</span>append<span class="token punctuation">(</span>message<span class="token punctuation">)</span></span>
+<span class="">    <span class="token keyword">return</span> issues</span>
+<!-- -->
+<!-- -->
+<span class=""><span class="token keyword">try</span><span class="token punctuation">:</span></span>
+<span class="">    input_data <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>stdin<span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">except</span> json<span class="token punctuation">.</span>JSONDecodeError <span class="token keyword">as</span> e<span class="token punctuation">:</span></span>
+<span class="">    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Error: Invalid JSON input: </span><span class="token interpolation"><span class="token punctuation">{</span>e<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span> <span class="token builtin">file</span><span class="token operator">=</span>sys<span class="token punctuation">.</span>stderr<span class="token punctuation">)</span></span>
+<span class="">    sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class="">tool_name <span class="token operator">=</span> input_data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"tool_name"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span></span>
+<span class="">tool_input <span class="token operator">=</span> input_data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"tool_input"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span></span>
+<span class="">command <span class="token operator">=</span> tool_input<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"command"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class=""><span class="token keyword">if</span> tool_name <span class="token operator">!=</span> <span class="token string">"Bash"</span> <span class="token keyword">or</span> <span class="token keyword">not</span> command<span class="token punctuation">:</span></span>
+<span class="">    sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Validate the command</span></span>
+<span class="">issues <span class="token operator">=</span> validate_command<span class="token punctuation">(</span>command<span class="token punctuation">)</span></span>
+<!-- -->
+<span class=""><span class="token keyword">if</span> issues<span class="token punctuation">:</span></span>
+<span class="">    <span class="token keyword">for</span> message <span class="token keyword">in</span> issues<span class="token punctuation">:</span></span>
+<span class="">        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"• </span><span class="token interpolation"><span class="token punctuation">{</span>message<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span> <span class="token builtin">file</span><span class="token operator">=</span>sys<span class="token punctuation">.</span>stderr<span class="token punctuation">)</span></span>
+<span class="">    <span class="token comment"># Exit code 2 blocks tool call and shows stderr to Claude</span></span>
+<span class="">    sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span></span>
+</code></pre></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="json-output-example%3A-userpromptsubmit-to-add-context-and-validation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#json-output-example%3A-userpromptsubmit-to-add-context-and-validation">​</a></div><span class="cursor-pointer">JSON Output Example: UserPromptSubmit to Add Context and Validation</span></h4>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>For <code>UserPromptSubmit</code> hooks, you can inject context using either method:</p><ul>
+<li>Exit code 0 with stdout: Claude sees the context (special case for <code>UserPromptSubmit</code>)</li>
+<li>JSON output: Provides more control over the behavior</li>
+</ul></div></div>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token comment">#!/usr/bin/env python3</span></span>
+<span class=""><span class="token keyword">import</span> json</span>
+<span class=""><span class="token keyword">import</span> sys</span>
+<span class=""><span class="token keyword">import</span> re</span>
+<span class=""><span class="token keyword">import</span> datetime</span>
+<!-- -->
+<span class=""><span class="token comment"># Load input from stdin</span></span>
+<span class=""><span class="token keyword">try</span><span class="token punctuation">:</span></span>
+<span class="">    input_data <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>stdin<span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">except</span> json<span class="token punctuation">.</span>JSONDecodeError <span class="token keyword">as</span> e<span class="token punctuation">:</span></span>
+<span class="">    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Error: Invalid JSON input: </span><span class="token interpolation"><span class="token punctuation">{</span>e<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span> <span class="token builtin">file</span><span class="token operator">=</span>sys<span class="token punctuation">.</span>stderr<span class="token punctuation">)</span></span>
+<span class="">    sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class="">prompt <span class="token operator">=</span> input_data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"prompt"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Check for sensitive patterns</span></span>
+<span class="">sensitive_patterns <span class="token operator">=</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">(</span><span class="token string">r"(?i)\b(password|secret|key|token)\s*[:=]"</span><span class="token punctuation">,</span> <span class="token string">"Prompt contains potential secrets"</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">]</span></span>
+<!-- -->
+<span class=""><span class="token keyword">for</span> pattern<span class="token punctuation">,</span> message <span class="token keyword">in</span> sensitive_patterns<span class="token punctuation">:</span></span>
+<span class="">    <span class="token keyword">if</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> prompt<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">        <span class="token comment"># Use JSON output to block with a specific reason</span></span>
+<span class="">        output <span class="token operator">=</span> <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"decision"</span><span class="token punctuation">:</span> <span class="token string">"block"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"reason"</span><span class="token punctuation">:</span> <span class="token string-interpolation"><span class="token string">f"Security policy violation: </span><span class="token interpolation"><span class="token punctuation">{</span>message<span class="token punctuation">}</span></span><span class="token string">. Please rephrase your request without sensitive information."</span></span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">        <span class="token keyword">print</span><span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>output<span class="token punctuation">)</span><span class="token punctuation">)</span></span>
+<span class="">        sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Add current time to context</span></span>
+<span class="">context <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"Current time: </span><span class="token interpolation"><span class="token punctuation">{</span>datetime<span class="token punctuation">.</span>datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">"</span></span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span></span>
+<!-- -->
+<span class=""><span class="token string">""</span>"</span>
+<span class="">The following <span class="token keyword">is</span> also equivalent<span class="token punctuation">:</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">  <span class="token string">"hookSpecificOutput"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"hookEventName"</span><span class="token punctuation">:</span> <span class="token string">"UserPromptSubmit"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token string">"additionalContext"</span><span class="token punctuation">:</span> context<span class="token punctuation">,</span></span>
+<span class="">  <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span>
+<span class=""><span class="token string">""</span>"</span>
+<!-- -->
+<span class=""><span class="token comment"># Allow the prompt to proceed with the additional context</span></span>
+<span class="">sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></span>
+</code></pre></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="json-output-example%3A-pretooluse-with-approval"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#json-output-example%3A-pretooluse-with-approval">​</a></div><span class="cursor-pointer">JSON Output Example: PreToolUse with Approval</span></h4>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token comment">#!/usr/bin/env python3</span></span>
+<span class=""><span class="token keyword">import</span> json</span>
+<span class=""><span class="token keyword">import</span> sys</span>
+<!-- -->
+<span class=""><span class="token comment"># Load input from stdin</span></span>
+<span class=""><span class="token keyword">try</span><span class="token punctuation">:</span></span>
+<span class="">    input_data <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>stdin<span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">except</span> json<span class="token punctuation">.</span>JSONDecodeError <span class="token keyword">as</span> e<span class="token punctuation">:</span></span>
+<span class="">    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Error: Invalid JSON input: </span><span class="token interpolation"><span class="token punctuation">{</span>e<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span> <span class="token builtin">file</span><span class="token operator">=</span>sys<span class="token punctuation">.</span>stderr<span class="token punctuation">)</span></span>
+<span class="">    sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class="">tool_name <span class="token operator">=</span> input_data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"tool_name"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span></span>
+<span class="">tool_input <span class="token operator">=</span> input_data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"tool_input"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Example: Auto-approve file reads for documentation files</span></span>
+<span class=""><span class="token keyword">if</span> tool_name <span class="token operator">==</span> <span class="token string">"Read"</span><span class="token punctuation">:</span></span>
+<span class="">    file_path <span class="token operator">=</span> tool_input<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"file_path"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span></span>
+<span class="">    <span class="token keyword">if</span> file_path<span class="token punctuation">.</span>endswith<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">".md"</span><span class="token punctuation">,</span> <span class="token string">".mdx"</span><span class="token punctuation">,</span> <span class="token string">".txt"</span><span class="token punctuation">,</span> <span class="token string">".json"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">        <span class="token comment"># Use JSON output to auto-approve the tool call</span></span>
+<span class="">        output <span class="token operator">=</span> <span class="token punctuation">{</span></span>
+<span class="">            <span class="token string">"decision"</span><span class="token punctuation">:</span> <span class="token string">"approve"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"reason"</span><span class="token punctuation">:</span> <span class="token string">"Documentation file auto-approved"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token string">"suppressOutput"</span><span class="token punctuation">:</span> <span class="token boolean">True</span>  <span class="token comment"># Don't show in transcript mode</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">        <span class="token keyword">print</span><span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>output<span class="token punctuation">)</span><span class="token punctuation">)</span></span>
+<span class="">        sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class=""><span class="token comment"># For other cases, let the normal permission flow proceed</span></span>
+<span class="">sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="working-with-mcp-tools"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#working-with-mcp-tools">​</a></div><span class="cursor-pointer">Working with MCP Tools</span></h2>
+<p>Claude Code hooks work seamlessly with
+<a class="link" href="/en/docs/claude-code/mcp">Model Context Protocol (MCP) tools</a>. When MCP servers
+provide tools, they appear with a special naming pattern that you can match in
+your hooks.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="mcp-tool-naming"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#mcp-tool-naming">​</a></div><span class="cursor-pointer">MCP Tool Naming</span></h3>
+<p>MCP tools follow the pattern <code>mcp__&lt;server&gt;__&lt;tool&gt;</code>, for example:</p>
+<ul>
+<li><code>mcp__memory__create_entities</code> - Memory server’s create entities tool</li>
+<li><code>mcp__filesystem__read_file</code> - Filesystem server’s read file tool</li>
+<li><code>mcp__github__search_repositories</code> - GitHub server’s search tool</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="configuring-hooks-for-mcp-tools"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#configuring-hooks-for-mcp-tools">​</a></div><span class="cursor-pointer">Configuring Hooks for MCP Tools</span></h3>
+<p>You can target specific MCP tools or entire MCP servers:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"PreToolUse"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token property">"matcher"</span><span class="token operator">:</span> <span class="token string">"mcp__memory__.*"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">          <span class="token punctuation">{</span></span>
+<span class="">            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"command"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"echo 'Memory operation initiated' &gt;&gt; ~/mcp-operations.log"</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">]</span></span>
+<span class="">      <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token property">"matcher"</span><span class="token operator">:</span> <span class="token string">"mcp__.*__write.*"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">          <span class="token punctuation">{</span></span>
+<span class="">            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"command"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"/home/user/scripts/validate-mcp-write.py"</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">]</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="examples"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#examples">​</a></div><span class="cursor-pointer">Examples</span></h2>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>For practical examples including code formatting, notifications, and file protection, see <a class="link" href="/en/docs/claude-code/hooks-guide#more-examples">More Examples</a> in the get started guide.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="security-considerations"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#security-considerations">​</a></div><span class="cursor-pointer">Security Considerations</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="disclaimer"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#disclaimer">​</a></div><span class="cursor-pointer">Disclaimer</span></h3>
+<p><strong>USE AT YOUR OWN RISK</strong>: Claude Code hooks execute arbitrary shell commands on
+your system automatically. By using hooks, you acknowledge that:</p>
+<ul>
+<li>You are solely responsible for the commands you configure</li>
+<li>Hooks can modify, delete, or access any files your user account can access</li>
+<li>Malicious or poorly written hooks can cause data loss or system damage</li>
+<li>Anthropic provides no warranty and assumes no liability for any damages
+resulting from hook usage</li>
+<li>You should thoroughly test hooks in a safe environment before production use</li>
+</ul>
+<p>Always review and understand any hook commands before adding them to your
+configuration.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="security-best-practices"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#security-best-practices">​</a></div><span class="cursor-pointer">Security Best Practices</span></h3>
+<p>Here are some key practices for writing more secure hooks:</p>
+<ol>
+<li><strong>Validate and sanitize inputs</strong> - Never trust input data blindly</li>
+<li><strong>Always quote shell variables</strong> - Use <code>"$VAR"</code> not <code>$VAR</code></li>
+<li><strong>Block path traversal</strong> - Check for <code>..</code> in file paths</li>
+<li><strong>Use absolute paths</strong> - Specify full paths for scripts (use
+<code>$CLAUDE_PROJECT_DIR</code> for the project path)</li>
+<li><strong>Skip sensitive files</strong> - Avoid <code>.env</code>, <code>.git/</code>, keys, etc.</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="configuration-safety"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#configuration-safety">​</a></div><span class="cursor-pointer">Configuration Safety</span></h3>
+<p>Direct edits to hooks in settings files don’t take effect immediately. Claude
+Code:</p>
+<ol>
+<li>Captures a snapshot of hooks at startup</li>
+<li>Uses this snapshot throughout the session</li>
+<li>Warns if hooks are modified externally</li>
+<li>Requires review in <code>/hooks</code> menu for changes to apply</li>
+</ol>
+<p>This prevents malicious hook modifications from affecting your current session.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="hook-execution-details"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#hook-execution-details">​</a></div><span class="cursor-pointer">Hook Execution Details</span></h2>
+<ul>
+<li><strong>Timeout</strong>: 60-second execution limit by default, configurable per command.<!-- -->
+<ul>
+<li>A timeout for an individual command does not affect the other commands.</li>
+</ul>
+</li>
+<li><strong>Parallelization</strong>: All matching hooks run in parallel</li>
+<li><strong>Environment</strong>: Runs in current directory with Claude Code’s environment<!-- -->
+<ul>
+<li>The <code>CLAUDE_PROJECT_DIR</code> environment variable is available and contains the
+absolute path to the project root directory</li>
+</ul>
+</li>
+<li><strong>Input</strong>: JSON via stdin</li>
+<li><strong>Output</strong>:<!-- -->
+<ul>
+<li>PreToolUse/PostToolUse/Stop: Progress shown in transcript (Ctrl-R)</li>
+<li>Notification: Logged to debug only (<code>--debug</code>)</li>
+</ul>
+</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="debugging"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#debugging">​</a></div><span class="cursor-pointer">Debugging</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="basic-troubleshooting"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#basic-troubleshooting">​</a></div><span class="cursor-pointer">Basic Troubleshooting</span></h3>
+<p>If your hooks aren’t working:</p>
+<ol>
+<li><strong>Check configuration</strong> - Run <code>/hooks</code> to see if your hook is registered</li>
+<li><strong>Verify syntax</strong> - Ensure your JSON settings are valid</li>
+<li><strong>Test commands</strong> - Run hook commands manually first</li>
+<li><strong>Check permissions</strong> - Make sure scripts are executable</li>
+<li><strong>Review logs</strong> - Use <code>claude --debug</code> to see hook execution details</li>
+</ol>
+<p>Common issues:</p>
+<ul>
+<li><strong>Quotes not escaped</strong> - Use <code>\"</code> inside JSON strings</li>
+<li><strong>Wrong matcher</strong> - Check tool names match exactly (case-sensitive)</li>
+<li><strong>Command not found</strong> - Use full paths for scripts</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="advanced-debugging"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#advanced-debugging">​</a></div><span class="cursor-pointer">Advanced Debugging</span></h3>
+<p>For complex hook issues:</p>
+<ol>
+<li><strong>Inspect hook execution</strong> - Use <code>claude --debug</code> to see detailed hook
+execution</li>
+<li><strong>Validate JSON schemas</strong> - Test hook input/output with external tools</li>
+<li><strong>Check environment variables</strong> - Verify Claude Code’s environment is correct</li>
+<li><strong>Test edge cases</strong> - Try hooks with unusual file paths or inputs</li>
+<li><strong>Monitor system resources</strong> - Check for resource exhaustion during hook
+execution</li>
+<li><strong>Use structured logging</strong> - Implement logging in your hook scripts</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="debug-output-example"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#debug-output-example">​</a></div><span class="cursor-pointer">Debug Output Example</span></h3>
+<p>Use <code>claude --debug</code> to see hook execution details:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext"><code><span class="">[DEBUG] Executing hooks for PostToolUse:Write</span>
+<span class="">[DEBUG] Getting matching hook commands for PostToolUse with query: Write</span>
+<span class="">[DEBUG] Found 1 hook matchers in settings</span>
+<span class="">[DEBUG] Matched 1 hooks for query "Write"</span>
+<span class="">[DEBUG] Found 1 hook commands to execute</span>
+<span class="">[DEBUG] Executing hook command: &lt;Your command&gt; with timeout 60000ms</span>
+<span class="">[DEBUG] Hook command completed with status 0: &lt;Your stdout&gt;</span>
+</code></pre></div></div></div>
+<p>Progress messages appear in transcript mode (Ctrl-R) showing:</p>
+<ul>
+<li>Which hook is running</li>
+<li>Command being executed</li>
+<li>Success/failure status</li>
+<li>Output or error messages</li>
+</ul></div>

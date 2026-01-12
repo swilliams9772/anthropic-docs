@@ -1,0 +1,96 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>LLM gateways provide a centralized proxy layer between Claude Code and model providers, offering:</p>
+<ul>
+<li><strong>Centralized authentication</strong> - Single point for API key management</li>
+<li><strong>Usage tracking</strong> - Monitor usage across teams and projects</li>
+<li><strong>Cost controls</strong> - Implement budgets and rate limits</li>
+<li><strong>Audit logging</strong> - Track all model interactions for compliance</li>
+<li><strong>Model routing</strong> - Switch between providers without code changes</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="litellm-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#litellm-configuration">​</a></div><span class="cursor-pointer">LiteLLM configuration</span></h2>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>LiteLLM is a third-party proxy service. Anthropic doesn’t endorse, maintain, or audit LiteLLM’s security or functionality. This guide is provided for informational purposes and may become outdated. Use at your own discretion.</p></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="prerequisites"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#prerequisites">​</a></div><span class="cursor-pointer">Prerequisites</span></h3>
+<ul>
+<li>Claude Code updated to the latest version</li>
+<li>LiteLLM Proxy Server deployed and accessible</li>
+<li>Access to Claude models through your chosen provider</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="basic-litellm-setup"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#basic-litellm-setup">​</a></div><span class="cursor-pointer">Basic LiteLLM setup</span></h3>
+<p><strong>Configure Claude Code</strong>:</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="authentication-methods"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#authentication-methods">​</a></div><span class="cursor-pointer">Authentication methods</span></h4>
+<h5>Static API key</h5>
+<p>Simplest method using a fixed API key:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token comment"># Set in environment</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_AUTH_TOKEN</span><span class="token operator">=</span>sk-litellm-static-key</span>
+<!-- -->
+<span class=""><span class="token comment"># Or in Claude Code settings</span></span>
+<span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token string">"env"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"ANTHROPIC_AUTH_TOKEN"</span><span class="token builtin class-name">:</span> <span class="token string">"sk-litellm-static-key"</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>This value will be sent as the <code>Authorization</code> header.</p>
+<h5>Dynamic API key with helper</h5>
+<p>For rotating keys or per-user authentication:</p>
+
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token shebang important">#!/bin/bash</span></span>
+<span class=""><span class="token comment"># ~/bin/get-litellm-key.sh</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Example: Fetch key from vault</span></span>
+<span class="">vault kv get <span class="token parameter variable">-field</span><span class="token operator">=</span>api_key secret/litellm/claude-code</span>
+<!-- -->
+<span class=""><span class="token comment"># Example: Generate JWT token</span></span>
+<span class="">jwt encode <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">--secret</span><span class="token operator">=</span><span class="token string">"<span class="token variable">${JWT_SECRET}</span>"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">--exp</span><span class="token operator">=</span><span class="token string">"+1h"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token string">'{"user":"'</span><span class="token variable">${<span class="token environment constant">USER</span>}</span><span class="token string">'","team":"engineering"}'</span></span>
+</code></pre></div></div></div>
+<ol start="2">
+<li>Configure Claude Code settings to use the helper:</li>
+</ol>
+
+<ol start="3">
+<li>Set token refresh interval:</li>
+</ol>
+
+<p>This value will be sent as <code>Authorization</code> and <code>X-Api-Key</code> headers. The <code>apiKeyHelper</code> has lower precedence than <code>ANTHROPIC_AUTH_TOKEN</code> or <code>ANTHROPIC_API_KEY</code>.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="unified-endpoint-recommended"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#unified-endpoint-recommended">​</a></div><span class="cursor-pointer">Unified endpoint (recommended)</span></h4>
+<p>Using LiteLLM’s <a class="link" href="https://docs.litellm.ai/docs/anthropic_unified" rel="noreferrer" target="_blank">Anthropic format endpoint</a>:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_BASE_URL</span><span class="token operator">=</span>https://litellm-server:4000</span>
+</code></pre></div></div></div>
+<p><strong>Benefits of the unified endpoint over pass-through endpoints:</strong></p>
+<ul>
+<li>Load balancing</li>
+<li>Fallbacks</li>
+<li>Consistent support for cost tracking and end-user tracking</li>
+</ul>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="provider-specific-pass-through-endpoints-alternative"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#provider-specific-pass-through-endpoints-alternative">​</a></div><span class="cursor-pointer">Provider-specific pass-through endpoints (alternative)</span></h4>
+<h5>Anthropic API through LiteLLM</h5>
+<p>Using <a class="link" href="https://docs.litellm.ai/docs/pass_through/anthropic_completion" rel="noreferrer" target="_blank">pass-through endpoint</a>:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_BASE_URL</span><span class="token operator">=</span>https://litellm-server:4000/anthropic</span>
+</code></pre></div></div></div>
+<h5>Amazon Bedrock through LiteLLM</h5>
+<p>Using <a class="link" href="https://docs.litellm.ai/docs/pass_through/bedrock" rel="noreferrer" target="_blank">pass-through endpoint</a>:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_BEDROCK_BASE_URL</span><span class="token operator">=</span>https://litellm-server:4000/bedrock</span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">CLAUDE_CODE_SKIP_BEDROCK_AUTH</span><span class="token operator">=</span><span class="token number">1</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">CLAUDE_CODE_USE_BEDROCK</span><span class="token operator">=</span><span class="token number">1</span></span>
+</code></pre></div></div></div>
+<h5>Google Vertex AI through LiteLLM</h5>
+<p>Using <a class="link" href="https://docs.litellm.ai/docs/pass_through/vertex_ai" rel="noreferrer" target="_blank">pass-through endpoint</a>:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_VERTEX_BASE_URL</span><span class="token operator">=</span>https://litellm-server:4000/vertex_ai/v1</span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_VERTEX_PROJECT_ID</span><span class="token operator">=</span>your-gcp-project-id</span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">CLAUDE_CODE_SKIP_VERTEX_AUTH</span><span class="token operator">=</span><span class="token number">1</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">CLAUDE_CODE_USE_VERTEX</span><span class="token operator">=</span><span class="token number">1</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">CLOUD_ML_REGION</span><span class="token operator">=</span>us-east5</span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="model-selection"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#model-selection">​</a></div><span class="cursor-pointer">Model selection</span></h3>
+<p>By default, the models will use those specified in <a class="link" href="/en/docs/claude-code/bedrock-vertex-proxies#model-configuration">Model configuration</a>.</p>
+<p>If you have configured custom model names in LiteLLM, set the aforementioned environment variables to those custom names.</p>
+<p>For more detailed information, refer to the <a class="link" href="https://docs.litellm.ai/" rel="noreferrer" target="_blank">LiteLLM documentation</a>.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="additional-resources"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#additional-resources">​</a></div><span class="cursor-pointer">Additional resources</span></h2>
+<ul>
+<li><a class="link" href="https://docs.litellm.ai/" rel="noreferrer" target="_blank">LiteLLM documentation</a></li>
+<li><a class="link" href="/en/docs/claude-code/settings">Claude Code settings</a></li>
+<li><a class="link" href="/en/docs/claude-code/corporate-proxy">Corporate proxy setup</a></li>
+<li><a class="link" href="/en/docs/claude-code/third-party-integrations">Third-party integrations overview</a></li>
+</ul></div>

@@ -1,0 +1,106 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><h2 class="flex whitespace-pre-wrap group font-semibold" id="system-requirements"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#system-requirements">​</a></div><span class="cursor-pointer">System requirements</span></h2>
+<ul>
+<li><strong>Operating Systems</strong>: macOS 10.15+, Ubuntu 20.04+/Debian 10+, or Windows 10+ (with WSL 1, WSL 2, or Git for Windows)</li>
+<li><strong>Hardware</strong>: 4GB+ RAM</li>
+<li><strong>Software</strong>: <a class="link" href="https://nodejs.org/en/download" rel="noreferrer" target="_blank">Node.js 18+</a></li>
+<li><strong>Network</strong>: Internet connection required for authentication and AI processing</li>
+<li><strong>Shell</strong>: Works best in Bash, Zsh or Fish</li>
+<li><strong>Location</strong>: <a class="link" href="https://www.anthropic.com/supported-countries" rel="noreferrer" target="_blank">Anthropic supported countries</a></li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="additional-dependencies"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#additional-dependencies">​</a></div><span class="cursor-pointer">Additional dependencies</span></h3>
+<ul>
+<li><strong>ripgrep</strong>: Claude Code depends on <code>ripgrep</code> for core functionality. While it is typically included in your Claude Code installation, you may need to independently install <code>ripgrep</code> on some distributions (like Alpine Linux or other musl-based distributions).</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="standard-installation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#standard-installation">​</a></div><span class="cursor-pointer">Standard installation</span></h2>
+<p>To install Claude Code, run the following command:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-sh"><code class="language-sh"><span class=""><span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> @anthropic-ai/claude-code</span>
+</code></pre></div></div></div>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-amber-500/20 bg-amber-50/50 dark:border-amber-500/30 dark:bg-amber-500/10" data-callout-type="warning"><div class="text-sm prose min-w-0 w-full text-amber-900 dark:text-amber-200" data-component-part="callout-content"><p>Do NOT use <code>sudo npm install -g</code> as this can lead to permission issues and security risks.
+If you encounter permission errors, see <a class="link" href="/en/docs/claude-code/troubleshooting#linux-permission-issues">configure Claude Code</a> for recommended solutions.</p></div></div>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>Some users may be automatically migrated to an improved installation method.
+Run <code>claude doctor</code> after installation to check your installation type.</p></div></div>
+<p>After the installation process completes, navigate to your project and start Claude Code:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token builtin class-name">cd</span> your-awesome-project</span>
+<span class="">claude</span>
+</code></pre></div></div></div>
+<p>Claude Code offers the following authentication options:</p>
+<ol>
+<li><strong>Anthropic Console</strong>: The default option. Connect through the Anthropic Console and complete the OAuth process. Requires active billing at <a class="link" href="https://console.anthropic.com" rel="noreferrer" target="_blank">console.anthropic.com</a>.</li>
+<li><strong>Claude App (with Pro or Max plan)</strong>: Subscribe to Claude’s <a class="link" href="https://www.anthropic.com/pricing" rel="noreferrer" target="_blank">Pro or Max plan</a> for a unified subscription that includes both Claude Code and the web interface. Get more value at the same price point while managing your account in one place. Log in with your Claude.ai account. During launch, choose the option that matches your subscription type.</li>
+<li><strong>Enterprise platforms</strong>: Configure Claude Code to use <a class="link" href="/en/docs/claude-code/third-party-integrations">Amazon Bedrock or Google Vertex AI</a> for enterprise deployments with your existing cloud infrastructure.</li>
+</ol>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>Claude Code securely stores your credentials. See <a class="link" href="/en/docs/claude-code/iam#credential-management">Credential Management</a> for details.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="windows-setup"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#windows-setup">​</a></div><span class="cursor-pointer">Windows setup</span></h2>
+<p><strong>Option 1: Claude Code within WSL</strong></p>
+<ul>
+<li>Both WSL 1 and WSL 2 are supported</li>
+</ul>
+<p><strong>Option 2: Claude Code on native Windows with Git Bash</strong></p>
+<ul>
+<li>Requires <a class="link" href="https://git-scm.com/downloads/win" rel="noreferrer" target="_blank">Git for Windows</a></li>
+<li>For portable Git installations, specify the path to your <code>bash.exe</code>:<!-- -->
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-powershell"><code class="language-powershell"><span class=""><span class="token variable">$env</span>:CLAUDE_CODE_GIT_BASH_PATH=<span class="token string">"C:\Program Files\Git\bin\bash.exe"</span></span>
+</code></pre></div></div></div>
+</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="alternative-installation-methods"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#alternative-installation-methods">​</a></div><span class="cursor-pointer">Alternative installation methods</span></h2>
+<p>Claude Code offers multiple installation methods to suit different environments.</p>
+<p>If you encounter any issues during installation, consult the <a class="link" href="/en/docs/claude-code/troubleshooting#linux-permission-issues">troubleshooting guide</a>.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>Run <code>claude doctor</code> after installation to check your installation type and version.</p></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="global-npm-installation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#global-npm-installation">​</a></div><span class="cursor-pointer">Global npm installation</span></h3>
+<p>Traditional method shown in the <a class="link" href="/_sites/docs.anthropic.com/en/docs/claude-code/setup?subjects=announcements#install-and-authenticate">install steps above</a></p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="native-binary-installation-beta"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#native-binary-installation-beta">​</a></div><span class="cursor-pointer">Native binary installation (Beta)</span></h3>
+<p>If you have an existing installation of Claude Code, use <code>claude install</code> to start the native binary installation.</p>
+<p>For a fresh install, run the following command:</p>
+<p><strong>macOS, Linux, WSL:</strong></p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash language-bash"><code class="language-bash"><span class=""><span class="token comment"># Install stable version (default)</span></span>
+<span class=""><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://claude.ai/install.sh <span class="token operator">|</span> <span class="token function">bash</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Install latest version</span></span>
+<span class=""><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://claude.ai/install.sh <span class="token operator">|</span> <span class="token function">bash</span> <span class="token parameter variable">-s</span> latest</span>
+<!-- -->
+<span class=""><span class="token comment"># Install specific version number</span></span>
+<span class=""><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://claude.ai/install.sh <span class="token operator">|</span> <span class="token function">bash</span> <span class="token parameter variable">-s</span> <span class="token number">1.0</span>.58</span>
+</code></pre></div></div></div>
+<p><strong>Windows PowerShell:</strong></p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-powershell"><code class="language-powershell"><span class=""><span class="token comment"># Install stable version (default)</span></span>
+<span class=""><span class="token function">irm</span> https:<span class="token operator">/</span><span class="token operator">/</span>claude<span class="token punctuation">.</span>ai/install<span class="token punctuation">.</span>ps1 <span class="token punctuation">|</span> <span class="token function">iex</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Install latest version</span></span>
+<span class="">&amp; <span class="token punctuation">(</span><span class="token namespace">[scriptblock]</span>::Create<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">irm</span> https:<span class="token operator">/</span><span class="token operator">/</span>claude<span class="token punctuation">.</span>ai/install<span class="token punctuation">.</span>ps1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> latest</span>
+<!-- -->
+<span class=""><span class="token comment"># Install specific version number</span></span>
+<span class="">&amp; <span class="token punctuation">(</span><span class="token namespace">[scriptblock]</span>::Create<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">irm</span> https:<span class="token operator">/</span><span class="token operator">/</span>claude<span class="token punctuation">.</span>ai/install<span class="token punctuation">.</span>ps1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 1<span class="token punctuation">.</span>0<span class="token punctuation">.</span>58</span>
+<!-- -->
+</code></pre></div></div></div>
+<p>The native Claude Code installer is supported on macOS, Linux, and Windows.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>Make sure that you remove any outdated aliases or symlinks.
+Once your installation is complete, run <code>claude doctor</code> to verify the installation.</p></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="local-installation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#local-installation">​</a></div><span class="cursor-pointer">Local installation</span></h3>
+<ul>
+<li>After global install via npm, use <code>claude migrate-installer</code> to move to local</li>
+<li>Avoids autoupdater npm permission issues</li>
+<li>Some users may be automatically migrated to this method</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="running-on-aws-or-gcp"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#running-on-aws-or-gcp">​</a></div><span class="cursor-pointer">Running on AWS or GCP</span></h2>
+<p>By default, Claude Code uses Anthropic’s API.</p>
+<p>For details on running Claude Code on AWS or GCP, see <a class="link" href="/en/docs/claude-code/third-party-integrations">third-party integrations</a>.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="update-claude-code"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#update-claude-code">​</a></div><span class="cursor-pointer">Update Claude Code</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="auto-updates"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#auto-updates">​</a></div><span class="cursor-pointer">Auto updates</span></h3>
+<p>Claude Code automatically keeps itself up to date to ensure you have the latest features and security fixes.</p>
+<ul>
+<li><strong>Update checks</strong>: Performed on startup and periodically while running</li>
+<li><strong>Update process</strong>: Downloads and installs automatically in the background</li>
+<li><strong>Notifications</strong>: You’ll see a notification when updates are installed</li>
+<li><strong>Applying updates</strong>: Updates take effect the next time you start Claude Code</li>
+</ul>
+<p><strong>Disable auto-updates:</strong></p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token comment"># Via configuration</span></span>
+<span class="">claude config <span class="token builtin class-name">set</span> autoUpdates <span class="token boolean">false</span> <span class="token parameter variable">--global</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Or via environment variable</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">DISABLE_AUTOUPDATER</span><span class="token operator">=</span><span class="token number">1</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="update-manually"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#update-manually">​</a></div><span class="cursor-pointer">Update manually</span></h3>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class="">claude update</span>
+</code></pre></div></div></div></div>

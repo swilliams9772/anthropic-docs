@@ -1,0 +1,261 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>Claude Code hooks are user-defined shell commands that execute at various points
+in Claude Code’s lifecycle. Hooks provide deterministic control over Claude
+Code’s behavior, ensuring certain actions always happen rather than relying on
+the LLM to choose to run them.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>For reference documentation on hooks, see <a class="link" href="/en/docs/claude-code/hooks">Hooks reference</a>.</p></div></div>
+<p>Example use cases for hooks include:</p>
+<ul>
+<li><strong>Notifications</strong>: Customize how you get notified when Claude Code is awaiting
+your input or permission to run something.</li>
+<li><strong>Automatic formatting</strong>: Run <code>prettier</code> on .ts files, <code>gofmt</code> on .go files,
+etc. after every file edit.</li>
+<li><strong>Logging</strong>: Track and count all executed commands for compliance or
+debugging.</li>
+<li><strong>Feedback</strong>: Provide automated feedback when Claude Code produces code that
+does not follow your codebase conventions.</li>
+<li><strong>Custom permissions</strong>: Block modifications to production files or sensitive
+directories.</li>
+</ul>
+<p>By encoding these rules as hooks rather than prompting instructions, you turn
+suggestions into app-level code that executes every time it is expected to run.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-amber-500/20 bg-amber-50/50 dark:border-amber-500/30 dark:bg-amber-500/10" data-callout-type="warning"><div class="text-sm prose min-w-0 w-full text-amber-900 dark:text-amber-200" data-component-part="callout-content"><p>You must consider the security implication of hooks as you add them, because hooks run automatically during the agent loop with your current environment’s credentials.
+For example, malicious hooks code can exfiltrate your data. Always review your hooks implementation before registering them.</p><p>For full security best practices, see <a class="link" href="/en/docs/claude-code/hooks#security-considerations">Security Considerations</a> in the hooks reference documentation.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="hook-events-overview"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#hook-events-overview">​</a></div><span class="cursor-pointer">Hook Events Overview</span></h2>
+<p>Claude Code provides several hook events that run at different points in the
+workflow:</p>
+<ul>
+<li><strong>PreToolUse</strong>: Runs before tool calls (can block them)</li>
+<li><strong>PostToolUse</strong>: Runs after tool calls complete</li>
+<li><strong>UserPromptSubmit</strong>: Runs when the user submits a prompt, before Claude processes it</li>
+<li><strong>Notification</strong>: Runs when Claude Code sends notifications</li>
+<li><strong>Stop</strong>: Runs when Claude Code finishes responding</li>
+<li><strong>Subagent Stop</strong>: Runs when subagent tasks complete</li>
+<li><strong>PreCompact</strong>: Runs before Claude Code is about to run a compact operation</li>
+<li><strong>SessionStart</strong>: Runs when Claude Code starts a new session or resumes an existing session</li>
+</ul>
+<p>Each event receives different data and can control Claude’s behavior in
+different ways.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="quickstart"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#quickstart">​</a></div><span class="cursor-pointer">Quickstart</span></h2>
+<p>In this quickstart, you’ll add a hook that logs the shell commands that Claude
+Code runs.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="prerequisites"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#prerequisites">​</a></div><span class="cursor-pointer">Prerequisites</span></h3>
+<p>Install <code>jq</code> for JSON processing in the command line.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="step-1%3A-open-hooks-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#step-1%3A-open-hooks-configuration">​</a></div><span class="cursor-pointer">Step 1: Open hooks configuration</span></h3>
+<p>Run the <code>/hooks</code> <a class="link" href="/en/docs/claude-code/slash-commands">slash command</a> and select
+the <code>PreToolUse</code> hook event.</p>
+<p><code>PreToolUse</code> hooks run before tool calls and can block them while providing
+Claude feedback on what to do differently.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="step-2%3A-add-a-matcher"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#step-2%3A-add-a-matcher">​</a></div><span class="cursor-pointer">Step 2: Add a matcher</span></h3>
+<p>Select <code>+ Add new matcher…</code> to run your hook only on Bash tool calls.</p>
+<p>Type <code>Bash</code> for the matcher.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content">You can use <code>*</code> to match all tools.</div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="step-3%3A-add-the-hook"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#step-3%3A-add-the-hook">​</a></div><span class="cursor-pointer">Step 3: Add the hook</span></h3>
+<p>Select <code>+ Add new hook…</code> and enter this command:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class="">jq <span class="token parameter variable">-r</span> <span class="token string">'"\(.tool_input.command) - \(.tool_input.description // "No description")"'</span> <span class="token operator">&gt;&gt;</span> ~/.claude/bash-command-log.txt</span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="step-4%3A-save-your-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#step-4%3A-save-your-configuration">​</a></div><span class="cursor-pointer">Step 4: Save your configuration</span></h3>
+<p>For storage location, select <code>User settings</code> since you’re logging to your home
+directory. This hook will then apply to all projects, not just your current
+project.</p>
+<p>Then press Esc until you return to the REPL. Your hook is now registered!</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="step-5%3A-verify-your-hook"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#step-5%3A-verify-your-hook">​</a></div><span class="cursor-pointer">Step 5: Verify your hook</span></h3>
+<p>Run <code>/hooks</code> again or check <code>~/.claude/settings.json</code> to see your configuration:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"PreToolUse"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token property">"matcher"</span><span class="token operator">:</span> <span class="token string">"Bash"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">          <span class="token punctuation">{</span></span>
+<span class="">            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"command"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"jq -r '\"\\(.tool_input.command) - \\(.tool_input.description // \"No description\")\"' &gt;&gt; ~/.claude/bash-command-log.txt"</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">]</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="step-6%3A-test-your-hook"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#step-6%3A-test-your-hook">​</a></div><span class="cursor-pointer">Step 6: Test your hook</span></h3>
+<p>Ask Claude to run a simple command like <code>ls</code> and check your log file:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token function">cat</span> ~/.claude/bash-command-log.txt</span>
+</code></pre></div></div></div>
+<p>You should see entries like:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext"><code><span class="">ls - Lists files and directories</span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="more-examples"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#more-examples">​</a></div><span class="cursor-pointer">More Examples</span></h2>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>For a complete example implementation, see the <a class="link" href="https://github.com/anthropics/claude-code/blob/main/examples/hooks/bash_command_validator_example.py" rel="noreferrer" target="_blank">bash command validator example</a> in our public codebase.</p></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="code-formatting-hook"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#code-formatting-hook">​</a></div><span class="cursor-pointer">Code Formatting Hook</span></h3>
+<p>Automatically format TypeScript files after editing:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"PostToolUse"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token property">"matcher"</span><span class="token operator">:</span> <span class="token string">"Edit|MultiEdit|Write"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">          <span class="token punctuation">{</span></span>
+<span class="">            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"command"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"jq -r '.tool_input.file_path' | { read file_path; if echo \"$file_path\" | grep -q '\\.ts$'; then npx prettier --write \"$file_path\"; fi; }"</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">]</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="markdown-formatting-hook"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#markdown-formatting-hook">​</a></div><span class="cursor-pointer">Markdown Formatting Hook</span></h3>
+<p>Automatically fix missing language tags and formatting issues in markdown files:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"PostToolUse"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token property">"matcher"</span><span class="token operator">:</span> <span class="token string">"Edit|MultiEdit|Write"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">          <span class="token punctuation">{</span></span>
+<span class="">            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"command"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"$CLAUDE_PROJECT_DIR/.claude/hooks/markdown_formatter.py"</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">]</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>Create <code>.claude/hooks/markdown_formatter.py</code> with this content:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token comment">#!/usr/bin/env python3</span></span>
+<span class=""><span class="token string">""</span>"</span>
+<span class="">Markdown formatter <span class="token keyword">for</span> Claude Code output<span class="token punctuation">.</span></span>
+<span class="">Fixes missing language tags <span class="token keyword">and</span> spacing issues <span class="token keyword">while</span> preserving code content<span class="token punctuation">.</span></span>
+<span class=""><span class="token string">""</span>"</span>
+<span class=""><span class="token keyword">import</span> json</span>
+<span class=""><span class="token keyword">import</span> sys</span>
+<span class=""><span class="token keyword">import</span> re</span>
+<span class=""><span class="token keyword">import</span> os</span>
+<!-- -->
+<span class=""><span class="token keyword">def</span> <span class="token function">detect_language</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">    <span class="token triple-quoted-string string">"""Best-effort language detection from code content."""</span></span>
+<span class="">    s <span class="token operator">=</span> code<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<!-- -->    <!-- -->
+<span class="">    <span class="token comment"># JSON detection</span></span>
+<span class="">    <span class="token keyword">if</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'^\s*[{\[]'</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">        <span class="token keyword">try</span><span class="token punctuation">:</span></span>
+<span class="">            json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>s<span class="token punctuation">)</span></span>
+<span class="">            <span class="token keyword">return</span> <span class="token string">'json'</span></span>
+<span class="">        <span class="token keyword">except</span><span class="token punctuation">:</span></span>
+<span class="">            <span class="token keyword">pass</span></span>
+<!-- -->    <!-- -->
+<span class="">    <span class="token comment"># Python detection</span></span>
+<span class="">    <span class="token keyword">if</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'^\s*def\s+\w+\s*\('</span><span class="token punctuation">,</span> s<span class="token punctuation">,</span> re<span class="token punctuation">.</span>M<span class="token punctuation">)</span> <span class="token keyword">or</span> \</span>
+<span class="">       re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'^\s*(import|from)\s+\w+'</span><span class="token punctuation">,</span> s<span class="token punctuation">,</span> re<span class="token punctuation">.</span>M<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">        <span class="token keyword">return</span> <span class="token string">'python'</span></span>
+<!-- -->    <!-- -->
+<span class="">    <span class="token comment"># JavaScript detection  </span></span>
+<span class="">    <span class="token keyword">if</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'\b(function\s+\w+\s*\(|const\s+\w+\s*=)'</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span> <span class="token keyword">or</span> \</span>
+<span class="">       re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'=&gt;|console\.(log|error)'</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">        <span class="token keyword">return</span> <span class="token string">'javascript'</span></span>
+<!-- -->    <!-- -->
+<span class="">    <span class="token comment"># Bash detection</span></span>
+<span class="">    <span class="token keyword">if</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'^#!.*\b(bash|sh)\b'</span><span class="token punctuation">,</span> s<span class="token punctuation">,</span> re<span class="token punctuation">.</span>M<span class="token punctuation">)</span> <span class="token keyword">or</span> \</span>
+<span class="">       re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'\b(if|then|fi|for|in|do|done)\b'</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">        <span class="token keyword">return</span> <span class="token string">'bash'</span></span>
+<!-- -->    <!-- -->
+<span class="">    <span class="token comment"># SQL detection</span></span>
+<span class="">    <span class="token keyword">if</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'\b(SELECT|INSERT|UPDATE|DELETE|CREATE)\s+'</span><span class="token punctuation">,</span> s<span class="token punctuation">,</span> re<span class="token punctuation">.</span>I<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">        <span class="token keyword">return</span> <span class="token string">'sql'</span></span>
+<!-- -->        <!-- -->
+<span class="">    <span class="token keyword">return</span> <span class="token string">'text'</span></span>
+<!-- -->
+<span class=""><span class="token keyword">def</span> <span class="token function">format_markdown</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">    <span class="token triple-quoted-string string">"""Format markdown content with language detection."""</span></span>
+<span class="">    <span class="token comment"># Fix unlabeled code fences</span></span>
+<span class="">    <span class="token keyword">def</span> <span class="token function">add_lang_to_fence</span><span class="token punctuation">(</span><span class="token keyword">match</span><span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">        indent<span class="token punctuation">,</span> info<span class="token punctuation">,</span> body<span class="token punctuation">,</span> closing <span class="token operator">=</span> <span class="token keyword">match</span><span class="token punctuation">.</span>groups<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="">        <span class="token keyword">if</span> <span class="token keyword">not</span> info<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">            lang <span class="token operator">=</span> detect_language<span class="token punctuation">(</span>body<span class="token punctuation">)</span></span>
+<span class="">            <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">{</span>indent<span class="token punctuation">}</span></span><span class="token string">```</span><span class="token interpolation"><span class="token punctuation">{</span>lang<span class="token punctuation">}</span></span><span class="token string">\n</span><span class="token interpolation"><span class="token punctuation">{</span>body<span class="token punctuation">}</span></span><span class="token interpolation"><span class="token punctuation">{</span>closing<span class="token punctuation">}</span></span><span class="token string">\n"</span></span></span>
+<span class="">        <span class="token keyword">return</span> <span class="token keyword">match</span><span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></span>
+<!-- -->    <!-- -->
+<span class="">    fence_pattern <span class="token operator">=</span> <span class="token string">r'(?ms)^([ \t]{0,3})```([^\n]*)\n(.*?)(\n\1```)\s*$'</span></span>
+<span class="">    content <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span>fence_pattern<span class="token punctuation">,</span> add_lang_to_fence<span class="token punctuation">,</span> content<span class="token punctuation">)</span></span>
+<!-- -->    <!-- -->
+<span class="">    <span class="token comment"># Fix excessive blank lines (only outside code fences)</span></span>
+<span class="">    content <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">r'\n{3,}'</span><span class="token punctuation">,</span> <span class="token string">'\n\n'</span><span class="token punctuation">,</span> content<span class="token punctuation">)</span></span>
+<!-- -->    <!-- -->
+<span class="">    <span class="token keyword">return</span> content<span class="token punctuation">.</span>rstrip<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'\n'</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Main execution</span></span>
+<span class=""><span class="token keyword">try</span><span class="token punctuation">:</span></span>
+<span class="">    input_data <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>stdin<span class="token punctuation">)</span></span>
+<span class="">    file_path <span class="token operator">=</span> input_data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'tool_input'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'file_path'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span></span>
+<!-- -->    <!-- -->
+<span class="">    <span class="token keyword">if</span> <span class="token keyword">not</span> file_path<span class="token punctuation">.</span>endswith<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">'.md'</span><span class="token punctuation">,</span> <span class="token string">'.mdx'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">        sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment"># Not a markdown file</span></span>
+<!-- -->    <!-- -->
+<span class="">    <span class="token keyword">if</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>exists<span class="token punctuation">(</span>file_path<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="">        <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>file_path<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span></span>
+<span class="">            content <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<!-- -->        <!-- -->
+<span class="">        formatted <span class="token operator">=</span> format_markdown<span class="token punctuation">(</span>content<span class="token punctuation">)</span></span>
+<!-- -->        <!-- -->
+<span class="">        <span class="token keyword">if</span> formatted <span class="token operator">!=</span> content<span class="token punctuation">:</span></span>
+<span class="">            <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>file_path<span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span></span>
+<span class="">                f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>formatted<span class="token punctuation">)</span></span>
+<span class="">            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"✓ Fixed markdown formatting in </span><span class="token interpolation"><span class="token punctuation">{</span>file_path<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></span>
+<!-- -->    <!-- -->
+<span class=""><span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span></span>
+<span class="">    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Error formatting markdown: </span><span class="token interpolation"><span class="token punctuation">{</span>e<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span> <span class="token builtin">file</span><span class="token operator">=</span>sys<span class="token punctuation">.</span>stderr<span class="token punctuation">)</span></span>
+<span class="">    sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></span>
+</code></pre></div></div></div>
+<p>Make the script executable:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token function">chmod</span> +x .claude/hooks/markdown_formatter.py</span>
+</code></pre></div></div></div>
+<p>This hook automatically:</p>
+<ul>
+<li>Detects programming languages in unlabeled code blocks</li>
+<li>Adds appropriate language tags for syntax highlighting</li>
+<li>Fixes excessive blank lines while preserving code content</li>
+<li>Only processes markdown files (<code>.md</code>, <code>.mdx</code>)</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="custom-notification-hook"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#custom-notification-hook">​</a></div><span class="cursor-pointer">Custom Notification Hook</span></h3>
+<p>Get desktop notifications when Claude needs input:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"Notification"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token property">"matcher"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">          <span class="token punctuation">{</span></span>
+<span class="">            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"command"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"notify-send 'Claude Code' 'Awaiting your input'"</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">]</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="file-protection-hook"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#file-protection-hook">​</a></div><span class="cursor-pointer">File Protection Hook</span></h3>
+<p>Block edits to sensitive files:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"PreToolUse"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token property">"matcher"</span><span class="token operator">:</span> <span class="token string">"Edit|MultiEdit|Write"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">          <span class="token punctuation">{</span></span>
+<span class="">            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"command"</span><span class="token punctuation">,</span></span>
+<span class="">            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"python3 -c \"import json, sys; data=json.load(sys.stdin); path=data.get('tool_input',{}).get('file_path',''); sys.exit(2 if any(p in path for p in ['.env', 'package-lock.json', '.git/']) else 0)\""</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">]</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="learn-more"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#learn-more">​</a></div><span class="cursor-pointer">Learn more</span></h2>
+<ul>
+<li>For reference documentation on hooks, see <a class="link" href="/en/docs/claude-code/hooks">Hooks reference</a>.</li>
+<li>For comprehensive security best practices and safety guidelines, see <a class="link" href="/en/docs/claude-code/hooks#security-considerations">Security Considerations</a> in the hooks reference documentation.</li>
+<li>For troubleshooting steps and debugging techniques, see <a class="link" href="/en/docs/claude-code/hooks#debugging">Debugging</a> in the hooks reference
+documentation.</li>
+</ul></div>

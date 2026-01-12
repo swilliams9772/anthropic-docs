@@ -1,0 +1,197 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>This page provides detailed pricing information for Anthropic’s models and features. All prices are in USD.</p>
+<p>For the most current pricing information, please visit <a class="link" href="https://www.anthropic.com/pricing" rel="noreferrer" target="_blank">anthropic.com/pricing</a>.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="model-pricing"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#model-pricing">​</a></div><span class="cursor-pointer">Model pricing</span></h2>
+<p>The following table shows pricing for all Claude models across different usage tiers:</p>
+<table><thead><tr><th>Model</th><th>Base Input Tokens</th><th>5m Cache Writes</th><th>1h Cache Writes</th><th>Cache Hits &amp; Refreshes</th><th>Output Tokens</th></tr></thead><tbody><tr><td>Claude Opus 4.1</td><td>$15 / MTok</td><td>$18.75 / MTok</td><td>$30 / MTok</td><td>$1.50 / MTok</td><td>$75 / MTok</td></tr><tr><td>Claude Opus 4</td><td>$15 / MTok</td><td>$18.75 / MTok</td><td>$30 / MTok</td><td>$1.50 / MTok</td><td>$75 / MTok</td></tr><tr><td>Claude Sonnet 4</td><td>$3 / MTok</td><td>$3.75 / MTok</td><td>$6 / MTok</td><td>$0.30 / MTok</td><td>$15 / MTok</td></tr><tr><td>Claude Sonnet 3.7</td><td>$3 / MTok</td><td>$3.75 / MTok</td><td>$6 / MTok</td><td>$0.30 / MTok</td><td>$15 / MTok</td></tr><tr><td>Claude Sonnet 3.5 (<a class="link" href="/en/docs/about-claude/model-deprecations">deprecated</a>)</td><td>$3 / MTok</td><td>$3.75 / MTok</td><td>$6 / MTok</td><td>$0.30 / MTok</td><td>$15 / MTok</td></tr><tr><td>Claude Haiku 3.5</td><td>$0.80 / MTok</td><td>$1 / MTok</td><td>$1.6 / MTok</td><td>$0.08 / MTok</td><td>$4 / MTok</td></tr><tr><td>Claude Opus 3 (<a class="link" href="/en/docs/about-claude/model-deprecations">deprecated</a>)</td><td>$15 / MTok</td><td>$18.75 / MTok</td><td>$30 / MTok</td><td>$1.50 / MTok</td><td>$75 / MTok</td></tr><tr><td>Claude Haiku 3</td><td>$0.25 / MTok</td><td>$0.30 / MTok</td><td>$0.50 / MTok</td><td>$0.03 / MTok</td><td>$1.25 / MTok</td></tr></tbody></table>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>MTok = Million tokens. The “Base Input Tokens” column shows standard input pricing, “Cache Writes” and “Cache Hits” are specific to <a class="link" href="/en/docs/build-with-claude/prompt-caching">prompt caching</a>, and “Output Tokens” shows output pricing. Prompt caching offers both 5-minute (default) and 1-hour cache durations to optimize costs for different use cases.</p><p>The table above reflects the following pricing multipliers for prompt caching:</p><ul>
+<li>5-minute cache write tokens are 1.25 times the base input tokens price</li>
+<li>1-hour cache write tokens are 2 times the base input tokens price</li>
+<li>Cache read tokens are 0.1 times the base input tokens price</li>
+</ul></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="feature-specific-pricing"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#feature-specific-pricing">​</a></div><span class="cursor-pointer">Feature-specific pricing</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="batch-processing"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#batch-processing">​</a></div><span class="cursor-pointer">Batch processing</span></h3>
+<p>The Batch API allows asynchronous processing of large volumes of requests with a 50% discount on both input and output tokens.</p>
+<table><thead><tr><th>Model</th><th>Batch input</th><th>Batch output</th></tr></thead><tbody><tr><td>Claude Opus 4.1</td><td>$7.50 / MTok</td><td>$37.50 / MTok</td></tr><tr><td>Claude Opus 4</td><td>$7.50 / MTok</td><td>$37.50 / MTok</td></tr><tr><td>Claude Sonnet 4</td><td>$1.50 / MTok</td><td>$7.50 / MTok</td></tr><tr><td>Claude Sonnet 3.7</td><td>$1.50 / MTok</td><td>$7.50 / MTok</td></tr><tr><td>Claude Sonnet 3.5 (<a class="link" href="/en/docs/about-claude/model-deprecations">deprecated</a>)</td><td>$1.50 / MTok</td><td>$7.50 / MTok</td></tr><tr><td>Claude Haiku 3.5</td><td>$0.40 / MTok</td><td>$2 / MTok</td></tr><tr><td>Claude Opus 3 (<a class="link" href="/en/docs/about-claude/model-deprecations">deprecated</a>)</td><td>$7.50 / MTok</td><td>$37.50 / MTok</td></tr><tr><td>Claude Haiku 3</td><td>$0.125 / MTok</td><td>$0.625 / MTok</td></tr></tbody></table>
+<p>For more information about batch processing, see our <a class="link" href="/en/docs/build-with-claude/batch-processing">batch processing documentation</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="long-context-pricing"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#long-context-pricing">​</a></div><span class="cursor-pointer">Long context pricing</span></h3>
+<p>When using Claude Sonnet 4 with the <a class="link" href="/en/docs/build-with-claude/context-windows#1m-token-context-window">1M token context window enabled</a>, requests that exceed 200K input tokens are automatically charged at premium long context rates:</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>The 1M token context window is currently in beta for organizations in <a class="link" href="/en/api/rate-limits">usage tier</a> 4 and organizations with custom rate limits. The 1M token context window is only available for Claude Sonnet 4.</p></div></div>
+<table><thead><tr><th>≤ 200K input tokens</th><th>&gt; 200K input tokens</th></tr></thead><tbody><tr><td>Input: $3 / MTok</td><td>Input: $6 / MTok</td></tr><tr><td>Output: $15 / MTok</td><td>Output: $22.50 / MTok</td></tr></tbody></table>
+<p>Long context pricing stacks with other pricing modifiers:</p>
+<ul>
+<li>The <a class="link" href="/_sites/docs.anthropic.com/en/docs/about-claude/pricing#batch-processing">Batch API 50% discount</a> applies to long context pricing</li>
+<li><a class="link" href="/_sites/docs.anthropic.com/en/docs/about-claude/pricing#model-pricing">Prompt caching multipliers</a> apply on top of long context pricing</li>
+</ul>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>Even with the beta flag enabled, requests with fewer than 200K input tokens are charged at standard rates. If your request exceeds 200K input tokens, all tokens incur premium pricing.</p><p>The 200K threshold is based solely on input tokens (including cache reads/writes). Output token count does not affect pricing tier selection, though output tokens are charged at the higher rate when the input threshold is exceeded.</p></div></div>
+<p>To check if your API request was charged at the 1M context window rates, examine the <code>usage</code> object in the API response:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"usage"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"input_tokens"</span><span class="token operator">:</span> <span class="token number">250000</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"cache_creation_input_tokens"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"cache_read_input_tokens"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"output_tokens"</span><span class="token operator">:</span> <span class="token number">500</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>Calculate the total input tokens by summing:</p>
+<ul>
+<li><code>input_tokens</code></li>
+<li><code>cache_creation_input_tokens</code> (if using prompt caching)</li>
+<li><code>cache_read_input_tokens</code> (if using prompt caching)</li>
+</ul>
+<p>If the total exceeds 200,000 tokens, the entire request was billed at 1M context rates.</p>
+<p>For more information about the <code>usage</code> object, see the <a class="link" href="/en/api/messages#response-usage">API response documentation</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="tool-use-pricing"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#tool-use-pricing">​</a></div><span class="cursor-pointer">Tool use pricing</span></h3>
+<p>Tool use requests are priced based on:</p>
+<ol>
+<li>The total number of input tokens sent to the model (including in the <code>tools</code> parameter)</li>
+<li>The number of output tokens generated</li>
+<li>For server-side tools, additional usage-based pricing (e.g., web search charges per search performed)</li>
+</ol>
+<p>Client-side tools are priced the same as any other Claude API request, while server-side tools may incur additional charges based on their specific usage.</p>
+<p>The additional tokens from tool use come from:</p>
+<ul>
+<li>The <code>tools</code> parameter in API requests (tool names, descriptions, and schemas)</li>
+<li><code>tool_use</code> content blocks in API requests and responses</li>
+<li><code>tool_result</code> content blocks in API requests</li>
+</ul>
+<p>When you use <code>tools</code>, we also automatically include a special system prompt for the model which enables tool use. The number of tool use tokens required for each model are listed below (excluding the additional tokens listed above). Note that the table assumes at least 1 tool is provided. If no <code>tools</code> are provided, then a tool choice of <code>none</code> uses 0 additional system prompt tokens.</p>
+<table><thead><tr><th>Model</th><th>Tool choice</th><th>Tool use system prompt token count</th></tr></thead><tbody><tr><td>Claude Opus 4.1</td><td><code>auto</code>, <code>none</code><code>any</code>, <code>tool</code></td><td>346 tokens313 tokens</td></tr><tr><td>Claude Opus 4</td><td><code>auto</code>, <code>none</code><code>any</code>, <code>tool</code></td><td>346 tokens313 tokens</td></tr><tr><td>Claude Sonnet 4</td><td><code>auto</code>, <code>none</code><code>any</code>, <code>tool</code></td><td>346 tokens313 tokens</td></tr><tr><td>Claude Sonnet 3.7</td><td><code>auto</code>, <code>none</code><code>any</code>, <code>tool</code></td><td>346 tokens313 tokens</td></tr><tr><td>Claude Sonnet 3.5 (Oct) (<a class="link" href="/en/docs/about-claude/model-deprecations">deprecated</a>)</td><td><code>auto</code>, <code>none</code><code>any</code>, <code>tool</code></td><td>346 tokens313 tokens</td></tr><tr><td>Claude Sonnet 3.5 (June) (<a class="link" href="/en/docs/about-claude/model-deprecations">deprecated</a>)</td><td><code>auto</code>, <code>none</code><code>any</code>, <code>tool</code></td><td>294 tokens261 tokens</td></tr><tr><td>Claude Haiku 3.5</td><td><code>auto</code>, <code>none</code><code>any</code>, <code>tool</code></td><td>264 tokens340 tokens</td></tr><tr><td>Claude Opus 3 (<a class="link" href="/en/docs/about-claude/model-deprecations">deprecated</a>)</td><td><code>auto</code>, <code>none</code><code>any</code>, <code>tool</code></td><td>530 tokens281 tokens</td></tr><tr><td>Claude Sonnet 3</td><td><code>auto</code>, <code>none</code><code>any</code>, <code>tool</code></td><td>159 tokens235 tokens</td></tr><tr><td>Claude Haiku 3</td><td><code>auto</code>, <code>none</code><code>any</code>, <code>tool</code></td><td>264 tokens340 tokens</td></tr></tbody></table>
+<p>These token counts are added to your normal input and output tokens to calculate the total cost of a request.</p>
+<p>For current per-model prices, refer to our <a class="link" href="/_sites/docs.anthropic.com/en/docs/about-claude/pricing#model-pricing">model pricing</a> section above.</p>
+<p>For more information about tool use implementation and best practices, see our <a class="link" href="/en/docs/agents-and-tools/tool-use/overview">tool use documentation</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="specific-tool-pricing"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#specific-tool-pricing">​</a></div><span class="cursor-pointer">Specific tool pricing</span></h3>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="bash-tool"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#bash-tool">​</a></div><span class="cursor-pointer">Bash tool</span></h4>
+<p>The bash tool adds <strong>245 input tokens</strong> to your API calls.</p>
+<p>Additional tokens are consumed by:</p>
+<ul>
+<li>Command outputs (stdout/stderr)</li>
+<li>Error messages</li>
+<li>Large file contents</li>
+</ul>
+<p>See <a class="link" href="/_sites/docs.anthropic.com/en/docs/about-claude/pricing#tool-use-pricing">tool use pricing</a> for complete pricing details.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="code-execution-tool"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#code-execution-tool">​</a></div><span class="cursor-pointer">Code execution tool</span></h4>
+<p>The code execution tool usage is tracked separately from token usage. Execution time is a minimum of 5 minutes.
+If files are included in the request, execution time is billed even if the tool is not used due to files being preloaded onto the container.</p>
+<p><strong>Pricing</strong>: $0.05 per session-hour.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="text-editor-tool"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#text-editor-tool">​</a></div><span class="cursor-pointer">Text editor tool</span></h4>
+<p>The text editor tool uses the same pricing structure as other tools used with Claude. It follows the standard input and output token pricing based on the Claude model you’re using.</p>
+<p>In addition to the base tokens, the following additional input tokens are needed for the text editor tool:</p>
+<table><thead><tr><th>Tool</th><th>Additional input tokens</th></tr></thead><tbody><tr><td><code>text_editor_20250429</code> (Claude 4)</td><td>700 tokens</td></tr><tr><td><code>text_editor_20250124</code> (Claude Sonnet 3.7)</td><td>700 tokens</td></tr><tr><td><code>text_editor_20241022</code> (Claude Sonnet 3.5 (<a class="link" href="/en/docs/about-claude/model-deprecations">deprecated</a>))</td><td>700 tokens</td></tr></tbody></table>
+<p>See <a class="link" href="/_sites/docs.anthropic.com/en/docs/about-claude/pricing#tool-use-pricing">tool use pricing</a> for complete pricing details.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="web-search-tool"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#web-search-tool">​</a></div><span class="cursor-pointer">Web search tool</span></h4>
+<p>Web search usage is charged in addition to token usage:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json"><code class="language-json"><span class=""><span class="token property">"usage"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"input_tokens"</span><span class="token operator">:</span> <span class="token number">105</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"output_tokens"</span><span class="token operator">:</span> <span class="token number">6039</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"cache_read_input_tokens"</span><span class="token operator">:</span> <span class="token number">7123</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"cache_creation_input_tokens"</span><span class="token operator">:</span> <span class="token number">7345</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"server_tool_use"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"web_search_requests"</span><span class="token operator">:</span> <span class="token number">1</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>Web search is available on the Anthropic API for <strong>$10 per 1,000 searches</strong>, plus standard token costs for search-generated content. Web search results retrieved throughout a conversation are counted as input tokens, in search iterations executed during a single turn and in subsequent conversation turns.</p>
+<p>Each web search counts as one use, regardless of the number of results returned. If an error occurs during web search, the web search will not be billed.</p>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="computer-use-tool"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#computer-use-tool">​</a></div><span class="cursor-pointer">Computer use tool</span></h4>
+<p>Computer use follows the standard <a class="link" href="/en/docs/agents-and-tools/tool-use/overview#pricing">tool use pricing</a>. When using the computer use tool:</p>
+<p><strong>System prompt overhead</strong>: The computer use beta adds 466-499 tokens to the system prompt</p>
+<p><strong>Computer use tool token usage</strong>:</p>
+<table><thead><tr><th>Model</th><th>Input tokens per tool definition</th></tr></thead><tbody><tr><td>Claude 4 / Sonnet 3.7</td><td>735 tokens</td></tr><tr><td>Claude Sonnet 3.5 (<a class="link" href="/en/docs/about-claude/model-deprecations">deprecated</a>)</td><td>683 tokens</td></tr></tbody></table>
+<p><strong>Additional token consumption</strong>:</p>
+<ul>
+<li>Screenshot images (see <a class="link" href="/en/docs/build-with-claude/vision">Vision pricing</a>)</li>
+<li>Tool execution results returned to Claude</li>
+</ul>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>If you’re also using bash or text editor tools alongside computer use, those tools have their own token costs as documented in their respective pages.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="agent-use-case-pricing-examples"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#agent-use-case-pricing-examples">​</a></div><span class="cursor-pointer">Agent use case pricing examples</span></h2>
+<p>Understanding pricing for agent applications is crucial when building with Claude. These real-world examples can help you estimate costs for different agent patterns.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="customer-support-agent-example"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#customer-support-agent-example">​</a></div><span class="cursor-pointer">Customer support agent example</span></h3>
+<p>When building a customer support agent, here’s how costs might break down:</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>Example calculation for processing 10,000 support tickets:</p><ul>
+<li>Average ~3,700 tokens per conversation</li>
+<li>Using Claude Sonnet 4 at <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mi mathvariant="normal">/</mi><mi>M</mi><mi>T</mi><mi>o</mi><mi>k</mi><mi>i</mi><mi>n</mi><mi>p</mi><mi>u</mi><mi>t</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">3/MTok input, </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="mord">3/</span><span class="mord mathnormal" style="margin-right:0.13889em">MT</span><span class="mord mathnormal">o</span><span class="mord mathnormal">kin</span><span class="mord mathnormal">p</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mpunct">,</span></span></span></span>15/MTok output</li>
+<li>Total cost: ~$22.20 per 10,000 tickets</li>
+</ul></div></div>
+<p>For a detailed walkthrough of this calculation, see our <a class="link" href="/en/docs/about-claude/use-case-guides/customer-support-chat">customer support agent guide</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="general-agent-workflow-pricing"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#general-agent-workflow-pricing">​</a></div><span class="cursor-pointer">General agent workflow pricing</span></h3>
+<p>For more complex agent architectures with multiple steps:</p>
+<ol>
+<li>
+<p><strong>Initial request processing</strong></p>
+<ul>
+<li>Typical input: 500-1,000 tokens</li>
+<li>Processing cost: ~$0.003 per request</li>
+</ul>
+</li>
+<li>
+<p><strong>Memory and context retrieval</strong></p>
+<ul>
+<li>Retrieved context: 2,000-5,000 tokens</li>
+<li>Cost per retrieval: ~$0.015 per operation</li>
+</ul>
+</li>
+<li>
+<p><strong>Action planning and execution</strong></p>
+<ul>
+<li>Planning tokens: 1,000-2,000</li>
+<li>Execution feedback: 500-1,000</li>
+<li>Combined cost: ~$0.045 per action</li>
+</ul>
+</li>
+</ol>
+<p>For a comprehensive guide on agent pricing patterns, see our <a class="link" href="/en/docs/about-claude/use-case-guides">agent use cases guide</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="cost-optimization-strategies"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#cost-optimization-strategies">​</a></div><span class="cursor-pointer">Cost optimization strategies</span></h3>
+<p>When building agents with Claude:</p>
+<ol>
+<li><strong>Use appropriate models</strong>: Choose Haiku for simple tasks, Sonnet for complex reasoning</li>
+<li><strong>Implement prompt caching</strong>: Reduce costs for repeated context</li>
+<li><strong>Batch operations</strong>: Use the Batch API for non-time-sensitive tasks</li>
+<li><strong>Monitor usage patterns</strong>: Track token consumption to identify optimization opportunities</li>
+</ol>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>For high-volume agent applications, consider contacting our <a class="link" href="https://www.anthropic.com/contact-sales" rel="noreferrer" target="_blank">enterprise sales team</a> for custom pricing arrangements.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="additional-pricing-considerations"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#additional-pricing-considerations">​</a></div><span class="cursor-pointer">Additional pricing considerations</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="rate-limits"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#rate-limits">​</a></div><span class="cursor-pointer">Rate limits</span></h3>
+<p>Rate limits vary by usage tier and affect how many requests you can make:</p>
+<ul>
+<li><strong>Tier 1</strong>: Entry-level usage with basic limits</li>
+<li><strong>Tier 2</strong>: Increased limits for growing applications</li>
+<li><strong>Tier 3</strong>: Higher limits for established applications</li>
+<li><strong>Tier 4</strong>: Maximum standard limits</li>
+<li><strong>Enterprise</strong>: Custom limits available</li>
+</ul>
+<p>For detailed rate limit information, see our <a class="link" href="/en/api/rate-limits">rate limits documentation</a>.</p>
+<p>For higher rate limits or custom pricing arrangements, <a class="link" href="https://www.anthropic.com/contact-sales" rel="noreferrer" target="_blank">contact our sales team</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="volume-discounts"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#volume-discounts">​</a></div><span class="cursor-pointer">Volume discounts</span></h3>
+<p>Volume discounts may be available for high-volume users. These are negotiated on a case-by-case basis.</p>
+<ul>
+<li>Standard tiers use the pricing shown above</li>
+<li>Enterprise customers can <a class="link" href="mailto:sales@anthropic.com" rel="noreferrer" target="_blank">contact sales</a> for custom pricing</li>
+<li>Academic and research discounts may be available</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="enterprise-pricing"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#enterprise-pricing">​</a></div><span class="cursor-pointer">Enterprise pricing</span></h3>
+<p>For enterprise customers with specific needs:</p>
+<ul>
+<li>Custom rate limits</li>
+<li>Volume discounts</li>
+<li>Dedicated support</li>
+<li>Custom terms</li>
+</ul>
+<p>Contact our sales team at <a class="link" href="mailto:sales@anthropic.com" rel="noreferrer" target="_blank">sales@anthropic.com</a> or through the <a class="link" href="https://console.anthropic.com/settings/limits" rel="noreferrer" target="_blank">Anthropic Console</a> to discuss enterprise pricing options.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="billing-and-payment"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#billing-and-payment">​</a></div><span class="cursor-pointer">Billing and payment</span></h2>
+<ul>
+<li>Billing is calculated monthly based on actual usage</li>
+<li>Payments are processed in USD</li>
+<li>Credit card and invoicing options available</li>
+<li>Usage tracking available in the <a class="link" href="https://console.anthropic.com" rel="noreferrer" target="_blank">Anthropic Console</a></li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="frequently-asked-questions"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#frequently-asked-questions">​</a></div><span class="cursor-pointer">Frequently asked questions</span></h2>
+<p><strong>How is token usage calculated?</strong></p>
+<p>Tokens are pieces of text that models process. As a rough estimate, 1 token is approximately 4 characters or 0.75 words in English. The exact count varies by language and content type.</p>
+<p><strong>Are there free tiers or trials?</strong></p>
+<p>New users receive a small amount of free credits to test the API. <a class="link" href="mailto:sales@anthropic.com" rel="noreferrer" target="_blank">Contact sales</a> for information about extended trials for enterprise evaluation.</p>
+<p><strong>How do discounts stack?</strong></p>
+<p>Batch API and prompt caching discounts can be combined. For example, using both features together provides significant cost savings compared to standard API calls.</p>
+<p><strong>What payment methods are accepted?</strong></p>
+<p>We accept major credit cards for standard accounts. Enterprise customers can arrange invoicing and other payment methods.</p>
+<p>For additional questions about pricing, contact <a class="link" href="mailto:support@anthropic.com" rel="noreferrer" target="_blank">support@anthropic.com</a>.</p></div>

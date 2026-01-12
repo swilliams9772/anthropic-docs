@@ -1,0 +1,87 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><h2 class="flex whitespace-pre-wrap group font-semibold" id="how-we-approach-security"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#how-we-approach-security">​</a></div><span class="cursor-pointer">How we approach security</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="security-foundation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#security-foundation">​</a></div><span class="cursor-pointer">Security foundation</span></h3>
+<p>Your code’s security is paramount. Claude Code is built with security at its core, developed according to Anthropic’s comprehensive security program. Learn more and access resources (SOC 2 Type 2 report, ISO 27001 certificate, etc.) at <a class="link" href="https://trust.anthropic.com" rel="noreferrer" target="_blank">Anthropic Trust Center</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="permission-based-architecture"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#permission-based-architecture">​</a></div><span class="cursor-pointer">Permission-based architecture</span></h3>
+<p>Claude Code uses strict read-only permissions by default. When additional actions are needed (editing files, running tests, executing commands), Claude Code requests explicit permission. Users control whether to approve actions once or allow them automatically.</p>
+<p>We designed Claude Code to be transparent and secure. For example, we require approval for bash commands before executing them, giving you direct control. This approach enables users and organizations to configure permissions directly.</p>
+<p>For detailed permission configuration, see <a class="link" href="/en/docs/claude-code/iam">Identity and Access Management</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="built-in-protections"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#built-in-protections">​</a></div><span class="cursor-pointer">Built-in protections</span></h3>
+<p>To mitigate risks in agentic systems:</p>
+<ul>
+<li><strong>Write access restriction</strong>: Claude Code can only write to the folder where it was started and its subfolders—it cannot modify files in parent directories. While Claude Code can read files outside the working directory (useful for accessing system libraries and dependencies), write operations are strictly confined to the project scope, creating a clear security boundary</li>
+<li><strong>Prompt fatigue mitigation</strong>: Support for allowlisting frequently used safe commands per-user, per-codebase, or per-organization</li>
+<li><strong>Accept Edits mode</strong>: Batch accept multiple edits while maintaining permission prompts for commands with side effects</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="user-responsibility"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#user-responsibility">​</a></div><span class="cursor-pointer">User responsibility</span></h3>
+<p>Claude Code only has the permissions you grant it. You’re responsible for reviewing proposed code and commands for safety before approval.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="protect-against-prompt-injection"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#protect-against-prompt-injection">​</a></div><span class="cursor-pointer">Protect against prompt injection</span></h2>
+<p>Prompt injection is a technique where an attacker attempts to override or manipulate an AI assistant’s instructions by inserting malicious text. Claude Code includes several safeguards against these attacks:</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="core-protections"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#core-protections">​</a></div><span class="cursor-pointer">Core protections</span></h3>
+<ul>
+<li><strong>Permission system</strong>: Sensitive operations require explicit approval</li>
+<li><strong>Context-aware analysis</strong>: Detects potentially harmful instructions by analyzing the full request</li>
+<li><strong>Input sanitization</strong>: Prevents command injection by processing user inputs</li>
+<li><strong>Command blocklist</strong>: Blocks risky commands that fetch arbitrary content from the web like <code>curl</code> and <code>wget</code></li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="privacy-safeguards"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#privacy-safeguards">​</a></div><span class="cursor-pointer">Privacy safeguards</span></h3>
+<p>We have implemented several safeguards to protect your data, including:</p>
+<ul>
+<li>Limited retention periods for sensitive information</li>
+<li>Restricted access to user session data</li>
+<li>Clear policies against using feedback for model training</li>
+</ul>
+<p>For full details, please review our <a class="link" href="https://www.anthropic.com/legal/commercial-terms" rel="noreferrer" target="_blank">Commercial Terms of Service</a> and <a class="link" href="https://www.anthropic.com/legal/privacy" rel="noreferrer" target="_blank">Privacy Policy</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="additional-safeguards"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#additional-safeguards">​</a></div><span class="cursor-pointer">Additional safeguards</span></h3>
+<ul>
+<li><strong>Network request approval</strong>: Tools that make network requests require user approval by default</li>
+<li><strong>Isolated context windows</strong>: Web fetch uses a separate context window to avoid injecting potentially malicious prompts</li>
+<li><strong>Trust verification</strong>: First-time codebase runs and new MCP servers require trust verification</li>
+<li><strong>Command injection detection</strong>: Suspicious bash commands require manual approval even if previously allowlisted</li>
+<li><strong>Fail-closed matching</strong>: Unmatched commands default to requiring manual approval</li>
+<li><strong>Natural language descriptions</strong>: Complex bash commands include explanations for user understanding</li>
+<li><strong>Secure credential storage</strong>: API keys and tokens are encrypted. See <a class="link" href="/en/docs/claude-code/iam#credential-management">Credential Management</a></li>
+</ul>
+<p><strong>Best practices for working with untrusted content</strong>:</p>
+<ol>
+<li>Review suggested commands before approval</li>
+<li>Avoid piping untrusted content directly to Claude</li>
+<li>Verify proposed changes to critical files</li>
+<li>Use virtual machines (VMs) to run scripts and make tool calls, especially when interacting with external web services</li>
+<li>Report suspicious behavior with <code>/bug</code></li>
+</ol>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-amber-500/20 bg-amber-50/50 dark:border-amber-500/30 dark:bg-amber-500/10" data-callout-type="warning"><div class="text-sm prose min-w-0 w-full text-amber-900 dark:text-amber-200" data-component-part="callout-content"><p>While these protections significantly reduce risk, no system is completely
+immune to all attacks. Always maintain good security practices when working
+with any AI tool.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="mcp-security"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#mcp-security">​</a></div><span class="cursor-pointer">MCP security</span></h2>
+<p>Claude Code allows users to configure Model Context Protocol (MCP) servers. The list of allowed MCP servers is configured in your source code, as part of Claude Code settings engineers check into source control.</p>
+<p>We encourage either writing your own MCP servers or using MCP servers from providers that you trust. You are able to configure Claude Code permissions for MCP servers. Anthropic does not manage or audit any MCP servers.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="security-best-practices"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#security-best-practices">​</a></div><span class="cursor-pointer">Security best practices</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="working-with-sensitive-code"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#working-with-sensitive-code">​</a></div><span class="cursor-pointer">Working with sensitive code</span></h3>
+<ul>
+<li>Review all suggested changes before approval</li>
+<li>Use project-specific permission settings for sensitive repositories</li>
+<li>Consider using <a class="link" href="/en/docs/claude-code/devcontainer">devcontainers</a> for additional isolation</li>
+<li>Regularly audit your permission settings with <code>/permissions</code></li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="team-security"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#team-security">​</a></div><span class="cursor-pointer">Team security</span></h3>
+<ul>
+<li>Use <a class="link" href="/en/docs/claude-code/iam#enterprise-managed-policy-settings">enterprise managed policies</a> to enforce organizational standards</li>
+<li>Share approved permission configurations through version control</li>
+<li>Train team members on security best practices</li>
+<li>Monitor Claude Code usage through <a class="link" href="/en/docs/claude-code/monitoring-usage">OpenTelemetry metrics</a></li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="reporting-security-issues"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#reporting-security-issues">​</a></div><span class="cursor-pointer">Reporting security issues</span></h3>
+<p>If you discover a security vulnerability in Claude Code:</p>
+<ol>
+<li>Do not disclose it publicly</li>
+<li>Report it through our <a class="link" href="https://hackerone.com/anthropic-vdp/reports/new?type=team&amp;report_type=vulnerability" rel="noreferrer" target="_blank">HackerOne program</a></li>
+<li>Include detailed reproduction steps</li>
+<li>Allow time for us to address the issue before public disclosure</li>
+</ol>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="related-resources"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#related-resources">​</a></div><span class="cursor-pointer">Related resources</span></h2>
+<ul>
+<li><a class="link" href="/en/docs/claude-code/iam">Identity and Access Management</a> - Configure permissions and access controls</li>
+<li><a class="link" href="/en/docs/claude-code/monitoring-usage">Monitoring usage</a> - Track and audit Claude Code activity</li>
+<li><a class="link" href="/en/docs/claude-code/devcontainer">Development containers</a> - Secure, isolated environments</li>
+<li><a class="link" href="https://trust.anthropic.com" rel="noreferrer" target="_blank">Anthropic Trust Center</a> - Security certifications and compliance</li>
+</ul></div>

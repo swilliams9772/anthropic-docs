@@ -1,0 +1,87 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><h2 class="flex whitespace-pre-wrap group font-semibold" id="prerequisites"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#prerequisites">​</a></div><span class="cursor-pointer">Prerequisites</span></h2>
+<p>Before configuring Claude Code with Vertex AI, ensure you have:</p>
+<ul>
+<li>A Google Cloud Platform (GCP) account with billing enabled</li>
+<li>A GCP project with Vertex AI API enabled</li>
+<li>Access to desired Claude models (e.g., Claude Sonnet 4)</li>
+<li>Google Cloud SDK (<code>gcloud</code>) installed and configured</li>
+<li>Quota allocated in desired GCP region</li>
+</ul>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-amber-500/20 bg-amber-50/50 dark:border-amber-500/30 dark:bg-amber-500/10" data-callout-type="warning"><div class="text-sm prose min-w-0 w-full text-amber-900 dark:text-amber-200" data-component-part="callout-content"><p>Vertex AI may not support the Claude Code default models on non-<code>us-east5</code> regions. Ensure you are using <code>us-east5</code> and have quota allocated, or switch to supported models.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="setup"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#setup">​</a></div><span class="cursor-pointer">Setup</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="1-enable-vertex-ai-api"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#1-enable-vertex-ai-api">​</a></div><span class="cursor-pointer">1. Enable Vertex AI API</span></h3>
+<p>Enable the Vertex AI API in your GCP project:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token comment"># Set your project ID</span></span>
+<span class="">gcloud config <span class="token builtin class-name">set</span> project YOUR-PROJECT-ID</span>
+<!-- -->
+<span class=""><span class="token comment"># Enable Vertex AI API</span></span>
+<span class="">gcloud services <span class="token builtin class-name">enable</span> aiplatform.googleapis.com</span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="2-request-model-access"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#2-request-model-access">​</a></div><span class="cursor-pointer">2. Request model access</span></h3>
+<p>Request access to Claude models in Vertex AI:</p>
+<ol>
+<li>Navigate to the <a class="link" href="https://console.cloud.google.com/vertex-ai/model-garden" rel="noreferrer" target="_blank">Vertex AI Model Garden</a></li>
+<li>Search for “Claude” models</li>
+<li>Request access to desired Claude models (e.g., Claude Sonnet 4)</li>
+<li>Wait for approval (may take 24-48 hours)</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="3-configure-gcp-credentials"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#3-configure-gcp-credentials">​</a></div><span class="cursor-pointer">3. Configure GCP credentials</span></h3>
+<p>Claude Code uses standard Google Cloud authentication.</p>
+<p>For more information, see <a class="link" href="https://cloud.google.com/docs/authentication" rel="noreferrer" target="_blank">Google Cloud authentication documentation</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="4-configure-claude-code"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#4-configure-claude-code">​</a></div><span class="cursor-pointer">4. Configure Claude Code</span></h3>
+<p>Set the following environment variables:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token comment"># Enable Vertex AI integration</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">CLAUDE_CODE_USE_VERTEX</span><span class="token operator">=</span><span class="token number">1</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">CLOUD_ML_REGION</span><span class="token operator">=</span>us-east5</span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_VERTEX_PROJECT_ID</span><span class="token operator">=</span>YOUR-PROJECT-ID</span>
+<!-- -->
+<span class=""><span class="token comment"># Optional: Disable prompt caching if needed</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">DISABLE_PROMPT_CACHING</span><span class="token operator">=</span><span class="token number">1</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Optional: Override regions for specific models</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">VERTEX_REGION_CLAUDE_3_5_HAIKU</span><span class="token operator">=</span>us-central1</span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">VERTEX_REGION_CLAUDE_3_5_SONNET</span><span class="token operator">=</span>us-east5</span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">VERTEX_REGION_CLAUDE_3_7_SONNET</span><span class="token operator">=</span>us-east5</span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">VERTEX_REGION_CLAUDE_4_0_OPUS</span><span class="token operator">=</span>europe-west4</span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">VERTEX_REGION_CLAUDE_4_0_SONNET</span><span class="token operator">=</span>us-east5</span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">VERTEX_REGION_CLAUDE_4_1_OPUS</span><span class="token operator">=</span>europe-west4</span>
+</code></pre></div></div></div>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p><a class="link" href="/en/docs/build-with-claude/prompt-caching">Prompt caching</a> is automatically supported when you specify the <code>cache_control</code> ephemeral flag. To disable it, set <code>DISABLE_PROMPT_CACHING=1</code>. For heightened rate limits, contact Google Cloud support.</p></div></div>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>When using Vertex AI, the <code>/login</code> and <code>/logout</code> commands are disabled since authentication is handled through Google Cloud credentials.</p></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="5-model-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#5-model-configuration">​</a></div><span class="cursor-pointer">5. Model configuration</span></h3>
+<p>Claude Code uses these default models for Vertex AI:</p>
+<table><thead><tr><th style="text-align:left">Model type</th><th style="text-align:left">Default value</th></tr></thead><tbody><tr><td style="text-align:left">Primary model</td><td style="text-align:left"><code>claude-sonnet-4@20250514</code></td></tr><tr><td style="text-align:left">Small/fast model</td><td style="text-align:left"><code>claude-3-5-haiku@20241022</code></td></tr></tbody></table>
+<p>To customize models:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_MODEL</span><span class="token operator">=</span><span class="token string">'claude-opus-4-1@20250805'</span></span>
+<span class=""><span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_SMALL_FAST_MODEL</span><span class="token operator">=</span><span class="token string">'claude-3-5-haiku@20241022'</span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="iam-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#iam-configuration">​</a></div><span class="cursor-pointer">IAM configuration</span></h2>
+<p>Assign the required IAM permissions:</p>
+<p>The <code>roles/aiplatform.user</code> role includes the required permissions:</p>
+<ul>
+<li><code>aiplatform.endpoints.predict</code> - Required for model invocation</li>
+<li><code>aiplatform.endpoints.computeTokens</code> - Required for token counting</li>
+</ul>
+<p>For more restrictive permissions, create a custom role with only the permissions above.</p>
+<p>For details, see <a class="link" href="https://cloud.google.com/vertex-ai/docs/general/access-control" rel="noreferrer" target="_blank">Vertex IAM documentation</a>.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>We recommend creating a dedicated GCP project for Claude Code to simplify cost tracking and access control.</p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="troubleshooting"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#troubleshooting">​</a></div><span class="cursor-pointer">Troubleshooting</span></h2>
+<p>If you encounter quota issues:</p>
+<ul>
+<li>Check current quotas or request quota increase through <a class="link" href="https://cloud.google.com/docs/quotas/view-manage" rel="noreferrer" target="_blank">Cloud Console</a></li>
+</ul>
+<p>If you encounter “model not found” 404 errors:</p>
+<ul>
+<li>Verify you have access to the specified region</li>
+<li>Confirm model is Enabled in <a class="link" href="https://console.cloud.google.com/vertex-ai/model-garden" rel="noreferrer" target="_blank">Model Garden</a></li>
+</ul>
+<p>If you encounter 429 errors:</p>
+<ul>
+<li>Ensure the primary model and small/fast model are supported in your selected region</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="additional-resources"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#additional-resources">​</a></div><span class="cursor-pointer">Additional resources</span></h2>
+<ul>
+<li><a class="link" href="https://cloud.google.com/vertex-ai/docs" rel="noreferrer" target="_blank">Vertex AI documentation</a></li>
+<li><a class="link" href="https://cloud.google.com/vertex-ai/pricing" rel="noreferrer" target="_blank">Vertex AI pricing</a></li>
+<li><a class="link" href="https://cloud.google.com/vertex-ai/docs/quotas" rel="noreferrer" target="_blank">Vertex AI quotas and limits</a></li>
+</ul></div>

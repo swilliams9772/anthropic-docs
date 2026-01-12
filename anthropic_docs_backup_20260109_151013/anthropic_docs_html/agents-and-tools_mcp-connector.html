@@ -1,0 +1,149 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>Claude’s Model Context Protocol (MCP) connector feature enables you to connect to remote MCP servers directly from the Messages API without a separate MCP client.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>This feature requires the beta header: <code>"anthropic-beta": "mcp-client-2025-04-04"</code></p></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="key-features"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#key-features">​</a></div><span class="cursor-pointer">Key features</span></h2>
+<ul>
+<li><strong>Direct API integration</strong>: Connect to MCP servers without implementing an MCP client</li>
+<li><strong>Tool calling support</strong>: Access MCP tools through the Messages API</li>
+<li><strong>OAuth authentication</strong>: Support for OAuth Bearer tokens for authenticated servers</li>
+<li><strong>Multiple servers</strong>: Connect to multiple MCP servers in a single request</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="limitations"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#limitations">​</a></div><span class="cursor-pointer">Limitations</span></h2>
+<ul>
+<li>Of the feature set of the <a class="link" href="https://modelcontextprotocol.io/introduction#explore-mcp" rel="noreferrer" target="_blank">MCP specification</a>, only <a class="link" href="https://modelcontextprotocol.io/docs/concepts/tools" rel="noreferrer" target="_blank">tool calls</a> are currently supported.</li>
+<li>The server must be publicly exposed through HTTP (supports both Streamable HTTP and SSE transports). Local STDIO servers cannot be connected directly.</li>
+<li>The MCP connector is currently not supported on Amazon Bedrock and Google Vertex.</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="using-the-mcp-connector-in-the-messages-api"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#using-the-mcp-connector-in-the-messages-api">​</a></div><span class="cursor-pointer">Using the MCP connector in the Messages API</span></h2>
+<p>To connect to a remote MCP server, include the <code>mcp_servers</code> parameter in your Messages API request:</p>
+<div class="code-group mt-5 mb-8 flex flex-col not-prose relative overflow-hidden rounded-2xl dark:border-gray-800/50 bg-[#0F1117] border border-transparent dark:bg-codeblock text-gray-50 codeblock-dark" id="code-group"><div class="relative border-b border-gray-900/80 bg-[#0F1117] dark:bg-codeblock" data-component-part="code-group-tab-bar"><div aria-orientation="horizontal" class="text-xs leading-6 rounded-t-xl flex overflow-x-auto overflow-y-hidden mr-12 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25" role="tablist"><button aria-selected="true" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-primary-light" data-headlessui-state="selected" id="headlessui-tabs-tab-:Rap2mpkql6:" role="tab" tabindex="0" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">cURL</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:Rip2mpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">TypeScript</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:Rqp2mpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Python</div></button></div></div><div class="flex flex-1 overflow-hidden"><div class="relative min-w-full w-full transition-[height] duration-300 ease-in-out" data-headlessui-state="selected" id="headlessui-tabs-panel-:R392mpkql6:" role="tabpanel" style="font-variant-ligatures:none;height:auto" tabindex="0"><div class="flex-none p-5 overflow-x-auto text-sm h-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25 leading-6" data-component-part="code-group-tab-content"><pre class="language-bash language-bash"><code class="language-bash"><span class=""><span class="token function">curl</span> https://api.anthropic.com/v1/messages <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"Content-Type: application/json"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"X-API-Key: <span class="token variable">$ANTHROPIC_API_KEY</span>"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"anthropic-version: 2023-06-01"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-H</span> <span class="token string">"anthropic-beta: mcp-client-2025-04-04"</span> <span class="token punctuation">\</span></span>
+<span class="">  <span class="token parameter variable">-d</span> '<span class="token punctuation">{</span></span>
+<span class="">    <span class="token string">"model"</span><span class="token builtin class-name">:</span> <span class="token string">"claude-sonnet-4-20250514"</span>,</span>
+<span class="">    <span class="token string">"max_tokens"</span><span class="token builtin class-name">:</span> <span class="token number">1000</span>,</span>
+<span class="">    <span class="token string">"messages"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token builtin class-name">:</span> <span class="token string">"user"</span>, <span class="token string">"content"</span><span class="token builtin class-name">:</span> <span class="token string">"What tools do you have available?"</span><span class="token punctuation">}</span><span class="token punctuation">]</span>,</span>
+<span class="">    <span class="token string">"mcp_servers"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span></span>
+<span class="">      <span class="token punctuation">{</span></span>
+<span class="">        <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"url"</span>,</span>
+<span class="">        <span class="token string">"url"</span><span class="token builtin class-name">:</span> <span class="token string">"https://example-server.modelcontextprotocol.io/sse"</span>,</span>
+<span class="">        <span class="token string">"name"</span><span class="token builtin class-name">:</span> <span class="token string">"example-mcp"</span>,</span>
+<span class="">        <span class="token string">"authorization_token"</span><span class="token builtin class-name">:</span> <span class="token string">"YOUR_TOKEN"</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span>'</span>
+</code></pre></div></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="mcp-server-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#mcp-server-configuration">​</a></div><span class="cursor-pointer">MCP server configuration</span></h2>
+<p>Each MCP server in the <code>mcp_servers</code> array supports the following configuration:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"url"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"https://example-server.modelcontextprotocol.io/sse"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"example-mcp"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"tool_configuration"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"enabled"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"allowed_tools"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"example_tool_1"</span><span class="token punctuation">,</span> <span class="token string">"example_tool_2"</span><span class="token punctuation">]</span></span>
+<span class="">  <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"authorization_token"</span><span class="token operator">:</span> <span class="token string">"YOUR_TOKEN"</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="field-descriptions"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#field-descriptions">​</a></div><span class="cursor-pointer">Field descriptions</span></h3>
+<table><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td><code>type</code></td><td>string</td><td>Yes</td><td>Currently only “url” is supported</td></tr><tr><td><code>url</code></td><td>string</td><td>Yes</td><td>The URL of the MCP server. Must start with https://</td></tr><tr><td><code>name</code></td><td>string</td><td>Yes</td><td>A unique identifier for this MCP server. It will be used in <code>mcp_tool_call</code> blocks to identify the server and to disambiguate tools to the model.</td></tr><tr><td><code>tool_configuration</code></td><td>object</td><td>No</td><td>Configure tool usage</td></tr><tr><td><code>tool_configuration.enabled</code></td><td>boolean</td><td>No</td><td>Whether to enable tools from this server (default: true)</td></tr><tr><td><code>tool_configuration.allowed_tools</code></td><td>array</td><td>No</td><td>List to restrict the tools to allow (by default, all tools are allowed)</td></tr><tr><td><code>authorization_token</code></td><td>string</td><td>No</td><td>OAuth authorization token if required by the MCP server. See <a class="link" href="https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization" rel="noreferrer" target="_blank">MCP specification</a>.</td></tr></tbody></table>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="response-content-types"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#response-content-types">​</a></div><span class="cursor-pointer">Response content types</span></h2>
+<p>When Claude uses MCP tools, the response will include two new content block types:</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="mcp-tool-use-block"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#mcp-tool-use-block">​</a></div><span class="cursor-pointer">MCP Tool Use Block</span></h3>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"mcp_tool_use"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"mcptoolu_014Q35RayjACSWkSj4X2yov1"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"echo"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"server_name"</span><span class="token operator">:</span> <span class="token string">"example-mcp"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"input"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"param1"</span><span class="token operator">:</span> <span class="token string">"value1"</span><span class="token punctuation">,</span> <span class="token property">"param2"</span><span class="token operator">:</span> <span class="token string">"value2"</span> <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="mcp-tool-result-block"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#mcp-tool-result-block">​</a></div><span class="cursor-pointer">MCP Tool Result Block</span></h3>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"mcp_tool_result"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"tool_use_id"</span><span class="token operator">:</span> <span class="token string">"mcptoolu_014Q35RayjACSWkSj4X2yov1"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"is_error"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"text"</span><span class="token operator">:</span> <span class="token string">"Hello"</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="multiple-mcp-servers"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#multiple-mcp-servers">​</a></div><span class="cursor-pointer">Multiple MCP servers</span></h2>
+<p>You can connect to multiple MCP servers by including multiple objects in the <code>mcp_servers</code> array:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"model"</span><span class="token operator">:</span> <span class="token string">"claude-sonnet-4-20250514"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"max_tokens"</span><span class="token operator">:</span> <span class="token number">1000</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"messages"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Use tools from both mcp-server-1 and mcp-server-2 to complete this task"</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"mcp_servers"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"url"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"https://mcp.example1.com/sse"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"mcp-server-1"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"authorization_token"</span><span class="token operator">:</span> <span class="token string">"TOKEN1"</span></span>
+<span class="">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"url"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"https://mcp.example2.com/sse"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"mcp-server-2"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"authorization_token"</span><span class="token operator">:</span> <span class="token string">"TOKEN2"</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="authentication"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#authentication">​</a></div><span class="cursor-pointer">Authentication</span></h2>
+<p>For MCP servers that require OAuth authentication, you’ll need to obtain an access token. The MCP connector beta supports passing an <code>authorization_token</code> parameter in the MCP server definition.
+API consumers are expected to handle the OAuth flow and obtain the access token prior to making the API call, as well as refreshing the token as needed.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="obtaining-an-access-token-for-testing"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#obtaining-an-access-token-for-testing">​</a></div><span class="cursor-pointer">Obtaining an access token for testing</span></h3>
+<p>The MCP inspector can guide you through the process of obtaining an access token for testing purposes.</p>
+<ol>
+<li>
+<p>Run the inspector with the following command. You need Node.js installed on your machine.</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class="">npx @modelcontextprotocol/inspector</span>
+</code></pre></div></div></div>
+</li>
+<li>
+<p>In the sidebar on the left, for “Transport type”, select either “SSE” or “Streamable HTTP”.</p>
+</li>
+<li>
+<p>Enter the URL of the MCP server.</p>
+</li>
+<li>
+<p>In the right area, click on the “Open Auth Settings” button after “Need to configure authentication?”.</p>
+</li>
+<li>
+<p>Click “Quick OAuth Flow” and authorize on the OAuth screen.</p>
+</li>
+<li>
+<p>Follow the steps in the “OAuth Flow Progress” section of the inspector and click “Continue” until you reach “Authentication complete”.</p>
+</li>
+<li>
+<p>Copy the <code>access_token</code> value.</p>
+</li>
+<li>
+<p>Paste it into the <code>authorization_token</code> field in your MCP server configuration.</p>
+</li>
+</ol>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="using-the-access-token"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#using-the-access-token">​</a></div><span class="cursor-pointer">Using the access token</span></h3>
+<p>Once you’ve obtained an access token using either OAuth flow above, you can use it in your MCP server configuration:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"mcp_servers"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"url"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"https://example-server.modelcontextprotocol.io/sse"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"authenticated-server"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token property">"authorization_token"</span><span class="token operator">:</span> <span class="token string">"YOUR_ACCESS_TOKEN_HERE"</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>For detailed explanations of the OAuth flow, refer to the <a class="link" href="https://modelcontextprotocol.io/docs/concepts/authentication" rel="noreferrer" target="_blank">Authorization section</a> in the MCP specification.</p></div>

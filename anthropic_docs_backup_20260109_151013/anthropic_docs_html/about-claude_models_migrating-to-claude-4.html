@@ -1,0 +1,109 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>This page provides guidance on migrating from Claude 3.7 models to Claude 4 models (Opus 4.1, Opus 4, and Sonnet 4).</p>
+<p>In most cases, you can switch to Claude 4 models with minimal changes:</p>
+<ol>
+<li>
+<p>Update your model name:</p>
+<ul>
+<li>From: <code>claude-3-7-sonnet-20250219</code></li>
+<li>To: <code>claude-sonnet-4-20250514</code> or <code>claude-opus-4-1-20250805</code></li>
+</ul>
+</li>
+<li>
+<p>Existing API calls should continue to work without modification, although API behavior has changed slightly in Claude 4 models (see <a class="link" href="/en/release-notes/api">API release notes</a> for details).</p>
+</li>
+</ol>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="what%E2%80%99s-new-in-claude-4"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#what%E2%80%99s-new-in-claude-4">​</a></div><span class="cursor-pointer">What’s new in Claude 4</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="new-refusal-stop-reason"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#new-refusal-stop-reason">​</a></div><span class="cursor-pointer">New refusal stop reason</span></h3>
+<p>Claude 4 models introduce a new <code>refusal</code> stop reason for content that the model declines to generate for safety reasons, due to the increased intelligence of Claude 4 models:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-json"><span class=""><span class="token punctuation">{</span><span class="token property">"id"</span><span class="token operator">:</span><span class="token string">"msg_014XEDjypDjFzgKVWdFUXxZP"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"message"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token property">"role"</span><span class="token operator">:</span><span class="token string">"assistant"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token property">"model"</span><span class="token operator">:</span><span class="token string">"claude-sonnet-4-20250514"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token property">"content"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"text"</span><span class="token punctuation">,</span><span class="token property">"text"</span><span class="token operator">:</span><span class="token string">"I would be happy to assist you. You can "</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token property">"stop_reason"</span><span class="token operator">:</span><span class="token string">"refusal"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token property">"stop_sequence"</span><span class="token operator">:</span><span class="token null keyword">null</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token property">"usage"</span><span class="token operator">:</span><span class="token punctuation">{</span><span class="token property">"input_tokens"</span><span class="token operator">:</span><span class="token number">564</span><span class="token punctuation">,</span><span class="token property">"cache_creation_input_tokens"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token property">"cache_read_input_tokens"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token property">"output_tokens"</span><span class="token operator">:</span><span class="token number">22</span><span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>When migrating to Claude 4, you should update your application to <a class="link" href="/en/docs/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals">handle <code>refusal</code> stop reasons</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="summarized-thinking"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#summarized-thinking">​</a></div><span class="cursor-pointer">Summarized thinking</span></h3>
+<p>With extended thinking enabled, the Messages API for Claude 4 models returns a summary of Claude’s full thinking process. Summarized thinking provides the full intelligence benefits of extended thinking, while preventing misuse.</p>
+<p>While the API is consistent across Claude 3.7 and 4 models, streaming responses for extended thinking might return in a “chunky” delivery pattern, with possible delays between streaming events.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>Summarization is processed by a different model than the one you target in your requests. The thinking model does not see the summarized output.</p></div></div>
+<p>For more information, see the <a class="link" href="/en/docs/build-with-claude/extended-thinking#summarized-thinking">Extended thinking documentation</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="interleaved-thinking"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#interleaved-thinking">​</a></div><span class="cursor-pointer">Interleaved thinking</span></h3>
+<p>Claude 4 models support interleaving tool use with extended thinking, allowing for more natural conversations where tool uses and responses can be mixed with regular messages.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>Interleaved thinking is in beta. To enable interleaved thinking, add <a class="link" href="/en/api/beta-headers">the beta header</a> <code>interleaved-thinking-2025-05-14</code> to your API request.</p></div></div>
+<p>For more information, see the <a class="link" href="/en/docs/build-with-claude/extended-thinking#interleaved-thinking">Extended thinking documentation</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="updated-text-editor-tool"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#updated-text-editor-tool">​</a></div><span class="cursor-pointer">Updated text editor tool</span></h3>
+<p>The text editor tool has been updated for Claude 4 models with the following changes:</p>
+<ul>
+<li><strong>Tool type</strong>: <code>text_editor_20250728</code></li>
+<li><strong>Tool name</strong>: <code>str_replace_based_edit_tool</code></li>
+<li>The <code>undo_edit</code> command is no longer supported in Claude 4 models.</li>
+</ul>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p>The <code>str_replace_editor</code> text editor tool remains the same for Claude Sonnet 3.7.</p></div></div>
+<p>If you’re migrating from Claude Sonnet 3.7 and using the text editor tool:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python"><code class="language-python"><span class=""><span class="token comment"># Claude Sonnet 3.7</span></span>
+<span class="">tools<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">        <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text_editor_20250124"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"str_replace_editor"</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">]</span></span>
+<!-- -->
+<span class=""><span class="token comment"># Claude 4</span></span>
+<span class="">tools<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">        <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text_editor_20250728"</span><span class="token punctuation">,</span></span>
+<span class="">        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"str_replace_based_edit_tool"</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">]</span></span>
+</code></pre></div></div></div>
+<p>For more information, see the <a class="link" href="/en/docs/agents-and-tools/tool-use/text-editor-tool">Text editor tool documentation</a>.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="token-efficient-tool-use-no-longer-supported"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#token-efficient-tool-use-no-longer-supported">​</a></div><span class="cursor-pointer">Token-efficient tool use no longer supported</span></h3>
+<p><a class="link" href="/en/docs/agents-and-tools/tool-use/token-efficient-tool-use">Token-efficient tool use</a> is only available in Claude Sonnet 3.7.</p>
+<p>If you’re migrating from Claude Sonnet 3.7 and using token-efficient tool use, we recommend removing the <code>token-efficient-tools-2025-02-19</code> <a class="link" href="/en/api/beta-headers">beta header</a> from your requests.</p>
+<p>The <code>token-efficient-tools-2025-02-19</code> beta header can still be included in Claude 4 requests, but it will have no effect.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="extended-output-no-longer-supported"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#extended-output-no-longer-supported">​</a></div><span class="cursor-pointer">Extended output no longer supported</span></h3>
+<p>The <code>output-128k-2025-02-19</code> <a class="link" href="/en/api/beta-headers">beta header</a> for extended output is only available in Claude Sonnet 3.7.</p>
+<p>If you’re migrating from Claude Sonnet 3.7, we recommend removing <code>output-128k-2025-02-19</code> from your requests.</p>
+<p>The <code>output-128k-2025-02-19</code> beta header can still be included in Claude 4 requests, but it will have no effect.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="performance-considerations"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#performance-considerations">​</a></div><span class="cursor-pointer">Performance considerations</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="claude-sonnet-4"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#claude-sonnet-4">​</a></div><span class="cursor-pointer">Claude Sonnet 4</span></h3>
+<ul>
+<li>Improved reasoning and intelligence capabilities compared to Claude Sonnet 3.7</li>
+<li>Enhanced tool use accuracy</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="claude-opus-4-1"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#claude-opus-4-1">​</a></div><span class="cursor-pointer">Claude Opus 4.1</span></h3>
+<ul>
+<li>Most capable model with superior reasoning and intelligence</li>
+<li>Slower than Sonnet models</li>
+<li>Best for complex tasks requiring deep analysis</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="claude-opus-4"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#claude-opus-4">​</a></div><span class="cursor-pointer">Claude Opus 4</span></h3>
+<ul>
+<li>Previous flagship model with very high reasoning and intelligence</li>
+<li>Slower than Sonnet models</li>
+<li>Excellent for complex tasks requiring deep analysis</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="migration-checklist"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#migration-checklist">​</a></div><span class="cursor-pointer">Migration checklist</span></h2>
+<ul class="contains-task-list">
+<li class="task-list-item"> <!-- -->Update model id in your API calls</li>
+<li class="task-list-item"> <!-- -->Test existing requests (should work without changes)</li>
+<li class="task-list-item"> <!-- -->Remove <code>token-efficient-tools-2025-02-19</code> beta header if applicable</li>
+<li class="task-list-item"> <!-- -->Remove <code>output-128k-2025-02-19</code> beta header if applicable</li>
+<li class="task-list-item"> <!-- -->Handle new <code>refusal</code> stop reason</li>
+<li class="task-list-item"> <!-- -->Update text editor tool type and name if using it</li>
+<li class="task-list-item"> <!-- -->Remove any code that uses the <code>undo_edit</code> command</li>
+<li class="task-list-item"> <!-- -->Explore new tool interleaving capabilities with extended thinking</li>
+<li class="task-list-item"> <!-- -->Review <a class="link" href="/en/docs/build-with-claude/prompt-engineering/claude-4-best-practices">Claude 4 prompt engineering best practices</a> for optimal results</li>
+<li class="task-list-item"> <!-- -->Test in development before production deployment</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="need-help%3F"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#need-help%3F">​</a></div><span class="cursor-pointer">Need help?</span></h2>
+<ul>
+<li>Check our <a class="link" href="/en/api/overview">API documentation</a> for detailed specifications.</li>
+<li>Review <a class="link" href="/en/docs/about-claude/models/overview">model capabilities</a> for performance comparisons.</li>
+<li>Review <a class="link" href="/en/release-notes/api">API release notes</a> for API updates.</li>
+<li>Contact support if you encounter any issues during migration.</li>
+</ul></div>

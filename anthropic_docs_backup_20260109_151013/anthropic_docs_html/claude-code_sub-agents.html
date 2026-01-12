@@ -1,0 +1,229 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><p>Custom subagents in Claude Code are specialized AI assistants that can be invoked to handle specific types of tasks. They enable more efficient problem-solving by providing task-specific configurations with customized system prompts, tools and a separate context window.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="what-are-subagents%3F"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#what-are-subagents%3F">​</a></div><span class="cursor-pointer">What are subagents?</span></h2>
+<p>Subagents are pre-configured AI personalities that Claude Code can delegate tasks to. Each subagent:</p>
+<ul>
+<li>Has a specific purpose and expertise area</li>
+<li>Uses its own context window separate from the main conversation</li>
+<li>Can be configured with specific tools it’s allowed to use</li>
+<li>Includes a custom system prompt that guides its behavior</li>
+</ul>
+<p>When Claude Code encounters a task that matches a subagent’s expertise, it can delegate that task to the specialized subagent, which works independently and returns results.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="key-benefits"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#key-benefits">​</a></div><span class="cursor-pointer">Key benefits</span></h2>
+<div class="card-group not-prose grid gap-x-4 sm:grid-cols-2"><div class="card block font-normal group relative my-2 ring-2 ring-transparent rounded-2xl bg-white dark:bg-background-dark border border-gray-950/10 dark:border-white/10 overflow-hidden w-full"><div class="px-6 py-5 relative" data-component-part="card-content-container"><div><h2 class="not-prose font-semibold text-base text-gray-800 dark:text-white mt-4" contenteditable="false" data-component-part="card-title">Context preservation</h2><div class="prose mt-1 font-normal text-sm leading-6 text-gray-600 dark:text-gray-400" data-component-part="card-content"><p>Each subagent operates in its own context, preventing pollution of the main conversation and keeping it focused on high-level objectives.</p></div></div></div></div><div class="card block font-normal group relative my-2 ring-2 ring-transparent rounded-2xl bg-white dark:bg-background-dark border border-gray-950/10 dark:border-white/10 overflow-hidden w-full"><div class="px-6 py-5 relative" data-component-part="card-content-container"><div><h2 class="not-prose font-semibold text-base text-gray-800 dark:text-white mt-4" contenteditable="false" data-component-part="card-title">Specialized expertise</h2><div class="prose mt-1 font-normal text-sm leading-6 text-gray-600 dark:text-gray-400" data-component-part="card-content"><p>Subagents can be fine-tuned with detailed instructions for specific domains, leading to higher success rates on designated tasks.</p></div></div></div></div><div class="card block font-normal group relative my-2 ring-2 ring-transparent rounded-2xl bg-white dark:bg-background-dark border border-gray-950/10 dark:border-white/10 overflow-hidden w-full"><div class="px-6 py-5 relative" data-component-part="card-content-container"><div><h2 class="not-prose font-semibold text-base text-gray-800 dark:text-white mt-4" contenteditable="false" data-component-part="card-title">Reusability</h2><div class="prose mt-1 font-normal text-sm leading-6 text-gray-600 dark:text-gray-400" data-component-part="card-content"><p>Once created, subagents can be used across different projects and shared with your team for consistent workflows.</p></div></div></div></div><div class="card block font-normal group relative my-2 ring-2 ring-transparent rounded-2xl bg-white dark:bg-background-dark border border-gray-950/10 dark:border-white/10 overflow-hidden w-full"><div class="px-6 py-5 relative" data-component-part="card-content-container"><div><h2 class="not-prose font-semibold text-base text-gray-800 dark:text-white mt-4" contenteditable="false" data-component-part="card-title">Flexible permissions</h2><div class="prose mt-1 font-normal text-sm leading-6 text-gray-600 dark:text-gray-400" data-component-part="card-content"><p>Each subagent can have different tool access levels, allowing you to limit powerful tools to specific subagent types.</p></div></div></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="quick-start"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#quick-start">​</a></div><span class="cursor-pointer">Quick start</span></h2>
+<p>To create your first subagent:</p>
+<div class="steps ml-3.5 mt-10 mb-6" role="list"><div class="step relative flex items-start pb-2" role="listitem"><div class="absolute ml-[-14px] py-2" contenteditable="false" data-component-part="step-number"><div class="w-7 h-7 shrink-0 rounded-lg bg-gray-100 dark:text-white dark:bg-[#26292E] text-sm text-gray-800 font-semibold flex items-center justify-center">1</div></div><div class="w-full overflow-hidden pl-12 pr-px"><p class="mt-2 font-semibold prose dark:prose-invert text-gray-900 dark:text-gray-200" contenteditable="false" data-component-part="step-title">Open the subagents interface</p><div data-component-part="step-content"><p>Run the following command:</p><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext"><code><span class="">/agents</span>
+</code></pre></div></div></div></div></div></div><div class="step relative flex items-start pb-2" role="listitem"><div class="absolute ml-[-14px] py-2" contenteditable="false" data-component-part="step-number"><div class="w-7 h-7 shrink-0 rounded-lg bg-gray-100 dark:text-white dark:bg-[#26292E] text-sm text-gray-800 font-semibold flex items-center justify-center">2</div></div><div class="w-full overflow-hidden pl-12 pr-px"><p class="mt-2 font-semibold prose dark:prose-invert text-gray-900 dark:text-gray-200" contenteditable="false" data-component-part="step-title">Select 'Create New Agent'</p><div data-component-part="step-content"><p>Choose whether to create a project-level or user-level subagent</p></div></div></div><div class="step relative flex items-start pb-2" role="listitem"><div class="absolute ml-[-14px] py-2" contenteditable="false" data-component-part="step-number"><div class="w-7 h-7 shrink-0 rounded-lg bg-gray-100 dark:text-white dark:bg-[#26292E] text-sm text-gray-800 font-semibold flex items-center justify-center">3</div></div><div class="w-full overflow-hidden pl-12 pr-px"><p class="mt-2 font-semibold prose dark:prose-invert text-gray-900 dark:text-gray-200" contenteditable="false" data-component-part="step-title">Define the subagent</p><div data-component-part="step-content"><ul>
+<li><strong>Recommended</strong>: Generate with Claude first, then customize to make it yours</li>
+<li>Describe your subagent in detail and when it should be used</li>
+<li>Select the tools you want to grant access to (or leave blank to inherit all tools)</li>
+<li>The interface shows all available tools, making selection easy</li>
+<li>If you’re generating with Claude, you can also edit the system prompt in your own editor by pressing <code>e</code></li>
+</ul></div></div></div><div class="step relative flex items-start pb-2" role="listitem"><div class="absolute ml-[-14px] py-2" contenteditable="false" data-component-part="step-number"><div class="w-7 h-7 shrink-0 rounded-lg bg-gray-100 dark:text-white dark:bg-[#26292E] text-sm text-gray-800 font-semibold flex items-center justify-center">4</div></div><div class="w-full overflow-hidden pl-12 pr-px"><p class="mt-2 font-semibold prose dark:prose-invert text-gray-900 dark:text-gray-200" contenteditable="false" data-component-part="step-title">Save and use</p><div data-component-part="step-content"><p>Your subagent is now available! Claude will use it automatically when appropriate, or you can invoke it explicitly:</p><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext"><code><span class="">&gt; Use the code-reviewer subagent to check my recent changes</span>
+</code></pre></div></div></div></div></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="subagent-configuration"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#subagent-configuration">​</a></div><span class="cursor-pointer">Subagent configuration</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="file-locations"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#file-locations">​</a></div><span class="cursor-pointer">File locations</span></h3>
+<p>Subagents are stored as Markdown files with YAML frontmatter in two possible locations:</p>
+<table><thead><tr><th style="text-align:left">Type</th><th style="text-align:left">Location</th><th style="text-align:left">Scope</th><th style="text-align:left">Priority</th></tr></thead><tbody><tr><td style="text-align:left"><strong>Project subagents</strong></td><td style="text-align:left"><code>.claude/agents/</code></td><td style="text-align:left">Available in current project</td><td style="text-align:left">Highest</td></tr><tr><td style="text-align:left"><strong>User subagents</strong></td><td style="text-align:left"><code>~/.claude/agents/</code></td><td style="text-align:left">Available across all projects</td><td style="text-align:left">Lower</td></tr></tbody></table>
+<p>When subagent names conflict, project-level subagents take precedence over user-level subagents.</p>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="file-format"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#file-format">​</a></div><span class="cursor-pointer">File format</span></h3>
+<p>Each subagent is defined in a Markdown file with this structure:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-markdown"><code class="language-markdown"><span class=""><span class="token hr punctuation">---</span></span>
+<span class="">name: your-sub-agent-name</span>
+<span class="">description: Description of when this subagent should be invoked</span>
+<span class="">tools: tool1, tool2, tool3  # Optional - inherits all tools if omitted</span>
+<span class=""><span class="token hr punctuation">---</span></span>
+<!-- -->
+<span class="">Your subagent's system prompt goes here. This can be multiple paragraphs</span>
+<span class="">and should clearly define the subagent's role, capabilities, and approach</span>
+<span class="">to solving problems.</span>
+<!-- -->
+<span class="">Include specific instructions, best practices, and any constraints</span>
+<span class="">the subagent should follow.</span>
+</code></pre></div></div></div>
+<h4 class="flex whitespace-pre-wrap group font-semibold" id="configuration-fields"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#configuration-fields">​</a></div><span class="cursor-pointer">Configuration fields</span></h4>
+<table><thead><tr><th style="text-align:left">Field</th><th style="text-align:left">Required</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td style="text-align:left"><code>name</code></td><td style="text-align:left">Yes</td><td style="text-align:left">Unique identifier using lowercase letters and hyphens</td></tr><tr><td style="text-align:left"><code>description</code></td><td style="text-align:left">Yes</td><td style="text-align:left">Natural language description of the subagent’s purpose</td></tr><tr><td style="text-align:left"><code>tools</code></td><td style="text-align:left">No</td><td style="text-align:left">Comma-separated list of specific tools. If omitted, inherits all tools from the main thread</td></tr></tbody></table>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="available-tools"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#available-tools">​</a></div><span class="cursor-pointer">Available tools</span></h3>
+<p>Subagents can be granted access to any of Claude Code’s internal tools. See the <a class="link" href="/en/docs/claude-code/settings#tools-available-to-claude">tools documentation</a> for a complete list of available tools.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p><strong>Recommended:</strong> Use the <code>/agents</code> command to modify tool access - it provides an interactive interface that lists all available tools, including any connected MCP server tools, making it easier to select the ones you need.</p></div></div>
+<p>You have two options for configuring tools:</p>
+<ul>
+<li><strong>Omit the <code>tools</code> field</strong> to inherit all tools from the main thread (default), including MCP tools</li>
+<li><strong>Specify individual tools</strong> as a comma-separated list for more granular control (can be edited manually or via <code>/agents</code>)</li>
+</ul>
+<p><strong>MCP Tools</strong>: Subagents can access MCP tools from configured MCP servers. When the <code>tools</code> field is omitted, subagents inherit all MCP tools available to the main thread.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="managing-subagents"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#managing-subagents">​</a></div><span class="cursor-pointer">Managing subagents</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="using-the-%2Fagents-command-recommended"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#using-the-%2Fagents-command-recommended">​</a></div><span class="cursor-pointer">Using the /agents command (Recommended)</span></h3>
+<p>The <code>/agents</code> command provides a comprehensive interface for subagent management:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext"><code><span class="">/agents</span>
+</code></pre></div></div></div>
+<p>This opens an interactive menu where you can:</p>
+<ul>
+<li>View all available subagents (built-in, user, and project)</li>
+<li>Create new subagents with guided setup</li>
+<li>Edit existing custom subagents, including their tool access</li>
+<li>Delete custom subagents</li>
+<li>See which subagents are active when duplicates exist</li>
+<li><strong>Easily manage tool permissions</strong> with a complete list of available tools</li>
+</ul>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="direct-file-management"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#direct-file-management">​</a></div><span class="cursor-pointer">Direct file management</span></h3>
+<p>You can also manage subagents by working directly with their files:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-bash"><code class="language-bash"><span class=""><span class="token comment"># Create a project subagent</span></span>
+<span class=""><span class="token function">mkdir</span> <span class="token parameter variable">-p</span> .claude/agents</span>
+<span class=""><span class="token builtin class-name">echo</span> '---</span>
+<span class="">name: test-runner</span>
+<span class="">description: Use proactively to run tests and fix failures</span>
+<span class="">---</span>
+<!-- -->
+<span class="">You are a <span class="token builtin class-name">test</span> automation expert. When you see code changes, proactively run the appropriate tests. If tests fail, analyze the failures and fix them <span class="token keyword">while</span> preserving the original <span class="token builtin class-name">test</span> intent.' <span class="token operator">&gt;</span> .claude/agents/test-runner.md</span>
+<!-- -->
+<span class=""><span class="token comment"># Create a user subagent</span></span>
+<span class=""><span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ~/.claude/agents</span>
+<span class=""><span class="token comment"># ... create subagent file</span></span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="using-subagents-effectively"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#using-subagents-effectively">​</a></div><span class="cursor-pointer">Using subagents effectively</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="automatic-delegation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#automatic-delegation">​</a></div><span class="cursor-pointer">Automatic delegation</span></h3>
+<p>Claude Code proactively delegates tasks based on:</p>
+<ul>
+<li>The task description in your request</li>
+<li>The <code>description</code> field in subagent configurations</li>
+<li>Current context and available tools</li>
+</ul>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10" data-callout-type="tip"><div class="text-sm prose min-w-0 w-full text-emerald-900 dark:text-emerald-200" data-component-part="callout-content"><p>To encourage more proactive subagent use, include phrases like “use PROACTIVELY” or “MUST BE USED” in your <code>description</code> field.</p></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="explicit-invocation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#explicit-invocation">​</a></div><span class="cursor-pointer">Explicit invocation</span></h3>
+<p>Request a specific subagent by mentioning it in your command:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext"><code><span class="">&gt; Use the test-runner subagent to fix failing tests</span>
+<span class="">&gt; Have the code-reviewer subagent look at my recent changes</span>
+<span class="">&gt; Ask the debugger subagent to investigate this error</span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="example-subagents"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#example-subagents">​</a></div><span class="cursor-pointer">Example subagents</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="code-reviewer"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#code-reviewer">​</a></div><span class="cursor-pointer">Code reviewer</span></h3>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-markdown"><code class="language-markdown"><span class=""><span class="token hr punctuation">---</span></span>
+<span class="">name: code-reviewer</span>
+<span class="">description: Expert code review specialist. Proactively reviews code for quality, security, and maintainability. Use immediately after writing or modifying code.</span>
+<span class="">tools: Read, Grep, Glob, Bash</span>
+<span class=""><span class="token hr punctuation">---</span></span>
+<!-- -->
+<span class="">You are a senior code reviewer ensuring high standards of code quality and security.</span>
+<!-- -->
+<span class="">When invoked:</span>
+<span class=""><span class="token list punctuation">1.</span> Run git diff to see recent changes</span>
+<span class=""><span class="token list punctuation">2.</span> Focus on modified files</span>
+<span class=""><span class="token list punctuation">3.</span> Begin review immediately</span>
+<!-- -->
+<span class="">Review checklist:</span>
+<span class=""><span class="token list punctuation">-</span> Code is simple and readable</span>
+<span class=""><span class="token list punctuation">-</span> Functions and variables are well-named</span>
+<span class=""><span class="token list punctuation">-</span> No duplicated code</span>
+<span class=""><span class="token list punctuation">-</span> Proper error handling</span>
+<span class=""><span class="token list punctuation">-</span> No exposed secrets or API keys</span>
+<span class=""><span class="token list punctuation">-</span> Input validation implemented</span>
+<span class=""><span class="token list punctuation">-</span> Good test coverage</span>
+<span class=""><span class="token list punctuation">-</span> Performance considerations addressed</span>
+<!-- -->
+<span class="">Provide feedback organized by priority:</span>
+<span class=""><span class="token list punctuation">-</span> Critical issues (must fix)</span>
+<span class=""><span class="token list punctuation">-</span> Warnings (should fix)</span>
+<span class=""><span class="token list punctuation">-</span> Suggestions (consider improving)</span>
+<!-- -->
+<span class="">Include specific examples of how to fix issues.</span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="debugger"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#debugger">​</a></div><span class="cursor-pointer">Debugger</span></h3>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-markdown"><code class="language-markdown"><span class=""><span class="token hr punctuation">---</span></span>
+<span class="">name: debugger</span>
+<span class="">description: Debugging specialist for errors, test failures, and unexpected behavior. Use proactively when encountering any issues.</span>
+<span class="">tools: Read, Edit, Bash, Grep, Glob</span>
+<span class=""><span class="token hr punctuation">---</span></span>
+<!-- -->
+<span class="">You are an expert debugger specializing in root cause analysis.</span>
+<!-- -->
+<span class="">When invoked:</span>
+<span class=""><span class="token list punctuation">1.</span> Capture error message and stack trace</span>
+<span class=""><span class="token list punctuation">2.</span> Identify reproduction steps</span>
+<span class=""><span class="token list punctuation">3.</span> Isolate the failure location</span>
+<span class=""><span class="token list punctuation">4.</span> Implement minimal fix</span>
+<span class=""><span class="token list punctuation">5.</span> Verify solution works</span>
+<!-- -->
+<span class="">Debugging process:</span>
+<span class=""><span class="token list punctuation">-</span> Analyze error messages and logs</span>
+<span class=""><span class="token list punctuation">-</span> Check recent code changes</span>
+<span class=""><span class="token list punctuation">-</span> Form and test hypotheses</span>
+<span class=""><span class="token list punctuation">-</span> Add strategic debug logging</span>
+<span class=""><span class="token list punctuation">-</span> Inspect variable states</span>
+<!-- -->
+<span class="">For each issue, provide:</span>
+<span class=""><span class="token list punctuation">-</span> Root cause explanation</span>
+<span class=""><span class="token list punctuation">-</span> Evidence supporting the diagnosis</span>
+<span class=""><span class="token list punctuation">-</span> Specific code fix</span>
+<span class=""><span class="token list punctuation">-</span> Testing approach</span>
+<span class=""><span class="token list punctuation">-</span> Prevention recommendations</span>
+<!-- -->
+<span class="">Focus on fixing the underlying issue, not just symptoms.</span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="data-scientist"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#data-scientist">​</a></div><span class="cursor-pointer">Data scientist</span></h3>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-markdown"><code class="language-markdown"><span class=""><span class="token hr punctuation">---</span></span>
+<span class="">name: data-scientist</span>
+<span class="">description: Data analysis expert for SQL queries, BigQuery operations, and data insights. Use proactively for data analysis tasks and queries.</span>
+<span class="">tools: Bash, Read, Write</span>
+<span class=""><span class="token hr punctuation">---</span></span>
+<!-- -->
+<span class="">You are a data scientist specializing in SQL and BigQuery analysis.</span>
+<!-- -->
+<span class="">When invoked:</span>
+<span class=""><span class="token list punctuation">1.</span> Understand the data analysis requirement</span>
+<span class=""><span class="token list punctuation">2.</span> Write efficient SQL queries</span>
+<span class=""><span class="token list punctuation">3.</span> Use BigQuery command line tools (bq) when appropriate</span>
+<span class=""><span class="token list punctuation">4.</span> Analyze and summarize results</span>
+<span class=""><span class="token list punctuation">5.</span> Present findings clearly</span>
+<!-- -->
+<span class="">Key practices:</span>
+<span class=""><span class="token list punctuation">-</span> Write optimized SQL queries with proper filters</span>
+<span class=""><span class="token list punctuation">-</span> Use appropriate aggregations and joins</span>
+<span class=""><span class="token list punctuation">-</span> Include comments explaining complex logic</span>
+<span class=""><span class="token list punctuation">-</span> Format results for readability</span>
+<span class=""><span class="token list punctuation">-</span> Provide data-driven recommendations</span>
+<!-- -->
+<span class="">For each analysis:</span>
+<span class=""><span class="token list punctuation">-</span> Explain the query approach</span>
+<span class=""><span class="token list punctuation">-</span> Document any assumptions</span>
+<span class=""><span class="token list punctuation">-</span> Highlight key findings</span>
+<span class=""><span class="token list punctuation">-</span> Suggest next steps based on data</span>
+<!-- -->
+<span class="">Always ensure queries are efficient and cost-effective.</span>
+</code></pre></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="best-practices"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#best-practices">​</a></div><span class="cursor-pointer">Best practices</span></h2>
+<ul>
+<li>
+<p><strong>Start with Claude-generated agents</strong>: We highly recommend generating your initial subagent with Claude and then iterating on it to make it personally yours. This approach gives you the best results - a solid foundation that you can customize to your specific needs.</p>
+</li>
+<li>
+<p><strong>Design focused subagents</strong>: Create subagents with single, clear responsibilities rather than trying to make one subagent do everything. This improves performance and makes subagents more predictable.</p>
+</li>
+<li>
+<p><strong>Write detailed prompts</strong>: Include specific instructions, examples, and constraints in your system prompts. The more guidance you provide, the better the subagent will perform.</p>
+</li>
+<li>
+<p><strong>Limit tool access</strong>: Only grant tools that are necessary for the subagent’s purpose. This improves security and helps the subagent focus on relevant actions.</p>
+</li>
+<li>
+<p><strong>Version control</strong>: Check project subagents into version control so your team can benefit from and improve them collaboratively.</p>
+</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="advanced-usage"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#advanced-usage">​</a></div><span class="cursor-pointer">Advanced usage</span></h2>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="chaining-subagents"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#chaining-subagents">​</a></div><span class="cursor-pointer">Chaining subagents</span></h3>
+<p>For complex workflows, you can chain multiple subagents:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext"><code><span class="">&gt; First use the code-analyzer subagent to find performance issues, then use the optimizer subagent to fix them</span>
+</code></pre></div></div></div>
+<h3 class="flex whitespace-pre-wrap group font-semibold" id="dynamic-subagent-selection"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#dynamic-subagent-selection">​</a></div><span class="cursor-pointer">Dynamic subagent selection</span></h3>
+<p>Claude Code intelligently selects subagents based on context. Make your <code>description</code> fields specific and action-oriented for best results.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="performance-considerations"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#performance-considerations">​</a></div><span class="cursor-pointer">Performance considerations</span></h2>
+<ul>
+<li><strong>Context efficiency</strong>: Agents help preserve main context, enabling longer overall sessions</li>
+<li><strong>Latency</strong>: Subagents start off with a clean slate each time they are invoked and may add latency as they gather context that they require to do their job effectively.</li>
+</ul>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="related-documentation"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#related-documentation">​</a></div><span class="cursor-pointer">Related documentation</span></h2>
+<ul>
+<li><a class="link" href="/en/docs/claude-code/slash-commands">Slash commands</a> - Learn about other built-in commands</li>
+<li><a class="link" href="/en/docs/claude-code/settings">Settings</a> - Configure Claude Code behavior</li>
+<li><a class="link" href="/en/docs/claude-code/hooks">Hooks</a> - Automate workflows with event handlers</li>
+</ul></div>

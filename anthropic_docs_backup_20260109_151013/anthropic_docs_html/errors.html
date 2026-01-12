@@ -1,0 +1,74 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><h2 class="flex whitespace-pre-wrap group font-semibold" id="http-errors"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#http-errors">​</a></div><span class="cursor-pointer">HTTP errors</span></h2>
+<p>Our API follows a predictable HTTP error code format:</p>
+<ul>
+<li>
+<p>400 - <code>invalid_request_error</code>: There was an issue with the format or content of your request. We may also use this error type for other 4XX status codes not listed below.</p>
+</li>
+<li>
+<p>401 - <code>authentication_error</code>: There’s an issue with your API key.</p>
+</li>
+<li>
+<p>403 - <code>permission_error</code>: Your API key does not have permission to use the specified resource.</p>
+</li>
+<li>
+<p>404 - <code>not_found_error</code>: The requested resource was not found.</p>
+</li>
+<li>
+<p>413 - <code>request_too_large</code>: Request exceeds the maximum allowed number of bytes. The maximum request size is 32 MB for standard API endpoints.</p>
+</li>
+<li>
+<p>429 - <code>rate_limit_error</code>: Your account has hit a rate limit.</p>
+</li>
+<li>
+<p>500 - <code>api_error</code>: An unexpected error has occurred internal to Anthropic’s systems.</p>
+</li>
+<li>
+<p>529 - <code>overloaded_error</code>: Anthropic’s API is temporarily overloaded.</p>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-amber-500/20 bg-amber-50/50 dark:border-amber-500/30 dark:bg-amber-500/10" data-callout-type="warning"><div class="text-sm prose min-w-0 w-full text-amber-900 dark:text-amber-200" data-component-part="callout-content"><p>529 errors can occur when Anthropic APIs experience high traffic across all users.</p><p>In rare cases, if your organization has a sharp increase in usage, you might see 429 errors. To avoid these 429 errors, ramp up your traffic gradually and maintain consistent usage patterns.</p></div></div>
+</li>
+</ul>
+<p>When receiving a <a class="link" href="/en/docs/build-with-claude/streaming">streaming</a> response via SSE, it’s possible that an error can occur after returning a 200 response, in which case error handling wouldn’t follow these standard mechanisms.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="request-size-limits"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#request-size-limits">​</a></div><span class="cursor-pointer">Request size limits</span></h2>
+<p>The API enforces request size limits to ensure optimal performance:</p>
+<table><thead><tr><th style="text-align:left">Endpoint Type</th><th style="text-align:left">Maximum Request Size</th></tr></thead><tbody><tr><td style="text-align:left">Messages API</td><td style="text-align:left">32 MB</td></tr><tr><td style="text-align:left">Token Counting API</td><td style="text-align:left">32 MB</td></tr><tr><td style="text-align:left"><a class="link" href="/en/docs/build-with-claude/batch-processing">Batch API</a></td><td style="text-align:left">256 MB</td></tr><tr><td style="text-align:left"><a class="link" href="/en/docs/build-with-claude/files">Files API</a></td><td style="text-align:left">500 MB</td></tr></tbody></table>
+<p>If you exceed these limits, you’ll receive a 413 <code>request_too_large</code> error. The error is returned from Cloudflare before the request reaches Anthropic’s API servers.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="error-shapes"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#error-shapes">​</a></div><span class="cursor-pointer">Error shapes</span></h2>
+<p>Errors are always returned as JSON, with a top-level <code>error</code> object that always includes a <code>type</code> and <code>message</code> value. For example:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="flex rounded-t-2xl text-gray-400 text-xs leading-6 border-b font-medium bg-black/40 border-gray-900/80" data-component-part="code-block-tab-bar"><div class="flex-none border-b px-4 pt-2.5 pb-2 flex items-center text-primary-light border-primary-light" data-component-part="code-block-tab-bar-filename">JSON</div></div><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-json language-json"><code class="language-JSON"><span class=""><span class="token punctuation">{</span></span>
+<span class="">  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"error"</span><span class="token punctuation">,</span></span>
+<span class="">  <span class="token property">"error"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"not_found_error"</span><span class="token punctuation">,</span></span>
+<span class="">    <span class="token property">"message"</span><span class="token operator">:</span> <span class="token string">"The requested resource could not be found."</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>In accordance with our <a class="link" href="/en/api/versioning">versioning</a> policy, we may expand the values within these objects, and it is possible that the <code>type</code> values will grow over time.</p>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="request-id"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#request-id">​</a></div><span class="cursor-pointer">Request id</span></h2>
+<p>Every API response includes a unique <code>request-id</code> header. This header contains a value such as <code>req_018EeWyXxfu5pfWkrYcMdjWG</code>. When contacting support about a specific request, please include this ID to help us quickly resolve your issue.</p>
+<p>Our official SDKs provide this value as a property on top-level response objects, containing the value of the <code>request-id</code> header:</p>
+<div class="code-group mt-5 mb-8 flex flex-col not-prose relative overflow-hidden rounded-2xl dark:border-gray-800/50 bg-[#0F1117] border border-transparent dark:bg-codeblock text-gray-50 codeblock-dark" id="code-group"><div class="relative border-b border-gray-900/80 bg-[#0F1117] dark:bg-codeblock" data-component-part="code-group-tab-bar"><div aria-orientation="horizontal" class="text-xs leading-6 rounded-t-xl flex overflow-x-auto overflow-y-hidden mr-12 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25" role="tablist"><button aria-selected="true" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-primary-light" data-headlessui-state="selected" id="headlessui-tabs-tab-:Rapumpkql6:" role="tab" tabindex="0" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">Python</div></button><button aria-selected="false" class="group flex items-center relative px-2 pt-2.5 pb-2 outline-none whitespace-nowrap font-medium text-gray-400" data-headlessui-state="" id="headlessui-tabs-tab-:Ripumpkql6:" role="tab" tabindex="-1" type="button"><div class="px-2 rounded-lg z-10 group-hover:bg-gray-700/70 group-hover:text-primary-light">TypeScript</div></button></div></div><div class="flex flex-1 overflow-hidden"><div class="relative min-w-full w-full transition-[height] duration-300 ease-in-out" data-headlessui-state="selected" id="headlessui-tabs-panel-:R39umpkql6:" role="tabpanel" style="font-variant-ligatures:none;height:auto" tabindex="0"><div class="flex-none p-5 overflow-x-auto text-sm h-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25 leading-6" data-component-part="code-group-tab-content"><pre class="language-python language-python"><code class="language-Python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<!-- -->
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">    model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">    max_tokens<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">,</span></span>
+<span class="">    messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span> <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token string">"Hello, Claude"</span><span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Request ID: </span><span class="token interpolation"><span class="token punctuation">{</span>message<span class="token punctuation">.</span>_request_id<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></span>
+</code></pre></div></div></div></div>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="long-requests"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#long-requests">​</a></div><span class="cursor-pointer">Long requests</span></h2>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-amber-500/20 bg-amber-50/50 dark:border-amber-500/30 dark:bg-amber-500/10" data-callout-type="warning"><div class="text-sm prose min-w-0 w-full text-amber-900 dark:text-amber-200" data-component-part="callout-content"><p>We highly encourage using the <a class="link" href="/en/docs/build-with-claude/streaming">streaming Messages API</a> or <a class="link" href="/en/api/creating-message-batches">Message Batches API</a> for long running requests, especially those over 10 minutes.</p></div></div>
+<p>We do not recommend setting a large <code>max_tokens</code> values without using our <a class="link" href="/en/docs/build-with-claude/streaming">streaming Messages API</a>
+or <a class="link" href="/en/api/creating-message-batches">Message Batches API</a>:</p>
+<ul>
+<li>Some networks may drop idle connections after a variable period of time, which
+can cause the request to fail or timeout without receiving a response from Anthropic.</li>
+<li>Networks differ in reliability; our <a class="link" href="/en/api/creating-message-batches">Message Batches API</a> can help you
+manage the risk of network issues by allowing you to poll for results rather than requiring an uninterrupted network connection.</li>
+</ul>
+<p>If you are building a direct API integration, you should be aware that setting a <a class="link" href="https://tldp.org/HOWTO/TCP-Keepalive-HOWTO/programming.html" rel="noreferrer" target="_blank">TCP socket keep-alive</a> can reduce the impact of idle connection timeouts on some networks.</p>
+<p>Our <a class="link" href="/en/api/client-sdks">SDKs</a> will validate that your non-streaming Messages API requests are not expected to exceed a 10 minute timeout and
+also will set a socket option for TCP keep-alive.</p></div>

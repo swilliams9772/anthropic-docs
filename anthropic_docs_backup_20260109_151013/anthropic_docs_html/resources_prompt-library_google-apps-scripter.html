@@ -1,0 +1,245 @@
+<div class="mdx-content relative mt-8 prose prose-gray dark:prose-invert"><blockquote>
+<p>Copy this prompt into our developer <a class="link" href="https://console.anthropic.com/dashboard" rel="noreferrer" target="_blank">Console</a> to try it for yourself!</p>
+</blockquote>
+<table><thead><tr><th>Content</th></tr></thead><tbody><tr><td>User</td><td>Write me a Google apps script that will translate all text in a Google Slides presentation to Korean.</td></tr></tbody></table>
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="example-output"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#example-output">​</a></div><span class="cursor-pointer">Example Output</span></h2>
+<p>Here’s a Google Apps Script that translates all the text in a Google Slides presentation to Korean:</p>
+<div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-javascript"><code class="language-JavaScript"><span class=""><span class="token keyword">function</span> <span class="token function">translateSlidesToKorean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="">  <span class="token keyword">var</span> presentation <span class="token operator">=</span> <span class="token maybe-class-name">SlidesApp</span><span class="token punctuation">.</span><span class="token method function property-access">getActivePresentation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="">  <span class="token keyword">var</span> slides <span class="token operator">=</span> presentation<span class="token punctuation">.</span><span class="token method function property-access">getSlides</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class="">  <span class="token keyword control-flow">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> slides<span class="token punctuation">.</span><span class="token property-access">length</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="">    <span class="token keyword">var</span> slide <span class="token operator">=</span> slides<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span></span>
+<span class="">    <span class="token keyword">var</span> pageElements <span class="token operator">=</span> slide<span class="token punctuation">.</span><span class="token method function property-access">getPageElements</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class="">    <span class="token keyword control-flow">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> pageElements<span class="token punctuation">.</span><span class="token property-access">length</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="">      <span class="token keyword">var</span> pageElement <span class="token operator">=</span> pageElements<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class="">      <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>pageElement<span class="token punctuation">.</span><span class="token method function property-access">getPageElementType</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token maybe-class-name">SlidesApp</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">PageElementType</span></span><span class="token punctuation">.</span><span class="token constant">SHAPE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="">        <span class="token keyword">var</span> shape <span class="token operator">=</span> pageElement<span class="token punctuation">.</span><span class="token method function property-access">asShape</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="">        <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>shape<span class="token punctuation">.</span><span class="token method function property-access">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token keyword null nil">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="">          <span class="token keyword">var</span> text <span class="token operator">=</span> shape<span class="token punctuation">.</span><span class="token method function property-access">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">asString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="">          <span class="token keyword">var</span> translatedText <span class="token operator">=</span> <span class="token maybe-class-name">LanguageApp</span><span class="token punctuation">.</span><span class="token method function property-access">translate</span><span class="token punctuation">(</span>text<span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">,</span> <span class="token string">'ko'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="">          shape<span class="token punctuation">.</span><span class="token method function property-access">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">setText</span><span class="token punctuation">(</span>translatedText<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">}</span> <span class="token keyword control-flow">else</span> <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>pageElement<span class="token punctuation">.</span><span class="token method function property-access">getPageElementType</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token maybe-class-name">SlidesApp</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">PageElementType</span></span><span class="token punctuation">.</span><span class="token constant">TABLE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="">        <span class="token keyword">var</span> table <span class="token operator">=</span> pageElement<span class="token punctuation">.</span><span class="token method function property-access">asTable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="">        <span class="token keyword">var</span> numRows <span class="token operator">=</span> table<span class="token punctuation">.</span><span class="token method function property-access">getNumRows</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="">        <span class="token keyword">var</span> numColumns <span class="token operator">=</span> table<span class="token punctuation">.</span><span class="token method function property-access">getNumColumns</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class="">        <span class="token keyword control-flow">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> row <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> row <span class="token operator">&lt;</span> numRows<span class="token punctuation">;</span> row<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="">          <span class="token keyword control-flow">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> col <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> col <span class="token operator">&lt;</span> numColumns<span class="token punctuation">;</span> col<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="">            <span class="token keyword">var</span> tableCell <span class="token operator">=</span> table<span class="token punctuation">.</span><span class="token method function property-access">getCell</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="">            <span class="token keyword">var</span> text <span class="token operator">=</span> tableCell<span class="token punctuation">.</span><span class="token method function property-access">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">asString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="">            <span class="token keyword">var</span> translatedText <span class="token operator">=</span> <span class="token maybe-class-name">LanguageApp</span><span class="token punctuation">.</span><span class="token method function property-access">translate</span><span class="token punctuation">(</span>text<span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">,</span> <span class="token string">'ko'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="">            tableCell<span class="token punctuation">.</span><span class="token method function property-access">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">setText</span><span class="token punctuation">(</span>translatedText<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="">          <span class="token punctuation">}</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">}</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+</code></pre></div></div></div>
+<p>Here’s how the script works:</p>
+<ol>
+<li>
+<p>The <code>translateSlidesToKorean()</code> function retrieves the active Google Slides presentation using <code>SlidesApp.getActivePresentation()</code>.</p>
+</li>
+<li>
+<p>It gets all the slides in the presentation using the <code>getSlides()</code> method.</p>
+</li>
+<li>
+<p>We iterate over each slide in the presentation.</p>
+</li>
+<li>
+<p>For each slide, we retrieve all the page elements (shapes, text boxes, tables, etc.) using the <code>getPageElements()</code> method.</p>
+</li>
+<li>
+<p>We iterate over each page element on the slide.</p>
+</li>
+<li>
+<p>We check the type of the page element using <code>getPageElementType()</code>:</p>
+<ul>
+<li>If the page element is a shape (<code>SlidesApp.PageElementType.SHAPE</code>), we get the text content of the shape using <code>getText().asString()</code>. We then translate the text to Korean using <code>LanguageApp.translate(text, '', 'ko')</code>, where <code>''</code> represents the source language (auto-detect) and <code>'ko'</code> represents the target language (Korean). Finally, we set the translated text back to the shape using <code>setText()</code>.</li>
+<li>If the page element is a table (<code>SlidesApp.PageElementType.TABLE</code>), we iterate over each cell in the table and translate the text within each cell similarly to how we handle shapes.</li>
+</ul>
+</li>
+<li>
+<p>The script continues to process all the page elements on each slide until all the text in the presentation has been translated to Korean.</p>
+</li>
+</ol>
+<div class="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10" data-callout-type="note"><div class="text-sm prose min-w-0 w-full text-sky-900 dark:text-sky-200" data-component-part="callout-content"><p><strong>Note:</strong> This script assumes that you have the necessary permissions to
+access and modify the Google Slides presentation. Make sure you have the
+required access rights before running the script.</p></div></div>
+<p>Also, keep in mind that the translation is performed using the Google Translate
+API, so the quality of the translation may vary depending on the complexity of
+the text and the capabilities of the translation service.</p>
+
+<h2 class="flex whitespace-pre-wrap group font-semibold" id="api-request"><div class="absolute"><a aria-label="Navigate to header" class="-ml-10 flex items-center opacity-0 border-0 group-hover:opacity-100" href="#api-request">​</a></div><span class="cursor-pointer">API Request</span></h2>
+<div class="tabs tabs tab-container" id="python"><ul class="not-prose mb-6 pb-[1px] flex-none min-w-full overflow-auto border-b border-gray-200 gap-x-6 flex dark:border-gray-200/10" data-component-part="tabs-list"><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-primary dark:text-primary-light border-current" data-component-part="tab-button">Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">TypeScript</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">AWS Bedrock AI TypeScript</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">AWS Bedrock AI Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">Vertex AI Python</button></li><li class="cursor-pointer"><button class="flex text-sm leading-6 font-semibold whitespace-nowrap pt-3 pb-2.5 -mb-px max-w-max border-b text-gray-900 border-transparent hover:border-gray-300 dark:text-gray-200 dark:hover:border-gray-700" data-component-part="tab-button">Vertex AI TypeScript</button></li></ul><div class="prose dark:prose-dark overflow-x-auto" data-component-part="tab-content"><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span></span>
+<span class="">  <span class="token comment"># defaults to os.environ.get("ANTHROPIC_API_KEY")</span></span>
+<span class="">  api_key<span class="token operator">=</span><span class="token string">"my_api_key"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">  model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">=</span><span class="token number">2000</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">"Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div class="hidden"><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-python language-python"><code class="language-python"><span class=""><span class="token keyword">import</span> anthropic</span>
+<!-- -->
+<span class="">client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span></span>
+<span class="">  <span class="token comment"># defaults to os.environ.get("ANTHROPIC_API_KEY")</span></span>
+<span class="">  api_key<span class="token operator">=</span><span class="token string">"my_api_key"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class="">message <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="">  model<span class="token operator">=</span><span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">=</span><span class="token number">2000</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">=</span><span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string">"text"</span><span class="token punctuation">:</span> <span class="token string">"Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">)</span></span>
+<span class=""><span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-typescript language-python"><code class="language-TypeScript"><span class=""><span class="token keyword">import</span> Anthropic <span class="token keyword">from</span> <span class="token string">"@anthropic-ai/sdk"</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token keyword">const</span> anthropic <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Anthropic</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">  apiKey<span class="token operator">:</span> <span class="token string">"my_api_key"</span><span class="token punctuation">,</span> <span class="token comment">// defaults to process.env["ANTHROPIC_API_KEY"]</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token keyword">const</span> msg <span class="token operator">=</span> <span class="token keyword">await</span> anthropic<span class="token punctuation">.</span>messages<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">  model<span class="token operator">:</span> <span class="token string">"claude-opus-4-1-20250805"</span><span class="token punctuation">,</span></span>
+<span class="">  max_tokens<span class="token operator">:</span> <span class="token number">2000</span><span class="token punctuation">,</span></span>
+<span class="">  temperature<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span></span>
+<span class="">  messages<span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">    <span class="token punctuation">{</span></span>
+<span class="">      <span class="token string-property property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class="">      <span class="token string-property property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class="">        <span class="token punctuation">{</span></span>
+<span class="">          <span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class="">          <span class="token string-property property">"text"</span><span class="token operator">:</span> <span class="token string">"Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."</span></span>
+<span class="">        <span class="token punctuation">}</span></span>
+<span class="">      <span class="token punctuation">]</span></span>
+<span class="">    <span class="token punctuation">}</span></span>
+<span class="">  <span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class=""><span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext language-python"><code><span class="">from anthropic import AnthropicBedrock</span>
+<!-- -->
+<span class=""># See https://docs.anthropic.com/claude/reference/claude-on-amazon-bedrock</span>
+<span class=""># for authentication options</span>
+<span class="">client = AnthropicBedrock()</span>
+<!-- -->
+<span class="">message = client.messages.create(</span>
+<span class="">    model="anthropic.claude-opus-4-1-20250805-v1:0",</span>
+<span class="">    max_tokens=2000,</span>
+<span class="">    temperature=0,</span>
+<span class="">    messages=[</span>
+<span class="">        {</span>
+<span class="">            "role": "user",</span>
+<span class="">            "content": [</span>
+<span class="">                {</span>
+<span class="">                    "type": "text",</span>
+<span class="">                    "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."</span>
+<span class="">                }</span>
+<span class="">            ]</span>
+<span class="">        }</span>
+<span class="">    ]</span>
+<span class="">)</span>
+<span class="">print(message.content)</span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext language-python"><code><span class="">import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";</span>
+<!-- -->
+<span class="">// See https://docs.anthropic.com/claude/reference/claude-on-amazon-bedrock</span>
+<span class="">// for authentication options</span>
+<span class="">const client = new AnthropicBedrock();</span>
+<!-- -->
+<span class="">const msg = await client.messages.create({</span>
+<span class="">  model: "anthropic.claude-opus-4-1-20250805-v1:0",</span>
+<span class="">  max_tokens: 2000,</span>
+<span class="">  temperature: 0,</span>
+<span class="">  messages: [</span>
+<span class="">    {</span>
+<span class="">      "role": "user",</span>
+<span class="">      "content": [</span>
+<span class="">        {</span>
+<span class="">          "type": "text",</span>
+<span class="">          "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."</span>
+<span class="">        }</span>
+<span class="">      ]</span>
+<span class="">    }</span>
+<span class="">  ]</span>
+<span class="">});</span>
+<span class="">console.log(msg);</span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-plaintext language-python"><code><span class="">from anthropic import AnthropicVertex</span>
+<!-- -->
+<span class="">client = AnthropicVertex()</span>
+<!-- -->
+<span class="">message = client.messages.create(</span>
+<span class="">    model="claude-sonnet-4@20250514",</span>
+<span class="">    max_tokens=2000,</span>
+<span class="">    temperature=0,</span>
+<span class="">    messages=[</span>
+<span class="">        {</span>
+<span class="">            "role": "user",</span>
+<span class="">            "content": [</span>
+<span class="">                {</span>
+<span class="">                    "type": "text",</span>
+<span class="">                    "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."</span>
+<span class="">                }</span>
+<span class="">            ]</span>
+<span class="">        }</span>
+<span class="">    ]</span>
+<span class="">)</span>
+<span class="">print(message.content)</span>
+<!-- -->
+</code></pre></div></div></div></div><div><div class="code-block mt-5 mb-8 not-prose rounded-2xl relative group text-gray-50 bg-[#0F1117] dark:bg-codeblock ring-1 ring-transparent dark:ring-gray-800/50 codeblock-dark"><div class="min-w-full relative text-sm leading-6 children:!my-0 children:!shadow-none children:!bg-transparent transition-[height] duration-300 ease-in-out" data-component-part="code-block-root" style="font-variant-ligatures:none;height:auto"><div class="overflow-x-auto h-full p-5 [&amp;&gt;pre&gt;code]:pr-[3rem] [&amp;&gt;pre&gt;code&gt;span.line-highlight]:min-w-[calc(100%+3rem)] overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-white/20 dark:scrollbar-thumb-white/20 hover:scrollbar-thumb-white/25 dark:hover:scrollbar-thumb-white/25 active:scrollbar-thumb-white/25 dark:active:scrollbar-thumb-white/25"><pre class="language-typescript language-python"><code class="language-typescript"><span class=""><span class="token keyword">import</span> <span class="token punctuation">{</span> AnthropicVertex <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@anthropic-ai/vertex-sdk'</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token comment">// Reads from the `CLOUD_ML_REGION` &amp; `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.</span></span>
+<span class=""><span class="token comment">// Additionally goes through the standard `google-auth-library` flow.</span></span>
+<span class=""><span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AnthropicVertex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+<span class=""><span class="token keyword">const</span> msg <span class="token operator">=</span> <span class="token keyword">await</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
+<span class="">model<span class="token operator">:</span> <span class="token string">"claude-sonnet-4@20250514"</span><span class="token punctuation">,</span></span>
+<span class="">max_tokens<span class="token operator">:</span> <span class="token number">2000</span><span class="token punctuation">,</span></span>
+<span class="">temperature<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span></span>
+<span class="">messages<span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class=""><span class="token punctuation">{</span></span>
+<span class=""><span class="token string-property property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token string-property property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
+<span class=""><span class="token punctuation">{</span></span>
+<span class=""><span class="token string-property property">"type"</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span></span>
+<span class=""><span class="token string-property property">"text"</span><span class="token operator">:</span> <span class="token string">"Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span></span>
+<span class=""><span class="token punctuation">]</span></span>
+<span class=""><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class=""><span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<!-- -->
+</code></pre></div></div></div></div></div></div></div>
