@@ -1,6 +1,6 @@
 # Get File Metadata
 
-**Source:** https://platform.claude.com/docs/en/api/beta/files/retrieve_metadata
+**Source:** http://platform.claude.com/docs/en/api/beta/files/retrieve_metadata
 
 Copy page
 
@@ -8,7 +8,7 @@ cURL
 
 # Get File Metadata
 
-get/v1/files/{file\_id}
+GET/v1/files/{file\_id}
 
 Get File Metadata
 
@@ -24,13 +24,13 @@ ID of the File.
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 16 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -70,9 +70,21 @@ Accepts one of the following:
 
 "skills-2025-10-02"
 
+"fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
+
+"advisor-tool-2026-03-01"
+
+"managed-agents-2026-04-01"
+
+"cache-diagnosis-2026-04-07"
+
 # ReturnsExpand Collapse
 
-FileMetadata = object { id, created\_at, filename, 4 more }
+FileMetadata object { id, created\_at, filename, 5 more }
 
 id: string
 
@@ -84,29 +96,17 @@ created\_at: string
 
 RFC 3339 datetime string representing when the file was created.
 
-formatdate-time
-
 filename: string
 
 Original filename of the uploaded file.
-
-maxLength500
-
-minLength1
 
 mime\_type: string
 
 MIME type of the file.
 
-maxLength255
-
-minLength1
-
 size\_bytes: number
 
 Size of the file in bytes.
-
-minimum0
 
 type: "file"
 
@@ -114,13 +114,21 @@ Object type.
 
 For files, this is always `"file"`.
 
-Accepts one of the following:
-
-"file"
-
 downloadable: optional boolean
 
 Whether the file can be downloaded.
+
+scope: optional [BetaFileScope](/docs/en/api/beta#beta_file_scope) { id, type }
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: string
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: "session"
+
+The type of scope (e.g., `"session"`).
 
 Get File Metadata
 
@@ -137,13 +145,17 @@ Response 200
 
 ```
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
   "type": "file",
-  "downloadable": true
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 
@@ -153,12 +165,16 @@ Response 200
 
 ```
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
   "type": "file",
-  "downloadable": true
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```

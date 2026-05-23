@@ -2,46 +2,121 @@
 
 **Source:** https://platform.claude.com/docs/en/home
 
-Build with Claude
+Claude Platform
 
-Learn how to get started with the Claude Developer Platform and Claude Code.
+# Start building with Claude
 
-Ask Claude about docs...
+Everything you need to integrate Claude into your applications. From first API call to production.
+
+What do you want to build?
 
 ⌘K
 
-# Claude Developer Platform
+[Quickstart](/docs/en/get-started)[Get API key](/settings/keys)[API reference](/docs/en/api/overview)
 
-[Get started
+PythonTypeScriptGoJavaRubyPHPC#cURLCLI
 
-Make your first API call in minutes.](/docs/en/get-started)[Features overview
+```
+import anthropic
 
-Explore the advanced features and capabilities now available in Claude.](/docs/en/api/overview)[What's new in Claude 4.5
+client = anthropic.Anthropic()
 
-Discover the latest advancements in Claude 4.5 models.](/docs/en/about-claude/models/whats-new-claude-4-5)[API reference
+message = client.messages.create(
+  model="claude-opus-4-7",
+  max_tokens=1024,
+  messages=[{
+    "role": "user",
+    "content": "Hello, Claude"
+  }]
+)
+print(message.content[0].text)
+```
 
-Integrate and scale using our API and SDKs.](/docs/en/api/overview)[Claude Console
+Platform
 
-Craft and test powerful prompts directly in your browser.](/)[Release notes
+# Choose how you build
 
-Learn about changes and new features in the Claude Developer Platform.](/docs/en/release-notes/api)
+Pick the developer surface that matches your approach, and the infrastructure that fits your stack.
 
-# Claude Code
+# Messages
 
-[Claude Code quickstart
+Direct model access. You construct every turn, manage conversation state, and write your own tool loop.
 
-Get started with Claude Code.](https://code.claude.com/docs/en/quickstart)[Claude Code reference
+[Quickstart](/docs/en/get-started)[API reference](/docs/en/api/messages/create)[Client SDKs](/docs/en/api/client-sdks)
 
-Consult the Claude Code reference documentation for details on feature implementation and configuration.](https://code.claude.com/docs/en/overview)[Claude Code changelog
+# Managed Agents
 
-Learn about changes and new features in Claude Code.](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)
+Fully managed agent infrastructure. Deploy and manage autonomous agents in stateful sessions with persistent event history.
 
-# Learning resources
+[Quickstart](/docs/en/managed-agents/quickstart)[API reference](/docs/en/api/beta/sessions)[Define your agent](/docs/en/managed-agents/agent-setup)
 
-[Anthropic Courses
+[AWS Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock)[Google Cloud Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai)[Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry)
 
-Explore Anthropic's educational courses and projects.](https://anthropic.skilljar.com/)[Claude Cookbook
+Developer journey
 
-See replicable code samples and implementations.](https://platform.claude.com/cookbooks)[Claude Quickstarts
+# From idea to production
 
-Deployable applications built with our API.](https://github.com/anthropics/anthropic-quickstarts)
+Follow the lifecycle or jump to what you need.
+
+MessagesManaged Agents
+
+1. 1
+
+   ### Get started
+
+   [Quickstart](/docs/en/get-started)[Get API key](/settings/keys)[Choose a model](/docs/en/about-claude/models/overview)[Install an SDK](/docs/en/api/client-sdks)[Try the Workbench](/workbench)
+2. 2
+
+   ### Build
+
+   [Messages API](/docs/en/api/messages/create)[Extended thinking](/docs/en/build-with-claude/extended-thinking)[Vision](/docs/en/build-with-claude/vision)[Tool use](/docs/en/agents-and-tools/tool-use/overview)[Web search](/docs/en/agents-and-tools/tool-use/web-search-tool)[Code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool)[Structured outputs](/docs/en/build-with-claude/structured-outputs)[Prompt caching](/docs/en/build-with-claude/prompt-caching)[Streaming](/docs/en/build-with-claude/streaming)
+3. 3
+
+   ### Evaluate & ship
+
+   [Prompting best practices](/docs/en/build-with-claude/prompt-engineering/overview)[Run evals](/docs/en/test-and-evaluate/develop-tests)[Batch testing](/docs/en/build-with-claude/batch-processing)[Safety & guardrails](/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency)[Rate limits & errors](/docs/en/api/rate-limits)[Cost optimization](/docs/en/about-claude/pricing)
+4. 4
+
+   ### Operate
+
+   [Workspaces & admin](/docs/en/build-with-claude/workspaces)[API key management](/settings/keys)[Usage monitoring](/docs/en/build-with-claude/usage-cost-api)[Model migration](/docs/en/about-claude/models/migration-guide)
+
+Models
+
+# The Claude model family
+
+Choose the right model for your use case.
+
+Most capable
+
+[Opus 4.7](/docs/en/about-claude/models/overview)claude-opus-4-7
+
+Best for complex analysis, coding, and creative tasks requiring deep reasoning.
+
+Best balance
+
+[Sonnet 4.6](/docs/en/about-claude/models/overview)claude-sonnet-4-6
+
+Ideal balance of intelligence and speed for most production workloads.
+
+Fastest
+
+[Haiku 4.5](/docs/en/about-claude/models/overview)claude-haiku-4-5
+
+Lightning-fast responses for high-volume, latency-sensitive applications.
+
+Resources
+
+# Keep learning
+
+[Courses
+
+Interactive courses to master Claude.](https://anthropic.skilljar.com/)[Cookbook
+
+Code samples and patterns.](https://platform.claude.com/cookbooks)[Quickstarts
+
+Deployable starter apps.](https://github.com/anthropics/anthropic-quickstarts)[What's new
+
+Latest features and updates.](/docs/en/release-notes/overview)[Claude Code
+
+An agentic coding assistant in your terminal.](https://code.claude.com/docs/en/overview)

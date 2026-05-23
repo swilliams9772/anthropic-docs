@@ -48,7 +48,7 @@ D. Developers must provide a standard testing account with sample data for Anthr
 
 E. Developers must provide at least three working examples of prompts or use cases that demonstrate core functionality.
 
-F. Developers must verify that they own or control any API endpoint, domain, or user interface their Software connects to, as well as any external resources it retrieves or renders.
+F. Developers must verify that they own or control any API endpoint, domain, or user interface their Software connects to, as well as any external resources it retrieves or renders. Plugins are an exception, and may connect to any Connector approved in the Software Directory.
 
 G. Developers must maintain their Software and address issues within reasonable timeframes.
 
@@ -62,6 +62,8 @@ A. Software that transfers money, cryptocurrency, or other financial assets, or 
 
 B. Software that uses AI models to generate images, video, or audio content. Design-focused software that uses AI models to create visual aids (such as slides, diagrams, charts, UI mockups, logos, or other design assets) are permitted. These servers may generate images as part of a design workflow, provided the developer does not offer standalone image generation as a primary service.
 
+C. Software that serves [advertisements](https://www.anthropic.com/news/claude-is-a-space-to-think), sponsored content, paid product placements, or exists primarily as an advertising or promotional vehicle.
+
 # 5. Additional Requirements for Model Context Protocol Servers
 
 A. MCP servers must gracefully handle errors and provide helpful feedback rather than generic error messages.
@@ -72,7 +74,7 @@ C. MCP tool names must not exceed 64 characters.
 
 D. Remote MCP servers that connect to a remote service and require authentication must use secure OAuth 2.0 with certificates from recognized authorities.
 
-E. MCP servers must provide all applicable [annotations](https://modelcontextprotocol.io/specification/draft/schema#toolannotations) for their tools, in particular *readOnlyHint*, *destructiveHint*, and *title*.
+E. MCP servers must provide all applicable [annotations](https://modelcontextprotocol.io/specification/2025-11-25/schema#toolannotations) for their tools, in particular *readOnlyHint*, *destructiveHint*, and *title*.
 
 F. Remote MCP servers should support the [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http) transport. Servers may support [SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) for the time being, but in the future it will be deprecated.
 
@@ -84,4 +86,4 @@ See prior version of this policy here: [Anthropic MCP Directory Policy](https://
 
 Related Articles
 
-[Anthropic Connectors Directory FAQ](https://support.claude.com/en/articles/11596036-anthropic-connectors-directory-faq)[Remote MCP Server Submission Guide](https://support.claude.com/en/articles/12922490-remote-mcp-server-submission-guide)[Local MCP Server Submission Guide](https://support.claude.com/en/articles/12922832-local-mcp-server-submission-guide)[Building Desktop Extensions with MCPB](https://support.claude.com/en/articles/12922929-building-desktop-extensions-with-mcpb)[Anthropic Software Directory Terms](https://support.claude.com/en/articles/13145338-anthropic-software-directory-terms)
+[Getting Started with Local MCP Servers on Claude Desktop](https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop)[Get started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp)[What are Skills?](https://support.claude.com/en/articles/12512176-what-are-skills)[Anthropic Software Directory Terms](https://support.claude.com/en/articles/13145338-anthropic-software-directory-terms)[MCP: Individual connectors](https://support.claude.com/en/articles/14503703-mcp-individual-connectors)

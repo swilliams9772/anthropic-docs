@@ -1,12 +1,12 @@
 # Update User
 
-**Source:** https://platform.claude.com/docs/en/api/admin/users/update
+**Source:** http://platform.claude.com/docs/en/api/admin/users/update
 
 Copy page
 
 # Update User
 
-post/v1/organizations/users/{user\_id}
+POST/v1/organizations/users/{user\_id}
 
 Update User
 
@@ -16,13 +16,13 @@ user\_id: string
 
 ID of the User.
 
-# Body ParametersExpand Collapse
+# Body ParametersJSONExpand Collapse
 
 role: "user" or "developer" or "billing" or "claude\_code\_user"
 
 New role for the User. Cannot be "admin".
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -34,7 +34,7 @@ Accepts one of the following:
 
 # ReturnsExpand Collapse
 
-User = object { id, added\_at, email, 3 more }
+User object { id, added\_at, email, 3 more }
 
 id: string
 
@@ -43,8 +43,6 @@ ID of the User.
 added\_at: string
 
 RFC 3339 datetime string indicating when the User joined the Organization.
-
-formatdate-time
 
 email: string
 
@@ -58,7 +56,7 @@ role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -76,15 +74,12 @@ Object type.
 
 For Users, this is always `"user"`.
 
-Accepts one of the following:
-
-"user"
-
 Update User
 
 ```
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
     -d '{
           "role": "user"

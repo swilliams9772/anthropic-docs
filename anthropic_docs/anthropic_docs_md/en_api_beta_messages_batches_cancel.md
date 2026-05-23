@@ -1,6 +1,6 @@
 # Cancel a Message Batch
 
-**Source:** https://platform.claude.com/docs/en/api/beta/messages/batches/cancel
+**Source:** http://platform.claude.com/docs/en/api/beta/messages/batches/cancel
 
 Copy page
 
@@ -8,7 +8,7 @@ cURL
 
 # Cancel a Message Batch
 
-post/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
 
@@ -28,13 +28,13 @@ ID of the Message Batch.
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 16 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -74,9 +74,21 @@ Accepts one of the following:
 
 "skills-2025-10-02"
 
+"fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
+
+"advisor-tool-2026-03-01"
+
+"managed-agents-2026-04-01"
+
+"cache-diagnosis-2026-04-07"
+
 # ReturnsExpand Collapse
 
-BetaMessageBatch = object { id, archived\_at, cancel\_initiated\_at, 7 more }
+BetaMessageBatch object { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 id: string
 
@@ -88,19 +100,13 @@ archived\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 cancel\_initiated\_at: string
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 created\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 ended\_at: string
 
@@ -114,13 +120,11 @@ expires\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-formatdate-time
-
 processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 
@@ -173,10 +177,6 @@ type: "message\_batch"
 Object type.
 
 For Message Batches, this is always `"message_batch"`.
-
-Accepts one of the following:
-
-"message\_batch"
 
 Cancel a Message Batch
 

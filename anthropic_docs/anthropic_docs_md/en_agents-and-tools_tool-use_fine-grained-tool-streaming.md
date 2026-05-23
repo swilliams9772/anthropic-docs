@@ -1,95 +1,120 @@
 # Fine
 
-**Source:** https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming
+**Source:** http://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming
 
 Copy page
 
-Tool use now supports fine-grained [streaming](/docs/en/build-with-claude/streaming) for parameter values. This allows developers to stream tool use parameters without buffering / JSON validation, reducing the latency to begin receiving large parameters.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-Fine-grained tool streaming is available via the Claude API, AWS Bedrock, Google Cloud's Vertex AI, and Microsoft Foundry.
+Fine-grained tool streaming is available on all models and all platforms. It enables [streaming](/docs/en/build-with-claude/streaming) of tool use parameter values without buffering or JSON validation, reducing the latency to begin receiving large parameters.
 
-Fine-grained tool streaming is a beta feature. Please make sure to evaluate your responses before using it in production.
-
-Please use [this form](https://forms.gle/D4Fjr7GvQRzfTZT96) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation—we cannot wait to hear from you!
-
-When using fine-grained tool streaming, you may potentially receive invalid or partial JSON inputs. Please make sure to account for these edge cases in your code.
+When using fine-grained tool streaming, you may potentially receive invalid or partial JSON inputs. Make sure to account for these edge cases in your code.
 
 # How to use fine-grained tool streaming
 
-To use this beta feature, simply add the beta header `fine-grained-tool-streaming-2025-05-14` to a tool use request and turn on streaming.
+Fine-grained tool streaming is supported on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). To use it, set `eager_input_streaming` to `true` on any user-defined tool where you want fine-grained streaming enabled, and enable streaming on your request.
 
 Here's an example of how to use fine-grained tool streaming with the API:
 
-Shell
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: fine-grained-tool-streaming-2025-05-14" \
-  -d '{
-    "model": "claude-sonnet-4-5",
-    "max_tokens": 65536,
-    "tools": [
-      {
-        "name": "make_file",
-        "description": "Write text to a file",
-        "input_schema": {
-          "type": "object",
-          "properties": {
-            "filename": {
-              "type": "string",
-              "description": "The filename to write text to"
+client = anthropic.Anthropic()
+
+with client.messages.stream(
+    max_tokens=65536,
+    model="claude-opus-4-7",
+    tools=[
+        {
+            "name": "make_file",
+            "description": "Write text to a file",
+            "eager_input_streaming": True,
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "filename": {
+                        "type": "string",
+                        "description": "The filename to write text to",
+                    },
+                    "lines_of_text": {
+                        "type": "array",
+                        "description": "An array of lines of text to write to the file",
+                    },
+                },
+                "required": ["filename", "lines_of_text"],
             },
-            "lines_of_text": {
-              "type": "array",
-              "description": "An array of lines of text to write to the file"
-            }
-          },
-          "required": ["filename", "lines_of_text"]
         }
-      }
     ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "Can you write a long poem and make a file called poem.txt?"
-      }
+    messages=[
+        {
+            "role": "user",
+            "content": "Can you write a long poem and make a file called poem.txt?",
+        }
     ],
-    "stream": true
-  }' | jq '.usage'
+) as stream:
+    final_message = stream.get_final_message()
+
+print(f"Input tokens: {final_message.usage.input_tokens}")
+print(f"Output tokens: {final_message.usage.output_tokens}")
 ```
 
 In this example, fine-grained tool streaming enables Claude to stream the lines of a long poem into the tool call `make_file` without buffering to validate if the `lines_of_text` parameter is valid JSON. This means you can see the parameter stream as it arrives, without having to wait for the entire parameter to buffer and validate.
 
-With fine-grained tool streaming, tool use chunks start streaming faster, and are often longer and contain fewer word breaks. This is due to differences in chunking behavior.
-
-Example:
-
-Without fine-grained streaming (15s delay):
-
-```
-Chunk 1: '{"'
-Chunk 2: 'query": "Ty'
-Chunk 3: 'peScri'
-Chunk 4: 'pt 5.0 5.1 '
-Chunk 5: '5.2 5'
-Chunk 6: '.3'
-Chunk 8: ' new f'
-Chunk 9: 'eatur'
-...
-```
-
-With fine-grained streaming (3s delay):
-
-```
-Chunk 1: '{"query": "TypeScript 5.0 5.1 5.2 5.3'
-Chunk 2: ' new features comparison'
-```
+With fine-grained tool streaming, tool input chunks start arriving sooner because the server skips JSON-validation buffering. Chunks are typically longer and contain fewer mid-token breaks as a side effect.
 
 Because fine-grained streaming sends parameters without buffering or JSON validation, there is no guarantee that the resulting stream will complete in a valid JSON string.
-Particularly, if the [stop reason](/docs/en/build-with-claude/handling-stop-reasons) `max_tokens` is reached, the stream may end midway through a parameter and may be incomplete. You will generally have to write specific support to handle when `max_tokens` is reached.
+Particularly, if the [stop reason](/docs/en/build-with-claude/handling-stop-reasons) `max_tokens` is reached, the stream may end midway through a parameter and may be incomplete. You generally have to write specific support to handle when `max_tokens` is reached.
+
+# Accumulating tool input deltas
+
+When a `tool_use` content block streams, the initial `content_block_start` event contains `input: {}` (an empty object). This is a placeholder. The actual input arrives as a series of `input_json_delta` events, each carrying a `partial_json` string fragment. To assemble the full input, concatenate these fragments and parse the result when the block closes.
+
+Where your SDK provides an accumulator helper (as used in the first example on this page), it handles this for you. The manual pattern is for SDKs without a helper, or when you need to react to partial input before the block closes.
+
+The accumulation contract:
+
+1. On `content_block_start` with `type: "tool_use"`, initialize an empty string: `input_json = ""`
+2. For each `content_block_delta` with `type: "input_json_delta"`, append: `input_json += event.delta.partial_json`
+3. On `content_block_stop`, parse the accumulated string: `json.loads(input_json)`
+
+The type mismatch between the initial `input: {}` (object) and `partial_json` (string) is by design. The empty object marks the slot in the content array; the delta strings build the real value.
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+```
+client = anthropic.Anthropic()
+
+tool_inputs: dict[int, str] = {}  # index -> accumulated JSON string
+
+with client.messages.stream(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=[
+        {
+            "name": "get_weather",
+            "description": "Get current weather for a city",
+            "eager_input_streaming": True,
+            "input_schema": {
+                "type": "object",
+                "properties": {"city": {"type": "string"}},
+                "required": ["city"],
+            },
+        }
+    ],
+    messages=[{"role": "user", "content": "Weather in Paris?"}],
+) as stream:
+    for event in stream:
+        match event.type:
+            case "content_block_start" if event.content_block.type == "tool_use":
+                tool_inputs[event.index] = ""
+            case "content_block_delta" if event.delta.type == "input_json_delta":
+                tool_inputs[event.index] += event.delta.partial_json
+            case "content_block_stop" if event.index in tool_inputs:
+                parsed = json.loads(tool_inputs[event.index])
+                print(f"Tool input: {parsed}")
+```
+
+Reach for the manual pattern when you need to react to partial input before the block closes (for example, rendering a progress indicator). Otherwise, prefer your SDK's accumulator helper where the first example on this page uses one.
 
 # Handling invalid JSON in tool responses
 
@@ -104,3 +129,15 @@ When using fine-grained tool streaming, you may receive invalid or incomplete JS
 This approach helps the model understand that the content is invalid JSON while preserving the original malformed data for debugging purposes.
 
 When wrapping invalid JSON, make sure to properly escape any quotes or special characters in the invalid JSON string to maintain valid JSON structure in the wrapper object.
+
+# Next steps
+
+[Streaming messages
+
+Full reference for server-sent events and stream event types.](/docs/en/build-with-claude/streaming)[Handle tool calls
+
+Execute tools and return results in the required message format.](/docs/en/agents-and-tools/tool-use/handle-tool-calls)[Tool reference
+
+Full directory of Anthropic-schema tools and their version strings.](/docs/en/agents-and-tools/tool-use/tool-reference)
+
+Was this page helpful?

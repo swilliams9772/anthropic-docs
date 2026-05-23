@@ -1,135 +1,137 @@
 # Client SDKs
 
-**Source:** https://platform.claude.com/docs/en/api/client-sdks
+**Source:** http://platform.claude.com/docs/en/api/client-sdks
 
 Copy page
 
-This page includes brief installation instructions and links to the open-source GitHub repositories for Anthropic's Client SDKs. For basic usage instructions, see the [API reference](/docs/en/api/overview) For detailed usage instructions, refer to each SDK's GitHub repository.
+Anthropic provides official client SDKs in multiple languages to make it easier to work with the Claude API. Each SDK provides idiomatic interfaces, type safety, and built-in support for features like streaming, retries, and error handling.
 
-Additional configuration is needed to use Anthropic's Client SDKs through a partner platform. If you are using Amazon Bedrock, see [this guide](/docs/en/build-with-claude/claude-on-amazon-bedrock); if you are using Google Cloud Vertex AI, see [this guide](/docs/en/build-with-claude/claude-on-vertex-ai); if you are using Microsoft Foundry, see [this guide](/docs/en/build-with-claude/claude-in-microsoft-foundry).
+For the full API specification, see the [API reference](/docs/en/api/overview).
 
-# Python
+[CLI
 
-[Python library GitHub repo](https://github.com/anthropics/anthropic-sdk-python)
+Shell scripting, typed flags, response transforms](/docs/en/api/sdks/cli)[Python
 
-**Requirements:** Python 3.8+
+Sync and async clients, Pydantic models](/docs/en/api/sdks/python)[TypeScript
 
-**Installation:**
+Node.js, Deno, Bun, and browser support](/docs/en/api/sdks/typescript)[Java
+
+Builder pattern, CompletableFuture async](/docs/en/api/sdks/java)[Go
+
+Context-based cancellation, functional options](/docs/en/api/sdks/go)[Ruby
+
+Sorbet types, streaming helpers](/docs/en/api/sdks/ruby)[C#
+
+.NET Standard 2.0+, IChatClient integration](/docs/en/api/sdks/csharp)[PHP
+
+Value objects, builder pattern](/docs/en/api/sdks/php)
+
+# Quick installation
+
+CLI
+
+CLI
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
 
 ```
 pip install anthropic
 ```
 
----
+# Quick start
 
-# TypeScript
-
-[TypeScript library GitHub repo](https://github.com/anthropics/anthropic-sdk-typescript)
-
-While this library is in TypeScript, it can also be used in JavaScript libraries.
-
-**Installation:**
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-npm install @anthropic-ai/sdk
+import anthropic
+
+client = anthropic.Anthropic()
+
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+)
+print(message.content)
 ```
 
----
+# Platform support
 
-# Java
+SDKs support the following platforms:
 
-[Java library GitHub repo](https://github.com/anthropics/anthropic-sdk-java)
+| Platform | Description |
+| --- | --- |
+| Claude API | Connect directly to Claude API endpoints |
+| [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) | Use Anthropic-operated Claude on AWS infrastructure |
+| [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) | Use Anthropic-operated Claude on Microsoft Azure |
+| [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) | Use partner-operated Claude through the Bedrock API |
+| [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai) | Use partner-operated Claude through Google Cloud |
 
-**Requirements:** Java 8 or later
+Platform support varies by language. See individual SDK pages for platform-specific setup instructions and availability.
 
-**Installation:**
+# Beta features
 
-Gradle:
+Access beta features using the `beta` namespace in any SDK:
 
-```
-implementation("com.anthropic:anthropic-java:2.10.0")
-```
-
-Maven:
-
-```
-<dependency>
-    <groupId>com.anthropic</groupId>
-    <artifactId>anthropic-java</artifactId>
-    <version>2.10.0</version>
-</dependency>
-```
-
----
-
-# Go
-
-[Go library GitHub repo](https://github.com/anthropics/anthropic-sdk-go)
-
-**Requirements:** Go 1.22+
-
-**Installation:**
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-go get -u 'github.com/anthropics/anthropic-sdk-go@v1.17.0'
+message = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello"}],
+    betas=["feature-name"],
+)
 ```
 
----
+See [Beta headers](/docs/en/api/beta-headers) for available beta features.
 
-# C#
+# Requirements
 
-[C# library GitHub repo](https://github.com/anthropics/anthropic-sdk-csharp)
+| SDK | Minimum version |
+| --- | --- |
+| Python | 3.9+ |
+| TypeScript | 4.9+ (Node.js 20+) |
+| Java | 8+ |
+| Go | 1.23+ |
+| Ruby | 3.2.0+ |
+| C# | .NET Standard 2.0+ |
+| PHP | 8.1.0+ |
 
-The C# SDK is currently in beta.
+# GitHub repositories
 
-**Requirements:** .NET 8 or later
+* [anthropic-sdk-python](https://github.com/anthropics/anthropic-sdk-python)
+* [anthropic-sdk-typescript](https://github.com/anthropics/anthropic-sdk-typescript)
+* [anthropic-sdk-java](https://github.com/anthropics/anthropic-sdk-java)
+* [anthropic-sdk-go](https://github.com/anthropics/anthropic-sdk-go)
+* [anthropic-sdk-ruby](https://github.com/anthropics/anthropic-sdk-ruby)
+* [anthropic-sdk-csharp](https://github.com/anthropics/anthropic-sdk-csharp)
+* [anthropic-sdk-php](https://github.com/anthropics/anthropic-sdk-php)
 
-**Installation:**
-
-```
-dotnet add package Anthropic
-```
-
----
-
-# Ruby
-
-[Ruby library GitHub repo](https://github.com/anthropics/anthropic-sdk-ruby)
-
-**Requirements:** Ruby 3.2.0 or later
-
-**Installation:**
-
-Add to your Gemfile:
-
-```
-gem "anthropic", "~> 1.13.0"
-```
-
-Then run:
-
-```
-bundle install
-```
-
----
-
-# PHP
-
-[PHP library GitHub repo](https://github.com/anthropics/anthropic-sdk-php)
-
-The PHP SDK is currently in beta.
-
-**Requirements:** PHP 8.1.0 or higher
-
-**Installation:**
-
-```
-composer require "anthropic-ai/sdk 0.3.0"
-```
-
----
-
-# Beta namespace in client SDKs
-
-Every SDK has a `beta` namespace that is available for accessing new features that Anthropic releases in beta versions. Use this in conjunction with [beta headers](/docs/en/api/beta-headers) to access these features. Refer to each SDK's GitHub repository for specific usage examples.
+Was this page helpful?

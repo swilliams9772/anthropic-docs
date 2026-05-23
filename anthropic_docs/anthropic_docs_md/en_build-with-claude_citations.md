@@ -1,56 +1,48 @@
 # Citations
 
-**Source:** https://platform.claude.com/docs/en/build-with-claude/citations
+**Source:** http://platform.claude.com/docs/en/build-with-claude/citations
 
 Copy page
+
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 Claude is capable of providing detailed citations when answering questions about documents, helping you track and verify information sources in responses.
 
 All [active models](/docs/en/about-claude/models/overview) support citations, with the exception of Haiku 3.
 
-*Citations with Claude Sonnet 3.7*
-
-Claude Sonnet 3.7 may be less likely to make citations compared to other Claude models without more explicit instructions from the user. When using citations with Claude Sonnet 3.7, we recommend including additional instructions in the `user` turn, like `"Use citations to back up your answer."` for example.
-
-We've also observed that when the model is asked to structure its response, it is unlikely to use citations unless explicitly told to use citations within that format. For example, if the model is asked to use `<result>` tags in its response, you should add something like `"Always use citations in your answer, even within <result> tags."`
-
-Please share your feedback and suggestions about the citations feature using this [form](https://forms.gle/9n9hSrKnKe3rpowH9).
+Share your feedback and suggestions about the citations feature using this [form](https://forms.gle/9n9hSrKnKe3rpowH9).
 
 Here's an example of how to use citations with the Messages API:
 
-Shell
+cURLCLIPythonJava
 
 ```
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-sonnet-4-5",
-    "max_tokens": 1024,
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "document",
-            "source": {
-              "type": "text",
-              "media_type": "text/plain",
-              "data": "The grass is green. The sky is blue."
-            },
-            "title": "My Document",
-            "context": "This is a trustworthy document.",
-            "citations": {"enabled": true}
-          },
-          {
-            "type": "text",
-            "text": "What color is the grass and sky?"
-          }
-        ]
-      }
-    ]
-  }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "document",
+                    "source": {
+                        "type": "text",
+                        "media_type": "text/plain",
+                        "data": "The grass is green. The sky is blue.",
+                    },
+                    "title": "My Document",
+                    "context": "This is a trustworthy document.",
+                    "citations": {"enabled": True},
+                },
+                {"type": "text", "text": "What color is the grass and sky?"},
+            ],
+        }
+    ],
+)
+print(response)
 ```
 
 **Comparison with prompt-based approaches**
@@ -58,8 +50,8 @@ curl https://api.anthropic.com/v1/messages \
 In comparison with prompt-based citations solutions, the citations feature has the following advantages:
 
 * **Cost savings:** If your prompt-based approach asks Claude to output direct quotes, you may see cost savings due to the fact that `cited_text` does not count towards your output tokens.
-* **Better citation reliability:** Because we parse citations into the respective response formats mentioned above and extract `cited_text`, citations are guaranteed to contain valid pointers to the provided documents.
-* **Improved citation quality:** In our evals, we found the citations feature to be significantly more likely to cite the most relevant quotes from documents as compared to purely prompt-based approaches.
+* **Better citation reliability:** Because citations are parsed into the respective response formats mentioned above and `cited_text` is extracted, citations are guaranteed to contain valid pointers to the provided documents.
+* **Improved citation quality:** In evaluations, the citations feature was found to be significantly more likely to cite the most relevant quotes from documents as compared to purely prompt-based approaches.
 
 ---
 
@@ -88,9 +80,9 @@ Integrate citations with Claude in these steps:
 
    * Responses may now include multiple text blocks where each text block can contain a claim that Claude is making and a list of citations that support the claim.
    * Citations reference specific locations in source documents. The format of these citations are dependent on the type of document being cited from.
-     + **For PDFs:** citations will include the page number range (1-indexed).
-     + **For plain text documents:** Citations will include the character index range (0-indexed).
-     + **For custom content documents:** Citations will include the content block index range (0-indexed) corresponding to the original content list provided.
+     + **For PDFs:** Citations include the page number range (1-indexed).
+     + **For plain text documents:** Citations include the character index range (0-indexed).
+     + **For custom content documents:** Citations include the content block index range (0-indexed) corresponding to the original content list provided.
    * Document indices are provided to indicate the reference source and are 0-indexed according to the list of all documents in your original request.
 
 **Automatic chunking vs custom content**
@@ -124,7 +116,7 @@ Citations works in conjunction with other API features including [prompt caching
 
 **Citations and Structured Outputs are incompatible**
 
-Citations cannot be used together with [Structured Outputs](/docs/en/build-with-claude/structured-outputs). If you enable citations on any user-provided document (Document blocks or RequestSearchResultBlock) and also include the `output_format` parameter, the API will return a 400 error.
+Citations cannot be used together with [Structured Outputs](/docs/en/build-with-claude/structured-outputs). If you enable citations on any user-provided document (Document blocks or RequestSearchResultBlock) and also include the `output_config.format` parameter (or the deprecated `output_format` parameter), the API will return a 400 error.
 
 This is because citations require interleaving citation blocks with text output, which is incompatible with the strict JSON schema constraints of structured outputs.
 
@@ -134,18 +126,18 @@ Citations and prompt caching can be used together effectively.
 
 The citation blocks generated in responses cannot be cached directly, but the source documents they reference can be cached. To optimize performance, apply `cache_control` to your top-level document content blocks.
 
-Python
+cURLCLIPythonTypeScript
 
 ```
-import anthropic
-
 client = anthropic.Anthropic()
 
 # Long document content (e.g., technical documentation)
-long_document = "This is a very long document with thousands of words..." + " ... " * 1000  # Minimum cacheable length
+long_document = (
+    "This is a very long document with thousands of words..." + " ... " * 1000
+)  # Minimum cacheable length
 
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-7",
     max_tokens=1024,
     messages=[
         {
@@ -156,19 +148,22 @@ response = client.messages.create(
                     "source": {
                         "type": "text",
                         "media_type": "text/plain",
-                        "data": long_document
+                        "data": long_document,
                     },
                     "citations": {"enabled": True},
-                    "cache_control": {"type": "ephemeral"}  # Cache the document content
+                    "cache_control": {
+                        "type": "ephemeral"
+                    },  # Cache the document content
                 },
                 {
                     "type": "text",
-                    "text": "What does this document say about API features?"
-                }
-            ]
+                    "text": "What does this document say about API features?",
+                },
+            ],
         }
-    ]
+    ],
 )
+print(response)
 ```
 
 In this example:
@@ -182,7 +177,7 @@ In this example:
 
 # Choosing a document type
 
-We support three document types for citations. Documents can be provided directly in the message (base64, text, or URL) or uploaded via the [Files API](/docs/en/build-with-claude/files) and referenced by `file_id`:
+Three document types are supported for citations. Documents can be provided directly in the message (base64, text, or URL) or uploaded via the [Files API](/docs/en/build-with-claude/files) and referenced by `file_id`:
 
 | Type | Best for | Chunking | Citation format |
 | --- | --- | --- | --- |
@@ -210,11 +205,11 @@ Files API
     "source": {
         "type": "text",
         "media_type": "text/plain",
-        "data": "Plain text content..."
+        "data": "Plain text content...",
     },
-    "title": "Document Title", # optional
-    "context": "Context about the document that will not be cited from", # optional
-    "citations": {"enabled": True}
+    "title": "Document Title",  # optional
+    "context": "Context about the document that will not be cited from",  # optional
+    "citations": {"enabled": True},
 }
 ```
 
@@ -238,11 +233,11 @@ Files API
     "source": {
         "type": "base64",
         "media_type": "application/pdf",
-        "data": base64_encoded_pdf_data
+        "data": base64_encoded_pdf_data,
     },
-    "title": "Document Title", # optional
-    "context": "Context about the document that will not be cited from", # optional
-    "citations": {"enabled": True}
+    "title": "Document Title",  # optional
+    "context": "Context about the document that will not be cited from",  # optional
+    "citations": {"enabled": True},
 }
 ```
 
@@ -259,12 +254,12 @@ Custom content documents give you control over citation granularity. No addition
         "type": "content",
         "content": [
             {"type": "text", "text": "First chunk"},
-            {"type": "text", "text": "Second chunk"}
-        ]
+            {"type": "text", "text": "Second chunk"},
+        ],
     },
-    "title": "Document Title", # optional
-    "context": "Context about the document that will not be cited from", # optional
-    "citations": {"enabled": True}
+    "title": "Document Title",  # optional
+    "context": "Context about the document that will not be cited from",  # optional
+    "citations": {"enabled": True},
 }
 ```
 
@@ -279,37 +274,35 @@ When citations are enabled, responses include multiple text blocks with citation
 ```
 {
     "content": [
-        {
-            "type": "text",
-            "text": "According to the document, "
-        },
+        {"type": "text", "text": "According to the document, "},
         {
             "type": "text",
             "text": "the grass is green",
-            "citations": [{
-                "type": "char_location",
-                "cited_text": "The grass is green.",
-                "document_index": 0,
-                "document_title": "Example Document",
-                "start_char_index": 0,
-                "end_char_index": 20
-            }]
+            "citations": [
+                {
+                    "type": "char_location",
+                    "cited_text": "The grass is green.",
+                    "document_index": 0,
+                    "document_title": "Example Document",
+                    "start_char_index": 0,
+                    "end_char_index": 20,
+                }
+            ],
         },
-        {
-            "type": "text",
-            "text": " and "
-        },
+        {"type": "text", "text": " and "},
         {
             "type": "text",
             "text": "the sky is blue",
-            "citations": [{
-                "type": "char_location",
-                "cited_text": "The sky is blue.",
-                "document_index": 0,
-                "document_title": "Example Document",
-                "start_char_index": 20,
-                "end_char_index": 36
-            }]
+            "citations": [
+                {
+                    "type": "char_location",
+                    "cited_text": "The sky is blue.",
+                    "document_index": 0,
+                    "document_title": "Example Document",
+                    "start_char_index": 20,
+                    "end_char_index": 36,
+                }
+            ],
         },
         {
             "type": "text",
@@ -318,14 +311,16 @@ When citations are enabled, responses include multiple text blocks with citation
         {
             "type": "text",
             "text": "water is essential",
-            "citations": [{
-                "type": "page_location",
-                "cited_text": "Water is essential for life.",
-                "document_index": 1,
-                "document_title": "PDF Document",
-                "start_page_number": 5,
-                "end_page_number": 6
-            }]
+            "citations": [
+                {
+                    "type": "page_location",
+                    "cited_text": "Water is essential for life.",
+                    "document_index": 1,
+                    "document_title": "PDF Document",
+                    "start_page_number": 5,
+                    "end_page_number": 6,
+                }
+            ],
         },
         {
             "type": "text",
@@ -334,21 +329,25 @@ When citations are enabled, responses include multiple text blocks with citation
         {
             "type": "text",
             "text": "important findings",
-            "citations": [{
-                "type": "content_block_location",
-                "cited_text": "These are important findings.",
-                "document_index": 2,
-                "document_title": "Custom Content Document",
-                "start_block_index": 0,
-                "end_block_index": 1
-            }]
-        }
+            "citations": [
+                {
+                    "type": "content_block_location",
+                    "cited_text": "These are important findings.",
+                    "document_index": 2,
+                    "document_title": "Custom Content Document",
+                    "start_block_index": 0,
+                    "end_block_index": 1,
+                }
+            ],
+        },
     ]
 }
 ```
 
 # Streaming Support
 
-For streaming responses, we've added a `citations_delta` type that contains a single citation to be added to the `citations` list on the current `text` content block.
+For streaming responses, a `citations_delta` type is included that contains a single citation to be added to the `citations` list on the current `text` content block.
 
 # Example streaming events
+
+Was this page helpful?

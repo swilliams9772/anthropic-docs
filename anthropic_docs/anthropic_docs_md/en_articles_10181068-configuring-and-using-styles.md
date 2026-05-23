@@ -1,12 +1,12 @@
-# Configuring and Using Styles
+# Configure and use styles
 
 **Source:** https://support.claude.com/en/articles/10181068-configuring-and-using-styles
 
 Styles allow you to customize how Claude communicates, helping you achieve more while working in a way that feels natural to you.
 
-# Using Preset Styles
+# Using preset styles
 
-# Selecting a Style
+# Selecting a style
 
 1. Click the "Search and tools" menu in the lower left corner of the chat interface.
 2. Select "Use style."
@@ -22,7 +22,7 @@ Available preset styles include:
 * **Formal:** Clear and polished responses
 * **Explanatory:** Educational responses for learning new concepts.
 
-# Managing Preset Styles
+# Managing preset styles
 
 You can customize which preset styles appear in your menu:
 
@@ -34,9 +34,9 @@ You can customize which preset styles appear in your menu:
 
 **Note:** While you can hide most preset styles, the Normal and Concise styles will always remain visible in your menu.
 
-# Creating Custom Styles
+# Creating custom styles
 
-# Method 1: Upload Writing Samples
+# Method 1: Upload writing samples
 
 1. From the "Use style" dropdown, click "Create & edit styles."
 2. Click “Create custom style.”
@@ -46,7 +46,7 @@ You can customize which preset styles appear in your menu:
 
 Your writing samples help Claude understand and match your preferred communication approach. You can upload documents in various formats including pdf, doc, and txt files.
 
-# Method 2: Describe Your Style
+# Method 2: Describe your style
 
 1. From the "Use style" dropdown, click "Create & edit styles."
 2. Click “Create custom style" in the bottom left corner of the "Customize your styles" modal.
@@ -57,7 +57,7 @@ Your writing samples help Claude understand and match your preferred communicati
    2. Click on "Use custom instructions (advanced)" to provide your own specific style instructions that Claude will follow exactly.
 5. Click "Generate style."
 
-# Managing Your Custom Styles
+# Managing your custom styles
 
 * From the "Use style" dropdown, click "Create & edit styles" to:
 
@@ -70,7 +70,7 @@ Your writing samples help Claude understand and match your preferred communicati
   + Edit style instructions to fine-tune Claude's responses.
   + Editing styles can be done with Claude (“Edit Style”) or by clicking “Set Instructions Manually” in the options menu to edit the instructions directly.
 
-# Tips for Success
+# Tips for success
 
 * Be specific when describing your desired communication style.
 * Use the preview feature to ensure the style matches your expectations.
@@ -81,4 +81,4 @@ Your writing samples help Claude understand and match your preferred communicati
 
 Related Articles
 
-[How can I create and manage projects?](https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects)[Understanding Claude's Personalization Features](https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features)[Using Claude App Intents, Shortcuts, and Widgets on iOS](https://support.claude.com/en/articles/10263469-using-claude-app-intents-shortcuts-and-widgets-on-ios)[Using Claude’s chat search and memory to build on previous context](https://support.claude.com/en/articles/11817273-using-claude-s-chat-search-and-memory-to-build-on-previous-context)[Using Claude in Slack](https://support.claude.com/en/articles/12461605-using-claude-in-slack)
+[How can I create and manage projects?](https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects)[Understanding Claude's personalization features](https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features)[Use Claude for PowerPoint](https://support.claude.com/en/articles/13521390-use-claude-for-powerpoint)[Use Claude for Word](https://support.claude.com/en/articles/14465370-use-claude-for-word)[Organization instructions in Claude for Government](https://support.claude.com/en/articles/14503675-organization-instructions-in-claude-for-government)

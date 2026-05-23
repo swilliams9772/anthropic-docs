@@ -1,6 +1,6 @@
 # Supported regions
 
-**Source:** https://platform.claude.com/docs/en/api/supported-regions
+**Source:** http://platform.claude.com/docs/en/api/supported-regions
 
 Copy page
 
@@ -179,3 +179,5 @@ Copy page
 * Vietnam
 * Zambia
 * Zimbabwe
+
+Was this page helpful?

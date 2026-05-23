@@ -1,22 +1,22 @@
 # Service tiers
 
-**Source:** https://platform.claude.com/docs/en/api/service-tiers
+**Source:** http://platform.claude.com/docs/en/api/service-tiers
 
 Copy page
 
-We offer three service tiers:
+Anthropic offers three service tiers:
 
 * **Priority Tier:** Best for workflows deployed in production where time, availability, and predictable pricing are important
 * **Standard:** Default tier for both piloting and scaling everyday use cases
-* **Batch:** Best for asynchronous workflows which can wait or benefit from being outside your normal capacity
+* **Batch:** Best for asynchronous workflows that can wait or benefit from being outside your normal capacity
 
 # Standard Tier
 
-The standard tier is the default service tier for all API requests. Requests in this tier are prioritized alongside all other requests and observe best-effort availability.
+The standard tier is the default service tier for all API requests. The API prioritizes these requests alongside all other requests with best-effort availability.
 
 # Priority Tier
 
-Requests in this tier are prioritized over all other requests to Anthropic. This prioritization helps minimize ["server overloaded" errors](/docs/en/api/errors#http-errors), even during peak times.
+The API prioritizes requests in this tier over all other requests. This prioritization helps minimize ["server overloaded" errors](/docs/en/api/errors#http-errors), even during peak times.
 
 For more information, see [Get started with Priority Tier](#get-started-with-priority-tier)
 
@@ -34,15 +34,17 @@ Anthropic counts usage against Priority Tier capacity as follows:
 * Cache reads as 0.1 tokens per token read from the cache
 * Cache writes as 1.25 tokens per token written to the cache with a 5 minute TTL
 * Cache writes as 2.00 tokens per token written to the cache with a 1 hour TTL
-* For [long-context](/docs/en/build-with-claude/context-windows) (>200k input tokens) requests, input tokens are 2 tokens per token
+* For [US-only inference](/docs/en/manage-claude/data-residency) (`inference_geo: "us"`) requests on Claude Opus 4.6, Claude Sonnet 4.6, and later models, input tokens are 1.1 tokens per token
 * All other input tokens are 1 token per token
 
 **Output Tokens**
 
-* For [long-context](/docs/en/build-with-claude/context-windows) (>200k input tokens) requests, output tokens are 1.5 tokens per token
+* For [US-only inference](/docs/en/manage-claude/data-residency) (`inference_geo: "us"`) requests on Claude Opus 4.6, Claude Sonnet 4.6, and later models, output tokens are 1.1 tokens per token
 * All other output tokens are 1 token per token
 
 Otherwise, requests proceed at standard tier.
+
+These burndown rates reflect the relative pricing of each token type. For example, US-only inference is priced at 1.1x on Opus 4.6, Sonnet 4.6, and later models, so each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your Priority Tier capacity.
 
 Requests assigned Priority Tier pull from both the Priority Tier capacity and the regular rate limits.
 If servicing the request would exceed the rate limits, the request is declined.
@@ -51,13 +53,16 @@ If servicing the request would exceed the rate limits, the request is declined.
 
 You can control which service tiers can be used for a request by setting the `service_tier` parameter:
 
+Python
+
 ```
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-7",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude!"}],
-    service_tier="auto"  # Automatically use Priority Tier when available, fallback to standard
+    service_tier="auto",  # Automatically use Priority Tier when available, fallback to standard
 )
+print(message.usage.service_tier)
 ```
 
 The `service_tier` parameter accepts the following values:
@@ -98,11 +103,11 @@ You can use the presence of these headers to detect if your request was eligible
 
 You may want to commit to Priority Tier capacity if you are interested in:
 
-* **Higher availability**: Target 99.5% uptime with prioritized computational resources
-* **Cost Control**: Predictable spend and discounts for longer commitments
-* **Flexible overflow**: Automatically falls back to standard tier when you exceed your committed capacity
+* **Higher availability:** Target 99.5% uptime with prioritized computational resources
+* **Cost control:** Predictable spend and discounts for longer commitments
+* **Flexible overflow:** Automatically falls back to standard tier when you exceed your committed capacity
 
-Committing to Priority Tier will involve deciding:
+Committing to Priority Tier involves deciding:
 
 * A number of input tokens per minute
 * A number of output tokens per minute
@@ -113,23 +118,16 @@ The ratio of input to output tokens you purchase matters. Sizing your Priority T
 
 # Supported models
 
-Priority Tier is supported by:
+Priority Tier is supported on all available Claude models (including Claude Opus 4.7) except [Claude Mythos Preview](https://anthropic.com/glasswing).
 
-* Claude Opus 4.5
-* Claude Sonnet 4.5
-* Claude Haiku 4.5
-* Claude Opus 4.1
-* Claude Opus 4
-* Claude Sonnet 4
-* Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
-* Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations))
-
-Check the [model overview page](/docs/en/about-claude/models/overview) for more details on our models.
+Check the [Models overview](/docs/en/about-claude/models/overview) for more details on available models.
 
 # How to access Priority Tier
 
 To begin using Priority Tier:
 
-1. [Contact sales](https://claude.com/contact-sales/priority-tier) to complete provisioning
-2. (Optional) Update your API requests to optionally set the `service_tier` parameter to `auto`
-3. Monitor your usage through response headers and the Claude Console
+1. [Contact sales](https://claude.com/contact-sales/priority-tier) to complete provisioning.
+2. (Optional) Update your API requests to set the `service_tier` parameter to `auto`.
+3. Monitor your usage through response headers and the Claude Console.
+
+Was this page helpful?

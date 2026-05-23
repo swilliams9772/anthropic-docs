@@ -1,4 +1,4 @@
-# Using Claude in Slack
+# Use Claude in Slack
 
 **Source:** https://support.claude.com/en/articles/12461605-using-claude-in-slack
 
@@ -20,17 +20,15 @@ Claude in Slack gives you AI assistance right where your team collaborates. This
 5. When you close the AI assistant panel, the conversation moves to your history.
 6. Access previous conversations by clicking the clock icon.
 
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1755150661/a1a13c73bda421f6ee906650cfc9/22907223-e523-4a93-a6d2-3199a8368991?expires=1767998700&signature=408f1da8ff5b029408ce51046f84eb731e54b6b922587166c99d515c86e41787&req=dSciE8h7nYdZWPMW1HO4zXK25BZH4TkZVfOC%2FRy97LURcxaIQy9Ctuf5vKzD%0AhxyVOgYncoiDzewm%2Bm0%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1755150661/a1a13c73bda421f6ee906650cfc9/22907223-e523-4a93-a6d2-3199a8368991?expires=1767998700&signature=408f1da8ff5b029408ce51046f84eb731e54b6b922587166c99d515c86e41787&req=dSciE8h7nYdZWPMW1HO4zXK25BZH4TkZVfOC%2FRy97LURcxaIQy9Ctuf5vKzD%0AhxyVOgYncoiDzewm%2Bm0%3D%0A)
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1755150661/a1a13c73bda421f6ee906650cfc9/22907223-e523-4a93-a6d2-3199a8368991?expires=1779558300&signature=448862cc35d0cf0ffa3e754de07639d90f5b14abd616f87a2b1007fbe047d458&req=dSciE8h7nYdZWPMW1HO4zXK25RhL7TkdVfOC%2FRy97LVvCOA1hOEE1I6skVZE%0ADvkB0oUZ0FWIsyEUGQo%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1755150661/a1a13c73bda421f6ee906650cfc9/22907223-e523-4a93-a6d2-3199a8368991?expires=1779558300&signature=448862cc35d0cf0ffa3e754de07639d90f5b14abd616f87a2b1007fbe047d458&req=dSciE8h7nYdZWPMW1HO4zXK25RhL7TkdVfOC%2FRy97LVvCOA1hOEE1I6skVZE%0ADvkB0oUZ0FWIsyEUGQo%3D%0A)
 
 # Mention @Claude in a thread or channel
 
 1. Mention @Claude in any thread or channel where you want Claude's help.
-2. Claude will draft a response based on the recent conversation context.
-3. You'll see the draft privately first.
-4. Review, edit, or regenerate the response before deciding to share it.
-5. Click "Post to thread" to share Claude's response with your team.
+2. Claude will reply directly in the thread based on the recent conversation context.
+3. The response will be visible to anyone with access to that thread or channel.
 
-This gives you control to review what Claude shares before it becomes visible to others.
+If Claude posts something you didn't intend to share, you can delete its message from the thread.
 
 # What context from the thread or channel is included when using @Claude?
 
@@ -72,6 +70,8 @@ To use Claude Code in Slack:
 
 Claude automatically chooses which repository to run the task on based on the repositories you've authenticated to Claude Code on the web.
 
+---
+
 # Features and capabilities
 
 # Available features
@@ -101,11 +101,24 @@ The following features are not available when using Claude in Slack:
 * Extended thinking
 * Creating new integration connections (you can only use integrations you’ve already connected in your Claude settings)
 
+---
+
+# Use integrations across multiple Slack workspaces
+
+If you use Claude across more than one Slack workspace, it's important to understand that your integrations (like the Slack connector) are tied to your **Claude account**, not to a specific Slack workspace.
+​
+​**To avoid unexpected results:**
+
+* Disconnect the Slack connector from your Claude account before using Claude in a different workspace (**Settings > Connectors > Slack > Disconnect**), then reconnect it when needed.
+* If you regularly use Claude in simultaneous workspaces, consider using separate Claude accounts, each configured for its respective workspace.
+
+---
+
 # Common use cases
 
 # Code assistance
 
-Share code snippets with Claude to get implementation suggestions, or help debugging errors, optimizing functions, and understanding legacy code. For more complex coding tasks, Claude can automatically route your request to Claude Code on the web (see [Route coding tasks to Claude Code](#h_adda66b697)).
+Share code snippets with Claude to get implementation suggestions, or help debugging errors, optimizing functions, and understanding legacy code. For more complex coding tasks, Claude can automatically route your request to Claude Code on the web (see **[Route coding tasks to Claude Code](#h_adda66b697)**).
 
 # Content creation
 
@@ -113,7 +126,7 @@ Transform team discussions into formalized documentation, draft emails and propo
 
 # Document analysis
 
-Upload files directly to Claude for data analysis, key point extraction/summarization, and translation. Supported file types include: PDF, TXT, DOC, DOCX, images (PNG, JPG), CSV, and [more](https://support.claude.com/en/articles/8241126-what-kinds-of-documents-can-i-upload-to-claude).
+Upload files directly to Claude for data analysis, key point extraction/summarization, and translation. Supported file types include: PDF, TXT, DOC, DOCX, images (PNG, JPG), CSV, and more. For more information, see **[Uploading files to Claude](https://support.claude.com/en/articles/8241126-uploading-files-to-claude)**.
 
 # Meeting preparation
 
@@ -127,6 +140,8 @@ Granting new team members access to channel history and shared documents in Slac
 
 Get instant answers during team discussions. Ask Claude about industry trends, technical concepts, or company information while staying in your conversation.
 
+---
+
 # Best practices
 
 # Optimize your workflow
@@ -136,7 +151,7 @@ Get instant answers during team discussions. Ask Claude about industry trends, t
 * **Use clear prompts**: Be specific about what you need to get the best results.
 * **Request web search**: Add "search the web" to your prompt when you need current information.
 
-# Managing conversations
+# Manage conversations
 
 * Each Claude DM maintains full chat history.
 * In the AI assistant panel, conversations move to history when you close the panel.
@@ -156,13 +171,15 @@ Get instant answers during team discussions. Ask Claude about industry trends, t
 
 # Channel restrictions
 
-Claude works in direct messages and threads where you explicitly mention @Claude. You control when Claude participates in conversations and can review all responses before sharing them with your team.
+Claude works in direct messages and threads where you explicitly mention @Claude, and you control when Claude participates in conversations.
+
+---
 
 # Troubleshooting
 
 # "Usage limit reached"
 
-This message appears when you've hit your Claude account usage limits. Try again later or consider [upgrading your Claude plan](https://claude.ai/upgrade).
+This message appears when you've hit your Claude account usage limits. Try again later or consider **[upgrading your Claude plan](https://claude.ai/upgrade)**.
 
 # "I'm unable to generate a response at this time"
 
@@ -172,7 +189,7 @@ This generic error message can appear for various reasons:
 * Empty responses from Claude
 * Network connectivity problems
 
-Try sending your message again. If the problem persists, you can [contact our Support team](https://support.claude.com/en/articles/9015913-how-to-get-support).
+Try sending your message again. If the problem persists, you can **[contact our Support team](https://support.claude.com/en/articles/9015913-how-to-get-support)**.
 
 # "I don't have access to our previous conversation history"
 
@@ -188,4 +205,4 @@ Start a new conversation to continue.
 
 Related Articles
 
-[Using Research on Claude](https://support.claude.com/en/articles/11088861-using-research-on-claude)[FAQs on Using Claude for Education at Your University](https://support.claude.com/en/articles/11139144-faqs-on-using-claude-for-education-at-your-university)[Getting Started with Claude in Slack](https://support.claude.com/en/articles/11506255-getting-started-with-claude-in-slack)[Create and edit files with Claude](https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude)[Using Claude in Xcode](https://support.claude.com/en/articles/12293051-using-claude-in-xcode)
+[Using Research on Claude](https://support.claude.com/en/articles/11088861-using-research-on-claude)[Get started with Claude in Slack](https://support.claude.com/en/articles/11506255-get-started-with-claude-in-slack)[Claude Code FAQ](https://support.claude.com/en/articles/12386420-claude-code-faq)[Assign tasks from anywhere in Claude Cowork](https://support.claude.com/en/articles/13947068-assign-tasks-from-anywhere-in-claude-cowork)[Use Claude for Outlook](https://support.claude.com/en/articles/14855664-use-claude-for-outlook)

@@ -6,18 +6,18 @@ Tenant Restrictions are available for members of Enterprise plans and Console or
 
 Tenant Restrictions enable IT administrators on Enterprise plans to enforce network-level access control for Claude. This feature ensures that users on corporate networks can only access approved organizational accounts, preventing unauthorized use of personal accounts.
 
-# How It Works
+# How it works
 
 When enabled, your network proxy injects an HTTP header into requests to Claude. Anthropic validates this header and blocks access from any organization not in the allowed list.
 
-**Supported Authentication Methods:**
+**Supported authentication methods:**
 
 * Web access ([claude.ai](http://claude.ai))
 * Desktop / App Access
 * API key authentication
 * OAuth token authentication
 
-# Header Format
+# Header format
 
 ```
 anthropic-allowed-org-ids: <org-uuid-1>,<org-uuid-2>,...
@@ -33,31 +33,31 @@ anthropic-allowed-org-ids: 550e8400-e29b-41d4-a716-446655440000,6ba7b810-
 9dad-11d1-80b4-00c04fd430c8
 ```
 
-# Configuration Steps
+# Configuration steps
 
-# 1. Find Your Organization UUID
+# 1. Find your organization UUID
 
 Members of Enterprise plans can find this in two different places:
 
-1. Navigate to [Settings > Account](https://claude.ai/settings/account) and find **Organization ID**.
-2. Navigate to [Admin settings > Organization](https://claude.ai/admin-settings/organization) and scroll down to the bottom of the page to locate **Organization ID**.
+1. Navigate to **[Settings > Account](https://claude.ai/settings/account)** and find **Organization ID**.
+2. Navigate to **[Organization settings > Organization](https://claude.ai/admin-settings/organization)** and scroll down to the bottom of the page to locate **Organization ID**.
 
-Members of Console organizations can find this in [Settings > Organization](https://platform.claude.com/settings/organization).
+Members of Console organizations can find this in **[Settings > Organization](https://platform.claude.com/settings/organization)**.
 
-# 2. Configure Your Network Proxy
+# 2. Configure your network proxy
 
 Configure your proxy to inject the header for Claude traffic:
 
 ```
 Rule: Claude Tenant Restriction
-Application: claude.ai, api.anthropic.com
+Application: claude.ai, api.anthropic.com, claude.com, anthropic.com
 Action: Inject Header
 Header Name: anthropic-allowed-org-ids
 Header Value:
 TLS Inspection: Required
 ```
 
-# 3. Test Your Configuration
+# 3. Test your configuration
 
 From restricted network, test with your org's API key:
 
@@ -66,11 +66,11 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $CLAUDE_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
-  -d '{"model":"claude-sonnet-4-20250514","max_tokens":1024,"messages":
+  -d '{"model":"claude-sonnet-4-6","max_tokens":1024,"messages":
  [{"role":"user","content":"Hello"}]}'
 ```
 
-# Error Response
+# Error response
 
 When access is blocked, users receive the following error:
 
@@ -85,7 +85,7 @@ When access is blocked, users receive the following error:
 }
 ```
 
-# Supported Proxy Platforms
+# Supported proxy platforms
 
 * Zscaler ZIA (Cloud App Control policies)
 * Palo Alto Prisma Access (SaaS App Management)
@@ -93,7 +93,7 @@ When access is blocked, users receive the following error:
 * Netskope (Header Insertion rules)
 * Generic HTTPS proxies with header injection capability
 
-# Use Cases
+# Use cases
 
 |  |  |
 | --- | --- |
@@ -101,14 +101,14 @@ When access is blocked, users receive the following error:
 | Single Organization | `<your-org-uuid>` |
 | Multiple Organizations (Partners) | `<org-uuid-1>,<org-uuid-2>` |
 
-# Security Benefits
+# Security benefits
 
 * **Data Loss Prevention:** Block personal account usage from corporate networks.
 * **Compliance:** Enforce data residency and access policies.
 * **Shadow IT Control:** Prevent unauthorized Claude usage.
 * **Audit Trail:** Complete visibility into access attempts.
 
-# Backward Compatibility
+# Backward compatibility
 
 * No impact to networks without tenant restrictions configured.
 * Standard authentication continues for unmanaged networks.
@@ -118,4 +118,4 @@ When access is blocked, users receive the following error:
 
 Related Articles
 
-[Does Anthropic Act as a Data Processor or Controller?](https://support.claude.com/en/articles/9267385-does-anthropic-act-as-a-data-processor-or-controller)[Claude Code FAQ](https://support.claude.com/en/articles/12386420-claude-code-faq)[Microsoft 365 Connector: Security Guide](https://support.claude.com/en/articles/12684923-microsoft-365-connector-security-guide)[Claude in Chrome Admin Controls](https://support.claude.com/en/articles/13065128-claude-in-chrome-admin-controls)[Setting up JIT or SCIM provisioning](https://support.claude.com/en/articles/13133195-setting-up-jit-or-scim-provisioning)
+[Business Associate Agreements (BAA) for Commercial Customers](https://support.claude.com/en/articles/8114513-business-associate-agreements-baa-for-commercial-customers)[Claude Code FAQ](https://support.claude.com/en/articles/12386420-claude-code-faq)[Microsoft 365 connector security guide](https://support.claude.com/en/articles/12684923-microsoft-365-connector-security-guide)[Use Claude for Microsoft 365 with third-party platforms](https://support.claude.com/en/articles/13945233-use-claude-for-microsoft-365-with-third-party-platforms)[MCP connectors](https://support.claude.com/en/articles/14503689-mcp-connectors)

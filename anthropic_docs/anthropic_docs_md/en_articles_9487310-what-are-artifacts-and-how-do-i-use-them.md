@@ -4,124 +4,148 @@
 
 Accessing artifacts in the sidebar and Claude-powered artifacts are supported on free, Pro, Max, Team, and Enterprise plans.
 
-Artifacts allow you to turn ideas into shareable apps, tools, or content—build tools, visualizations, and experiences by simply describing what you need. Claude can share substantial, standalone content with you in a dedicated window separate from the main conversation. This makes it easy for you to work with significant pieces of content that you may want to modify, build upon, or reference later.
+Artifacts allow you to turn ideas into shareable apps, tools, or content—build tools, visualizations, and experiences by simply describing what you need. Claude can share substantial, standalone content with you in a dedicated window separate from the main conversation. This makes it easy to work with significant pieces of content that you may want to modify, build upon, or reference later.
+
+---
 
 # What are artifacts?
 
-Claude creates an artifact when the content it is sharing has the following characteristics:
+Claude creates an artifact when the content it's sharing meets these criteria:
 
-* It is significant and self-contained, typically over 15 lines of content.
-* It is something you are likely to want to edit, iterate on, or reuse outside the conversation.
+* It is significant and self-contained, typically over 15 lines.
+* It is something you're likely to want to edit, iterate on, or reuse outside the conversation.
 * It represents a complex piece of content that stands on its own without requiring extra conversation context.
-* It is content you are likely to want to refer back to or use later on.
+* It is content you're likely to want to refer back to or use later.
 
-Some common examples of artifact content include:
+Common examples of artifact content include:
 
-* Documents (Markdown or Plain Text)
+* Documents (Markdown or plain text)
 * Code snippets
-* Websites (single page HTML)
-* Scalable Vector Graphics (SVG) images
+* Single-page HTML websites
+* SVG images
 * Diagrams and flowcharts
 * Interactive React components
 
-# How do I create and manage artifacts?
+---
 
-# For free, Pro, and Max plan users
+# Enabling or disabling artifacts
+
+To adjust your artifacts preferences:
+
+1. Click your initials or name in the lower left corner.
+2. Navigate to **[Settings > Capabilities](https://claude.ai/settings/capabilities)**.
+3. Find **Artifacts** and toggle it on or off.
+
+**Note:** Team and Enterprise administrators may manage some artifact settings at the organization level.
+
+---
+
+# Accessing your artifacts
 
 You can access all your artifacts through the dedicated artifacts space in your Claude sidebar. This space allows you to:
 
-* View all your creations in one organized location.
-* Browse Anthropic-created artifacts for inspiration.
-* Create new artifacts from scratch or by customizing existing ones.
-* Manage and organize your artifact collection.
+* View all your creations in one organized location
+* Browse Anthropic-created artifacts for inspiration
+* Create new artifacts from scratch or by customizing existing ones
+* Manage and organize your artifact collection
 
-# For Claude for Work users
-
-In addition to the above, Team and Enterprise users can share artifacts securely with other members of the same organization and browse work-focused artifacts for inspiration.
+---
 
 # Working with artifacts
 
-When Claude creates an artifact, you'll see the artifact content displayed in the dedicated window to the right side of the main chat. Here's what you can do:
+When Claude creates an artifact, you'll see the content displayed in a dedicated window to the right of the main chat.
 
 # Edit and iterate
 
 * Ask Claude to modify or update the artifact content
-* These changes appear directly in the artifact window
+* Changes appear directly in the artifact window
 * Switch between different versions using the version selector
 * Your edits won't change Claude's memory of the original content
-* Edit prior chat messages to create a different version of a chat history, with its own set of Artifacts. This lets you easily create different versions of an Artifact without fear of losing your previous work.
+* Edit prior chat messages to create a different version of the conversation, with its own set of artifacts—this lets you explore different directions without losing previous work
 
 # View and export
 
-* View the underlying code of any artifact.
-* Copy content to your clipboard.
-* Download files to use outside the conversation.
-* These options are in the lower right corner of the artifact window.
+In the lower right corner of the artifact window, you can:
+
+* View the underlying code of any artifact
+* Copy content to your clipboard
+* Download files to use outside the conversation
 
 # Multiple artifacts
 
-* Open and work with several artifacts in one conversation.
-* Use the chat controls (slider icon in upper right) to switch between them.
-* Select which artifact you want Claude to reference for updates.
+* Open and work with several artifacts in one conversation
+* Use the chat controls (slider icon in upper right) to switch between them
+* Select which artifact you want Claude to reference for updates
 
-# Creating Claude-powered artifacts
+# Fixing errors
 
-You can also build artifacts that embed AI capabilities, turning them into AI-powered apps. Users of your artifacts can access Claude's intelligence through a text-based API—answering questions, generating creative content, providing personalized coaching, playing games, solving problems, and adapting responses based on input. When you share these AI-powered artifacts, others can use them immediately—no API keys, no costs to you. Whether your artifact helps 10 people or 10,000, it's completely free to share.
+If an artifact generates an error, look for the “Try fixing with Claude” button near the error message. Click the button to automatically copy the error details into a new message, then send it to Claude to diagnose the issue and suggest a fix.
 
-**For Claude for Work (Team and Enterprise plan) users:** When you share AI-powered artifacts within your organization, team members can use them without incurring additional costs to the creator. Usage counts against each user's existing team limits.
+**Note:** While Claude will attempt to fix the error, success isn't guaranteed. Some errors may require additional troubleshooting.
 
-# To create artifacts with AI capabilities
+---
 
-* You describe what you want.
-* Claude writes the code.
-* The app runs on Anthropic's infrastructure.
-* Users authenticate with their Claude account and interact with their own instance of the artifact.
-* Their usage counts against their Claude subscription (you do not pay for their usage).
+# AI-powered artifacts
 
-# Enhanced artifact capabilities
+You can build artifacts that embed AI capabilities, turning them into AI-powered apps. Users of your artifacts can access Claude's intelligence through a text-based API—answering questions, generating creative content, providing personalized coaching, playing games, solving problems, and adapting responses based on input.
 
-Artifacts now support advanced features that enable more powerful and persistent applications.
+# Creating AI-powered artifacts
 
-MCP integration and persistent storage for artifacts are available on Pro, Max, Team, and Enterprise plans on Claude web and desktop.
+1. Describe what you want to Claude.
+2. Claude writes the code.
+3. The app runs on Anthropic's infrastructure.
+4. Users authenticate with their Claude account and interact with their own instance of the artifact.
+
+# How usage works
+
+When you share AI-powered artifacts, others can use them immediately—no API keys required, and no costs to you. Whether your artifact helps 10 people or 10,000, sharing is free. Usage counts against each user's own Claude subscription limits, not yours.
+
+For Team and Enterprise plans, when you share AI-powered artifacts within your organization, team members can use them without incurring additional costs to the creator.
+
+---
 
 # MCP integration
 
-Artifacts can connect to external services through the Model Context Protocol (MCP), enabling interactive applications that read from and write to tools like Asana, Google Calendar, and Slack. In addition to Anthropic's official MCP integrations, they can connect to any [custom MCP servers](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp) you've configured. Users control which tools each artifact can access through granular permission settings.
+MCP integration for artifacts is available on Pro, Max, Team, and Enterprise plans on Claude web and desktop.
+
+Artifacts can connect to external services through the Model Context Protocol (MCP), enabling interactive applications that read from and write to tools like Asana, Google Calendar, and Slack. In addition to Anthropic's official MCP integrations, artifacts can connect to any **[custom MCP servers](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp)** you've configured.
 
 When an artifact needs to access an MCP tool, you'll be prompted to approve access on first interaction. Your preferences persist for subsequent uses of that artifact.
 
-**Important:** Each user must authenticate MCP servers independently, even when using shared or published artifacts. Organization admins can enable or disable artifacts MCP at the organization level, but cannot manage which specific MCP servers artifacts can use.
+**Important:** Each user must authenticate MCP servers independently, even when using shared or published artifacts. Organization admins can enable or disable artifact MCP access at the organization level but cannot manage which specific MCP servers artifacts can use.
+
+---
 
 # Persistent storage
 
-Artifacts can now store data across sessions, enabling stateful applications like journals, trackers, and collaborative tools. Storage can be configured as either **personal** or **shared**, depending on the artifact's purpose.
+Persistent storage for artifacts is available on Pro, Max, Team, and Enterprise plans on Claude web and desktop.
 
-**Personal storage:** Each user maintains their own private data. For example, in a journal artifact, your entries remain visible only to you—other users have their own separate journal entries.
+Artifacts can store data across sessions, enabling stateful applications like journals, trackers, and collaborative tools. Storage can be configured as either personal or shared:
 
-**Shared storage:** All users see and interact with the same data. For example, in a game leaderboard artifact, everyone sees the same scores and rankings.
+* **Personal storage:** Each user maintains their own private data. For example, in a journal artifact, your entries remain visible only to you.
+* **Shared storage:** All users see and interact with the same data. For example, in a game leaderboard, everyone sees the same scores and rankings.
 
 When you interact with an artifact that uses shared storage for the first time, you'll see a confirmation dialog explaining that your data will be visible to other users of that artifact.
 
-**Note:** Persistent storage is only available for published artifacts. During development and testing, the storage API will be visible but storage operations will not succeed until the artifact is published.
+**Note:** Persistent storage is only available for published artifacts. During development and testing, storage operations will not succeed until the artifact is published.
 
 **Storage specifications:**
 
-* 20MB storage limit per artifact
-* Text-only input—no images, files, or binary data can be stored
-* Personal and shared storage are isolated: your personal data is never shared, and shared data is visible to all artifact users
-* Unpublishing an artifact permanently deletes all associated storage data (both personal and shared)
+* 20 MB storage limit per artifact
+* Text-only input—no images, files, or binary data
+* Personal and shared storage are isolated
+* Unpublishing an artifact permanently deletes all associated storage data
 
-**Privacy considerations:** Artifact creators determine which data uses personal versus shared storage when building the artifact. Before entering sensitive information, consider whether the artifact uses shared storage and whether other users should have access to your data.
+**Privacy consideration:** Artifact creators determine which data uses personal versus shared storage when building the artifact. Before entering sensitive information, consider whether the artifact uses shared storage.
 
-# Learn more about artifacts
+---
 
-Read more about how to use Claude to power artifacts with these two guides:
+# Learn more
 
-* [Consumer Launch Guide](https://support.claude.com/en/articles/11649427-use-artifacts-to-visualize-and-create-ai-apps-without-ever-writing-a-line-of-code)
-* [Developer Launch Guide](https://support.claude.com/en/articles/11649438-prototype-ai-powered-apps-with-claude-artifacts)
+To share your artifacts publicly, embed them on websites, or discover artifacts created by others, see **[Publishing and sharing artifacts](https://support.claude.com/en/articles/9547008-publishing-and-sharing-artifacts)**.
 
 ---
 
 Related Articles
 
-[Discovering, publishing, customizing, and sharing artifacts](https://support.claude.com/en/articles/9547008-discovering-publishing-customizing-and-sharing-artifacts)[Getting Started with Custom Connectors Using Remote MCP](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp)[Anthropic Connectors Directory FAQ](https://support.claude.com/en/articles/11596036-anthropic-connectors-directory-faq)[Prototype AI-Powered Apps with Claude artifacts](https://support.claude.com/en/articles/11649438-prototype-ai-powered-apps-with-claude-artifacts)[Microsoft 365 Connector: Security Guide](https://support.claude.com/en/articles/12684923-microsoft-365-connector-security-guide)
+[Business Associate Agreements (BAA) for Commercial Customers](https://support.claude.com/en/articles/8114513-business-associate-agreements-baa-for-commercial-customers)[Publishing and sharing artifacts](https://support.claude.com/en/articles/9547008-publishing-and-sharing-artifacts)[Get started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp)[MCP: Individual connectors](https://support.claude.com/en/articles/14503703-mcp-individual-connectors)[Use live artifacts in Claude Cowork](https://support.claude.com/en/articles/14729249-use-live-artifacts-in-claude-cowork)

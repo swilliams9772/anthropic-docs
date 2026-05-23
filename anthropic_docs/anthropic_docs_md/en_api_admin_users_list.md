@@ -1,12 +1,12 @@
 # List Users
 
-**Source:** https://platform.claude.com/docs/en/api/admin/users/list
+**Source:** http://platform.claude.com/docs/en/api/admin/users/list
 
 Copy page
 
 # List Users
 
-get/v1/organizations/users
+GET/v1/organizations/users
 
 List Users
 
@@ -23,8 +23,6 @@ ID of the object to use as a cursor for pagination. When provided, returns the p
 email: optional string
 
 Filter by user email.
-
-formatemail
 
 limit: optional number
 
@@ -48,8 +46,6 @@ added\_at: string
 
 RFC 3339 datetime string indicating when the User joined the Organization.
 
-formatdate-time
-
 email: string
 
 Email of the User.
@@ -62,7 +58,7 @@ role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -80,10 +76,6 @@ Object type.
 
 For Users, this is always `"user"`.
 
-Accepts one of the following:
-
-"user"
-
 first\_id: string
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
@@ -100,6 +92,7 @@ List Users
 
 ```
 curl https://api.anthropic.com/v1/organizations/users \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 

@@ -1,6 +1,6 @@
 # Delete a Message Batch
 
-**Source:** https://platform.claude.com/docs/en/api/deleting-message-batches
+**Source:** http://platform.claude.com/docs/en/api/deleting-message-batches
 
 Copy page
 
@@ -8,7 +8,7 @@ cURL
 
 # Delete a Message Batch
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 Delete a Message Batch.
 
@@ -24,7 +24,7 @@ ID of the Message Batch.
 
 # ReturnsExpand Collapse
 
-DeletedMessageBatch = object { id, type }
+DeletedMessageBatch object { id, type }
 
 id: string
 
@@ -35,10 +35,6 @@ type: "message\_batch\_deleted"
 Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
-
-Accepts one of the following:
-
-"message\_batch\_deleted"
 
 Delete a Message Batch
 

@@ -2,24 +2,31 @@
 
 **Source:** https://support.claude.com/en/articles/12622703-deploy-claude-desktop-for-windows
 
-Administrators on Team or Enterprise plans can deploy Claude Desktop automatically across their organization to manage installations and updates centrally. We offer an MSIX package for Windows deployments, enabling secure, scalable distribution.
+Administrators on Team or Enterprise plans can deploy Claude Desktop automatically across their organization to manage installations and updates centrally. We offer MSIX packages for Windows deployments via Microsoft Intune, SCCM, Group Policy, or PowerShell, enabling secure, scalable distribution.
 
-# Available Formats
+# Installation requirements
 
-- `.msix` - Compatible with Microsoft Intune and Microsoft Store
+* For individual installations with full feature support including Cowork, administrator privileges are required. Users will see a Windows UAC prompt during installation. Users without admin access can still install Claude, but Cowork will not be available. Access the user-friendly installer from **[our download page](https://claude.com/download)**.
+* For silent deployment without user interaction, use the MSIX package directly with your enterprise management tool.
 
-- `.exe` - Standard installer. Installs to `%LOCALAPPDATA%\Programs\Claude\`. Updates automatically when new versions are released, unless disabled via enterprise policies.
+# Cowork requirements
 
-# Download:
+Claude Desktop for Windows requires the **[Virtual Machine Platform](https://support.microsoft.com/en-us/windows/enable-virtualization-on-windows-c5578302-6e43-4b4b-a449-8ced115f58e1)** to use Cowork. You can automate installation of this feature via most endpoint management solutions, but you may also run the following command to install it manually:
 
-* [X64 Claude MSIX Installer](https://claude.ai/api/desktop/win32/x64/msix/latest/redirect)
-* [ARM64 Claude MSIX Installer](https://claude.ai/api/desktop/win32/arm64/msix/latest/redirect)
+```
+Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -All -NoRestart
+```
 
-# Installation commands:
+# Download
+
+* **[Claude MSIX (x64)](https://claude.ai/api/desktop/win32/x64/msix/latest/redirect)**
+* **[Claude MSIX (arm64)](https://claude.ai/api/desktop/win32/arm64/msix/latest/redirect)**
+
+# Installation commands
 
 For manual installation on individual machines, use the following PowerShell commands:
 
-**Install for single user:**
+# Install for single user
 
 ```
 ```powershell
@@ -27,9 +34,9 @@ Add-AppxPackage -Path "Claude.msix"
 ```
 ```
 
-See Microsoft's [Add-AppxPackage](https://learn.microsoft.com/en-us/powershell/module/appx/add-appxpackage?view=windowsserver2022-ps) documentation for more details.
+For more details, see Microsoft's **[Add-AppxPackage](https://learn.microsoft.com/en-us/powershell/module/appx/add-appxpackage?view=windowsserver2022-ps)** documentation.
 
-**Install for all users (provisions machine-wide):**
+# Install for all users (provisions machine-wide)
 
 ```
 ```powershell
@@ -37,21 +44,21 @@ Add-AppxProvisionedPackage -Online -PackagePath "Claude.msix" -SkipLicense -Regi
 ```
 ```
 
-See Microsoft's [Add-AppxProvisionedPackage](https://learn.microsoft.com/en-us/powershell/module/dism/add-appxprovisionedpackage?view=windowsserver2022-ps) documentation for more details.
+For more details, see Microsoft's **[Add-AppxProvisionedPackage](https://learn.microsoft.com/en-us/powershell/module/dism/add-appxprovisionedpackage?view=windowsserver2022-ps)** documentation.
 
 # Deploy via MDM
 
 Claude Desktop can be deployed through various enterprise software distribution services. Choose the method that aligns with your organization's existing infrastructure:
 
-* [Microsoft Intune](https://docs.microsoft.com/en-us/windows/msix/desktop/managing-your-msix-deployment-intune)
-* [Microsoft Endpoint Configuration Manager (SCCM)](https://learn.microsoft.com/en-us/windows/msix/desktop/managing-your-msix-deployment-mem-adminconsole)
-* [Group Policy Software Installation](https://learn.microsoft.com/en-us/troubleshoot/windows-server/group-policy/use-group-policy-to-install-software)
-* [Deployment Image Servicing and Management (DISM.exe)](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/preinstall-apps-using-dism?view=windows-10)
-* [PowerShell Scripts](https://learn.microsoft.com/en-us/windows/msix/desktop/powershell-msix-cmdlets)
+* **[Microsoft Intune](https://docs.microsoft.com/en-us/windows/msix/desktop/managing-your-msix-deployment-intune)**
+* **[Microsoft Endpoint Configuration Manager (SCCM)](https://learn.microsoft.com/en-us/windows/msix/desktop/managing-your-msix-deployment-mem-adminconsole)**
+* **[Group Policy Software Installation](https://learn.microsoft.com/en-us/troubleshoot/windows-server/group-policy/use-group-policy-to-install-software)**
+* **[Deployment Image Servicing and Management (DISM.exe)](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/preinstall-apps-using-dism?view=windows-10)**
+* **[PowerShell Scripts](https://learn.microsoft.com/en-us/windows/msix/desktop/powershell-msix-cmdlets)**
 
 # Configuration
 
-To configure Claude Desktop settings such as auto-updates, extensions, and MCP servers, see the [Enterprise Configuration article](https://support.claude.com/en/articles/12622667-enterprise-configuration).
+To configure Claude Desktop settings such as auto-updates, extensions, and MCP servers, see **[Enterprise configuration](https://support.claude.com/en/articles/12622667-enterprise-configuration)**.
 
 # Troubleshooting
 
@@ -63,4 +70,4 @@ By default, packaged apps may be restricted by AppLocker policies. Ensure your A
 
 Related Articles
 
-[Installing Claude Desktop](https://support.claude.com/en/articles/10065433-installing-claude-desktop)[Getting Started with Local MCP Servers on Claude Desktop](https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop)[Deploy Claude Desktop for macOS](https://support.claude.com/en/articles/12611117-deploy-claude-desktop-for-macos)[Enterprise Configuration](https://support.claude.com/en/articles/12622667-enterprise-configuration)[Deploying enterprise-grade MCP servers with desktop extensions](https://support.claude.com/en/articles/12702546-deploying-enterprise-grade-mcp-servers-with-desktop-extensions)
+[Install Claude Desktop](https://support.claude.com/en/articles/10065433-install-claude-desktop)[Deploy Claude Desktop for macOS](https://support.claude.com/en/articles/12611117-deploy-claude-desktop-for-macos)[Enterprise configuration for Claude Desktop](https://support.claude.com/en/articles/12622667-enterprise-configuration-for-claude-desktop)[Get started with Claude Cowork](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork)[Claude Cowork desktop architecture overview](https://support.claude.com/en/articles/14479288-claude-cowork-desktop-architecture-overview)

@@ -2,9 +2,9 @@
 
 **Source:** https://support.claude.com/en/articles/8606394-how-large-is-the-context-window-on-paid-claude-plans
 
-Claude’s context window size is 200K, meaning it can ingest 200K+ tokens (about 500 pages of text or more) when using a paid Claude plan.
+Sonnet 4.6, Opus 4.6, and Opus 4.7 support a 500K token context window on all paid plans when chatting with Claude. Outside of these models, Claude’s context window size is 200K, meaning it can ingest 200K+ tokens (about 500 pages of text or more) when using a paid Claude plan.
 
-**Note:** Users on Enterprise plans have access to a 500K context window when chatting with Claude Sonnet 4.5. See [What is the Enterprise plan?](https://support.claude.com/en/articles/9797531-what-is-the-enterprise-plan) for more information.
+When using Claude Code with a Pro, Max, Team, or Enterprise plan, Opus 4.7 supports a 1M token context window. Pro users need to enable usage credits to access Opus 4.7 in Claude Code. Sonnet 4.6 also supports a 1M context window for all paid Claude plans on Claude Code, but usage credits must be enabled to access it (except for usage-based Enterprise plans).
 
 # Automatic context management
 
@@ -26,4 +26,4 @@ While context is managed automatically for most conversations, you can still opt
 
 Related Articles
 
-[How large is Claude’s context window?](https://support.claude.com/en/articles/7996848-how-large-is-claude-s-context-window)[About Claude's Max Plan Usage](https://support.claude.com/en/articles/11014257-about-claude-s-max-plan-usage)[Understanding Usage and Length Limits](https://support.claude.com/en/articles/11647753-understanding-usage-and-length-limits)[Using Claude’s chat search and memory to build on previous context](https://support.claude.com/en/articles/11817273-using-claude-s-chat-search-and-memory-to-build-on-previous-context)[Extra Usage for Paid Claude Plans](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans)
+[How up-to-date is Claude's training data?](https://support.claude.com/en/articles/8114494-how-up-to-date-is-claude-s-training-data)[How large is the Claude API’s context window?](https://support.claude.com/en/articles/8606395-how-large-is-the-claude-api-s-context-window)[Claude Code model configuration](https://support.claude.com/en/articles/11940350-claude-code-model-configuration)[Release notes](https://support.claude.com/en/articles/12138966-release-notes)[Models, usage, and limits in Claude Code](https://support.claude.com/en/articles/14552983-models-usage-and-limits-in-claude-code)

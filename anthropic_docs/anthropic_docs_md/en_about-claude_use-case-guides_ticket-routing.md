@@ -1,6 +1,6 @@
 # Ticket routing
 
-**Source:** https://platform.claude.com/docs/en/about-claude/use-case-guides/ticket-routing
+**Source:** http://platform.claude.com/docs/en/about-claude/use-case-guides/ticket-routing
 
 Copy page
 
@@ -38,7 +38,7 @@ Consider questions like:
 * How are edge cases or ambiguous tickets handled?
 * How does the team prioritize tickets?
 
-The more you know about how humans handle certain cases, the better you will be able to work with Claude to do the task.
+The more you know about how humans handle certain cases, the better you can work with Claude to do the task.
 
 # Define user intent categories
 
@@ -74,7 +74,7 @@ In addition to intent, ticket routing and prioritization may also be influenced 
 
 # Establish success criteria
 
-Work with your support team to [define clear success criteria](/docs/en/test-and-evaluate/define-success) with measurable benchmarks, thresholds, and goals.
+Work with your support team to [define clear success criteria](/docs/en/test-and-evaluate/develop-tests) with measurable benchmarks, thresholds, and goals.
 
 Here are some standard criteria and benchmarks when using LLMs for support ticket routing:
 
@@ -203,15 +203,16 @@ It’s hard to know how well your prompt works without deploying it in a test pr
 
 Let’s build the deployment structure. Start by defining the method signature for wrapping our call to Claude. We'll take the method we’ve already begun to write, which has `ticket_contents` as input, and now return a tuple of `reasoning` and `intent` as output. If you have an existing automation using traditional ML, you'll want to follow that method signature instead.
 
+Python
+
 ```
-import anthropic
 import re
 
 # Create an instance of the Claude API client
 client = anthropic.Anthropic()
 
 # Set the default model
-DEFAULT_MODEL="claude-haiku-4-5-20251001"
+DEFAULT_MODEL = "claude-haiku-4-5-20251001"
 
 def classify_support_request(ticket_contents):
     # Define the prompt for the classification task
@@ -244,7 +245,7 @@ def classify_support_request(ticket_contents):
 
 This code:
 
-* Imports the Anthropic library and creates a client instance using your API key.
+* Creates a client instance using your API key.
 * Defines a `classify_support_request` function that takes a `ticket_contents` string.
 * Sends the `ticket_contents` to Claude for classification using the `classification_prompt`
 * Returns the model's `reasoning` and `intent` extracted from the response.
@@ -257,7 +258,7 @@ Since we need to wait for the entire reasoning and intent text to be generated b
 
 Prompting often requires testing and optimization for it to be production ready. To determine the readiness of your solution, evaluate performance based on the success criteria and thresholds you established earlier.
 
-To run your evaluation, you will need test cases to run it on. The rest of this guide assumes you have already [developed your test cases](/docs/en/test-and-evaluate/develop-tests).
+To run your evaluation, you need test cases to run it on. The rest of this guide assumes you have already [developed your test cases](/docs/en/test-and-evaluate/develop-tests).
 
 # Build an evaluation function
 
@@ -270,15 +271,16 @@ You may need to assess Claude on other axes depending on what factors that are i
 
 To assess this, we first have to modify the script we wrote and add a function to compare the predicted intent with the actual intent and calculate the percentage of correct predictions. We also have to add in cost calculation and time measurement functionality.
 
+Python
+
 ```
-import anthropic
 import re
 
 # Create an instance of the Claude API client
 client = anthropic.Anthropic()
 
 # Set the default model
-DEFAULT_MODEL="claude-haiku-4-5-20251001"
+DEFAULT_MODEL = "claude-haiku-4-5-20251001"
 
 def classify_support_request(request, actual_intent):
     # Define the prompt for the classification task
@@ -306,7 +308,7 @@ def classify_support_request(request, actual_intent):
     intent_match = re.search(r"<intent>(.*?)</intent>", reasoning_and_intent, re.DOTALL)
     intent = intent_match.group(1).strip() if intent_match else ""
 
-      # Check if the model's prediction is correct.
+    # Check if the model's prediction is correct.
     correct = actual_intent.strip() == intent.strip()
 
     # Return the reasoning, intent, correct, and usage.
@@ -320,7 +322,7 @@ Let’s break down the edits we’ve made:
 
 # Run your evaluation
 
-A proper evaluation requires clear thresholds and benchmarks to determine what is a good result. The script above will give us the runtime values for accuracy, response time, and cost per classification, but we still would need clearly established thresholds. For example:
+A proper evaluation requires clear thresholds and benchmarks to determine what is a good result. The script above gives us the runtime values for accuracy, response time, and cost per classification, but we still would need clearly established thresholds. For example:
 
 * **Accuracy:** 95% (out of 100 tests)
 * **Cost per classification:** 50% reduction on average (across 100 tests) from current routing method
@@ -376,7 +378,7 @@ Proper integration requires that you make some decisions regarding how your Clau
 * **Pull-Based:** Your code pulls for the latest tickets based on a given schedule and routes them at pull time.
   + This approach is easier to implement but might make unnecessary calls to the support ticket system when the pull frequency is too high or might be overly slow when the pull frequency is too low.
 
-For either of these approaches, you will need to wrap your script in a service. The choice of approach depends on what APIs your support ticketing system provides.
+For either of these approaches, you need to wrap your script in a service. The choice of approach depends on what APIs your support ticketing system provides.
 
 ---
 
@@ -385,3 +387,5 @@ For either of these approaches, you will need to wrap your script in a service. 
 Visit our classification cookbook for more example code and detailed eval guidance.](https://platform.claude.com/cookbook/capabilities-classification-guide)[Claude Console
 
 Begin building and evaluating your workflow on the Claude Console.](/dashboard)
+
+Was this page helpful?

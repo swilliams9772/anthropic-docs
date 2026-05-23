@@ -1,47 +1,73 @@
 # Intro to Claude
 
-**Source:** https://platform.claude.com/docs/en/intro
+**Source:** http://platform.claude.com/docs/en/intro
 
 Copy page
 
 The latest generation of Claude models:
 
-**Claude Opus 4.5** - Most intelligent model, and an industry-leader for coding,
-agents, and computer use. [Learn more](https://www.anthropic.com/news/claude-opus-4-5).
+**Claude Opus 4.7** - Anthropic's most capable model for complex reasoning and agentic coding, with a step-change jump over Claude Opus 4.6. Read the [Claude Opus 4.7 announcement](https://www.anthropic.com/news/claude-opus-4-7).
 
-**Claude Sonnet 4.5** - Balanced performance and practicality for most uses,
-including coding and agents. [Learn
-more](https://www.anthropic.com/news/claude-sonnet-4-5).
+**Claude Sonnet 4.6** - Frontier intelligence at scale, built for coding, agents, and enterprise workflows. Read the [Claude Sonnet 4.6 announcement](https://www.anthropic.com/news/claude-sonnet-4-6).
 
-**Claude Haiku 4.5** - Fastest model with near-frontier intelligence. [Learn more](https://www.anthropic.com/news/claude-haiku-4-5).
+**Claude Haiku 4.5** - Fastest model with near-frontier intelligence. Read the [Claude Haiku 4.5 announcement](https://www.anthropic.com/news/claude-haiku-4-5).
 
-Looking to chat with Claude? Visit [claude.ai](http://www.claude.ai)!
+Looking to chat with Claude? Visit [claude.ai](https://www.claude.ai).
 
-# Get started
+Anthropic offers two ways to build with Claude, each suited to different use cases:
 
-If you’re new to Claude, start here to learn the essentials and make your first API call.
+|  | Messages API | Claude Managed Agents |
+| --- | --- | --- |
+| **What it is** | Direct model prompting access | Pre-built, configurable agent harness that runs in managed infrastructure |
+| **Best for** | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work |
+| **Learn more** | [Messages API docs](/docs/en/build-with-claude/working-with-messages) | [Claude Managed Agents docs](/docs/en/managed-agents/overview) |
 
-[Get started
+# Recommended path for new developers
 
-Set up your development environment for building with Claude.](/docs/en/get-started)[Learn about Claude
+Follow these steps to go from zero to a working Claude integration.
 
-Learn about the family of Claude models.](/docs/en/about-claude/models/overview)[Prompt Library
+1. 1
 
-Explore example prompts for inspiration.](/docs/en/resources/prompt-library/library)
+   Make your first API call
+
+   Set up your environment, install an SDK, and send your first message to Claude.
+
+   [Go to the quickstart](/docs/en/get-started)
+2. 2
+
+   Understand the Messages API
+
+   Learn the core request and response structure, including multi-turn conversations, system prompts, and stop reasons.
+
+   [Read the Messages API guide](/docs/en/build-with-claude/working-with-messages)
+3. 3
+
+   Choose the right model
+
+   Compare Claude models by capability and cost to pick the best fit for your use case.
+
+   [See the models overview](/docs/en/about-claude/models/overview)
+4. 4
+
+   Explore features and tools
+
+   Discover what Claude can do: extended thinking, web search, file handling, structured outputs, and more.
+
+   [Browse the features overview](/docs/en/build-with-claude/overview)
 
 ---
 
 # Develop with Claude
 
-Anthropic has best-in-class developer tools to build scalable applications with Claude.
+Anthropic provides developer tools to help you build and scale applications with Claude.
 
 [Developer Console
 
-Enjoy easier, more powerful prompting in your browser with the Workbench and the prompt generator tool.](/)[API Reference
+Prototype and test prompts in your browser with the Workbench and prompt generator.](/)[API Reference
 
-Explore, implement, and scale with the Claude API and SDKs.](/docs/en/api/overview)[Claude Cookbook
+Explore the full Claude API and client SDK documentation.](/docs/en/api/overview)[Claude Cookbook
 
-Learn with interactive Jupyter notebooks that demonstrate uploading PDFs, embeddings, and more.](https://platform.claude.com/cookbooks)
+Learn with interactive Jupyter notebooks covering PDFs, embeddings, and more.](https://platform.claude.com/cookbooks)
 
 ---
 
@@ -51,7 +77,7 @@ Claude can assist with many tasks that involve text, code, and images.
 
 [Text and code generation
 
-Summarize text, answer questions, extract data, translate text, and explain and generate code.](/docs/en/build-with-claude/text-generation)[Vision
+Summarize text, answer questions, extract data, translate text, and explain and generate code.](/docs/en/build-with-claude/overview)[Vision
 
 Process and analyze visual input and generate text and code from images.](/docs/en/build-with-claude/vision)
 
@@ -64,3 +90,5 @@ Process and analyze visual input and generate text and code from images.](/docs/
 Find answers to frequently asked account and billing questions.](https://support.claude.com/en/)[Service Status
 
 Check the status of Anthropic services.](https://status.claude.com)
+
+Was this page helpful?

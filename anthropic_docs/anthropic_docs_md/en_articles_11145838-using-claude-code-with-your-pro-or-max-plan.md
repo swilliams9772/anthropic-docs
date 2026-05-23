@@ -1,8 +1,8 @@
-# Using Claude Code with your Pro or Max plan
+# Use Claude Code with your Pro or Max plan
 
 **Source:** https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan
 
-This article applies to individual consumers using Pro or Max plan subscriptions to access Claude Code. If you’re a member of a Claude for Work organization, see [Using Claude Code with your Team or Enterprise plan](https://support.claude.com/en/articles/11845131-using-claude-code-with-your-team-or-enterprise-plan).
+This article applies to individual consumers using Pro or Max plan subscriptions to access Claude Code. If you’re a member of a Team or Enterprise plan organization, see **[Use Claude Code with your Team or Enterprise plan](https://support.claude.com/en/articles/11845131)**.
 
 # What is Claude Code?
 
@@ -15,21 +15,16 @@ Use two powerful AI products in one simple subscription.
 * Use Claude for writing, research, analysis, and more — at work and at home.
 * Use Claude Code for your terminal-based coding workflows.
 
-# How to connect Claude Code with your plan
+---
 
-To start using Claude Code with your Pro or Max plan:
+# How to connect Claude Code to your Pro or Max plan
 
 1. **Ensure you have an active Pro or Max plan subscription**
 
-   * If you're not already subscribed, upgrade at [claude.ai/upgrade](https://claude.ai/upgrade).
-   * Pro plan: $20/month for light coding work on small repositories.
-   * Max plan offers two usage tiers:
-
-     + 5x Pro usage ($100/month)
-     + 20x Pro usage ($200/month)
+   * If you're not already subscribed, upgrade at **[claude.ai/upgrade](https://claude.ai/upgrade)**
 2. **Install Claude Code**
 
-   * Visit the [Claude Code Docs](https://code.claude.com/docs/en/overview#install-and-authenticate) to download and install Claude Code.
+   * Visit the **[Claude Code page in our Claude Docs](https://code.claude.com/docs/en/quickstart#step-1-install-claude-code)** to download and install Claude Code.
    * Follow the installation instructions for your operating system.
 3. **Authenticate with your Claude credentials**
 
@@ -46,70 +41,35 @@ If you're not seeing the option to authenticate with your preferred account, fol
 3. Restart your terminal completely for the change to take effect.
 4. Run `claude` and select the correct account to use Claude Code.
 
-**Important:** If you have an ANTHROPIC\_API\_KEY environment variable set on your system, Claude Code will use this API key for authentication instead of your Claude subscription (Pro, Max, Team, or Enterprise plans), resulting in API usage charges rather than using your subscription's included usage. See this article for more information: [Managing API Key Environment Variables in Claude Code](https://support.claude.com/en/articles/12304248-managing-api-key-environment-variables-in-claude-code).
+**Important:** If you have an ANTHROPIC\_API\_KEY environment variable set on your system, Claude Code will use this API key for authentication instead of your Claude subscription (Pro, Max, Team, or Enterprise plans), resulting in API usage charges rather than using your subscription's included usage. See this article for more information: **[Managing API key environment variables in Claude Code](https://support.claude.com/en/articles/12304248-managing-api-key-environment-variables-in-claude-code).**
 
 ---
-
-# How do usage limits work?
-
-Both Pro and Max plans offer usage limits that are shared across Claude and Claude Code, meaning all activity in both tools counts against the same usage limits. The number of messages you can send varies based on message length, conversation length, and file attachments, while Claude Code usage varies based on project complexity, codebase size, and auto-accept settings. Using more compute-intensive models will cause you to hit your usage limits sooner.
-
-# Pro Plan
-
-To read more about Pro plan usage limits, see [About Claude’s Pro Plan Usage](https://support.claude.com/en/articles/8324991-about-claude-s-pro-plan-usage).
-
-* **Model access**: Pro plan subscribers can use Sonnet or Opus 4.5 on Claude Code (switch between them using the /model command).
-* **Best for:** Light work on small repositories (typically under 1,000 lines of code).
-
-**Usage Limits for Older Models**
-
-* **Pro ($20/month)**: Average users can send approximately 45 messages with Claude every five hours, OR send approximately 10-40 prompts with Claude Code every five hours. Most Pro users can expect 40-80 hours of Sonnet 4 within their weekly usage limits.
-
-  + This will vary based on factors such as codebase size and user settings like auto-accept mode. Users running multiple Claude Code instances in parallel will hit their limits sooner.
-
-# Max Plan
-
-For detailed information about Max plan usage limits, see [About Claude's Max Plan Usage](https://support.claude.com/en/articles/11014257-about-claude-s-max-plan-usage).
-
-* **Model access**: Max plan subscribers can use Sonnet or Opus 4.5 on Claude Code (switch between them using the /model command).
-* **Best for**: Everyday use with larger codebases, or power users.
-
-In addition, to manage capacity and ensure fair access to all users, we may limit your usage in other ways, such as weekly and monthly caps or model and feature usage, at our discretion.
-
-**Usage Limits for Older Models**
-
-* **Max 5x ($100/month)**: Average users can send approximately 225 messages with Claude every five hours, OR send approximately 50-200 prompts with Claude Code every five hours. Most Max 5x users can expect 140-280 hours of Sonnet 4 and 15-35 hours of Opus 4 within their weekly usage limits.
-
-  + This will vary based on factors such as codebase size and user settings like auto-accept mode.
-  + Heavy Opus users with large codebases or those running multiple Claude Code instances in parallel will hit their limits sooner.
-* **Max 20x ($200/month)**: Average users can send approximately 900 messages with Claude every five hours, OR send approximately 200-800 prompts with Claude Code every five hours. Most Max 20x users can expect 240-480 hours of Sonnet 4 and 24-40 hours of Opus 4 within their weekly usage limits.
-
-  + This will vary based on factors such as codebase size and user settings like auto-accept mode.
-  + Heavy Opus users with large codebases or those running multiple Claude Code instances in parallel will hit their limits sooner.
 
 # What happens when you hit usage limits
 
-To help you monitor your usage, you will see warning messages about remaining capacity. When you reach your usage limits, you can select from a few options based on your needs:
+Both Pro and Max plans offer usage limits that are shared across Claude and Claude Code, meaning all activity in both tools counts against the same usage limits. To help you monitor your usage, you will see warning messages about remaining capacity.
 
-# Pro Plan Users
+When you reach your usage limits, you can select from a few options based on your needs:
+
+# Pro plan users
 
 * Consider upgrading to the Max 5x plan if you consistently hit limits and need more capacity for larger repositories.
-* [Enable extra usage](https://support.claude.com/en/articles/12429409-extra-usage-for-max-20x-plans) to continue using Claude with your Pro plan after hitting the included usage limit.
-* You will have the flexibility to switch to [pay-as-you-go usage](https://support.claude.com/en/articles/8114526-how-will-i-be-billed-for-claude-api-use) with a Claude Console account for intensive coding sprints.
+* **[Enable usage credits](https://support.claude.com/en/articles/12429409-)** to continue using Claude with your Pro plan after hitting the included usage limit.
+* You will have the flexibility to switch to **[pay-as-you-go usage](https://support.claude.com/en/articles/8114526-how-will-i-be-billed-for-claude-api-use)** with a Claude Console account for intensive coding sprints.
 * Wait until your usage limits reset.
 
-# Max Plan Users
+# Max plan users
 
 * If you're on the Max 5x plan, consider upgrading to the Max 20x plan if you consistently hit limits.
-* [Enable extra usage](https://support.claude.com/en/articles/12429409-extra-usage-for-max-20x-plans) to continue using Claude with your Max plan after hitting the included usage limit.
-* You will have the flexibility to switch to [pay-as-you-go usage](https://support.claude.com/en/articles/8114526-how-will-i-be-billed-for-claude-api-use) with a Claude Console account for intensive coding sprints.
+* **[Enable usage credits](https://support.claude.com/en/articles/12429409-)** to continue using Claude with your Max plan after hitting the included usage limit.
+* You will have the flexibility to switch to **[pay-as-you-go usage](https://support.claude.com/en/articles/8114526-how-will-i-be-billed-for-claude-api-use)** with a Claude Console account for intensive coding sprints.
 * Wait until your usage limits reset.
 
-For more details on efficient usage, refer to our [Usage Limit Best Practices](https://support.claude.com/en/articles/9797557-usage-limit-best-practices).
+For more details on efficient usage, refer to our **[Usage limit best practices](https://support.claude.com/en/articles/9797557-usage-limit-best-practices)**.
 
 ---
 
-# Claude Code Usage Limits and Billing
+# Claude Code billing
 
 # Understanding two distinct systems
 
@@ -122,7 +82,7 @@ It's important to recognize these are separate systems:
 
 If you want to use API credits through Claude Code:
 
-* Usage will be billed at [standard API rates](https://claude.com/pricing#api) (distinct from Pro/Max Plan pricing).
+* Usage will be billed at **[standard API rates](https://claude.com/pricing#api)** (distinct from Pro/Max Plan pricing).
 * If auto-reload is enabled in your Console account, additional credits will be automatically added when your balance runs low.
 
 # Staying within your plan
@@ -131,7 +91,7 @@ To maintain usage strictly within your Pro or Max Plan allocation:
 
 * Decline the API credit option when presented.
 * Allow your usage period to reset before continuing to use Claude Code.
-* Monitor your remaining allocation using the `/status` command.
+* Monitor your remaining allocation using the /status command.
 
 # Opting out of API credits for Claude Code
 
@@ -147,7 +107,7 @@ This ensures Claude Code will only use your plan allocation and you won't be pro
 
 Auto-reload functionality is managed within your Claude Console account, not through Claude Code:
 
-* Review your [Console Billing settings](https://platform.claude.com/settings/billing) to check auto-reload status.
+* Review your **[Console Billing settings](https://platform.claude.com/settings/billing)** to check auto-reload status.
 * Adjust these settings in the Console if you prefer to avoid automatic credit purchases.
 * Remember, auto-reload only applies when you've chosen to use API credits.
 
@@ -162,4 +122,4 @@ Auto-reload functionality is managed within your Claude Console account, not thr
 
 Related Articles
 
-[About Claude's Max Plan Usage](https://support.claude.com/en/articles/11014257-about-claude-s-max-plan-usage)[What is the Max plan?](https://support.claude.com/en/articles/11049741-what-is-the-max-plan)[Using Claude Code with your Team or Enterprise plan](https://support.claude.com/en/articles/11845131-using-claude-code-with-your-team-or-enterprise-plan)[Claude Code FAQ](https://support.claude.com/en/articles/12386420-claude-code-faq)[Extra Usage for Paid Claude Plans](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans)
+[What is the Pro plan?](https://support.claude.com/en/articles/8325606-what-is-the-pro-plan)[How do I pay for my Claude API usage?](https://support.claude.com/en/articles/8977456-how-do-i-pay-for-my-claude-api-usage)[What is the Max plan?](https://support.claude.com/en/articles/11049741-what-is-the-max-plan)[Manage usage credits for paid Claude plans](https://support.claude.com/en/articles/12429409-manage-usage-credits-for-paid-claude-plans)[Use the Claude Agent SDK with your Claude plan](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan)

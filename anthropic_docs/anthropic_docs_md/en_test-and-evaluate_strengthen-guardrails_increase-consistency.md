@@ -1,6 +1,6 @@
 # Increase output consistency
 
-**Source:** https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency
+**Source:** http://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency
 
 Copy page
 
@@ -19,6 +19,8 @@ Precisely define your desired output format using JSON, XML, or custom templates
 # Example: Standardizing customer feedback
 
 # Prefill Claude's response
+
+Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) or system prompt instructions instead.
 
 Prefill the `Assistant` turn with your desired format. This trick bypasses Claude's friendly preamble and enforces your structure.
 
@@ -39,3 +41,16 @@ For tasks requiring consistent context (e.g., chatbots, knowledge bases), use re
 # Chain prompts for complex tasks
 
 Break down complex tasks into smaller, consistent subtasks. Each subtask gets Claude's full attention, reducing inconsistency errors across scaled workflows.
+
+# Keep Claude in character
+
+For role-based applications, maintaining consistent character requires deliberate prompting.
+
+* **Use system prompts to set the role:** Use [system prompts](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role) to define Claude's role and personality. This sets a strong foundation for consistent responses.
+
+  When setting up the character, provide detailed information about the personality, background, and any specific traits or quirks. This will help the model better emulate and generalize the character's traits.
+* **Prepare Claude for possible scenarios:** Provide a list of common scenarios and expected responses in your prompts. This "trains" Claude to handle diverse situations without breaking character.
+
+# Example: Enterprise chatbot for role prompting
+
+Was this page helpful?

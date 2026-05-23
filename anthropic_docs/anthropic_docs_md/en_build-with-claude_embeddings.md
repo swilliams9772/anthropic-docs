@@ -1,6 +1,6 @@
 # Embeddings
 
-**Source:** https://platform.claude.com/docs/en/build-with-claude/embeddings
+**Source:** http://platform.claude.com/docs/en/build-with-claude/embeddings
 
 Copy page
 
@@ -18,11 +18,22 @@ Anthropic does not offer its own embedding model. One embeddings provider that h
 
 Voyage AI makes state-of-the-art embedding models and offers customized models for specific industry domains such as finance and healthcare, or bespoke fine-tuned models for individual customers.
 
-The rest of this guide is for Voyage AI, but we encourage you to assess a variety of embeddings vendors to find the best fit for your specific use case.
+The rest of this guide is for Voyage AI, but you should assess a variety of embeddings vendors to find the best fit for your specific use case.
 
-# Available Models
+# Available models
 
 Voyage recommends using the following text embedding models:
+
+**Voyage 4 (latest generation)**
+
+| Model | Context Length | Embedding Dimension | Description |
+| --- | --- | --- | --- |
+| `voyage-4-large` | 32,000 | 1024 (default), 256, 512, 2048 | The best general-purpose and multilingual retrieval quality. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+| `voyage-4` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for general-purpose and multilingual retrieval quality. Balances quality and efficiency. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+| `voyage-4-lite` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for latency and cost. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+| `voyage-4-nano` | 32,000 | 1024 (default), 256, 512, 2048 | Open-weight model (Apache 2.0 license) available on Hugging Face. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+
+**Previous generation**
 
 | Model | Context Length | Embedding Dimension | Description |
 | --- | --- | --- | --- |
@@ -37,7 +48,8 @@ Additionally, the following multimodal embedding models are recommended:
 
 | Model | Context Length | Embedding Dimension | Description |
 | --- | --- | --- | --- |
-| `voyage-multimodal-3` | 32000 | 1024 | Rich multimodal embedding model that can vectorize interleaved text and content-rich images, such as screenshots of PDFs, slides, tables, figures, and more. See [blog post](https://blog.voyageai.com/2024/11/12/voyage-multimodal-3/) for details. |
+| `voyage-multimodal-3.5` | 32,000 | 1024 (default), 256, 512, 2048 | Rich multimodal embedding model that can vectorize interleaved text, images, and videos. Includes video support as the first production-grade video embedding model. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-multimodal-3-5/) for details. |
+| `voyage-multimodal-3` | 32,000 | 1024 | Rich multimodal embedding model that can vectorize interleaved text and content-rich images, such as screenshots of PDFs, slides, tables, figures, and more. See [blog post](https://blog.voyageai.com/2024/11/12/voyage-multimodal-3/) for details. |
 
 Need help deciding which text embedding model to use? Check out the [FAQ](https://docs.voyageai.com/docs/faq#what-embedding-models-are-available-and-which-one-should-i-use&ref=anthropic).
 
@@ -74,7 +86,7 @@ vo = voyageai.Client()
 
 texts = ["Sample text 1", "Sample text 2"]
 
-result = vo.embed(texts, model="voyage-3.5", input_type="document")
+result = vo.embed(texts, model="voyage-4", input_type="document")
 print(result.embeddings[0])
 print(result.embeddings[1])
 ```
@@ -94,13 +106,15 @@ For more information on the Voyage python package, see [the Voyage documentation
 
 You can also get embeddings by requesting Voyage HTTP API. For example, you can send an HTTP request through the `curl` command in a terminal:
 
+cURL
+
 ```
 curl https://api.voyageai.com/v1/embeddings \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $VOYAGE_API_KEY" \
   -d '{
     "input": ["Sample text 1", "Sample text 2"],
-    "model": "voyage-3.5"
+    "model": "voyage-4"
   }'
 ```
 
@@ -111,15 +125,15 @@ The response you would get is a JSON object containing the embeddings and the to
   "object": "list",
   "data": [
     {
-      "embedding": [-0.013131560757756233, 0.019828535616397858, ...],
+      "embedding": [-0.013131560757756233, 0.019828535616397858 /* ... */],
       "index": 0
     },
     {
-      "embedding": [-0.0069352793507277966, 0.020878976210951805, ...],
+      "embedding": [-0.0069352793507277966, 0.020878976210951805 /* ... */],
       "index": 1
     }
   ],
-  "model": "voyage-3.5",
+  "model": "voyage-4",
   "usage": {
     "total_tokens": 10
   }
@@ -130,13 +144,13 @@ For more information on the Voyage HTTP API, see [the Voyage documentation](http
 
 # AWS Marketplace
 
-Voyage embeddings are available on [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=seller-snt4gb6fd7ljg). Instructions for accessing Voyage on AWS are available [here](https://docs.voyageai.com/docs/aws-marketplace-model-package?ref=anthropic).
+Voyage embeddings are available on [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=seller-snt4gb6fd7ljg). Instructions for accessing Voyage on AWS are available in the [Voyage AWS Marketplace documentation](https://docs.voyageai.com/docs/aws-marketplace-model-package?ref=anthropic).
 
 # Quickstart example
 
-Now that we know how to get embeddings, let's see a brief example.
+The following brief example shows how to use embeddings.
 
-Suppose we have a small corpus of six documents to retrieve from
+Suppose you have a small corpus of six documents to retrieve from
 
 ```
 documents = [
@@ -145,11 +159,11 @@ documents = [
     "20th-century innovations, from radios to smartphones, centered on electronic advancements.",
     "Rivers provide water, irrigation, and habitat for aquatic species, vital for ecosystems.",
     "Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET.",
-    "Shakespeare's works, like 'Hamlet' and 'A Midsummer Night's Dream,' endure in literature."
+    "Shakespeare's works, like 'Hamlet' and 'A Midsummer Night's Dream,' endure in literature.",
 ]
 ```
 
-We will first use Voyage to convert each of them into an embedding vector
+First, use Voyage to convert each document into an embedding vector
 
 ```
 import voyageai
@@ -157,26 +171,22 @@ import voyageai
 vo = voyageai.Client()
 
 # Embed the documents
-doc_embds = vo.embed(
-    documents, model="voyage-3.5", input_type="document"
-).embeddings
+doc_embds = vo.embed(documents, model="voyage-4", input_type="document").embeddings
 ```
 
-The embeddings will allow us to do semantic search / retrieval in the vector space. Given an example query,
+The embeddings allow you to do semantic search / retrieval in the vector space. Given an example query,
 
 ```
 query = "When is Apple's conference call scheduled?"
 ```
 
-we convert it into an embedding, and conduct a nearest neighbor search to find the most relevant document based on the distance in the embedding space.
+Next, convert it into an embedding and conduct a nearest neighbor search to find the most relevant document based on the distance in the embedding space.
 
 ```
 import numpy as np
 
 # Embed the query
-query_embd = vo.embed(
-    [query], model="voyage-3.5", input_type="query"
-).embeddings[0]
+query_embd = vo.embed([query], model="voyage-4", input_type="query").embeddings[0]
 
 # Compute the similarity
 # Voyage embeddings are normalized to length 1, therefore dot-product
@@ -187,7 +197,7 @@ retrieved_id = np.argmax(similarities)
 print(documents[retrieved_id])
 ```
 
-Note that we use `input_type="document"` and `input_type="query"` for embedding the document and query, respectively. More specification can be found [here](/docs/en/build-with-claude/embeddings#voyage-python-package).
+Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in [Voyage Python library](/docs/en/build-with-claude/embeddings#voyage-python-library).
 
 The output would be the 5th document, which is indeed the most relevant to the query:
 
@@ -195,7 +205,7 @@ The output would be the 5th document, which is indeed the most relevant to the q
 Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET.
 ```
 
-If you are looking for a detailed set of cookbooks on how to do RAG with embeddings, including vector databases, check out our [RAG cookbook](https://platform.claude.com/cookbook/third-party-pinecone-rag-using-pinecone).
+If you are looking for a detailed set of cookbooks on how to do RAG with embeddings, including vector databases, check out the [RAG cookbook](https://platform.claude.com/cookbook/third-party-pinecone-rag-using-pinecone).
 
 # FAQ
 
@@ -216,3 +226,5 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
 # Pricing
 
 Visit Voyage's [pricing page](https://docs.voyageai.com/docs/pricing?ref=anthropic) for the most up to date pricing details.
+
+Was this page helpful?

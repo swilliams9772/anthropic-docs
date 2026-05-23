@@ -1,6 +1,6 @@
 # Create Skill
 
-**Source:** https://platform.claude.com/docs/en/api/skills/create-skill
+**Source:** http://platform.claude.com/docs/en/api/skills/create-skill
 
 Copy page
 
@@ -8,7 +8,7 @@ cURL
 
 # Create Skill
 
-post/v1/skills
+POST/v1/skills
 
 Create Skill
 
@@ -18,13 +18,13 @@ Create Skill
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 16 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -63,6 +63,32 @@ Accepts one of the following:
 "model-context-window-exceeded-2025-08-26"
 
 "skills-2025-10-02"
+
+"fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
+
+"advisor-tool-2026-03-01"
+
+"managed-agents-2026-04-01"
+
+"cache-diagnosis-2026-04-07"
+
+# Body ParametersForm DataExpand Collapse
+
+display\_title: optional string
+
+Display title for the skill.
+
+This is a human-readable label that is not included in the prompt sent to the model.
+
+files: optional array of string
+
+Files to upload for the skill.
+
+All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
 # ReturnsExpand Collapse
 

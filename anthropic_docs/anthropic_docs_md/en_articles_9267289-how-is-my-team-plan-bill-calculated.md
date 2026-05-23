@@ -2,46 +2,37 @@
 
 **Source:** https://support.claude.com/en/articles/9267289-how-is-my-team-plan-bill-calculated
 
-Prices shown are for US customers and exclude applicable taxes. Pricing, currency, and tax handling vary by region. Visit [claude.ai/upgrade](http://claude.ai/upgrade) to see current pricing for your location.
+Prices shown are for US customers and exclude applicable taxes. Pricing, currency, and tax handling vary by region. Visit **[claude.ai/upgrade](http://claude.ai/upgrade)** to see current pricing for your location.
 
-# What is the pricing for the Team plan?
+For current pricing by seat type and billing interval, see **[What is the Team plan?](https://support.claude.com/en/articles/9266767-what-is-the-team-plan)**
 
-# Annual Team plans
+For information on seat types and what's included, see **[Purchasing and managing seats on Team plans](https://support.claude.com/en/articles/12004354-purchasing-and-managing-seats)**.
 
-**Standard seats:** $25 per month per member, billed annually. There is a minimum requirement of five members.
+---
 
-**Premium seats:** $150 per month per member, billed annually. Premium seats include access to Claude Code and increased usage. Refer to this article for more information about this seat type: [How to purchase and manage premium seats](https://support.claude.com/en/articles/12004354-how-to-purchase-and-manage-premium-seats).
+# How does adding or removing members affect my bill?
 
-You will be charged for the number of members on your team at the beginning of your subscription.
+**Adding members or upgrading seats:** You will be charged the prorated amount immediately.
 
-# Monthly Team plans
+**Removing members:** You will not receive an immediate credit or refund. The seat becomes available to assign to another member.
 
-**Standard seats:** $30 per month per member, billed monthly. There is a minimum requirement of five members.
+For instructions to add and remove members, see **[Managing members on Team and Enterprise plans](https://support.claude.com/en/articles/13133750-managing-members-on-team-and-enterprise-plans)**.
 
-**Premium seats:** $150 per month per member, billed monthly. Premium seats include access to Claude Code and increased usage.
+---
 
-You will be charged for the number of members on your team at the beginning of each billing cycle.
+# Usage credits
 
-# Adding and removing members
+If usage credits are enabled, your bill may include charges for usage beyond seat limits. For details on how usage credits work and how they're billed on your plan, see **[Manage usage credits for Team and seat-based Enterprise plans](https://support.claude.com/en/articles/12005970-)**.
 
-You can add a member to a team by navigating to [Admin settings > Organization](https://claude.ai/admin-settings/organization) and clicking "Add member." Enter the person's email address (it must use one of your organization’s allowed email domains), set the role and permissions for the member, and assign them to one of two seat types:
+---
 
-* **Standard seats:** Base features and usage limits.
-* **Premium seats:** Higher usage limits and access to Claude Code.
-
-If you add to your team in the middle of a billing cycle, you will be charged the prorated amount immediately. If you remove a member from your team during the billing cycle, you will not immediately receive a credit or refund, and their seat will be made available to allocate to another member until the beginning of the next billing cycle.
-
-# Purchasing extra usage
-
-If extra usage is enabled for your organization, then your Team plan bill may also include the amount paid for extra usage beyond seat limits. Refer to our article on extra usage for more information: [Extra Usage for Claude for Work (Team and Enterprise) Plans](https://support.claude.com/en/articles/12005970-extra-usage-for-claude-for-work-team-and-enterprise-plans).
-
-# Billing Examples
+# Billing examples
 
 # Annual plan example
 
-On January 1 (the start date of your annual subscription), your annual plan has 10 standard seats. The amount charged would be $3,000 ($25 × 10 seats × 12 months) due on January 1st.
+On January 1 (the start date of your annual subscription), your annual plan has 10 standard seats. The amount charged would be $2,400 ($20 × 10 seats × 12 months) due on January 1st.
 
-On April 1st, you decide to upgrade five of the existing standard seats to premium seats. Since there are 275 days remaining in your subscription year, the prorated cost for the seat upgrades would be: ($125 × 5 seats × 12 months) × (275 days ÷ 365 days in the year) = $5,136.99. Your payment method will be charged $5,136.99 on April 1st for the seat upgrades for the remainder of the subscription year.
+On April 1st, you decide to upgrade five of the existing standard seats to premium seats. Since there are 275 days remaining in your subscription year, the prorated cost for the seat upgrades would be: ($80 × 5 seats × 12 months) × (275 days ÷ 365 days in the year) = $3,616.44. Your payment method will be charged $3,616.44 on April 1st for the seat upgrades for the remainder of the subscription year.
 
 If you remove members during your subscription year, their seats will become available to assign to other team members.
 
@@ -49,18 +40,20 @@ Taxes are not included in this example.
 
 # Monthly plan example
 
-On January 1 (the first day of your billing cycle), your Team plan has 10 standard seats. The amount charged would be $300 ($30 × 10 seats) due on January 1st.
+On January 1 (the first day of your billing cycle), your Team plan has 10 standard seats. The amount charged would be $250 ($25 × 10 seats) due on January 1st.
 
-On January 15th, you decide to upgrade five standard seats to premium seats. Since there are 16 days remaining in January, the prorated cost for the seat upgrades would be: ($120 × 5 seats × 16 days) ÷ 31 days in January = $309.68. Your payment method will be charged $309.68 on January 15th for the seat upgrades in January.
+On January 15th, you decide to upgrade five standard seats to premium seats. Since there are 16 days remaining in January, the prorated cost for the seat upgrades would be: ($100 × 5 seats × 16 days) ÷ 31 days in January = $258.06. Your payment method will be charged $258.06 on January 15th for the seat upgrades in January.
 
-If you remove members in the middle of a billing cycle, their seats will become available to assign to other team members.
+You will be charged for the number of members on your team at the beginning of each billing cycle. If you remove members in the middle of a billing cycle, their seats will become available to assign to other team members.
 
 Taxes are not included in this example.
 
-**Note:** The "Projected total" displayed on [your Billing page](https://claude.ai/admin-settings/billing) is not inclusive of taxes.
+**Note:** The "Projected total" displayed on **[your organization’s Billing page](https://claude.ai/admin-settings/billing)** is not inclusive of taxes.
+
+Price and plans are subject to change at Anthropic's discretion.
 
 ---
 
 Related Articles
 
-[What is the Team plan?](https://support.claude.com/en/articles/9266767-what-is-the-team-plan)[About Team and Enterprise Plan Usage](https://support.claude.com/en/articles/9267304-about-team-and-enterprise-plan-usage)[What is the Max plan?](https://support.claude.com/en/articles/11049741-what-is-the-max-plan)[Purchasing and managing seats](https://support.claude.com/en/articles/12004354-purchasing-and-managing-seats)[Extra Usage for Team and Enterprise Plans](https://support.claude.com/en/articles/12005970-extra-usage-for-team-and-enterprise-plans)
+[What is the Team plan?](https://support.claude.com/en/articles/9266767-what-is-the-team-plan)[Cancel your organization's Team plan subscription](https://support.claude.com/en/articles/9267323-cancel-your-organization-s-team-plan-subscription)[How am I billed for my Enterprise plan?](https://support.claude.com/en/articles/11526368-how-am-i-billed-for-my-enterprise-plan)[Purchase and manage seats on Team plans](https://support.claude.com/en/articles/12004354-purchase-and-manage-seats-on-team-plans)[Team plan billing FAQs](https://support.claude.com/en/articles/12997503-team-plan-billing-faqs)

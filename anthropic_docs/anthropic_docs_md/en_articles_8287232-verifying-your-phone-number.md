@@ -1,10 +1,10 @@
-# Verifying your phone number
+# Verify your phone number
 
 **Source:** https://support.claude.com/en/articles/8287232-verifying-your-phone-number
 
-When you first create a Claude account, you’ll be asked to enter your phone number from a [supported location](https://support.claude.com/en/articles/8461763-where-can-i-access-claude) to receive a verification code via text message:
+When you first create a Claude account, you’ll be asked to enter your phone number from a **[supported location](https://support.claude.com/en/articles/8461763-where-can-i-access-claude)** to receive a verification code via text message:
 
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1893173143/de034a2e7d9a6ae1f703cf867afd/image.png?expires=1767997800&signature=de5e9e0f3ba8349b64bbc8720b1bab8697a273259791f8cbc2014d4463fb2a37&req=dSguFch5noBbWvMW1HO4zVIf%2Fpdq1S1yoTnI%2BoMZk7ergDiWYXGP5JDwl64H%0AQTIX%2FCcjvJvyHySvnu8%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1893173143/de034a2e7d9a6ae1f703cf867afd/image.png?expires=1767997800&signature=de5e9e0f3ba8349b64bbc8720b1bab8697a273259791f8cbc2014d4463fb2a37&req=dSguFch5noBbWvMW1HO4zVIf%2Fpdq1S1yoTnI%2BoMZk7ergDiWYXGP5JDwl64H%0AQTIX%2FCcjvJvyHySvnu8%3D%0A)
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1893173143/de034a2e7d9a6ae1f703cf867afd/image.png?expires=1779558300&signature=f1aa98e9bbf00b1862da4d99381db37b221352b27c78b8f37d18a7a7bf62b0e6&req=dSguFch5noBbWvMW1HO4zVIf%2F5lm2SJ5oTnI%2BoMZk7fXcobArrXyDBGWhOYe%0AL1395o1aDlHn9w%2Fe09I%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1893173143/de034a2e7d9a6ae1f703cf867afd/image.png?expires=1779558300&signature=f1aa98e9bbf00b1862da4d99381db37b221352b27c78b8f37d18a7a7bf62b0e6&req=dSguFch5noBbWvMW1HO4zVIf%2F5lm2SJ5oTnI%2BoMZk7fXcobArrXyDBGWhOYe%0AL1395o1aDlHn9w%2Fe09I%3D%0A)
 
 Once you receive the text message with the code, type it into the box and click “Verify code.” This will complete the verification and account creation process and allow you to start chatting with Claude.
 
@@ -56,4 +56,4 @@ There isn’t a way to change your phone number associated with your Claude acco
 
 Related Articles
 
-[How do I change the email address associated with my account?](https://support.claude.com/en/articles/8452276-how-do-i-change-the-email-address-associated-with-my-account)[FAQs on Using Claude for Education at Your University](https://support.claude.com/en/articles/11139144-faqs-on-using-claude-for-education-at-your-university)[Using the PubMed Connector in Claude](https://support.claude.com/en/articles/12614801-using-the-pubmed-connector-in-claude)[Getting Started with Claude for Nonprofits](https://support.claude.com/en/articles/12893767-getting-started-with-claude-for-nonprofits)[Logging in to your Claude account](https://support.claude.com/en/articles/13189465-logging-in-to-your-claude-account)
+[How do I change the email address associated with my account?](https://support.claude.com/en/articles/8452276-how-do-i-change-the-email-address-associated-with-my-account)[Getting started with Claude for Nonprofits](https://support.claude.com/en/articles/12893767-getting-started-with-claude-for-nonprofits)[Log in to your Claude account](https://support.claude.com/en/articles/13189465-log-in-to-your-claude-account)[Logging in to your Console account](https://support.claude.com/en/articles/13371040-logging-in-to-your-console-account)[Age assurance on Claude](https://support.claude.com/en/articles/15171100-age-assurance-on-claude)

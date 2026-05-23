@@ -1,133 +1,145 @@
-# Discovering, publishing, customizing, and sharing artifacts
+# Publishing and sharing artifacts
 
 **Source:** https://support.claude.com/en/articles/9547008-discovering-publishing-customizing-and-sharing-artifacts
 
-Artifacts are a powerful way to create content within Claude. You can take your creations a step further by sharing them so others can engage with, and customize them. Similarly, if you see an artifact that you like, you can easily customize it to make it your own. This guide will walk you through the process of sharing your artifacts and customizing artifacts created by others.
+Artifacts are a powerful way to create content within Claude. You can take your creations further by sharing them so others can engage with and customize them. Similarly, if you see an artifact you like, you can customize it to make it your own. This article covers how to publish artifacts publicly, share them within your organization, and discover artifacts created by others.
 
-# Discovering and browsing artifacts
+---
 
-**Discovering and publishing artifacts** is currently available to free, Pro, and Max plan users on web, Claude for iOS and Android, and Claude Desktop.
+# Publishing vs. sharing
 
-For Claude for Work (Team and Enterprise plan) users: You can discover and browse artifacts within your organization, but artifacts are not published publicly. Instead, they are shared securely within your Team or Enterprise organization.
+Claude uses different terms depending on your plan:
 
-# Get Inspired
+* **Publishing** (Free, Pro, Max): Makes your artifact publicly available. Anyone with the link can view and interact with it.
+* **Sharing** (Team, Enterprise): Makes your artifact available within your organization only. Viewers must be logged into your Team or Enterprise account to access it.
 
-Access a curated collection of artifacts directly from the artifacts space in your Claude sidebar by clicking [Artifacts > Inspiration](https://claude.ai/artifacts) (or the "Get inspired" banner on mobile).
+---
 
-The "Inspiration" tab features:
+# Discovering artifacts
 
-* High-quality, useful artifacts across various categories.
-* Examples to inspire your own creations.
-* One-click access to try any artifact immediately.
-* Easy customization of existing artifacts to make them your own.
+Discovering and browsing artifacts is available on Free, Pro, Max, Team, and Enterprise plans on web, Claude for iOS and Android, and Claude Desktop.
 
-# Browse by Category
+Access a curated collection of artifacts directly from the artifacts space in your Claude sidebar by clicking **[Artifacts > Inspiration](http://claude.ai/artifacts)** (or the "Get inspired" banner on mobile).
 
-Artifacts are organized into helpful categories such as:
+The Inspiration tab features:
 
-* Learn something
-* Life hacks
-* Play a game
-* Be creative
-* Touch grass
+* High-quality, useful artifacts across various categories
+* Examples to inspire your own creations
+* One-click access to try any artifact immediately
+* Easy customization of existing artifacts to make them your own
+
+Artifacts are organized into categories such as Learn something, Life hacks, and Be creative.
+
+---
 
 # Publishing artifacts
 
-# Who can access what
+Publishing is available on Free, Pro, and Max plans.
 
-**For non-users:**
+**To publish an artifact:**
 
-* View and interact with any shared artifact from free, Pro, and Max users.
-* Try all basic functionality without signing up.
+1. Navigate to the artifact you want to publish.
+2. Ensure you're on the correct artifact version.
+3. Click the “Publish” button.
+4. Copy the public link to share with others.
+
+# Who can access published artifacts
+
+**Non-users:**
+
+* View and interact with any published artifact without signing up.
+* Try all basic functionality without a Claude account.
 * Prompted to sign up only for advanced features like customizing or using AI-powered capabilities.
 
-**For Claude users (free, Pro, Max):**
+**Claude users (Free, Pro, Max):**
 
-* Full access to view, interact, and customize any publicly shared artifact.
-* Full access to view, interact, and customize any AI-powered apps.
+* Full access to view, interact with, and customize any published artifact.
 * Can use AI-powered features within their usage limits.
-* Can save and organize interesting artifacts they discover.
+* Can save and organize artifacts they discover.
 
-**For Claude for Work users (Team and Enterprise):**
+# Embedding artifacts
 
-* Can view, interact, and customize artifacts shared within their organization.
-* Must be logged in to a Team or Enterprise account to access shared artifacts.
-* Artifacts created within the organization are contained there and can’t be shared externally.
+After publishing, you'll see a “Get embed code” button.
 
-# Embedding published artifacts
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1951684960/0cd917c4455b31e86b70a97f8234/image.png?expires=1779557400&signature=a7b5ba837887c5c6c6b4e05b0235e23b357beb09925e769f8000109a86a04bc8&req=dSkiF892mYhZWfMW1HO4zdcpAF9X4ASFR8xgMH3ra8hfVnVamEzTCLe4o8AP%0AOpcgyWF9JO5%2Bc%2FRsTRA%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1951684960/0cd917c4455b31e86b70a97f8234/image.png?expires=1779557400&signature=a7b5ba837887c5c6c6b4e05b0235e23b357beb09925e769f8000109a86a04bc8&req=dSkiF892mYhZWfMW1HO4zdcpAF9X4ASFR8xgMH3ra8hfVnVamEzTCLe4o8AP%0AOpcgyWF9JO5%2Bc%2FRsTRA%3D%0A)
 
-If you’re a Claude user with a free, Pro, or Max plan, you will see the option to embed any artifacts you share publicly. After clicking “Publish” on your artifact, a “Get embed code” button will appear:
+Click it to open a modal with automatically generated code you can copy and paste to embed your artifact on another website.
 
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1681304648/d39f8e2c9f73d0aee94abdc96d26/image.png?expires=1767998700&signature=b8698a9d0ccdd4cf62be2c02d7a7ba97b800660395e574f17beec01669cf771b&req=dSYvF8p%2BmYdbUfMW1HO4zbaqnRqdU6T0%2F3CsMGHXT%2F9iQNYzFeIjIFZbZcGB%0AYxdcbKcmjB0EMWwRH0s%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1681304648/d39f8e2c9f73d0aee94abdc96d26/image.png?expires=1767998700&signature=b8698a9d0ccdd4cf62be2c02d7a7ba97b800660395e574f17beec01669cf771b&req=dSYvF8p%2BmYdbUfMW1HO4zbaqnRqdU6T0%2F3CsMGHXT%2F9iQNYzFeIjIFZbZcGB%0AYxdcbKcmjB0EMWwRH0s%3D%0A)
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1951685860/6bf1aa2c57d6ff95804797779e9c/image.png?expires=1779557400&signature=4a8380c9861297ad7a6180cc718ae8256f64b7a762165d6fab5989c82b07de7b&req=dSkiF892mIlZWfMW1HO4zcqH4NCGzINpf3CUbx4Ru6WGegpkX6p7JHvqZflu%0ACOe0jsT4aCbPUdS%2B9rQ%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1951685860/6bf1aa2c57d6ff95804797779e9c/image.png?expires=1779557400&signature=4a8380c9861297ad7a6180cc718ae8256f64b7a762165d6fab5989c82b07de7b&req=dSkiF892mIlZWfMW1HO4zcqH4NCGzINpf3CUbx4Ru6WGegpkX6p7JHvqZflu%0ACOe0jsT4aCbPUdS%2B9rQ%3D%0A)
 
-Clicking this button will open a modal with an automatically-generated code you can copy and paste to embed your artifact on another website:
+You must specify which websites can embed your artifact by entering URLs in the **Allowed domains** field, separated by commas.
 
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1681305882/ae884efcb0e82de65d213d55ee4b/image.png?expires=1767998700&signature=f6f984a3dbb6f75e6c82f851f402d288d4f7d50b3f8c02c0c003abafc43d3903&req=dSYvF8p%2BmIlXW%2FMW1HO4zf9LpaY8PJKBHj%2BNadheR9QIKQEjr1e94HLVfPT%2F%0A%2FX%2B2qwf%2BdXwAmKcn9xI%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1681305882/ae884efcb0e82de65d213d55ee4b/image.png?expires=1767998700&signature=f6f984a3dbb6f75e6c82f851f402d288d4f7d50b3f8c02c0c003abafc43d3903&req=dSYvF8p%2BmIlXW%2FMW1HO4zf9LpaY8PJKBHj%2BNadheR9QIKQEjr1e94HLVfPT%2F%0A%2FX%2B2qwf%2BdXwAmKcn9xI%3D%0A)
+# Unpublishing artifacts
 
-You must specify which websites can embed your artifact by entering URLs in the **Allowed domains** field separated by commas.
+After publishing an artifact, an “Unpublish” button appears, giving you the option to revoke access.
 
-# How can I unpublish an artifact?
+**Important:** Once you unpublish an artifact, you cannot publish that same artifact again. You'll need to create a new artifact if you want to publish it later. Unpublishing also permanently deletes all associated storage data (both personal and shared) if the artifact used persistent storage.
 
-After publishing an artifact, an "Unpublish" button will appear, giving you the option to revoke other users' access to the artifact. Note that once you click "Unpublish," you will not be able to publish the same artifact again. You will need to create a new artifact if you want to publish it.
+---
 
-# To use AI-Powered artifacts
+# Sharing artifacts within your organization
 
-For artifacts with AI capabilities embedded, users only need to sign up if they want to use the AI features.
+Internal sharing is available on Team and Enterprise plans.
 
-* Usage counts toward the user's limits, not the creator's.
-* You never pay for others' usage of your shared AI-powered artifacts.
+Artifacts created on Team or Enterprise accounts can only be shared within your organization—they cannot be published publicly.
 
-# Customizing existing artifacts
+**To share an artifact:**
 
-**Customizing artifacts** is supported on free, Pro, Max, and Claude for Work (Team and Enterprise) plans.
+1. Navigate to the artifact you want to share.
+2. Ensure you're on the correct artifact version.
+3. Click the “Share” button.
+4. Click “Share & copy link” to make this version shareable.
 
-Customizing allows you to build upon and modify existing artifacts:
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1951680160/d5a38784df4c6d0cc55eda339279/Screenshot%2B2025-10-28%2Bat%2B2_00_15-E2-80-AFPM.png?expires=1779557400&signature=c6fbe691cd7090696f6987a80878e692861878145f3cb480883d8bafc1b7e16e&req=dSkiF892nYBZWfMW1HO4zbvYNVjgKH6XK6hAzMpXfmPeOdqrEQnw5WjPQGkp%0Avih%2BeFTzK1fJ67KMgHE%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1951680160/d5a38784df4c6d0cc55eda339279/Screenshot%2B2025-10-28%2Bat%2B2_00_15-E2-80-AFPM.png?expires=1779557400&signature=c6fbe691cd7090696f6987a80878e692861878145f3cb480883d8bafc1b7e16e&req=dSkiF892nYBZWfMW1HO4zbvYNVjgKH6XK6hAzMpXfmPeOdqrEQnw5WjPQGkp%0Avih%2BeFTzK1fJ67KMgHE%3D%0A)
+
+# Who can access shared artifacts
+
+* Only members of your Team or Enterprise organization.
+* Viewers must authenticate with their Team or Enterprise account.
+* If the artifact was created from a project, viewers must also have access to that project.
+
+# Sharing artifacts with attachments
+
+When you share an artifact, viewers also gain access to any attachments and files in the conversation that created it. Consider this before sharing artifacts from conversations containing sensitive documents.
+
+# Unsharing artifacts
+
+**To unshare an artifact:**
+
+1. Click the “Share” button in the upper right corner of the artifact.
+2. In the **Artifact shared** modal, click “Unshare.”
+
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1951676927/c66153a2c075c6a64404306aefd0/Screenshot%2B2025-10-28%2Bat%2B1_58_24-E2-80-AFPM.png?expires=1779557400&signature=5b3544c429eb47e5deb9640e7ffbd3604aade8a274e06d970bcc4938585734b9&req=dSkiF895m4hdXvMW1HO4zW9EzQC4%2FHO3gj8mTHivCKbm2p0XS069QWGadfzy%0Asyou%2FK3crOltkTTIdyc%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1951676927/c66153a2c075c6a64404306aefd0/Screenshot%2B2025-10-28%2Bat%2B1_58_24-E2-80-AFPM.png?expires=1779557400&signature=5b3544c429eb47e5deb9640e7ffbd3604aade8a274e06d970bcc4938585734b9&req=dSkiF895m4hdXvMW1HO4zW9EzQC4%2FHO3gj8mTHivCKbm2p0XS069QWGadfzy%0Asyou%2FK3crOltkTTIdyc%3D%0A)
+
+---
+
+# Customizing artifacts
+
+Customizing is available on all plans: Free, Pro, Max, Team, and Enterprise.
+
+Customizing allows you to build upon and modify artifacts created by others:
 
 1. When viewing an artifact, look for the "Customize" button.
 2. Click the button to start a new Claude conversation with the artifact's content.
 3. You'll be redirected to Claude, where you can modify and interact with the artifact.
 
-**Important:** If you haven't used artifacts before, clicking "Customize" will automatically enable this feature for your account. Similarly, if you don’t currently have a Claude account, you will be prompted to sign up.
+# What happens when you customize
 
-# What happens when you customize an artifact
+* A new conversation is created for you with Claude
+* The original artifact's content is added to your conversation
+* You can modify, expand upon, or use the artifact as inspiration
+* Your changes don't affect the original—you're working on your own copy
 
-* A new conversation will be created for you with Claude.
-* The original artifact's content will be added to your conversation.
-* You can then modify, expand upon, or use the artifact as inspiration for your own creations.
+**Note:** If you haven't used artifacts before, clicking "Customize" will automatically enable the feature for your account. If you don't have a Claude account, you'll be prompted to sign up.
 
-# Sharing your artifacts
+---
 
-# For free, Pro, and Max plan users
+# Learn More
 
-Artifacts can be shared publicly for anyone to view and interact with.
-
-# For Claude for Work (Team and Enterprise plan) users
-
-On Team and Enterprise plans, artifacts are available to share internally, which allows anyone in your organization to view the artifact. Sharing the artifact will also allow access to attachments and files in the conversation.
-
-Follow these steps:
-
-1. Navigate to the artifact you want to share.
-2. Ensure you're on the correct artifact version.
-3. Look for the "Share" button.
-4. Click "Share & copy link" to make this version of your artifact shareable:
-
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1801616142/cc3aace4b05eca4c5ecc4985fcdb/Screenshot+2025-10-28+at+2_00_15%E2%80%AFPM.png?expires=1767998700&signature=415c9a2c7adfdb3e598d74976a4cdb7682d908e257339e0a72c7422f09b331b7&req=dSgnF89%2Fm4BbW%2FMW1HO4zTVYmvII6pPqc6Wf8TaRoSFpBUfD8haSaXYyw1wO%0AdaHxft4TOIRS2DaqNCE%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1801616142/cc3aace4b05eca4c5ecc4985fcdb/Screenshot+2025-10-28+at+2_00_15%E2%80%AFPM.png?expires=1767998700&signature=415c9a2c7adfdb3e598d74976a4cdb7682d908e257339e0a72c7422f09b331b7&req=dSgnF89%2Fm4BbW%2FMW1HO4zTVYmvII6pPqc6Wf8TaRoSFpBUfD8haSaXYyw1wO%0AdaHxft4TOIRS2DaqNCE%3D%0A)
-
-**Security features for Team and Enterprise organizations:**
-
-* Artifacts created on Team or Enterprise user accounts can only be shared within the organization.
-* If an artifact is created from a project, users must also have access to that project to view and interact with that artifact.
-* Viewers must authenticate with their team account to access shared artifacts.
-
-# How can I unshare an artifact?
-
-To unshare an artifact, click the "Share" button in the upper right corner of the artifact. In the **Artifact shared** modal, click the "Unshare" button:
-
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1801613897/50d1173327c844a27e65904a6627/Screenshot+2025-10-28+at+1_58_24%E2%80%AFPM.png?expires=1767998700&signature=89d5134ff2c07cffba1011249d3a000b1b05fd5afd2928df34dd98bf2c78dd93&req=dSgnF89%2FnolWXvMW1HO4zTeyedln%2FUsoRawJl1GKaE3iyNjkv%2FlsQ%2BWaTy0q%0As%2Bo5cvvJ257TSP5YoUA%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1801613897/50d1173327c844a27e65904a6627/Screenshot+2025-10-28+at+1_58_24%E2%80%AFPM.png?expires=1767998700&signature=89d5134ff2c07cffba1011249d3a000b1b05fd5afd2928df34dd98bf2c78dd93&req=dSgnF89%2FnolWXvMW1HO4zTeyedln%2FUsoRawJl1GKaE3iyNjkv%2FlsQ%2BWaTy0q%0As%2Bo5cvvJ257TSP5YoUA%3D%0A)
+For information about creating artifacts, AI-powered capabilities, MCP integration, and persistent storage, see **[What are artifacts and how do I use them?](https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them)**
 
 ---
 
 Related Articles
 
-[How do I enable or disable the artifacts feature?](https://support.claude.com/en/articles/9487308-how-do-i-enable-or-disable-the-artifacts-feature)[What are artifacts and how do I use them?](https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them)[Intro to Artifacts](https://support.claude.com/en/articles/9945615-intro-to-artifacts)[Sharing and Unsharing Chats](https://support.claude.com/en/articles/10593882-sharing-and-unsharing-chats)[Use artifacts to visualize and create AI apps, without ever writing a line of code](https://support.claude.com/en/articles/11649427-use-artifacts-to-visualize-and-create-ai-apps-without-ever-writing-a-line-of-code)
+[What are artifacts and how do I use them?](https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them)[Sharing and Unsharing Chats](https://support.claude.com/en/articles/10593882-sharing-and-unsharing-chats)[Use Claude Code with your Pro or Max plan](https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan)[Release notes](https://support.claude.com/en/articles/12138966-release-notes)[Use live artifacts in Claude Cowork](https://support.claude.com/en/articles/14729249-use-live-artifacts-in-claude-cowork)

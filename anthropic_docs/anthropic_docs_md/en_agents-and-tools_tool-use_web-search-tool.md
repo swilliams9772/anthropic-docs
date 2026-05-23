@@ -1,25 +1,18 @@
 # Web search tool
 
-**Source:** https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool
+**Source:** http://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool
 
 Copy page
 
-The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. Claude automatically cites sources from search results as part of its answer.
+The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. The response includes citations for sources drawn from search results.
 
-Please reach out through our [feedback form](https://forms.gle/sWjBtsrNEY2oKGuE8) to share your experience with the web search tool.
+The latest web search tool version (`web_search_20260209`) supports **dynamic filtering** with [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. The previous tool version (`web_search_20250305`) remains available without dynamic filtering.
 
-# Supported models
+For [Claude Mythos Preview](https://anthropic.com/glasswing), web search is supported on the Claude API, Microsoft Foundry, and Vertex AI. Web search is not available for Mythos Preview on Amazon Bedrock or [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws).
 
-Web search is available on:
+For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#zdr-and-allowed-callers).
 
-* Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
-* Claude Sonnet 4 (`claude-sonnet-4-20250514`)
-* Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-7-sonnet-20250219`)
-* Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
-* Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-5-haiku-latest`)
-* Claude Opus 4.5 (`claude-opus-4-5-20251101`)
-* Claude Opus 4.1 (`claude-opus-4-1-20250805`)
-* Claude Opus 4 (`claude-opus-4-20250514`)
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 # How web search works
 
@@ -29,34 +22,60 @@ When you add the web search tool to your API request:
 2. The API executes the searches and provides Claude with the results. This process may repeat multiple times throughout a single request.
 3. At the end of its turn, Claude provides a final response with cited sources.
 
+# Dynamic filtering
+
+Web search is a token-intensive task. With basic web search, Claude needs to pull search results into context, fetch full HTML from multiple websites, and reason over all of it before arriving at an answer. Often, much of this content is irrelevant, which can degrade response quality.
+
+With the `web_search_20260209` tool version, Claude can write and execute code to post-process query results. Instead of reasoning over full HTML files, Claude dynamically filters search results before loading them into context, keeping only what's relevant and discarding the rest.
+
+Dynamic filtering is particularly effective for:
+
+* Searching through technical documentation
+* Literature review and citation verification
+* Technical research
+* Response grounding and verification
+
+Dynamic filtering requires the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) to be enabled. The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Vertex AI, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
+
+To enable dynamic filtering, use the `web_search_20260209` tool version:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+```
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[
+        {
+            "role": "user",
+            "content": "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.",
+        }
+    ],
+    tools=[{"type": "web_search_20260209", "name": "web_search"}],
+)
+print(response)
+```
+
 # How to use web search
 
-Your organization's administrator must enable web search in [Console](/settings/privacy).
+Your organization's administrator must enable web search in the [Claude Console](/settings/privacy).
 
 Provide the web search tool in your API request:
 
-Shell
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-sonnet-4-5",
-        "max_tokens": 1024,
-        "messages": [
-            {
-                "role": "user",
-                "content": "What is the weather in NYC?"
-            }
-        ],
-        "tools": [{
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "max_uses": 5
-        }]
-    }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "What's the weather in NYC?"}],
+    tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
+)
+print(response)
 ```
 
 # Tool definition
@@ -92,27 +111,11 @@ JSON
 
 # Max uses
 
-The `max_uses` parameter limits the number of searches performed. If Claude attempts more searches than allowed, the `web_search_tool_result` will be an error with the `max_uses_exceeded` error code.
+The `max_uses` parameter limits the number of searches performed. If Claude attempts more searches than allowed, the `web_search_tool_result` is an error with the `max_uses_exceeded` error code.
 
 # Domain filtering
 
-When using domain filters:
-
-* Domains should not include the HTTP/HTTPS scheme (use `example.com` instead of `https://example.com`)
-* Subdomains are automatically included (`example.com` covers `docs.example.com`)
-* Specific subdomains restrict results to only that subdomain (`docs.example.com` returns only results from that subdomain, not from `example.com` or `api.example.com`)
-* Subpaths are supported and match anything after the path (`example.com/blog` matches `example.com/blog/post-1`)
-* You can use either `allowed_domains` or `blocked_domains`, but not both in the same request.
-
-**Wildcard support:**
-
-* Only one wildcard (`*`) is allowed per domain entry, and it must appear after the domain part (in the path)
-* Valid: `example.com/*`, `example.com/*/articles`
-* Invalid: `*.example.com`, `ex*.com`, `example.com/*/news/*`
-
-Invalid domain formats will return an `invalid_tool_input` tool error.
-
-Request-level domain restrictions must be compatible with organization-level domain restrictions configured in the Console. Request-level domains can only further restrict domains, not override or expand beyond the organization-level list. If your request includes domains that conflict with organization settings, the API will return a validation error.
+For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#domain-filtering).
 
 # Localization
 
@@ -127,6 +130,8 @@ The `user_location` parameter allows you to localize search results based on a u
 # Response
 
 Here's an example response structure:
+
+Output
 
 ```
 {
@@ -217,10 +222,12 @@ When displaying API outputs directly to end users, citations must be included to
 
 When the web search tool encounters an error (such as hitting rate limits), the Claude API still returns a 200 (success) response. The error is represented within the response body using the following structure:
 
+Output
+
 ```
 {
   "type": "web_search_tool_result",
-  "tool_use_id": "servertoolu_a93jad",
+  "tool_use_id": "srvtoolu_a93jad",
   "content": {
     "type": "web_search_tool_result_error",
     "error_code": "max_uses_exceeded"
@@ -238,83 +245,17 @@ These are the possible error codes:
 
 # `pause_turn` stop reason
 
-The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running turn. You may provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you wish to interrupt the conversation.
+For continuing after a `pause_turn` stop reason, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#the-server-side-loop-and-pause-turn).
 
 # Prompt caching
 
-Web search works with [prompt caching](/docs/en/build-with-claude/prompt-caching). To enable prompt caching, add at least one `cache_control` breakpoint in your request. The system will automatically cache up until the last `web_search_tool_result` block when executing the tool.
-
-For multi-turn conversations, set a `cache_control` breakpoint on or after the last `web_search_tool_result` block to reuse cached content.
-
-For example, to use prompt caching with web search for a multi-turn conversation:
-
-```
-import anthropic
-
-client = anthropic.Anthropic()
-
-# First request with web search and cache breakpoint
-messages = [
-    {
-        "role": "user",
-        "content": "What's the current weather in San Francisco today?"
-    }
-]
-
-response1 = client.messages.create(
-    model="claude-sonnet-4-5",
-    max_tokens=1024,
-    messages=messages,
-    tools=[{
-        "type": "web_search_20250305",
-        "name": "web_search",
-        "user_location": {
-            "type": "approximate",
-            "city": "San Francisco",
-            "region": "California",
-            "country": "US",
-            "timezone": "America/Los_Angeles"
-        }
-    }]
-)
-
-# Add Claude's response to the conversation
-messages.append({
-    "role": "assistant",
-    "content": response1.content
-})
-
-# Second request with cache breakpoint after the search results
-messages.append({
-    "role": "user",
-    "content": "Should I expect rain later this week?",
-    "cache_control": {"type": "ephemeral"}  # Cache up to this point
-})
-
-response2 = client.messages.create(
-    model="claude-sonnet-4-5",
-    max_tokens=1024,
-    messages=messages,
-    tools=[{
-        "type": "web_search_20250305",
-        "name": "web_search",
-        "user_location": {
-            "type": "approximate",
-            "city": "San Francisco",
-            "region": "California",
-            "country": "US",
-            "timezone": "America/Los_Angeles"
-        }
-    }]
-)
-# The second response will benefit from cached search results
-# while still being able to perform new searches if needed
-print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
-```
+For caching tool definitions across turns, see [Tool use with prompt caching](/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching).
 
 # Streaming
 
 With streaming enabled, you'll receive search events as part of the stream. There will be a pause while the search executes:
+
+Output
 
 ```
 event: message_start
@@ -350,13 +291,15 @@ You can include the web search tool in the [Messages Batches API](/docs/en/build
 Web search usage is charged in addition to token usage:
 
 ```
-"usage": {
-  "input_tokens": 105,
-  "output_tokens": 6039,
-  "cache_read_input_tokens": 7123,
-  "cache_creation_input_tokens": 7345,
-  "server_tool_use": {
-    "web_search_requests": 1
+{
+  "usage": {
+    "input_tokens": 105,
+    "output_tokens": 6039,
+    "cache_read_input_tokens": 7123,
+    "cache_creation_input_tokens": 7345,
+    "server_tool_use": {
+      "web_search_requests": 1
+    }
   }
 }
 ```
@@ -364,3 +307,13 @@ Web search usage is charged in addition to token usage:
 Web search is available on the Claude API for **$10 per 1,000 searches**, plus standard token costs for search-generated content. Web search results retrieved throughout a conversation are counted as input tokens, in search iterations executed during a single turn and in subsequent conversation turns.
 
 Each web search counts as one use, regardless of the number of results returned. If an error occurs during web search, the web search will not be billed.
+
+# Next steps
+
+[Server tools
+
+Shared mechanics for Anthropic-executed tools.](/docs/en/agents-and-tools/tool-use/server-tools)[Tool reference
+
+Directory of all Anthropic-provided tools.](/docs/en/agents-and-tools/tool-use/tool-reference)
+
+Was this page helpful?

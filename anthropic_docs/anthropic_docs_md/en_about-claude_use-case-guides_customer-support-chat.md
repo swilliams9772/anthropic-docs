@@ -1,6 +1,6 @@
 # Customer support agent
 
-**Source:** https://platform.claude.com/docs/en/about-claude/use-case-guides/customer-support-chat
+**Source:** http://platform.claude.com/docs/en/about-claude/use-case-guides/customer-support-chat
 
 Copy page
 
@@ -32,21 +32,21 @@ Outline an ideal customer interaction to define how and when you expect the cust
 
 Here is an example chat interaction for car insurance customer support:
 
-* **Customer**: Initiates support chat experience
-  + **Claude**: Warmly greets customer and initiates conversation
-* **Customer**: Asks about insurance for their new electric car
-  + **Claude**: Provides relevant information about electric vehicle coverage
-* **Customer**: Asks questions related to unique needs for electric vehicle insurances
-  + **Claude**: Responds with accurate and informative answers and provides links to the sources
-* **Customer**: Asks off-topic questions unrelated to insurance or cars
-  + **Claude**: Clarifies it does not discuss unrelated topics and steers the user back to car insurance
-* **Customer**: Expresses interest in an insurance quote
-  + **Claude**: Ask a set of questions to determine the appropriate quote, adapting to their responses
-  + **Claude**: Sends a request to use the quote generation API tool along with necessary information collected from the user
-  + **Claude**: Receives the response information from the API tool use, synthesizes the information into a natural response, and presents the provided quote to the user
-* **Customer**: Asks follow up questions
-  + **Claude**: Answers follow up questions as needed
-  + **Claude**: Guides the customer to the next steps in the insurance process and closes out the conversation
+* **Customer:** Initiates support chat experience
+  + **Claude:** Warmly greets customer and initiates conversation
+* **Customer:** Asks about insurance for their new electric car
+  + **Claude:** Provides relevant information about electric vehicle coverage
+* **Customer:** Asks questions related to unique needs for electric vehicle insurances
+  + **Claude:** Responds with accurate and informative answers and provides links to the sources
+* **Customer:** Asks off-topic questions unrelated to insurance or cars
+  + **Claude:** Clarifies it does not discuss unrelated topics and steers the user back to car insurance
+* **Customer:** Expresses interest in an insurance quote
+  + **Claude:** Ask a set of questions to determine the appropriate quote, adapting to their responses
+  + **Claude:** Sends a request to use the quote generation API tool along with necessary information collected from the user
+  + **Claude:** Receives the response information from the API tool use, synthesizes the information into a natural response, and presents the provided quote to the user
+* **Customer:** Asks follow up questions
+  + **Claude:** Answers follow up questions as needed
+  + **Claude:** Guides the customer to the next steps in the insurance process and closes out the conversation
 
 In the real example that you write for your own use case, you might find it useful to write out the actual words in this interaction so that you can also get a sense of the ideal tone, response length, and level of detail you want Claude to have.
 
@@ -83,7 +83,7 @@ Here are the key tasks associated with the example insurance interaction above:
 
 # Establish success criteria
 
-Work with your support team to [define clear success criteria](/docs/en/test-and-evaluate/define-success) and write [detailed evaluations](/docs/en/test-and-evaluate/develop-tests) with measurable benchmarks and goals.
+Work with your support team to [define success criteria and write detailed evaluations](/docs/en/test-and-evaluate/develop-tests) with measurable benchmarks and goals.
 
 Here are criteria and benchmarks that can be used to evaluate how successfully Claude performs the defined tasks:
 
@@ -117,13 +117,13 @@ Here are criteria and benchmarks that can be used to evaluate the business impac
 
 The choice of model depends on the trade-offs between cost, accuracy, and response time.
 
-For customer support chat, Claude Sonnet 4.5 is well suited to balance intelligence, latency, and cost. However, for instances where you have conversation flow with multiple prompts including RAG, tool use, and/or long-context prompts, Claude Haiku 4.5 may be more suitable to optimize for latency.
+For customer support chat, Claude Opus 4.7 is well suited to balance intelligence, latency, and cost. However, for instances where you have conversation flow with multiple prompts including RAG, tool use, and/or long-context prompts, Claude Haiku 4.5 may be more suitable to optimize for latency.
 
 # Build a strong prompt
 
 Using Claude for customer support requires Claude having enough direction and context to respond appropriately, while having enough flexibility to handle a wide range of customer inquiries.
 
-Let's start by writing the elements of a strong prompt, starting with a system prompt:
+Start by writing the elements of a strong prompt, starting with a system prompt:
 
 ```
 IDENTITY = """You are Eva, a friendly and knowledgeable AI assistant for Acme Insurance
@@ -132,11 +132,11 @@ Acme's insurance offerings, which include car insurance and electric car
 insurance. You can also help customers get quotes for their insurance needs."""
 ```
 
-While you may be tempted to put all your information inside a system prompt as a way to separate instructions from the user conversation, Claude actually works best with the bulk of its prompt content written inside the first `User` turn (with the only exception being role prompting). Read more at [Giving Claude a role with a system prompt](/docs/en/build-with-claude/prompt-engineering/system-prompts).
+While you may be tempted to put all your information inside a system prompt as a way to separate instructions from the user conversation, Claude actually works best with the bulk of its prompt content written inside the first `User` turn (with the only exception being role prompting). Read more at [Giving Claude a role with a system prompt](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
-It's best to break down complex prompts into subsections and write one part at a time. For each task, you might find greater success by following a step by step process to define the parts of the prompt Claude would need to do the task well. For this car insurance customer support example, we'll be writing piecemeal all the parts for a prompt starting with the "Greeting and general guidance" task. This also makes debugging your prompt easier as you can more quickly adjust individual parts of the overall prompt.
+It's best to break down complex prompts into subsections and write one part at a time. For each task, you might find greater success by following a step by step process to define the parts of the prompt Claude would need to do the task well. For this car insurance customer support example, you'll be writing piecemeal all the parts for a prompt starting with the "Greeting and general guidance" task. This also makes debugging your prompt easier as you can more quickly adjust individual parts of the overall prompt.
 
-We'll put all of these pieces in a file called `config.py`.
+Put all of these pieces in a file called `config.py`.
 
 ```
 STATIC_GREETINGS_AND_GENERAL = """
@@ -166,10 +166,10 @@ Customer service number: 1-800-123-4567
 """
 ```
 
-We'll then do the same for our car insurance and electric car insurance information.
+Then do the same for your car insurance and electric car insurance information.
 
 ```
-STATIC_CAR_INSURANCE="""
+STATIC_CAR_INSURANCE = """
 <static_context>
 Car Insurance Coverage:
 Acme's car insurance policies typically cover:
@@ -186,7 +186,7 @@ Optional coverages include:
 </static_context>
 """
 
-STATIC_ELECTRIC_CAR_INSURANCE="""
+STATIC_ELECTRIC_CAR_INSURANCE = """
 <static_context>
 Electric Car Insurance:
 Our specialized electric car insurance goes beyond traditional auto coverage,
@@ -202,10 +202,10 @@ that gives you the confidence to enjoy every electron-powered mile.
 """
 ```
 
-Now that we have our static content, let's add at least 4-5 sample "good" interactions to guide Claude's responses. These examples should be representative of your ideal customer interaction and can include guardrails, tool calls, etc.
+Now that you have your static content, add at least 4-5 sample "good" interactions to guide Claude's responses. These examples should be representative of your ideal customer interaction and can include guardrails, tool calls, etc.
 
 ```
-EXAMPLES="""
+EXAMPLES = """
 Here are a few examples of how you can interact with customers:
 
 <example 1>
@@ -286,44 +286,57 @@ You only provide information and guidance.
 """
 ```
 
-Now let’s combine all these sections into a single string to use as our prompt.
+Now combine all these sections into a single string to use as your prompt.
 
 ```
-TASK_SPECIFIC_INSTRUCTIONS = ' '.join([
-   STATIC_GREETINGS_AND_GENERAL,
-   STATIC_CAR_INSURANCE,
-   STATIC_ELECTRIC_CAR_INSURANCE,
-   EXAMPLES,
-   ADDITIONAL_GUARDRAILS,
-])
+TASK_SPECIFIC_INSTRUCTIONS = " ".join(
+    [
+        STATIC_GREETINGS_AND_GENERAL,
+        STATIC_CAR_INSURANCE,
+        STATIC_ELECTRIC_CAR_INSURANCE,
+        EXAMPLES,
+        ADDITIONAL_GUARDRAILS,
+    ]
+)
 ```
 
 # Add dynamic and agentic capabilities with tool use
 
 Claude is capable of taking actions and retrieving information dynamically using client-side tool use functionality. Start by listing any external tools or APIs the prompt should utilize.
 
-For this example, we will start with one tool for calculating the quote.
+For this example, start with one tool for calculating the quote.
 
 As a reminder, this tool will not perform the actual calculation, it will just signal to the application that a tool should be used with whatever arguments specified.
 
 Example insurance quote calculator:
 
 ```
-TOOLS = [{
-  "name": "get_quote",
-  "description": "Calculate the insurance quote based on user input. Returned value is per month premium.",
-  "input_schema": {
-    "type": "object",
-    "properties": {
-      "make": {"type": "string", "description": "The make of the vehicle."},
-      "model": {"type": "string", "description": "The model of the vehicle."},
-      "year": {"type": "integer", "description": "The year the vehicle was manufactured."},
-      "mileage": {"type": "integer", "description": "The mileage on the vehicle."},
-      "driver_age": {"type": "integer", "description": "The age of the primary driver."}
-    },
-    "required": ["make", "model", "year", "mileage", "driver_age"]
-  }
-}]
+TOOLS = [
+    {
+        "name": "get_quote",
+        "description": "Calculate the insurance quote based on user input. Returned value is per month premium.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "make": {"type": "string", "description": "The make of the vehicle."},
+                "model": {"type": "string", "description": "The model of the vehicle."},
+                "year": {
+                    "type": "integer",
+                    "description": "The year the vehicle was manufactured.",
+                },
+                "mileage": {
+                    "type": "integer",
+                    "description": "The mileage on the vehicle.",
+                },
+                "driver_age": {
+                    "type": "integer",
+                    "description": "The age of the primary driver.",
+                },
+            },
+            "required": ["make", "model", "year", "mileage", "driver_age"],
+        },
+    }
+]
 
 def get_quote(make, model, year, mileage, driver_age):
     """Returns the premium per month in USD"""
@@ -335,7 +348,7 @@ def get_quote(make, model, year, mileage, driver_age):
 
 # Deploy your prompts
 
-It's hard to know how well your prompt works without deploying it in a test production setting and [running evaluations](/docs/en/test-and-evaluate/develop-tests) so let's build a small application using our prompt, the Anthropic SDK, and streamlit for a user interface.
+It's hard to know how well your prompt works without deploying it in a test production setting and [running evaluations](/docs/en/test-and-evaluate/develop-tests) so let's build a small application using the prompt, the Anthropic SDK, and streamlit for a user interface.
 
 In a file called `chatbot.py`, start by setting up the ChatBot class, which will encapsulate the interactions with the Anthropic SDK.
 
@@ -349,94 +362,98 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class ChatBot:
-   def __init__(self, session_state):
-       self.anthropic = Anthropic()
-       self.session_state = session_state
+    def __init__(self, session_state):
+        self.anthropic = Anthropic()
+        self.session_state = session_state
 
-   def generate_message(
-       self,
-       messages,
-       max_tokens,
-   ):
-       try:
-           response = self.anthropic.messages.create(
-               model=MODEL,
-               system=IDENTITY,
-               max_tokens=max_tokens,
-               messages=messages,
-               tools=TOOLS,
-           )
-           return response
-       except Exception as e:
-           return {"error": str(e)}
+    def generate_message(
+        self,
+        messages,
+        max_tokens,
+    ):
+        try:
+            response = self.anthropic.messages.create(
+                model=MODEL,
+                system=IDENTITY,
+                max_tokens=max_tokens,
+                messages=messages,
+                tools=TOOLS,
+            )
+            return response
+        except Exception as e:
+            return {"error": str(e)}
 
-   def process_user_input(self, user_input):
-       self.session_state.messages.append({"role": "user", "content": user_input})
+    def process_user_input(self, user_input):
+        self.session_state.messages.append({"role": "user", "content": user_input})
 
-       response_message = self.generate_message(
-           messages=self.session_state.messages,
-           max_tokens=2048,
-       )
+        response_message = self.generate_message(
+            messages=self.session_state.messages,
+            max_tokens=2048,
+        )
 
-       if "error" in response_message:
-           return f"An error occurred: {response_message['error']}"
+        if "error" in response_message:
+            return f"An error occurred: {response_message['error']}"
 
-       if response_message.content[-1].type == "tool_use":
-           tool_use = response_message.content[-1]
-           func_name = tool_use.name
-           func_params = tool_use.input
-           tool_use_id = tool_use.id
+        if response_message.content[-1].type == "tool_use":
+            tool_use = response_message.content[-1]
+            func_name = tool_use.name
+            func_params = tool_use.input
+            tool_use_id = tool_use.id
 
-           result = self.handle_tool_use(func_name, func_params)
-           self.session_state.messages.append(
-               {"role": "assistant", "content": response_message.content}
-           )
-           self.session_state.messages.append({
-               "role": "user",
-               "content": [{
-                   "type": "tool_result",
-                   "tool_use_id": tool_use_id,
-                   "content": f"{result}",
-               }],
-           })
+            result = self.handle_tool_use(func_name, func_params)
+            self.session_state.messages.append(
+                {"role": "assistant", "content": response_message.content}
+            )
+            self.session_state.messages.append(
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "tool_result",
+                            "tool_use_id": tool_use_id,
+                            "content": f"{result}",
+                        }
+                    ],
+                }
+            )
 
-           follow_up_response = self.generate_message(
-               messages=self.session_state.messages,
-               max_tokens=2048,
-           )
+            follow_up_response = self.generate_message(
+                messages=self.session_state.messages,
+                max_tokens=2048,
+            )
 
-           if "error" in follow_up_response:
-               return f"An error occurred: {follow_up_response['error']}"
+            if "error" in follow_up_response:
+                return f"An error occurred: {follow_up_response['error']}"
 
-           response_text = follow_up_response.content[0].text
-           self.session_state.messages.append(
-               {"role": "assistant", "content": response_text}
-           )
-           return response_text
+            response_text = follow_up_response.content[0].text
+            self.session_state.messages.append(
+                {"role": "assistant", "content": response_text}
+            )
+            return response_text
 
-       elif response_message.content[0].type == "text":
-           response_text = response_message.content[0].text
-           self.session_state.messages.append(
-               {"role": "assistant", "content": response_text}
-           )
-           return response_text
+        elif response_message.content[0].type == "text":
+            response_text = response_message.content[0].text
+            self.session_state.messages.append(
+                {"role": "assistant", "content": response_text}
+            )
+            return response_text
 
-       else:
-           raise Exception("An error occurred: Unexpected response type")
+        else:
+            raise Exception("An error occurred: Unexpected response type")
 
-   def handle_tool_use(self, func_name, func_params):
-       if func_name == "get_quote":
-           premium = get_quote(**func_params)
-           return f"Quote generated: ${premium:.2f} per month"
+    def handle_tool_use(self, func_name, func_params):
+        if func_name == "get_quote":
+            premium = get_quote(**func_params)
+            return f"Quote generated: ${premium:.2f} per month"
 
-       raise Exception("An unexpected tool was used")
+        raise Exception("An unexpected tool was used")
 ```
 
 # Build your user interface
 
 Test deploying this code with Streamlit using a main method. This `main()` function sets up a Streamlit-based chat interface.
 
-We'll do this in a file called `app.py`
+Do this in a file called `app.py`
 
 ```
 import streamlit as st
@@ -444,34 +461,34 @@ from chatbot import ChatBot
 from config import TASK_SPECIFIC_INSTRUCTIONS
 
 def main():
-   st.title("Chat with Eva, Acme Insurance Company's Assistant🤖")
+    st.title("Chat with Eva, Acme Insurance Company's Assistant🤖")
 
-   if "messages" not in st.session_state:
-       st.session_state.messages = [
-           {'role': "user", "content": TASK_SPECIFIC_INSTRUCTIONS},
-           {'role': "assistant", "content": "Understood"},
-       ]
+    if "messages" not in st.session_state:
+        st.session_state.messages = [
+            {"role": "user", "content": TASK_SPECIFIC_INSTRUCTIONS},
+            {"role": "assistant", "content": "Understood"},
+        ]
 
-   chatbot = ChatBot(st.session_state)
+    chatbot = ChatBot(st.session_state)
 
-   # Display user and assistant messages skipping the first two
-   for message in st.session_state.messages[2:]:
-       # ignore tool use blocks
-       if isinstance(message["content"], str):
-           with st.chat_message(message["role"]):
-               st.markdown(message["content"])
+    # Display user and assistant messages skipping the first two
+    for message in st.session_state.messages[2:]:
+        # ignore tool use blocks
+        if isinstance(message["content"], str):
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
 
-   if user_msg := st.chat_input("Type your message here..."):
-       st.chat_message("user").markdown(user_msg)
+    if user_msg := st.chat_input("Type your message here..."):
+        st.chat_message("user").markdown(user_msg)
 
-       with st.chat_message("assistant"):
-           with st.spinner("Eva is thinking..."):
-               response_placeholder = st.empty()
-               full_response = chatbot.process_user_input(user_msg)
-               response_placeholder.markdown(full_response)
+        with st.chat_message("assistant"):
+            with st.spinner("Eva is thinking..."):
+                response_placeholder = st.empty()
+                full_response = chatbot.process_user_input(user_msg)
+                response_placeholder.markdown(full_response)
 
 if __name__ == "__main__":
-   main()
+    main()
 ```
 
 Run the program with:
@@ -502,7 +519,7 @@ Implementing RAG for support use cases [RAG recipe](https://platform.claude.com/
 
 When dealing with queries that require real-time information, such as account balances or policy details, embedding-based RAG approaches are not sufficient. Instead, you can leverage tool use to significantly enhance your chatbot's ability to provide accurate, real-time responses. For example, you can use tool use to look up customer information, retrieve order details, and cancel orders on behalf of the customer.
 
-This approach, [outlined in our tool use: customer service agent recipe](https://platform.claude.com/cookbook/tool-use-customer-service-agent), allows you to seamlessly integrate live data into your Claude's responses and provide a more personalized and efficient customer experience.
+This approach, [outlined in the tool use: customer service agent recipe](https://platform.claude.com/cookbook/tool-use-customer-service-agent), allows you to seamlessly integrate live data into your Claude's responses and provide a more personalized and efficient customer experience.
 
 # Strengthen input and output guardrails
 
@@ -513,7 +530,7 @@ When deploying a chatbot, especially in customer service scenarios, it's crucial
 * Avoid contractual commitments: Ensure the agent doesn't make promises or enter into agreements it's not authorized to make.
 * [Mitigate jailbreaks](/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks): Use methods like harmlessness screens and input validation to prevent users from exploiting model vulnerabilities, aiming to generate inappropriate content.
 * Avoid mentioning competitors: Implement a competitor mention filter to maintain brand focus and not mention any competitor's products or services.
-* [Keep Claude in character](/docs/en/test-and-evaluate/strengthen-guardrails/keep-claude-in-character): Prevent Claude from changing their style of context, even during long, complex interactions.
+* [Increase output consistency](/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency): Prevent Claude from changing style or going out of character, even during long, complex interactions.
 * Remove Personally Identifiable Information (PII): Unless explicitly required and authorized, strip out any PII from responses.
 
 # Reduce perceived response time with streaming
@@ -533,14 +550,14 @@ In some cases, streaming enables the use of more advanced models with higher bas
 
 As the complexity of your Chatbot grows, your application architecture can evolve to match. Before you add further layers to your architecture, consider the following less exhaustive options:
 
-* Ensure that you are making the most out of your prompts and optimizing through prompt engineering. Use our [prompt engineering guides](/docs/en/build-with-claude/prompt-engineering/overview) to write the most effective prompts.
-* Add additional [tools](/docs/en/build-with-claude/tool-use) to the prompt (which can include [prompt chains](/docs/en/build-with-claude/prompt-engineering/chain-prompts)) and see if you can achieve the functionality required.
+* Ensure that you are making the most out of your prompts and optimizing through prompt engineering. Use the [prompt engineering guides](/docs/en/build-with-claude/prompt-engineering/overview) to write the most effective prompts.
+* Add additional [tools](/docs/en/build-with-claude/tool-use) to the prompt (which can include [prompt chains](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#chain-complex-prompts)) and see if you can achieve the functionality required.
 
 If your Chatbot handles incredibly varied tasks, you may want to consider adding a [separate intent classifier](https://platform.claude.com/cookbook/capabilities-classification-guide) to route the initial customer query. For the existing application, this would involve creating a decision tree that would route customer queries through the classifier and then to specialized conversations (with their own set of tools and system prompts). Note, this method requires an additional call to Claude that can increase latency.
 
 # Integrate Claude into your support workflow
 
-While our examples have focused on Python functions callable within a Streamlit environment, deploying Claude for real-time support chatbot requires an API service.
+While the examples above have focused on Python functions callable within a Streamlit environment, deploying Claude for real-time support chatbot requires an API service.
 
 Here's how you can approach this:
 
@@ -553,6 +570,8 @@ Here's how you can approach this:
 
 [Retrieval Augmented Generation (RAG) cookbook
 
-Visit our RAG cookbook recipe for more example code and detailed guidance.](https://platform.claude.com/cookbook/capabilities-retrieval-augmented-generation-guide)[Citations cookbook
+Visit the RAG cookbook recipe for more example code and detailed guidance.](https://platform.claude.com/cookbook/capabilities-retrieval-augmented-generation-guide)[Citations cookbook
 
-Explore our Citations cookbook recipe for how to ensure accuracy and explainability of information.](https://platform.claude.com/cookbook/misc-using-citations)
+Explore the Citations cookbook recipe for how to ensure accuracy and explainability of information.](https://platform.claude.com/cookbook/misc-using-citations)
+
+Was this page helpful?

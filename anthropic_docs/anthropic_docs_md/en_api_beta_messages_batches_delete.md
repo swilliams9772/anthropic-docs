@@ -1,6 +1,6 @@
 # Delete a Message Batch
 
-**Source:** https://platform.claude.com/docs/en/api/beta/messages/batches/delete
+**Source:** http://platform.claude.com/docs/en/api/beta/messages/batches/delete
 
 Copy page
 
@@ -8,7 +8,7 @@ cURL
 
 # Delete a Message Batch
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 Delete a Message Batch.
 
@@ -28,13 +28,13 @@ ID of the Message Batch.
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 16 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -74,9 +74,21 @@ Accepts one of the following:
 
 "skills-2025-10-02"
 
+"fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
+
+"advisor-tool-2026-03-01"
+
+"managed-agents-2026-04-01"
+
+"cache-diagnosis-2026-04-07"
+
 # ReturnsExpand Collapse
 
-BetaDeletedMessageBatch = object { id, type }
+BetaDeletedMessageBatch object { id, type }
 
 id: string
 
@@ -87,10 +99,6 @@ type: "message\_batch\_deleted"
 Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
-
-Accepts one of the following:
-
-"message\_batch\_deleted"
 
 Delete a Message Batch
 

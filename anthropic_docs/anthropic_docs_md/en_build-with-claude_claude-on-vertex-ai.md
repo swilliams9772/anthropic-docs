@@ -1,17 +1,17 @@
 # Claude on Vertex AI
 
-**Source:** https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai
+**Source:** http://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai
 
 Copy page
 
-The Vertex API for accessing Claude is nearly-identical to the [Messages API](/docs/en/api/messages) and supports all of the same options, with two key differences:
+The Vertex API for accessing Claude is nearly identical to the [Messages API](/docs/en/api/messages/create), with two key differences in request format:
 
 * In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
 * In Vertex, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
 
-Vertex is also supported by Anthropic's official [client SDKs](/docs/en/api/client-sdks). This guide will walk you through the process of making a request to Claude on Vertex AI in either Python or TypeScript.
+Vertex is also supported by Anthropic's official [client SDKs](/docs/en/api/client-sdks). This guide walks you through making a request to Claude on Vertex AI using one of Anthropic's client SDKs.
 
-Note that this guide assumes you have already have a GCP project that is able to use Vertex AI. See [using the Claude 3 models from Anthropic](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for more information on the setup required, as well as a full walkthrough.
+Note that this guide assumes you already have a GCP project that is able to use Vertex AI. See [Anthropic Claude models on Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for more information on the setup required and a full walkthrough.
 
 # Install an SDK for accessing Vertex AI
 
@@ -19,37 +19,69 @@ First, install Anthropic's [client SDK](/docs/en/api/client-sdks) for your langu
 
 Python
 
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
+
 ```
 pip install -U google-cloud-aiplatform "anthropic[vertex]"
 ```
 
 # Accessing Vertex AI
 
-# Model Availability
+# Model availability
 
-Note that Anthropic model availability varies by region. Search for "Claude" in the [Vertex AI Model Garden](https://cloud.google.com/model-garden) or go to [Use Claude 3](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for the latest information.
+Note that Anthropic model availability varies by region. Search for "Claude" in the [Vertex AI Model Garden](https://cloud.google.com/model-garden) or go to [Anthropic Claude models](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for the latest information.
 
 # API model IDs
 
+Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/en/about-claude/model-deprecations); a "Retiring" annotation gives the platform's announced retirement date. The dates in the following table are the **Vertex AI** schedule, which Google Cloud sets independently. A model's lifecycle status and dates here can differ from the Anthropic-operated schedule on the Model deprecations page.
+
 | Model | Vertex AI API model ID |
 | --- | --- |
+| Claude Opus 4.7 | claude-opus-4-7 |
+| Claude Opus 4.6 | claude-opus-4-6 |
+| Claude Sonnet 4.6 | claude-sonnet-4-6 |
 | Claude Sonnet 4.5 | claude-sonnet-4-5@20250929 |
-| Claude Sonnet 4 | claude-sonnet-4@20250514 |
-| Claude Sonnet 3.7 ⚠️ | claude-3-7-sonnet@20250219 |
+| Claude Sonnet 4  Deprecated. Retiring September 14, 2026. | claude-sonnet-4@20250514 |
+| Claude Sonnet 3.7  Retired May 11, 2026. | claude-3-7-sonnet@20250219 |
 | Claude Opus 4.5 | claude-opus-4-5@20251101 |
 | Claude Opus 4.1 | claude-opus-4-1@20250805 |
-| Claude Opus 4 | claude-opus-4@20250514 |
+| Claude Opus 4  Deprecated. Retiring September 14, 2026. | claude-opus-4@20250514 |
 | Claude Haiku 4.5 | claude-haiku-4-5@20251001 |
-| Claude Haiku 3.5 ⚠️ | claude-3-5-haiku@20241022 |
-| Claude Haiku 3 | claude-3-haiku@20240307 |
+| Claude Haiku 3.5  Deprecated. Retiring July 5, 2026. | claude-3-5-haiku@20241022 |
+
+Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model).
 
 # Making requests
 
 Before running requests you may need to run `gcloud auth application-default login` to authenticate with GCP.
 
-The following examples shows how to generate text from Claude on Vertex AI:
+The following examples show how to generate text from Claude on Vertex AI:
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
 from anthropic import AnthropicVertex
@@ -60,7 +92,7 @@ region = "global"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-sonnet-4-5@20250929",
+    model="claude-opus-4-7",
     max_tokens=100,
     messages=[
         {
@@ -72,7 +104,13 @@ message = client.messages.create(
 print(message)
 ```
 
-See our [client SDKs](/docs/en/api/client-sdks) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
+See the [client SDKs](/docs/en/api/client-sdks) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
+
+Claude is also available through [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry).
+
+# Data retention
+
+Data handling for this offering is governed by Google Cloud Vertex AI. For details, see [Vertex AI and zero data retention](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance).
 
 # Activity logging
 
@@ -84,18 +122,43 @@ Turning on this service does not give Google or Anthropic any access to your con
 
 # Feature support
 
-You can find all the features currently supported on Vertex [here](/docs/en/api/overview).
+For the full feature list with Vertex AI availability, see [Features overview](/docs/en/build-with-claude/overview).
 
-# Global vs regional endpoints
+# Supported feature highlights
 
-Starting with **Claude Sonnet 4.5 and all future models**, Google Vertex AI offers two endpoint types:
+* [Messages API](/docs/en/api/messages/create)
+* [Prompt caching](/docs/en/build-with-claude/prompt-caching)
+* [Extended thinking](/docs/en/build-with-claude/extended-thinking)
+* [Tool use](/docs/en/agents-and-tools/tool-use/overview), including the [Bash tool](/docs/en/agents-and-tools/tool-use/bash-tool), [Computer use tool](/docs/en/agents-and-tools/tool-use/computer-use-tool), [Memory tool](/docs/en/agents-and-tools/tool-use/memory-tool), and [Text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool)
+* [Web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool)
+* [Citations](/docs/en/build-with-claude/citations)
+* [Structured outputs](/docs/en/build-with-claude/structured-outputs)
 
-* **Global endpoints**: Dynamic routing for maximum availability
-* **Regional endpoints**: Guaranteed data routing through specific geographic regions
+# Features not supported
 
-Regional endpoints include a 10% pricing premium over global endpoints.
+* Input sources (URL sources for images and documents, Files API)
+* Server-side tools (code execution, web fetch, advisor)
+* Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
+* API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
+* Claude Managed Agents
 
-This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4, Opus 4, and earlier) maintain their existing pricing structures.
+# Context window
+
+Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+
+Vertex AI limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
+
+# Global, multi-region, and regional endpoints
+
+Vertex AI offers three endpoint types:
+
+* **Global endpoints:** Dynamic routing for maximum availability
+* **Multi-region endpoints:** Dynamic routing within a geographic area (for example, the United States or the European Union) for data residency with high availability
+* **Regional endpoints:** Guaranteed data routing through specific geographic regions
+
+Regional and multi-region endpoints include a 10% pricing premium over global endpoints.
+
+This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4 (deprecated), Opus 4 (deprecated), and earlier) maintain their existing pricing structures.
 
 # When to use each option
 
@@ -107,10 +170,17 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 * Best for applications where data residency is flexible
 * Only supports pay-as-you-go traffic (provisioned throughput requires regional endpoints)
 
+**Multi-region endpoints:**
+
+* Dynamically route requests across regions within a geographic area (currently `us` and `eu`)
+* Useful when you need data residency within a broad geography but want higher availability than a single region
+* 10% pricing premium over global endpoints
+* Only supports pay-as-you-go traffic (provisioned throughput requires regional endpoints)
+
 **Regional endpoints:**
 
 * Route traffic through specific geographic regions
-* Required for data residency and compliance requirements
+* Required for single-region data residency, strict compliance mandates, or provisioned throughput
 * Support both pay-as-you-go and provisioned throughput
 * 10% pricing premium reflects infrastructure costs for dedicated regional capacity
 
@@ -120,7 +190,7 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 Set the `region` parameter to `"global"` when initializing the client:
 
-Python
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
 from anthropic import AnthropicVertex
@@ -131,7 +201,34 @@ region = "global"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-sonnet-4-5@20250929",
+    model="claude-opus-4-7",
+    max_tokens=100,
+    messages=[
+        {
+            "role": "user",
+            "content": "Hey Claude!",
+        }
+    ],
+)
+print(message)
+```
+
+**Using multi-region endpoints:**
+
+Set the `region` parameter to a multi-region identifier: `"us"` for the United States or `"eu"` for the European Union. The SDK routes requests to the corresponding multi-region endpoint (`https://aiplatform.us.rep.googleapis.com` or `https://aiplatform.eu.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
+
+CLIPythonTypeScriptC#GoJavaPHPRuby
+
+```
+from anthropic import AnthropicVertex
+
+project_id = "MY_PROJECT_ID"
+region = "us"  # Multi-region identifier: "us" or "eu"
+
+client = AnthropicVertex(project_id=project_id, region=region)
+
+message = client.messages.create(
+    model="claude-opus-4-7",
     max_tokens=100,
     messages=[
         {
@@ -147,7 +244,7 @@ print(message)
 
 Specify a specific region like `"us-east1"` or `"europe-west1"`:
 
-Python
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
 from anthropic import AnthropicVertex
@@ -158,7 +255,7 @@ region = "us-east1"  # Specify a specific region
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-sonnet-4-5@20250929",
+    model="claude-opus-4-7",
     max_tokens=100,
     messages=[
         {
@@ -170,9 +267,13 @@ message = client.messages.create(
 print(message)
 ```
 
+Claude Mythos Preview is a research preview available to invited customers on Vertex AI. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
+
 # Additional resources
 
-* **Google Vertex AI pricing:** [cloud.google.com/vertex-ai/generative-ai/pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing)
+* **Vertex AI pricing:** [cloud.google.com/vertex-ai/generative-ai/pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing)
 * **Claude models documentation:** [Claude on Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/claude)
 * **Google blog post:** [Global endpoint for Claude models](https://cloud.google.com/blog/products/ai-machine-learning/global-endpoint-for-claude-models-generally-available-on-vertex-ai)
-* **Anthropic pricing details:** [Pricing documentation](/docs/en/about-claude/pricing#third-party-platform-pricing)
+* **Anthropic pricing details:** [Cloud platform pricing](/docs/en/about-claude/pricing#cloud-platform-pricing)
+
+Was this page helpful?

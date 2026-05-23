@@ -1,36 +1,36 @@
-# Team Plan Billing FAQs
+# Team plan billing FAQs
 
 **Source:** https://support.claude.com/en/articles/12997503-team-plan-billing-faqs
 
 # What payment methods can I use to pay for the Team plan?
 
-Accepted payment methods are credit, debit, or prepaid cards. Other forms of payment are not accepted at this time.
+Accepted payment methods are credit, debit, or prepaid cards. Other forms of payment, including ACH bank transfers, are not accepted at this time.
 
 # How do I update my billing information and payment method?
 
-An organization Owner can update your Team plan’s payment method by navigating to [Admin settings > Billing](https://claude.ai/admin-settings/billing).
+An organization Owner can update your Team plan’s payment method by navigating to **[Organization settings > Billing](https://claude.ai/admin-settings/billing)**.
 
-**Note:** Your billing address determines your tax jurisdiction. See [Understanding your billing address and tax calculation](https://support.claude.com/en/articles/12997130-understanding-your-billing-address-and-tax-calculation) for details on how to view or update your billing address.
+**Note:** Your billing address determines your tax jurisdiction. See **[Understanding your billing address and tax calculation](https://support.claude.com/en/articles/12997130-understanding-your-billing-address-and-tax-calculation)** for details on how to view or update your billing address.
 
 # How can I change my billing email address?
 
-Your organization's billing address determines where your invoices are sent. You can request to change this email address, or add additional billing email addresses, by [contacting our Support team](https://support.claude.com/en/articles/9015913-how-to-get-support). Note that an organization Owner must authorize any changes to your billing address. For additional invoice recipients, the account Owner must be copied on the request. Once approved, all future invoices will be sent to the new email address(es).
+Your organization's billing address determines where your invoices are sent. You can request to change this email address, or add additional billing email addresses, by **[contacting our Support team](https://support.claude.com/en/articles/9015913-how-to-get-support)**. Note that an organization Owner must authorize any changes to your billing address. For additional invoice recipients, the account Owner must be copied on the request. Once approved, all future invoices will be sent to the new email address(es).
 
 # How can I use a different name on my invoices?
 
-If you want to use a name other than the one tied to your payment method, an organization Owner should check the "Use a different name on invoices" box when adding or updating your payment method in [Admin settings > Billing](https://claude.ai/admin-settings/billing):
+If you want to use a name other than the one tied to your payment method, an organization Owner should check the "Use a different name on invoices" box when adding or updating your payment method in **[Organization settings > Billing](https://claude.ai/admin-settings/billing)**:
 
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1922145253/f2e3d4e0fe43a2ea07e89244764c/image.png?expires=1768132800&signature=bf256ce7ba605e06d4e041a7cfd0552ce73e1e3efd6107c3b1d65e208eef21e0&req=dSklFMh6mINaWvMW3nq%2BgVr9wWuKUd38O9vEXNYt8DVngINHheDLWRh%2F1qAQ%0A%2B35cuIeCw4fBG6Pz7iH7jUNFK%2FM%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1922145253/f2e3d4e0fe43a2ea07e89244764c/image.png?expires=1768132800&signature=bf256ce7ba605e06d4e041a7cfd0552ce73e1e3efd6107c3b1d65e208eef21e0&req=dSklFMh6mINaWvMW3nq%2BgVr9wWuKUd38O9vEXNYt8DVngINHheDLWRh%2F1qAQ%0A%2B35cuIeCw4fBG6Pz7iH7jUNFK%2FM%3D%0A)
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1922145253/f2e3d4e0fe43a2ea07e89244764c/image.png?expires=1779557400&signature=8f59240f19ff1ad5e70fe185a235f93edac65c9187177c1b322e08c4391c4b35&req=dSklFMh6mINaWvMW1HO4zRZTy1PEvszXKAqLF4ERnlW5VCXtXDzLYT1TacVk%0A8ItE%2FGMJEf4LZttQvsE%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1922145253/f2e3d4e0fe43a2ea07e89244764c/image.png?expires=1779557400&signature=8f59240f19ff1ad5e70fe185a235f93edac65c9187177c1b322e08c4391c4b35&req=dSklFMh6mINaWvMW1HO4zRZTy1PEvszXKAqLF4ERnlW5VCXtXDzLYT1TacVk%0A8ItE%2FGMJEf4LZttQvsE%3D%0A)
 
 # When will I be billed?
 
-Your payment method on file will be charged at the beginning of your billing cycle. The amount will be based on the number of members on your team at the beginning of the billing cycle. If you add or remove members from your team during the billing cycle, you will be credited or charged the prorated amount immediately. See [How is my Team plan bill calculated?](https://support.claude.com/en/articles/9267289-how-is-my-team-plan-bill-calculated) for more information about Team plan pricing.
+Your payment method on file will be charged at the beginning of your billing cycle. The amount will be based on the number of members on your team at the beginning of the billing cycle. If you add or remove members from your team during the billing cycle, you will be credited or charged the prorated amount immediately. See **[How is my Team plan bill calculated?](https://support.claude.com/en/articles/9267289-how-is-my-team-plan-bill-calculated)** for more information about Team plan pricing.
 
 # Where can I find the invoice or receipt for my Team plan payment?
 
-An organization Owner can follow these steps to access invoices:
+An organization owner can follow these steps to access invoices:
 
-1. Navigate to [Admin settings > Billing](https://claude.ai/admin-settings/billing).
+1. Navigate to **[Organization settings > Billing](https://claude.ai/admin-settings/billing)**.
 2. Find the **Invoices** section.
 3. Click the "View" button next to the invoice you want to open.
 4. A new Stripe tab will open.
@@ -46,10 +46,10 @@ Please click on the message icon in the bottom right of our Help Center to conta
 
 # My Team plan access is no longer active and I want to resubscribe.
 
-An organization Owner can resubscribe for Team plan access by navigating to [Admin settings > Billing](https://claude.ai/admin-settings/billing).
+An organization owner can resubscribe for Team plan access by navigating to **[Organization settings > Billing](https://claude.ai/admin-settings/billing)**.
 
 ---
 
 Related Articles
 
-[Paid Plan Billing FAQs](https://support.claude.com/en/articles/8325618-paid-plan-billing-faqs)[How is my Team plan bill calculated?](https://support.claude.com/en/articles/9267289-how-is-my-team-plan-bill-calculated)[How am I billed for my Enterprise plan?](https://support.claude.com/en/articles/9797541-how-am-i-billed-for-my-enterprise-plan)[I need to add or update my Team plan's Tax or VAT ID](https://support.claude.com/en/articles/9927624-i-need-to-add-or-update-my-team-plan-s-tax-or-vat-id)[Understanding your billing address and tax calculation](https://support.claude.com/en/articles/12997130-understanding-your-billing-address-and-tax-calculation)
+[Paid Plan Billing FAQs](https://support.claude.com/en/articles/8325618-paid-plan-billing-faqs)[How is my Team plan bill calculated?](https://support.claude.com/en/articles/9267289-how-is-my-team-plan-bill-calculated)[Add or update your Team plan's tax or VAT ID](https://support.claude.com/en/articles/9927624-add-or-update-your-team-plan-s-tax-or-vat-id)[Understanding your billing address and tax calculation](https://support.claude.com/en/articles/12997130-understanding-your-billing-address-and-tax-calculation)[Manage members on Team and Enterprise plans](https://support.claude.com/en/articles/13133750-manage-members-on-team-and-enterprise-plans)

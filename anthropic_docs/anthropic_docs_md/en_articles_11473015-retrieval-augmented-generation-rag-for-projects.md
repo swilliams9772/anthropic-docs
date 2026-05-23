@@ -1,18 +1,18 @@
-# Retrieval Augmented Generation (RAG) for Projects
+# Retrieval augmented generation (RAG) for projects
 
 **Source:** https://support.claude.com/en/articles/11473015-retrieval-augmented-generation-rag-for-projects
 
-RAG for Projects is available for all paid Claude plans (Pro, Max, Team, and Enterprise). Free users do not have access to this feature.
+RAG for projects is available for all Claude plans (free, Pro, Max, Team, and Enterprise).
 
 Projects can now handle much more content without running into limits, giving Claude better context to help you. As you add more files and information to your projects, Claude automatically switches to a faster mode (powered by RAG) that keeps response times quick while maintaining quality responses.
 
-# What is RAG for Projects?
+# What is RAG for projects?
 
-RAG or Retrieval Augmented Generation is a technology that allows your projects to store and access significantly more knowledge than before. When your project knowledge approaches the context window limit, Claude will automatically enable RAG mode to expand your project's capacity by up to 10x while maintaining quality responses.
+RAG or retrieval augmented generation is a technology that allows your projects to store and access significantly more knowledge than before. When your project knowledge approaches the context window limit, Claude will automatically enable RAG mode to expand your project's capacity by up to 10x while maintaining quality responses.
 
-Previously, projects had a knowledge capacity limit based on the [context window](https://support.claude.com/en/articles/8606394-how-large-is-the-context-window-on-paid-claude-plans). Once you reached this threshold, it wasn't possible to add more content. With RAG, you can continue adding knowledge beyond these limits while maintaining full functionality.
+Previously, projects had a knowledge capacity limit based on the **[context window](https://support.claude.com/en/articles/8606394-how-large-is-the-context-window-on-paid-claude-plans)**. Once you reached this threshold, it wasn't possible to add more content. With RAG, you can continue adding knowledge beyond these limits while maintaining full functionality.
 
-# How RAG Works
+# How RAG works
 
 When RAG is enabled for your project, Claude uses a **project knowledge search tool** to retrieve relevant information from your uploaded documents. Instead of loading all project content into memory at once, Claude intelligently searches and retrieves only the most relevant information needed to answer your questions.
 
@@ -23,7 +23,7 @@ This approach allows for:
 * **Faster responses**: Optimized retrieval keeps response times quick.
 * **Seamless transition**: Automatic activation when needed, no setup required.
 
-# When RAG Activates
+# When RAG activates
 
 RAG automatically activates when your project approaches or exceeds the context window limits. You'll see a visual indicator showing that your project is RAG-enabled.
 
@@ -40,29 +40,29 @@ Working with RAG-enabled projects feels similar to working with regular projects
 
 The main difference is that you'll see Claude using a **project knowledge search tool** when it needs to find relevant information from your uploaded content.
 
-# Best Practices for RAG Projects
+# Best practices for RAG projects
 
 To get the most out of your RAG-enabled projects:
 
-# Upload Comprehensive Content
+# Upload comprehensive content
 
 Add all relevant documents and files to your project upfront. The more context Claude has access to, the better it can assist you.
 
-# Use Clear, Descriptive Filenames
+# Use clear, descriptive filenames
 
 Well-named files help Claude understand and retrieve the right information more effectively.
 
-# Organize Related Content Together
+# Organize related content together
 
 Group related documents in the same project to enable Claude to draw connections between different sources.
 
-# Reference Specific Documents
+# Reference specific documents
 
 When asking questions, you can reference specific documents by name to help Claude focus its search.
 
 ---
 
-# Frequently Asked Questions
+# Frequently asked questions
 
 # Will having RAG enabled on my project affect response quality?
 
@@ -88,4 +88,4 @@ Yes. RAG works with all Claude features, including web search, extended thinking
 
 Related Articles
 
-[How large is the context window on paid Claude plans?](https://support.claude.com/en/articles/8606394-how-large-is-the-context-window-on-paid-claude-plans)[What are projects?](https://support.claude.com/en/articles/9517075-what-are-projects)[How can I create and manage projects?](https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects)[Usage Limit Best Practices](https://support.claude.com/en/articles/9797557-usage-limit-best-practices)[Using Google Drive Cataloging on the Enterprise Plan](https://support.claude.com/en/articles/11088779-using-google-drive-cataloging-on-the-enterprise-plan)
+[How large is the context window on paid Claude plans?](https://support.claude.com/en/articles/8606394-how-large-is-the-context-window-on-paid-claude-plans)[What are projects?](https://support.claude.com/en/articles/9517075-what-are-projects)[How can I create and manage projects?](https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects)[Usage limit best practices](https://support.claude.com/en/articles/9797557-usage-limit-best-practices)[Use Google Workspace connectors](https://support.claude.com/en/articles/10166901-use-google-workspace-connectors)

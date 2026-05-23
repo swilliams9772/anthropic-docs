@@ -1,12 +1,12 @@
 # Get Claude Code Usage Report
 
-**Source:** https://platform.claude.com/docs/en/api/admin-api/claude-code/get-claude-code-usage-report
+**Source:** http://platform.claude.com/docs/en/api/admin-api/claude-code/get-claude-code-usage-report
 
 Copy page
 
 # Get Claude Code Usage Report
 
-get/v1/organizations/usage\_report/claude\_code
+GET/v1/organizations/usage\_report/claude\_code
 
 Retrieve daily aggregated usage metrics for Claude Code users.
 Enables organizations to analyze developer productivity and build custom dashboards.
@@ -21,17 +21,13 @@ limit: optional number
 
 Number of records per page (default: 20, max: 1000).
 
-maximum1000
-
-minimum1
-
 page: optional string
 
 Opaque cursor token from previous response's `next_page` field.
 
 # ReturnsExpand Collapse
 
-ClaudeCodeUsageReport = object { data, has\_more, next\_page }
+ClaudeCodeUsageReport object { data, has\_more, next\_page }
 
 data: array of object { actor, core\_metrics, customer\_type, 6 more }
 
@@ -41,9 +37,9 @@ actor: object { email\_address, type }  or object { api\_key\_name, type }
 
 The user or API key that performed the Claude Code actions.
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, type }
+UserActor object { email\_address, type }
 
 email\_address: string
 
@@ -51,21 +47,13 @@ Email address of the user who performed Claude Code actions.
 
 type: "user\_actor"
 
-Accepts one of the following:
-
-"user\_actor"
-
-APIActor = object { api\_key\_name, type }
+APIActor object { api\_key\_name, type }
 
 api\_key\_name: string
 
 Name of the API key used to perform Claude Code actions.
 
 type: "api\_actor"
-
-Accepts one of the following:
-
-"api\_actor"
 
 core\_metrics: object { commits\_by\_claude\_code, lines\_of\_code, num\_sessions, pull\_requests\_by\_claude\_code }
 
@@ -99,7 +87,7 @@ customer\_type: "api" or "subscription"
 
 Type of customer account (api for API customers, subscription for Pro/Team customers).
 
-Accepts one of the following:
+One of the following:
 
 "api"
 
@@ -108,8 +96,6 @@ Accepts one of the following:
 date: string
 
 UTC date for the usage metrics in YYYY-MM-DD format.
-
-formatdate-time
 
 model\_breakdown: array of object { estimated\_cost, model, tokens }
 
@@ -173,9 +159,9 @@ Number of tool action proposals that the user rejected.
 
 subscription\_type: optional "enterprise" or "team"
 
-Subscription tier for subscription customers. Null for API customers.
+Subscription tier for subscription customers. `null` for API customers.
 
-Accepts one of the following:
+One of the following:
 
 "enterprise"
 
@@ -193,6 +179,7 @@ Get Claude Code Usage Report
 
 ```
 curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 

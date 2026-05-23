@@ -1,148 +1,49 @@
-# When to Use Desktop and Web Connectors
+# When to use desktop and web connectors
 
 **Source:** https://support.claude.com/en/articles/11725091-when-to-use-desktop-and-web-connectors
 
-This article helps you decide whether to use local desktop extensions or remote connectors to give Claude the context and capabilities you need for your work.
+Claude can connect to your tools in two ways: through the web (remote connectors) or through the Claude Desktop app (desktop extensions). Most connectors are remote—they're the default choice and work everywhere you use Claude.
 
-Remote web connectors are available on Claude, Claude Desktop, and Claude Mobile (iOS and Android) for users with paid plans (Pro, Max, Team, or Enterprise). Local desktop extensions are available to all users on Claude Desktop.
+# Use a remote connector when
 
-# Understanding your options
+* The tool is a cloud service you sign into (Slack, Notion, Linear, GitHub, your company's SaaS)
+* You want the connector available everywhere—web, mobile, Cowork, Desktop, and Claude Code
+* You're connecting something from the [Connectors Directory](https://claude.ai/directory)
 
-Claude can connect to your tools and data in two ways:
+Remote connectors work across all Claude surfaces. Once connected, they're available everywhere without extra setup.
 
-* **Local desktop extensions** run on your computer through Claude Desktop and give Claude access to your local files, applications, and system resources.
-* **Remote connectors** run on external servers and connect Claude to cloud-based services and applications through the internet.
+# Use a desktop extension when
 
-See the [Connectors Directory](https://claude.com/connectors) to browse available local and remote connectors.
+* The tool runs on your computer—local files, a database on localhost, a desktop application
+* The tool needs OS-level access (filesystem, clipboard, local processes)
+* There's no cloud version to connect to
 
-# When to use local desktop extensions
+Desktop extensions run locally and are only available in Claude Desktop and Claude Code—not on web or mobile.
 
-Choose local desktop extensions when you want to:
+# Plugins work with both
 
-# Keep your work private and secure
+A plugin can bundle either remote or local MCP servers (or both). Installing a plugin that references a remote MCP makes it available everywhere; one that references a local MCP works in Desktop and Claude Code.
 
-* Work with confidential documents without sending them to external servers.
-* Maintain control over sensitive data like client files or proprietary information.
-* Access your local calendar, contacts, and messaging apps privately.
+# Quick guide
 
-# Work with your local files and applications
+|  |  |  |
+| --- | --- | --- |
+| Your tool is… | Use | Available on |
+| A cloud/SaaS product | Remote connector | All surfaces |
+| In the Connectors Directory | Remote connector | All surfaces |
+| Running on your machine | Desktop extension | Desktop, Claude Code |
+| A local file or folder | Desktop extension | Desktop, Claude Code |
+| Something you built with a public URL | Remote connector (add as custom) | All surfaces |
+| Something you built that runs locally | Desktop extension | Desktop, Claude Code |
 
-* Organize and manage files on your computer.
-* Create summaries from documents in your folders.
-* Draft emails using your local address book.
-* Access development environments and system tools.
+# Get started
 
-**Example use cases:**
-
-* "Claude, create a summary of all the PDFs in my Documents folder."
-* "Help me organize my desktop files by project."
-* "Draft an email using the contact information from my local address book."
-
-# When to use remote connectors
-
-Choose remote connectors when you want to:
-
-# Connect to your cloud-based work tools
-
-* Access real-time data from services like Asana, Linear, or Notion.
-* Integrate with business tools like PayPal, Square, or Plaid.
-* Connect to communication platforms like Intercom.
-* Use automation services like Zapier or Workato.
-
-# Collaborate with your team
-
-* Work with team workspaces and shared projects.
-* Share access to the same tools and data sources.
-
-# Get real-time insights and take action
-
-* Monitor current metrics and analytics.
-* Create tasks and update project status.
-* Receive up-to-date information from live services.
-
-# Work across multiple devices
-
-* Access the same connectors from different computers.
-* Maintain consistent workflows whether on desktop or web.
-
-**Example use cases:**
-
-* "Claude, create a new task in Asana and assign it to my teammate."
-* "Analyze our PayPal transaction data from last week."
-* "Check our latest Linear issues and prioritize them."
-
-# Choosing the right approach
-
-Consider these factors when deciding:
-
-# Data sensitivity
-
-* Local: Your data stays on your computer.
-* Remote: Data flows between Claude and external services.
-
-# Collaboration needs
-
-* Local: Individual use, limited sharing.
-* Remote: Team access, shared workspaces.
-
-# **Setup and maintenance**
-
-* Local: Install desktop extensions, configure local settings.
-* Remote: Authenticate with web services, manage permissions.
-
-# Using both approaches together
-
-Many users find the most comprehensive solution combines both approaches:
-
-* Use local desktop extensions for private file management and confidential work.
-* Use remote connectors for team collaboration and cloud services.
-
-**Example workflow:**
-
-1. Use local desktop extensions to read project files from your computer.
-2. Use remote connectors to create tasks in your team's project management tool.
-3. Use local desktop extensions to save results back to your local files.
-
-# Getting started
-
-# For local desktop extensions
-
-1. Install [Claude Desktop](https://claude.ai/download).
-2. Navigate to Settings > Extensions within Claude Desktop.
-3. Browse and install desktop extensions.
-4. Configure any required settings.
-
-See [Getting started with Local MCP Servers on Claude Desktop](https://support.claude.com/ko/articles/7989434-claude%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94) for more information.
-
-# For remote web connectors
-
-1. Go to [Settings > Connectors](https://claude.ai/settings/connectors) in Claude or Claude Desktop.
-2. Browse the connectors directory or click "Add custom connector."
-3. Connect to your desired services.
-4. Authenticate and configure permissions.
-
-See [Pre-built Web Connectors Using Remote MCP](https://support.claude.com/en/articles/11176164-pre-built-web-connectors-using-remote-mcp) for more information.
-
-# Security best practices
-
-# For local desktop extensions
-
-* Only install extensions from trusted sources.
-* Review file access permissions before installing.
-* Keep your desktop app updated.
-* Monitor which local resources extensions can access.
-
-# For remote connectors
-
-* Connect only to services you trust.
-* Review OAuth permissions carefully during setup.
-* Monitor tool usage and activities.
-* Regularly audit connected services.
-
-Choose the approach that best fits your workflow, security requirements, and collaboration needs. The combination of local desktop extensions and remote connectors provides the most comprehensive solution for connecting Claude to your work.
+* Browse and add remote connectors: [Settings → Connectors](https://claude.ai/settings/connectors) or the [Connectors Directory](https://claude.ai/directory)
+* Install a desktop extension: Open Claude Desktop → Settings → Extensions
+* Building your own? See the [connector building docs](https://claude.com/docs/connectors/building) for remote connectors or the [MCPB guide](https://claude.com/docs/connectors/building/mcpb) for local ones.
 
 ---
 
 Related Articles
 
-[Getting Started with Custom Connectors Using Remote MCP](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp)[Anthropic Connectors Directory FAQ](https://support.claude.com/en/articles/11596036-anthropic-connectors-directory-faq)[Using the Connectors Directory to extend Claude’s capabilities](https://support.claude.com/en/articles/11724452-using-the-connectors-directory-to-extend-claude-s-capabilities)[Deploying enterprise-grade MCP servers with desktop extensions](https://support.claude.com/en/articles/12702546-deploying-enterprise-grade-mcp-servers-with-desktop-extensions)[Building Desktop Extensions with MCPB](https://support.claude.com/en/articles/12922929-building-desktop-extensions-with-mcpb)
+[Getting Started with Local MCP Servers on Claude Desktop](https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop)[Get started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp)[Use connectors to extend Claude's capabilities](https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities)[Deploying enterprise-grade MCP servers with desktop extensions](https://support.claude.com/en/articles/12702546-deploying-enterprise-grade-mcp-servers-with-desktop-extensions)[Use interactive connectors in Claude](https://support.claude.com/en/articles/13454812-use-interactive-connectors-in-claude)

@@ -1,6 +1,6 @@
 # Get started with Agent Skills in the API
 
-**Source:** https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart
+**Source:** http://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart
 
 Copy page
 
@@ -8,40 +8,30 @@ This tutorial shows you how to use Agent Skills to create a PowerPoint presentat
 
 # Prerequisites
 
-* [Anthropic API key](/settings/keys)
+* [Claude API key](/settings/keys)
 * Python 3.7+ or curl installed
 * Basic familiarity with making API requests
 
-# What are Agent Skills?
+# Agent Skills overview
 
 Pre-built Agent Skills extend Claude's capabilities with specialized expertise for tasks like creating documents, analyzing data, and processing files. Anthropic provides the following pre-built Agent Skills in the API:
 
-* **PowerPoint (pptx)**: Create and edit presentations
-* **Excel (xlsx)**: Create and analyze spreadsheets
-* **Word (docx)**: Create and edit documents
-* **PDF (pdf)**: Generate PDF documents
+* **PowerPoint (pptx):** Create and edit presentations
+* **Excel (xlsx):** Create and analyze spreadsheets
+* **Word (docx):** Create and edit documents
+* **PDF (pdf):** Generate PDF documents
 
 **Want to create custom Skills?** See the [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction) for examples of building your own Skills with domain-specific expertise.
 
 # Step 1: List available Skills
 
-First, let's see what Skills are available. We'll use the Skills API to list all Anthropic-managed Skills:
+First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills:
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-import anthropic
-
-client = anthropic.Anthropic()
-
 # List Anthropic-managed Skills
-skills = client.beta.skills.list(
-    source="anthropic",
-    betas=["skills-2025-10-02"]
-)
-
-for skill in skills.data:
-    print(f"{skill.id}: {skill.display_title}")
+ant beta:skills list --source anthropic
 ```
 
 You see the following Skills: `pptx`, `xlsx`, `docx`, and `pdf`.
@@ -50,50 +40,39 @@ This API returns each Skill's metadata: its name and description. Claude loads t
 
 # Step 2: Create a presentation
 
-Now we'll use the PowerPoint Skill to create a presentation about renewable energy. We specify Skills using the `container` parameter in the Messages API:
+Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-import anthropic
-
-client = anthropic.Anthropic()
-
 # Create a message with the PowerPoint Skill
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
-    max_tokens=4096,
+    model="claude-opus-4-7",
+    max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "pptx",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Create a presentation about renewable energy with 5 slides"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a presentation about renewable energy with 5 slides",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
-print(response.content)
+print(f"stop_reason={response.stop_reason}, blocks={len(response.content)}")
 ```
 
 Let's break down what each part does:
 
-* **`container.skills`**: Specifies which Skills Claude can use
-* **`type: "anthropic"`**: Indicates this is an Anthropic-managed Skill
-* **`skill_id: "pptx"`**: The PowerPoint Skill identifier
-* **`version: "latest"`**: The Skill version set to the most recently published
-* **`tools`**: Enables code execution (required for Skills)
-* **Beta headers**: `code-execution-2025-08-25` and `skills-2025-10-02`
+* **`container.skills`:** Specifies which Skills Claude can use
+* **`type: "anthropic"`:** Indicates this is an Anthropic-managed Skill
+* **`skill_id: "pptx"`:** The PowerPoint Skill identifier
+* **`version: "latest"`:** The Skill version set to the most recently published
+* **`tools`:** Enables code execution (required for Skills)
+* **Beta headers:** `code-execution-2025-08-25` and `skills-2025-10-02`
 
 When you make this request, Claude automatically matches your task to the relevant Skill. Since you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude executes the Skill's code to create your presentation.
 
@@ -101,31 +80,29 @@ When you make this request, Claude automatically matches your task to the releva
 
 The presentation was created in the code execution container and saved as a file. The response includes a file reference with a file ID. Extract the file ID and download it using the Files API:
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-# Extract file ID from response
+# Extract file ID from the code-execution tool result. The Skill might run
+# its work through either the Python or bash code-execution tool, so check
+# both result types.
 file_id = None
 for block in response.content:
-    if block.type == 'tool_use' and block.name == 'code_execution':
-        # File ID is in the tool result
-        for result_block in block.content:
-            if hasattr(result_block, 'file_id'):
-                file_id = result_block.file_id
-                break
+    if block.type == "code_execution_tool_result":
+        if block.content.type == "code_execution_result":
+            for output in block.content.content:
+                file_id = output.file_id
+    elif block.type == "bash_code_execution_tool_result":
+        if block.content.type == "bash_code_execution_result":
+            for output in block.content.content:
+                file_id = output.file_id
 
 if file_id:
-    # Download the file
-    file_content = client.beta.files.download(
-        file_id=file_id,
-        betas=["files-api-2025-04-14"]
-    )
-
-    # Save to disk
-    with open("renewable_energy.pptx", "wb") as f:
-        file_content.write_to_file(f.name)
-
-    print(f"Presentation saved to renewable_energy.pptx")
+    # Download the file and save it
+    output_path = Path(tempfile.gettempdir()) / "renewable_energy.pptx"
+    file_content = client.beta.files.download(file_id=file_id)
+    file_content.write_to_file(output_path)
+    print(f"Presentation saved to {output_path}")
 ```
 
 For complete details on working with generated files, see the [code execution tool documentation](/docs/en/agents-and-tools/tool-use/code-execution-tool#retrieve-generated-files).
@@ -136,88 +113,67 @@ Now that you've created your first document with Skills, try these variations:
 
 # Create a spreadsheet
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
-    max_tokens=4096,
+    model="claude-opus-4-7",
+    max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "xlsx",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Create a quarterly sales tracking spreadsheet with sample data"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a quarterly sales tracking spreadsheet with sample data",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 ```
 
 # Create a Word document
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
-    max_tokens=4096,
+    model="claude-opus-4-7",
+    max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "docx",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Write a 2-page report on the benefits of renewable energy"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Write a 2-page report on the benefits of renewable energy",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 ```
 
 # Generate a PDF
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
-    max_tokens=4096,
+    model="claude-opus-4-7",
+    max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "pdf",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Generate a PDF invoice template"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Generate a PDF invoice template",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 ```
 
@@ -233,8 +189,8 @@ Upload your own Skills for specialized tasks](/docs/en/api/skills/create-skill)[
 
 Learn best practices for writing effective Skills](/docs/en/agents-and-tools/agent-skills/best-practices)[Use Skills in Claude Code
 
-Learn about Skills in Claude Code](https://code.claude.com/docs/en/skills)[Use Skills in the Agent SDK
-
-Use Skills programmatically in TypeScript and Python](/docs/en/agent-sdk/skills)[Agent Skills Cookbook
+Learn about Skills in Claude Code](https://code.claude.com/docs/en/skills)[Agent Skills Cookbook
 
 Explore example Skills and implementation patterns](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction)
+
+Was this page helpful?

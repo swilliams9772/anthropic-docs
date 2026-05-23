@@ -1,4 +1,4 @@
-# How to Get Support for Claude for Government
+# How to get support for Claude for Government
 
 **Source:** https://support.claude.com/en/articles/13047024-how-to-get-support-for-claude-for-government
 
@@ -17,4 +17,4 @@ This article explains how Claude for Government Owners and Primary Owners can co
 
 Related Articles
 
-[Who owns and manages the data of my team?](https://support.claude.com/en/articles/9265372-who-owns-and-manages-the-data-of-my-team)[Getting Started with Claude for Education at Your University (for Owners/Admins)](https://support.claude.com/en/articles/11139094-getting-started-with-claude-for-education-at-your-university-for-owners-admins)[Who owns and manages the data of my Claude for Education account?](https://support.claude.com/en/articles/11732894-who-owns-and-manages-the-data-of-my-claude-for-education-account)[Using Skills in Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude)[Crisis Helpline Support in Claude](https://support.claude.com/en/articles/13171706-crisis-helpline-support-in-claude)
+[Get started with Claude for Government](https://support.claude.com/en/articles/14503590-get-started-with-claude-for-government)[Set up SCIM in Claude for Government](https://support.claude.com/en/articles/14503643-set-up-scim-in-claude-for-government)[MCP connectors](https://support.claude.com/en/articles/14503689-mcp-connectors)[MCP: Individual connectors](https://support.claude.com/en/articles/14503703-mcp-individual-connectors)[Model availability in Claude for Government](https://support.claude.com/en/articles/14503794-model-availability-in-claude-for-government)

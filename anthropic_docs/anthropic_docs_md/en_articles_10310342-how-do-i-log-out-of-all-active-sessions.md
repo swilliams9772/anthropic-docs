@@ -32,7 +32,7 @@ To regain access to your account on any device, you'll need to authenticate agai
 
 If you used your Claude account to authenticate into Claude Code, you can manage your authorization tokens by navigating to [Settings > Claude Code](http://claude.ai/settings/claude-code). To remove a token and log out of Claude Code, click the trash can icon.
 
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1608263923/b4fa7d6f6f08f2adffb4ea63bc58/image+%287%29.png?expires=1767998700&signature=b50d5b1bb1baf23524639af4ae3fa56e3ab6c76ec4af6f4b46486e458b2ce9ee&req=dSYnHst4nohdWvMW1HO4zVuHhBv032%2B8AQofdwM8qVeo2w02W%2FHbzwYyHlxD%0AlqGyp%2FqOzRervgFuU5M%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1608263923/b4fa7d6f6f08f2adffb4ea63bc58/image+%287%29.png?expires=1767998700&signature=b50d5b1bb1baf23524639af4ae3fa56e3ab6c76ec4af6f4b46486e458b2ce9ee&req=dSYnHst4nohdWvMW1HO4zVuHhBv032%2B8AQofdwM8qVeo2w02W%2FHbzwYyHlxD%0AlqGyp%2FqOzRervgFuU5M%3D%0A)
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1608263923/b4fa7d6f6f08f2adffb4ea63bc58/image+%287%29.png?expires=1779557400&signature=e652375372a759c4e5ae16df5ca957f3232e5dc85cb171a7cb67bce1d5cc7188&req=dSYnHst4nohdWvMW1HO4zVuHhRX402C%2FAQofdwM8qVdjC6K3t9kEVrn6tlpp%0ACt7L7%2BK8FLANR6ou3qM%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1608263923/b4fa7d6f6f08f2adffb4ea63bc58/image+%287%29.png?expires=1779557400&signature=e652375372a759c4e5ae16df5ca957f3232e5dc85cb171a7cb67bce1d5cc7188&req=dSYnHst4nohdWvMW1HO4zVuHhRX402C%2FAQofdwM8qVdjC6K3t9kEVrn6tlpp%0ACt7L7%2BK8FLANR6ou3qM%3D%0A)
 
 # Unable to access your account?
 
@@ -42,4 +42,4 @@ If you're unable to sign into your account to log out of all sessions, contact o
 
 Related Articles
 
-[How do I sign up for the Pro plan?](https://support.claude.com/en/articles/8325609-how-do-i-sign-up-for-the-pro-plan)[How do I cancel my paid Claude subscription?](https://support.claude.com/en/articles/8325617-how-do-i-cancel-my-paid-claude-subscription)[FAQs on Using Claude for Education at Your University](https://support.claude.com/en/articles/11139144-faqs-on-using-claude-for-education-at-your-university)[Managing your active sessions](https://support.claude.com/en/articles/13124001-managing-your-active-sessions)[Logging in to your Claude account](https://support.claude.com/en/articles/13189465-logging-in-to-your-claude-account)
+[How do I cancel my paid Claude subscription?](https://support.claude.com/en/articles/8325617-how-do-i-cancel-my-paid-claude-subscription)[Managing your active sessions](https://support.claude.com/en/articles/13124001-managing-your-active-sessions)[Log in to your Claude account](https://support.claude.com/en/articles/13189465-log-in-to-your-claude-account)[Logging in to your Console account](https://support.claude.com/en/articles/13371040-logging-in-to-your-console-account)[Open the Claude mobile app with a link](https://support.claude.com/en/articles/14898120-open-the-claude-mobile-app-with-a-link)

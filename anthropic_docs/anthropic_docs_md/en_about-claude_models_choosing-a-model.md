@@ -1,15 +1,15 @@
 # Choosing the right model
 
-**Source:** https://platform.claude.com/docs/en/about-claude/models/choosing-a-model
+**Source:** http://platform.claude.com/docs/en/about-claude/models/choosing-a-model
 
 Copy page
 
 # Establish key criteria
 
-When choosing a Claude model, we recommend first evaluating these factors:
+When choosing a Claude model, consider first evaluating these factors:
 
 * **Capabilities:** What specific features or capabilities will you need the model to have in order to meet your needs?
-* **Speed:** How quickly does the model need to respond in your application?
+* **Speed:** How quickly does the model need to respond in your application? For Claude Opus 4.6 and Claude Opus 4.7, [fast mode](/docs/en/build-with-claude/fast-mode) (beta: research preview) can provide up to 2.5x higher output speed at premium pricing.
 * **Cost:** What's your budget for both development and production usage?
 
 Knowing these answers in advance will make narrowing down and deciding which model to use much easier.
@@ -40,7 +40,7 @@ This approach allows for quick iteration, lower development costs, and is often 
 
 For complex tasks where intelligence and advanced capabilities are paramount, you may want to start with the most capable model and then consider optimizing to more efficient models down the line:
 
-1. Implement with Claude Sonnet 4.5
+1. Implement with Claude Opus 4.7
 2. Optimize your prompts for these models
 3. Evaluate if performance meets your requirements
 4. Consider increasing efficiency by downgrading intelligence over time with greater workflow optimization
@@ -55,12 +55,11 @@ This approach is best for:
 
 # Model selection matrix
 
-| When you need... | We recommend starting with... | Example use cases |
+| When you need... | Consider starting with... | Example use cases |
 | --- | --- | --- |
-| Best model for complex agents and coding, highest intelligence across most tasks, superior tool orchestration for long-running autonomous tasks | Claude Sonnet 4.5 | Autonomous coding agents, cybersecurity automation, complex financial analysis, multi-hour research tasks, multi agent frameworks |
-| Maximum intelligence with practical performance for complex specialized tasks | Claude Opus 4.5 | Professional software engineering, advanced agents for office tasks, computer and browser use at scale, step-change vision applications |
-| Exceptional intelligence and reasoning for specialized complex tasks | Claude Opus 4.1 | Highly complex codebase refactoring, nuanced creative writing, specialized scientific analysis |
-| Near-frontier performance with lightning-fast speed and extended thinking - our fastest and most intelligent Haiku model at the most economical price point | Claude Haiku 4.5 | Real-time applications, high-volume intelligent processing, cost-sensitive deployments needing strong reasoning, sub-agent tasks |
+| Anthropic's most capable generally available model for complex reasoning and agentic coding, with a step-change jump over Claude Opus 4.6 | Claude Opus 4.7 | Long-horizon agentic coding, large-scale refactoring, complex systems engineering, advanced research, multi-hour autonomous tasks |
+| Frontier intelligence at scale, built for coding, agents, and enterprise workflows | Claude Sonnet 4.6 | Code generation, data analysis, content creation, visual understanding, agentic tool use |
+| Near-frontier performance with lightning-fast speed and extended thinking at the most economical price point | Claude Haiku 4.5 | Real-time applications, high-volume intelligent processing, cost-sensitive deployments needing strong reasoning, sub-agent tasks |
 
 ---
 
@@ -80,8 +79,10 @@ To determine if you need to upgrade or change models, you should:
 
 [Model comparison chart
 
-See detailed specifications and pricing for the latest Claude models](/docs/en/about-claude/models/overview)[What's new in Claude 4.5
+See detailed specifications and pricing for the latest Claude models](/docs/en/about-claude/models/overview)[What's new in Claude Opus 4.7
 
-Explore the latest improvements in Claude 4.5 models](/docs/en/about-claude/models/whats-new-claude-4-5)[Start building
+Explore the latest improvements in Claude Opus 4.7](/docs/en/about-claude/models/whats-new-claude-4-7)[Start building
 
 Get started with your first API call](/docs/en/get-started)
+
+Was this page helpful?

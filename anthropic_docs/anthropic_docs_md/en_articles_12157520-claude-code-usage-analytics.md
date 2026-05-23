@@ -1,25 +1,31 @@
-# Claude Code Usage Analytics
+# Claude Code usage analytics
 
 **Source:** https://support.claude.com/en/articles/12157520-claude-code-usage-analytics
 
-Usage analytics for Claude Code are currently available to Team and Enterprise plan Owners assigned to premium seats, and API Console users (Admin, Billing, and Developer roles). See [Analytics](https://code.claude.com/docs/en/analytics) in our Claude Code docs for more information.
+This feature allows Console users and owners of Team and Enterprise plans to monitor how their organization uses Claude Code, tracking productivity metrics and adoption patterns across teams.
 
-This feature allows Console users and Owners of Team and Enterprise plans to monitor how their organization uses Claude Code, tracking productivity metrics and adoption patterns across teams.
+Claude Code usage analytics are available to:
+
+* **Team plans:** Owners and Primary Owners
+* **Enterprise plans:** Owners, Primary Owners, and Admins (requires a Chat + Claude Code seat for usage-based plans or Premium seat for seat-based plans)
+* **API Console:** Admin, Billing, and Developer roles
 
 # Accessing Claude Code analytics
 
-# Team and Enterprise Owners
+# Team and Enterprise plans
 
 1. Log in to your Owner or Primary Owner account.
 2. Click your initials or name in the lower left corner.
-3. Navigate to [Admin settings > Claude Code](https://claude.ai/admin-settings/claude-code) to view **Usage**.
+3. Navigate to **[Analytics > Claude Code](https://claude.ai/analytics/claude-code)** to view **Usage**.
 
 # API Console users
 
-1. Log in to your [Claude Console account](https://platform.claude.com).
+1. Log in to your **[Claude Console account](https://platform.claude.com)**.
 2. Expand the left side panel.
 3. Click “Claude Code” under **Analytics**.
-4. View Claude Code usage analytics on [Settings > Claude Code](https://platform.claude.com/claude-code).
+4. View Claude Code usage analytics on **[Settings > Claude Code](https://platform.claude.com/claude-code)**.
+
+---
 
 # Available metrics
 
@@ -32,7 +38,7 @@ The Claude Code Usage page displays the following metrics for your organization:
 * **Activity trends**: Daily view of active users and sessions over time.
 * **Lines accepted over time**: Daily breakdown of accepted code lines.
 
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1717579277/46c512f4b3ed05c359cecd78ed5c/e0ce2c19-39e2-411f-9a1f-cb1d46439a42?expires=1767997800&signature=c5d11044dbce204e69f43d395fdc91c66ba2f89f8c6ad318c19774c0a34d3e0a&req=dScmEcx5lINYXvMW1HO4zfiEMaFZhn7GCX9h5MbdDjN6nmJrjUMaEEh%2Fi3%2B0%0AMsTzLR6zdjqzphG1%2BuE%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1717579277/46c512f4b3ed05c359cecd78ed5c/e0ce2c19-39e2-411f-9a1f-cb1d46439a42?expires=1767997800&signature=c5d11044dbce204e69f43d395fdc91c66ba2f89f8c6ad318c19774c0a34d3e0a&req=dScmEcx5lINYXvMW1HO4zfiEMaFZhn7GCX9h5MbdDjN6nmJrjUMaEEh%2Fi3%2B0%0AMsTzLR6zdjqzphG1%2BuE%3D%0A)
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1717579277/46c512f4b3ed05c359cecd78ed5c/e0ce2c19-39e2-411f-9a1f-cb1d46439a42?expires=1779557400&signature=ab38a489999c4e8cf95701c0fc454a5f5aed751b659cce7430c5925066069335&req=dScmEcx5lINYXvMW1HO4zfiEMK9Vin7KCX9h5MbdDjNgExDuy6wlWBnhCV9q%0AlSn%2BmTHhAmDcQUGZeqU%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1717579277/46c512f4b3ed05c359cecd78ed5c/e0ce2c19-39e2-411f-9a1f-cb1d46439a42?expires=1779557400&signature=ab38a489999c4e8cf95701c0fc454a5f5aed751b659cce7430c5925066069335&req=dScmEcx5lINYXvMW1HO4zfiEMK9Vin7KCX9h5MbdDjNgExDuy6wlWBnhCV9q%0AlSn%2BmTHhAmDcQUGZeqU%3D%0A)
 
 # User-level metrics
 
@@ -46,6 +52,43 @@ The Claude Code Usage page displays the following metrics for your organization:
 
 **Activity trends** show adoption patterns and help identify peak usage periods, allowing you to understand how Claude Code fits into your team's workflow.
 
+---
+
+# Contribution metrics (beta)
+
+Contribution metrics are a new feature in public beta that helps Team and Enterprise organizations measure how Claude Code affects engineering velocity. By connecting to your organization's GitHub account, these metrics track code shipping activity with and without Claude Code, so you can see where it's making a difference.
+
+Contribution metrics require GitHub Cloud and are not available to Console users at this time.
+
+For a more in-depth look at contribution metrics, see **[our Claude Code docs](https://code.claude.com/docs/en/analytics#enable-contribution-metrics)**.
+
+# Setting up contribution metrics
+
+Contribution metrics require a few steps beyond the base analytics setup:
+
+1. Install the **[Claude GitHub App](https://github.com/apps/claude)** on your organization's GitHub account.
+2. Log in with an Owner or Primary Owner account.
+3. Navigate to **[Admin settings > Claude Code](https://claude.ai/admin-settings/claude-code)**.
+4. Enable the Claude Code analytics feature if you haven't already.
+5. Toggle on **GitHub analytics**.
+6. Select the GitHub organization(s) you want included in the comparison.
+
+After setup, metrics begin populating automatically. Allow up to 24 hours for data to appear. The dashboard currently processes data once daily.
+
+If you see "GitHub app required. Install the GitHub app to view analytics," the GitHub App hasn't been installed yet. If the app is authenticated but no data appears, confirm the GitHub App is installed and that your team has started using Claude Code.
+
+# Available contribution metrics
+
+Once enabled, the following metrics appear in your Claude Code analytics dashboard:
+
+1. **Pull requests merged**: Total PRs merged with and without Claude Code assistance, at both the organization and user level.
+2. **Lines of code committed**: Total lines committed with and without Claude Code assistance, at both the organization and user level.
+3. **Pull requests opened per user**: Individual PR activity across your team.
+
+Data is collected by correlating Claude Code session activity with GitHub commits and pull requests.
+
+---
+
 # Data reset and availability
 
 Usage metrics display data for the current calendar month and reset at the beginning of each month. Historical data visualization shows daily granularity for tracking trends over time.
@@ -58,7 +101,9 @@ Monitor individual usage patterns to identify power users who can share best pra
 
 Track activity trends to understand when your team uses Claude Code most effectively and ensure adequate seat allocation during peak periods.
 
-# FAQs
+---
+
+# Frequently asked questions
 
 # I'm using an individual paid plan; how can I access usage analytics for Claude Code?
 
@@ -68,8 +113,12 @@ Claude Code usage analytics are not available to individual Pro or Max plans at 
 
 If you notice that a specific user isn't showing up in your analytics, you should have them update Claude Code to the most recent version. The first Claude Code version to support this feature is **version 2.0.28**, so users should run `claude update` to manually update Claude Code if needed.
 
+# Where can I find more information?
+
+See **[Analytics](https://code.claude.com/docs/en/analytics)** in our Claude Code docs for more information.
+
 ---
 
 Related Articles
 
-[Claude Console Roles and Permissions](https://support.claude.com/en/articles/10186004-claude-console-roles-and-permissions)[Using Claude Code with your Pro or Max plan](https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan)[Using Claude Code with your Team or Enterprise plan](https://support.claude.com/en/articles/11845131-using-claude-code-with-your-team-or-enterprise-plan)[Claude Code FAQ](https://support.claude.com/en/articles/12386420-claude-code-faq)[Usage Analytics for Enterprise Plans](https://support.claude.com/en/articles/12883420-usage-analytics-for-enterprise-plans)
+[Claude Code FAQ](https://support.claude.com/en/articles/12386420-claude-code-faq)[View usage analytics for Team and Enterprise plans](https://support.claude.com/en/articles/12883420-view-usage-analytics-for-team-and-enterprise-plans)[Get started with the Claude Enterprise Analytics API](https://support.claude.com/en/articles/13694757-get-started-with-the-claude-enterprise-analytics-api)[Set up Code Review for Claude Code](https://support.claude.com/en/articles/14233555-set-up-code-review-for-claude-code)[Use analytics chat to ask Claude about usage](https://support.claude.com/en/articles/14729354-use-analytics-chat-to-ask-claude-about-usage)

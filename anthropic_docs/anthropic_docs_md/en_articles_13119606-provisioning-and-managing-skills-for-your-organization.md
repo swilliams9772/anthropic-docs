@@ -1,64 +1,110 @@
-# Provisioning and managing Skills for your organization
+# Provision and manage Skills for your organization
 
 **Source:** https://support.claude.com/en/articles/13119606-provisioning-and-managing-skills-for-your-organization
 
-Organization-wide skill management is available to Team and Enterprise plans.
+This article explains how organization owners can provision skills for all users in their organization. Provisioning skills to your team allows you to distribute approved workflows and capabilities across your entire organization from a central location.
 
-This article explains how organization Owners can provision skills for all users in their organization. Provisioning skills to your team allows you to distribute approved workflows and capabilities across your entire organization from a central location.
+Organization-wide skill management is available to Team and Enterprise plans.
 
 # Prerequisites
 
-Before you can provision skills for your organization, you must enable two capabilities by toggling them on in [Admin settings > Capabilities](https://claude.ai/admin-settings/capabilities):
+Before you can provision skills for your organization, you must enable two capabilities by toggling them on:
 
-1. **Code execution and file creation**
-2. **Skills**
+1. **Code execution and file creation** in **[Organization settings > Capabilities](https://claude.ai/admin-settings/capabilities)**
+2. **Skills** in **[Organization settings > Skills](https://claude.ai/admin-settings/skills)**
 
 Skills require code execution to function, so if code execution is disabled, skills will not be available.
 
-# Provisioning skills for your organization
+---
 
-When you upload a skill through Admin settings, it automatically becomes available to all users in your organization in [Settings > Capabilities](https://claude.ai/settings/capabilities) under **Skills**. This means that individual users no longer need to manually upload the same skills.
+# Provision skills for your organization
 
-# To provision a skill
+When you upload a skill through organization settings, it automatically becomes available to all users in your organization in **[Customize > Skills](https://claude.ai/customize/skills)**. This means that individual users no longer need to manually upload the same skills.
 
-1. Navigate to [Admin settings > Capabilities](https://claude.ai/admin-settings/capabilities).
-2. Locate the **Skills** section.
-3. Click “Upload skill.”
-4. Select a .zip file containing your skill (must include a SKILL.md file).
-5. The skill is immediately provisioned to all users in your organization.
+**To provision a skill:**
 
-# Setting default status
+1. Navigate to **[Organization settings > Skills](https://claude.ai/admin-settings/skills)**.
+2. In the **Organization skills** section, click "+ Add."
+3. Select a .zip file containing your skill (must include a SKILL.md file).
+4. The skill is immediately provisioned to all users in your organization.
 
-When provisioning a skill, you can choose whether it should be enabled or disabled by default for users:
+Admin-provisioned skills are enabled by default for everyone in your organization, but users can still toggle individual skills off if they choose. This gives organizations consistent, approved workflows across teams while letting individual users customize their experience.
 
-* **Enabled by default:** The skill is automatically active for all users. Users can still toggle it off individually if they prefer.
-* **Disabled by default:** The skill appears in users' Skills list but is not active until they toggle it on.
+---
 
-Individual users can always toggle Owner-provisioned skills on or off based on their preferences, regardless of the default setting.
+# Control skill sharing between members
+
+In addition to provisioning skills top-down, you can let members share skills they've built with each other. Two independent toggles control this:
+
+* **Skill sharing:** Members can share a skill with specific colleagues. Recipients see the skill in the **Shared with you** section of their skills list.
+* **Share with organization:** Members can publish a skill to the organization directory, where anyone can find and install it.
+
+Both toggles are off by default. You can enable either or both in **[Organization settings > Skills](http://claude.ai/admin-settings/skills)**.
+
+**Note:** Shared skills are view-only. Recipients can enable and use a shared skill but can't edit its contents.
+
+# How shared skills differ from provisioned skills
+
+|  |  |  |  |
+| --- | --- | --- | --- |
+|  | **Owner-provisioned** | **Shared peer-to-peer** | **Shared org-wide** |
+| **Who can share** | Owners only | Any member (if enabled) | Any member (if enabled) |
+| **Where it appears** | Everyone's skills list | Recipient's "Shared with you" section | Organization directory |
+| **Can recipients remove it?** | Disable only | Disable or delete | Disable only |
+| **Requires owner approval?** | Owner uploads directly | No | No |
+
+**Important:** There's no approval workflow for org-wide sharing. If you enable **Share with organization**, any member can publish a skill to the directory without review. Consider enabling peer-to-peer sharing only if this is a concern.
+
+# Monitor sharing activity
+
+Skill sharing events are captured in the audit log and Compliance API as `role_assignment` events. You can see who shared a skill, with whom, and whether it was peer-to-peer or organization-wide.
+
+The audit log doesn't capture the contents of shared skills—only the share event itself. There's no admin dashboard to browse or inspect the contents of skills shared between members.
+
+---
+
+# How members see provisioned and shared skills
+
+Skills appear for each member in **[Customize > Skills](https://claude.ai/customize/skills)**, organized into three sections:
+
+* **Personal skills:** Skills the member has created or uploaded.
+* **Shared with you:** Skills colleagues have shared directly with a member. These appear grayed out until enabled.
+* **Organization skills:** Skills an owner has provisioned and skills members have shared organization-wide. Members install these from the directory.
+
+Owner-provisioned skills are marked with a visual indicator so members can distinguish them from other skill types. Members can click on any skill to preview its contents and description.
+
+For more on how members browse and install from the directory, see **[Browse skills, connectors, and plugins in one directory](https://support.claude.com/en/articles/14328846-browse-skills-connectors-and-plugins-in-one-directory)**.
+
+---
 
 # How users see provisioned skills
 
-Skills provisioned by an organization Owner will appear in each user's **Skills** section in [Settings > Capabilities](https://claude.ai/settings/capabilities) alongside Anthropic skills and any skills they've uploaded themselves.
+Skills provisioned by an organization owner will appear for each user in **[Customize > Skills](https://claude.ai/customize/skills)** alongside Anthropic skills and any skills they've uploaded themselves.
 
 These skills are marked with a visual indicator so users can distinguish them from other skill types. Users can click on any skill to preview its contents and description.
 
-# Managing and removing provisioned skills
+---
 
-The **Skills** section in Admin settings displays all skills that have been provisioned for your organization. You can use search and section headings to navigate your provisioned skills.
+# Manage and remove provisioned skills
 
-To remove a skill from your organization, locate it in the Skills list and select the option to remove it. Once removed, the skill will no longer appear in users' Skills lists.
+The **Organization skills** section in **[Organization settings > Skills](https://claude.ai/admin-settings/skills)** displays all skills that have been provisioned for your organization. You can use search and section headings to navigate your provisioned skills.
 
-**Note:** Only Owners can add or remove organization-wide skills. Individual users cannot delete provisioned skills, though they can toggle them off for their own use.
+To remove a skill from your organization, locate it in the **Organization skills** list and select the option to remove it. Once removed, the skill will no longer appear in users' Skills lists in **[Customize > Skills](https://claude.ai/customize/skills).**
 
-# Best Practices
+**Note:** Only owners can add or remove organization-wide skills. Individual users cannot delete provisioned skills, though they can toggle them off for their own use.
+
+---
+
+# Best practices
 
 * **Test skills before provisioning:** Upload and test skills on your own account first to verify they work as expected before distributing them organization-wide.
 * **Use descriptive names:** Give skills clear names that help users understand their purpose at a glance.
 * **Write clear descriptions:** The skill's description helps Claude determine when to use it automatically. Ensure descriptions accurately reflect what the skill does.
 * **Consider default status carefully:** Enable skills by default when they're broadly useful to most users. Use disabled by default for specialized skills that only some team members need.
+* **Decide on sharing deliberately:** Peer-to-org sharing has no approval step. If you want to review skills before they reach everyone, keep org-wide sharing off and ask members to submit skills to an owner for provisioning instead.
 
 ---
 
 Related Articles
 
-[Important Considerations Before Enabling Single Sign-On (SSO) and JIT/SCIM Provisioning](https://support.claude.com/en/articles/10276682-important-considerations-before-enabling-single-sign-on-sso-and-jit-scim-provisioning)[Create and edit files with Claude](https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude)[What are Skills?](https://support.claude.com/en/articles/12512176-what-are-skills)[Using Skills in Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude)[Setting up JIT or SCIM provisioning](https://support.claude.com/en/articles/13133195-setting-up-jit-or-scim-provisioning)
+[What are Skills?](https://support.claude.com/en/articles/12512176-what-are-skills)[Use Skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude)[Set up JIT or SCIM provisioning](https://support.claude.com/en/articles/13133195-set-up-jit-or-scim-provisioning)[Migrate your organization from Team to Enterprise](https://support.claude.com/en/articles/13779868-migrate-your-organization-from-team-to-enterprise)[Browse skills, connectors, and plugins in one directory](https://support.claude.com/en/articles/14328846-browse-skills-connectors-and-plugins-in-one-directory)

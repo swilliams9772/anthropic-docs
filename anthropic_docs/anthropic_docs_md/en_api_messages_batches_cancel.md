@@ -1,6 +1,6 @@
 # Cancel a Message Batch
 
-**Source:** https://platform.claude.com/docs/en/api/messages/batches/cancel
+**Source:** http://platform.claude.com/docs/en/api/messages/batches/cancel
 
 Copy page
 
@@ -8,7 +8,7 @@ cURL
 
 # Cancel a Message Batch
 
-post/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
 
@@ -24,7 +24,7 @@ ID of the Message Batch.
 
 # ReturnsExpand Collapse
 
-MessageBatch = object { id, archived\_at, cancel\_initiated\_at, 7 more }
+MessageBatch object { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 id: string
 
@@ -36,19 +36,13 @@ archived\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 cancel\_initiated\_at: string
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 created\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 ended\_at: string
 
@@ -62,13 +56,11 @@ expires\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-formatdate-time
-
 processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 
@@ -121,10 +113,6 @@ type: "message\_batch"
 Object type.
 
 For Message Batches, this is always `"message_batch"`.
-
-Accepts one of the following:
-
-"message\_batch"
 
 Cancel a Message Batch
 

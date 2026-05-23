@@ -1,6 +1,6 @@
 # List Message Batches
 
-**Source:** https://platform.claude.com/docs/en/api/listing-message-batches
+**Source:** http://platform.claude.com/docs/en/api/listing-message-batches
 
 Copy page
 
@@ -8,7 +8,7 @@ cURL
 
 # List Message Batches
 
-get/v1/messages/batches
+GET/v1/messages/batches
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
@@ -48,19 +48,13 @@ archived\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 cancel\_initiated\_at: string
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 created\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 ended\_at: string
 
@@ -74,13 +68,11 @@ expires\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-formatdate-time
-
 processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 
@@ -133,10 +125,6 @@ type: "message\_batch"
 Object type.
 
 For Message Batches, this is always `"message_batch"`.
-
-Accepts one of the following:
-
-"message\_batch"
 
 first\_id: string
 

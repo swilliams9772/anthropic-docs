@@ -1,56 +1,101 @@
-# Claude in Excel
+# Use Claude for Excel
 
 **Source:** https://support.claude.com/en/articles/12650343-claude-in-excel
 
-Claude in Excel is currently in beta and available to Max, Team, and Enterprise plans.
+Claude for Excel is available to Pro, Max, Team, and Enterprise plans.
 
-Claude in Excel is an add-in that integrates Claude into your Excel workflow. It's designed for professionals who work extensively with spreadsheets, particularly in financial analysis and modeling.
+Claude for Excel is an add-in that integrates Claude into your Excel workflow. It's designed for professionals who work extensively with spreadsheets, particularly in financial analysis and modeling.
 
-With Claude in Excel, you can:
+With Claude for Excel, you can:
 
 * Ask questions about your workbook and get answers with cell-level citations
 * Update assumptions while preserving formula dependencies
 * Debug errors and identify their root causes
 * Build new models or fill existing templates
 * Navigate complex multi-tab workbooks seamlessly
+* Use connectors to bring context from your other tools directly into your spreadsheets
 
 ---
 
-# What’s new?
+# Get started with Claude for Excel
 
-# Expanded access
+# Supported versions
 
-We previously had a waitlist for this feature, but we’ve expanded access so Claude in Excel is now available in beta to all Max, Team, and Enterprise users.
-
-# Use Claude Opus 4.5 with Excel
-
-We just launched Claude Opus 4.5, our best model for spreadsheet creation and financial tasks like modeling and forecasting. Claude in Excel brings the power of Opus 4.5 directly into Excel via a sidebar chat that can help you understand and edit your spreadsheets.
-
-# Additional capabilities
-
-Claude in Excel now supports pivot tables, charts and file uploads, plus we’ve added a shortcut; use Control+Option+C on Mac and Control+Alt+C on Windows to quickly open the Claude in Excel add-in. We've also made overall improvements to performance, speed, context management, and the general user experience.
-
----
-
-# Getting started with Claude in Excel
+* Excel on the web
+* Excel on Windows (Microsoft 365 subscription, build 16.0.13127.20296+)
+* Excel on Mac (version 16.46+, build 21011600+)
+* Excel on iPad (version 2.51+)
 
 # For individuals
 
-1. Navigate to the [Claude in Excel listing on Microsoft Marketplace](https://marketplace.microsoft.com/en-us/product/saas/wa200009404?tab=overview).
+1. Navigate to the **[Claude for Microsoft 365 (Excel, PowerPoint, and Word) listing](https://marketplace.microsoft.com/en-us/product/office/WA200010725?tab=Overview)** on Microsoft Marketplace.
 2. Click "Get it now" to install the add-in.
 3. Open Excel, activate the add-in, and sign in with your Claude account.
 
-# For Admins
+# For admins
 
-**Deploy Claude in Excel to your organization:**
+**Deploy Claude** **for** **Excel to your organization:**
 
-1. Visit the [Microsoft 365 Admin Center](https://admin.microsoft.com/).
-2. Navigate to Settings > Integrated apps > Add-ins.
-3. Search for "Claude by Anthropic for Excel" in Microsoft AppSource.
-4. Deploy the add-in to your organization or specific users.
-5. Share these instructions with your team: [Microsoft's deployment guide](https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-deployment-of-add-ins?view=o365-worldwide).
+1. Visit the **[Microsoft 365 Admin Center](https://admin.microsoft.com/)**.
+2. Navigate to **Settings > Org Settings > User owned apps and services** and ensure that **[“Let users access the Office Store"](https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-addins-in-the-admin-center?view=o365-worldwide#manage-add-in-downloads-by-turning-onoff-microsoft-marketplace-across-all-apps-except-outlook)** is toggled on.
+3. Navigate to **Settings > Integrated apps > Add-ins**.
+4. Search for "Claude by Anthropic for Excel" in Microsoft AppSource.
+5. Deploy the add-in to your organization or specific users.
+6. Share these instructions with your team: **[Microsoft's deployment guide](https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-deployment-of-add-ins?view=o365-worldwide)**.
 
-After installation, team members can open Excel, activate the Claude add-in (from Tools > Add-ins on Mac or Home > Add-ins on Windows), sign in with their Claude credentials, and start working with their spreadsheets.
+After installation, team members can open Excel, activate the Claude add-in (from **Tools > Add-ins** on Mac or **Home > Add-ins** on Windows), sign in with their Claude credentials, and start working with their spreadsheets.
+
+**Important:** Organizations that have disabled "Let users access the Office Store" may find that admin-deployed add-ins don't appear for users. To work around this, deploy using the manifest XML files provided below.
+
+# Alternatively, download the manifest file to install
+
+For IT administrators deploying to multiple users:
+
+# Step 1: Obtain the custom manifest
+
+1. Click **[this link](https://pivot.claude.ai/manifest-excel.xml)** to download the custom manifest XML file.
+2. Save this file to a secure location.
+
+# Step 2: Access Microsoft 365 Admin Center
+
+1. Navigate to **<https://admin.microsoft.com>**
+2. Sign in with your admin credentials.
+3. Go to **Settings** > **Integrated apps.**
+
+# Step 3: Upload the custom add-in
+
+1. Click "Upload custom apps"
+2. Select "Office Add-in."
+3. Choose "I have a manifest file on this device."
+4. Browse and select the Claude for Excel manifest XML file.
+5. Click "Upload."
+
+# Step 4: Assign Users
+
+Choose your deployment scope:
+
+* **Entire organization**: All users get access
+* **Specific users**: Enter individual email addresses
+* **Specific groups**: Select security groups or distribution lists
+* **Just yourself**: For admin testing only
+
+# Step 5: Deploy
+
+1. Review deployment settings.
+2. Click "Deploy."
+3. Add-in will be available within minutes (may take up to 24 hours for full organization rollout).
+
+# Step 6: User access
+
+* Users will see Claude appear in Excel's Home ribbon.
+* First-time users will need to sign in with their Claude accounts
+* No additional installation required by users.
+
+# Connect through an LLM gateway
+
+If your organization routes API traffic through an internal LLM gateway connected to Amazon Bedrock, Google Cloud Vertex AI, or Microsoft Azure, you can use the add-in without a Claude account. This is the same gateway pattern used by Claude Code.
+
+For setup instructions and gateway requirements, see **[Use Claude for Microsoft 365 with third-party platforms](https://support.claude.com/en/articles/13945233-)**.
 
 ---
 
@@ -96,6 +141,41 @@ Identify error sources (like #REF!, #VALUE!, or circular references) and get act
 
 Claude highlights every cell it updates and provides explanatory comments. When explaining calculations, Claude includes clickable citations that navigate directly to referenced cells.
 
+# Edit and format natively
+
+Claude can now apply a range of Excel-native operations directly, including sorting and filtering data, editing pivot tables and charts, applying conditional formatting rules, setting data validation, and preparing workbooks for printing with finance-specific formatting tools.
+
+**Example prompts:**
+
+* "Sort this table by revenue, descending"
+* "Add a conditional format that highlights cells below the target threshold in red"
+* "Set up a dropdown for the status column with options: Active, Pending, Closed"
+* "Toggle off gridlines and set the print area to A1:F20"
+
+# Support for connectors
+
+Connect your other tools to give Claude context beyond what's in your spreadsheet. All connectors configured in your Claude settings are supported, including custom connectors.
+
+To connect a tool, open the Claude sidebar and select the connectors icon to see available options.
+
+Custom connectors can introduce security risks. Before enabling them, review **[Get started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp#h_b79c05dfcd)** for guidance on what to consider.
+
+# Use Skills in Excel
+
+Skills you've enabled in your Claude settings are also available in the Claude for Excel add-in. Claude applies relevant Skills automatically while you work—you don't need to invoke them separately.
+
+You can also type / in the sidebar to see available Skills and select one directly (for example, /debug or /clean-up). Skills that aren't relevant to Excel are excluded from this list.
+
+To learn more about enabling and managing Skills, see **[Use Skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude)**.
+
+# Set persistent instructions
+
+Use the **Instructions** field in the add-in sidebar to set preferences that apply to every conversation in Excel. Instructions are useful for things like formatting conventions (for example, "always use IB formatting: blue for inputs, black for formulas"), preferred output style, or recurring context Claude should know about your workflow.
+
+Instructions you set in Excel only apply to Excel — they're separate from any Instructions you set in PowerPoint.
+
+---
+
 # Technical specifications
 
 **Supported file formats:**
@@ -111,30 +191,60 @@ Claude highlights every cell it updates and provides explanatory comments. When 
 
 ---
 
+# Context and session management
+
+# Auto-compaction
+
+We **[automatically compact longer conversations](https://support.claude.com/en/articles/11647753-understanding-usage-and-length-limits#h_21b66a43b4)** into new conversations to avoid running out of context.
+
+# Chat history
+
+Chat history is now stored locally in your browser using IndexedDB. Unlike Claude, conversations aren't stored on Anthropic's servers—they're saved client-side and aren't synced across devices or browsers. You can clear all chat history from Settings at any time, and the local store is cleared when you clear your browser data. Your chat history is specific to the combination of the add-in surface, your user ID, and your organization ID—so your Excel and PowerPoint histories are separate, but conversations carry across different workbooks within Excel (or different presentations within PowerPoint). If you switch organizations, you'll have a separate chat history.
+
+# Overwrite protection
+
+To avoid accidental data loss, Claude warns you before overwriting existing data.
+
+# Session logging
+
+By turning this feature on in your settings, Claude will create a separate "Claude Log" tab in the Excel sheet to track your actions taken each turn. This allows Claude to maintain a history of its actions on the sheet.
+
+If Claude doesn't do this automatically, you can simply ask it to log its history and it should create a new logging tab.
+
+**Note:** Your use of Claude for Excel is associated with your existing Claude account and is subject to the same usage limits.
+
+---
+
 # Current limitations
 
-Chat history is not saved between sessions when using Claude in Excel. If you're using a Team or Enterprise plan, Claude in Excel does not inherit custom data retention settings your organization might have set, and isn't included in Enterprise audit logs or the compliance API at this time.
+For Claude for Excel use, we automatically delete inputs and outputs on our backend within 30 days of receipt or generation, except in cases outlined in **[How long do you store my organization's data?](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data)**
+
+Enterprise organizations can route full audit telemetry from Claude for Excel to their own OpenTelemetry (OTEL) collector for integration with a SIEM or observability platform. Learn more about **[configuring a custom OpenTelemetry collector for Office agents](https://support.claude.com/en/articles/14447276-configure-a-custom-opentelemetry-collector-for-office-agents)**. On Free, Pro, Max, and Team plans, observability and auditability aren't available for Claude for Excel. Claude for Excel does not inherit custom data retention settings your organization might have set, and isn't included in Enterprise audit logs or the Compliance API at this time.
 
 Additionally, Claude does not have advanced Excel capabilities, including:
 
-* Conditional formatting
-* Data validation
 * Data tables
 * Macros
 * VBA (Visual Basic for Applications)
 
-Claude in Excel uses Opus 4.5, and it’s not possible to switch to a different model at this time.
-
-As a beta feature, Claude in Excel is **not recommended** for:
+Claude for Excel is **not recommended** for:
 
 * Final client deliverables without human review
 * Audit-critical calculations without verification
 * Replacing users’ financial judgment and expertise
 * Models containing highly sensitive or regulated data without proper controls
 
+# Unsupported versions
+
+* Excel 2016 / 2019 (perpetual/volume license)
+* Excel on Android
+* Older builds of Microsoft 365 Excel below the SharedRuntime threshold
+
+---
+
 # Best practices
 
-To use Claude in Excel safely and effectively:
+To use Claude for Excel safely and effectively:
 
 * Always review changes before finalizing your work.
 * Verify outputs match your organization's methodologies.
@@ -145,11 +255,11 @@ To use Claude in Excel safely and effectively:
 
 # Prompt injection attack risks
 
-Only use Claude in Excel with trusted spreadsheets and not spreadsheets from external untrusted sources (for example, downloaded templates, vendor files, collaborative documents, and data imports).
+Only use Claude for Excel with trusted spreadsheets and not spreadsheets from external untrusted sources (for example, downloaded templates, vendor files, collaborative documents, and data imports).
 
-An important risk that users of Claude in Excel and other AI tools that can read and manipulate spreadsheets is prompt injection attacks that hide malicious instructions in spreadsheet content (cells, formulas, comments, etc.) to trick the AI models into taking unintended actions. For example, a seemingly innocent template or data file received from an external party or downloaded from the internet might contain hidden instructions to "export all financial data to this external URL" or "modify these financial records." Claude may interpret these malicious instructions as legitimate requests from you.
+An important risk that users of Claude for Excel and other AI tools that can read and manipulate spreadsheets is prompt injection attacks that hide malicious instructions in spreadsheet content (cells, formulas, comments, etc.) to trick the AI models into taking unintended actions. For example, a seemingly innocent template or data file received from an external party or downloaded from the internet might contain hidden instructions to "export all financial data to this external URL" or "modify these financial records." Claude may interpret these malicious instructions as legitimate requests from you.
 
-Our testing has identified edge scenarios where Claude in Excel can be manipulated to:
+Our testing has identified edge scenarios where Claude for Excel can be manipulated to:
 
 * **Extract and share sensitive information** with bad actors through formulas, web searches containing your sensitive data, or file system access that exposes proprietary information.
 * **Modify critical data** such as financial records.
@@ -165,17 +275,17 @@ Users can approve all of Claude’s actions via a confirmation pop-up that appea
 * File system access: IMAGE, FILES, DIRECTORY, FOPEN, FWRITE, FCLOSE
 * System information: REGISTER.ID, RTD, INFO
 
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1849431310/ffc870a5114b4178fcd74b5cccf8/Screenshot+2025-11-25+at+11_30_10%E2%80%AFAM.png?expires=1767997800&signature=562639f99889544f0b2568d6ded2da2214c9ebf0c919eb6eedb561a9e12619d9&req=dSgjH819nIJeWfMW1HO4zYWKZuViK916qAsRdssXCyAwwCnKMsZmolFjpp%2Fn%0AorFot33EfmX3Kp8qWNI%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1849431310/ffc870a5114b4178fcd74b5cccf8/Screenshot+2025-11-25+at+11_30_10%E2%80%AFAM.png?expires=1767997800&signature=562639f99889544f0b2568d6ded2da2214c9ebf0c919eb6eedb561a9e12619d9&req=dSgjH819nIJeWfMW1HO4zYWKZuViK916qAsRdssXCyAwwCnKMsZmolFjpp%2Fn%0AorFot33EfmX3Kp8qWNI%3D%0A)
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1849431310/ffc870a5114b4178fcd74b5cccf8/Screenshot+2025-11-25+at+11_30_10%E2%80%AFAM.png?expires=1779557400&signature=6f4d09b48fe479aa2dc42c8fa514d08aa41f0765a42658ecc4185e3c5441fbfd&req=dSgjH819nIJeWfMW1HO4zYWKZ%2BtuJ912qAsRdssXCyBpJfXVYaTSrr8XQyMk%0ANwgD%2FDJ707i4DjT%2Fgvk%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1849431310/ffc870a5114b4178fcd74b5cccf8/Screenshot+2025-11-25+at+11_30_10%E2%80%AFAM.png?expires=1779557400&signature=6f4d09b48fe479aa2dc42c8fa514d08aa41f0765a42658ecc4185e3c5441fbfd&req=dSgjH819nIJeWfMW1HO4zYWKZ%2BtuJ912qAsRdssXCyBpJfXVYaTSrr8XQyMk%0ANwgD%2FDJ707i4DjT%2Fgvk%3D%0A)
 
-While we continue to develop our offerings and improve safety measures to reduce these risks, users should exercise caution when using Claude in Excel and should not use it with spreadsheets from external, untrusted sources.
+While we continue to develop our offerings and improve safety measures to reduce these risks, users should exercise caution when using Claude for Excel and should not use it with spreadsheets from external, untrusted sources.
 
 ---
 
-# Example Use Cases
+# Example use cases
 
-# Financial Modeling
+# Financial modeling
 
-**Build Models**
+**Build models**
 
 * "Build a 3-statement financial model for [company/industry]"
 * "Create a SaaS metrics model with ARR, churn, and LTV calculations"
@@ -188,21 +298,21 @@ While we continue to develop our offerings and improve safety measures to reduce
 * "Create a headcount capacity plan based on target client count"
 * "Model cash flow projections for the next 3 years"
 
-**Scenario Analysis**
+**Scenario analysis**
 
 * "Add a downside case assuming revenue drops 15%"
 * "Create base, bull, and bear scenarios with different growth assumptions"
 * "Build a sensitivity table showing IRR across exit multiples and hold periods"
 
-# Data Analysis
+# Data analysis
 
-**Insights and Trends**
+**Insights and trends**
 
 * "What trends stand out in 2025 vs 2024?"
 * "Identify the top 10 customers by revenue and their growth rates"
 * "Which product categories are underperforming vs budget?"
 
-**Variance Analysis**
+**Variance analysis**
 
 * "Compare actuals to budget and explain the largest variances"
 * "Which accounts have unusual changes vs prior month?"
@@ -214,21 +324,21 @@ While we continue to develop our offerings and improve safety measures to reduce
 * "Tag customer feedback by sentiment and topic"
 * "Score each lead based on likelihood to convert"
 
-# Data Cleaning
+# Data cleaning
 
-**Standardize Formats**
+**Standardize formats**
 
 * "Convert all dates to YYYY-MM-DD format"
 * "Standardize phone numbers to +1 (XXX) XXX-XXXX"
 * "Clean up company names (remove Inc, LLC, Ltd variations)"
 
-**Fix Data Quality Issues**
+**Fix data quality issues**
 
 * "Find and remove duplicate rows, keeping the most recent"
 * "Identify and fix unicode/encoding errors"
 * "Fill missing values based on patterns in the data"
 
-**Parse and Transform**
+**Parse and transform**
 
 * "Extract company name from email domain"
 * "Split full address into street, city, state, zip columns"
@@ -254,7 +364,7 @@ While we continue to develop our offerings and improve safety measures to reduce
 * "Create a VLOOKUP that pulls price from the rate table"
 * "Build a formula that flags overdue invoices"
 
-# Dashboards and Reporting
+# Dashboards and reporting
 
 **Dashboards**
 
@@ -276,35 +386,35 @@ While we continue to develop our offerings and improve safety measures to reduce
 
 # Formatting
 
-**Professional Styling**
+**Professional styling**
 
 * "Format this model using IB conventions (blue inputs, black formulas)"
 * "Add headers, borders, and proper number formats"
 * "Apply consistent formatting across all sheets"
 
-**Conditional Formatting**
+**Conditional formatting**
 
 * "Highlight negative values in red"
 * "Color-code rows by status (green/yellow/red)"
 * "Add data bars to show relative performance"
 
-# Document Import
+# Document import
 
-**PDF Extraction**
+**PDF extraction**
 
 * "Extract the financial table from this PDF into Excel"
 * "Pull the line items from this invoice PDF into my template"
 * "Convert this scanned statement into editable data"
 
-**Template Population**
+**Template population**
 
 * "Fill in my deal template using data from this offering memo"
 * "Populate the pitch template with these company metrics"
 * "Map the imported CSV data to my standard format"
 
-# Model Review
+# Model review
 
-**Audit and Validation**
+**Audit and validation**
 
 * "Check that all formulas link correctly across sheets"
 * "Verify the balance sheet balances in all periods"
@@ -318,19 +428,25 @@ While we continue to develop our offerings and improve safety measures to reduce
 
 ---
 
-# FAQs
+# Frequently asked questions
+
+# Which models are available when using Claude for Excel?
+
+You can switch between Opus 4.7, Opus 4.6, and Sonnet 4.6 when using Claude for Excel.
 
 # Does Claude understand financial modeling conventions?
 
 Yes, Claude is trained to recognize common financial modeling patterns, formula structures, and industry-standard calculations. However, always verify that outputs match your specific methodologies.
 
-# Can I use Claude in Excel with sensitive data?
+# Can I use Claude for Excel with sensitive data?
 
-Claude in Excel works within your existing security framework. For highly sensitive or regulated data, ensure you follow your organization's data handling policies.
+Claude for Excel works within your existing security framework. For highly sensitive or regulated data, ensure you follow your organization's data handling policies.
 
 # What happens to my chat history?
 
-Currently, chat history is not saved between sessions. Each time you open the add-in, you start a fresh conversation with Claude. However, we are working to support this in future versions of Claude in Excel.
+Your chat history is stored locally in your browser using IndexedDB. It persists between sessions, so you can return to previous conversations. Chat history is not automatically deleted, but you can clear all of it manually from Settings.
+
+Your history is specific to each add-in surface, your user ID, and your organization. This means your Excel and PowerPoint chat histories are separate. Within a single surface, your chat history is shared across files—for example, conversations in one Excel workbook appear in another. If you log in to a different organization, you'll see a separate chat history.
 
 # How does Claude access my spreadsheet?
 
@@ -344,4 +460,4 @@ Claude highlights all changes it makes to your workbook. Review these changes ca
 
 Related Articles
 
-[Create and edit files with Claude](https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude)[Create and edit files with Claude to eliminate hours of busy work](https://support.claude.com/en/articles/12143746-create-and-edit-files-with-claude-to-eliminate-hours-of-busy-work)[Claude for Financial Services Overview](https://support.claude.com/en/articles/12219959-claude-for-financial-services-overview)[Create professional results across tools with Claude Sonnet 4.5](https://support.claude.com/en/articles/12439380-create-professional-results-across-tools-with-claude-sonnet-4-5)[Claude for Financial Services Skills](https://support.claude.com/en/articles/12663107-claude-for-financial-services-skills)
+[Create and edit files with Claude](https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude)[Use Claude in Microsoft Foundry](https://support.claude.com/en/articles/12864745-use-claude-in-microsoft-foundry)[Use Claude for PowerPoint](https://support.claude.com/en/articles/13521390-use-claude-for-powerpoint)[Work across Microsoft 365 apps](https://support.claude.com/en/articles/13892150-work-across-microsoft-365-apps)[Use Claude for Word](https://support.claude.com/en/articles/14465370-use-claude-for-word)

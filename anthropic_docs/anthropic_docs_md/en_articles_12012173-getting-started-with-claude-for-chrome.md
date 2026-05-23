@@ -1,4 +1,4 @@
-# Getting Started with Claude in Chrome
+# Get started with Claude in Chrome
 
 **Source:** https://support.claude.com/en/articles/12012173-getting-started-with-claude-for-chrome
 
@@ -6,13 +6,13 @@ Claude in Chrome is available in beta for all paid plans (Pro, Max, Team, and En
 
 Claude in Chrome is a browser extension that allows Claude to read, click, and navigate websites alongside you. Claude works directly in the side panel while you browse, seeing what you see and taking actions when you ask.
 
-**Important:** Browser use is a beta feature that allows Claude to interact directly with websites on your behalf, which carries inherent risks. Please review [Using Claude in Chrome Safely](https://support.claude.com/en/articles/12902428-using-claude-in-chrome-safely) before use.
+**Important:** Browser use is a beta feature that allows Claude to interact directly with websites on your behalf, which carries inherent risks. Please review **[Using Claude in Chrome safely](https://support.claude.com/en/articles/12902428-using-claude-in-chrome-safely)** before use.
 
-# What's New
+# What's new
 
 After months of testing, Claude in Chrome is now available in beta to users on all paid plans (Pro, Max, Team, and Enterprise).
 
-**Note:** To follow along with Claude in Chrome updates, refer to our [extension-specific release notes](https://support.claude.com/en/articles/12306336-claude-for-chrome-release-notes).
+**Note:** To follow along with Claude in Chrome updates, refer to our **[extension-specific release notes](https://support.claude.com/en/articles/12306336-claude-for-chrome-release-notes)**.
 
 # Claude Code integration
 
@@ -33,9 +33,9 @@ Start a task in Claude Desktop and let it handle work in the browser without swi
 3. Find **Claude in Chrome** in the list and click “Configure.”
 4. Toggle the connector on, then download and install the extension if you haven’t already.
 
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1892696502/a23969725f631e99b9e4c47ec6e9/89803b8f-4f3c-4983-8b4d-63aec687ea1a?expires=1767998700&signature=71795d84c0f4669e27b51dc2a96bbb83db50919bb475e1980dea808801797810&req=dSguFM93m4RfW%2FMW1HO4zdOewoxV4bt%2Bhnw73Y7ib%2Bd0E4P0jXcj4duFoddw%0Awxrygud9R5jsd8xX0qw%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1892696502/a23969725f631e99b9e4c47ec6e9/89803b8f-4f3c-4983-8b4d-63aec687ea1a?expires=1767998700&signature=71795d84c0f4669e27b51dc2a96bbb83db50919bb475e1980dea808801797810&req=dSguFM93m4RfW%2FMW1HO4zdOewoxV4bt%2Bhnw73Y7ib%2Bd0E4P0jXcj4duFoddw%0Awxrygud9R5jsd8xX0qw%3D%0A)
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1892696502/a23969725f631e99b9e4c47ec6e9/89803b8f-4f3c-4983-8b4d-63aec687ea1a?expires=1779557400&signature=6f92650d70617ad2e7d1dfac5442e5de24e12b17930533309a3a6183953c259a&req=dSguFM93m4RfW%2FMW1HO4zdOew4JZ7bR9hnw73Y7ib%2Bc18NAkFCOI5YHZo0Fl%0AELcLEgZHAiyttFj0G7Q%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1892696502/a23969725f631e99b9e4c47ec6e9/89803b8f-4f3c-4983-8b4d-63aec687ea1a?expires=1779557400&signature=6f92650d70617ad2e7d1dfac5442e5de24e12b17930533309a3a6183953c259a&req=dSguFM93m4RfW%2FMW1HO4zdOew4JZ7bR9hnw73Y7ib%2Bc18NAkFCOI5YHZo0Fl%0AELcLEgZHAiyttFj0G7Q%3D%0A)
 
-Completing these steps will add Claude in Chrome to the “Connectors” drop-down on your chats with Claude. This is disabled by default, so you’ll need to enable it manually for each conversation. Note that this connector only works with Haiku 4.5, Sonnet 4.5, or Opus 4.5; if you select another model in your chat window, the connector will be disabled.
+Completing these steps will add Claude in Chrome to the “Connectors” drop-down on your chats with Claude. This is disabled by default, so you’ll need to enable it manually for each conversation.
 
 # Record a workflow
 
@@ -52,13 +52,11 @@ Claude can now read browser console output, including errors, network requests, 
 
 # Scheduled tasks
 
-Set recurring browser tasks to run automatically on your schedule. Set it once and Claude handles it from there—daily, weekly, monthly, or annually.
-
-You can schedule your Claude in Chrome shortcuts to run automatically by clicking the clock icon in the upper right corner of the extension panel.
+Set recurring browser tasks to run automatically on your schedule. Set it once and Claude handles it from there—daily, weekly, monthly, or annually. You can schedule your Claude in Chrome shortcuts to run automatically by clicking the clock icon in the upper right corner of the extension panel.
 
 # Follow Claude’s plan
 
-Use “Ask before acting” to have Claude create a plan for your approval, then let it execute the entire workflow independently within those approved boundaries. Aside from [certain high-risk actions](https://support.claude.com/en/articles/12902446-claude-for-chrome-permissions-guide#h_b7ded56289), Claude won't ask for permission until it's done or encounters something outside the plan. Learn more about this permission mode in our [Claude in Chrome Permissions Guide](https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide).
+Use “Ask before acting” to have Claude create a plan for your approval, then let it execute the entire workflow independently within those approved boundaries. Aside from **[certain high-risk actions](https://support.claude.com/en/articles/12902446-claude-for-chrome-permissions-guide#h_b7ded56289)**, Claude won't ask for permission until it's done or encounters something outside the plan. Learn more about this permission mode in our **[Claude in Chrome permissions guide](https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide)**.
 
 # Model selection
 
@@ -66,8 +64,8 @@ Use “Ask before acting” to have Claude create a plan for your approval, then
 
 **Max, Team, and Enterprise plans:** Choose the model that best fits your task.
 
-* **Opus 4.5**: Maximum reasoning power for the most demanding workflows
-* **Sonnet 4.5**: Best for complex, multi-step tasks
+* **Opus 4.7**: Maximum reasoning power for the most demanding workflows
+* **Sonnet 4.6**: Best for complex, multi-step tasks
 * **Haiku 4.5**: Optimized for speed and responsiveness
 
 Switch between models anytime based on what you need.
@@ -79,7 +77,7 @@ Switch between models anytime based on what you need.
 1. Open a Google Chrome browser window.
 
    1. **Note:** Claude in Chrome is not supported on other Chromium-based web browsers or mobile devices.
-2. Visit the [Chrome Web Store](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) to find Claude in Chrome.
+2. Visit the **[Chrome Web Store](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn)** to find Claude in Chrome.
 3. Click "Add to Chrome" to install the extension.
 4. Sign in with your Claude account credentials when prompted.
 5. Pin the extension by clicking the puzzle piece icon, then the thumbtack next to "Claude."
@@ -112,9 +110,9 @@ You will need to grant Claude in Chrome the following permissions to install and
 | downloads | This lets Claude download files from websites and open them when you ask it to save or work with files as part of an automated workflow. |
 | unlimitedStorage | This lets Claude store more data locally (like complex instructions for a detailed workflow) beyond the normal limits that Chrome sets for extensions. |
 
-Refer to the [Google Chrome Permissions documentation](https://developer.chrome.com/docs/extensions/reference/permissions-list) for more information.
+Refer to the **[Google Chrome Permissions documentation](https://developer.chrome.com/docs/extensions/reference/permissions-list)** for more information.
 
-# Core Capabilities
+# Core capabilities
 
 # Multi-tab functionality
 
@@ -138,7 +136,7 @@ Give Claude an image and tell it where to upload, whether it's an expense report
 
 # Shortcuts
 
-Save your best-working prompts as shortcuts (also called /slash commands) and reuse these proven workflows instantly:
+Save your best-working prompts as shortcuts and reuse these proven workflows instantly:
 
 1. After crafting a prompt that works well, save it as a shortcut.
 2. Access your saved shortcuts by typing "/" in the chat.
@@ -160,19 +158,19 @@ If you're using Claude in Chrome on a Team or Enterprise plan, your admin may ha
 * **Extension availability:** Your admin controls whether the extension is enabled for your organization.
 * **Site access:** Your admin can restrict which websites Claude is allowed to access using allowlists and blocklists.
 
-If you're unable to install or use the extension, contact your organization's admin. For admin documentation, see [Claude in Chrome Admin Controls](https://support.claude.com/en/articles/13065128-claude-for-chrome-admin-controls).
+If you're unable to install or use the extension, contact your organization's admin. For admin documentation, see **[Claude in Chrome admin controls](https://support.claude.com/en/articles/13065128-claude-for-chrome-admin-controls)**.
 
 ---
 
-# Next Steps
+# Next steps
 
-* [Claude in Chrome Permissions Guide](https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide): Learn how to control what Claude can access and do within the extension.
-* [Using Claude in Chrome Safely](https://support.claude.com/en/articles/12902428-using-claude-in-chrome-safely): Understand risks and best practices.
-* [Claude in Chrome Troubleshooting](https://support.claude.com/en/articles/12902405-claude-in-chrome-troubleshooting): Get help with common issues.
-* [Claude in Chrome Admin Controls](https://support.claude.com/en/articles/13065128-claude-for-chrome-admin-controls): For Team and Enterprise admins managing the extension for their organization.
+* **[Claude in Chrome permissions guide](https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide)**: Learn how to control what Claude can access and do within the extension.
+* **[Using Claude in Chrome safely](https://support.claude.com/en/articles/12902428-using-claude-in-chrome-safely)**: Understand risks and best practices.
+* **[Claude in Chrome troubleshooting](https://support.claude.com/en/articles/12902405-claude-in-chrome-troubleshooting)**: Get help with common issues.
+* **[Claude in Chrome admin controls](https://support.claude.com/en/articles/13065128-claude-for-chrome-admin-controls)**: For Team and Enterprise admins managing the extension for their organization.
 
 ---
 
 Related Articles
 
-[Claude in Chrome Release Notes](https://support.claude.com/en/articles/12306336-claude-in-chrome-release-notes)[Simplify your browsing experience with Claude in Chrome](https://support.claude.com/en/articles/12431227-simplify-your-browsing-experience-with-claude-in-chrome)[Claude in Chrome Troubleshooting](https://support.claude.com/en/articles/12902405-claude-in-chrome-troubleshooting)[Using Claude in Chrome Safely](https://support.claude.com/en/articles/12902428-using-claude-in-chrome-safely)[Claude in Chrome Admin Controls](https://support.claude.com/en/articles/13065128-claude-in-chrome-admin-controls)
+[Claude in Chrome Troubleshooting](https://support.claude.com/en/articles/12902405-claude-in-chrome-troubleshooting)[Using Claude in Chrome safely](https://support.claude.com/en/articles/12902428-using-claude-in-chrome-safely)[Claude in Chrome Permissions Guide](https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide)[Claude in Chrome admin controls](https://support.claude.com/en/articles/13065128-claude-in-chrome-admin-controls)[Use Claude Cowork safely](https://support.claude.com/en/articles/13364135-use-claude-cowork-safely)

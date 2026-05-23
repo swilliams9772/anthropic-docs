@@ -1,10 +1,10 @@
 # Versions
 
-**Source:** https://platform.claude.com/docs/en/api/versioning
+**Source:** http://platform.claude.com/docs/en/api/versioning
 
 Copy page
 
-For any given API version, we will preserve:
+For any given version with the Messages API, we will preserve:
 
 * Existing input parameters
 * Existing output parameters
@@ -29,3 +29,5 @@ We always recommend using the latest API version whenever possible. Previous ver
     - Removed unnecessary `data: [DONE]` event.
   + Removed legacy `exception` and `truncated` values in responses.
 * `2023-01-01`: Initial release.
+
+Was this page helpful?

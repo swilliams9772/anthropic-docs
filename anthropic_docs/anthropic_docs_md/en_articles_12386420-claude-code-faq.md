@@ -2,11 +2,11 @@
 
 **Source:** https://support.claude.com/en/articles/12386420-claude-code-faq
 
-This article is a compilation of commonly-asked questions about Claude Code related to authentication, integrations, configuration, and more. If you're interested in learning more about Claude Code, please refer to our Claude Docs here: [Claude Code overview](https://docs.claude.com/en/docs/claude-code/overview).
+This article is a compilation of commonly-asked questions about Claude Code related to authentication, integrations, configuration, and more. If you're interested in learning more about Claude Code, please refer to our Claude Docs here: **[Claude Code overview](https://docs.claude.com/en/docs/claude-code/overview)**.
 
 # How do I set up single sign-on (SSO) for Claude Code?
 
-If you are setting up single sign-on for a Claude Console organization, we have detailed instructions here: [Setting up Single Sign-On on the Claude Console](https://support.claude.com/en/articles/10280258-setting-up-single-sign-on-on-the-claude-console). If you are using Claude Code with an Enterprise plan, see this article for SSO setup instructions: [Setting up Single Sign-On (SSO) on the Enterprise plan](https://support.claude.com/en/articles/9797544-setting-up-single-sign-on-sso-on-the-enterprise-plan).
+We have detailed instructions for setting up single sign-on on a Team, Enterprise, or Console organization here: **[Set up single sign-on (SSO)](https://support.claude.com/en/articles/13132885-set-up-single-sign-on-sso)**.
 
 # Is there a way to disable Opus model access across our entire organization in Claude Code?
 
@@ -18,23 +18,23 @@ No current Visual Studio 2022 integration exists. Claude Code currently supports
 
 # How can we implement PR review automation with Claude Code?
 
-While there isn't a turnkey PR reviewer solution yet, you can use the [Claude Code GitHub Actions integration](https://support.claude.com/en/articles/11932705-automated-security-reviews-in-claude-code) for automated reviews. For now, you can use the security review action as a template and customize it for general PR reviews. This is also a good use case for the [Claude Code SDK](https://docs.claude.com/en/docs/claude-code/sdk/sdk-overview).
+While there isn't a turnkey PR reviewer solution yet, you can use the **[Claude Code GitHub Actions integration](https://support.claude.com/en/articles/11932705-automated-security-reviews-in-claude-code)** for automated reviews. For now, you can use the security review action as a template and customize it for general PR reviews. This is also a good use case for the **[Claude Code SDK](https://docs.claude.com/en/docs/claude-code/sdk/sdk-overview)**.
 
 # I’m getting an error message that “Claude Max or Pro is required to connect to Claude Code” but I should have access through my organization’s Team or Enterprise plan. How can I troubleshoot?
 
-This indicates that you selected the wrong login method from the Claude Code setup screen. Try running /login again and selecting the account associated with your primary work email address. If you’re still unable to connect, see [Having trouble using your Team or Enterprise account to access Claude Code?](https://support.claude.com/en/articles/11845131-using-claude-code-with-your-team-or-enterprise-plan#h_540f9e65d8)
+This indicates that you selected the wrong login method from the Claude Code setup screen. Try running /login again and selecting the account associated with your primary work email address. If you’re still unable to connect, see **[Having trouble using your Team or Enterprise account to access Claude Code?](https://support.claude.com/en/articles/11845131-using-claude-code-with-your-team-or-enterprise-plan#h_540f9e65d8)**
 
 # What data is sent to Anthropic when using Claude Code with Bedrock/Vertex API keys?
 
-When configured with Bedrock/Vertex and CLAUDE\_CODE\_DISABLE\_NONESSENTIAL\_TRAFFIC is set, only essential telemetry is sent. All model API requests go directly to your Bedrock/Vertex endpoints. Review the [data flow documentation](https://docs.claude.com/en/docs/claude-code/security) for complete details.
+When configured with Bedrock/Vertex and CLAUDE\_CODE\_DISABLE\_NONESSENTIAL\_TRAFFIC is set, only essential telemetry is sent. All model API requests go directly to your Bedrock/Vertex endpoints. Review the [d**ata flow documentation**](https://docs.claude.com/en/docs/claude-code/security) for complete details.
 
 # Is there a way to access Claude Code via Bedrock/Vertex without exposing a secret key/access key?
 
-Yes. Our setup guides for [Bedrock](https://docs.claude.com/en/docs/claude-code/amazon-bedrock) and [Vertex](https://docs.claude.com/en/docs/claude-code/google-vertex-ai) show how you can enable this. For example, in the Bedrock case you can run `aws configure` to configure the AWS CLI before adding the necessary [configs](https://docs.claude.com/en/docs/claude-code/amazon-bedrock#3-configure-claude-code) and running Claude Code with the Bedrock, or you can use Bedrock API keys, which is a new feature from AWS that enables API keys for Bedrock usage that don’t require full AWS credentials.
+Yes. Our setup guides for **[Bedrock](https://docs.claude.com/en/docs/claude-code/amazon-bedrock)** and **[Vertex](https://docs.claude.com/en/docs/claude-code/google-vertex-ai)** show how you can enable this. For example, in the Bedrock case you can run `aws configure` to configure the AWS CLI before adding the necessary **[configs](https://docs.claude.com/en/docs/claude-code/amazon-bedrock#3-configure-claude-code)** and running Claude Code with the Bedrock, or you can use Bedrock API keys, which is a new feature from AWS that enables API keys for Bedrock usage that don’t require full AWS credentials.
 
 # Is the 1M context window available in Claude Code, and will users be warned about higher pricing?
 
-Long context support is currently limited to some Claude Code users on Max 20x plans, so it’s available only to a small number of users. The 1M context window is not generally available for all Claude Code users yet, including those accessing Claude via the API.
+1M context, which previously required usage credits, is now included in Claude Code for Max, Team, and Enterprise users with Opus 4.6 or 4.7. Sessions using these models can use the full 1M context window automatically, meaning fewer compactions and more of the conversation kept intact.
 
 # How can we deploy Claude Code with custom environment variables and permissions across our organization?
 
@@ -46,19 +46,19 @@ No, public code filtering and attribution capabilities are not currently on the 
 
 # Are subagents available in Claude Code SDK and GitHub Actions?
 
-Subagents are available via the [Claude Code SDK](https://docs.claude.com/en/docs/claude-code/sdk/sdk-overview). They're not yet integrated into GitHub Actions, but we are considering this. The UX collapses outputs when more than three subagents run in parallel to manage complexity.
+Subagents are available via the **[Claude Code SDK](https://docs.claude.com/en/docs/claude-code/sdk/sdk-overview)**. They're not yet integrated into GitHub Actions, but we are considering this. The UX collapses outputs when more than three subagents run in parallel to manage complexity.
 
 # Can subagents be configured to use specific MCP tools?
 
-Yes, when creating a subagent, you can specify which tools it has access to using the `tools` field in the configuration. In the subagent configuration file, you can either omit the tools field to inherit all tools from the main thread, or you can specify individual tools as a comma-separated list for more granular control. Learn more about this in our Claude Docs: [Subagents - Available tools](https://docs.claude.com/en/docs/claude-code/sub-agents#available-tools).
+Yes, when creating a subagent, you can specify which tools it has access to using the `tools` field in the configuration. In the subagent configuration file, you can either omit the tools field to inherit all tools from the main thread, or you can specify individual tools as a comma-separated list for more granular control. Learn more about this in our Claude Docs: **[Subagents - Available tools](https://docs.claude.com/en/docs/claude-code/sub-agents#available-tools)**.
 
 # How can we manage Claude Code costs, especially for automated workflows?
 
-For automated workflows like security reviews, switch from Opus to Sonnet using the [claude --model <alias|name> configuration option](https://docs.claude.com/en/docs/claude-code/model-config) for cost savings. You can also monitor usage through your console dashboard and set appropriate rate limits. Note that you can use Workspaces to set more granular spend limits for different user groups. Read more about Workspaces here: [Creating and managing Workspaces in the Claude Console](https://support.claude.com/en/articles/9796807-creating-and-managing-workspaces-in-the-claude-console). We also allow you to view spend per API key in the Console. Refer to this article for more information: [Cost and Usage Reporting in the Claude Console](https://support.claude.com/en/articles/9534590-cost-and-usage-reporting-in-the-claude-console).
+For automated workflows like security reviews, switch from Opus to Sonnet using the **[claude --model <alias|name> configuration option](https://docs.claude.com/en/docs/claude-code/model-config)** for cost savings. You can also monitor usage through your console dashboard and set appropriate rate limits. Note that you can use Workspaces to set more granular spend limits for different user groups. Read more about Workspaces here: **[Creating and managing Workspaces in the Claude Console](https://support.claude.com/en/articles/9796807-creating-and-managing-workspaces-in-the-claude-console)**. We also allow you to view spend per API key in the Console. Refer to this article for more information: **[Cost and Usage Reporting in the Claude Console](https://support.claude.com/en/articles/9534590-cost-and-usage-reporting-in-the-claude-console)**.
 
 # Can Claude Code work through corporate proxies like LiteLLM?
 
-Yes, Claude Code supports corporate proxy configurations as long as they support the Anthropic API spec. Follow the proxy setup instructions in our Claude Docs: [Proxy configuration](https://docs.claude.com/en/docs/claude-code/network-config#proxy-configuration). Common issues arise from port restrictions in restricted environments.
+Yes, Claude Code supports corporate proxy configurations as long as they support the Anthropic API spec. Follow the proxy setup instructions in our Claude Docs: **[Proxy configuration](https://docs.claude.com/en/docs/claude-code/network-config#proxy-configuration)**. Common issues arise from port restrictions in restricted environments.
 
 # How do we add users to Claude Code when using a Console account?
 
@@ -80,15 +80,15 @@ No. Claude Code has access to a system prompt and a series of tools that it can 
 
 Yes, Claude Code integrates with GitHub Actions for CI/CD, supports git operations, and can connect to various platforms via MCP servers. See our Claude Docs for more information:
 
-* [Claude Code GitHub Actions](https://docs.claude.com/en/docs/claude-code/github-actions)
-* [Claude Code GitLab CI/CD](https://docs.claude.com/en/docs/claude-code/gitlab-ci-cd)
+* **[Claude Code GitHub Actions](https://docs.claude.com/en/docs/claude-code/github-actions)**
+* **[Claude Code GitLab CI/CD](https://docs.claude.com/en/docs/claude-code/gitlab-ci-cd)**
 
 # Why am I seeing "Workflow validation failed" errors in GitHub Actions?
 
-This typically occurs with reusable workflows. Check that your workflow syntax is correct and that all required parameters are passed. If the error persists, file an issue here with your workflow configuration: [github.com/anthropics/claude-code-action](http://github.com/anthropics/claude-code-action).
+This typically occurs with reusable workflows. Check that your workflow syntax is correct and that all required parameters are passed. If the error persists, file an issue here with your workflow configuration: **[github.com/anthropics/claude-code-action](http://github.com/anthropics/claude-code-action)**.
 
 ---
 
 Related Articles
 
-[How do I get access to Claude in Amazon Bedrock?](https://support.claude.com/en/articles/7996920-how-do-i-get-access-to-claude-in-amazon-bedrock)[Using Claude Code with your Pro or Max plan](https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan)[Automated Security Reviews in Claude Code](https://support.claude.com/en/articles/11932705-automated-security-reviews-in-claude-code)[Claude Code Usage Analytics](https://support.claude.com/en/articles/12157520-claude-code-usage-analytics)[Claude Code on the web](https://support.claude.com/en/articles/12618689-claude-code-on-the-web)
+[Use Claude for Microsoft 365 with third-party platforms](https://support.claude.com/en/articles/13945233-use-claude-for-microsoft-365-with-third-party-platforms)[Your first day in Claude Code](https://support.claude.com/en/articles/14552382-your-first-day-in-claude-code)[Claude Code cheatsheet](https://support.claude.com/en/articles/14553413-claude-code-cheatsheet)[Claude Code power user tips](https://support.claude.com/en/articles/14554000-claude-code-power-user-tips)[Claude Code user FAQ](https://support.claude.com/en/articles/14554922-claude-code-user-faq)

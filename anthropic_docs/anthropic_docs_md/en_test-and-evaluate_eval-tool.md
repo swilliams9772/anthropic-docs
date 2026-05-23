@@ -1,6 +1,6 @@
 # Using the Evaluation Tool
 
-**Source:** https://platform.claude.com/docs/en/test-and-evaluate/eval-tool
+**Source:** http://platform.claude.com/docs/en/test-and-evaluate/eval-tool
 
 Copy page
 
@@ -17,7 +17,7 @@ Ensure your prompt includes at least 1-2 dynamic variables using the double brac
 
 # Generating Prompts
 
-The Console offers a built-in [prompt generator](/docs/en/build-with-claude/prompt-engineering/prompt-generator) powered by Claude Opus 4.1:
+The Console offers a built-in [prompt generator](/docs/en/build-with-claude/prompt-engineering/prompting-tools) powered by Claude Opus 4.1:
 
 1. 1
 
@@ -85,3 +85,5 @@ The Evaluation tool offers several features to help you refine your prompts:
 By reviewing results across test cases and comparing different prompt versions, you can spot patterns and make informed adjustments to your prompt more efficiently.
 
 Start evaluating your prompts today to build more robust AI applications with Claude!
+
+Was this page helpful?

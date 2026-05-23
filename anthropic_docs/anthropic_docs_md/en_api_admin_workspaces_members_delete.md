@@ -1,12 +1,12 @@
 # Delete Workspace Member
 
-**Source:** https://platform.claude.com/docs/en/api/admin/workspaces/members/delete
+**Source:** http://platform.claude.com/docs/en/api/admin/workspaces/members/delete
 
 Copy page
 
 # Delete Workspace Member
 
-delete/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 Delete Workspace Member
 
@@ -28,10 +28,6 @@ Deleted object type.
 
 For Workspace Members, this is always `"workspace_member_deleted"`.
 
-Accepts one of the following:
-
-"workspace\_member\_deleted"
-
 user\_id: string
 
 ID of the User.
@@ -45,6 +41,7 @@ Delete Workspace Member
 ```
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 

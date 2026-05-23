@@ -1,64 +1,73 @@
 # Code execution tool
 
-**Source:** https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
+**Source:** http://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
 
 Copy page
 
-Claude can analyze data, create visualizations, perform complex calculations, run system commands, create and edit files, and process uploaded
-files directly within the API conversation.
-The code execution tool allows Claude to run Bash commands and manipulate files, including writing code, in a secure, sandboxed environment.
+Claude can analyze data, create visualizations, perform complex calculations, run system commands, create and edit files, and process uploaded files directly within the API conversation. The code execution tool allows Claude to run Bash commands and manipulate files, including writing code, in a secure, sandboxed environment.
 
-The code execution tool is currently in public beta.
+**Code execution is free when used with web search or web fetch.** When `web_search_20260209` or `web_fetch_20260209` is included in your request, there are no additional charges for code execution tool calls beyond the standard input and output token costs. Standard code execution charges apply when these tools are not included.
 
-To use this feature, add the `"code-execution-2025-08-25"` [beta header](/docs/en/api/beta-headers) to your API requests.
+Code execution is a core primitive for building high-performance agents. It enables dynamic filtering in web search and web fetch tools, allowing Claude to process results before they reach the context window, improving accuracy while reducing token consumption.
 
-Please reach out through our [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to share your feedback on this feature.
+Reach out through the [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to share your feedback on this feature.
+
+This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). Data is retained according to the feature's standard retention policy.
 
 # Model compatibility
 
 The code execution tool is available on the following models:
 
-| Model | Tool Version |
+| Model | Tool versions |
 | --- | --- |
-| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |
-| Claude Opus 4.1 (`claude-opus-4-1-20250805`) | `code_execution_20250825` |
-| Claude Opus 4 (`claude-opus-4-20250514`) | `code_execution_20250825` |
-| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |
-| Claude Sonnet 4 (`claude-sonnet-4-20250514`) | `code_execution_20250825` |
-| Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
+| Claude Opus 4.7 (`claude-opus-4-7`) | `code_execution_20250825`, `code_execution_20260120` |
+| Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20250825`, `code_execution_20260120` |
+| Claude Sonnet 4.6 (`claude-sonnet-4-6`) | `code_execution_20250825`, `code_execution_20260120` |
+| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825`, `code_execution_20260120` |
+| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) | `code_execution_20250825` |
-| Claude Haiku 3.5 (`claude-3-5-haiku-latest`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
+| Claude Opus 4.1 (`claude-opus-4-1-20250805`) | `code_execution_20250825` |
+| Claude Opus 4 (`claude-opus-4-20250514`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
+| Claude Sonnet 4 (`claude-sonnet-4-20250514`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
 
-The current version `code_execution_20250825` supports Bash commands and file operations. A legacy version `code_execution_20250522` (Python only) is also available. See [Upgrade to latest tool version](#upgrade-to-latest-tool-version) for migration details.
+`code_execution_20250825` supports Bash commands and file operations and is available on every model listed above. `code_execution_20260120` adds REPL state persistence and [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) from within the sandbox, and is available on Opus 4.5+ and Sonnet 4.5+ only. If you're still using the legacy `code_execution_20250522` (Python only), see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.
 
 Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
+
+# Platform availability
+
+Code execution is available on:
+
+* **Claude API** (Anthropic)
+* **[Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws)**
+* **[Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry)**
+
+Code execution is not currently available on Amazon Bedrock or Vertex AI.
+
+For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock, Vertex AI, or Claude Platform on AWS.
 
 # Quick start
 
 Here's a simple example that asks Claude to perform a calculation:
 
-Shell
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-2025-08-25" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-sonnet-4-5",
-        "max_tokens": 4096,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-            }
-        ],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[
+        {
+            "role": "user",
+            "content": "Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+
+print(response)
 ```
 
 # How code execution works
@@ -73,74 +82,38 @@ When you add the code execution tool to your API request:
 4. All operations run in a secure sandbox environment
 5. Claude provides results with any generated charts, calculations, or analysis
 
+# Using code execution with other execution tools
+
+When you provide code execution alongside client-provided tools that also run code (such as a [bash tool](/docs/en/agents-and-tools/tool-use/bash-tool) or custom REPL), Claude is operating in a multi-computer environment. The code execution tool runs in Anthropic's sandboxed container, while your client-provided tools run in a separate environment that you control. Claude can sometimes confuse these environments, attempting to use the wrong tool or assuming state is shared between them.
+
+To avoid this, add instructions to your system prompt that clarify the distinction:
+
+```
+When multiple code execution environments are available, be aware that:
+- Variables, files, and state do NOT persist between different execution environments
+- Use the code_execution tool for general-purpose computation in Anthropic's sandboxed environment
+- Use client-provided execution tools (e.g., bash) when you need access to the user's local system, files, or data
+- If you need to pass results between environments, explicitly include outputs in subsequent tool calls rather than assuming shared state
+```
+
+This is especially important when combining code execution with [web search](/docs/en/agents-and-tools/tool-use/web-search-tool) or [web fetch](/docs/en/agents-and-tools/tool-use/web-fetch-tool), which enable code execution automatically. If your application already provides a client-side shell tool, the automatic code execution creates a second execution environment that Claude needs to distinguish between.
+
 # How to use the tool
-
-# Execute Bash commands
-
-Ask Claude to check system information and install packages:
-
-Shell
-
-```
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-2025-08-25" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-sonnet-4-5",
-        "max_tokens": 4096,
-        "messages": [{
-            "role": "user",
-            "content": "Check the Python version and list installed packages"
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
-```
-
-# Create and edit files directly
-
-Claude can create, view, and edit files directly in the sandbox using the file manipulation capabilities:
-
-Shell
-
-```
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-2025-08-25" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-sonnet-4-5",
-        "max_tokens": 4096,
-        "messages": [{
-            "role": "user",
-            "content": "Create a config.yaml file with database settings, then update the port from 5432 to 3306"
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
-```
 
 # Upload and analyze your own files
 
-To analyze your own data files (CSV, Excel, images, etc.), upload them via the Files API and reference them in your request:
+To analyze your own data files (such as CSV, Excel, or images), upload them through the Files API and reference them in your request:
 
-Using the Files API with Code Execution requires two beta headers: `"anthropic-beta": "code-execution-2025-08-25,files-api-2025-04-14"`
+Using the Files API with Code Execution requires the Files API beta header: `"anthropic-beta": "files-api-2025-04-14"`
 
-The Python environment can process various file types uploaded via the Files API, including:
+The Python environment can process various file types uploaded through the Files API, including:
 
 * CSV
 * Excel (.xlsx, .xls)
 * JSON
 * XML
 * Images (JPEG, PNG, GIF, WebP)
-* Text files (.txt, .md, .py, etc)
+* Text files (.txt, .md, .py, and others)
 
 # Upload and analyze files
 
@@ -148,76 +121,70 @@ The Python environment can process various file types uploaded via the Files API
 2. **Reference the file** in your message using a `container_upload` content block
 3. **Include the code execution tool** in your API request
 
-Shell
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-# First, upload a file
-curl https://api.anthropic.com/v1/files \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: files-api-2025-04-14" \
-    --form 'file=@"data.csv"' \
+client = anthropic.Anthropic()
 
-# Then use the file_id with code execution
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-2025-08-25,files-api-2025-04-14" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-sonnet-4-5",
-        "max_tokens": 4096,
-        "messages": [{
+# Upload a file
+file_object = client.beta.files.upload(
+    file=open("data.csv", "rb"),
+)
+
+# Use the file_id with code execution
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    betas=["files-api-2025-04-14"],
+    max_tokens=4096,
+    messages=[
+        {
             "role": "user",
             "content": [
                 {"type": "text", "text": "Analyze this CSV data"},
-                {"type": "container_upload", "file_id": "file_abc123"}
-            ]
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
+                {"type": "container_upload", "file_id": file_object.id},
+            ],
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+
+print(response)
 ```
 
 # Retrieve generated files
 
 When Claude creates files during code execution, you can retrieve these files using the Files API:
 
-Python
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-from anthropic import Anthropic
-
 # Initialize the client
 client = Anthropic()
 
 # Request code execution that creates files
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
-    betas=["code-execution-2025-08-25", "files-api-2025-04-14"],
+    model="claude-opus-4-7",
+    betas=["files-api-2025-04-14"],
     max_tokens=4096,
-    messages=[{
-        "role": "user",
-        "content": "Create a matplotlib visualization and save it as output.png"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a matplotlib visualization and save it as output.png",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
 # Extract file IDs from the response
 def extract_file_ids(response):
     file_ids = []
     for item in response.content:
-        if item.type == 'bash_code_execution_tool_result':
+        if item.type == "bash_code_execution_tool_result":
             content_item = item.content
-            if content_item.type == 'bash_code_execution_result':
+            if content_item.type == "bash_code_execution_result":
+                # concrete-typed list: List[BashCodeExecutionOutputBlock]
                 for file in content_item.content:
-                    if hasattr(file, 'file_id'):
-                        file_ids.append(file.file_id)
+                    file_ids.append(file.file_id)
     return file_ids
 
 # Download the created files
@@ -226,53 +193,6 @@ for file_id in extract_file_ids(response):
     file_content = client.beta.files.download(file_id)
     file_content.write_to_file(file_metadata.filename)
     print(f"Downloaded: {file_metadata.filename}")
-```
-
-# Combine operations
-
-A complex workflow using all capabilities:
-
-Shell
-
-```
-# First, upload a file
-curl https://api.anthropic.com/v1/files \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: files-api-2025-04-14" \
-    --form 'file=@"data.csv"' \
-    > file_response.json
-
-# Extract file_id (using jq)
-FILE_ID=$(jq -r '.id' file_response.json)
-
-# Then use it with code execution
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-2025-08-25,files-api-2025-04-14" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-sonnet-4-5",
-        "max_tokens": 4096,
-        "messages": [{
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"
-                },
-                {
-                    "type": "container_upload",
-                    "file_id": "'$FILE_ID'"
-                }
-            ]
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
 ```
 
 # Tool definition
@@ -299,6 +219,8 @@ The code execution tool can return two types of results depending on the operati
 
 # Bash command response
 
+Output
+
 ```
 {
   "type": "server_tool_use",
@@ -323,6 +245,8 @@ The code execution tool can return two types of results depending on the operati
 # File operation responses
 
 **View file:**
+
+Output
 
 ```
 {
@@ -350,6 +274,8 @@ The code execution tool can return two types of results depending on the operati
 
 **Create file:**
 
+Output
+
 ```
 {
   "type": "server_tool_use",
@@ -372,6 +298,8 @@ The code execution tool can return two types of results depending on the operati
 ```
 
 **Edit file (str\_replace):**
+
+Output
 
 ```
 {
@@ -419,6 +347,8 @@ Each tool type can return specific errors:
 
 **Common errors (all tools):**
 
+Output
+
 ```
 {
   "type": "bash_code_execution_tool_result",
@@ -439,6 +369,7 @@ Each tool type can return specific errors:
 | All tools | `container_expired` | Container expired and is no longer available |
 | All tools | `invalid_tool_input` | Invalid parameters provided to the tool |
 | All tools | `too_many_requests` | Rate limit exceeded for tool usage |
+| bash | `output_file_too_large` | Command output exceeded the maximum size |
 | text\_editor | `file_not_found` | File doesn't exist (for view/edit operations) |
 | text\_editor | `string_not_found` | The `old_str` not found in file (for str\_replace) |
 
@@ -490,50 +421,40 @@ This allows you to maintain created files between requests.
 
 # Example
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-import os
-from anthropic import Anthropic
-
-# Initialize the client
-client = Anthropic(
-    api_key=os.getenv("ANTHROPIC_API_KEY")
-)
-
 # First request: Create a file with a random number
-response1 = client.beta.messages.create(
-    model="claude-sonnet-4-5",
-    betas=["code-execution-2025-08-25"],
+response1 = client.messages.create(
+    model="claude-opus-4-7",
     max_tokens=4096,
-    messages=[{
-        "role": "user",
-        "content": "Write a file with a random number and save it to '/tmp/number.txt'"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Write a file with a random number and save it to '/tmp/number.txt'",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
 # Extract the container ID from the first response
 container_id = response1.container.id
 
 # Second request: Reuse the container to read the file
-response2 = client.beta.messages.create(
+response2 = client.messages.create(
     container=container_id,  # Reuse the same container
-    model="claude-sonnet-4-5",
-    betas=["code-execution-2025-08-25"],
+    model="claude-opus-4-7",
     max_tokens=4096,
-    messages=[{
-        "role": "user",
-        "content": "Read the number from '/tmp/number.txt' and calculate its square"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Read the number from '/tmp/number.txt' and calculate its square",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
+
+print(response2)
 ```
 
 # Streaming
@@ -561,10 +482,28 @@ You can include the code execution tool in the [Messages Batches API](/docs/en/b
 
 # Usage and pricing
 
-Code execution tool usage is tracked separately from token usage. Execution time has a minimum of 5 minutes.
-If files are included in the request, execution time is billed even if the tool is not used due to files being preloaded onto the container.
+**Code execution is free when used with web search or web fetch.** When `web_search_20260209` or `web_fetch_20260209` is included in your API request, there are no additional charges for code execution tool calls beyond the standard input and output token costs.
 
-Each organization receives 1,550 free hours of usage with the code execution tool per month. Additional usage beyond the first 1,550 hours is billed at $0.05 per hour, per container.
+When used without these tools, code execution is billed by execution time, tracked separately from token usage:
+
+* Execution time has a minimum of 5 minutes
+* Each organization receives **1,550 free hours** of usage per month
+* Additional usage beyond 1,550 hours is billed at **$0.05 per hour, per container**
+* If files are included in the request, execution time is billed even if the tool is not invoked, due to files being preloaded onto the container
+
+Code execution usage is tracked in the response:
+
+```
+{
+  "usage": {
+    "input_tokens": 105,
+    "output_tokens": 239,
+    "server_tool_use": {
+      "code_execution_requests": 1
+    }
+  }
+}
+```
 
 # Upgrade to latest tool version
 
@@ -586,60 +525,32 @@ By upgrading to `code-execution-2025-08-25`, you get access to file manipulation
 
 # Upgrade steps
 
-To upgrade, you need to make the following changes in your API requests:
+To upgrade, update the tool type in your API requests:
 
-1. **Update the beta header**:
+```
+- "type": "code_execution_20250522"
++ "type": "code_execution_20250825"
+```
 
-   ```
-   - "anthropic-beta": "code-execution-2025-05-22"
-   + "anthropic-beta": "code-execution-2025-08-25"
-   ```
-2. **Update the tool type**:
+**Review response handling** (if parsing responses programmatically):
 
-   ```
-   - "type": "code_execution_20250522"
-   + "type": "code_execution_20250825"
-   ```
-3. **Review response handling** (if parsing responses programmatically):
-
-   * The previous blocks for Python execution responses will no longer be sent
-   * Instead, new response types for Bash and file operations will be sent (see Response Format section)
+* The previous blocks for Python execution responses will no longer be sent
+* Instead, new response types for Bash and file operations will be sent (see Response Format section)
 
 # Programmatic tool calling
 
-The code execution tool powers [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), which allows Claude to write code that calls your custom tools programmatically within the execution container. This enables efficient multi-tool workflows, data filtering before reaching Claude's context, and complex conditional logic.
+For running tools inside the code execution container, see [Programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling).
 
-Python
+# Data retention
 
-```
-# Enable programmatic calling for your tools
-response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
-    betas=["advanced-tool-use-2025-11-20"],
-    max_tokens=4096,
-    messages=[{
-        "role": "user",
-        "content": "Get weather for 5 cities and find the warmest"
-    }],
-    tools=[
-        {
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        },
-        {
-            "name": "get_weather",
-            "description": "Get weather for a city",
-            "input_schema": {...},
-            "allowed_callers": ["code_execution_20250825"]  # Enable programmatic calling
-        }
-    ]
-)
-```
+Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the [Files API](/docs/en/build-with-claude/files) (retrievable via `client.beta.files.download()`) persist until explicitly deleted.
 
-Learn more in the [Programmatic tool calling documentation](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling).
+For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
 # Using code execution with Agent Skills
 
 The code execution tool enables Claude to use [Agent Skills](/docs/en/agents-and-tools/agent-skills/overview). Skills are modular capabilities consisting of instructions, scripts, and resources that extend Claude's functionality.
 
-Learn more in the [Agent Skills documentation](/docs/en/agents-and-tools/agent-skills/overview) and [Agent Skills API guide](/docs/en/build-with-claude/skills-guide).
+Learn more in [Agent Skills](/docs/en/agents-and-tools/agent-skills/overview) and [Using Agent Skills with the API](/docs/en/build-with-claude/skills-guide).
+
+Was this page helpful?

@@ -1,14 +1,14 @@
-# Get Api Key
+# Get API Key
 
-**Source:** https://platform.claude.com/docs/en/api/admin-api/apikeys/get-api-key
+**Source:** http://platform.claude.com/docs/en/api/admin-api/apikeys/get-api-key
 
 Copy page
 
-# Get Api Key
+# Get API Key
 
-get/v1/organizations/api\_keys/{api\_key\_id}
+GET/v1/organizations/api\_keys/{api\_key\_id}
 
-Get Api Key
+Get API Key
 
 # Path ParametersExpand Collapse
 
@@ -18,7 +18,7 @@ ID of the API key.
 
 # ReturnsExpand Collapse
 
-APIKey = object { id, created\_at, created\_by, 5 more }
+APIKey object { id, created\_at, created\_by, 6 more }
 
 id: string
 
@@ -27,8 +27,6 @@ ID of the API key.
 created\_at: string
 
 RFC 3339 datetime string indicating when the API Key was created.
-
-formatdate-time
 
 created\_by: object { id, type }
 
@@ -42,6 +40,10 @@ type: string
 
 Type of the actor that created the object.
 
+expires\_at: string
+
+RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
+
 name: string
 
 Name of the API key.
@@ -50,11 +52,11 @@ partial\_key\_hint: string
 
 Partially redacted hint for the API key.
 
-status: "active" or "inactive" or "archived"
+status: "active" or "inactive" or "archived" or "expired"
 
 Status of the API key.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 
@@ -62,24 +64,23 @@ Accepts one of the following:
 
 "archived"
 
+"expired"
+
 type: "api\_key"
 
 Object type.
 
 For API Keys, this is always `"api_key"`.
 
-Accepts one of the following:
-
-"api\_key"
-
 workspace\_id: string
 
-ID of the Workspace associated with the API key, or null if the API key belongs to the default Workspace.
+ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
 
-Get Api Key
+Get API Key
 
 ```
 curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
@@ -93,6 +94,7 @@ Response 200
     "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
     "type": "user"
   },
+  "expires_at": "2024-10-30T23:58:27.427722Z",
   "name": "Developer Key",
   "partial_key_hint": "sk-ant-api03-R2D...igAA",
   "status": "active",
@@ -113,6 +115,7 @@ Response 200
     "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
     "type": "user"
   },
+  "expires_at": "2024-10-30T23:58:27.427722Z",
   "name": "Developer Key",
   "partial_key_hint": "sk-ant-api03-R2D...igAA",
   "status": "active",

@@ -1,36 +1,40 @@
 # Search results
 
-**Source:** https://platform.claude.com/docs/en/build-with-claude/search-results
+**Source:** http://platform.claude.com/docs/en/build-with-claude/search-results
 
 Copy page
+
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 Search result content blocks enable natural citations with proper source attribution, bringing web search-quality citations to your custom applications. This feature is particularly powerful for RAG (Retrieval-Augmented Generation) applications where you need Claude to cite sources accurately.
 
 The search results feature is available on the following models:
 
+* Claude Opus 4.7 (`claude-opus-4-7`)
+* Claude Opus 4.6 (`claude-opus-4-6`)
+* Claude Sonnet 4.6 (`claude-sonnet-4-6`)
+* Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
 * Claude Opus 4.5 (`claude-opus-4-5-20251101`)
 * Claude Opus 4.1 (`claude-opus-4-1-20250805`)
-* Claude Opus 4 (`claude-opus-4-20250514`)
-* Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
-* Claude Sonnet 4 (`claude-sonnet-4-20250514`)
-* Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-7-sonnet-20250219`)
+* Claude Opus 4 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-opus-4-20250514`)
+* Claude Sonnet 4 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-sonnet-4-20250514`)
 * Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
-* Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-5-haiku-20241022`)
+* Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](/docs/en/about-claude/model-deprecations)) (`claude-3-5-haiku-20241022`)
 
 # Key benefits
 
-* **Natural citations** - Achieve the same citation quality as web search for any content
-* **Flexible integration** - Use in tool returns for dynamic RAG or as top-level content for pre-fetched data
-* **Proper source attribution** - Each result includes source and title information for clear attribution
-* **No document workarounds needed** - Eliminates the need for document-based workarounds
-* **Consistent citation format** - Matches the citation quality and format of Claude's web search functionality
+* **Natural citations:** Achieve the same citation quality as web search for any content
+* **Flexible integration:** Use in tool returns for dynamic RAG or as top-level content for pre-fetched data
+* **Proper source attribution:** Each result includes source and title information for clear attribution
+* **No document workarounds needed:** Eliminates the need for document-based workarounds
+* **Consistent citation format:** Matches the citation quality and format of Claude's web search functionality
 
 # How it works
 
 Search results can be provided in two ways:
 
-1. **From tool calls** - Your custom tools return search results, enabling dynamic RAG applications
-2. **As top-level content** - You provide search results directly in user messages for pre-fetched or cached content
+1. **From tool calls:** Your custom tools return search results, enabling dynamic RAG applications
+2. **As top-level content:** You provide search results directly in user messages for pre-fetched or cached content
 
 In both cases, Claude can automatically cite information from the search results with proper source attribution.
 
@@ -41,16 +45,18 @@ Search results use the following structure:
 ```
 {
   "type": "search_result",
-  "source": "https://example.com/article",  // Required: Source URL or identifier
-  "title": "Article Title",                  // Required: Title of the result
-  "content": [                               // Required: Array of text blocks
+  "source": "https://example.com/article", // Required: Source URL or identifier
+  "title": "Article Title", // Required: Title of the result
+  "content": [
+    // Required: Array of text blocks
     {
       "type": "text",
       "text": "The actual content of the search result..."
     }
   ],
-  "citations": {                             // Optional: Citation configuration
-    "enabled": true                          // Enable/disable citations for this result
+  "citations": {
+    // Optional: Citation configuration
+    "enabled": true // Enable/disable citations for this result
   }
 }
 ```
@@ -82,15 +88,14 @@ The most powerful use case is returning search results from your custom tools. T
 
 # Example: Knowledge base tool
 
-Python
+PythonTypeScriptC#GoJavaPHPRuby
 
 ```
-from anthropic import Anthropic
 from anthropic.types import (
     MessageParam,
     TextBlockParam,
     SearchResultBlockParam,
-    ToolResultBlockParam
+    ToolResultBlockParam,
 )
 
 client = Anthropic()
@@ -101,14 +106,9 @@ knowledge_base_tool = {
     "description": "Search the company knowledge base for information",
     "input_schema": {
         "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "The search query"
-            }
-        },
-        "required": ["query"]
-    }
+        "properties": {"query": {"type": "string", "description": "The search query"}},
+        "required": ["query"],
+    },
 }
 
 # Function to handle the tool call
@@ -123,10 +123,10 @@ def search_knowledge_base(query):
             content=[
                 TextBlockParam(
                     type="text",
-                    text="To configure the product, navigate to Settings > Configuration. The default timeout is 30 seconds, but can be adjusted between 10-120 seconds based on your needs."
+                    text="To configure the product, navigate to Settings > Configuration. The default timeout is 30 seconds, but can be adjusted between 10-120 seconds based on your needs.",
                 )
             ],
-            citations={"enabled": True}
+            citations={"enabled": True},
         ),
         SearchResultBlockParam(
             type="search_result",
@@ -135,24 +135,21 @@ def search_knowledge_base(query):
             content=[
                 TextBlockParam(
                     type="text",
-                    text="If you encounter timeout errors, first check the configuration settings. Common causes include network latency and incorrect timeout values."
+                    text="If you encounter timeout errors, first check the configuration settings. Common causes include network latency and incorrect timeout values.",
                 )
             ],
-            citations={"enabled": True}
-        )
+            citations={"enabled": True},
+        ),
     ]
 
 # Create a message with the tool
 response = client.messages.create(
-    model="claude-sonnet-4-5",  # Works with all supported models
+    model="claude-opus-4-7",  # Works with all supported models
     max_tokens=1024,
     tools=[knowledge_base_tool],
     messages=[
-        MessageParam(
-            role="user",
-            content="How do I configure the timeout settings?"
-        )
-    ]
+        MessageParam(role="user", content="How do I configure the timeout settings?")
+    ],
 )
 
 # When Claude calls the tool, provide the search results
@@ -161,10 +158,12 @@ if response.content[0].type == "tool_use":
 
     # Send the tool result back
     final_response = client.messages.create(
-        model="claude-sonnet-4-5",  # Works with all supported models
+        model="claude-opus-4-7",  # Works with all supported models
         max_tokens=1024,
         messages=[
-            MessageParam(role="user", content="How do I configure the timeout settings?"),
+            MessageParam(
+                role="user", content="How do I configure the timeout settings?"
+            ),
             MessageParam(role="assistant", content=response.content),
             MessageParam(
                 role="user",
@@ -172,11 +171,11 @@ if response.content[0].type == "tool_use":
                     ToolResultBlockParam(
                         type="tool_result",
                         tool_use_id=response.content[0].id,
-                        content=tool_result  # Search results go here
+                        content=tool_result,  # Search results go here
                     )
-                ]
-            )
-        ]
+                ],
+            ),
+        ],
     )
 ```
 
@@ -191,21 +190,16 @@ You can also provide search results directly in user messages. This is useful fo
 
 # Example: Direct search results
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-from anthropic import Anthropic
-from anthropic.types import (
-    MessageParam,
-    TextBlockParam,
-    SearchResultBlockParam
-)
+from anthropic.types import MessageParam, TextBlockParam, SearchResultBlockParam
 
 client = Anthropic()
 
 # Provide search results directly in the user message
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-7",
     max_tokens=1024,
     messages=[
         MessageParam(
@@ -218,10 +212,10 @@ response = client.messages.create(
                     content=[
                         TextBlockParam(
                             type="text",
-                            text="All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium."
+                            text="All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium.",
                         )
                     ],
-                    citations={"enabled": True}
+                    citations={"enabled": True},
                 ),
                 SearchResultBlockParam(
                     type="search_result",
@@ -230,21 +224,21 @@ response = client.messages.create(
                     content=[
                         TextBlockParam(
                             type="text",
-                            text="To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key."
+                            text="To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key.",
                         )
                     ],
-                    citations={"enabled": True}
+                    citations={"enabled": True},
                 ),
                 TextBlockParam(
                     type="text",
-                    text="Based on these search results, how do I authenticate API requests and what are the rate limits?"
-                )
-            ]
+                    text="Based on these search results, how do I authenticate API requests and what are the rate limits?",
+                ),
+            ],
         )
-    ]
+    ],
 )
 
-print(response.model_dump_json(indent=2))
+print(response)
 ```
 
 # Claude's response with citations
@@ -257,46 +251,35 @@ Regardless of how search results are provided, Claude automatically includes cit
   "content": [
     {
       "type": "text",
-      "text": "To authenticate API requests, you need to include an API key in the Authorization header",
+      "text": "All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard.",
       "citations": [
         {
           "type": "search_result_location",
+          "cited_text": "All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium.",
           "source": "https://docs.company.com/api-reference",
           "title": "API Reference - Authentication",
-          "cited_text": "All API requests must include an API key in the Authorization header",
           "search_result_index": 0,
           "start_block_index": 0,
-          "end_block_index": 0
+          "end_block_index": 1
         }
       ]
     },
     {
       "type": "text",
-      "text": ". You can generate API keys from your dashboard",
-      "citations": [
-        {
-          "type": "search_result_location",
-          "source": "https://docs.company.com/api-reference",
-          "title": "API Reference - Authentication",
-          "cited_text": "Keys can be generated from the dashboard",
-          "search_result_index": 0,
-          "start_block_index": 0,
-          "end_block_index": 0
-        }
-      ]
+      "text": "\n\nTo set this up from scratch, you'll need to "
     },
     {
       "type": "text",
-      "text": ". The rate limits are 1,000 requests per hour for the standard tier and 10,000 requests per hour for the premium tier.",
+      "text": "sign up for an account, generate an API key from the dashboard, install the SDK using `pip install company-sdk`, and initialize the client with your API key.",
       "citations": [
         {
           "type": "search_result_location",
-          "source": "https://docs.company.com/api-reference",
-          "title": "API Reference - Authentication",
-          "cited_text": "Rate limits: 1000 requests per hour for standard tier, 10000 for premium",
-          "search_result_index": 0,
+          "cited_text": "To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key.",
+          "source": "https://docs.company.com/quickstart",
+          "title": "Getting Started Guide",
+          "search_result_index": 1,
           "start_block_index": 0,
-          "end_block_index": 0
+          "end_block_index": 1
         }
       ]
     }
@@ -313,12 +296,12 @@ Each citation includes:
 | `type` | string | Always `"search_result_location"` for search result citations |
 | `source` | string | The source from the original search result |
 | `title` | string or null | The title from the original search result |
-| `cited_text` | string | The exact text being cited |
-| `search_result_index` | integer | Index of the search result (0-based) |
-| `start_block_index` | integer | Starting position in the content array |
-| `end_block_index` | integer | Ending position in the content array |
+| `cited_text` | string | The full text of the cited block(s), concatenated. Equals the contents of `content[start_block_index:end_block_index]` joined together. Not counted toward output tokens. |
+| `search_result_index` | integer | 0-based index of the cited search result among all `search_result` blocks in the request, in the order they appear (across all messages and tool results). |
+| `start_block_index` | integer | 0-based index of the first cited block in the search result's `content` array. |
+| `end_block_index` | integer | Exclusive end index of the cited block range in the search result's `content` array. Always greater than `start_block_index`. |
 
-Note: The `search_result_index` refers to the index of the search result content block (0-based), regardless of how the search results were provided (tool call or top-level content).
+The block indices identify a slice of the search result's `content` array, and `cited_text` is the full text of that slice. The text block is the minimal citable unit: Claude cites whole blocks, not substrings within a block. To get finer-grained citations, split your search result content into smaller blocks (see [Multiple content blocks](#multiple-content-blocks)).
 
 # Multiple content blocks
 
@@ -346,7 +329,21 @@ Search results can contain multiple text blocks in the `content` array:
 }
 ```
 
-Claude can cite specific blocks using the `start_block_index` and `end_block_index` fields.
+A citation referencing the rate limits block looks like:
+
+```
+{
+  "type": "search_result_location",
+  "cited_text": "Rate Limits: The API allows 1000 requests per hour per key.",
+  "source": "https://docs.company.com/api-guide",
+  "title": "API Documentation",
+  "search_result_index": 0,
+  "start_block_index": 1,
+  "end_block_index": 2
+}
+```
+
+When this search result is cited, `start_block_index` and `end_block_index` identify which of these blocks the citation covers, and `cited_text` contains exactly those blocks' text. Splitting content into smaller, focused blocks gives Claude finer citation boundaries; combining content into one block means every citation returns the full text. This is the same model used by [custom content documents](/docs/en/build-with-claude/citations#custom-content-documents) in the Citations feature.
 
 # Advanced usage
 
@@ -355,6 +352,8 @@ Claude can cite specific blocks using the `start_block_index` and `end_block_ind
 You can use both tool-based and top-level search results in the same conversation:
 
 ```
+from anthropic.types import MessageParam, SearchResultBlockParam, TextBlockParam
+
 # First message with top-level search results
 messages = [
     MessageParam(
@@ -365,15 +364,17 @@ messages = [
                 source="https://docs.company.com/overview",
                 title="Product Overview",
                 content=[
-                    TextBlockParam(type="text", text="Our product helps teams collaborate...")
+                    TextBlockParam(
+                        type="text", text="Our product helps teams collaborate..."
+                    )
                 ],
-                citations={"enabled": True}
+                citations={"enabled": True},
             ),
             TextBlockParam(
                 type="text",
-                text="Tell me about this product and search for pricing information"
-            )
-        ]
+                text="Tell me about this product and search for pricing information",
+            ),
+        ],
     )
 ]
 
@@ -386,6 +387,8 @@ messages = [
 Both methods support mixing search results with other content:
 
 ```
+from anthropic.types import SearchResultBlockParam, TextBlockParam
+
 # In tool results
 tool_result = [
     SearchResultBlockParam(
@@ -393,12 +396,11 @@ tool_result = [
         source="https://docs.company.com/guide",
         title="User Guide",
         content=[TextBlockParam(type="text", text="Configuration details...")],
-        citations={"enabled": True}
+        citations={"enabled": True},
     ),
     TextBlockParam(
-        type="text",
-        text="Additional context: This applies to version 2.0 and later."
-    )
+        type="text", text="Additional context: This applies to version 2.0 and later."
+    ),
 ]
 
 # In top-level content
@@ -408,16 +410,15 @@ user_content = [
         source="https://research.com/paper",
         title="Research Paper",
         content=[TextBlockParam(type="text", text="Key findings...")],
-        citations={"enabled": True}
+        citations={"enabled": True},
     ),
     {
         "type": "image",
-        "source": {"type": "url", "url": "https://example.com/chart.png"}
+        "source": {"type": "url", "url": "https://example.com/chart.png"},
     },
     TextBlockParam(
-        type="text",
-        text="How does the chart relate to the research findings?"
-    )
+        type="text", text="How does the chart relate to the research findings?"
+    ),
 ]
 ```
 
@@ -430,7 +431,7 @@ Add cache control for better performance:
   "type": "search_result",
   "source": "https://docs.company.com/guide",
   "title": "User Guide",
-  "content": [{"type": "text", "text": "..."}],
+  "content": [{ "type": "text", "text": "..." }],
   "cache_control": {
     "type": "ephemeral"
   }
@@ -446,50 +447,48 @@ By default, citations are disabled for search results. You can enable citations 
   "type": "search_result",
   "source": "https://docs.company.com/guide",
   "title": "User Guide",
-  "content": [{"type": "text", "text": "Important documentation..."}],
+  "content": [{ "type": "text", "text": "Important documentation..." }],
   "citations": {
-    "enabled": true  // Enable citations for this result
+    "enabled": true // Enable citations for this result
   }
 }
 ```
 
-When `citations.enabled` is set to `true`, Claude will include citation references when using information from the search result. This enables:
+When `citations.enabled` is set to `true`, Claude includes citation references when using information from the search result. This enables:
 
 * Natural citations for your custom RAG applications
 * Source attribution when interfacing with proprietary knowledge bases
 * Web search-quality citations for any custom tool that returns search results
 
-If the `citations` field is omitted, citations are disabled by default.
-
-Citations are all-or-nothing: either all search results in a request must have citations enabled, or all must have them disabled. Mixing search results with different citation settings will result in an error. If you need to disable citations for some sources, you must disable them for all search results in that request.
+Citations are all-or-nothing: either all search results in a request must have citations enabled, or all must have them disabled. Mixing search results with different citation settings results in an error.
 
 # Best practices
 
 # For tool-based search (Method 1)
 
-* **Dynamic content**: Use for real-time searches and dynamic RAG applications
-* **Error handling**: Return appropriate messages when searches fail
-* **Result limits**: Return only the most relevant results to avoid context overflow
+* **Dynamic content:** Use for real-time searches and dynamic RAG applications
+* **Error handling:** Return appropriate messages when searches fail
+* **Result limits:** Return only the most relevant results to avoid context overflow
 
 # For top-level search (Method 2)
 
-* **Pre-fetched content**: Use when you already have search results
-* **Batch processing**: Ideal for processing multiple search results at once
-* **Testing**: Great for testing citation behavior with known content
+* **Pre-fetched content:** Use when you already have search results
+* **Batch processing:** Ideal for processing multiple search results at once
+* **Testing:** Great for testing citation behavior with known content
 
 # General best practices
 
-1. **Structure results effectively**
+1. **Structure results effectively:**
 
    * Use clear, permanent source URLs
    * Provide descriptive titles
-   * Break long content into logical text blocks
-2. **Maintain consistency**
+   * Break long content into logical text blocks to give Claude finer citation boundaries
+2. **Maintain consistency:**
 
    * Use consistent source formats across your application
    * Ensure titles accurately reflect content
    * Keep formatting consistent
-3. **Handle errors gracefully**
+3. **Handle errors gracefully:**
 
    ```
    def search_with_fallback(query):
@@ -507,3 +506,5 @@ Citations are all-or-nothing: either all search results in a request must have c
 * Search result content blocks are available on Claude API, Amazon Bedrock, and Google Cloud's Vertex AI
 * Only text content is supported within search results (no images or other media)
 * The `content` array must contain at least one text block
+
+Was this page helpful?

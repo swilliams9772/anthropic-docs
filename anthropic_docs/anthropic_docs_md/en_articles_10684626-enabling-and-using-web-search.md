@@ -1,25 +1,27 @@
-# Enabling and Using Web Search
+# Enabling and using web search
 
 **Source:** https://support.claude.com/en/articles/10684626-enabling-and-using-web-search
 
 You can have Claude search the internet to provide you with up-to-date information and insights when using the following models:
 
+* Opus 4.7
+* Sonnet 4.6
+* Opus 4.6
 * Opus 4.5
 * Haiku 4.5
 * Sonnet 4.5
-* Opus 4.1
-* Sonnet 4
-* Opus 4
+
+**Note:** Sonnet 4.5 will be retired and removed from the model selector soon. For more information, see **[Adapting to new model personas after deprecations](https://support.claude.com/en/articles/12738598-adapting-to-new-model-personas-after-deprecations)**.
 
 Web search expands Claude's knowledge with real-time data, helping you make better-informed decisions with current information.
 
 **To access this feature on a Team or Enterprise plan account:**
 
-An Owner or Primary Owner must first enable web search for the entire workspace. This can be found in [Admin settings > Capabilities](https://claude.ai/admin-settings/capabilities):
+An Owner or Primary Owner must first enable web search for the entire workspace. This can be found in **[Admin settings > Capabilities](https://claude.ai/admin-settings/capabilities)**:
 
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1770635515/1f5828de863972362d671de435bb/Screenshot+2025-10-09+at+3_44_19%E2%80%AFPM.png?expires=1767998700&signature=dcbfda9a6040e6d40317c6b619a32b648644cd49dceda1b3b2ad3544da837152&req=dScgFs99mIReXPMW1HO4zULH6MKpye%2ByxIyOw8vc%2B3nDN99Y%2BjlEHTRCJ1NO%0AJbiu%2BdR0hS6ANRqWC14%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1770635515/1f5828de863972362d671de435bb/Screenshot+2025-10-09+at+3_44_19%E2%80%AFPM.png?expires=1767998700&signature=dcbfda9a6040e6d40317c6b619a32b648644cd49dceda1b3b2ad3544da837152&req=dScgFs99mIReXPMW1HO4zULH6MKpye%2ByxIyOw8vc%2B3nDN99Y%2BjlEHTRCJ1NO%0AJbiu%2BdR0hS6ANRqWC14%3D%0A)
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/2032032614/ad907328c4d9a26ee4bd9ca27a52/CleanShot+2026-02-05+at+09_01_42%402x.png?expires=1779557400&signature=ff8d5878d56aa2df5471829ea7f7bd8f707e637b4e0ff9e1c25a84030adc81ba&req=diAkFMl9n4deXfMW1HO4zetvxbu%2FHclUUJIbgsqS2%2BN6vqIhWJNz851Ydo%2Br%0AH7Dg3ovAUu6hPON9p3o%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/2032032614/ad907328c4d9a26ee4bd9ca27a52/CleanShot+2026-02-05+at+09_01_42%402x.png?expires=1779557400&signature=ff8d5878d56aa2df5471829ea7f7bd8f707e637b4e0ff9e1c25a84030adc81ba&req=diAkFMl9n4deXfMW1HO4zetvxbu%2FHclUUJIbgsqS2%2BN6vqIhWJNz851Ydo%2Br%0AH7Dg3ovAUu6hPON9p3o%3D%0A)
 
-Once this is enabled at the workspace level, any member of the organization can switch it on while starting a chat by opening the “Search and tools” menu and toggling “Web search” on. Users can toggle this off for chats that don’t require web search capabilities.
+Once this is enabled at the workspace level, any member of the organization can switch it on while starting a chat by clicking the “+” button in the lower left corner of the chat window and selecting “Web search." Users can toggle this off for chats that don’t require web search capabilities.
 
 # How to enable web search in a chat
 
@@ -50,6 +52,23 @@ When Claude searches the web:
 When “Web search” is toggled on, Claude can also retrieve content directly from web pages when provided with specific URLs. This feature, called web fetch, allows Claude to access and analyze the full content of articles, blog posts, and other web pages you want to discuss.
 
 **Important note for free Claude accounts:** When you provide Claude with a direct link to a long article or document and ask it to analyze or summarize the contents, the entire article is retrieved into Claude's context window. This can consume a significant portion of your usage capacity, especially for lengthy content. For example, asking Claude to summarize a 10,000-word article will use substantially more of your context window than a regular web search query.
+
+# Image results
+
+When web search is enabled, Claude can also search for and display images directly in your conversation. You don't need to enable a separate setting — image results are part of web search.
+
+For example, you might ask Claude to:
+
+* Show you what a recipe looks like before you start cooking
+* Find photos of a product you're considering
+* Help identify a plant, insect, or object by searching for visual matches
+* Compare what similar items look like side by side
+
+Claude selects images from web search results, powered by Bing, and displays them alongside its text response. Each image includes a source link so you can visit the original page for more details.
+
+Image search is powered by Bing (<https://www.microsoft.com/en-us/privacy/privacystatement>).
+
+Claude can also display interactive content in search results. For more detailed information, see here: **[Visual and interactive content](https://support.claude.com/en/articles/13641943-visual-responses-and-interactive-widgets)**.
 
 # Managing usage on free Claude accounts
 
@@ -90,11 +109,11 @@ You can re-enable it anytime you need current information.
 
 # Support
 
-* For web search questions or support, please visit our [Online Safety Contacts](https://support.claude.com/en/articles/11174660-online-safety-contacts) page.
-* For content removal requests, please visit our [Blocking and Removing Content from Claude](https://support.claude.com/en/articles/10684638-reporting-blocking-and-removing-content-from-claude) page.
+* For web search questions or support, please visit our **[Online Safety Contacts](https://support.claude.com/en/articles/11174660-online-safety-contacts)** page.
+* For content removal requests, please visit our **[Blocking and Removing Content from Claude](https://support.claude.com/en/articles/10684638-reporting-blocking-and-removing-content-from-claude)** page.
 
 ---
 
 Related Articles
 
-[How up-to-date is Claude's training data?](https://support.claude.com/en/articles/8114494-how-up-to-date-is-claude-s-training-data)[About Team and Enterprise Plan Usage](https://support.claude.com/en/articles/9267304-about-team-and-enterprise-plan-usage)[Using Claude Code with your Team or Enterprise plan](https://support.claude.com/en/articles/11845131-using-claude-code-with-your-team-or-enterprise-plan)[Claude Code Model Configuration](https://support.claude.com/en/articles/11940350-claude-code-model-configuration)[Release Notes](https://support.claude.com/en/articles/12138966-release-notes)
+[How up-to-date is Claude's training data?](https://support.claude.com/en/articles/8114494-how-up-to-date-is-claude-s-training-data)[How large is the Claude API’s context window?](https://support.claude.com/en/articles/8606395-how-large-is-the-claude-api-s-context-window)[Claude Code model configuration](https://support.claude.com/en/articles/11940350-claude-code-model-configuration)[Release notes](https://support.claude.com/en/articles/12138966-release-notes)[Use Claude in Microsoft Foundry](https://support.claude.com/en/articles/12864745-use-claude-in-microsoft-foundry)

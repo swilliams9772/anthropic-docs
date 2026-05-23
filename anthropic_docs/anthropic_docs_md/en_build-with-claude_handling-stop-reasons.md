@@ -1,14 +1,14 @@
 # Handling stop reasons
 
-**Source:** https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons
+**Source:** http://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons
 
 Copy page
 
 When you make a request to the Messages API, Claude's response includes a `stop_reason` field that indicates why the model stopped generating its response. Understanding these values is crucial for building robust applications that handle different response types appropriately.
 
-For details about `stop_reason` in the API response, see the [Messages API reference](/docs/en/api/messages).
+For details about `stop_reason` in the API response, see the [Messages API reference](/docs/en/api/messages/create).
 
-# What is stop\_reason?
+# The stop\_reason field
 
 The `stop_reason` field is part of every successful Messages API response. Unlike errors, which indicate failures in processing your request, `stop_reason` tells you why Claude successfully completed its response generation.
 
@@ -40,7 +40,17 @@ Example response
 
 The most common stop reason. Indicates Claude finished its response naturally.
 
+Python
+
 ```
+from anthropic import Anthropic
+
+client = Anthropic()
+response = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}],
+)
 if response.stop_reason == "end_turn":
     # Process the complete response
     print(response.content[0].text)
@@ -61,59 +71,59 @@ Sometimes Claude returns an empty response (exactly 2-3 tokens with no content) 
 # INCORRECT: Adding text immediately after tool_result
 messages = [
     {"role": "user", "content": "Calculate the sum of 1234 and 5678"},
-    {"role": "assistant", "content": [
-        {
-            "type": "tool_use",
-            "id": "toolu_123",
-            "name": "calculator",
-            "input": {"operation": "add", "a": 1234, "b": 5678}
-        }
-    ]},
-    {"role": "user", "content": [
-        {
-            "type": "tool_result",
-            "tool_use_id": "toolu_123",
-            "content": "6912"
-        },
-        {
-            "type": "text",
-            "text": "Here's the result"  # Don't add text after tool_result
-        }
-    ]}
+    {
+        "role": "assistant",
+        "content": [
+            {
+                "type": "tool_use",
+                "id": "toolu_123",
+                "name": "calculator",
+                "input": {"operation": "add", "a": 1234, "b": 5678},
+            }
+        ],
+    },
+    {
+        "role": "user",
+        "content": [
+            {"type": "tool_result", "tool_use_id": "toolu_123", "content": "6912"},
+            {
+                "type": "text",
+                "text": "Here's the result",  # Don't add text after tool_result
+            },
+        ],
+    },
 ]
 
 # CORRECT: Send tool results directly without additional text
 messages = [
     {"role": "user", "content": "Calculate the sum of 1234 and 5678"},
-    {"role": "assistant", "content": [
-        {
-            "type": "tool_use",
-            "id": "toolu_123",
-            "name": "calculator",
-            "input": {"operation": "add", "a": 1234, "b": 5678}
-        }
-    ]},
-    {"role": "user", "content": [
-        {
-            "type": "tool_result",
-            "tool_use_id": "toolu_123",
-            "content": "6912"
-        }
-    ]}  # Just the tool_result, no additional text
+    {
+        "role": "assistant",
+        "content": [
+            {
+                "type": "tool_use",
+                "id": "toolu_123",
+                "name": "calculator",
+                "input": {"operation": "add", "a": 1234, "b": 5678},
+            }
+        ],
+    },
+    {
+        "role": "user",
+        "content": [
+            {"type": "tool_result", "tool_use_id": "toolu_123", "content": "6912"}
+        ],
+    },  # Just the tool_result, no additional text
 ]
 
 # If you still get empty responses after fixing the above:
 def handle_empty_response(client, messages):
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=1024,
-        messages=messages
+        model="claude-opus-4-7", max_tokens=1024, messages=messages
     )
 
     # Check if response is empty
-    if (response.stop_reason == "end_turn" and
-        not response.content:
-
+    if response.stop_reason == "end_turn" and not response.content:
         # INCORRECT: Don't just retry with the empty response
         # This won't work because Claude already decided it's done
 
@@ -121,9 +131,7 @@ def handle_empty_response(client, messages):
         messages.append({"role": "user", "content": "Please continue"})
 
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=1024,
-            messages=messages
+            model="claude-opus-4-7", max_tokens=1024, messages=messages
         )
 
     return response
@@ -139,12 +147,14 @@ def handle_empty_response(client, messages):
 
 Claude stopped because it reached the `max_tokens` limit specified in your request.
 
+Python
+
 ```
 # Request with limited tokens
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-7",
     max_tokens=10,
-    messages=[{"role": "user", "content": "Explain quantum physics"}]
+    messages=[{"role": "user", "content": "Explain quantum physics"}],
 )
 
 if response.stop_reason == "max_tokens":
@@ -153,16 +163,39 @@ if response.stop_reason == "max_tokens":
     # Consider making another request to continue
 ```
 
+# Incomplete tool use blocks
+
+If Claude's response is cut off due to hitting the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
+
+CLIPythonTypeScriptC#GoJavaPHPRuby
+
+```
+# Check if response was truncated during tool use
+if response.stop_reason == "max_tokens":
+    # Check if the last content block is an incomplete tool_use
+    last_block = response.content[-1]
+    if last_block.type == "tool_use":
+        # Send the request with higher max_tokens
+        response = client.messages.create(
+            model="claude-opus-4-7",
+            max_tokens=4096,  # Increased limit
+            messages=messages,
+            tools=tools,
+        )
+```
+
 # stop\_sequence
 
 Claude encountered one of your custom stop sequences.
 
+Python
+
 ```
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-7",
     max_tokens=1024,
     stop_sequences=["END", "STOP"],
-    messages=[{"role": "user", "content": "Generate text until you say END"}]
+    messages=[{"role": "user", "content": "Generate text until you say END"}],
 )
 
 if response.stop_reason == "stop_sequence":
@@ -173,14 +206,35 @@ if response.stop_reason == "stop_sequence":
 
 Claude is calling a tool and expects you to execute it.
 
-For most tool use implementations, we recommend using the [tool runner](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta) which automatically handles tool execution, result formatting, and conversation management.
+For most tool use implementations, we recommend using the [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner) which automatically handles tool execution, result formatting, and conversation management.
+
+Python
 
 ```
+from anthropic import Anthropic
+
+client = Anthropic()
+weather_tool = {
+    "name": "get_weather",
+    "description": "Get the current weather in a given location",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "location": {"type": "string", "description": "City and state"},
+        },
+        "required": ["location"],
+    },
+}
+
+def execute_tool(name, tool_input):
+    """Execute a tool and return the result."""
+    return f"Weather in {tool_input.get('location', 'unknown')}: 72°F"
+
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     tools=[weather_tool],
-    messages=[{"role": "user", "content": "What's the weather?"}]
+    messages=[{"role": "user", "content": "What's the weather?"}],
 )
 
 if response.stop_reason == "tool_use":
@@ -193,38 +247,47 @@ if response.stop_reason == "tool_use":
 
 # pause\_turn
 
-Used with server tools like web search when Claude needs to pause a long-running operation.
+Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](/docs/en/agents-and-tools/tool-use/server-tools) like web search or web fetch. The default limit is 10 iterations per request.
+
+When this happens, the response may contain a `server_tool_use` block without a corresponding `server_tool_result`. To let Claude finish processing, continue the conversation by sending the response back as-is.
+
+Python
 
 ```
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
-    messages=[{"role": "user", "content": "Search for latest AI news"}]
+    messages=[{"role": "user", "content": "Search for latest AI news"}],
 )
 
 if response.stop_reason == "pause_turn":
-    # Continue the conversation
+    # Continue the conversation by sending the response back
     messages = [
         {"role": "user", "content": original_query},
-        {"role": "assistant", "content": response.content}
+        {"role": "assistant", "content": response.content},
     ]
     continuation = client.messages.create(
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-7",
+        max_tokens=1024,
         messages=messages,
-        tools=[{"type": "web_search_20250305", "name": "web_search"}]
+        tools=[{"type": "web_search_20250305", "name": "web_search"}],
     )
 ```
+
+Your application should handle `pause_turn` in any agent loop that uses server tools. Simply add the assistant's response to your messages array and make another API request to let Claude continue.
 
 # refusal
 
 Claude refused to generate a response due to safety concerns.
 
+Python
+
 ```
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-7",
     max_tokens=1024,
-    messages=[{"role": "user", "content": "[Unsafe request]"}]
+    messages=[{"role": "user", "content": "[Unsafe request]"}],
 )
 
 if response.stop_reason == "refusal":
@@ -233,20 +296,22 @@ if response.stop_reason == "refusal":
     # Consider rephrasing or modifying the request
 ```
 
-If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1, you can try updating your API calls to use Sonnet 4 (`claude-sonnet-4-20250514`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
-
-To learn more about refusals triggered by API safety filters for Claude Sonnet 4.5, see [Understanding Sonnet 4.5's API Safety Filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1, you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 
 # model\_context\_window\_exceeded
 
 Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
 
+Python
+
 ```
 # Request with maximum tokens to get as much as possible
 response = client.messages.create(
-    model="claude-sonnet-4-5",
-    max_tokens=64000,  # Model's maximum output tokens
-    messages=[{"role": "user", "content": "Large input that uses most of context window..."}]
+    model="claude-opus-4-7",
+    max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k (Opus 4.7 supports 128k with streaming)
+    messages=[
+        {"role": "user", "content": "Large input that uses most of context window..."}
+    ],
 )
 
 if response.stop_reason == "model_context_window_exceeded":
@@ -297,36 +362,47 @@ def handle_truncated_response(response):
         # Option 2: Continue generation
         messages = [
             {"role": "user", "content": original_prompt},
-            {"role": "assistant", "content": response.content[0].text}
+            {"role": "assistant", "content": response.content[0].text},
         ]
         continuation = client.messages.create(
-            model="claude-sonnet-4-5",
+            model="claude-opus-4-7",
             max_tokens=1024,
-            messages=messages + [{"role": "user", "content": "Please continue"}]
+            messages=messages + [{"role": "user", "content": "Please continue"}],
         )
         return response.content[0].text + continuation.content[0].text
 ```
 
 # 3. Implement retry logic for pause\_turn
 
-For server tools that may pause:
+When using [server tools](/docs/en/agents-and-tools/tool-use/server-tools), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
 ```
-def handle_paused_conversation(initial_response, max_retries=3):
-    response = initial_response
-    messages = [{"role": "user", "content": original_query}]
+def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
+    """
+    Handle server tool conversations that may require multiple continuations.
 
-    for attempt in range(max_retries):
-        if response.stop_reason != "pause_turn":
-            break
+    The server runs a sampling loop when executing server tools. If the loop
+    reaches its iteration limit, the API returns pause_turn. Continue the
+    conversation by sending the response back to let Claude finish.
+    """
+    messages = [{"role": "user", "content": user_query}]
 
-        messages.append({"role": "assistant", "content": response.content})
+    for _ in range(max_continuations):
         response = client.messages.create(
-            model="claude-sonnet-4-5",
-            messages=messages,
-            tools=original_tools
+            model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
         )
 
+        if response.stop_reason != "pause_turn":
+            # Claude finished processing - return the final response
+            return response
+
+        # pause_turn: replace the full message list to maintain alternating roles
+        messages = [
+            {"role": "user", "content": user_query},
+            {"role": "assistant", "content": response.content},
+        ]
+
+    # Reached max continuations - return the last response
     return response
 ```
 
@@ -346,15 +422,26 @@ It's important to distinguish between `stop_reason` values and actual errors:
 * Indicate request processing failures
 * Response contains error details
 
+Python
+
 ```
+import anthropic
+from anthropic import Anthropic
+
+client = Anthropic()
+
 try:
-    response = client.messages.create(...)
+    response = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": "Hello!"}],
+    )
 
     # Handle successful response with stop_reason
     if response.stop_reason == "max_tokens":
         print("Response was truncated")
 
-except anthropic.APIError as e:
+except anthropic.APIStatusError as e:
     # Handle actual errors
     if e.status_code == 429:
         print("Rate limit exceeded")
@@ -370,8 +457,18 @@ When using streaming, `stop_reason` is:
 * Provided in the `message_delta` event
 * Not provided in any other events
 
+Python
+
 ```
-with client.messages.stream(...) as stream:
+from anthropic import Anthropic
+
+client = Anthropic()
+
+with client.messages.stream(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}],
+) as stream:
     for event in stream:
         if event.type == "message_delta":
             stop_reason = event.delta.stop_reason
@@ -383,7 +480,7 @@ with client.messages.stream(...) as stream:
 
 # Handling tool use workflows
 
-**Simpler with tool runner**: The example below shows manual tool handling. For most use cases, the [tool runner](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta) automatically handles tool execution with much less code.
+**Simpler with tool runner**: The example below shows manual tool handling. For most use cases, the [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner) automatically handles tool execution with much less code.
 
 ```
 def complete_tool_workflow(client, user_query, tools):
@@ -391,9 +488,7 @@ def complete_tool_workflow(client, user_query, tools):
 
     while True:
         response = client.messages.create(
-            model="claude-sonnet-4-5",
-            messages=messages,
-            tools=tools
+            model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
         )
 
         if response.stop_reason == "tool_use":
@@ -415,9 +510,7 @@ def get_complete_response(client, prompt, max_attempts=3):
 
     for _ in range(max_attempts):
         response = client.messages.create(
-            model="claude-sonnet-4-5",
-            messages=messages,
-            max_tokens=4096
+            model="claude-opus-4-7", messages=messages, max_tokens=4096
         )
 
         full_response += response.content[0].text
@@ -429,7 +522,7 @@ def get_complete_response(client, prompt, max_attempts=3):
         messages = [
             {"role": "user", "content": prompt},
             {"role": "assistant", "content": full_response},
-            {"role": "user", "content": "Please continue from where you left off."}
+            {"role": "user", "content": "Please continue from where you left off."},
         ]
 
     return full_response
@@ -446,14 +539,16 @@ def get_max_possible_tokens(client, prompt):
     without needing to calculate input token count
     """
     response = client.messages.create(
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-7",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=64000  # Set to model's maximum output tokens
+        max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k
     )
 
     if response.stop_reason == "model_context_window_exceeded":
         # Got the maximum possible tokens given input size
-        print(f"Generated {response.usage.output_tokens} tokens (context limit reached)")
+        print(
+            f"Generated {response.usage.output_tokens} tokens (context limit reached)"
+        )
     elif response.stop_reason == "max_tokens":
         # Got exactly the requested tokens
         print(f"Generated {response.usage.output_tokens} tokens (max_tokens reached)")
@@ -465,3 +560,5 @@ def get_max_possible_tokens(client, prompt):
 ```
 
 By properly handling `stop_reason` values, you can build more robust applications that gracefully handle different response scenarios and provide better user experiences.
+
+Was this page helpful?

@@ -1,64 +1,50 @@
-# Prefill Claude's response for greater output control
+# Prompt engineering overview
 
 **Source:** https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prefill-claudes-response
 
 Copy page
 
-While these tips apply broadly to all Claude models, you can find prompting tips specific to extended thinking models [here](/docs/en/build-with-claude/prompt-engineering/extended-thinking-tips).
+# Before prompt engineering
 
-Prefilling is only available for non-extended thinking modes. It's not currently supported with extended thinking.
+This guide assumes that you have:
 
-When using Claude, you have the unique ability to guide its responses by prefilling the `Assistant` message. This powerful technique allows you to direct Claude's actions, skip preambles, enforce specific formats like JSON or XML, and even help Claude maintain character consistency in role-play scenarios.
+1. A clear definition of the success criteria for your use case
+2. Some ways to empirically test against those criteria
+3. A first draft prompt you want to improve
 
-In some cases where Claude is not performing as expected, a few prefilled sentences can vastly improve Claude's performance. A little prefilling goes a long way!
+If not, we highly suggest you spend time establishing that first. Check out [Define success criteria and build evaluations](/docs/en/test-and-evaluate/develop-tests) for tips and guidance.
 
-# How to prefill Claude's response
+[Prompt generator
 
-To prefill, include the desired initial text in the `Assistant` message (Claude's response will continue from where the `Assistant` message leaves off):
+Don't have a first draft prompt? Try the prompt generator in the Claude Console!](/dashboard)[Prompting best practices
 
-```
-import anthropic
-
-client = anthropic.Anthropic()
-response = client.messages.create(
-    model="claude-sonnet-4-5",
-    max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "What is your favorite color?"},
-        {"role": "assistant", "content": "As an AI assistant, I don't have a favorite color, But if I had to pick, it would be green because"}  # Prefill here
-    ]
-)
-```
-
-The prefill content cannot end with trailing whitespace. A prefill like `"As an AI assistant, I "` (with a space at the end) will result in an error.
-
-# Examples
-
-# Example 1: Controlling output formatting and skipping the preamble
-
-**Power user tip**: Prefilling `{` forces Claude to skip the preamble and directly output the JSON object. This is cleaner, more concise, and easier for programs to parse without additional processing.
-For guaranteed JSON output that conforms to a specific schema, consider using [Structured Outputs](/docs/en/build-with-claude/structured-outputs) instead of prefilling. Structured outputs ensure Claude's response always matches your defined JSON schema, making it ideal for production applications that require strict format compliance.
-
-# Example: Structured data extraction without prefilling
-
-# Example: Structured data extraction with prefilling
-
-# Example 2: Maintaining character in roleplay scenarios
-
-**Role-play tip**: Prefilling a bracketed `[ROLE_NAME]` can remind Claude stay in character, even for longer and more complex conversations. This is especially powerful when combined with role prompting in the `system` parameter.
-
-# Example: Maintaining character without role prompting
-
-# Example: Maintaining character with role prompting
+For model-specific tuning guidance for Claude's latest models, start here.](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
 
 ---
 
-[Working with Messages
+# When to prompt engineer
 
-See more examples of prefill and other Messages API patterns.](/docs/en/build-with-claude/working-with-messages)[Prompt library
+This guide focuses on success criteria that are controllable through prompt engineering.
+Not every success criteria or failing eval is best solved by prompt engineering. For example, latency and cost can be sometimes more easily improved by selecting a different model.
 
-Get inspired by a curated selection of prompts for various tasks and use cases.](/docs/en/resources/prompt-library/library)[GitHub prompting tutorial
+---
+
+# How to prompt engineer
+
+All prompting techniques — from clarity and examples to XML structuring, role prompting, thinking, and prompt chaining — are covered in [Prompting best practices](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices). That's the living reference; start there.
+
+The [Claude Console](/dashboard) also offers [prompting tools](/docs/en/build-with-claude/prompt-engineering/prompting-tools)—prompt generator, templates and variables, and prompt improver—to help you build and refine prompts quickly.
+
+---
+
+# Prompt engineering tutorial
+
+If you're an interactive learner, you can dive into our interactive tutorials instead!
+
+[GitHub prompting tutorial
 
 An example-filled tutorial that covers the prompt engineering concepts found in our docs.](https://github.com/anthropics/prompt-eng-interactive-tutorial)[Google Sheets prompting tutorial
 
 A lighter weight version of our prompt engineering tutorial via an interactive spreadsheet.](https://docs.google.com/spreadsheets/d/19jzLgRruG9kjUQNKtCg1ZjdD6l6weA6qRXG5zLIAhC8)
+
+Was this page helpful?

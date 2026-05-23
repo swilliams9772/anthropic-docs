@@ -1,12 +1,12 @@
 # List Invites
 
-**Source:** https://platform.claude.com/docs/en/api/admin/invites/list
+**Source:** http://platform.claude.com/docs/en/api/admin/invites/list
 
 Copy page
 
 # List Invites
 
-get/v1/organizations/invites
+GET/v1/organizations/invites
 
 List Invites
 
@@ -46,19 +46,15 @@ expires\_at: string
 
 RFC 3339 datetime string indicating when the Invite expires.
 
-formatdate-time
-
 invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
-
-formatdate-time
 
 role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -74,7 +70,7 @@ status: "accepted" or "expired" or "deleted" or "pending"
 
 Status of the Invite.
 
-Accepts one of the following:
+One of the following:
 
 "accepted"
 
@@ -89,10 +85,6 @@ type: "invite"
 Object type.
 
 For Invites, this is always `"invite"`.
-
-Accepts one of the following:
-
-"invite"
 
 first\_id: string
 
@@ -110,6 +102,7 @@ List Invites
 
 ```
 curl https://api.anthropic.com/v1/organizations/invites \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 

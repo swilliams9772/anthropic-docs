@@ -1,12 +1,14 @@
-# Using Claude Code with your Team or Enterprise plan
+# Use Claude Code with your Team or Enterprise plan
 
 **Source:** https://support.claude.com/en/articles/11845131-using-claude-code-with-your-team-or-enterprise-plan
 
-Claude Code is only available to members of Team and Enterprise organizations assigned to premium seats.
-
 # What is Claude Code?
 
-Claude Code is a command line tool that gives you access to Claude models directly in your terminal, allowing you to delegate complex coding tasks while maintaining transparency and control. With premium seats on Team and Enterprise plans, you can access Claude on the web, desktop, and mobile apps, plus Claude Code in your terminal with one unified subscription.
+Claude Code is a command line tool that gives you access to Claude models directly in your terminal, allowing you to delegate complex coding tasks while maintaining transparency and control.
+
+Claude Code is included with every Team plan seat. Premium seats offer more usage for team members with heavier workloads. For Enterprise plans, Claude Code is included with the single Enterprise seat on new and self-serve plans. On older Enterprise plans, Claude Code is available on Chat + Claude Code seats (usage-based billing) and Premium seats (seat-based billing).
+
+With a Team or Enterprise plan, you can access Claude on the web, desktop, and mobile apps, plus Claude Code in your terminal—all with one unified subscription.
 
 # Why use Claude and Claude Code?
 
@@ -15,21 +17,25 @@ Combine two powerful AI products in one unified subscription:
 * Use Claude for writing, research, analysis, and collaboration across teams.
 * Use Claude Code for terminal-based coding workflows and development tasks.
 
-# How to connect Claude Code to your Team or Enterprise plan
+---
 
-# Step 1: Purchase premium seats
+# Connect Claude Code to your Team or Enterprise plan
 
-Team or Enterprise plan Owners can [purchase premium seats](https://support.claude.com/en/articles/12004354-how-to-purchase-and-manage-premium-seats) that include Claude Code access and manage seat allocation in [Admin settings > Organization](https://claude.ai/admin-settings/organization).
+# Step 1: Confirm Claude Code access (Enterprise plans only)
+
+If your organization is on a new or self-serve Enterprise plan, Claude Code is already included with every Enterprise seat — no additional purchase is needed. Proceed to Step 2.
+
+**Note:** If your organization has a HIPAA-ready Enterprise plan, Claude Code is included in your seat but is not covered under the HIPAA-ready offering. See **[HIPAA-ready Enterprise plans](https://support.claude.com/en/articles/13296973-hipaa-ready-enterprise-plans)** for details.
+
+If your organization is on an older Enterprise plan with Chat and Chat + Claude Code seats, or Standard and Premium seats, you'll need to ensure you have a seat type that includes Claude Code. Owners can purchase or reassign **Chat + Claude Code / Premium seats** in **[Organization settings > Organization](https://claude.ai/admin-settings/organization)**. See **[Purchasing and managing seats on Enterprise plans](https://support.claude.com/en/articles/13393991-purchasing-and-managing-seats-on-enterprise-plans)** for details.
 
 # Step 2: Download and install Claude Code
 
 **Note:** If you already have Claude Code installed on your computer, proceed to Step 3.
 
-1. Once you have Claude Code access via a premium seat, visit the [Claude Code page](https://claude.com/product/claude-code).
-2. Click the link to install [Node.js 18+](https://nodejs.org/en/download).
-3. Open your terminal, then run: `npm install -g @anthropic-ai/claude-code`
+Once you confirm you have access, follow the installation instructions in our **[Claude Code Docs](https://code.claude.com/docs/en/quickstart#step-1-install-claude-code)** for the environment you're using.
 
-# Step 3: Authenticate with the Team or Enterprise account tied to the premium seat
+# Step 3: Authenticate with the Team or Enterprise account
 
 1. Type `claude` within your Terminal window to start a Claude Code session.
 2. When prompted during setup or first use, select a login method.
@@ -48,32 +54,16 @@ If you're not seeing the option to authenticate with your preferred account, fol
 3. Restart your terminal completely for the change to take effect.
 4. Run `claude` and select the correct account to use Claude Code.
 
-# How do usage limits work?
-
-**Team plan members with premium seats:**
-
-Opus 4.5 is now your default model.
-
-**Enterprise plan members with premium seats:**
-
-Opus 4.5 is now available. Opus 4.5 consumes your weekly limit faster than Sonnet, so we recommend Sonnet 4.5 for everyday use.
-
-Premium seats include enhanced usage limits compared to standard seats. Note that usage is tracked across both Claude Code and Claude (on the web, desktop, and mobile).
-
-# For Team plans
-
-Average users can send approximately 225 messages with Claude every five hours, and have weekly usage limits of 50-95 hours of Sonnet 4 usage and 3-7 hours of Opus 4 usage. This will vary based on factors such as codebase size and user settings like auto-accept mode. Heavy Opus users with large codebases or those running multiple Claude Code instances in parallel will hit their limits sooner.
-
-# For Enterprise plans
-
-If you’re on an Enterprise plan and looking for more specific information about usage limits, please reach out to your Account Manager or [our Sales team](https://www.claude.com/contact-sales).
+---
 
 # What happens when you hit usage limits
 
-Your Team or Enterprise organization can enable extra usage to allow team members on all seat types to continue working with Claude and Claude Code after reaching their included usage limits. See this article for more information: [Extra Usage for Claude for Work (Team and Enterprise) Plans](https://support.claude.com/en/articles/12005970-extra-usage-for-claude-for-work-team-and-enterprise-plans).
+If your organization is on a **usage-based Enterprise plan** (including self-serve Enterprise), there are no per-seat usage limits—usage is based on consumption and billed at API rates. See **[How am I billed for my Enterprise plan?](https://support.claude.com/en/articles/11526368-how-am-i-billed-for-my-enterprise-plan)** for details on how usage billing works.
+
+If your organization is on a Team plan or a seat-based Enterprise plan, you can enable usage credits to allow team members to continue working with Claude, Cowork, and Claude Code after reaching their included usage limits. For more information, see **[Manage usage credits for Team and seat-based Enterprise plans](https://support.claude.com/en/articles/12005970-)**.
 
 ---
 
 Related Articles
 
-[About Team and Enterprise Plan Usage](https://support.claude.com/en/articles/9267304-about-team-and-enterprise-plan-usage)[What is the Enterprise plan?](https://support.claude.com/en/articles/9797531-what-is-the-enterprise-plan)[Using Claude Code with your Pro or Max plan](https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan)[Claude Code Model Configuration](https://support.claude.com/en/articles/11940350-claude-code-model-configuration)[Extra Usage for Team and Enterprise Plans](https://support.claude.com/en/articles/12005970-extra-usage-for-team-and-enterprise-plans)
+[What is the Enterprise plan?](https://support.claude.com/en/articles/9797531-what-is-the-enterprise-plan)[How am I billed for my Enterprise plan?](https://support.claude.com/en/articles/11526368-how-am-i-billed-for-my-enterprise-plan)[HIPAA-ready Enterprise plans](https://support.claude.com/en/articles/13296973-hipaa-ready-enterprise-plans)[Purchase and manage seats on Enterprise plans](https://support.claude.com/en/articles/13393991-purchase-and-manage-seats-on-enterprise-plans)[Use the Claude Agent SDK with your Claude plan](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan)

@@ -1,10 +1,10 @@
-# Custom Data Retention Controls for Enterprise Plans
+# Configure custom data retention controls for Enterprise plans
 
 **Source:** https://support.claude.com/en/articles/10440198-custom-data-retention-controls-for-claude-enterprise
 
 This feature is available to Enterprise plan customers. To set custom retention periods for your organization, you must have either a Primary Owner or Owner role.
 
-*This article is about our commercial products such as Claude for Work and the Anthropic API. For our consumer products such as Claude Free, Pro, Max and when accounts from those plans use Claude Code, see [here](https://privacy.claude.com/en/collections/10663362-consumers).*
+*This article is about our commercial products such as Claude for Work and the Anthropic API. For our consumer products such as Claude Free, Pro, Max and when accounts from those plans use Claude Code, see **[here](https://privacy.claude.com/en/collections/10663362-consumers)**.*
 
 Custom data retention controls allow organizations to manage how long Claude stores conversation and project data. This article explains how to set up and manage data retention periods for your organization.
 
@@ -38,7 +38,7 @@ When data reaches the end of its retention period:
 # To set custom retention periods:
 
 1. Log in to your Owner Enterprise plan account.
-2. Navigate to [Admin settings > Data and Privacy](https://claude.ai/admin-settings/data-privacy-controls).
+2. Navigate to **[Organization settings > Data and Privacy](https://claude.ai/admin-settings/data-privacy-controls)**.
 3. Set your desired retention period (minimum 30 days).
 4. Save your changes.
 
@@ -48,10 +48,10 @@ If a conversation’s last message is at 3PM UTC on March 1 with a 30-day retent
 
 # Monitoring retention-related activities
 
-All retention-related actions and changes are automatically tracked in [audit logs](https://support.claude.com/en/articles/9970975-how-to-access-audit-logs). You can access these logs to monitor changes to retention settings and data deletion events.
+All retention-related actions and changes are automatically tracked in **[audit logs](https://support.claude.com/en/articles/9970975-how-to-access-audit-logs)**. You can access these logs to monitor changes to retention settings and data deletion events.
 
 ---
 
 Related Articles
 
-[Can you delete data that I sent via Team and Enterprise plans?](https://support.claude.com/en/articles/9796617-can-you-delete-data-that-i-sent-via-team-and-enterprise-plans)[Using Claude’s chat search and memory to build on previous context](https://support.claude.com/en/articles/11817273-using-claude-s-chat-search-and-memory-to-build-on-previous-context)[What happens to a user's data when they are removed from a Team or Enterprise organization?](https://support.claude.com/en/articles/12053672-what-happens-to-a-user-s-data-when-they-are-removed-from-a-team-or-enterprise-organization)[Using incognito chats](https://support.claude.com/en/articles/12260368-using-incognito-chats)[Usage Analytics for Enterprise Plans](https://support.claude.com/en/articles/12883420-usage-analytics-for-enterprise-plans)
+[Can you delete data that I sent via Team and Enterprise plans?](https://support.claude.com/en/articles/9796617-can-you-delete-data-that-i-sent-via-team-and-enterprise-plans)[Use Claude’s chat search and memory to build on previous context](https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context)[Using incognito chats](https://support.claude.com/en/articles/12260368-using-incognito-chats)[View usage analytics for Team and Enterprise plans](https://support.claude.com/en/articles/12883420-view-usage-analytics-for-team-and-enterprise-plans)[Manage custom roles on Enterprise plans](https://support.claude.com/en/articles/13930452-manage-custom-roles-on-enterprise-plans)

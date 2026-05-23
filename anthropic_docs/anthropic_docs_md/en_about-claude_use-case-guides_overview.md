@@ -1,6 +1,6 @@
 # Guides to common use cases
 
-**Source:** https://platform.claude.com/docs/en/about-claude/use-case-guides/overview
+**Source:** http://platform.claude.com/docs/en/about-claude/use-case-guides/overview
 
 Copy page
 
@@ -15,3 +15,5 @@ Build intelligent, context-aware chatbots with Claude to enhance customer suppor
 Techniques and best practices for using Claude to perform content filtering and general content moderation.](/docs/en/about-claude/use-case-guides/content-moderation)[Legal summarization
 
 Summarize legal documents using Claude to extract key information and expedite research.](/docs/en/about-claude/use-case-guides/legal-summarization)
+
+Was this page helpful?

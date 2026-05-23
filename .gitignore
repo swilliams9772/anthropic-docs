@@ -42,4 +42,14 @@ Thumbs.db
 
 # Exclude scraped data to keep repo size manageable
 anthropic_docs/anthropic_docs_full_html/
-anthropic_docs/anthropic_docs_html/ 
+anthropic_docs/anthropic_docs_html/
+
+# Pre-scrape working backups (created automatically before re-runs).
+# These can be regenerated from git history at any commit, so we don't
+# want to bloat the repo with them.
+anthropic_docs_backup_*/
+anthropic_docs_prev_*/
+
+# Per-run analysis artifacts that are easy to regenerate
+debug_release_notes.html
+scraper_run*.log 

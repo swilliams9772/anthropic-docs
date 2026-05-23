@@ -1,22 +1,40 @@
 # System Prompts
 
-**Source:** https://platform.claude.com/docs/en/release-notes/system-prompts
+**Source:** http://platform.claude.com/docs/en/release-notes/system-prompts
 
 Copy page
 
-Claude's web interface ([Claude.ai](https://www.claude.ai)) and mobile apps use a system prompt to provide up-to-date information, such as the current date, to Claude at the start of every conversation. We also use the system prompt to encourage certain behaviors, such as always providing code snippets in Markdown. We periodically update this prompt as we continue to improve Claude's responses. These system prompt updates do not apply to the Anthropic API. Updates between versions are bolded.
+Claude's web interface ([claude.ai](https://www.claude.ai)) and mobile apps use a system prompt to provide up-to-date information, such as the current date, to Claude at the start of every conversation. The system prompt also encourages certain behaviors, such as always providing code snippets in Markdown. This prompt is periodically updated to improve Claude's responses. These system prompt updates do not apply to the Claude API. Updates between versions are bolded.
+
+# Claude Opus 4.7
+
+# April 16, 2026
+
+# Claude Sonnet 4.6
+
+# February 17, 2026
+
+# Claude Opus 4.6
+
+# February 5, 2026
 
 # Claude Opus 4.5
+
+# January 18, 2026
 
 # November 24, 2025
 
 # Claude Haiku 4.5
+
+# January 18, 2026
 
 # November 19, 2025
 
 # October 15, 2025
 
 # Claude Sonnet 4.5
+
+# January 18, 2026
 
 # November 19, 2025
 
@@ -67,3 +85,5 @@ Claude's web interface ([Claude.ai](https://www.claude.ai)) and mobile apps use 
 # Claude Haiku 3
 
 # July 12th, 2024
+
+Was this page helpful?

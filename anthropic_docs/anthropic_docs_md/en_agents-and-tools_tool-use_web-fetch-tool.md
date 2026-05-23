@@ -1,16 +1,20 @@
 # Web fetch tool
 
-**Source:** https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool
+**Source:** http://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool
 
 Copy page
 
 The web fetch tool allows Claude to retrieve full content from specified web pages and PDF documents.
 
-The web fetch tool is currently in beta. To enable it, use the beta header `web-fetch-2025-09-10` in your API requests.
+The latest web fetch tool version (`web_fetch_20260209`) supports **dynamic filtering** with [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. The previous tool version (`web_fetch_20250910`) remains available without dynamic filtering.
 
-Please use [this form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation.
+For [Claude Mythos Preview](https://anthropic.com/glasswing), web fetch is available on the Claude API and Microsoft Foundry. It is not currently available for Mythos Preview on Amazon Bedrock or Vertex AI.
 
-Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. We recommend only using this tool in trusted environments or when handling non-sensitive data.
+Use the [feedback form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation.
+
+For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#zdr-and-allowed-callers).
+
+Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. Only use this tool in trusted environments or when handling non-sensitive data.
 
 To minimize exfiltration risks, Claude is not allowed to dynamically construct URLs. Claude can only fetch URLs that have been explicitly provided by the user or that come from previous web search or web fetch results. However, there is still residual risk that should be carefully considered when using this tool.
 
@@ -20,18 +24,7 @@ If data exfiltration is a concern, consider:
 * Using the `max_uses` parameter to limit the number of requests
 * Using the `allowed_domains` parameter to restrict to known safe domains
 
-# Supported models
-
-Web fetch is available on:
-
-* Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
-* Claude Sonnet 4 (`claude-sonnet-4-20250514`)
-* Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-7-sonnet-20250219`)
-* Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
-* Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-5-haiku-latest`)
-* Claude Opus 4.5 (`claude-opus-4-5-20251101`)
-* Claude Opus 4.1 (`claude-opus-4-1-20250805`)
-* Claude Opus 4 (`claude-opus-4-20250514`)
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 # How web fetch works
 
@@ -42,35 +35,63 @@ When you add the web fetch tool to your API request:
 3. For PDFs, automatic text extraction is performed.
 4. Claude analyzes the fetched content and provides a response with optional citations.
 
-The web fetch tool currently does not support web sites dynamically rendered via Javascript.
+The web fetch tool currently does not support websites dynamically rendered with JavaScript.
+
+# Dynamic filtering
+
+Fetching full web pages and PDFs can quickly consume tokens, especially when only specific information is needed from large documents. With the `web_fetch_20260209` tool version, Claude can write and execute code to filter the fetched content before loading it into context.
+
+This dynamic filtering is particularly useful for:
+
+* Extracting specific sections from long documents
+* Processing structured data from web pages
+* Filtering relevant information from PDFs
+* Reducing token costs when working with large documents
+
+Dynamic filtering requires the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) to be enabled. The web fetch tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). It is not currently available on Amazon Bedrock or Vertex AI.
+
+To enable dynamic filtering, use the `web_fetch_20260209` tool version:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+```
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[
+        {
+            "role": "user",
+            "content": "Fetch the content at https://example.com/research-paper and extract the key findings.",
+        }
+    ],
+    tools=[{"type": "web_fetch_20260209", "name": "web_fetch"}],
+)
+print(response)
+```
 
 # How to use web fetch
 
 Provide the web fetch tool in your API request:
 
-Shell
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: web-fetch-2025-09-10" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-sonnet-4-5",
-        "max_tokens": 1024,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please analyze the content at https://example.com/article"
-            }
-        ],
-        "tools": [{
-            "type": "web_fetch_20250910",
-            "name": "web_fetch",
-            "max_uses": 5
-        }]
-    }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": "Please analyze the content at https://example.com/article",
+        }
+    ],
+    tools=[{"type": "web_fetch_20250910", "name": "web_fetch", "max_uses": 5}],
+)
+print(response)
 ```
 
 # Tool definition
@@ -105,29 +126,15 @@ JSON
 
 # Max uses
 
-The `max_uses` parameter limits the number of web fetches performed. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` will be an error with the `max_uses_exceeded` error code. There is currently no default limit.
+The `max_uses` parameter limits the number of web fetches performed. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` is an error with the `max_uses_exceeded` error code. There is currently no default limit.
 
 # Domain filtering
 
-When using domain filters:
-
-* Domains should not include the HTTP/HTTPS scheme (use `example.com` instead of `https://example.com`)
-* Subdomains are automatically included (`example.com` covers `docs.example.com`)
-* Subpaths are supported (`example.com/blog`)
-* You can use either `allowed_domains` or `blocked_domains`, but not both in the same request.
-
-Be aware that Unicode characters in domain names can create security vulnerabilities through homograph attacks, where visually similar characters from different scripts can bypass domain filters. For example, `аmazon.com` (using Cyrillic 'а') may appear identical to `amazon.com` but represents a different domain.
-
-When configuring domain allow/block lists:
-
-* Use ASCII-only domain names when possible
-* Consider that URL parsers may handle Unicode normalization differently
-* Test your domain filters with potential homograph variations
-* Regularly audit your domain configurations for suspicious Unicode characters
+For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#domain-filtering).
 
 # Content limits
 
-The `max_content_tokens` parameter limits the amount of content that will be included in the context. If the fetched content exceeds this limit, it will be truncated. This helps control token usage when fetching large documents.
+The `max_content_tokens` parameter limits the amount of content included in the context. If the fetched content exceeds this limit, the tool truncates it. This helps control token usage when fetching large documents.
 
 The `max_content_tokens` parameter limit is approximate. The actual number of input tokens used can vary by a small amount.
 
@@ -140,6 +147,8 @@ When displaying API outputs directly to end users, citations must be included to
 # Response
 
 Here's an example response structure:
+
+Output
 
 ```
 {
@@ -174,7 +183,7 @@ Here's an example response structure:
             "data": "Full text content of the article..."
           },
           "title": "Article Title",
-          "citations": {"enabled": true}
+          "citations": { "enabled": true }
         },
         "retrieved_at": "2025-08-25T10:30:00Z"
       }
@@ -219,9 +228,11 @@ Fetch results include:
 * `content`: A document block containing the fetched content
 * `retrieved_at`: Timestamp when the content was retrieved
 
-The web fetch tool caches results to improve performance and reduce redundant requests. This means the content returned may not always be the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns.
+The web fetch tool caches results to improve performance and reduce redundant requests. The content returned may not always reflect the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns.
 
-For PDF documents, the content will be returned as base64-encoded data:
+For PDF documents, content is returned as base64-encoded data:
+
+Output
 
 ```
 {
@@ -237,7 +248,7 @@ For PDF documents, the content will be returned as base64-encoded data:
         "media_type": "application/pdf",
         "data": "JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBvYmo..."
       },
-      "citations": {"enabled": true}
+      "citations": { "enabled": true }
     },
     "retrieved_at": "2025-08-25T10:30:02Z"
   }
@@ -247,6 +258,8 @@ For PDF documents, the content will be returned as base64-encoded data:
 # Errors
 
 When the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body:
+
+Output
 
 ```
 {
@@ -284,37 +297,31 @@ The tool cannot fetch arbitrary URLs that Claude generates or URLs from containe
 
 Web fetch works seamlessly with web search for comprehensive information gathering:
 
-```
-import anthropic
+Python
 
+```
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-7",
     max_tokens=4096,
     messages=[
         {
             "role": "user",
-            "content": "Find recent articles about quantum computing and analyze the most relevant one in detail"
+            "content": "Find recent articles about quantum computing and analyze the most relevant one in detail",
         }
     ],
     tools=[
-        {
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "max_uses": 3
-        },
+        {"type": "web_search_20250305", "name": "web_search", "max_uses": 3},
         {
             "type": "web_fetch_20250910",
             "name": "web_fetch",
             "max_uses": 5,
-            "citations": {"enabled": True}
-        }
+            "citations": {"enabled": True},
+        },
     ],
-    extra_headers={
-        "anthropic-beta": "web-fetch-2025-09-10"
-    }
 )
+print(response)
 ```
 
 In this workflow, Claude will:
@@ -326,67 +333,13 @@ In this workflow, Claude will:
 
 # Prompt caching
 
-Web fetch works with [prompt caching](/docs/en/build-with-claude/prompt-caching). To enable prompt caching, add `cache_control` breakpoints in your request. Cached fetch results can be reused across conversation turns.
-
-```
-import anthropic
-
-client = anthropic.Anthropic()
-
-# First request with web fetch
-messages = [
-    {
-        "role": "user",
-        "content": "Analyze this research paper: https://arxiv.org/abs/2024.12345"
-    }
-]
-
-response1 = client.messages.create(
-    model="claude-sonnet-4-5",
-    max_tokens=1024,
-    messages=messages,
-    tools=[{
-        "type": "web_fetch_20250910",
-        "name": "web_fetch"
-    }],
-    extra_headers={
-        "anthropic-beta": "web-fetch-2025-09-10"
-    }
-)
-
-# Add Claude's response to conversation
-messages.append({
-    "role": "assistant",
-    "content": response1.content
-})
-
-# Second request with cache breakpoint
-messages.append({
-    "role": "user",
-    "content": "What methodology does the paper use?",
-    "cache_control": {"type": "ephemeral"}
-})
-
-response2 = client.messages.create(
-    model="claude-sonnet-4-5",
-    max_tokens=1024,
-    messages=messages,
-    tools=[{
-        "type": "web_fetch_20250910",
-        "name": "web_fetch"
-    }],
-    extra_headers={
-        "anthropic-beta": "web-fetch-2025-09-10"
-    }
-)
-
-# The second response benefits from cached fetch results
-print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
-```
+For caching tool definitions across turns, see [Tool use with prompt caching](/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching).
 
 # Streaming
 
 With streaming enabled, fetch events are part of the stream with a pause during content retrieval:
+
+Output
 
 ```
 event: message_start
@@ -422,13 +375,15 @@ You can include the web fetch tool in the [Messages Batches API](/docs/en/build-
 Web fetch usage has **no additional charges** beyond standard token costs:
 
 ```
-"usage": {
-  "input_tokens": 25039,
-  "output_tokens": 931,
-  "cache_read_input_tokens": 0,
-  "cache_creation_input_tokens": 0,
-  "server_tool_use": {
-    "web_fetch_requests": 1
+{
+  "usage": {
+    "input_tokens": 25039,
+    "output_tokens": 931,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 1
+    }
   }
 }
 ```
@@ -439,6 +394,16 @@ To protect against inadvertently fetching large content that would consume exces
 
 Example token usage for typical content:
 
-* Average web page (10KB): ~2,500 tokens
-* Large documentation page (100KB): ~25,000 tokens
-* Research paper PDF (500KB): ~125,000 tokens
+* Average web page (10 kB): ~2,500 tokens
+* Large documentation page (100 kB): ~25,000 tokens
+* Research paper PDF (500 kB): ~125,000 tokens
+
+# Next steps
+
+[Server tools
+
+Shared mechanics for Anthropic-executed tools.](/docs/en/agents-and-tools/tool-use/server-tools)[Tool reference
+
+Directory of all Anthropic-provided tools.](/docs/en/agents-and-tools/tool-use/tool-reference)
+
+Was this page helpful?

@@ -1,6 +1,6 @@
 # Streaming refusals
 
-**Source:** https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals
+**Source:** http://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals
 
 Copy page
 
@@ -10,7 +10,7 @@ To learn more about refusals triggered by API safety filters for Claude Sonnet 4
 
 # API response format
 
-When streaming classifiers detect content that violates our policies, the API returns this response:
+When streaming classifiers detect content that violates Anthropic's policies, the API returns this response:
 
 ```
 {
@@ -29,41 +29,45 @@ No additional refusal message is included. You must handle the response and prov
 
 # Reset context after refusal
 
-When you receive **`stop_reason`: `refusal`**, you must reset the conversation context **by removing or updating the turn that was refused** before continuing. Attempting to continue without resetting will result in continued refusals.
+When you receive **`stop_reason`: `refusal`**, you must reset the conversation context before continuing. You can remove or rephrase the turn that triggered the refusal, or clear the conversation history entirely. Attempting to continue without resetting will result in continued refusals.
 
 Usage metrics are still provided in the response for billing purposes, even when the response is refused.
 
 You will be billed for output tokens up until the refusal.
 
-If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1, you can try updating your API calls to use Sonnet 4 (`claude-sonnet-4-20250514`), which has different usage restrictions.
+If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1, you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 
 # Implementation guide
 
 Here's how to detect and handle streaming refusals in your application:
 
-Shell
+cURLPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-# Stream request and check for refusal
-response=$(curl -N https://api.anthropic.com/v1/messages \
-  --header "anthropic-version: 2023-06-01" \
-  --header "content-type: application/json" \
-  --header "x-api-key: $ANTHROPIC_API_KEY" \
-  --data '{
-    "model": "claude-sonnet-4-5",
-    "messages": [{"role": "user", "content": "Hello"}],
-    "max_tokens": 256,
-    "stream": true
-  }')
+client = anthropic.Anthropic()
+messages = []
 
-# Check for refusal in the stream
-if echo "$response" | grep -q '"stop_reason":"refusal"'; then
-  echo "Response refused - resetting conversation context"
-  # Reset your conversation state here
-fi
+def reset_conversation():
+    """Reset conversation context after refusal"""
+    global messages
+    messages = []
+    print("Conversation reset due to refusal")
+
+try:
+    with client.messages.stream(
+        max_tokens=1024,
+        messages=messages + [{"role": "user", "content": "Hello"}],
+        model="claude-opus-4-7",
+    ) as stream:
+        for event in stream:
+            # Check for refusal in message delta
+            if event.type == "message_delta":
+                if event.delta.stop_reason == "refusal":
+                    reset_conversation()
+                    break
+except Exception as e:
+    print(f"Error: {e}")
 ```
-
-If you need to test refusal handling in your application, you can use this special test string as your prompt: `ANTHROPIC_MAGIC_STRING_TRIGGER_REFUSAL_1FAEFB6177B4672DEE07F9D3AFC62588CCD2631EDCF22E8CCC1FB35B501C9C86`
 
 # Current refusal types
 
@@ -88,3 +92,5 @@ Future API versions will expand the **`stop_reason`: `refusal`** pattern to unif
 
 * Future models will expand this pattern to other refusal types
 * Plan your error handling to accommodate future unification of refusal responses
+
+Was this page helpful?

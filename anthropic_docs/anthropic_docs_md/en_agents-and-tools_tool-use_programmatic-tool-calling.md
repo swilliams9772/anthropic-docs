@@ -1,73 +1,69 @@
 # Programmatic tool calling
 
-**Source:** https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling
+**Source:** http://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling
 
 Copy page
 
-Programmatic tool calling allows Claude to write code that calls your tools programmatically within a [code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool) container, rather than requiring round trips through the model for each tool invocation. This reduces latency for multi-tool workflows and decreases token consumption by allowing Claude to filter or process data before it reaches the model's context window.
+Programmatic tool calling allows Claude to write code that calls your tools programmatically within a [code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool) container, rather than requiring round trips through the model for each tool invocation. This reduces latency for multi-tool workflows and decreases token consumption by allowing Claude to filter or process data before it reaches the model's context window. On agentic search benchmarks like [BrowseComp](https://arxiv.org/abs/2504.12516) and [DeepSearchQA](https://github.com/google-deepmind/deepsearchqa), which test multi-step web research and complex information retrieval, adding programmatic tool calling on top of basic search tools was the key factor that fully unlocked agent performance.
 
-Programmatic tool calling is currently in public beta.
+The difference compounds fast in real workflows. Consider checking budget compliance across 20 employees: the traditional approach requires 20 separate model round-trips, pulling thousands of expense line items into the context along the way. With programmatic tool calling, a single script runs all 20 lookups, filters the results, and returns only the employees who exceeded their limits, shrinking what Claude needs to reason over from hundreds of kilobytes down to a handful of lines.
 
-To use this feature, add the `"advanced-tool-use-2025-11-20"` [beta header](/docs/en/api/beta-headers) to your API requests.
+For a deeper look at the inference and context costs that programmatic tool calling addresses, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use).
 
 This feature requires the code execution tool to be enabled.
 
-Please reach out through our [feedback form](https://forms.gle/MVGTnrHe73HpMiho8) to share your feedback on this feature.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). Data is retained according to the feature's standard retention policy.
 
 # Model compatibility
 
-Programmatic tool calling is available on the following models:
+Programmatic tool calling requires `code_execution_20260120`, which is supported on the following models:
 
-| Model | Tool Version |
-| --- | --- |
-| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |
-| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |
+| Model |
+| --- |
+| Claude Opus 4.7 (`claude-opus-4-7`) |
+| Claude Opus 4.6 (`claude-opus-4-6`) |
+| Claude Sonnet 4.6 (`claude-sonnet-4-6`) |
+| Claude Opus 4.5 (`claude-opus-4-5-20251101`) |
+| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) |
 
-Programmatic tool calling is available via the Claude API and Microsoft Foundry.
+For the full code execution tool version matrix, see the [code execution tool model compatibility table](/docs/en/agents-and-tools/tool-use/code-execution-tool#model-compatibility). Programmatic tool calling is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). It is not currently available on Amazon Bedrock or Vertex AI.
 
 # Quick start
 
 Here's a simple example where Claude programmatically queries a database multiple times and aggregates results:
 
-Shell
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: advanced-tool-use-2025-11-20" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-sonnet-4-5",
-        "max_tokens": 4096,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue"
-            }
-        ],
-        "tools": [
-            {
-                "type": "code_execution_20250825",
-                "name": "code_execution"
-            },
-            {
-                "name": "query_database",
-                "description": "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
-                "input_schema": {
-                    "type": "object",
-                    "properties": {
-                        "sql": {
-                            "type": "string",
-                            "description": "SQL query to execute"
-                        }
-                    },
-                    "required": ["sql"]
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[
+        {
+            "role": "user",
+            "content": "Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue",
+        }
+    ],
+    tools=[
+        {"type": "code_execution_20260120", "name": "code_execution"},
+        {
+            "name": "query_database",
+            "description": "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "sql": {"type": "string", "description": "SQL query to execute"}
                 },
-                "allowed_callers": ["code_execution_20250825"]
-            }
-        ]
-    }'
+                "required": ["sql"],
+            },
+            "allowed_callers": ["code_execution_20260120"],
+        },
+    ],
+)
+
+print(response)
 ```
 
 # How programmatic tool calling works
@@ -75,16 +71,16 @@ curl https://api.anthropic.com/v1/messages \
 When you configure a tool to be callable from code execution and Claude decides to use that tool:
 
 1. Claude writes Python code that invokes the tool as a function, potentially including multiple tool calls and pre/post-processing logic
-2. Claude runs this code in a sandboxed container via code execution
+2. Claude runs this code in a sandboxed container through code execution
 3. When a tool function is called, code execution pauses and the API returns a `tool_use` block
 4. You provide the tool result, and code execution continues (intermediate results are not loaded into Claude's context window)
 5. Once all code execution completes, Claude receives the final output and continues working on the task
 
 This approach is particularly useful for:
 
-* **Large data processing**: Filter or aggregate tool results before they reach Claude's context
-* **Multi-step workflows**: Save tokens and latency by calling tools serially or in a loop without sampling Claude in-between tool calls
-* **Conditional logic**: Make decisions based on intermediate tool results
+* **Large data processing:** Filter or aggregate tool results before they reach Claude's context
+* **Multi-step workflows:** Save tokens and latency by calling tools serially or in a loop without sampling Claude in-between tool calls
+* **Conditional logic:** Make decisions based on intermediate tool results
 
 Custom tools are converted to async Python functions to support parallel tool calling. When Claude writes code that calls your tools, it uses `await` (e.g., `result = await query_database("<sql>")`) and automatically includes the appropriate async wrapper function.
 
@@ -100,18 +96,20 @@ The `allowed_callers` field specifies which contexts can invoke a tool:
 {
   "name": "query_database",
   "description": "Execute a SQL query against the database",
-  "input_schema": {...},
-  "allowed_callers": ["code_execution_20250825"]
+  "input_schema": {
+    // ...
+  },
+  "allowed_callers": ["code_execution_20260120"]
 }
 ```
 
 **Possible values:**
 
 * `["direct"]` - Only Claude can call this tool directly (default if omitted)
-* `["code_execution_20250825"]` - Only callable from within code execution
-* `["direct", "code_execution_20250825"]` - Callable both directly and from code execution
+* `["code_execution_20260120"]` - Only callable from within code execution
+* `["direct", "code_execution_20260120"]` - Callable both directly and from code execution
 
-We recommend choosing either `["direct"]` or `["code_execution_20250825"]` for each tool rather than enabling both, as this provides clearer guidance to Claude for how best to use the tool.
+Choose either `["direct"]` or `["code_execution_20260120"]` for each tool rather than enabling both, as this provides clearer guidance to Claude for how best to use the tool.
 
 # The `caller` field in responses
 
@@ -124,8 +122,8 @@ Every tool use block includes a `caller` field indicating how it was invoked:
   "type": "tool_use",
   "id": "toolu_abc123",
   "name": "query_database",
-  "input": {"sql": "<sql>"},
-  "caller": {"type": "direct"}
+  "input": { "sql": "<sql>" },
+  "caller": { "type": "direct" }
 }
 ```
 
@@ -136,9 +134,9 @@ Every tool use block includes a `caller` field indicating how it was invoked:
   "type": "tool_use",
   "id": "toolu_xyz789",
   "name": "query_database",
-  "input": {"sql": "<sql>"},
+  "input": { "sql": "<sql>" },
   "caller": {
-    "type": "code_execution_20250825",
+    "type": "code_execution_20260120",
     "tool_id": "srvtoolu_abc123"
   }
 }
@@ -150,10 +148,10 @@ The `tool_id` references the code execution tool that made the programmatic call
 
 Programmatic tool calling uses the same containers as code execution:
 
-* **Container creation**: A new container is created for each session unless you reuse an existing one
-* **Expiration**: Containers expire after approximately 4.5 minutes of inactivity (subject to change)
-* **Container ID**: Returned in responses via the `container` field
-* **Reuse**: Pass the container ID to maintain state across requests
+* **Container creation:** A new container is created for each request unless you reuse an existing one
+* **Expiration:** Containers have a 30-day maximum lifetime and are cleaned up after 4.5 minutes of idle time
+* **Container ID:** Returned in responses in the `container` field
+* **Reuse:** Pass the container ID to maintain state across requests
 
 When a tool is called programmatically and the container is waiting for your tool result, you must respond before the container expires. Monitor the `expires_at` field. If the container expires, Claude may treat the tool call as timed out and retry it.
 
@@ -165,37 +163,15 @@ Here's how a complete programmatic tool calling flow works:
 
 Send a request with code execution and a tool that allows programmatic calling. To enable programmatic calling, add the `allowed_callers` field to your tool definition.
 
-Provide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude will attempt to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.
+Provide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude attempts to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.
 
-Python
-
-```
-response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
-    betas=["advanced-tool-use-2025-11-20"],
-    max_tokens=4096,
-    messages=[{
-        "role": "user",
-        "content": "Query customer purchase history from the last quarter and identify our top 5 customers by revenue"
-    }],
-    tools=[
-        {
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        },
-        {
-            "name": "query_database",
-            "description": "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
-            "input_schema": {...},
-            "allowed_callers": ["code_execution_20250825"]
-        }
-    ]
-)
-```
+The request shape is identical to the [Quick start](#quick-start) example: include `code_execution` in your tools list, add `allowed_callers: ["code_execution_20260120"]` to any tool you want Claude to invoke from code, and send your user message. The remaining steps in this workflow use the user message `"Query customer purchase history from the last quarter and identify our top 5 customers by revenue"`.
 
 # Step 2: API response with tool call
 
 Claude writes code that calls your tool. The API pauses and returns:
+
+Output
 
 ```
 {
@@ -217,16 +193,16 @@ Claude writes code that calls your tool. The API pauses and returns:
       "type": "tool_use",
       "id": "toolu_def456",
       "name": "query_database",
-      "input": {"sql": "<sql>"},
+      "input": { "sql": "<sql>" },
       "caller": {
-        "type": "code_execution_20250825",
+        "type": "code_execution_20260120",
         "tool_id": "srvtoolu_abc123"
       }
     }
   ],
   "container": {
     "id": "container_xyz789",
-    "expires_at": "2025-01-15T14:30:00Z"
+    "expires_at": "2026-01-20T14:30:00Z"
   },
   "stop_reason": "tool_use"
 }
@@ -236,25 +212,30 @@ Claude writes code that calls your tool. The API pauses and returns:
 
 Include the full conversation history plus your tool result:
 
-Python
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
-    betas=["advanced-tool-use-2025-11-20"],
+response = client.messages.create(
+    model="claude-opus-4-7",
     max_tokens=4096,
     container="container_xyz789",  # Reuse the container
     messages=[
-        {"role": "user", "content": "Query customer purchase history from the last quarter and identify our top 5 customers by revenue"},
+        {
+            "role": "user",
+            "content": "Query customer purchase history from the last quarter and identify our top 5 customers by revenue",
+        },
         {
             "role": "assistant",
             "content": [
-                {"type": "text", "text": "I'll query the purchase history and analyze the results."},
+                {
+                    "type": "text",
+                    "text": "I'll query the purchase history and analyze the results.",
+                },
                 {
                     "type": "server_tool_use",
                     "id": "srvtoolu_abc123",
                     "name": "code_execution",
-                    "input": {"code": "..."}
+                    "input": {"code": "..."},
                 },
                 {
                     "type": "tool_use",
@@ -262,11 +243,11 @@ response = client.beta.messages.create(
                     "name": "query_database",
                     "input": {"sql": "<sql>"},
                     "caller": {
-                        "type": "code_execution_20250825",
-                        "tool_id": "srvtoolu_abc123"
-                    }
-                }
-            ]
+                        "type": "code_execution_20260120",
+                        "tool_id": "srvtoolu_abc123",
+                    },
+                },
+            ],
         },
         {
             "role": "user",
@@ -274,13 +255,15 @@ response = client.beta.messages.create(
                 {
                     "type": "tool_result",
                     "tool_use_id": "toolu_def456",
-                    "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}, {\"customer_id\": \"C2\", \"revenue\": 38000}, ...]"
+                    "content": '[{"customer_id": "C1", "revenue": 45000}, {"customer_id": "C2", "revenue": 38000}, ...]',
                 }
-            ]
-        }
+            ],
+        },
     ],
-    tools=[...]
+    tools=[...],
 )
+
+print(response)
 ```
 
 # Step 4: Next tool call or completion
@@ -291,6 +274,8 @@ The code execution continues and processes the results. If additional tool calls
 
 Once the code execution completes, Claude provides the final response:
 
+Output
+
 ```
 {
   "content": [
@@ -299,7 +284,7 @@ Once the code execution completes, Claude provides the final response:
       "tool_use_id": "srvtoolu_abc123",
       "content": {
         "type": "code_execution_result",
-        "stdout": "Top 5 customers by revenue:\n1. Customer C1: $45,000\n2. Customer C2: $38,000\n3. Customer C5: $32,000\n4. Customer C8: $28,500\n5. Customer C3: $24,000",
+        "stdout": "Top 5 customers: [{'customer_id': 'C1', 'revenue': 45000}, {'customer_id': 'C2', 'revenue': 38000}, {'customer_id': 'C5', 'revenue': 32000}, {'customer_id': 'C8', 'revenue': 28500}, {'customer_id': 'C3', 'revenue': 24000}]",
         "stderr": "",
         "return_code": 0,
         "content": []
@@ -321,16 +306,16 @@ Once the code execution completes, Claude provides the final response:
 Claude can write code that processes multiple items efficiently:
 
 ```
-# async wrapper omitted for clarity
-regions = ["West", "East", "Central", "North", "South"]
-results = {}
-for region in regions:
-    data = await query_database(f"<sql for {region}>")
-    results[region] = sum(row["revenue"] for row in data)
+async def _claude_code():
+    regions = ["West", "East", "Central", "North", "South"]
+    results = {}
+    for region in regions:
+        data = await query_database(f"<sql for {region}>")
+        results[region] = sum(row["revenue"] for row in data)
 
-# Process results programmatically
-top_region = max(results.items(), key=lambda x: x[1])
-print(f"Top region: {top_region[0]} with ${top_region[1]:,} in revenue")
+    # Process results programmatically
+    top_region = max(results.items(), key=lambda x: x[1])
+    print(f"Top region: {top_region[0]} with ${top_region[1]:,} in revenue")
 ```
 
 This pattern:
@@ -344,36 +329,36 @@ This pattern:
 Claude can stop processing as soon as success criteria are met:
 
 ```
-# async wrapper omitted for clarity
-endpoints = ["us-east", "eu-west", "apac"]
-for endpoint in endpoints:
-    status = await check_health(endpoint)
-    if status == "healthy":
-        print(f"Found healthy endpoint: {endpoint}")
-        break  # Stop early, don't check remaining
+async def _claude_code():
+    endpoints = ["us-east", "eu-west", "apac"]
+    for endpoint in endpoints:
+        status = await check_health(endpoint)
+        if status == "healthy":
+            print(f"Found healthy endpoint: {endpoint}")
+            break  # Stop early, don't check remaining
 ```
 
 # Conditional tool selection
 
 ```
-# async wrapper omitted for clarity
-file_info = await get_file_info(path)
-if file_info["size"] < 10000:
-    content = await read_full_file(path)
-else:
-    content = await read_file_summary(path)
-print(content)
+async def _claude_code():
+    file_info = await get_file_info(path)
+    if file_info["size"] < 10000:
+        content = await read_full_file(path)
+    else:
+        content = await read_file_summary(path)
+    print(content)
 ```
 
 # Data filtering
 
 ```
-# async wrapper omitted for clarity
-logs = await fetch_logs(server_id)
-errors = [log for log in logs if "ERROR" in log]
-print(f"Found {len(errors)} errors")
-for error in errors[-10:]:  # Only return last 10 errors
-    print(error)
+async def _claude_code():
+    logs = await fetch_logs(server_id)
+    errors = [log for log in logs if "ERROR" in log]
+    print(f"Found {len(errors)} errors")
+    for error in errors[-10:]:  # Only return last 10 errors
+        print(error)
 ```
 
 # Response format
@@ -387,9 +372,9 @@ When code execution calls a tool:
   "type": "tool_use",
   "id": "toolu_abc123",
   "name": "query_database",
-  "input": {"sql": "<sql>"},
+  "input": { "sql": "<sql>" },
   "caller": {
-    "type": "code_execution_20250825",
+    "type": "code_execution_20260120",
     "tool_id": "srvtoolu_xyz789"
   }
 }
@@ -438,11 +423,10 @@ When all tool calls are satisfied and code completes:
 | --- | --- | --- |
 | `invalid_tool_input` | Tool input doesn't match schema | Validate your tool's input\_schema |
 | `tool_not_allowed` | Tool doesn't allow the requested caller type | Check `allowed_callers` includes the right contexts |
-| `missing_beta_header` | PTC beta header not provided | Add both beta headers to your request |
 
 # Container expiration during tool call
 
-If your tool takes too long to respond, the code execution will receive a `TimeoutError`. Claude sees this in stderr and will typically retry:
+If your tool takes too long to respond, the code execution receives a `TimeoutError`. Claude sees this in stderr and typically retries:
 
 ```
 {
@@ -469,53 +453,62 @@ To prevent timeouts:
 If your tool returns an error:
 
 ```
-# Provide error information in the tool result
 {
-    "type": "tool_result",
-    "tool_use_id": "toolu_abc123",
-    "content": "Error: Query timeout - table lock exceeded 30 seconds"
+  "type": "tool_result",
+  "tool_use_id": "toolu_abc123",
+  "content": "Error: Query timeout - table lock exceeded 30 seconds"
 }
 ```
 
-Claude's code will receive this error and can handle it appropriately.
+Claude's code receives this error and can handle it appropriately.
 
 # Constraints and limitations
 
 # Feature incompatibilities
 
-* **Structured outputs**: Tools with `strict: true` are not supported with programmatic calling
-* **Tool choice**: You cannot force programmatic calling of a specific tool via `tool_choice`
-* **Parallel tool use**: `disable_parallel_tool_use: true` is not supported with programmatic calling
+* **Structured outputs:** Tools with `strict: true` are not supported with programmatic calling
+* **Tool choice:** You cannot force programmatic calling of a specific tool through `tool_choice`
+* **Parallel tool use:** `disable_parallel_tool_use: true` is not supported with programmatic calling
 
 # Tool restrictions
 
-The following tools cannot currently be called programmatically, but support may be added in future releases:
+The following tools cannot be called programmatically:
 
-* Web search
-* Web fetch
 * Tools provided by an [MCP connector](/docs/en/agents-and-tools/mcp-connector)
 
 # Message formatting restrictions
 
 When responding to programmatic tool calls, there are strict formatting requirements:
 
-**Tool result only responses**: If there are pending programmatic tool calls waiting for results, your response message must contain **only** `tool_result` blocks. You cannot include any text content, even after the tool results.
+**Tool result only responses:** If there are pending programmatic tool calls waiting for results, your response message must contain **only** `tool_result` blocks. You cannot include any text content, even after the tool results.
+
+Invalid - Cannot include text when responding to programmatic tool calls:
 
 ```
-// ❌ INVALID - Cannot include text when responding to programmatic tool calls
 {
   "role": "user",
   "content": [
-    {"type": "tool_result", "tool_use_id": "toolu_01", "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"},
-    {"type": "text", "text": "What should I do next?"}  // This will cause an error
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01",
+      "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"
+    },
+    { "type": "text", "text": "What should I do next?" }
   ]
 }
+```
 
-// ✅ VALID - Only tool results when responding to programmatic tool calls
+Valid - Only tool results when responding to programmatic tool calls:
+
+```
 {
   "role": "user",
   "content": [
-    {"type": "tool_result", "tool_use_id": "toolu_01", "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"}
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01",
+      "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"
+    }
   ]
 }
 ```
@@ -528,10 +521,10 @@ Programmatic tool calls are subject to the same rate limits as regular tool call
 
 # Validate tool results before use
 
-When implementing custom tools that will be called programmatically:
+When implementing user-defined tools that will be called programmatically:
 
-* **Tool results are returned as strings**: They can contain any content, including code snippets or executable commands that may be processed by the execution environment.
-* **Validate external tool results**: If your tool returns data from external sources or accepts user input, be aware of code injection risks if the output will be interpreted or executed as code.
+* **Tool results are returned as strings:** They can contain any content, including code snippets or executable commands that may be processed by the execution environment.
+* **Validate external tool results:** If your tool returns data from external sources or accepts user input, be aware of code injection risks if the output will be interpreted or executed as code.
 
 # Token efficiency
 
@@ -553,9 +546,9 @@ Token counting for programmatic tool calls: Tool results from programmatic invoc
 
 # Tool design
 
-* **Provide detailed output descriptions**: Since Claude deserializes tool results in code, clearly document the format (JSON structure, field types, etc.)
-* **Return structured data**: JSON or other easily parseable formats work best for programmatic processing
-* **Keep responses concise**: Return only necessary data to minimize processing overhead
+* **Provide detailed output descriptions:** Since Claude deserializes tool results in code, clearly document the format (JSON structure, field types, etc.)
+* **Return structured data:** JSON or other easily parseable formats work best for programmatic processing
+* **Keep responses concise:** Return only necessary data to minimize processing overhead
 
 # When to use programmatic calling
 
@@ -584,18 +577,13 @@ Token counting for programmatic tool calls: Tool results from programmatic invoc
 
 **"Tool not allowed" error**
 
-* Verify your tool definition includes `"allowed_callers": ["code_execution_20250825"]`
-* Check that you're using the correct beta headers
+* Verify your tool definition includes `"allowed_callers": ["code_execution_20260120"]`
 
 **Container expiration**
 
-* Ensure you respond to tool calls within the container's lifetime (~4.5 minutes)
+* Ensure you respond to tool calls before the container idles out (4.5 minutes of inactivity; 30-day hard maximum)
 * Monitor the `expires_at` field in responses
 * Consider implementing faster tool execution
-
-**Beta header issues**
-
-* You need the header: `"advanced-tool-use-2025-11-20"`
 
 **Tool result not parsed correctly**
 
@@ -613,15 +601,15 @@ Token counting for programmatic tool calls: Tool results from programmatic invoc
 
 Claude's training includes extensive exposure to code, making it effective at reasoning through and chaining function calls. When tools are presented as callable functions within a code execution environment, Claude can leverage this strength to:
 
-* **Reason naturally about tool composition**: Chain operations and handle dependencies as naturally as writing any Python code
-* **Process large results efficiently**: Filter down large tool outputs, extract only relevant data, or write intermediate results to files before returning summaries to the context window
-* **Reduce latency significantly**: Eliminate the overhead of re-sampling Claude between each tool call in multi-step workflows
+* **Reason naturally about tool composition:** Chain operations and handle dependencies as naturally as writing any Python code
+* **Process large results efficiently:** Filter down large tool outputs, extract only relevant data, or write intermediate results to files before returning summaries to the context window
+* **Reduce latency significantly:** Eliminate the overhead of re-sampling Claude between each tool call in multi-step workflows
 
-This approach enables workflows that would be impractical with traditional tool use—such as processing files over 1M tokens—by allowing Claude to work with data programmatically rather than loading everything into the conversation context.
+This approach enables workflows that would be impractical with traditional tool use (such as processing files over 1M tokens) by allowing Claude to work with data programmatically rather than loading everything into the conversation context.
 
 # Alternative implementations
 
-Programmatic tool calling is a generalizable pattern that can be implemented outside of Anthropic's managed code execution. Here's an overview of the approaches:
+Programmatic tool calling is a generalizable pattern that can also be implemented on your own infrastructure. Here's how the approaches compare:
 
 # Client-side direct execution
 
@@ -665,7 +653,13 @@ Anthropic's programmatic tool calling is a managed version of sandboxed executio
 * Easy to enable with minimal configuration
 * Environment and instructions optimized for Claude
 
-We recommend using Anthropic's managed solution if you're using the Claude API.
+Consider using Anthropic's managed solution if you're using the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), or [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry).
+
+# Data retention
+
+Programmatic tool calling is built on the code execution infrastructure and uses the same sandbox containers. Container data, including execution artifacts and outputs, is retained for up to 30 days.
+
+For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
 # Related features
 
@@ -673,6 +667,8 @@ We recommend using Anthropic's managed solution if you're using the Claude API.
 
 Learn about the underlying code execution capability that powers programmatic tool calling.](/docs/en/agents-and-tools/tool-use/code-execution-tool)[Tool Use Overview
 
-Understand the fundamentals of tool use with Claude.](/docs/en/agents-and-tools/tool-use/overview)[Implement Tool Use
+Understand the fundamentals of tool use with Claude.](/docs/en/agents-and-tools/tool-use/overview)[Define tools
 
-Step-by-step guide for implementing tools.](/docs/en/agents-and-tools/tool-use/implement-tool-use)
+Step-by-step guide for defining tools.](/docs/en/agents-and-tools/tool-use/define-tools)
+
+Was this page helpful?

@@ -1,6 +1,6 @@
 # Reduce hallucinations
 
-**Source:** https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations
+**Source:** http://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations
 
 Copy page
 
@@ -13,7 +13,7 @@ This guide will explore techniques to minimize hallucinations and ensure Claude'
 
 # Example: Analyzing a merger & acquisition report
 
-* **Use direct quotes for factual grounding:** For tasks involving long documents (>20K tokens), ask Claude to extract word-for-word quotes first before performing its task. This grounds its responses in the actual text, reducing hallucinations.
+* **Use direct quotes for factual grounding:** For tasks involving long documents (>20k tokens), ask Claude to extract word-for-word quotes first before performing its task. This grounds its responses in the actual text, reducing hallucinations.
 
 # Example: Auditing a data privacy policy
 
@@ -31,3 +31,5 @@ This guide will explore techniques to minimize hallucinations and ensure Claude'
 * **External knowledge restriction**: Explicitly instruct Claude to only use information from provided documents and not its general knowledge.
 
 Remember, while these techniques significantly reduce hallucinations, they don't eliminate them entirely. Always validate critical information, especially for high-stakes decisions.
+
+Was this page helpful?

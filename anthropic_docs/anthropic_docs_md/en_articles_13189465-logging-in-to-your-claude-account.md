@@ -1,10 +1,10 @@
-# Logging in to your Claude account
+# Log in to your Claude account
 
 **Source:** https://support.claude.com/en/articles/13189465-logging-in-to-your-claude-account
 
 When you open Claude on a web browser ([claude.ai](http://claude.ai)), the desktop app, or a mobile app, you will see two different options for logging in to your Claude account.
 
-[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1893216804/f2209c3ec6cf4fc2e803d13bbc9d/40520c9e-ff82-4a7c-adca-5a064fe18d8c?expires=1768068000&signature=eaca601e37b5d9b01c7e624fbf3a31321592699b0bcdd1f66d9276d37d94b3c3&req=dSguFct%2Fm4lfXfMW3nq%2BgZ0bQ9EyFI3%2FU%2FtpJ86YnA4hSRhNsEzrLecq4QN8%0A2%2BMPcu10EJ959pPU960%2BkUTkowM%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1893216804/f2209c3ec6cf4fc2e803d13bbc9d/40520c9e-ff82-4a7c-adca-5a064fe18d8c?expires=1768068000&signature=eaca601e37b5d9b01c7e624fbf3a31321592699b0bcdd1f66d9276d37d94b3c3&req=dSguFct%2Fm4lfXfMW3nq%2BgZ0bQ9EyFI3%2FU%2FtpJ86YnA4hSRhNsEzrLecq4QN8%0A2%2BMPcu10EJ959pPU960%2BkUTkowM%3D%0A)
+[![](https://downloads.intercomcdn.com/i/o/lupk8zyo/1893216804/f2209c3ec6cf4fc2e803d13bbc9d/40520c9e-ff82-4a7c-adca-5a064fe18d8c?expires=1779557400&signature=a1b8ecf8685fc2aaa72c246598b7e445268e0edcd4d1af7eca698c88839963d6&req=dSguFct%2Fm4lfXfMW1HO4zXg5CYuJ5hWwzWhrqpWiTMkjSCccRjQXzAns6i%2BC%0AMbVxC2siq8S0tAayulo%3D%0A)](https://downloads.intercomcdn.com/i/o/lupk8zyo/1893216804/f2209c3ec6cf4fc2e803d13bbc9d/40520c9e-ff82-4a7c-adca-5a064fe18d8c?expires=1779557400&signature=a1b8ecf8685fc2aaa72c246598b7e445268e0edcd4d1af7eca698c88839963d6&req=dSguFct%2Fm4lfXfMW1HO4zXg5CYuJ5hWwzWhrqpWiTMkjSCccRjQXzAns6i%2BC%0AMbVxC2siq8S0tAayulo%3D%0A)
 
 # Continue with Google
 
@@ -22,6 +22,18 @@ If you requested the login email and clicked the link using the same device, you
 
 If you requested the login email and clicked the link using a different device (requesting from a web browser and clicking the email link on a phone, for example), then you will still see a “Sign in with Claude.ai” link in the email, but clicking it will generate a verification code. You should enter this code on the original device where you requested the login email to authenticate.
 
+# Authenticating to subscription plans
+
+Claude offers subscription plans (Free, Pro, Max, Team, Enterprise) that let subscribers authenticate using OAuth tokens or other methods. Subscription plans can only be used by subscribers, and the usage included in these plans is designed to support ordinary use of native Anthropic applications, including the Claude web, desktop, and mobile applications and Claude Code.
+
+The preferred way to access Anthropic services using third-party software, tools, or services (“third-party tools”), including open-source projects, is through API key authentication through Claude Console or a supported cloud provider. Anthropic may at its discretion allow paid subscribers who have enabled **[usage credits](https://support.claude.com/en/articles/12429409-)** to use certain third-party tools to access Anthropic services included in paid subscription plans, but reserves the right to draw use of such third-party tools from usage credits rather than subscription limits. Users are responsible for any usage credit charges incurred this way. Use of third-party tools that misrepresent their identity to Anthropic’s servers, attempt to route third-party traffic against subscription limits, or otherwise violate applicable terms or policies is prohibited and such use may be enforced against.
+
+# Developers
+
+If you’re building a product, application, or tool for others, use API key authentication through Claude Console or a supported cloud provider. Applications that misrepresent their identity to Anthropic’s servers, attempt to route third-party traffic against subscription limits, or otherwise violate applicable terms or policies are prohibited and may be enforced against.
+
+---
+
 # Troubleshooting
 
 # I entered my email address but I haven’t received my login email.
@@ -37,11 +49,13 @@ If you requested a login email but you haven’t received it yet, do the followi
 
 # I received the email but I'm still having trouble logging in.
 
-If you received the login email but can’t log in with the link or code, take note of the error message you’re seeing. If you’re creating an account or logging in for the first time and seeing a message about your phone number, please refer to [Verifying your phone number](https://support.claude.com/en/articles/8287232-verifying-your-phone-number).
+If you received the login email but can’t log in with the link or code, take note of the error message you’re seeing. If you’re creating an account or logging in for the first time and seeing a message about your phone number, please refer to **[Verifying your phone number](https://support.claude.com/en/articles/8287232-verifying-your-phone-number)**.
 
-Otherwise, visit the [Claude status page](https://status.claude.com/) to check if there are any known service disruptions or maintenance activities. If the status page shows an ongoing system-wide incident, it's best to wait for service restoration before attempting further troubleshooting.
+Otherwise, visit the **[Claude status page](https://status.claude.com/)** to check if there are any known service disruptions or maintenance activities. If the status page shows an ongoing system-wide incident, it's best to wait for service restoration before attempting further troubleshooting.
 
-# Frequently Asked Questions
+---
+
+# Frequently asked questions
 
 # How can I set a password for my Claude account?
 
@@ -89,4 +103,4 @@ If you are already logged in to Claude for iOS, you can see the email address yo
 
 Related Articles
 
-[How do I log out of all active sessions?](https://support.claude.com/en/articles/10310342-how-do-i-log-out-of-all-active-sessions)[Getting Started with Claude for Education at Your University (for Owners/Admins)](https://support.claude.com/en/articles/11139094-getting-started-with-claude-for-education-at-your-university-for-owners-admins)[FAQs on Using Claude for Education at Your University](https://support.claude.com/en/articles/11139144-faqs-on-using-claude-for-education-at-your-university)[Set up the Claude LTI in Canvas by Instructure](https://support.claude.com/en/articles/11725453-set-up-the-claude-lti-in-canvas-by-instructure)[How to gift a Claude subscription](https://support.claude.com/en/articles/12938627-how-to-gift-a-claude-subscription)
+[How do I log out of all active sessions?](https://support.claude.com/en/articles/10310342-how-do-i-log-out-of-all-active-sessions)[Get started with Claude for Education at your university (for Owners/Admins)](https://support.claude.com/en/articles/11139094-get-started-with-claude-for-education-at-your-university-for-owners-admins)[Claude 4 Invite Sweepstakes Official Rules](https://support.claude.com/en/articles/11140763-claude-4-invite-sweepstakes-official-rules)[Logging in to your Console account](https://support.claude.com/en/articles/13371040-logging-in-to-your-console-account)[Open the Claude mobile app with a link](https://support.claude.com/en/articles/14898120-open-the-claude-mobile-app-with-a-link)

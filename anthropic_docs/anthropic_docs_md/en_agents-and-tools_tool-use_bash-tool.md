@@ -1,10 +1,12 @@
 # Bash tool
 
-**Source:** https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool
+**Source:** http://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool
 
 Copy page
 
-The bash tool enables Claude to execute shell commands in a persistent bash session, allowing system operations, script execution, and command-line automation.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+
+The bash tool enables Claude to execute shell commands in a persistent bash session, allowing system operations, script execution, and command-line automation. Shell access is a foundational agent capability. On [Terminal-Bench 2.0](https://github.com/terminal-bench/terminal-bench), a benchmark that evaluates real-world terminal tasks using shell-only validation, Claude shows strong performance gains with access to a persistent bash session.
 
 # Overview
 
@@ -15,24 +17,18 @@ The bash tool provides Claude with:
 * Access to environment variables and working directory
 * Command chaining and scripting capabilities
 
-# Model compatibility
-
-| Model | Tool Version |
-| --- | --- |
-| Claude 4 models and Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) | `bash_20250124` |
-
-Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 # Use cases
 
-* **Development workflows**: Run build commands, tests, and development tools
-* **System automation**: Execute scripts, manage files, automate tasks
-* **Data processing**: Process files, run analysis scripts, manage datasets
-* **Environment setup**: Install packages, configure environments
+* **Development workflows:** Run build commands, tests, and development tools
+* **System automation:** Execute scripts, manage files, automate tasks
+* **Data processing:** Process files, run analysis scripts, manage datasets
+* **Environment setup:** Install packages, configure environments
 
 # Quick start
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
 import anthropic
@@ -40,18 +36,15 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-7",
     max_tokens=1024,
-    tools=[
-        {
-            "type": "bash_20250124",
-            "name": "bash"
-        }
-    ],
+    tools=[{"type": "bash_20250124", "name": "bash"}],
     messages=[
         {"role": "user", "content": "List all Python files in the current directory."}
-    ]
+    ],
 )
+
+print(response)
 ```
 
 # How it works
@@ -79,23 +72,22 @@ The bash tool maintains a persistent session:
 Claude can chain commands to complete complex tasks:
 
 ```
-# User request
-"Install the requests library and create a simple Python script that fetches a joke from an API, then run it."
+User request:
+"Install the requests library and create a simple Python script that
+fetches a joke from an API, then run it."
 
-# Claude's tool uses:
-# 1. Install package
-{"command": "pip install requests"}
+Claude's tool uses:
+1. Install package
+   {"command": "pip install requests"}
 
-# 2. Create script
-{"command": "cat > fetch_joke.py << 'EOF'\nimport requests\nresponse = requests.get('https://official-joke-api.appspot.com/random_joke')\njoke = response.json()\nprint(f\"Setup: {joke['setup']}\")\nprint(f\"Punchline: {joke['punchline']}\")\nEOF"}
+2. Create script
+   {"command": "cat > fetch_joke.py << 'EOF'\nimport requests\nresponse = requests.get('https://official-joke-api.appspot.com/random_joke')\njoke = response.json()\nprint(f\"Setup: {joke['setup']}\")\nprint(f\"Punchline: {joke['punchline']}\")\nEOF"}
 
-# 3. Run script
-{"command": "python fetch_joke.py"}
+3. Run script
+   {"command": "python fetch_joke.py"}
 ```
 
 The session maintains state between commands, so files created in step 2 are available in step 3.
-
----
 
 # Implement the bash tool
 
@@ -115,12 +107,12 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
    class BashSession:
        def __init__(self):
            self.process = subprocess.Popen(
-               ['/bin/bash'],
+               ["/bin/bash"],
                stdin=subprocess.PIPE,
                stdout=subprocess.PIPE,
                stderr=subprocess.PIPE,
                text=True,
-               bufsize=0
+               bufsize=0,
            )
            self.output_queue = queue.Queue()
            self.error_queue = queue.Queue()
@@ -135,7 +127,7 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
    ```
    def execute_command(self, command):
        # Send command to bash
-       self.process.stdin.write(command + '\n')
+       self.process.stdin.write(command + "\n")
        self.process.stdin.flush()
 
        # Capture output with timeout
@@ -162,26 +154,44 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
            tool_result = {
                "type": "tool_result",
                "tool_use_id": content.id,
-               "content": result
+               "content": result,
            }
    ```
 4. 4
 
    Implement safety measures
 
-   Add validation and restrictions:
+   Add validation and restrictions. Use an allowlist rather than a blocklist, since blocklists are easy to bypass. Reject shell operators so chained commands can't slip past the allowlist:
 
    ```
-   def validate_command(command):
-       # Block dangerous commands
-       dangerous_patterns = ['rm -rf /', 'format', ':(){:|:&};:']
-       for pattern in dangerous_patterns:
-           if pattern in command:
-               return False, f"Command contains dangerous pattern: {pattern}"
+   import shlex
 
-       # Add more validation as needed
+   ALLOWED_COMMANDS = {"ls", "cat", "echo", "pwd", "grep", "find", "wc", "head", "tail"}
+   SHELL_OPERATORS = {"&&", "||", "|", ";", "&", ">", "<", ">>"}
+
+   def validate_command(command):
+       # Allow only commands from an explicit allowlist
+       try:
+           tokens = shlex.split(command)
+       except ValueError:
+           return False, "Could not parse command"
+
+       if not tokens:
+           return False, "Empty command"
+
+       executable = tokens[0]
+       if executable not in ALLOWED_COMMANDS:
+           return False, f"Command '{executable}' is not in the allowlist"
+
+       # Reject shell operators that would chain additional commands
+       for token in tokens[1:]:
+           if token in SHELL_OPERATORS or token.startswith(("$", "`")):
+               return False, f"Shell operator '{token}' is not allowed"
+
        return True, None
    ```
+
+   This check is a first line of defense. For stronger isolation, run validated commands with `shell=False` and pass `shlex.split(command)` as the argument list, so the shell never interprets the string.
 
 # Handle errors
 
@@ -241,6 +251,15 @@ See [tool use pricing](/docs/en/agents-and-tools/tool-use/overview#pricing) for 
 * Building projects: `npm install && npm run build`
 * Git operations: `git status && git add . && git commit -m "message"`
 
+# Git-based checkpointing
+
+Git serves as a structured recovery mechanism in long-running agent workflows, not just a way to save changes:
+
+* **Capture a baseline:** Before any agent work begins, commit the current state. This is the known-good starting point.
+* **Commit per feature:** Each completed feature gets its own commit. These serve as rollback points if something goes wrong later.
+* **Reconstruct state at session start:** Read `git log` alongside a progress file to understand what has already been done and what comes next.
+* **Revert on failure:** If work goes sideways, `git checkout` reverts to the last good commit instead of trying to debug a broken state.
+
 # File operations
 
 * Processing data: `wc -l *.csv && ls -lh *.csv`
@@ -255,15 +274,17 @@ See [tool use pricing](/docs/en/agents-and-tools/tool-use/overview#pricing) for 
 
 # Limitations
 
-* **No interactive commands**: Cannot handle `vim`, `less`, or password prompts
-* **No GUI applications**: Command-line only
-* **Session scope**: Persists within conversation, lost between API calls
-* **Output limits**: Large outputs may be truncated
-* **No streaming**: Results returned after completion
+* **No interactive commands:** Cannot handle `vim`, `less`, or password prompts
+* **No GUI applications:** Command-line only
+* **Session scope:** Bash session state is client-side. The API is stateless. Your application is responsible for maintaining the shell session between turns.
+* **Output limits:** Large outputs may be truncated
+* **No streaming:** Results returned after completion
 
 # Combining with other tools
 
 The bash tool is most powerful when combined with the [text editor](/docs/en/agents-and-tools/tool-use/text-editor-tool) and other tools.
+
+If you're also using the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](/docs/en/agents-and-tools/tool-use/code-execution-tool#using-code-execution-with-other-execution-tools) for guidance on prompting Claude to distinguish between environments.
 
 # Next steps
 
@@ -272,3 +293,5 @@ The bash tool is most powerful when combined with the [text editor](/docs/en/age
 Learn about tool use with Claude](/docs/en/agents-and-tools/tool-use/overview)[Text editor tool
 
 View and edit text files with Claude](/docs/en/agents-and-tools/tool-use/text-editor-tool)
+
+Was this page helpful?

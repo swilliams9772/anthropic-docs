@@ -1,16 +1,18 @@
 # Memory tool
 
-**Source:** https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool
+**Source:** http://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool
 
 Copy page
 
 The memory tool enables Claude to store and retrieve information across conversations through a memory file directory. Claude can create, read, update, and delete files that persist between sessions, allowing it to build knowledge over time without keeping everything in the context window.
 
-The memory tool operates client-side—you control where and how the data is stored through your own infrastructure.
+This is the key primitive for just-in-time context retrieval: rather than loading all relevant information upfront, agents store what they learn in memory and pull it back on demand. This keeps the active context focused on what's currently relevant, critical for long-running workflows where loading everything at once would overwhelm the context window. See [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) for the broader pattern.
 
-The memory tool is currently in beta. To enable it, use the beta header `context-management-2025-06-27` in your API requests.
+The memory tool operates client-side: you control where and how the data is stored through your own infrastructure.
 
-Please reach out through our [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
+Reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
+
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 # Use cases
 
@@ -95,26 +97,16 @@ Claude calls the memory tool:
 "Based on your customer service guidelines, I can help you craft a response. Please share the ticket details..."
 ```
 
-# Supported models
-
-The memory tool is available on:
-
-* Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
-* Claude Sonnet 4 (`claude-sonnet-4-20250514`)
-* Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
-* Claude Opus 4.5 (`claude-opus-4-5-20251101`)
-* Claude Opus 4.1 (`claude-opus-4-1-20250805`)
-* Claude Opus 4 (`claude-opus-4-20250514`)
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 # Getting started
 
 To use the memory tool:
 
-1. Include the beta header `context-management-2025-06-27` in your API requests
-2. Add the memory tool to your request
-3. Implement client-side handlers for memory operations
+1. Add the memory tool to your request
+2. Implement client-side handlers for memory operations
 
-To handle memory tool operations in your application, you need to implement handlers for each memory command. Our SDKs provide memory tool helpers that handle the tool interface—you can subclass `BetaAbstractMemoryTool` (Python) or use `betaMemoryTool` (TypeScript) to implement your own memory backend (file-based, database, cloud storage, encrypted files, etc.).
+To handle memory tool operations in your application, you need to implement handlers for each memory command. The SDKs provide memory tool helpers that handle the tool interface. You can subclass `BetaAbstractMemoryTool` (Python) or use `betaMemoryTool` (TypeScript) to implement your own memory backend (file-based, database, cloud storage, encrypted files, etc.).
 
 For working examples, see:
 
@@ -123,28 +115,24 @@ For working examples, see:
 
 # Basic usage
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-sonnet-4-5",
-        "max_tokens": 2048,
-        "messages": [
-            {
-                "role": "user",
-                "content": "I'\''m working on a Python web scraper that keeps crashing with a timeout error. Here'\''s the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
-            }
-        ],
-        "tools": [{
-            "type": "memory_20250818",
-            "name": "memory"
-        }]
-    }'
+client = anthropic.Anthropic()
+
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=2048,
+    messages=[
+        {
+            "role": "user",
+            "content": "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.",
+        }
+    ],
+    tools=[{"type": "memory_20250818", "name": "memory"}],
+)
+
+print(message)
 ```
 
 # Tool commands
@@ -159,7 +147,7 @@ Shows directory contents or file contents with optional line ranges:
 {
   "command": "view",
   "path": "/memories",
-  "view_range": [1, 10]  // Optional: view specific lines
+  "view_range": [1, 10] // Optional: view specific lines
 }
 ```
 
@@ -175,7 +163,7 @@ Here're the files and directories up to 2 levels deep in {path}, excluding hidde
 ```
 
 * Lists files up to 2 levels deep
-* Shows human-readable sizes (e.g., `5.5K`, `1.2M`)
+* Shows human-readable sizes (for example, `5.5K`, `1.2M`)
 * Excludes hidden items (files starting with `.`) and `node_modules`
 * Uses tab character between size and path
 
@@ -330,7 +318,7 @@ Renames the directory.
 
 # Prompting guidance
 
-We automatically include this instruction to the system prompt when the memory tool is included:
+This instruction is automatically included in the system prompt when the memory tool is enabled:
 
 ```
 IMPORTANT: ALWAYS VIEW YOUR MEMORY DIRECTORY BEFORE DOING ANYTHING ELSE.
@@ -345,7 +333,7 @@ If you observe Claude creating cluttered memory files, you can include this inst
 
 > Note: when editing your memory folder, always try to keep its content up-to-date, coherent and organized. You can rename or delete files that are no longer relevant. Do not create new files unless necessary.
 
-You can also guide what Claude writes to memory, e.g., "Only write down information relevant to <topic> in your memory system."
+You can also guide what Claude writes to memory. For example: "Only write down information relevant to <topic> in your memory system."
 
 # Security considerations
 
@@ -373,86 +361,44 @@ Consider these safeguards:
 * Resolve paths to their canonical form and verify they remain within the memory directory
 * Reject paths containing sequences like `../`, `..\\`, or other traversal patterns
 * Watch for URL-encoded traversal sequences (`%2e%2e%2f`)
-* Use your language's built-in path security utilities (e.g., Python's `pathlib.Path.resolve()` and `relative_to()`)
+* Use your language's built-in path security utilities (for example, Python's `pathlib.Path.resolve()` and `relative_to()`)
 
 # Error handling
 
 The memory tool uses similar error handling patterns to the [text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool#handle-errors). See the individual tool command sections above for detailed error messages and behaviors. Common errors include file not found, permission errors, invalid paths, and duplicate text matches.
 
-# Using with Context Editing
+# Context editing integration
 
-The memory tool can be combined with [context editing](/docs/en/build-with-claude/context-editing), which automatically clears old tool results when conversation context grows beyond a configured threshold. This combination enables long-running agentic workflows that would otherwise exceed context limits.
+The memory tool pairs with context editing to manage long-running conversations. For details, see [Context editing](/docs/en/build-with-claude/context-editing).
 
-# How they work together
+# Using with Compaction
 
-When context editing is enabled and your conversation approaches the clearing threshold, Claude automatically receives a warning notification. This prompts Claude to preserve any important information from tool results into memory files before those results are cleared from the context window.
+The memory tool can also be paired with [compaction](/docs/en/build-with-claude/compaction), which provides server-side summarization of older conversation context. While context editing clears specific tool results on the client side, compaction automatically summarizes the entire conversation on the server side when it approaches the context window limit.
 
-After tool results are cleared, Claude can retrieve the stored information from memory files whenever needed, effectively treating memory as an extension of its working context. This allows Claude to:
+For long-running agentic workflows, consider using both: compaction keeps the active context manageable without client-side bookkeeping, and memory persists important information across compaction boundaries so that nothing critical is lost in the summary.
 
-* Continue complex, multi-step workflows without losing critical information
-* Reference past work and decisions even after tool results are removed
-* Maintain coherent context across conversations that would exceed typical context limits
-* Build up a knowledge base over time while keeping the active context window manageable
+# Multi-session software development pattern
 
-# Example workflow
+For long-running software projects that span multiple agent sessions, memory files need to be bootstrapped deliberately, not just written ad hoc as work progresses. The pattern below turns memory into a structured recovery mechanism, so each new session can pick up exactly where the last one left off.
 
-Consider a code refactoring project with many file operations:
+# How it works
 
-1. Claude makes numerous edits to files, generating many tool results
-2. As the context grows and approaches your threshold, Claude receives a warning
-3. Claude summarizes the changes made so far to a memory file (e.g., `/memories/refactoring_progress.xml`)
-4. Context editing clears the older tool results automatically
-5. Claude continues working, referencing the memory file when it needs to recall what changes were already completed
-6. The workflow can continue indefinitely, with Claude managing both active context and persistent memory
+1. **Initializer session:** The first session sets up the memory artifacts before any substantive work begins. This includes a progress log (tracking what has been done and what comes next), a feature checklist (defining the scope of work), and a reference to any startup or initialization script the project needs.
+2. **Subsequent sessions:** Each new session opens by reading those memory artifacts. This recovers the full state of the project in seconds, without needing to re-explore the codebase or retrace earlier decisions.
+3. **End-of-session update:** Before a session ends, it updates the progress log with what was completed and what remains. This ensures the next session has an accurate starting point.
 
-# Configuration
+# Key principle
 
-To use both features together:
+Work on one feature at a time. Only mark a feature complete after end-to-end verification confirms it works, not just after the code is written. This keeps the progress log trustworthy and prevents scope creep from compounding across sessions.
 
-Python
+For a detailed case study of this pattern in practice, including the initializer script, progress file structure, and git-based recovery, see [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
 
-```
-response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
-    max_tokens=4096,
-    messages=[...],
-    tools=[
-        {
-            "type": "memory_20250818",
-            "name": "memory"
-        },
-        # Your other tools
-    ],
-    betas=["context-management-2025-06-27"],
-    context_management={
-        "edits": [
-            {
-                "type": "clear_tool_uses_20250919",
-                "trigger": {
-                    "type": "input_tokens",
-                    "value": 100000
-                },
-                "keep": {
-                    "type": "tool_uses",
-                    "value": 3
-                }
-            }
-        ]
-    }
-)
-```
+# Next steps
 
-You can also exclude memory tool calls from being cleared to ensure Claude always has access to recent memory operations:
+[See all tools
 
-Python
+Directory of Anthropic-provided tools and their properties.](/docs/en/agents-and-tools/tool-use/tool-reference)[Context editing
 
-```
-context_management={
-    "edits": [
-        {
-            "type": "clear_tool_uses_20250919",
-            "exclude_tools": ["memory"]
-        }
-    ]
-}
-```
+Manage conversation length alongside memory.](/docs/en/build-with-claude/context-editing)
+
+Was this page helpful?

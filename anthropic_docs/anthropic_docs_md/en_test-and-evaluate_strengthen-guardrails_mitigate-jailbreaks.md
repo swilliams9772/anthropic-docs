@@ -1,14 +1,12 @@
 # Mitigate jailbreaks and prompt injections
 
-**Source:** https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks
+**Source:** http://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks
 
 Copy page
 
 Jailbreaking and prompt injections occur when users craft prompts to exploit model vulnerabilities, aiming to generate inappropriate content. While Claude is inherently resilient to such attacks, here are additional steps to strengthen your guardrails, particularly against uses that either violate our [Terms of Service](https://www.anthropic.com/legal/commercial-terms) or [Usage Policy](https://www.anthropic.com/legal/aup).
 
-Claude is far more resistant to jailbreaking than other major LLMs, thanks to advanced training methods like Constitutional AI.
-
-* **Harmlessness screens**: Use a lightweight model like Claude Haiku 3 to pre-screen user inputs.
+* **Harmlessness screens**: Use a lightweight model like Claude Haiku 4.5 to pre-screen user inputs. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) to constrain the response to a simple classification.
 
   ### Example: Harmlessness screen for content moderation
 * **Input validation**: Filter prompts for jailbreaking patterns. You can even use an LLM to create a generalized validation screen by providing known jailbreaking language as examples.
@@ -28,3 +26,5 @@ Combine strategies for robust protection. Here's an enterprise-grade example wit
 # Example: Multi-layered protection for a financial advisor chatbot
 
 By layering these strategies, you create a robust defense against jailbreaking and prompt injections, ensuring your Claude-powered applications maintain the highest standards of safety and compliance.
+
+Was this page helpful?

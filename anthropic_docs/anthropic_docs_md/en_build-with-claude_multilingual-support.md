@@ -1,6 +1,6 @@
 # Multilingual support
 
-**Source:** https://platform.claude.com/docs/en/build-with-claude/multilingual-support
+**Source:** http://platform.claude.com/docs/en/build-with-claude/multilingual-support
 
 Copy page
 
@@ -8,13 +8,13 @@ Copy page
 
 Claude demonstrates robust multilingual capabilities, with particularly strong performance in zero-shot tasks across languages. The model maintains consistent relative performance across both widely-spoken and lower-resource languages, making it a reliable choice for multilingual applications.
 
-Note that Claude is capable in many languages beyond those benchmarked below. We encourage testing with any languages relevant to your specific use cases.
+Note that Claude is capable in many languages beyond those benchmarked below. Consider testing with any languages relevant to your specific use cases.
 
 # Performance data
 
 Below are the zero-shot chain-of-thought evaluation scores for Claude models across different languages, shown as a percent relative to English performance (100%):
 
-| Language | Claude Opus 4.11 | Claude Opus 41 | Claude Sonnet 4.51 | Claude Sonnet 41 | Claude Haiku 4.51 |
+| Language | Claude Opus 4.11 | Claude Opus 4 (deprecated)1 | Claude Sonnet 4.51 | Claude Sonnet 4 (deprecated)1 | Claude Haiku 4.51 |
 | --- | --- | --- | --- | --- | --- |
 | English (baseline, fixed to 100%) | 100% | 100% | 100% | 100% | 100% |
 | Spanish | 98.1% | 98.0% | 98.2% | 97.5% | 96.4% |
@@ -46,7 +46,7 @@ When working with multilingual content:
 2. **Use native scripts**: Submit text in its native script rather than transliteration for optimal results
 3. **Consider cultural context**: Effective communication often requires cultural and regional awareness beyond pure translation
 
-We also suggest following our general [prompt engineering guidelines](/docs/en/build-with-claude/prompt-engineering/overview) to better improve Claude's performance.
+Also follow the general [prompt engineering guidelines](/docs/en/build-with-claude/prompt-engineering/overview) to better improve Claude's performance.
 
 ---
 
@@ -58,6 +58,6 @@ We also suggest following our general [prompt engineering guidelines](/docs/en/b
 
 [Prompt Engineering Guide
 
-Master the art of prompt crafting to get the most out of Claude.](/docs/en/build-with-claude/prompt-engineering/overview)[Prompt Library
+Master the art of prompt crafting to get the most out of Claude.](/docs/en/build-with-claude/prompt-engineering/overview)
 
-Find a wide range of pre-crafted prompts for various tasks and industries. Perfect for inspiration or quick starts.](/docs/en/resources/prompt-library)
+Was this page helpful?

@@ -1,12 +1,12 @@
-# How to Get Support
+# How to get support
 
 **Source:** https://support.claude.com/en/articles/9015913-how-to-get-support
 
 This guide explains how to get support for your Claude or Console account. Different support options are available depending on your plan.
 
-# Paid Plans (Pro, Max, Team, Enterprise, or Console)
+# Pro and Max plans, Team and Enterprise plan Owners, and Console Admins
 
-As a paid user of Claude or the Console, you have full access to:
+You have full access to:
 
 * All help documentation
 * Fin, our AI support bot
@@ -47,11 +47,9 @@ Users who are logged in to their Claude or Console accounts will be able to clic
 
 **Important:** For Console users, this applies specifically to those logged in via [platform.claude.com](http://platform.claude.com). If you’re logged in via [console.anthropic.com](http://console.anthropic.com), you will be prompted to visit [platform.claude.com](http://platform.claude.com) to authenticate before sending a message in the Help Center support messenger.
 
-# Enterprise plan owners
+# Team and Enterprise plan non-Owners, and Console non-Admins
 
-If you are the Primary Owner or Owner of a Claude for Work Enterprise plan, you can also submit a request through the [Enterprise Support form](https://claude.ai/support/enterprise).
-
-**Note:** You must be logged in to your Owner account to access this form.
+You’ll chat with Fin, an AI support agent, to help answer your questions. Human specialist support is not directly available for your account seat type. If Fin can't find a resolution and you need to escalate to our human team of specialists, your account's Primary Owner, Owner, or Console Admin can reach out on your behalf.
 
 # Free Claude users
 
@@ -108,4 +106,4 @@ Users in the EU can find instructions on how to find the single point of contact
 
 Related Articles
 
-[How can I delete my Claude Console account?](https://support.claude.com/en/articles/10366376-how-can-i-delete-my-claude-console-account)[I'm getting an API connection error. How can I fix it?](https://support.claude.com/en/articles/10366432-i-m-getting-an-api-connection-error-how-can-i-fix-it)[Claude Code Usage Analytics](https://support.claude.com/en/articles/12157520-claude-code-usage-analytics)[How to Get Support for Claude for Government](https://support.claude.com/en/articles/13047024-how-to-get-support-for-claude-for-government)[Setting up Single Sign-on (SSO)](https://support.claude.com/en/articles/13132885-setting-up-single-sign-on-sso)
+[Where can I go for Claude API support and assistance?](https://support.claude.com/en/articles/8114535-where-can-i-go-for-claude-api-support-and-assistance)[Important considerations before enabling single sign-on (SSO) and JIT/SCIM provisioning](https://support.claude.com/en/articles/10276682-important-considerations-before-enabling-single-sign-on-sso-and-jit-scim-provisioning)[I'm getting an API connection error. How can I fix it?](https://support.claude.com/en/articles/10366432-i-m-getting-an-api-connection-error-how-can-i-fix-it)[Claude Code usage analytics](https://support.claude.com/en/articles/12157520-claude-code-usage-analytics)[How to get support for Claude for Government](https://support.claude.com/en/articles/13047024-how-to-get-support-for-claude-for-government)

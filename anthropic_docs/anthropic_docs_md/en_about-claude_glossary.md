@@ -1,6 +1,6 @@
 # Glossary
 
-**Source:** https://platform.claude.com/docs/en/about-claude/glossary
+**Source:** http://platform.claude.com/docs/en/about-claude/glossary
 
 Copy page
 
@@ -36,7 +36,7 @@ Model Context Protocol (MCP) is an open protocol that standardizes how applicati
 
 # MCP connector
 
-The MCP connector is a feature that allows API users to connect to MCP servers directly from the Messages API without building an MCP client. This enables seamless integration with MCP-compatible tools and services through the Claude API. The MCP connector supports features like tool calling and is available in public beta. See our [MCP connector documentation](/docs/en/agents-and-tools/mcp-connector) to learn more.
+The MCP connector is a feature that allows API users to connect to MCP servers directly from the Messages API without building an MCP client. This enables seamless integration with MCP-compatible tools and services through the Claude API. The MCP connector supports features like tool calling and is available in beta. See the [MCP connector documentation](/docs/en/agents-and-tools/mcp-connector) to learn more.
 
 # Pretraining
 
@@ -63,3 +63,5 @@ Time to First Token (TTFT) is a performance metric that measures the time it tak
 # Tokens
 
 Tokens are the smallest individual units of a language model, and can correspond to words, subwords, characters, or even bytes (in the case of Unicode). For Claude, a token approximately represents 3.5 English characters, though the exact number can vary depending on the language used. Tokens are typically hidden when interacting with language models at the "text" level but become relevant when examining the exact inputs and outputs of a language model. When Claude is provided with text to evaluate, the text (consisting of a series of characters) is encoded into a series of tokens for the model to process. Larger tokens enable data efficiency during inference and pretraining (and are utilized when possible), while smaller tokens allow a model to handle uncommon or never-before-seen words. The choice of tokenization method can impact the model's performance, vocabulary size, and ability to handle out-of-vocabulary words.
+
+Was this page helpful?

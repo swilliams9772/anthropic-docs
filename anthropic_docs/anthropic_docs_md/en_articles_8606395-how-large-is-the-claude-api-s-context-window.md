@@ -2,10 +2,12 @@
 
 **Source:** https://support.claude.com/en/articles/8606395-how-large-is-the-claude-api-s-context-window
 
-The Claude API can ingest can ingest 1M tokens when using Sonnet 4, and 200K+ tokens (about 500 pages of text or more) when using all other models.
+The Claude API can ingest 1M tokens when using Claude Opus 4.7, Opus 4.6, or Sonnet 4.6, and 200K+ tokens (about 500 pages of text or more) when using all other models.
+
+For more detailed information, see our **[Claude API Docs](https://platform.claude.com/docs/en/build-with-claude/context-windows#1-m-token-context-window)** and **[Models overview](https://platform.claude.com/docs/en/about-claude/models/overview)**.
 
 ---
 
 Related Articles
 
-[What is the maximum prompt length?](https://support.claude.com/en/articles/7996856-what-is-the-maximum-prompt-length)[How large is the context window on paid Claude plans?](https://support.claude.com/en/articles/8606394-how-large-is-the-context-window-on-paid-claude-plans)[Claude Code Model Configuration](https://support.claude.com/en/articles/11940350-claude-code-model-configuration)[Extra Usage for Team and Enterprise Plans](https://support.claude.com/en/articles/12005970-extra-usage-for-team-and-enterprise-plans)[Extra Usage for Paid Claude Plans](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans)
+[How up-to-date is Claude's training data?](https://support.claude.com/en/articles/8114494-how-up-to-date-is-claude-s-training-data)[How large is the context window on paid Claude plans?](https://support.claude.com/en/articles/8606394-how-large-is-the-context-window-on-paid-claude-plans)[Claude Code model configuration](https://support.claude.com/en/articles/11940350-claude-code-model-configuration)[Release notes](https://support.claude.com/en/articles/12138966-release-notes)[Claude Code FAQ](https://support.claude.com/en/articles/12386420-claude-code-faq)

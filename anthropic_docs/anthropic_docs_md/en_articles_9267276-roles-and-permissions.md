@@ -1,14 +1,21 @@
-# Roles and Permissions
+# Roles and permissions
 
 **Source:** https://support.claude.com/en/articles/9267276-roles-and-permissions
 
 What an individual can see and do in their Team or Enterprise plan account is dictated by their role. Roles are provisioned with the following permissions.
 
-Important notes about the Primary Owner role:
+**Important notes about the Primary Owner role:**
 
 * Team and Enterprise organizations can only have one Primary Owner.
 * The Primary Owner seat uses one of your plan's licenses.
 * Your organization's Primary Owner can be a service account that isn't tied to an individual user.
+
+**About custom roles (Enterprise plans only):** Enterprise plans support custom roles, which let you control feature access at the group level. Members who are set to “Custom roles” have no default permissions—their access is determined entirely by the custom roles assigned to their groups. Because these members have no built-in permissions, they don't appear in the tables below.
+
+To learn more, refer to the following articles:
+
+* **[Manage custom roles on Enterprise plans](https://support.claude.com/en/articles/13930452-manage-custom-roles-on-enterprise-plans)**
+* **[Manage groups and group spend limits on Enterprise plans](https://support.claude.com/en/articles/13799932-manage-groups-and-group-spend-limits-on-enterprise-plans)**
 
 # Billing
 
@@ -44,7 +51,7 @@ Important notes about the Primary Owner role:
 |  | User | Admin | Owner | Primary Owner |
 | Invite new members |  | ✅ | ✅ | ✅ |
 | Remove members/cancel invitations |  | ✅ | ✅ | ✅ |
-| Invite/remove new admins/owners |  |  | ✅ | ✅ |
+| Invite/remove new Admins/Owners |  |  | ✅ | ✅ |
 | Modify roles |  |  | ✅ | ✅ |
 
 # Prioritized Support Routing (Enterprise plan only)
@@ -53,8 +60,6 @@ Important notes about the Primary Owner role:
 | --- | --- | --- | --- | --- |
 |  | User | Admin | Owner | Primary Owner |
 | Prioritized Support routing |  |  | ✅ | ✅ |
-
-**Note:** If you are logged in to a Primary Owner or Owner account on an Enterprise plan, you can also submit a request through the [Enterprise Support form](https://claude.ai/support/enterprise).
 
 # Security and Data Controls (Team and Enterprise plans)
 
@@ -74,8 +79,22 @@ Important notes about the Primary Owner role:
 | Manage data retention controls |  |  | ✅ | ✅ |
 | Manage  feedback settings |  |  | ✅ | ✅ |
 
+# Usage Analytics (Enterprise plans)
+
+|  |  |  |  |  |
+| --- | --- | --- | --- | --- |
+|  | User | Admin | Owner | Primary Owner |
+| View usage analytics |  | ✅ | ✅ | ✅ |
+
+# Usage Analytics (Team plans)
+
+|  |  |  |  |  |
+| --- | --- | --- | --- | --- |
+|  | User | Admin | Owner | Primary Owner |
+| View usage analytics |  |  | ✅ | ✅ |
+
 ---
 
 Related Articles
 
-[Important Considerations Before Enabling Single Sign-On (SSO) and JIT/SCIM Provisioning](https://support.claude.com/en/articles/10276682-important-considerations-before-enabling-single-sign-on-sso-and-jit-scim-provisioning)[Purchasing and managing seats](https://support.claude.com/en/articles/12004354-purchasing-and-managing-seats)[Extra Usage for Team and Enterprise Plans](https://support.claude.com/en/articles/12005970-extra-usage-for-team-and-enterprise-plans)[Setting up JIT or SCIM provisioning](https://support.claude.com/en/articles/13133195-setting-up-jit-or-scim-provisioning)[Managing members on Team and Enterprise plans](https://support.claude.com/en/articles/13133750-managing-members-on-team-and-enterprise-plans)
+[Set up JIT or SCIM provisioning](https://support.claude.com/en/articles/13133195-set-up-jit-or-scim-provisioning)[Manage members on Team and Enterprise plans](https://support.claude.com/en/articles/13133750-manage-members-on-team-and-enterprise-plans)[Find and join a Team or Enterprise organization](https://support.claude.com/en/articles/13566435-find-and-join-a-team-or-enterprise-organization)[Manage groups and group spend limits on Enterprise plans](https://support.claude.com/en/articles/13799932-manage-groups-and-group-spend-limits-on-enterprise-plans)[Set up role-based permissions on Enterprise plans](https://support.claude.com/en/articles/13930458-set-up-role-based-permissions-on-enterprise-plans)

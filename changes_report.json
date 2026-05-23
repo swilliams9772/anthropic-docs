@@ -1,0 +1,3969 @@
+{
+  "generated_at": "2026-05-23T13:26:34",
+  "old_snapshot": {
+    "label": "Jan 9, 2026 (previous scrape)",
+    "dir": "anthropic_docs_backup_20260523_124122/anthropic_docs_md",
+    "file_count": 692
+  },
+  "new_snapshot": {
+    "label": "May 23, 2026 (current scrape)",
+    "dir": "anthropic_docs/anthropic_docs_md",
+    "file_count": 1138
+  },
+  "counts": {
+    "added": 446,
+    "removed": 0,
+    "modified": 427,
+    "unchanged": 265,
+    "net_change": 446
+  },
+  "added": [
+    "en_about-claude_models_migration-guide.md",
+    "en_about-claude_models_model-ids-and-versions.md",
+    "en_about-claude_models_whats-new-claude-4-6.md",
+    "en_about-claude_models_whats-new-claude-4-7.md",
+    "en_agent-sdk_agent-loop.md",
+    "en_agent-sdk_claude-code-features.md",
+    "en_agent-sdk_observability.md",
+    "en_agent-sdk_session-storage.md",
+    "en_agent-sdk_streaming-output.md",
+    "en_agent-sdk_tool-search.md",
+    "en_agents-and-tools_agent-skills_claude-api-skill.md",
+    "en_agents-and-tools_agent-skills_enterprise.md",
+    "en_agents-and-tools_mcp-tunnels_console.md",
+    "en_agents-and-tools_mcp-tunnels_deploy-compose.md",
+    "en_agents-and-tools_mcp-tunnels_deploy-helm.md",
+    "en_agents-and-tools_mcp-tunnels_overview.md",
+    "en_agents-and-tools_mcp-tunnels_quickstart.md",
+    "en_agents-and-tools_mcp-tunnels_reference.md",
+    "en_agents-and-tools_mcp-tunnels_security.md",
+    "en_agents-and-tools_mcp-tunnels_troubleshooting.md",
+    "en_agents-and-tools_tool-use_advisor-tool.md",
+    "en_agents-and-tools_tool-use_build-a-tool-using-agent.md",
+    "en_agents-and-tools_tool-use_define-tools.md",
+    "en_agents-and-tools_tool-use_handle-tool-calls.md",
+    "en_agents-and-tools_tool-use_how-tool-use-works.md",
+    "en_agents-and-tools_tool-use_manage-tool-context.md",
+    "en_agents-and-tools_tool-use_parallel-tool-use.md",
+    "en_agents-and-tools_tool-use_server-tools.md",
+    "en_agents-and-tools_tool-use_strict-tool-use.md",
+    "en_agents-and-tools_tool-use_tool-combinations.md",
+    "en_agents-and-tools_tool-use_tool-reference.md",
+    "en_agents-and-tools_tool-use_tool-runner.md",
+    "en_agents-and-tools_tool-use_tool-use-with-prompt-caching.md",
+    "en_agents-and-tools_tool-use_troubleshooting-tool-use.md",
+    "en_api_admin_mcp_tunnels.md",
+    "en_api_admin_mcp_tunnels_archive.md",
+    "en_api_admin_mcp_tunnels_list.md",
+    "en_api_admin_mcp_tunnels_retrieve.md",
+    "en_api_admin_mcp_tunnels_reveal_token.md",
+    "en_api_admin_mcp_tunnels_rotate_token.md",
+    "en_api_admin_mcp_tunnels_tunnel_certificates_archive.md",
+    "en_api_admin_mcp_tunnels_tunnel_certificates_create.md",
+    "en_api_admin_mcp_tunnels_tunnel_certificates_list.md",
+    "en_api_admin_mcp_tunnels_tunnel_certificates_retrieve.md",
+    "en_api_admin_rate_limits_list.md",
+    "en_api_admin_workspaces_rate_limits_list.md",
+    "en_api_authentication_overview.md",
+    "en_api_beta_agents_archive.md",
+    "en_api_beta_agents_create.md",
+    "en_api_beta_agents_list.md",
+    "en_api_beta_agents_retrieve.md",
+    "en_api_beta_agents_update.md",
+    "en_api_beta_agents_versions_list.md",
+    "en_api_beta_environments_archive.md",
+    "en_api_beta_environments_create.md",
+    "en_api_beta_environments_delete.md",
+    "en_api_beta_environments_list.md",
+    "en_api_beta_environments_retrieve.md",
+    "en_api_beta_environments_update.md",
+    "en_api_beta_environments_work.md",
+    "en_api_beta_environments_work_ack.md",
+    "en_api_beta_environments_work_heartbeat.md",
+    "en_api_beta_environments_work_list.md",
+    "en_api_beta_environments_work_poll.md",
+    "en_api_beta_environments_work_retrieve.md",
+    "en_api_beta_environments_work_stats.md",
+    "en_api_beta_environments_work_stop.md",
+    "en_api_beta_environments_work_update.md",
+    "en_api_beta_memory_stores_archive.md",
+    "en_api_beta_memory_stores_create.md",
+    "en_api_beta_memory_stores_delete.md",
+    "en_api_beta_memory_stores_list.md",
+    "en_api_beta_memory_stores_memories_create.md",
+    "en_api_beta_memory_stores_memories_delete.md",
+    "en_api_beta_memory_stores_memories_list.md",
+    "en_api_beta_memory_stores_memories_retrieve.md",
+    "en_api_beta_memory_stores_memories_update.md",
+    "en_api_beta_memory_stores_memory_versions_list.md",
+    "en_api_beta_memory_stores_memory_versions_redact.md",
+    "en_api_beta_memory_stores_memory_versions_retrieve.md",
+    "en_api_beta_memory_stores_retrieve.md",
+    "en_api_beta_memory_stores_update.md",
+    "en_api_beta_sessions.md",
+    "en_api_beta_sessions_archive.md",
+    "en_api_beta_sessions_create.md",
+    "en_api_beta_sessions_delete.md",
+    "en_api_beta_sessions_events_list.md",
+    "en_api_beta_sessions_events_send.md",
+    "en_api_beta_sessions_events_stream.md",
+    "en_api_beta_sessions_list.md",
+    "en_api_beta_sessions_resources_add.md",
+    "en_api_beta_sessions_resources_delete.md",
+    "en_api_beta_sessions_resources_list.md",
+    "en_api_beta_sessions_resources_retrieve.md",
+    "en_api_beta_sessions_resources_update.md",
+    "en_api_beta_sessions_retrieve.md",
+    "en_api_beta_sessions_threads_archive.md",
+    "en_api_beta_sessions_threads_events_list.md",
+    "en_api_beta_sessions_threads_events_stream.md",
+    "en_api_beta_sessions_threads_list.md",
+    "en_api_beta_sessions_threads_retrieve.md",
+    "en_api_beta_sessions_update.md",
+    "en_api_beta_skills_versions_download.md",
+    "en_api_beta_user_profiles_create.md",
+    "en_api_beta_user_profiles_create_enrollment_url.md",
+    "en_api_beta_user_profiles_list.md",
+    "en_api_beta_user_profiles_retrieve.md",
+    "en_api_beta_user_profiles_update.md",
+    "en_api_beta_vaults_archive.md",
+    "en_api_beta_vaults_create.md",
+    "en_api_beta_vaults_credentials_archive.md",
+    "en_api_beta_vaults_credentials_create.md",
+    "en_api_beta_vaults_credentials_delete.md",
+    "en_api_beta_vaults_credentials_list.md",
+    "en_api_beta_vaults_credentials_mcp_oauth_validate.md",
+    "en_api_beta_vaults_credentials_retrieve.md",
+    "en_api_beta_vaults_credentials_update.md",
+    "en_api_beta_vaults_delete.md",
+    "en_api_beta_vaults_list.md",
+    "en_api_beta_vaults_retrieve.md",
+    "en_api_beta_vaults_update.md",
+    "en_api_beta_webhooks.md",
+    "en_api_claude-code_routines-fire.md",
+    "en_api_claude-platform-on-aws-iam-actions.md",
+    "en_api_cli_beta_environments.md",
+    "en_api_cli_messages_create.md",
+    "en_api_compliance.md",
+    "en_api_compliance_activities_list.md",
+    "en_api_compliance_apps.md",
+    "en_api_compliance_apps_artifacts_download.md",
+    "en_api_compliance_apps_artifacts_retrieve.md",
+    "en_api_compliance_apps_chats_delete.md",
+    "en_api_compliance_apps_chats_files_delete.md",
+    "en_api_compliance_apps_chats_files_download.md",
+    "en_api_compliance_apps_chats_files_retrieve.md",
+    "en_api_compliance_apps_chats_generated_files_download.md",
+    "en_api_compliance_apps_chats_generated_files_retrieve.md",
+    "en_api_compliance_apps_chats_list.md",
+    "en_api_compliance_apps_chats_messages_list.md",
+    "en_api_compliance_apps_projects_attachments_list.md",
+    "en_api_compliance_apps_projects_delete.md",
+    "en_api_compliance_apps_projects_documents_delete.md",
+    "en_api_compliance_apps_projects_documents_metadata.md",
+    "en_api_compliance_apps_projects_documents_retrieve.md",
+    "en_api_compliance_apps_projects_list.md",
+    "en_api_compliance_apps_projects_retrieve.md",
+    "en_api_compliance_groups_list.md",
+    "en_api_compliance_groups_members_list.md",
+    "en_api_compliance_groups_retrieve.md",
+    "en_api_compliance_organizations.md",
+    "en_api_compliance_organizations_list.md",
+    "en_api_compliance_organizations_roles_list.md",
+    "en_api_compliance_organizations_roles_permissions_list.md",
+    "en_api_compliance_organizations_roles_retrieve.md",
+    "en_api_compliance_organizations_users_list.md",
+    "en_api_sdks_cli.md",
+    "en_api_sdks_csharp.md",
+    "en_api_sdks_go.md",
+    "en_api_sdks_java.md",
+    "en_api_sdks_php.md",
+    "en_api_sdks_python.md",
+    "en_api_sdks_ruby.md",
+    "en_api_sdks_typescript.md",
+    "en_api_sessions-retrieve.md",
+    "en_articles_10065433-install-claude-desktop.md",
+    "en_articles_10166901-use-google-workspace-connectors.md",
+    "en_articles_10276682.md",
+    "en_articles_10440198-configure-custom-data-retention-controls-for-enterprise-plans.md",
+    "en_articles_10504844-manage-user-feedback-settings-on-team-and-enterprise-plans.md",
+    "en_articles_10504853-manage-user-feedback-settings-on-claude-console.md",
+    "en_articles_10769299-how-to-use-claude-in-your-preferred-language.md",
+    "en_articles_11049762-choose-a-claude-plan.md",
+    "en_articles_11101966-.md",
+    "en_articles_11101966-use-voice-mode.md",
+    "en_articles_11139094-get-started-with-claude-for-education-at-your-university-for-owners-admins.md",
+    "en_articles_11145838-use-claude-code-with-your-pro-or-max-plan.md",
+    "en_articles_11175166-get-started-with-custom-connectors-using-remote-mcp.md",
+    "en_articles_11175166.md",
+    "en_articles_11176164-use-connectors-to-extend-claude-s-capabilities.md",
+    "en_articles_11503834-build-custom-connectors-via-remote-mcp-servers.md",
+    "en_articles_11506255-get-started-with-claude-in-slack.md",
+    "en_articles_11526368-how-am-i-billed-for-my-enterprise-plan.md",
+    "en_articles_11526368-usage-based-enterprise-plans.md",
+    "en_articles_11647753-how-do-usage-and-length-limits-work.md",
+    "en_articles_11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context.md",
+    "en_articles_11825384-.md",
+    "en_articles_11845131-use-claude-code-with-your-team-or-enterprise-plan.md",
+    "en_articles_11845131.md",
+    "en_articles_11869619-use-claude-with-ios-apps.md",
+    "en_articles_11869629-use-claude-with-android-apps.md",
+    "en_articles_12004354-purchase-and-manage-seats-on-team-plans.md",
+    "en_articles_12004354-purchasing-and-managing-seats-on-team-plans.md",
+    "en_articles_12004354.md",
+    "en_articles_12005970-.md",
+    "en_articles_12005970-manage-extra-usage-for-team-and-seat-based-enterprise-plans.md",
+    "en_articles_12005970-manage-usage-credits-for-team-and-seat-based-enterprise-plans.md",
+    "en_articles_12012173-get-started-with-claude-in-chrome.md",
+    "en_articles_12083917-change-your-team-plan-from-monthly-to-annual-billing.md",
+    "en_articles_12123587-import-and-export-your-memory-from-claude.md",
+    "en_articles_12260368-.md",
+    "en_articles_12304248-manage-api-key-environment-variables-in-claude-code.md",
+    "en_articles_12429409-.md",
+    "en_articles_12429409-manage-extra-usage-for-paid-claude-plans.md",
+    "en_articles_12429409-manage-usage-credits-for-paid-claude-plans.md",
+    "en_articles_12461605-use-claude-in-slack.md",
+    "en_articles_12466728-troubleshoot-claude-error-messages.md",
+    "en_articles_12489464-use-enterprise-search.md",
+    "en_articles_12489464.md",
+    "en_articles_12512180-use-skills-in-claude.md",
+    "en_articles_12542951-.md",
+    "en_articles_12542951-set-up-the-microsoft-365-connector.md",
+    "en_articles_12622667-enterprise-configuration-for-claude-desktop.md",
+    "en_articles_12650343-use-claude-for-excel.md",
+    "en_articles_12650343-use-claude-in-excel.md",
+    "en_articles_12650343-using-claude-in-excel.md",
+    "en_articles_12684923-.md",
+    "en_articles_12864745-use-claude-in-microsoft-foundry.md",
+    "en_articles_12883420-view-usage-analytics-for-team-and-enterprise-plans.md",
+    "en_articles_12922490.md",
+    "en_articles_13015708-access-the-compliance-api.md",
+    "en_articles_13119606-provision-and-manage-skills-for-your-organization.md",
+    "en_articles_13132885-set-up-single-sign-on-sso.md",
+    "en_articles_13132885.md",
+    "en_articles_13133195-set-up-jit-or-scim-provisioning.md",
+    "en_articles_13133195.md",
+    "en_articles_13133750-manage-members-on-team-and-enterprise-plans.md",
+    "en_articles_13189465-log-in-to-your-claude-account.md",
+    "en_articles_13200993-restrict-access-to-claude-with-ip-allowlisting.md",
+    "en_articles_13296973-hipaa-ready-enterprise-plans.md",
+    "en_articles_13345190-get-started-with-claude-cowork.md",
+    "en_articles_13345190-get-started-with-cowork.md",
+    "en_articles_13345190-getting-started-with-cowork.md",
+    "en_articles_13345190-getting-started-with-local-agent-mode.md",
+    "en_articles_13346720-export-your-organization-s-data.md",
+    "en_articles_13364135-use-claude-cowork-safely.md",
+    "en_articles_13364135-use-cowork-safely.md",
+    "en_articles_13364135-using-cowork-safely.md",
+    "en_articles_13371040-logging-in-to-your-console-account.md",
+    "en_articles_13393991-purchase-and-manage-seats-on-enterprise-plans.md",
+    "en_articles_13393991-purchasing-and-managing-seats-on-enterprise-plans.md",
+    "en_articles_13393991.md",
+    "en_articles_13403291-how-can-i-check-connectivity-to-the-claude-api.md",
+    "en_articles_13443687-switching-to-a-different-identity-provider-idp.md",
+    "en_articles_13443764-inviting-members-to-the-claude-console.md",
+    "en_articles_13454812-use-interactive-connectors-in-claude.md",
+    "en_articles_13455879-cowork-for-team-and-enterprise-plans.md",
+    "en_articles_13455879-use-claude-cowork-on-team-and-enterprise-plans.md",
+    "en_articles_13455879-use-cowork-on-team-and-enterprise-plans.md",
+    "en_articles_13455879.md",
+    "en_articles_13521390-use-claude-for-powerpoint.md",
+    "en_articles_13521390-use-claude-in-powerpoint.md",
+    "en_articles_13521390-using-claude-in-powerpoint.md",
+    "en_articles_13566435-find-and-join-a-team-or-enterprise-organization.md",
+    "en_articles_13566435-organization-discovery.md",
+    "en_articles_13641943-visual-and-interactive-content.md",
+    "en_articles_13641943-visual-responses-and-interactive-widgets.md",
+    "en_articles_13663666-use-visual-and-interactive-content-on-team-and-enterprise-plans.md",
+    "en_articles_13694757-access-engagement-and-adoption-data-with-the-analytics-api.md",
+    "en_articles_13694757-access-usage-data-with-the-analytics-api.md",
+    "en_articles_13694757-claude-enterprise-analytics-api-access-engagement-and-adoption-data.md",
+    "en_articles_13694757-get-started-with-the-claude-enterprise-analytics-api.md",
+    "en_articles_13703965-claude-enterprise-analytics-api-reference-guide.md",
+    "en_articles_13704655-unauthorized-anthropic-stock-sales-and-investment-scams.md",
+    "en_articles_13730515-manage-claude-s-tool-access.md",
+    "en_articles_13756069-public-sector-faqs.md",
+    "en_articles_13776697-join-an-organization-via-invite-link.md",
+    "en_articles_13779868-migrate-your-organization-from-team-to-enterprise.md",
+    "en_articles_13799932-manage-groups-and-group-spend-limits-on-enterprise-plans.md",
+    "en_articles_13837433-manage-claude-cowork-plugins-for-your-organization.md",
+    "en_articles_13837433-manage-cowork-plugins-for-your-organization.md",
+    "en_articles_13837440-use-plugins-in-claude-cowork.md",
+    "en_articles_13837440-use-plugins-in-cowork.md",
+    "en_articles_13851150-install-financial-services-plugins-for-cowork.md",
+    "en_articles_13854387-schedule-recurring-tasks-in-claude-cowork.md",
+    "en_articles_13854387-schedule-recurring-tasks-in-cowork.md",
+    "en_articles_13892150-work-across-apps-with-cowork.md",
+    "en_articles_13892150-work-across-microsoft-365-apps.md",
+    "en_articles_13892150.md",
+    "en_articles_13917817-google-workspace-sso-scim-email-mismatch.md",
+    "en_articles_13917817.md",
+    "en_articles_13917829-microsoft-entra-id-sso-scim-email-mismatch.md",
+    "en_articles_13917829.md",
+    "en_articles_13917840-okta-sso-scim-email-mismatch.md",
+    "en_articles_13917840.md",
+    "en_articles_13917861-onelogin-sso-scim-email-mismatch.md",
+    "en_articles_13917861.md",
+    "en_articles_13917875-ping-identity-sso-scim-email-mismatch.md",
+    "en_articles_13917875.md",
+    "en_articles_13917884-google-workspace-sso-setup.md",
+    "en_articles_13917889-microsoft-entra-id-sso-setup.md",
+    "en_articles_13917894-okta-sso-setup.md",
+    "en_articles_13917899-onelogin-sso-setup.md",
+    "en_articles_13917902-ping-identity-sso-setup.md",
+    "en_articles_13930452-manage-custom-roles-on-enterprise-plans.md",
+    "en_articles_13930458-set-up-role-based-entitlements-on-enterprise-plans.md",
+    "en_articles_13930458-set-up-role-based-permissions-on-enterprise-plans.md",
+    "en_articles_13945233-.md",
+    "en_articles_13945233-use-claude-for-microsoft-365-with-third-party-platforms.md",
+    "en_articles_13945233-use-claude-in-excel-and-powerpoint-with-an-llm-gateway.md",
+    "en_articles_13945233.md",
+    "en_articles_13947068-assign-tasks-from-anywhere-in-claude-cowork.md",
+    "en_articles_13947068-assign-tasks-to-claude-from-anywhere-in-cowork.md",
+    "en_articles_13979539-custom-visuals-in-chat-and-cowork.md",
+    "en_articles_13979539-custom-visuals-in-chat.md",
+    "en_articles_14116274-organize-your-tasks-with-projects-in-claude-cowork.md",
+    "en_articles_14116274-organize-your-tasks-with-projects-in-cowork.md",
+    "en_articles_14128542-computer-use-safety.md",
+    "en_articles_14128542-let-claude-use-your-computer-in-cowork.md",
+    "en_articles_14233555-set-up-code-review-for-claude-code.md",
+    "en_articles_14246112-buy-usage-bundles.md",
+    "en_articles_14328846-browse-skills-connectors-and-plugins-in-one-directory.md",
+    "en_articles_14328960-identity-verification-on-claude.md",
+    "en_articles_14447276-.md",
+    "en_articles_14447276-configure-a-custom-opentelemetry-collector-for-office-agents.md",
+    "en_articles_14465370-use-claude-for-word.md",
+    "en_articles_14477985-monitor-claude-cowork-activity-with-opentelemetry.md",
+    "en_articles_14477985-monitor-cowork-activity-with-opentelemetry.md",
+    "en_articles_14479288-claude-cowork-desktop-architecture-overview.md",
+    "en_articles_14479591-use-dictation-in-office-agents.md",
+    "en_articles_14499648-how-scim-sync-works-for-enterprise-organizations.md",
+    "en_articles_14503590-get-started-with-claude-for-government.md",
+    "en_articles_14503613-sso-login.md",
+    "en_articles_14503643-set-up-scim-in-claude-for-government.md",
+    "en_articles_14503675-organization-instructions-in-claude-for-government.md",
+    "en_articles_14503689-mcp-connectors.md",
+    "en_articles_14503703-mcp-individual-connectors.md",
+    "en_articles_14503775-mcp-web-search.md",
+    "en_articles_14503794-model-availability-in-claude-for-government.md",
+    "en_articles_14503804-classification-banner-in-claude-for-government.md",
+    "en_articles_14546867-set-organization-instructions.md",
+    "en_articles_14552382-your-first-day-in-claude-code.md",
+    "en_articles_14552646-troubleshoot-claude-code-installation-and-authentication.md",
+    "en_articles_14552983-models-usage-and-limits-in-claude-code.md",
+    "en_articles_14553240-give-claude-context-claude-md-and-better-prompts.md",
+    "en_articles_14553413-claude-code-cheatsheet.md",
+    "en_articles_14553517-claude-code-common-developer-use-cases.md",
+    "en_articles_14554000-claude-code-power-user-tips.md",
+    "en_articles_14554922-claude-code-user-faq.md",
+    "en_articles_14555399-claude-code-champion-kit.md",
+    "en_articles_14555877-claude-code-communications-kit.md",
+    "en_articles_14604397-set-up-your-design-system-in-claude-design.md",
+    "en_articles_14604406-claude-design-admin-guide-for-team-and-enterprise-plans.md",
+    "en_articles_14604416-get-started-with-claude-design.md",
+    "en_articles_14604842-real-time-cyber-safeguards-on-claude.md",
+    "en_articles_14625619-claim-and-migrate-accounts-on-your-domain.md",
+    "en_articles_14625626-migrate-your-claude-account-to-an-enterprise-organization.md",
+    "en_articles_14625626-respond-to-an-enterprise-domain-claim-on-your-claude-account.md",
+    "en_articles_14661296-use-claude-security.md",
+    "en_articles_14667344-claude-design-subscription-usage-and-pricing.md",
+    "en_articles_14729249-use-live-artifacts-in-claude-cowork.md",
+    "en_articles_14729294-open-claude-desktop-with-a-link.md",
+    "en_articles_14729354-use-analytics-chat-to-ask-claude-about-usage.md",
+    "en_articles_14730684-how-claude-suggests-connected-apps.md",
+    "en_articles_14782391-claude-enterprise-consumption-guide.md",
+    "en_articles_14793921-find-and-join-a-console-organization.md",
+    "en_articles_14855664-use-claude-for-outlook.md",
+    "en_articles_14898120-open-the-claude-mobile-app-with-a-link.md",
+    "en_articles_15036540-use-the-claude-agent-sdk-with-your-claude-plan.md",
+    "en_articles_15167101-get-started-with-claude-compliance-api-integrations.md",
+    "en_articles_15171100-age-assurance-on-claude.md",
+    "en_articles_15183774-.md",
+    "en_articles_15183774-connect-to-microsoft-365.md",
+    "en_articles_8114491-get-started-with-claude.md",
+    "en_articles_8241126-upload-files-to-claude.md",
+    "en_articles_8241126-uploading-files-to-claude.md",
+    "en_articles_9015913.md",
+    "en_articles_9266462-install-claude-for-ios.md",
+    "en_articles_9267247-get-started-with-the-team-plan.md",
+    "en_articles_9267323-cancel-your-organization-s-team-plan-subscription.md",
+    "en_articles_9267400-move-your-personal-claude-account-to-a-team-or-enterprise-organization.md",
+    "en_articles_9519189-manage-project-visibility-and-sharing.md",
+    "en_articles_9547008-publishing-and-sharing-artifacts.md",
+    "en_articles_9612887-install-claude-for-android.md",
+    "en_articles_9889408-add-or-update-your-paid-claude-account-s-tax-or-vat-id.md",
+    "en_articles_9889428-add-or-update-your-claude-console-organization-s-tax-or-vat-id.md",
+    "en_articles_9927533-disable-public-projects-for-your-organization.md",
+    "en_articles_9927624-add-or-update-your-team-plan-s-tax-or-vat-id.md",
+    "en_articles_9970975-access-audit-logs.md",
+    "en_build-with-claude_adaptive-thinking.md",
+    "en_build-with-claude_api-and-data-retention.md",
+    "en_build-with-claude_cache-diagnostics.md",
+    "en_build-with-claude_claude-in-amazon-bedrock.md",
+    "en_build-with-claude_claude-on-amazon-bedrock-legacy.md",
+    "en_build-with-claude_claude-platform-on-aws.md",
+    "en_build-with-claude_compaction.md",
+    "en_build-with-claude_fast-mode.md",
+    "en_build-with-claude_prompt-engineering_claude-prompting-best-practices.md",
+    "en_build-with-claude_prompt-engineering_prompting-tools.md",
+    "en_build-with-claude_task-budgets.md",
+    "en_claude_api_primer.md",
+    "en_collections_10351014-security-and-compliance.md",
+    "en_collections_18901831-analytics-and-usage.md",
+    "en_collections_18901835-get-started.md",
+    "en_collections_9811414-capabilities.md",
+    "en_collections_9811436-billing.md",
+    "en_collections_9811449-admin-management.md",
+    "en_manage-claude_admin-api.md",
+    "en_manage-claude_api-and-data-retention.md",
+    "en_manage-claude_authentication.md",
+    "en_manage-claude_claude-code-analytics-api.md",
+    "en_manage-claude_compliance-activity-feed.md",
+    "en_manage-claude_compliance-api-access.md",
+    "en_manage-claude_compliance-api.md",
+    "en_manage-claude_compliance-content-data.md",
+    "en_manage-claude_compliance-errors.md",
+    "en_manage-claude_compliance-faq.md",
+    "en_manage-claude_compliance-integration-patterns.md",
+    "en_manage-claude_compliance-org-data.md",
+    "en_manage-claude_data-residency.md",
+    "en_manage-claude_rate-limits-api.md",
+    "en_manage-claude_usage-cost-api.md",
+    "en_manage-claude_wif-providers_aws.md",
+    "en_manage-claude_wif-providers_azure.md",
+    "en_manage-claude_wif-providers_gcp.md",
+    "en_manage-claude_wif-providers_github-actions.md",
+    "en_manage-claude_wif-providers_kubernetes.md",
+    "en_manage-claude_wif-providers_okta.md",
+    "en_manage-claude_wif-providers_spiffe.md",
+    "en_manage-claude_wif-reference.md",
+    "en_manage-claude_workload-identity-federation.md",
+    "en_manage-claude_workspaces.md",
+    "en_managed-agents_agent-setup.md",
+    "en_managed-agents_cloud-containers.md",
+    "en_managed-agents_define-outcomes.md",
+    "en_managed-agents_dreams.md",
+    "en_managed-agents_environments.md",
+    "en_managed-agents_events-and-streaming.md",
+    "en_managed-agents_files.md",
+    "en_managed-agents_github.md",
+    "en_managed-agents_mcp-connector.md",
+    "en_managed-agents_memory.md",
+    "en_managed-agents_migration.md",
+    "en_managed-agents_multi-agent.md",
+    "en_managed-agents_onboarding.md",
+    "en_managed-agents_overview.md",
+    "en_managed-agents_permission-policies.md",
+    "en_managed-agents_quickstart.md",
+    "en_managed-agents_self-hosted-sandboxes-security.md",
+    "en_managed-agents_self-hosted-sandboxes.md",
+    "en_managed-agents_sessions.md",
+    "en_managed-agents_skills.md",
+    "en_managed-agents_tools.md",
+    "en_managed-agents_vaults.md",
+    "en_managed-agents_webhooks.md",
+    "en_overview.md",
+    "en_troubleshooting.md"
+  ],
+  "removed": [],
+  "modified": [
+    {
+      "file": "en_api_beta.md",
+      "old_size": 539537,
+      "new_size": 1301183,
+      "delta": 761646
+    },
+    {
+      "file": "en_api_messages.md",
+      "old_size": 239384,
+      "new_size": 508503,
+      "delta": 269119
+    },
+    {
+      "file": "en_release-notes_claude-code.md",
+      "old_size": 63747,
+      "new_size": 327739,
+      "delta": 263992
+    },
+    {
+      "file": "for-claude.md",
+      "old_size": 56204,
+      "new_size": 166573,
+      "delta": 110369
+    },
+    {
+      "file": "en_api_beta_messages_create.md",
+      "old_size": 127741,
+      "new_size": 234776,
+      "delta": 107035
+    },
+    {
+      "file": "en_api_messages_create.md",
+      "old_size": 62822,
+      "new_size": 162905,
+      "delta": 100083
+    },
+    {
+      "file": "en_agent-sdk_typescript.md",
+      "old_size": 47352,
+      "new_size": 109898,
+      "delta": 62546
+    },
+    {
+      "file": "en_agent-sdk_python.md",
+      "old_size": 58185,
+      "new_size": 119989,
+      "delta": 61804
+    },
+    {
+      "file": "en_build-with-claude_prompt-engineering_long-context-tips.md",
+      "old_size": 1864,
+      "new_size": 56335,
+      "delta": 54471
+    },
+    {
+      "file": "en_build-with-claude_prompt-engineering_multishot-prompting.md",
+      "old_size": 2237,
+      "new_size": 56335,
+      "delta": 54098
+    },
+    {
+      "file": "en_build-with-claude_prompt-engineering_be-clear-and-direct.md",
+      "old_size": 2278,
+      "new_size": 56335,
+      "delta": 54057
+    },
+    {
+      "file": "en_build-with-claude_prompt-engineering_use-xml-tags.md",
+      "old_size": 2445,
+      "new_size": 56335,
+      "delta": 53890
+    },
+    {
+      "file": "en_build-with-claude_prompt-engineering_chain-of-thought.md",
+      "old_size": 2943,
+      "new_size": 56335,
+      "delta": 53392
+    },
+    {
+      "file": "en_build-with-claude_prompt-engineering_system-prompts.md",
+      "old_size": 2984,
+      "new_size": 56335,
+      "delta": 53351
+    },
+    {
+      "file": "en_build-with-claude_prompt-engineering_chain-prompts.md",
+      "old_size": 3186,
+      "new_size": 56335,
+      "delta": 53149
+    },
+    {
+      "file": "en_build-with-claude_prompt-engineering_extended-thinking-tips.md",
+      "old_size": 8585,
+      "new_size": 56335,
+      "delta": 47750
+    },
+    {
+      "file": "en_resources_prompt-library_library.md",
+      "old_size": 9426,
+      "new_size": 56335,
+      "delta": 46909
+    },
+    {
+      "file": "en_api_creating-message-batches.md",
+      "old_size": 56009,
+      "new_size": 99194,
+      "delta": 43185
+    },
+    {
+      "file": "en_api_messages_batches_create.md",
+      "old_size": 56009,
+      "new_size": 99194,
+      "delta": 43185
+    },
+    {
+      "file": "en_api_messages-count-tokens.md",
+      "old_size": 48247,
+      "new_size": 91420,
+      "delta": 43173
+    },
+    {
+      "file": "en_api_messages_count_tokens.md",
+      "old_size": 48247,
+      "new_size": 91420,
+      "delta": 43173
+    },
+    {
+      "file": "en_build-with-claude_prompt-engineering.md",
+      "old_size": 25663,
+      "new_size": 2155,
+      "delta": -23508
+    },
+    {
+      "file": "en_api_beta_messages_batches_create.md",
+      "old_size": 104747,
+      "new_size": 127123,
+      "delta": 22376
+    },
+    {
+      "file": "en_api_beta_messages_count_tokens.md",
+      "old_size": 96820,
+      "new_size": 118612,
+      "delta": 21792
+    },
+    {
+      "file": "en_agents-and-tools_remote-mcp-servers.md",
+      "old_size": 13471,
+      "new_size": 31661,
+      "delta": 18190
+    },
+    {
+      "file": "en_agent-sdk_custom-tools.md",
+      "old_size": 10593,
+      "new_size": 28033,
+      "delta": 17440
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_implement-tool-use.md",
+      "old_size": 28956,
+      "new_size": 11969,
+      "delta": -16987
+    },
+    {
+      "file": "en_articles_12138966-release-notes.md",
+      "old_size": 10392,
+      "new_size": 26844,
+      "delta": 16452
+    },
+    {
+      "file": "en_release-notes_claude-apps.md",
+      "old_size": 10392,
+      "new_size": 26844,
+      "delta": 16452
+    },
+    {
+      "file": "en_articles_12922490-remote-mcp-server-submission-guide.md",
+      "old_size": 17446,
+      "new_size": 1005,
+      "delta": -16441
+    },
+    {
+      "file": "en_articles_12922832-local-mcp-server-submission-guide.md",
+      "old_size": 17160,
+      "new_size": 913,
+      "delta": -16247
+    },
+    {
+      "file": "en_build-with-claude_prompt-caching.md",
+      "old_size": 24929,
+      "new_size": 40832,
+      "delta": 15903
+    },
+    {
+      "file": "en_articles_12220298-financial-analysis-workflows-with-claude.md",
+      "old_size": 11250,
+      "new_size": 26771,
+      "delta": 15521
+    },
+    {
+      "file": "en_articles_12220277-prompting-strategies-for-financial-analysis.md",
+      "old_size": 11036,
+      "new_size": 26528,
+      "delta": 15492
+    },
+    {
+      "file": "en_release-notes_api.md",
+      "old_size": 29576,
+      "new_size": 44979,
+      "delta": 15403
+    },
+    {
+      "file": "en_release-notes_overview.md",
+      "old_size": 29576,
+      "new_size": 44979,
+      "delta": 15403
+    },
+    {
+      "file": "en_agent-sdk_mcp.md",
+      "old_size": 4331,
+      "new_size": 19424,
+      "delta": 15093
+    },
+    {
+      "file": "en_articles_11106443-using-research.md",
+      "old_size": 1061,
+      "new_size": 15965,
+      "delta": 14904
+    },
+    {
+      "file": "en_articles_11101545-using-research-and-google-workspace.md",
+      "old_size": 1184,
+      "new_size": 16009,
+      "delta": 14825
+    },
+    {
+      "file": "en_articles_11596036-anthropic-connectors-directory-faq.md",
+      "old_size": 15440,
+      "new_size": 1088,
+      "delta": -14352
+    },
+    {
+      "file": "en_agent-sdk_sessions.md",
+      "old_size": 4651,
+      "new_size": 17740,
+      "delta": 13089
+    },
+    {
+      "file": "en_build-with-claude_extended-thinking.md",
+      "old_size": 31483,
+      "new_size": 44116,
+      "delta": 12633
+    },
+    {
+      "file": "en_api_models.md",
+      "old_size": 642,
+      "new_size": 12993,
+      "delta": 12351
+    },
+    {
+      "file": "en_agent-sdk_modifying-system-prompts.md",
+      "old_size": 10754,
+      "new_size": 22864,
+      "delta": 12110
+    },
+    {
+      "file": "en_api_admin.md",
+      "old_size": 12851,
+      "new_size": 24340,
+      "delta": 11489
+    },
+    {
+      "file": "en_api_messages_batches_results.md",
+      "old_size": 13486,
+      "new_size": 24414,
+      "delta": 10928
+    },
+    {
+      "file": "en_api_retrieving-message-batch-results.md",
+      "old_size": 13486,
+      "new_size": 24414,
+      "delta": 10928
+    },
+    {
+      "file": "en_agent-sdk_overview.md",
+      "old_size": 8386,
+      "new_size": 19071,
+      "delta": 10685
+    },
+    {
+      "file": "en_api_beta_messages_batches_results.md",
+      "old_size": 29945,
+      "new_size": 40339,
+      "delta": 10394
+    },
+    {
+      "file": "en_agent-sdk_subagents.md",
+      "old_size": 13291,
+      "new_size": 23508,
+      "delta": 10217
+    },
+    {
+      "file": "en_articles_12922929-building-desktop-extensions-with-mcpb.md",
+      "old_size": 10751,
+      "new_size": 996,
+      "delta": -9755
+    },
+    {
+      "file": "en_agent-sdk_user-input.md",
+      "old_size": 19046,
+      "new_size": 28413,
+      "delta": 9367
+    },
+    {
+      "file": "en_articles_8114513-business-associate-agreements-baa-for-commercial-customers.md",
+      "old_size": 2576,
+      "new_size": 11795,
+      "delta": 9219
+    },
+    {
+      "file": "en_articles_12542951-enabling-and-using-the-microsoft-365-connector.md",
+      "old_size": 20411,
+      "new_size": 11699,
+      "delta": -8712
+    },
+    {
+      "file": "en_agent-sdk_permissions.md",
+      "old_size": 5327,
+      "new_size": 13973,
+      "delta": 8646
+    },
+    {
+      "file": "en_agent-sdk_hooks.md",
+      "old_size": 23107,
+      "new_size": 30748,
+      "delta": 7641
+    },
+    {
+      "file": "en_api_beta_models_list.md",
+      "old_size": 3171,
+      "new_size": 10740,
+      "delta": 7569
+    },
+    {
+      "file": "en_api_models-list.md",
+      "old_size": 3164,
+      "new_size": 10586,
+      "delta": 7422
+    },
+    {
+      "file": "en_api_models_list.md",
+      "old_size": 3164,
+      "new_size": 10586,
+      "delta": 7422
+    },
+    {
+      "file": "en_agent-sdk_cost-tracking.md",
+      "old_size": 9174,
+      "new_size": 16546,
+      "delta": 7372
+    },
+    {
+      "file": "en_agent-sdk_structured-outputs.md",
+      "old_size": 6987,
+      "new_size": 14235,
+      "delta": 7248
+    },
+    {
+      "file": "en_about-claude_pricing.md",
+      "old_size": 17199,
+      "new_size": 24324,
+      "delta": 7125
+    },
+    {
+      "file": "en_api_beta_models_retrieve.md",
+      "old_size": 2216,
+      "new_size": 9279,
+      "delta": 7063
+    },
+    {
+      "file": "en_articles_9797531-what-is-the-enterprise-plan.md",
+      "old_size": 3783,
+      "new_size": 10728,
+      "delta": 6945
+    },
+    {
+      "file": "en_api_models_retrieve.md",
+      "old_size": 2212,
+      "new_size": 9128,
+      "delta": 6916
+    },
+    {
+      "file": "en_articles_12650343-claude-in-excel.md",
+      "old_size": 14328,
+      "new_size": 21057,
+      "delta": 6729
+    },
+    {
+      "file": "en_build-with-claude_overview.md",
+      "old_size": 7755,
+      "new_size": 14268,
+      "delta": 6513
+    },
+    {
+      "file": "en_agent-sdk_todo-tracking.md",
+      "old_size": 3351,
+      "new_size": 9837,
+      "delta": 6486
+    },
+    {
+      "file": "en_prompt-generator.md",
+      "old_size": 1909,
+      "new_size": 8330,
+      "delta": 6421
+    },
+    {
+      "file": "en_articles_11503834-building-custom-connectors-via-remote-mcp-servers.md",
+      "old_size": 6950,
+      "new_size": 868,
+      "delta": -6082
+    },
+    {
+      "file": "en_build-with-claude_effort.md",
+      "old_size": 4887,
+      "new_size": 10737,
+      "delta": 5850
+    },
+    {
+      "file": "en_articles_11697096-anthropic-mcp-directory-policy.md",
+      "old_size": 6852,
+      "new_size": 1089,
+      "delta": -5763
+    },
+    {
+      "file": "en_articles_11869629-using-claude-with-android-apps.md",
+      "old_size": 9907,
+      "new_size": 14933,
+      "delta": 5026
+    },
+    {
+      "file": "en_agent-sdk_skills.md",
+      "old_size": 8214,
+      "new_size": 13218,
+      "delta": 5004
+    },
+    {
+      "file": "en_agents-and-tools_mcp-connector.md",
+      "old_size": 13725,
+      "new_size": 18666,
+      "delta": 4941
+    },
+    {
+      "file": "en_agent-sdk_slash-commands.md",
+      "old_size": 8504,
+      "new_size": 13236,
+      "delta": 4732
+    },
+    {
+      "file": "en_build-with-claude_claude-on-vertex-ai.md",
+      "old_size": 6124,
+      "new_size": 10848,
+      "delta": 4724
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_overview.md",
+      "old_size": 10337,
+      "new_size": 5763,
+      "delta": -4574
+    },
+    {
+      "file": "en_build-with-claude_tool-use.md",
+      "old_size": 10337,
+      "new_size": 5763,
+      "delta": -4574
+    },
+    {
+      "file": "en_agent-sdk_quickstart.md",
+      "old_size": 9544,
+      "new_size": 13885,
+      "delta": 4341
+    },
+    {
+      "file": "en_articles_11869619-using-claude-with-ios-apps.md",
+      "old_size": 8802,
+      "new_size": 13123,
+      "delta": 4321
+    },
+    {
+      "file": "en_agent-sdk_secure-deployment.md",
+      "old_size": 20806,
+      "new_size": 25077,
+      "delta": 4271
+    },
+    {
+      "file": "en_articles_13133750-managing-members-on-team-and-enterprise-plans.md",
+      "old_size": 7691,
+      "new_size": 11828,
+      "delta": 4137
+    },
+    {
+      "file": "en_agent-sdk_plugins.md",
+      "old_size": 7009,
+      "new_size": 11108,
+      "delta": 4099
+    },
+    {
+      "file": "en_build-with-claude_structured-outputs.md",
+      "old_size": 15984,
+      "new_size": 20060,
+      "delta": 4076
+    },
+    {
+      "file": "en_agent-sdk_hosting.md",
+      "old_size": 6686,
+      "new_size": 10614,
+      "delta": 3928
+    },
+    {
+      "file": "en_articles_12893767-getting-started-with-claude-for-nonprofits.md",
+      "old_size": 16597,
+      "new_size": 20409,
+      "delta": 3812
+    },
+    {
+      "file": "en_agent-sdk_streaming-vs-single-mode.md",
+      "old_size": 4121,
+      "new_size": 7804,
+      "delta": 3683
+    },
+    {
+      "file": "en_articles_13133195-setting-up-jit-or-scim-provisioning-to-manage-user-assignments-on-team-or-enter.md",
+      "old_size": 11183,
+      "new_size": 14742,
+      "delta": 3559
+    },
+    {
+      "file": "en_articles_13133195-setting-up-jit-or-scim-provisioning.md",
+      "old_size": 11183,
+      "new_size": 14742,
+      "delta": 3559
+    },
+    {
+      "file": "en_collections_9387370-team-and-enterprise-plans.md",
+      "old_size": 5185,
+      "new_size": 8626,
+      "delta": 3441
+    },
+    {
+      "file": "en_build-with-claude_vision.md",
+      "old_size": 11046,
+      "new_size": 14467,
+      "delta": 3421
+    },
+    {
+      "file": "en_agent-sdk_migration-guide.md",
+      "old_size": 7142,
+      "new_size": 10491,
+      "delta": 3349
+    },
+    {
+      "file": "en_build-with-claude_batch-processing.md",
+      "old_size": 19108,
+      "new_size": 22348,
+      "delta": 3240
+    },
+    {
+      "file": "en_build-with-claude_handling-stop-reasons.md",
+      "old_size": 15186,
+      "new_size": 18375,
+      "delta": 3189
+    },
+    {
+      "file": "en_articles_12512180-using-skills-in-claude.md",
+      "old_size": 11289,
+      "new_size": 14471,
+      "delta": 3182
+    },
+    {
+      "file": "en_articles_11145838-using-claude-code-with-your-pro-or-max-plan.md",
+      "old_size": 10183,
+      "new_size": 7086,
+      "delta": -3097
+    },
+    {
+      "file": "en_articles_9266767-what-is-the-team-plan.md",
+      "old_size": 3419,
+      "new_size": 6478,
+      "delta": 3059
+    },
+    {
+      "file": "en_articles_13119606-managing-skills-as-an-admin.md",
+      "old_size": 4279,
+      "new_size": 7301,
+      "delta": 3022
+    },
+    {
+      "file": "en_articles_13119606-provisioning-and-managing-skills-for-your-organization.md",
+      "old_size": 4279,
+      "new_size": 7301,
+      "delta": 3022
+    },
+    {
+      "file": "en_articles_11725091-when-to-use-desktop-and-web-connectors.md",
+      "old_size": 6075,
+      "new_size": 3065,
+      "delta": -3010
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_fine-grained-tool-streaming.md",
+      "old_size": 4201,
+      "new_size": 7186,
+      "delta": 2985
+    },
+    {
+      "file": "en_api_errors.md",
+      "old_size": 4442,
+      "new_size": 7409,
+      "delta": 2967
+    },
+    {
+      "file": "en_build-with-claude_usage-cost-api.md",
+      "old_size": 10161,
+      "new_size": 13118,
+      "delta": 2957
+    },
+    {
+      "file": "en_articles_12005970-extra-usage-for-team-and-enterprise-plans.md",
+      "old_size": 14544,
+      "new_size": 11722,
+      "delta": -2822
+    },
+    {
+      "file": "en_build-with-claude_workspaces.md",
+      "old_size": 9898,
+      "new_size": 12716,
+      "delta": 2818
+    },
+    {
+      "file": "en_test-and-evaluate_define-success.md",
+      "old_size": 2297,
+      "new_size": 4945,
+      "delta": 2648
+    },
+    {
+      "file": "en_articles_8325606-what-is-the-pro-plan.md",
+      "old_size": 2643,
+      "new_size": 5222,
+      "delta": 2579
+    },
+    {
+      "file": "en_agent-sdk_file-checkpointing.md",
+      "old_size": 19238,
+      "new_size": 21816,
+      "delta": 2578
+    },
+    {
+      "file": "en_articles_10366376-how-can-i-delete-my-claude-console-account.md",
+      "old_size": 1876,
+      "new_size": 4366,
+      "delta": 2490
+    },
+    {
+      "file": "en_home.md",
+      "old_size": 1557,
+      "new_size": 4016,
+      "delta": 2459
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_bash-tool.md",
+      "old_size": 7332,
+      "new_size": 9778,
+      "delta": 2446
+    },
+    {
+      "file": "en_api_admin_workspaces_create.md",
+      "old_size": 1565,
+      "new_size": 3992,
+      "delta": 2427
+    },
+    {
+      "file": "en_api_completions_create.md",
+      "old_size": 9695,
+      "new_size": 12089,
+      "delta": 2394
+    },
+    {
+      "file": "en_articles_12157520-claude-code-usage-analytics.md",
+      "old_size": 5018,
+      "new_size": 7364,
+      "delta": 2346
+    },
+    {
+      "file": "en_api_rate-limits.md",
+      "old_size": 14980,
+      "new_size": 17274,
+      "delta": 2294
+    },
+    {
+      "file": "en_articles_11049741-what-is-the-max-plan.md",
+      "old_size": 3125,
+      "new_size": 5266,
+      "delta": 2141
+    },
+    {
+      "file": "en_articles_12386328-requesting-a-refund-for-a-paid-claude-plan.md",
+      "old_size": 1406,
+      "new_size": 3470,
+      "delta": 2064
+    },
+    {
+      "file": "en_articles_11175166-getting-started-with-custom-connectors-using-remote-mcp.md",
+      "old_size": 9464,
+      "new_size": 11489,
+      "delta": 2025
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_tool-search-tool.md",
+      "old_size": 17315,
+      "new_size": 15327,
+      "delta": -1988
+    },
+    {
+      "file": "en_api_admin-api_usage-cost_get-messages-usage-report.md",
+      "old_size": 5967,
+      "new_size": 7836,
+      "delta": 1869
+    },
+    {
+      "file": "en_api_admin_usage_report_retrieve_messages.md",
+      "old_size": 5967,
+      "new_size": 7836,
+      "delta": 1869
+    },
+    {
+      "file": "en_build-with-claude_streaming.md",
+      "old_size": 20127,
+      "new_size": 21925,
+      "delta": 1798
+    },
+    {
+      "file": "en_api_admin_workspaces_update.md",
+      "old_size": 1674,
+      "new_size": 3411,
+      "delta": 1737
+    },
+    {
+      "file": "en_test-and-evaluate_develop-tests.md",
+      "old_size": 3223,
+      "new_size": 4945,
+      "delta": 1722
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_text-editor-tool.md",
+      "old_size": 20035,
+      "new_size": 18339,
+      "delta": -1696
+    },
+    {
+      "file": "en_about-claude_model-deprecations.md",
+      "old_size": 7096,
+      "new_size": 8783,
+      "delta": 1687
+    },
+    {
+      "file": "en_articles_13189465-logging-in-to-your-claude-account.md",
+      "old_size": 6332,
+      "new_size": 7987,
+      "delta": 1655
+    },
+    {
+      "file": "en_build-with-claude_search-results.md",
+      "old_size": 16948,
+      "new_size": 18419,
+      "delta": 1471
+    },
+    {
+      "file": "en_build-with-claude_claude-in-microsoft-foundry.md",
+      "old_size": 11989,
+      "new_size": 13447,
+      "delta": 1458
+    },
+    {
+      "file": "en_articles_13132885-setting-up-single-sign-on-sso-for-claude-and-claude-console.md",
+      "old_size": 11062,
+      "new_size": 12415,
+      "delta": 1353
+    },
+    {
+      "file": "en_articles_13132885-setting-up-single-sign-on-sso.md",
+      "old_size": 11062,
+      "new_size": 12415,
+      "delta": 1353
+    },
+    {
+      "file": "en_build-with-claude_embeddings.md",
+      "old_size": 9192,
+      "new_size": 10541,
+      "delta": 1349
+    },
+    {
+      "file": "en_articles_12111783-create-and-edit-files-with-claude.md",
+      "old_size": 20934,
+      "new_size": 19622,
+      "delta": -1312
+    },
+    {
+      "file": "en_articles_10684626-enabling-and-using-web-search.md",
+      "old_size": 6218,
+      "new_size": 7495,
+      "delta": 1277
+    },
+    {
+      "file": "en_agent-sdk_typescript-v2-preview.md",
+      "old_size": 10365,
+      "new_size": 11627,
+      "delta": 1262
+    },
+    {
+      "file": "en_build-with-claude_prompt-engineering_prefill-claudes-response.md",
+      "old_size": 3399,
+      "new_size": 2155,
+      "delta": -1244
+    },
+    {
+      "file": "en_about-claude_models.md",
+      "old_size": 5974,
+      "new_size": 7164,
+      "delta": 1190
+    },
+    {
+      "file": "en_about-claude_models_overview.md",
+      "old_size": 5974,
+      "new_size": 7164,
+      "delta": 1190
+    },
+    {
+      "file": "en_articles_12902428-using-claude-for-chrome-safely.md",
+      "old_size": 7721,
+      "new_size": 8886,
+      "delta": 1165
+    },
+    {
+      "file": "en_articles_12902428-using-claude-in-chrome-safely.md",
+      "old_size": 7721,
+      "new_size": 8886,
+      "delta": 1165
+    },
+    {
+      "file": "en_intro.md",
+      "old_size": 2117,
+      "new_size": 3272,
+      "delta": 1155
+    },
+    {
+      "file": "en_build-with-claude_context-windows.md",
+      "old_size": 12226,
+      "new_size": 13361,
+      "delta": 1135
+    },
+    {
+      "file": "en_test-and-evaluate_strengthen-guardrails_increase-consistency.md",
+      "old_size": 1625,
+      "new_size": 2748,
+      "delta": 1123
+    },
+    {
+      "file": "en_agents-and-tools_agent-skills_overview.md",
+      "old_size": 17182,
+      "new_size": 18303,
+      "delta": 1121
+    },
+    {
+      "file": "en_api_admin-api_workspaces_list-workspaces.md",
+      "old_size": 2534,
+      "new_size": 3633,
+      "delta": 1099
+    },
+    {
+      "file": "en_api_admin_workspaces_list.md",
+      "old_size": 2534,
+      "new_size": 3633,
+      "delta": 1099
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_programmatic-tool-calling.md",
+      "old_size": 23689,
+      "new_size": 24785,
+      "delta": 1096
+    },
+    {
+      "file": "en_api_admin-api_workspaces_get-workspace.md",
+      "old_size": 1477,
+      "new_size": 2502,
+      "delta": 1025
+    },
+    {
+      "file": "en_api_admin_workspaces_retrieve.md",
+      "old_size": 1477,
+      "new_size": 2502,
+      "delta": 1025
+    },
+    {
+      "file": "en_articles_12123587-importing-and-exporting-your-memory-from-claude.md",
+      "old_size": 3408,
+      "new_size": 4421,
+      "delta": 1013
+    },
+    {
+      "file": "en_articles_8114491-getting-started-with-claude.md",
+      "old_size": 4986,
+      "new_size": 5991,
+      "delta": 1005
+    },
+    {
+      "file": "en_api_admin_workspaces_archive.md",
+      "old_size": 1524,
+      "new_size": 2527,
+      "delta": 1003
+    },
+    {
+      "file": "en_agents-and-tools_mcp.md",
+      "old_size": 3647,
+      "new_size": 4635,
+      "delta": 988
+    },
+    {
+      "file": "en_mcp.md",
+      "old_size": 3647,
+      "new_size": 4635,
+      "delta": 988
+    },
+    {
+      "file": "en_articles_10065433-installing-claude-desktop.md",
+      "old_size": 2684,
+      "new_size": 3668,
+      "delta": 984
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_web-search-tool.md",
+      "old_size": 12785,
+      "new_size": 11842,
+      "delta": -943
+    },
+    {
+      "file": "en_build-with-claude_working-with-messages.md",
+      "old_size": 6235,
+      "new_size": 7143,
+      "delta": 908
+    },
+    {
+      "file": "en_articles_12004354-purchasing-and-managing-seats.md",
+      "old_size": 8680,
+      "new_size": 7773,
+      "delta": -907
+    },
+    {
+      "file": "en_build-with-claude_context-editing.md",
+      "old_size": 23472,
+      "new_size": 24372,
+      "delta": 900
+    },
+    {
+      "file": "en_api_overview.md",
+      "old_size": 8031,
+      "new_size": 8914,
+      "delta": 883
+    },
+    {
+      "file": "en_articles_9267276-roles-and-permissions.md",
+      "old_size": 3161,
+      "new_size": 4026,
+      "delta": 865
+    },
+    {
+      "file": "en_articles_9267289-how-is-my-team-plan-bill-calculated.md",
+      "old_size": 4635,
+      "new_size": 3810,
+      "delta": -825
+    },
+    {
+      "file": "en_api_beta_files_list.md",
+      "old_size": 3285,
+      "new_size": 4060,
+      "delta": 775
+    },
+    {
+      "file": "en_articles_8887527-customizing-your-appearance-settings.md",
+      "old_size": 2929,
+      "new_size": 3669,
+      "delta": 740
+    },
+    {
+      "file": "en_articles_12622703-deploy-claude-desktop-for-windows.md",
+      "old_size": 3577,
+      "new_size": 4295,
+      "delta": 718
+    },
+    {
+      "file": "en_build-with-claude_prompt-engineering_overview.md",
+      "old_size": 2854,
+      "new_size": 2155,
+      "delta": -699
+    },
+    {
+      "file": "en_articles_8664678-how-can-i-change-the-model-version-that-i-m-chatting-with.md",
+      "old_size": 1716,
+      "new_size": 1063,
+      "delta": -653
+    },
+    {
+      "file": "en_articles_12684923-microsoft-365-connector-security-guide.md",
+      "old_size": 15126,
+      "new_size": 14503,
+      "delta": -623
+    },
+    {
+      "file": "en_articles_12622667-enterprise-configuration.md",
+      "old_size": 3775,
+      "new_size": 4397,
+      "delta": 622
+    },
+    {
+      "file": "en_get-started.md",
+      "old_size": 2386,
+      "new_size": 3002,
+      "delta": 616
+    },
+    {
+      "file": "en_api_beta_files_upload.md",
+      "old_size": 2344,
+      "new_size": 2948,
+      "delta": 604
+    },
+    {
+      "file": "en_api_files-create.md",
+      "old_size": 2344,
+      "new_size": 2948,
+      "delta": 604
+    },
+    {
+      "file": "en_articles_9002504-can-claude-produce-images.md",
+      "old_size": 735,
+      "new_size": 1330,
+      "delta": 595
+    },
+    {
+      "file": "en_collections_9879000-claude-for-ios.md",
+      "old_size": 1658,
+      "new_size": 1067,
+      "delta": -591
+    },
+    {
+      "file": "en_api_client-sdks.md",
+      "old_size": 2730,
+      "new_size": 3301,
+      "delta": 571
+    },
+    {
+      "file": "en_about-claude_use-case-guides_customer-support-chat.md",
+      "old_size": 28738,
+      "new_size": 29306,
+      "delta": 568
+    },
+    {
+      "file": "en_articles_11940350-claude-code-model-configuration.md",
+      "old_size": 4365,
+      "new_size": 3828,
+      "delta": -537
+    },
+    {
+      "file": "en_api_admin-api_usage-cost_get-cost-report.md",
+      "old_size": 4526,
+      "new_size": 5060,
+      "delta": 534
+    },
+    {
+      "file": "en_api_admin_cost_report_retrieve.md",
+      "old_size": 4526,
+      "new_size": 5060,
+      "delta": 534
+    },
+    {
+      "file": "en_api_beta_files_retrieve_metadata.md",
+      "old_size": 2380,
+      "new_size": 2909,
+      "delta": 529
+    },
+    {
+      "file": "en_api_ip-addresses.md",
+      "old_size": 581,
+      "new_size": 1108,
+      "delta": 527
+    },
+    {
+      "file": "en_api_beta_skills_create.md",
+      "old_size": 2619,
+      "new_size": 3109,
+      "delta": 490
+    },
+    {
+      "file": "en_api_skills_create-skill.md",
+      "old_size": 2619,
+      "new_size": 3109,
+      "delta": 490
+    },
+    {
+      "file": "en_articles_12461605-using-claude-in-slack.md",
+      "old_size": 10008,
+      "new_size": 10497,
+      "delta": 489
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_code-execution-tool.md",
+      "old_size": 21073,
+      "new_size": 20595,
+      "delta": -478
+    },
+    {
+      "file": "en_build-with-claude_pdf-support.md",
+      "old_size": 12278,
+      "new_size": 11800,
+      "delta": -478
+    },
+    {
+      "file": "en_articles_9547008-discovering-publishing-customizing-and-sharing-artifacts.md",
+      "old_size": 8923,
+      "new_size": 8493,
+      "delta": -430
+    },
+    {
+      "file": "en_articles_10186004-api-console-roles-and-permissions.md",
+      "old_size": 2388,
+      "new_size": 2802,
+      "delta": 414
+    },
+    {
+      "file": "en_articles_10186004-claude-console-roles-and-permissions.md",
+      "old_size": 2388,
+      "new_size": 2802,
+      "delta": 414
+    },
+    {
+      "file": "en_articles_13145338-anthropic-software-directory-terms.md",
+      "old_size": 4856,
+      "new_size": 5260,
+      "delta": 404
+    },
+    {
+      "file": "en_articles_9796807-creating-and-managing-workspaces-in-the-claude-console.md",
+      "old_size": 5802,
+      "new_size": 6200,
+      "delta": 398
+    },
+    {
+      "file": "en_api_beta-headers.md",
+      "old_size": 2150,
+      "new_size": 2544,
+      "delta": 394
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_web-fetch-tool.md",
+      "old_size": 14595,
+      "new_size": 14225,
+      "delta": -370
+    },
+    {
+      "file": "en_articles_9487310-what-are-artifacts-and-how-do-i-use-them.md",
+      "old_size": 8159,
+      "new_size": 7790,
+      "delta": -369
+    },
+    {
+      "file": "en_articles_9797557-usage-limit-best-practices.md",
+      "old_size": 6818,
+      "new_size": 7170,
+      "delta": 352
+    },
+    {
+      "file": "en_build-with-claude_token-counting.md",
+      "old_size": 6485,
+      "new_size": 6836,
+      "delta": 351
+    },
+    {
+      "file": "en_articles_12512176-what-are-skills.md",
+      "old_size": 5970,
+      "new_size": 6314,
+      "delta": 344
+    },
+    {
+      "file": "en_api_beta_skills_versions_create.md",
+      "old_size": 3005,
+      "new_size": 3346,
+      "delta": 341
+    },
+    {
+      "file": "en_api_skills_create-skill-version.md",
+      "old_size": 3005,
+      "new_size": 3346,
+      "delta": 341
+    },
+    {
+      "file": "en_articles_13145358-anthropic-software-directory-policy.md",
+      "old_size": 7772,
+      "new_size": 8100,
+      "delta": 328
+    },
+    {
+      "file": "en_articles_10949351-getting-started-with-local-mcp-servers-on-claude-desktop.md",
+      "old_size": 8889,
+      "new_size": 9204,
+      "delta": 315
+    },
+    {
+      "file": "en_api_completions.md",
+      "old_size": 2802,
+      "new_size": 2502,
+      "delta": -300
+    },
+    {
+      "file": "en_api_admin-api.md",
+      "old_size": 1150,
+      "new_size": 1443,
+      "delta": 293
+    },
+    {
+      "file": "en_api_messages-batches.md",
+      "old_size": 1150,
+      "new_size": 1443,
+      "delta": 293
+    },
+    {
+      "file": "en_api_shared.md",
+      "old_size": 1150,
+      "new_size": 1443,
+      "delta": 293
+    },
+    {
+      "file": "en_articles_10684638-reporting-blocking-and-removing-content-from-claude.md",
+      "old_size": 5840,
+      "new_size": 5550,
+      "delta": -290
+    },
+    {
+      "file": "en_articles_7996906-reporting-blocking-and-removing-content-from-claude.md",
+      "old_size": 5841,
+      "new_size": 5551,
+      "delta": -290
+    },
+    {
+      "file": "en_api_service-tiers.md",
+      "old_size": 5224,
+      "new_size": 5513,
+      "delta": 289
+    },
+    {
+      "file": "en_agents-and-tools_computer-use.md",
+      "old_size": 29478,
+      "new_size": 29754,
+      "delta": 276
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_computer-use-tool.md",
+      "old_size": 29478,
+      "new_size": 29754,
+      "delta": 276
+    },
+    {
+      "file": "en_articles_9970975-how-to-access-audit-logs.md",
+      "old_size": 9021,
+      "new_size": 9282,
+      "delta": 261
+    },
+    {
+      "file": "en_articles_12386420-claude-code-faq.md",
+      "old_size": 10401,
+      "new_size": 10149,
+      "delta": -252
+    },
+    {
+      "file": "en_api_admin-api_apikeys_list-api-keys.md",
+      "old_size": 3283,
+      "new_size": 3516,
+      "delta": 233
+    },
+    {
+      "file": "en_api_admin_api_keys_list.md",
+      "old_size": 3283,
+      "new_size": 3516,
+      "delta": 233
+    },
+    {
+      "file": "en_articles_8114494-how-up-to-date-is-claude-s-training-data.md",
+      "old_size": 1534,
+      "new_size": 1761,
+      "delta": 227
+    },
+    {
+      "file": "en_articles_9015913-how-to-get-support.md",
+      "old_size": 5686,
+      "new_size": 5900,
+      "delta": 214
+    },
+    {
+      "file": "en_agents-and-tools_agent-skills_quickstart.md",
+      "old_size": 7218,
+      "new_size": 7006,
+      "delta": -212
+    },
+    {
+      "file": "en_articles_12053672-what-happens-to-a-user-s-data-when-they-are-removed-from-a-team-or-enterprise-o.md",
+      "old_size": 4227,
+      "new_size": 4018,
+      "delta": -209
+    },
+    {
+      "file": "en_articles_12012173-getting-started-with-claude-for-chrome.md",
+      "old_size": 12005,
+      "new_size": 11798,
+      "delta": -207
+    },
+    {
+      "file": "en_api_admin-api_apikeys_get-api-key.md",
+      "old_size": 1993,
+      "new_size": 2199,
+      "delta": 206
+    },
+    {
+      "file": "en_api_admin_api_keys_retrieve.md",
+      "old_size": 1993,
+      "new_size": 2199,
+      "delta": 206
+    },
+    {
+      "file": "en_articles_8525154-claude-is-providing-incorrect-or-misleading-responses-what-s-going-on.md",
+      "old_size": 2263,
+      "new_size": 2461,
+      "delta": 198
+    },
+    {
+      "file": "en_articles_12012173-getting-started-with-claude-in-chrome.md",
+      "old_size": 12009,
+      "new_size": 11814,
+      "delta": -195
+    },
+    {
+      "file": "en_articles_8606395-how-large-is-the-claude-api-s-context-window.md",
+      "old_size": 863,
+      "new_size": 1057,
+      "delta": 194
+    },
+    {
+      "file": "en_articles_8606394-how-large-is-the-context-window-on-paid-claude-plans.md",
+      "old_size": 2661,
+      "new_size": 2852,
+      "delta": 191
+    },
+    {
+      "file": "en_articles_9199617-api-safeguards-tools.md",
+      "old_size": 3907,
+      "new_size": 3716,
+      "delta": -191
+    },
+    {
+      "file": "en_articles_8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler.md",
+      "old_size": 4577,
+      "new_size": 4763,
+      "delta": 186
+    },
+    {
+      "file": "en_articles_8977456-how-do-i-pay-for-my-api-usage.md",
+      "old_size": 3014,
+      "new_size": 3199,
+      "delta": 185
+    },
+    {
+      "file": "en_articles_8977456-how-do-i-pay-for-my-claude-api-usage.md",
+      "old_size": 3014,
+      "new_size": 3199,
+      "delta": 185
+    },
+    {
+      "file": "en_api_admin_api_keys_update.md",
+      "old_size": 2311,
+      "new_size": 2487,
+      "delta": 176
+    },
+    {
+      "file": "en_release-notes_system-prompts.md",
+      "old_size": 1118,
+      "new_size": 1294,
+      "delta": 176
+    },
+    {
+      "file": "en_test-and-evaluate_strengthen-guardrails_reduce-prompt-leak.md",
+      "old_size": 1905,
+      "new_size": 2079,
+      "delta": 174
+    },
+    {
+      "file": "en_articles_12260368-using-incognito-chats.md",
+      "old_size": 4287,
+      "new_size": 4458,
+      "delta": 171
+    },
+    {
+      "file": "en_articles_13124001-managing-your-active-sessions.md",
+      "old_size": 3005,
+      "new_size": 2834,
+      "delta": -171
+    },
+    {
+      "file": "en_test-and-evaluate_strengthen-guardrails_handle-streaming-refusals.md",
+      "old_size": 3637,
+      "new_size": 3802,
+      "delta": 165
+    },
+    {
+      "file": "en_articles_13047024-how-to-get-support-for-claude-for-government.md",
+      "old_size": 1509,
+      "new_size": 1345,
+      "delta": -164
+    },
+    {
+      "file": "en_articles_12923668-claude-for-nonprofits-partnership-success-guide-for-admins.md",
+      "old_size": 6483,
+      "new_size": 6646,
+      "delta": 163
+    },
+    {
+      "file": "en_articles_12938627-how-to-gift-a-claude-subscription.md",
+      "old_size": 2709,
+      "new_size": 2869,
+      "delta": 160
+    },
+    {
+      "file": "en_articles_11595103-designated-point-of-contact-for-users-in-the-eu.md",
+      "old_size": 1508,
+      "new_size": 1666,
+      "delta": 158
+    },
+    {
+      "file": "en_collections_9879004-claude-for-android.md",
+      "old_size": 1417,
+      "new_size": 1259,
+      "delta": -158
+    },
+    {
+      "file": "en_articles_11647753-understanding-usage-and-length-limits.md",
+      "old_size": 6360,
+      "new_size": 6215,
+      "delta": -145
+    },
+    {
+      "file": "en_articles_11845131-using-claude-code-with-your-team-or-enterprise-plan.md",
+      "old_size": 4771,
+      "new_size": 4916,
+      "delta": 145
+    },
+    {
+      "file": "en_articles_10276682-important-considerations-before-enabling-single-sign-on-sso-and-jit-scim-provis.md",
+      "old_size": 9767,
+      "new_size": 9905,
+      "delta": 138
+    },
+    {
+      "file": "en_articles_12611117-deploy-claude-desktop-for-macos.md",
+      "old_size": 2258,
+      "new_size": 2394,
+      "delta": 136
+    },
+    {
+      "file": "en_build-with-claude_multilingual-support.md",
+      "old_size": 3640,
+      "new_size": 3504,
+      "delta": -136
+    },
+    {
+      "file": "en_build-with-claude_citations.md",
+      "old_size": 14308,
+      "new_size": 14175,
+      "delta": -133
+    },
+    {
+      "file": "en_test-and-evaluate_strengthen-guardrails_reduce-latency.md",
+      "old_size": 5083,
+      "new_size": 5214,
+      "delta": 131
+    },
+    {
+      "file": "en_api_canceling-message-batches.md",
+      "old_size": 5129,
+      "new_size": 5002,
+      "delta": -127
+    },
+    {
+      "file": "en_api_messages_batches_cancel.md",
+      "old_size": 5129,
+      "new_size": 5002,
+      "delta": -127
+    },
+    {
+      "file": "en_api_messages_batches_retrieve.md",
+      "old_size": 4796,
+      "new_size": 4669,
+      "delta": -127
+    },
+    {
+      "file": "en_api_retrieving-message-batches.md",
+      "old_size": 4796,
+      "new_size": 4669,
+      "delta": -127
+    },
+    {
+      "file": "en_articles_13325567-account-management-faqs.md",
+      "old_size": 3709,
+      "new_size": 3836,
+      "delta": 127
+    },
+    {
+      "file": "en_api_listing-message-batches.md",
+      "old_size": 5704,
+      "new_size": 5579,
+      "delta": -125
+    },
+    {
+      "file": "en_api_messages_batches_list.md",
+      "old_size": 5704,
+      "new_size": 5579,
+      "delta": -125
+    },
+    {
+      "file": "en_articles_12738598-adapting-to-new-model-personas-after-deprecations.md",
+      "old_size": 4655,
+      "new_size": 4780,
+      "delta": 125
+    },
+    {
+      "file": "en_api_beta_files_delete.md",
+      "old_size": 1723,
+      "new_size": 1845,
+      "delta": 122
+    },
+    {
+      "file": "en_articles_10574485-using-extended-thinking.md",
+      "old_size": 3605,
+      "new_size": 3483,
+      "delta": -122
+    },
+    {
+      "file": "en_api_admin-api_claude-code_get-claude-code-usage-report.md",
+      "old_size": 7702,
+      "new_size": 7584,
+      "delta": -118
+    },
+    {
+      "file": "en_api_admin_usage_report_retrieve_claude_code.md",
+      "old_size": 7702,
+      "new_size": 7584,
+      "delta": -118
+    },
+    {
+      "file": "en_api_beta_files_download.md",
+      "old_size": 1343,
+      "new_size": 1461,
+      "delta": 118
+    },
+    {
+      "file": "en_api_beta_skills_delete.md",
+      "old_size": 1796,
+      "new_size": 1914,
+      "delta": 118
+    },
+    {
+      "file": "en_api_beta_skills_list.md",
+      "old_size": 3831,
+      "new_size": 3949,
+      "delta": 118
+    },
+    {
+      "file": "en_api_beta_skills_retrieve.md",
+      "old_size": 2753,
+      "new_size": 2871,
+      "delta": 118
+    },
+    {
+      "file": "en_api_beta_skills_versions_delete.md",
+      "old_size": 2014,
+      "new_size": 2132,
+      "delta": 118
+    },
+    {
+      "file": "en_api_beta_skills_versions_list.md",
+      "old_size": 3775,
+      "new_size": 3893,
+      "delta": 118
+    },
+    {
+      "file": "en_api_beta_skills_versions_retrieve.md",
+      "old_size": 3131,
+      "new_size": 3249,
+      "delta": 118
+    },
+    {
+      "file": "en_api_files-content.md",
+      "old_size": 1343,
+      "new_size": 1461,
+      "delta": 118
+    },
+    {
+      "file": "en_api_skills_list-skill-versions.md",
+      "old_size": 3775,
+      "new_size": 3893,
+      "delta": 118
+    },
+    {
+      "file": "en_api_skills_list-skills.md",
+      "old_size": 3831,
+      "new_size": 3949,
+      "delta": 118
+    },
+    {
+      "file": "en_collections_4078534-privacy-and-legal.md",
+      "old_size": 3322,
+      "new_size": 3440,
+      "delta": 118
+    },
+    {
+      "file": "en_api_openai-sdk.md",
+      "old_size": 7447,
+      "new_size": 7558,
+      "delta": 111
+    },
+    {
+      "file": "en_articles_12449294-understanding-sonnet-4-5-s-api-safety-filters.md",
+      "old_size": 4213,
+      "new_size": 4103,
+      "delta": -110
+    },
+    {
+      "file": "en_articles_9612901-why-can-t-i-find-claude-for-android-in-the-play-store.md",
+      "old_size": 1058,
+      "new_size": 950,
+      "delta": -108
+    },
+    {
+      "file": "en_agents-and-tools_agent-skills_best-practices.md",
+      "old_size": 40460,
+      "new_size": 40354,
+      "delta": -106
+    },
+    {
+      "file": "en_articles_7996862-how-do-i-view-and-sign-your-data-processing-addendum-dpa.md",
+      "old_size": 1637,
+      "new_size": 1531,
+      "delta": -106
+    },
+    {
+      "file": "en_build-with-claude_files.md",
+      "old_size": 9193,
+      "new_size": 9297,
+      "delta": 104
+    },
+    {
+      "file": "en_articles_10593882-sharing-and-unsharing-chats.md",
+      "old_size": 5921,
+      "new_size": 5818,
+      "delta": -103
+    },
+    {
+      "file": "en_articles_9020328-csam-detection-and-reporting.md",
+      "old_size": 1944,
+      "new_size": 1841,
+      "delta": -103
+    },
+    {
+      "file": "en_articles_10181068-configuring-and-using-styles.md",
+      "old_size": 4138,
+      "new_size": 4040,
+      "delta": -98
+    },
+    {
+      "file": "en_articles_10416553-official-anthropic-marketing-email-addresses.md",
+      "old_size": 1949,
+      "new_size": 2043,
+      "delta": 94
+    },
+    {
+      "file": "en_articles_13346458-customizing-your-console-appearance-settings.md",
+      "old_size": 1691,
+      "new_size": 1598,
+      "delta": -93
+    },
+    {
+      "file": "en_articles_9519177-how-can-i-create-and-manage-projects.md",
+      "old_size": 14887,
+      "new_size": 14980,
+      "delta": 93
+    },
+    {
+      "file": "en_articles_10035659-where-can-i-learn-more-about-anthropic-s-privacy-practices.md",
+      "old_size": 1159,
+      "new_size": 1068,
+      "delta": -91
+    },
+    {
+      "file": "en_about-claude_models_choosing-a-model.md",
+      "old_size": 4040,
+      "new_size": 3953,
+      "delta": -87
+    },
+    {
+      "file": "en_api_admin_workspaces_members_create.md",
+      "old_size": 1865,
+      "new_size": 1952,
+      "delta": 87
+    },
+    {
+      "file": "en_articles_10185728-understanding-claude-s-personalization-features.md",
+      "old_size": 3650,
+      "new_size": 3566,
+      "delta": -84
+    },
+    {
+      "file": "en_articles_11140763-claude-4-invite-sweepstakes-official-rules.md",
+      "old_size": 4431,
+      "new_size": 4347,
+      "delta": -84
+    },
+    {
+      "file": "en_articles_11473015-retrieval-augmented-generation-rag-for-projects.md",
+      "old_size": 4840,
+      "new_size": 4756,
+      "delta": -84
+    },
+    {
+      "file": "en_articles_9450526-how-can-i-export-my-claude-data.md",
+      "old_size": 2022,
+      "new_size": 2105,
+      "delta": 83
+    },
+    {
+      "file": "en_articles_11139144-faqs-on-using-claude-for-education-at-your-university.md",
+      "old_size": 8338,
+      "new_size": 8256,
+      "delta": -82
+    },
+    {
+      "file": "en_articles_10504844-managing-user-feedback-settings-on-team-and-enterprise-plans.md",
+      "old_size": 2172,
+      "new_size": 2092,
+      "delta": -80
+    },
+    {
+      "file": "en_articles_12902446-claude-for-chrome-permissions-guide.md",
+      "old_size": 8902,
+      "new_size": 8822,
+      "delta": -80
+    },
+    {
+      "file": "en_articles_12902446-claude-in-chrome-permissions-guide.md",
+      "old_size": 8902,
+      "new_size": 8822,
+      "delta": -80
+    },
+    {
+      "file": "en_articles_9534590-cost-and-usage-reporting-in-the-claude-console.md",
+      "old_size": 6934,
+      "new_size": 7014,
+      "delta": 80
+    },
+    {
+      "file": "en_articles_7996921-i-use-claude-in-amazon-bedrock-who-do-i-contact-for-customer-support-inquiries.md",
+      "old_size": 1554,
+      "new_size": 1477,
+      "delta": -77
+    },
+    {
+      "file": "en_build-with-claude_skills-guide.md",
+      "old_size": 22033,
+      "new_size": 22110,
+      "delta": 77
+    },
+    {
+      "file": "en_articles_12335811-report-a-concern-australian-dis-standard-compliance.md",
+      "old_size": 3076,
+      "new_size": 3001,
+      "delta": -75
+    },
+    {
+      "file": "en_articles_11049762-choosing-a-claude-plan.md",
+      "old_size": 1903,
+      "new_size": 1975,
+      "delta": 72
+    },
+    {
+      "file": "en_articles_12923901-claude-for-nonprofits-partnership-guide-for-all-users.md",
+      "old_size": 5747,
+      "new_size": 5675,
+      "delta": -72
+    },
+    {
+      "file": "en_articles_8287232-verifying-your-phone-number.md",
+      "old_size": 4926,
+      "new_size": 4855,
+      "delta": -71
+    },
+    {
+      "file": "en_api_admin_invites_create.md",
+      "old_size": 1979,
+      "new_size": 1910,
+      "delta": -69
+    },
+    {
+      "file": "en_articles_10015870-what-certifications-has-anthropic-obtained.md",
+      "old_size": 1447,
+      "new_size": 1380,
+      "delta": -67
+    },
+    {
+      "file": "en_agents-and-tools_tool-use_memory-tool.md",
+      "old_size": 15505,
+      "new_size": 15441,
+      "delta": -64
+    },
+    {
+      "file": "en_articles_10366432-i-m-getting-an-api-connection-error-how-can-i-fix-it.md",
+      "old_size": 1446,
+      "new_size": 1509,
+      "delta": 63
+    },
+    {
+      "file": "en_articles_11932705-automated-security-reviews-in-claude-code.md",
+      "old_size": 5386,
+      "new_size": 5323,
+      "delta": -63
+    },
+    {
+      "file": "en_articles_12618689-claude-code-on-the-web.md",
+      "old_size": 12593,
+      "new_size": 12530,
+      "delta": -63
+    },
+    {
+      "file": "en_articles_8114521-how-can-i-access-the-anthropic-api.md",
+      "old_size": 1706,
+      "new_size": 1768,
+      "delta": 62
+    },
+    {
+      "file": "en_articles_8114521-how-can-i-access-the-claude-api.md",
+      "old_size": 1706,
+      "new_size": 1768,
+      "delta": 62
+    },
+    {
+      "file": "en_resources_overview.md",
+      "old_size": 2117,
+      "new_size": 2178,
+      "delta": 61
+    },
+    {
+      "file": "en_api_deleting-message-batches.md",
+      "old_size": 1226,
+      "new_size": 1166,
+      "delta": -60
+    },
+    {
+      "file": "en_api_messages_batches_delete.md",
+      "old_size": 1226,
+      "new_size": 1166,
+      "delta": -60
+    },
+    {
+      "file": "en_articles_9876003-i-have-a-paid-claude-subscription-pro-max-team-or-enterprise-plans-why-do-i-have.md",
+      "old_size": 1794,
+      "new_size": 1854,
+      "delta": 60
+    },
+    {
+      "file": "en_articles_9927533-how-can-i-disable-public-projects.md",
+      "old_size": 3540,
+      "new_size": 3600,
+      "delta": 60
+    },
+    {
+      "file": "en_articles_10023646-i-think-a-user-is-infringing-my-copyright-or-other-intellectual-property-how-do.md",
+      "old_size": 1523,
+      "new_size": 1464,
+      "delta": -59
+    },
+    {
+      "file": "en_articles_11427875-public-vulnerability-reporting.md",
+      "old_size": 1730,
+      "new_size": 1671,
+      "delta": -59
+    },
+    {
+      "file": "en_articles_13065128-claude-for-chrome-admin-controls.md",
+      "old_size": 5466,
+      "new_size": 5525,
+      "delta": 59
+    },
+    {
+      "file": "en_articles_13065128-claude-in-chrome-admin-controls.md",
+      "old_size": 5466,
+      "new_size": 5525,
+      "delta": 59
+    },
+    {
+      "file": "en_api_beta_messages_batches_delete.md",
+      "old_size": 2222,
+      "new_size": 2280,
+      "delta": 58
+    },
+    {
+      "file": "en_articles_10280779-how-do-i-learn-more-about-amazon-and-anthropic-s-strategic-collaboration.md",
+      "old_size": 1072,
+      "new_size": 1015,
+      "delta": -57
+    },
+    {
+      "file": "en_articles_11174660-online-safety-contacts.md",
+      "old_size": 1313,
+      "new_size": 1370,
+      "delta": 57
+    },
+    {
+      "file": "en_articles_12304248-managing-api-key-environment-variables-in-claude-code.md",
+      "old_size": 4543,
+      "new_size": 4486,
+      "delta": -57
+    },
+    {
+      "file": "en_articles_13198485-enforce-network-level-access-control-with-tenant-restrictions.md",
+      "old_size": 4044,
+      "new_size": 4101,
+      "delta": 57
+    },
+    {
+      "file": "en_about-claude_use-case-guides_content-moderation.md",
+      "old_size": 22444,
+      "new_size": 22390,
+      "delta": -54
+    },
+    {
+      "file": "en_articles_12626668-use-quick-entry-with-claude-desktop-on-mac.md",
+      "old_size": 6906,
+      "new_size": 6852,
+      "delta": -54
+    },
+    {
+      "file": "en_articles_13171706-crisis-helpline-support-in-claude.md",
+      "old_size": 9358,
+      "new_size": 9304,
+      "delta": -54
+    },
+    {
+      "file": "en_about-claude_use-case-guides_ticket-routing.md",
+      "old_size": 18574,
+      "new_size": 18521,
+      "delta": -53
+    },
+    {
+      "file": "en_articles_12997503-team-plan-billing-faqs.md",
+      "old_size": 4819,
+      "new_size": 4872,
+      "delta": 53
+    },
+    {
+      "file": "en_api_admin-api_invites_get-invite.md",
+      "old_size": 1650,
+      "new_size": 1598,
+      "delta": -52
+    },
+    {
+      "file": "en_api_admin_invites_retrieve.md",
+      "old_size": 1650,
+      "new_size": 1598,
+      "delta": -52
+    },
+    {
+      "file": "en_articles_10534883-using-the-claude-widget-on-android.md",
+      "old_size": 2233,
+      "new_size": 2181,
+      "delta": -52
+    },
+    {
+      "file": "en_articles_10722177-sharing-prompts-in-the-claude-console.md",
+      "old_size": 7578,
+      "new_size": 7526,
+      "delta": -52
+    },
+    {
+      "file": "en_articles_11817273-using-claude-s-chat-search-and-memory-to-build-on-previous-context.md",
+      "old_size": 12881,
+      "new_size": 12933,
+      "delta": 52
+    },
+    {
+      "file": "en_api_admin_workspaces_members_update.md",
+      "old_size": 1844,
+      "new_size": 1895,
+      "delta": 51
+    },
+    {
+      "file": "en_articles_9035075-law-enforcement-requests.md",
+      "old_size": 1969,
+      "new_size": 2020,
+      "delta": 51
+    },
+    {
+      "file": "en_api_admin_invites_list.md",
+      "old_size": 2614,
+      "new_size": 2564,
+      "delta": -50
+    },
+    {
+      "file": "en_articles_10440198-custom-data-retention-controls-for-claude-enterprise.md",
+      "old_size": 3603,
+      "new_size": 3553,
+      "delta": -50
+    },
+    {
+      "file": "en_articles_10440198-custom-data-retention-controls-for-enterprise-plans.md",
+      "old_size": 3603,
+      "new_size": 3553,
+      "delta": -50
+    },
+    {
+      "file": "en_articles_9796617-can-you-delete-data-that-i-sent-via-team-and-enterprise-plans.md",
+      "old_size": 1964,
+      "new_size": 1915,
+      "delta": -49
+    },
+    {
+      "file": "en_articles_12938695-how-to-redeem-a-claude-gift-subscription.md",
+      "old_size": 2907,
+      "new_size": 2954,
+      "delta": 47
+    },
+    {
+      "file": "en_articles_8241253-safeguards-warnings-and-appeals.md",
+      "old_size": 2268,
+      "new_size": 2221,
+      "delta": -47
+    },
+    {
+      "file": "en_articles_9519291-what-is-anthropic-s-policy-for-handling-governmental-requests-for-user-informati.md",
+      "old_size": 1840,
+      "new_size": 1793,
+      "delta": -47
+    },
+    {
+      "file": "en_articles_9267385-does-anthropic-act-as-a-data-processor-or-controller.md",
+      "old_size": 2580,
+      "new_size": 2626,
+      "delta": 46
+    },
+    {
+      "file": "en_articles_10302511-accessing-claude-app-on-ios-lock-screen-control-center-and-action-button.md",
+      "old_size": 2221,
+      "new_size": 2176,
+      "delta": -45
+    },
+    {
+      "file": "en_api_versioning.md",
+      "old_size": 1402,
+      "new_size": 1444,
+      "delta": 42
+    },
+    {
+      "file": "en_articles_12923221-using-the-blackbaud-connector-in-claude.md",
+      "old_size": 6727,
+      "new_size": 6685,
+      "delta": -42
+    },
+    {
+      "file": "en_articles_10065434-using-dictation-on-claude-mobile.md",
+      "old_size": 2190,
+      "new_size": 2149,
+      "delta": -41
+    },
+    {
+      "file": "en_articles_9264804-how-can-i-cancel-my-claude-pro-subscription-on-the-claude-app-for-ios.md",
+      "old_size": 1602,
+      "new_size": 1561,
+      "delta": -41
+    },
+    {
+      "file": "en_articles_9517075-what-are-projects.md",
+      "old_size": 4380,
+      "new_size": 4421,
+      "delta": 41
+    },
+    {
+      "file": "en_articles_9612889-how-can-i-uninstall-claude-for-android.md",
+      "old_size": 1410,
+      "new_size": 1369,
+      "delta": -41
+    },
+    {
+      "file": "en_collections_4078537-amazon-bedrock.md",
+      "old_size": 1164,
+      "new_size": 1123,
+      "delta": -41
+    },
+    {
+      "file": "en_articles_10310342-how-do-i-log-out-of-all-active-sessions.md",
+      "old_size": 3434,
+      "new_size": 3394,
+      "delta": -40
+    },
+    {
+      "file": "en_articles_9265372-who-owns-and-manages-the-data-of-my-team.md",
+      "old_size": 3208,
+      "new_size": 3168,
+      "delta": -40
+    },
+    {
+      "file": "en_articles_11732894-who-owns-and-manages-the-data-of-my-claude-for-education-account.md",
+      "old_size": 3779,
+      "new_size": 3741,
+      "delta": -38
+    },
+    {
+      "file": "en_api_admin_users_list.md",
+      "old_size": 2299,
+      "new_size": 2263,
+      "delta": -36
+    },
+    {
+      "file": "en_articles_9028421-how-can-i-delete-my-claude-account.md",
+      "old_size": 3344,
+      "new_size": 3379,
+      "delta": 35
+    },
+    {
+      "file": "en_articles_8325621-i-would-like-to-input-sensitive-data-into-my-chats-with-claude-who-can-view-my-c.md",
+      "old_size": 3291,
+      "new_size": 3325,
+      "delta": 34
+    },
+    {
+      "file": "en_articles_10366389-how-can-i-advance-my-claude-api-usage-to-tier-2.md",
+      "old_size": 1644,
+      "new_size": 1611,
+      "delta": -33
+    },
+    {
+      "file": "en_articles_12702546-deploying-enterprise-grade-mcp-servers-with-desktop-extensions.md",
+      "old_size": 3637,
+      "new_size": 3669,
+      "delta": 32
+    },
+    {
+      "file": "en_articles_12923235-using-the-candid-connector-in-claude.md",
+      "old_size": 15715,
+      "new_size": 15685,
+      "delta": -30
+    },
+    {
+      "file": "en_articles_7996845-what-are-some-things-i-can-use-claude-for.md",
+      "old_size": 1964,
+      "new_size": 1934,
+      "delta": -30
+    },
+    {
+      "file": "en_api_admin_users_update.md",
+      "old_size": 1608,
+      "new_size": 1579,
+      "delta": -29
+    },
+    {
+      "file": "en_articles_8452276-how-do-i-change-the-email-address-associated-with-my-account.md",
+      "old_size": 2887,
+      "new_size": 2859,
+      "delta": -28
+    },
+    {
+      "file": "en_articles_8114535-where-can-i-go-for-claude-api-support-and-assistance.md",
+      "old_size": 1274,
+      "new_size": 1247,
+      "delta": -27
+    },
+    {
+      "file": "en_articles_8325617-how-do-i-cancel-my-paid-claude-subscription.md",
+      "old_size": 3105,
+      "new_size": 3078,
+      "delta": -27
+    },
+    {
+      "file": "en_articles_11049752-how-do-i-sign-up-for-the-max-plan.md",
+      "old_size": 2431,
+      "new_size": 2457,
+      "delta": 26
+    },
+    {
+      "file": "en_articles_11825384-how-to-update-claude-for-ios.md",
+      "old_size": 1156,
+      "new_size": 1130,
+      "delta": -26
+    },
+    {
+      "file": "en_articles_13117299-minimum-age-requirement-access-restriction.md",
+      "old_size": 2104,
+      "new_size": 2078,
+      "delta": -26
+    },
+    {
+      "file": "en_articles_8114526-how-will-i-be-billed-for-claude-api-use.md",
+      "old_size": 2152,
+      "new_size": 2178,
+      "delta": 26
+    },
+    {
+      "file": "en_api_admin-api_users_get-user.md",
+      "old_size": 1277,
+      "new_size": 1252,
+      "delta": -25
+    },
+    {
+      "file": "en_api_admin_users_retrieve.md",
+      "old_size": 1277,
+      "new_size": 1252,
+      "delta": -25
+    },
+    {
+      "file": "en_articles_12997130-understanding-your-billing-address-and-tax-calculation.md",
+      "old_size": 2417,
+      "new_size": 2392,
+      "delta": -25
+    },
+    {
+      "file": "en_articles_8987223-can-i-have-a-claude-account-and-a-console-account.md",
+      "old_size": 871,
+      "new_size": 846,
+      "delta": -25
+    },
+    {
+      "file": "en_about-claude_use-case-guides_overview.md",
+      "old_size": 887,
+      "new_size": 911,
+      "delta": 24
+    },
+    {
+      "file": "en_api_supported-regions.md",
+      "old_size": 2160,
+      "new_size": 2184,
+      "delta": 24
+    },
+    {
+      "file": "en_articles_11095361-when-should-i-use-web-search-extended-thinking-and-research.md",
+      "old_size": 3500,
+      "new_size": 3524,
+      "delta": 24
+    },
+    {
+      "file": "en_articles_11095361.md",
+      "old_size": 3500,
+      "new_size": 3524,
+      "delta": 24
+    },
+    {
+      "file": "en_test-and-evaluate_strengthen-guardrails_reduce-hallucinations.md",
+      "old_size": 2162,
+      "new_size": 2186,
+      "delta": 24
+    },
+    {
+      "file": "en_articles_8241216-i-m-planning-to-launch-a-product-using-the-claude-api-what-steps-should-i-take-t.md",
+      "old_size": 2218,
+      "new_size": 2195,
+      "delta": -23
+    },
+    {
+      "file": "en_test-and-evaluate_eval-tool.md",
+      "old_size": 3684,
+      "new_size": 3707,
+      "delta": 23
+    },
+    {
+      "file": "en_test-and-evaluate_strengthen-guardrails_mitigate-jailbreaks.md",
+      "old_size": 2048,
+      "new_size": 2071,
+      "delta": 23
+    },
+    {
+      "file": "en_articles_11199177-anthropic-s-ai-for-science-program.md",
+      "old_size": 6557,
+      "new_size": 6535,
+      "delta": -22
+    },
+    {
+      "file": "en_articles_11697081-anthropic-mcp-directory-terms-and-conditions.md",
+      "old_size": 3407,
+      "new_size": 3386,
+      "delta": -21
+    },
+    {
+      "file": "en_api_admin-api_organization_get-me.md",
+      "old_size": 889,
+      "new_size": 869,
+      "delta": -20
+    },
+    {
+      "file": "en_api_admin_organizations_me.md",
+      "old_size": 889,
+      "new_size": 869,
+      "delta": -20
+    },
+    {
+      "file": "en_api_admin_workspaces_members_delete.md",
+      "old_size": 1102,
+      "new_size": 1082,
+      "delta": -20
+    },
+    {
+      "file": "en_articles_10263469-using-claude-app-intents-shortcuts-and-widgets-on-ios.md",
+      "old_size": 5900,
+      "new_size": 5920,
+      "delta": 20
+    },
+    {
+      "file": "en_articles_12166798-getting-started-with-claude-for-enterprise.md",
+      "old_size": 1917,
+      "new_size": 1897,
+      "delta": -20
+    },
+    {
+      "file": "en_articles_12592343-enabling-and-using-the-desktop-extension-allowlist.md",
+      "old_size": 7547,
+      "new_size": 7567,
+      "delta": 20
+    },
+    {
+      "file": "en_articles_12902405-claude-in-chrome-troubleshooting.md",
+      "old_size": 4333,
+      "new_size": 4313,
+      "delta": -20
+    },
+    {
+      "file": "en_api_admin_workspaces_members_list.md",
+      "old_size": 2420,
+      "new_size": 2439,
+      "delta": 19
+    },
+    {
+      "file": "en_articles_8325609-how-do-i-sign-up-for-the-pro-plan.md",
+      "old_size": 3248,
+      "new_size": 3229,
+      "delta": -19
+    },
+    {
+      "file": "en_articles_9266495-how-do-i-sign-up-for-claude-pro-on-the-claude-app-for-ios.md",
+      "old_size": 1151,
+      "new_size": 1133,
+      "delta": -18
+    },
+    {
+      "file": "en_articles_9612904-what-versions-of-android-are-supported.md",
+      "old_size": 744,
+      "new_size": 726,
+      "delta": -18
+    },
+    {
+      "file": "en_about-claude_glossary.md",
+      "old_size": 8895,
+      "new_size": 8912,
+      "delta": 17
+    },
+    {
+      "file": "en_api_admin-api_workspace_members_get-workspace-member.md",
+      "old_size": 1429,
+      "new_size": 1446,
+      "delta": 17
+    },
+    {
+      "file": "en_api_admin_workspaces_members_retrieve.md",
+      "old_size": 1429,
+      "new_size": 1446,
+      "delta": 17
+    },
+    {
+      "file": "en_resources_glossary.md",
+      "old_size": 8895,
+      "new_size": 8912,
+      "delta": 17
+    },
+    {
+      "file": "en_articles_11088861-using-research-on-claude.md",
+      "old_size": 3239,
+      "new_size": 3255,
+      "delta": 16
+    },
+    {
+      "file": "en_articles_10185996-how-to-change-your-pro-plan-from-monthly-to-annual-billing.md",
+      "old_size": 1826,
+      "new_size": 1841,
+      "delta": 15
+    },
+    {
+      "file": "en_articles_11408405-claude-4-invite-contest.md",
+      "old_size": 5158,
+      "new_size": 5143,
+      "delta": -15
+    },
+    {
+      "file": "en_articles_11174108-about-the-development-partner-program.md",
+      "old_size": 4296,
+      "new_size": 4310,
+      "delta": 14
+    },
+    {
+      "file": "en_articles_8325618-paid-plan-billing-faqs.md",
+      "old_size": 4010,
+      "new_size": 3996,
+      "delta": -14
+    },
+    {
+      "file": "en_articles_8114523-how-can-i-learn-more-about-claude-api-pricing.md",
+      "old_size": 848,
+      "new_size": 858,
+      "delta": 10
+    },
+    {
+      "file": "en_articles_8114533-i-ve-been-using-other-large-language-models-llms-to-power-my-product-how-should-.md",
+      "old_size": 961,
+      "new_size": 951,
+      "delta": -10
+    },
+    {
+      "file": "en_articles_9612892-how-do-i-sign-up-for-claude-pro-on-claude-for-android.md",
+      "old_size": 1151,
+      "new_size": 1141,
+      "delta": -10
+    },
+    {
+      "file": "en_api_admin_invites_delete.md",
+      "old_size": 750,
+      "new_size": 741,
+      "delta": -9
+    },
+    {
+      "file": "en_api_beta_messages_batches_cancel.md",
+      "old_size": 6130,
+      "new_size": 6121,
+      "delta": -9
+    },
+    {
+      "file": "en_api_beta_messages_batches_retrieve.md",
+      "old_size": 5797,
+      "new_size": 5788,
+      "delta": -9
+    },
+    {
+      "file": "en_articles_12083917-how-to-change-your-team-plan-from-monthly-to-annual-billing.md",
+      "old_size": 2040,
+      "new_size": 2031,
+      "delta": -9
+    },
+    {
+      "file": "en_api_admin_users_delete.md",
+      "old_size": 712,
+      "new_size": 705,
+      "delta": -7
+    },
+    {
+      "file": "en_api_beta_messages_batches_list.md",
+      "old_size": 6706,
+      "new_size": 6699,
+      "delta": -7
+    },
+    {
+      "file": "en_articles_13163666-holiday-2025-usage-promotion.md",
+      "old_size": 2503,
+      "new_size": 2496,
+      "delta": -7
+    },
+    {
+      "file": "en_articles_7996918-what-is-amazon-bedrock.md",
+      "old_size": 1791,
+      "new_size": 1798,
+      "delta": 7
+    },
+    {
+      "file": "en_articles_10280791-what-aws-regions-are-claude-models-available-in-amazon-bedrock.md",
+      "old_size": 978,
+      "new_size": 984,
+      "delta": 6
+    },
+    {
+      "file": "en_articles_11825394-how-to-update-claude-for-android.md",
+      "old_size": 1136,
+      "new_size": 1142,
+      "delta": 6
+    },
+    {
+      "file": "en_articles_8114531-i-created-a-claude-console-organization-how-do-i-start-using-the-claude-api.md",
+      "old_size": 1346,
+      "new_size": 1352,
+      "delta": 6
+    },
+    {
+      "file": "en_articles_9307344-responsible-use-of-anthropic-s-models-guidelines-for-organizations-serving-minor.md",
+      "old_size": 3202,
+      "new_size": 3196,
+      "delta": -6
+    },
+    {
+      "file": "en_articles_12923227-using-the-benevity-connector-in-claude.md",
+      "old_size": 5162,
+      "new_size": 5166,
+      "delta": 4
+    },
+    {
+      "file": "en_articles_9612898-how-can-i-cancel-my-claude-pro-subscription-on-claude-for-android.md",
+      "old_size": 1659,
+      "new_size": 1655,
+      "delta": -4
+    },
+    {
+      "file": "en_articles_12512198-creating-custom-skills.md",
+      "old_size": 8122,
+      "new_size": 8119,
+      "delta": -3
+    },
+    {
+      "file": "en_articles_12512198-how-to-create-custom-skills.md",
+      "old_size": 8122,
+      "new_size": 8119,
+      "delta": -3
+    },
+    {
+      "file": "en_articles_12005017-using-agents-according-to-our-usage-policy.md",
+      "old_size": 3303,
+      "new_size": 3305,
+      "delta": 2
+    },
+    {
+      "file": "en_articles_12326764-can-i-use-my-outputs-to-train-an-ai-model.md",
+      "old_size": 3430,
+      "new_size": 3428,
+      "delta": -2
+    },
+    {
+      "file": "en_articles_9125743-what-is-the-external-researcher-access-program.md",
+      "old_size": 10383,
+      "new_size": 10385,
+      "delta": 2
+    },
+    {
+      "file": "en_articles_9519189-project-visibility-and-sharing.md",
+      "old_size": 9321,
+      "new_size": 9322,
+      "delta": 1
+    },
+    {
+      "file": "en_articles_8106465-our-approach-to-user-safety.md",
+      "old_size": 2575,
+      "new_size": 2575,
+      "delta": 0
+    }
+  ],
+  "by_section": {
+    "added": {
+      "About Claude": [
+        "en_about-claude_models_migration-guide.md",
+        "en_about-claude_models_model-ids-and-versions.md",
+        "en_about-claude_models_whats-new-claude-4-6.md",
+        "en_about-claude_models_whats-new-claude-4-7.md"
+      ],
+      "Agent SDK": [
+        "en_agent-sdk_agent-loop.md",
+        "en_agent-sdk_claude-code-features.md",
+        "en_agent-sdk_observability.md",
+        "en_agent-sdk_session-storage.md",
+        "en_agent-sdk_streaming-output.md",
+        "en_agent-sdk_tool-search.md"
+      ],
+      "Agents & Tools": [
+        "en_agents-and-tools_agent-skills_claude-api-skill.md",
+        "en_agents-and-tools_agent-skills_enterprise.md",
+        "en_agents-and-tools_mcp-tunnels_console.md",
+        "en_agents-and-tools_mcp-tunnels_deploy-compose.md",
+        "en_agents-and-tools_mcp-tunnels_deploy-helm.md",
+        "en_agents-and-tools_mcp-tunnels_overview.md",
+        "en_agents-and-tools_mcp-tunnels_quickstart.md",
+        "en_agents-and-tools_mcp-tunnels_reference.md",
+        "en_agents-and-tools_mcp-tunnels_security.md",
+        "en_agents-and-tools_mcp-tunnels_troubleshooting.md",
+        "en_agents-and-tools_tool-use_advisor-tool.md",
+        "en_agents-and-tools_tool-use_build-a-tool-using-agent.md",
+        "en_agents-and-tools_tool-use_define-tools.md",
+        "en_agents-and-tools_tool-use_handle-tool-calls.md",
+        "en_agents-and-tools_tool-use_how-tool-use-works.md",
+        "en_agents-and-tools_tool-use_manage-tool-context.md",
+        "en_agents-and-tools_tool-use_parallel-tool-use.md",
+        "en_agents-and-tools_tool-use_server-tools.md",
+        "en_agents-and-tools_tool-use_strict-tool-use.md",
+        "en_agents-and-tools_tool-use_tool-combinations.md",
+        "en_agents-and-tools_tool-use_tool-reference.md",
+        "en_agents-and-tools_tool-use_tool-runner.md",
+        "en_agents-and-tools_tool-use_tool-use-with-prompt-caching.md",
+        "en_agents-and-tools_tool-use_troubleshooting-tool-use.md"
+      ],
+      "API Reference": [
+        "en_api_admin_mcp_tunnels.md",
+        "en_api_admin_mcp_tunnels_archive.md",
+        "en_api_admin_mcp_tunnels_list.md",
+        "en_api_admin_mcp_tunnels_retrieve.md",
+        "en_api_admin_mcp_tunnels_reveal_token.md",
+        "en_api_admin_mcp_tunnels_rotate_token.md",
+        "en_api_admin_mcp_tunnels_tunnel_certificates_archive.md",
+        "en_api_admin_mcp_tunnels_tunnel_certificates_create.md",
+        "en_api_admin_mcp_tunnels_tunnel_certificates_list.md",
+        "en_api_admin_mcp_tunnels_tunnel_certificates_retrieve.md",
+        "en_api_admin_rate_limits_list.md",
+        "en_api_admin_workspaces_rate_limits_list.md",
+        "en_api_authentication_overview.md",
+        "en_api_beta_agents_archive.md",
+        "en_api_beta_agents_create.md",
+        "en_api_beta_agents_list.md",
+        "en_api_beta_agents_retrieve.md",
+        "en_api_beta_agents_update.md",
+        "en_api_beta_agents_versions_list.md",
+        "en_api_beta_environments_archive.md",
+        "en_api_beta_environments_create.md",
+        "en_api_beta_environments_delete.md",
+        "en_api_beta_environments_list.md",
+        "en_api_beta_environments_retrieve.md",
+        "en_api_beta_environments_update.md",
+        "en_api_beta_environments_work.md",
+        "en_api_beta_environments_work_ack.md",
+        "en_api_beta_environments_work_heartbeat.md",
+        "en_api_beta_environments_work_list.md",
+        "en_api_beta_environments_work_poll.md",
+        "en_api_beta_environments_work_retrieve.md",
+        "en_api_beta_environments_work_stats.md",
+        "en_api_beta_environments_work_stop.md",
+        "en_api_beta_environments_work_update.md",
+        "en_api_beta_memory_stores_archive.md",
+        "en_api_beta_memory_stores_create.md",
+        "en_api_beta_memory_stores_delete.md",
+        "en_api_beta_memory_stores_list.md",
+        "en_api_beta_memory_stores_memories_create.md",
+        "en_api_beta_memory_stores_memories_delete.md",
+        "en_api_beta_memory_stores_memories_list.md",
+        "en_api_beta_memory_stores_memories_retrieve.md",
+        "en_api_beta_memory_stores_memories_update.md",
+        "en_api_beta_memory_stores_memory_versions_list.md",
+        "en_api_beta_memory_stores_memory_versions_redact.md",
+        "en_api_beta_memory_stores_memory_versions_retrieve.md",
+        "en_api_beta_memory_stores_retrieve.md",
+        "en_api_beta_memory_stores_update.md",
+        "en_api_beta_sessions.md",
+        "en_api_beta_sessions_archive.md",
+        "en_api_beta_sessions_create.md",
+        "en_api_beta_sessions_delete.md",
+        "en_api_beta_sessions_events_list.md",
+        "en_api_beta_sessions_events_send.md",
+        "en_api_beta_sessions_events_stream.md",
+        "en_api_beta_sessions_list.md",
+        "en_api_beta_sessions_resources_add.md",
+        "en_api_beta_sessions_resources_delete.md",
+        "en_api_beta_sessions_resources_list.md",
+        "en_api_beta_sessions_resources_retrieve.md",
+        "en_api_beta_sessions_resources_update.md",
+        "en_api_beta_sessions_retrieve.md",
+        "en_api_beta_sessions_threads_archive.md",
+        "en_api_beta_sessions_threads_events_list.md",
+        "en_api_beta_sessions_threads_events_stream.md",
+        "en_api_beta_sessions_threads_list.md",
+        "en_api_beta_sessions_threads_retrieve.md",
+        "en_api_beta_sessions_update.md",
+        "en_api_beta_skills_versions_download.md",
+        "en_api_beta_user_profiles_create.md",
+        "en_api_beta_user_profiles_create_enrollment_url.md",
+        "en_api_beta_user_profiles_list.md",
+        "en_api_beta_user_profiles_retrieve.md",
+        "en_api_beta_user_profiles_update.md",
+        "en_api_beta_vaults_archive.md",
+        "en_api_beta_vaults_create.md",
+        "en_api_beta_vaults_credentials_archive.md",
+        "en_api_beta_vaults_credentials_create.md",
+        "en_api_beta_vaults_credentials_delete.md",
+        "en_api_beta_vaults_credentials_list.md",
+        "en_api_beta_vaults_credentials_mcp_oauth_validate.md",
+        "en_api_beta_vaults_credentials_retrieve.md",
+        "en_api_beta_vaults_credentials_update.md",
+        "en_api_beta_vaults_delete.md",
+        "en_api_beta_vaults_list.md",
+        "en_api_beta_vaults_retrieve.md",
+        "en_api_beta_vaults_update.md",
+        "en_api_beta_webhooks.md",
+        "en_api_claude-code_routines-fire.md",
+        "en_api_claude-platform-on-aws-iam-actions.md",
+        "en_api_cli_beta_environments.md",
+        "en_api_cli_messages_create.md",
+        "en_api_compliance.md",
+        "en_api_compliance_activities_list.md",
+        "en_api_compliance_apps.md",
+        "en_api_compliance_apps_artifacts_download.md",
+        "en_api_compliance_apps_artifacts_retrieve.md",
+        "en_api_compliance_apps_chats_delete.md",
+        "en_api_compliance_apps_chats_files_delete.md",
+        "en_api_compliance_apps_chats_files_download.md",
+        "en_api_compliance_apps_chats_files_retrieve.md",
+        "en_api_compliance_apps_chats_generated_files_download.md",
+        "en_api_compliance_apps_chats_generated_files_retrieve.md",
+        "en_api_compliance_apps_chats_list.md",
+        "en_api_compliance_apps_chats_messages_list.md",
+        "en_api_compliance_apps_projects_attachments_list.md",
+        "en_api_compliance_apps_projects_delete.md",
+        "en_api_compliance_apps_projects_documents_delete.md",
+        "en_api_compliance_apps_projects_documents_metadata.md",
+        "en_api_compliance_apps_projects_documents_retrieve.md",
+        "en_api_compliance_apps_projects_list.md",
+        "en_api_compliance_apps_projects_retrieve.md",
+        "en_api_compliance_groups_list.md",
+        "en_api_compliance_groups_members_list.md",
+        "en_api_compliance_groups_retrieve.md",
+        "en_api_compliance_organizations.md",
+        "en_api_compliance_organizations_list.md",
+        "en_api_compliance_organizations_roles_list.md",
+        "en_api_compliance_organizations_roles_permissions_list.md",
+        "en_api_compliance_organizations_roles_retrieve.md",
+        "en_api_compliance_organizations_users_list.md",
+        "en_api_sdks_cli.md",
+        "en_api_sdks_csharp.md",
+        "en_api_sdks_go.md",
+        "en_api_sdks_java.md",
+        "en_api_sdks_php.md",
+        "en_api_sdks_python.md",
+        "en_api_sdks_ruby.md",
+        "en_api_sdks_typescript.md",
+        "en_api_sessions-retrieve.md"
+      ],
+      "Support Articles": [
+        "en_articles_10065433-install-claude-desktop.md",
+        "en_articles_10166901-use-google-workspace-connectors.md",
+        "en_articles_10276682.md",
+        "en_articles_10440198-configure-custom-data-retention-controls-for-enterprise-plans.md",
+        "en_articles_10504844-manage-user-feedback-settings-on-team-and-enterprise-plans.md",
+        "en_articles_10504853-manage-user-feedback-settings-on-claude-console.md",
+        "en_articles_10769299-how-to-use-claude-in-your-preferred-language.md",
+        "en_articles_11049762-choose-a-claude-plan.md",
+        "en_articles_11101966-.md",
+        "en_articles_11101966-use-voice-mode.md",
+        "en_articles_11139094-get-started-with-claude-for-education-at-your-university-for-owners-admins.md",
+        "en_articles_11145838-use-claude-code-with-your-pro-or-max-plan.md",
+        "en_articles_11175166-get-started-with-custom-connectors-using-remote-mcp.md",
+        "en_articles_11175166.md",
+        "en_articles_11176164-use-connectors-to-extend-claude-s-capabilities.md",
+        "en_articles_11503834-build-custom-connectors-via-remote-mcp-servers.md",
+        "en_articles_11506255-get-started-with-claude-in-slack.md",
+        "en_articles_11526368-how-am-i-billed-for-my-enterprise-plan.md",
+        "en_articles_11526368-usage-based-enterprise-plans.md",
+        "en_articles_11647753-how-do-usage-and-length-limits-work.md",
+        "en_articles_11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context.md",
+        "en_articles_11825384-.md",
+        "en_articles_11845131-use-claude-code-with-your-team-or-enterprise-plan.md",
+        "en_articles_11845131.md",
+        "en_articles_11869619-use-claude-with-ios-apps.md",
+        "en_articles_11869629-use-claude-with-android-apps.md",
+        "en_articles_12004354-purchase-and-manage-seats-on-team-plans.md",
+        "en_articles_12004354-purchasing-and-managing-seats-on-team-plans.md",
+        "en_articles_12004354.md",
+        "en_articles_12005970-.md",
+        "en_articles_12005970-manage-extra-usage-for-team-and-seat-based-enterprise-plans.md",
+        "en_articles_12005970-manage-usage-credits-for-team-and-seat-based-enterprise-plans.md",
+        "en_articles_12012173-get-started-with-claude-in-chrome.md",
+        "en_articles_12083917-change-your-team-plan-from-monthly-to-annual-billing.md",
+        "en_articles_12123587-import-and-export-your-memory-from-claude.md",
+        "en_articles_12260368-.md",
+        "en_articles_12304248-manage-api-key-environment-variables-in-claude-code.md",
+        "en_articles_12429409-.md",
+        "en_articles_12429409-manage-extra-usage-for-paid-claude-plans.md",
+        "en_articles_12429409-manage-usage-credits-for-paid-claude-plans.md",
+        "en_articles_12461605-use-claude-in-slack.md",
+        "en_articles_12466728-troubleshoot-claude-error-messages.md",
+        "en_articles_12489464-use-enterprise-search.md",
+        "en_articles_12489464.md",
+        "en_articles_12512180-use-skills-in-claude.md",
+        "en_articles_12542951-.md",
+        "en_articles_12542951-set-up-the-microsoft-365-connector.md",
+        "en_articles_12622667-enterprise-configuration-for-claude-desktop.md",
+        "en_articles_12650343-use-claude-for-excel.md",
+        "en_articles_12650343-use-claude-in-excel.md",
+        "en_articles_12650343-using-claude-in-excel.md",
+        "en_articles_12684923-.md",
+        "en_articles_12864745-use-claude-in-microsoft-foundry.md",
+        "en_articles_12883420-view-usage-analytics-for-team-and-enterprise-plans.md",
+        "en_articles_12922490.md",
+        "en_articles_13015708-access-the-compliance-api.md",
+        "en_articles_13119606-provision-and-manage-skills-for-your-organization.md",
+        "en_articles_13132885-set-up-single-sign-on-sso.md",
+        "en_articles_13132885.md",
+        "en_articles_13133195-set-up-jit-or-scim-provisioning.md",
+        "en_articles_13133195.md",
+        "en_articles_13133750-manage-members-on-team-and-enterprise-plans.md",
+        "en_articles_13189465-log-in-to-your-claude-account.md",
+        "en_articles_13200993-restrict-access-to-claude-with-ip-allowlisting.md",
+        "en_articles_13296973-hipaa-ready-enterprise-plans.md",
+        "en_articles_13345190-get-started-with-claude-cowork.md",
+        "en_articles_13345190-get-started-with-cowork.md",
+        "en_articles_13345190-getting-started-with-cowork.md",
+        "en_articles_13345190-getting-started-with-local-agent-mode.md",
+        "en_articles_13346720-export-your-organization-s-data.md",
+        "en_articles_13364135-use-claude-cowork-safely.md",
+        "en_articles_13364135-use-cowork-safely.md",
+        "en_articles_13364135-using-cowork-safely.md",
+        "en_articles_13371040-logging-in-to-your-console-account.md",
+        "en_articles_13393991-purchase-and-manage-seats-on-enterprise-plans.md",
+        "en_articles_13393991-purchasing-and-managing-seats-on-enterprise-plans.md",
+        "en_articles_13393991.md",
+        "en_articles_13403291-how-can-i-check-connectivity-to-the-claude-api.md",
+        "en_articles_13443687-switching-to-a-different-identity-provider-idp.md",
+        "en_articles_13443764-inviting-members-to-the-claude-console.md",
+        "en_articles_13454812-use-interactive-connectors-in-claude.md",
+        "en_articles_13455879-cowork-for-team-and-enterprise-plans.md",
+        "en_articles_13455879-use-claude-cowork-on-team-and-enterprise-plans.md",
+        "en_articles_13455879-use-cowork-on-team-and-enterprise-plans.md",
+        "en_articles_13455879.md",
+        "en_articles_13521390-use-claude-for-powerpoint.md",
+        "en_articles_13521390-use-claude-in-powerpoint.md",
+        "en_articles_13521390-using-claude-in-powerpoint.md",
+        "en_articles_13566435-find-and-join-a-team-or-enterprise-organization.md",
+        "en_articles_13566435-organization-discovery.md",
+        "en_articles_13641943-visual-and-interactive-content.md",
+        "en_articles_13641943-visual-responses-and-interactive-widgets.md",
+        "en_articles_13663666-use-visual-and-interactive-content-on-team-and-enterprise-plans.md",
+        "en_articles_13694757-access-engagement-and-adoption-data-with-the-analytics-api.md",
+        "en_articles_13694757-access-usage-data-with-the-analytics-api.md",
+        "en_articles_13694757-claude-enterprise-analytics-api-access-engagement-and-adoption-data.md",
+        "en_articles_13694757-get-started-with-the-claude-enterprise-analytics-api.md",
+        "en_articles_13703965-claude-enterprise-analytics-api-reference-guide.md",
+        "en_articles_13704655-unauthorized-anthropic-stock-sales-and-investment-scams.md",
+        "en_articles_13730515-manage-claude-s-tool-access.md",
+        "en_articles_13756069-public-sector-faqs.md",
+        "en_articles_13776697-join-an-organization-via-invite-link.md",
+        "en_articles_13779868-migrate-your-organization-from-team-to-enterprise.md",
+        "en_articles_13799932-manage-groups-and-group-spend-limits-on-enterprise-plans.md",
+        "en_articles_13837433-manage-claude-cowork-plugins-for-your-organization.md",
+        "en_articles_13837433-manage-cowork-plugins-for-your-organization.md",
+        "en_articles_13837440-use-plugins-in-claude-cowork.md",
+        "en_articles_13837440-use-plugins-in-cowork.md",
+        "en_articles_13851150-install-financial-services-plugins-for-cowork.md",
+        "en_articles_13854387-schedule-recurring-tasks-in-claude-cowork.md",
+        "en_articles_13854387-schedule-recurring-tasks-in-cowork.md",
+        "en_articles_13892150-work-across-apps-with-cowork.md",
+        "en_articles_13892150-work-across-microsoft-365-apps.md",
+        "en_articles_13892150.md",
+        "en_articles_13917817-google-workspace-sso-scim-email-mismatch.md",
+        "en_articles_13917817.md",
+        "en_articles_13917829-microsoft-entra-id-sso-scim-email-mismatch.md",
+        "en_articles_13917829.md",
+        "en_articles_13917840-okta-sso-scim-email-mismatch.md",
+        "en_articles_13917840.md",
+        "en_articles_13917861-onelogin-sso-scim-email-mismatch.md",
+        "en_articles_13917861.md",
+        "en_articles_13917875-ping-identity-sso-scim-email-mismatch.md",
+        "en_articles_13917875.md",
+        "en_articles_13917884-google-workspace-sso-setup.md",
+        "en_articles_13917889-microsoft-entra-id-sso-setup.md",
+        "en_articles_13917894-okta-sso-setup.md",
+        "en_articles_13917899-onelogin-sso-setup.md",
+        "en_articles_13917902-ping-identity-sso-setup.md",
+        "en_articles_13930452-manage-custom-roles-on-enterprise-plans.md",
+        "en_articles_13930458-set-up-role-based-entitlements-on-enterprise-plans.md",
+        "en_articles_13930458-set-up-role-based-permissions-on-enterprise-plans.md",
+        "en_articles_13945233-.md",
+        "en_articles_13945233-use-claude-for-microsoft-365-with-third-party-platforms.md",
+        "en_articles_13945233-use-claude-in-excel-and-powerpoint-with-an-llm-gateway.md",
+        "en_articles_13945233.md",
+        "en_articles_13947068-assign-tasks-from-anywhere-in-claude-cowork.md",
+        "en_articles_13947068-assign-tasks-to-claude-from-anywhere-in-cowork.md",
+        "en_articles_13979539-custom-visuals-in-chat-and-cowork.md",
+        "en_articles_13979539-custom-visuals-in-chat.md",
+        "en_articles_14116274-organize-your-tasks-with-projects-in-claude-cowork.md",
+        "en_articles_14116274-organize-your-tasks-with-projects-in-cowork.md",
+        "en_articles_14128542-computer-use-safety.md",
+        "en_articles_14128542-let-claude-use-your-computer-in-cowork.md",
+        "en_articles_14233555-set-up-code-review-for-claude-code.md",
+        "en_articles_14246112-buy-usage-bundles.md",
+        "en_articles_14328846-browse-skills-connectors-and-plugins-in-one-directory.md",
+        "en_articles_14328960-identity-verification-on-claude.md",
+        "en_articles_14447276-.md",
+        "en_articles_14447276-configure-a-custom-opentelemetry-collector-for-office-agents.md",
+        "en_articles_14465370-use-claude-for-word.md",
+        "en_articles_14477985-monitor-claude-cowork-activity-with-opentelemetry.md",
+        "en_articles_14477985-monitor-cowork-activity-with-opentelemetry.md",
+        "en_articles_14479288-claude-cowork-desktop-architecture-overview.md",
+        "en_articles_14479591-use-dictation-in-office-agents.md",
+        "en_articles_14499648-how-scim-sync-works-for-enterprise-organizations.md",
+        "en_articles_14503590-get-started-with-claude-for-government.md",
+        "en_articles_14503613-sso-login.md",
+        "en_articles_14503643-set-up-scim-in-claude-for-government.md",
+        "en_articles_14503675-organization-instructions-in-claude-for-government.md",
+        "en_articles_14503689-mcp-connectors.md",
+        "en_articles_14503703-mcp-individual-connectors.md",
+        "en_articles_14503775-mcp-web-search.md",
+        "en_articles_14503794-model-availability-in-claude-for-government.md",
+        "en_articles_14503804-classification-banner-in-claude-for-government.md",
+        "en_articles_14546867-set-organization-instructions.md",
+        "en_articles_14552382-your-first-day-in-claude-code.md",
+        "en_articles_14552646-troubleshoot-claude-code-installation-and-authentication.md",
+        "en_articles_14552983-models-usage-and-limits-in-claude-code.md",
+        "en_articles_14553240-give-claude-context-claude-md-and-better-prompts.md",
+        "en_articles_14553413-claude-code-cheatsheet.md",
+        "en_articles_14553517-claude-code-common-developer-use-cases.md",
+        "en_articles_14554000-claude-code-power-user-tips.md",
+        "en_articles_14554922-claude-code-user-faq.md",
+        "en_articles_14555399-claude-code-champion-kit.md",
+        "en_articles_14555877-claude-code-communications-kit.md",
+        "en_articles_14604397-set-up-your-design-system-in-claude-design.md",
+        "en_articles_14604406-claude-design-admin-guide-for-team-and-enterprise-plans.md",
+        "en_articles_14604416-get-started-with-claude-design.md",
+        "en_articles_14604842-real-time-cyber-safeguards-on-claude.md",
+        "en_articles_14625619-claim-and-migrate-accounts-on-your-domain.md",
+        "en_articles_14625626-migrate-your-claude-account-to-an-enterprise-organization.md",
+        "en_articles_14625626-respond-to-an-enterprise-domain-claim-on-your-claude-account.md",
+        "en_articles_14661296-use-claude-security.md",
+        "en_articles_14667344-claude-design-subscription-usage-and-pricing.md",
+        "en_articles_14729249-use-live-artifacts-in-claude-cowork.md",
+        "en_articles_14729294-open-claude-desktop-with-a-link.md",
+        "en_articles_14729354-use-analytics-chat-to-ask-claude-about-usage.md",
+        "en_articles_14730684-how-claude-suggests-connected-apps.md",
+        "en_articles_14782391-claude-enterprise-consumption-guide.md",
+        "en_articles_14793921-find-and-join-a-console-organization.md",
+        "en_articles_14855664-use-claude-for-outlook.md",
+        "en_articles_14898120-open-the-claude-mobile-app-with-a-link.md",
+        "en_articles_15036540-use-the-claude-agent-sdk-with-your-claude-plan.md",
+        "en_articles_15167101-get-started-with-claude-compliance-api-integrations.md",
+        "en_articles_15171100-age-assurance-on-claude.md",
+        "en_articles_15183774-.md",
+        "en_articles_15183774-connect-to-microsoft-365.md",
+        "en_articles_8114491-get-started-with-claude.md",
+        "en_articles_8241126-upload-files-to-claude.md",
+        "en_articles_8241126-uploading-files-to-claude.md",
+        "en_articles_9015913.md",
+        "en_articles_9266462-install-claude-for-ios.md",
+        "en_articles_9267247-get-started-with-the-team-plan.md",
+        "en_articles_9267323-cancel-your-organization-s-team-plan-subscription.md",
+        "en_articles_9267400-move-your-personal-claude-account-to-a-team-or-enterprise-organization.md",
+        "en_articles_9519189-manage-project-visibility-and-sharing.md",
+        "en_articles_9547008-publishing-and-sharing-artifacts.md",
+        "en_articles_9612887-install-claude-for-android.md",
+        "en_articles_9889408-add-or-update-your-paid-claude-account-s-tax-or-vat-id.md",
+        "en_articles_9889428-add-or-update-your-claude-console-organization-s-tax-or-vat-id.md",
+        "en_articles_9927533-disable-public-projects-for-your-organization.md",
+        "en_articles_9927624-add-or-update-your-team-plan-s-tax-or-vat-id.md",
+        "en_articles_9970975-access-audit-logs.md"
+      ],
+      "Build with Claude": [
+        "en_build-with-claude_adaptive-thinking.md",
+        "en_build-with-claude_api-and-data-retention.md",
+        "en_build-with-claude_cache-diagnostics.md",
+        "en_build-with-claude_claude-in-amazon-bedrock.md",
+        "en_build-with-claude_claude-on-amazon-bedrock-legacy.md",
+        "en_build-with-claude_claude-platform-on-aws.md",
+        "en_build-with-claude_compaction.md",
+        "en_build-with-claude_fast-mode.md",
+        "en_build-with-claude_prompt-engineering_claude-prompting-best-practices.md",
+        "en_build-with-claude_prompt-engineering_prompting-tools.md",
+        "en_build-with-claude_task-budgets.md"
+      ],
+      "Claude": [
+        "en_claude_api_primer.md"
+      ],
+      "Collections": [
+        "en_collections_10351014-security-and-compliance.md",
+        "en_collections_18901831-analytics-and-usage.md",
+        "en_collections_18901835-get-started.md",
+        "en_collections_9811414-capabilities.md",
+        "en_collections_9811436-billing.md",
+        "en_collections_9811449-admin-management.md"
+      ],
+      "Manage Claude": [
+        "en_manage-claude_admin-api.md",
+        "en_manage-claude_api-and-data-retention.md",
+        "en_manage-claude_authentication.md",
+        "en_manage-claude_claude-code-analytics-api.md",
+        "en_manage-claude_compliance-activity-feed.md",
+        "en_manage-claude_compliance-api-access.md",
+        "en_manage-claude_compliance-api.md",
+        "en_manage-claude_compliance-content-data.md",
+        "en_manage-claude_compliance-errors.md",
+        "en_manage-claude_compliance-faq.md",
+        "en_manage-claude_compliance-integration-patterns.md",
+        "en_manage-claude_compliance-org-data.md",
+        "en_manage-claude_data-residency.md",
+        "en_manage-claude_rate-limits-api.md",
+        "en_manage-claude_usage-cost-api.md",
+        "en_manage-claude_wif-providers_aws.md",
+        "en_manage-claude_wif-providers_azure.md",
+        "en_manage-claude_wif-providers_gcp.md",
+        "en_manage-claude_wif-providers_github-actions.md",
+        "en_manage-claude_wif-providers_kubernetes.md",
+        "en_manage-claude_wif-providers_okta.md",
+        "en_manage-claude_wif-providers_spiffe.md",
+        "en_manage-claude_wif-reference.md",
+        "en_manage-claude_workload-identity-federation.md",
+        "en_manage-claude_workspaces.md"
+      ],
+      "Managed Agents": [
+        "en_managed-agents_agent-setup.md",
+        "en_managed-agents_cloud-containers.md",
+        "en_managed-agents_define-outcomes.md",
+        "en_managed-agents_dreams.md",
+        "en_managed-agents_environments.md",
+        "en_managed-agents_events-and-streaming.md",
+        "en_managed-agents_files.md",
+        "en_managed-agents_github.md",
+        "en_managed-agents_mcp-connector.md",
+        "en_managed-agents_memory.md",
+        "en_managed-agents_migration.md",
+        "en_managed-agents_multi-agent.md",
+        "en_managed-agents_onboarding.md",
+        "en_managed-agents_overview.md",
+        "en_managed-agents_permission-policies.md",
+        "en_managed-agents_quickstart.md",
+        "en_managed-agents_self-hosted-sandboxes-security.md",
+        "en_managed-agents_self-hosted-sandboxes.md",
+        "en_managed-agents_sessions.md",
+        "en_managed-agents_skills.md",
+        "en_managed-agents_tools.md",
+        "en_managed-agents_vaults.md",
+        "en_managed-agents_webhooks.md"
+      ],
+      "Overview": [
+        "en_overview.md"
+      ],
+      "Troubleshooting": [
+        "en_troubleshooting.md"
+      ]
+    },
+    "removed": {},
+    "modified": {
+      "API Reference": [
+        "en_api_admin-api.md",
+        "en_api_admin-api_apikeys_get-api-key.md",
+        "en_api_admin-api_apikeys_list-api-keys.md",
+        "en_api_admin-api_claude-code_get-claude-code-usage-report.md",
+        "en_api_admin-api_invites_get-invite.md",
+        "en_api_admin-api_organization_get-me.md",
+        "en_api_admin-api_usage-cost_get-cost-report.md",
+        "en_api_admin-api_usage-cost_get-messages-usage-report.md",
+        "en_api_admin-api_users_get-user.md",
+        "en_api_admin-api_workspace_members_get-workspace-member.md",
+        "en_api_admin-api_workspaces_get-workspace.md",
+        "en_api_admin-api_workspaces_list-workspaces.md",
+        "en_api_admin.md",
+        "en_api_admin_api_keys_list.md",
+        "en_api_admin_api_keys_retrieve.md",
+        "en_api_admin_api_keys_update.md",
+        "en_api_admin_cost_report_retrieve.md",
+        "en_api_admin_invites_create.md",
+        "en_api_admin_invites_delete.md",
+        "en_api_admin_invites_list.md",
+        "en_api_admin_invites_retrieve.md",
+        "en_api_admin_organizations_me.md",
+        "en_api_admin_usage_report_retrieve_claude_code.md",
+        "en_api_admin_usage_report_retrieve_messages.md",
+        "en_api_admin_users_delete.md",
+        "en_api_admin_users_list.md",
+        "en_api_admin_users_retrieve.md",
+        "en_api_admin_users_update.md",
+        "en_api_admin_workspaces_archive.md",
+        "en_api_admin_workspaces_create.md",
+        "en_api_admin_workspaces_list.md",
+        "en_api_admin_workspaces_members_create.md",
+        "en_api_admin_workspaces_members_delete.md",
+        "en_api_admin_workspaces_members_list.md",
+        "en_api_admin_workspaces_members_retrieve.md",
+        "en_api_admin_workspaces_members_update.md",
+        "en_api_admin_workspaces_retrieve.md",
+        "en_api_admin_workspaces_update.md",
+        "en_api_beta-headers.md",
+        "en_api_beta.md",
+        "en_api_beta_files_delete.md",
+        "en_api_beta_files_download.md",
+        "en_api_beta_files_list.md",
+        "en_api_beta_files_retrieve_metadata.md",
+        "en_api_beta_files_upload.md",
+        "en_api_beta_messages_batches_cancel.md",
+        "en_api_beta_messages_batches_create.md",
+        "en_api_beta_messages_batches_delete.md",
+        "en_api_beta_messages_batches_list.md",
+        "en_api_beta_messages_batches_results.md",
+        "en_api_beta_messages_batches_retrieve.md",
+        "en_api_beta_messages_count_tokens.md",
+        "en_api_beta_messages_create.md",
+        "en_api_beta_models_list.md",
+        "en_api_beta_models_retrieve.md",
+        "en_api_beta_skills_create.md",
+        "en_api_beta_skills_delete.md",
+        "en_api_beta_skills_list.md",
+        "en_api_beta_skills_retrieve.md",
+        "en_api_beta_skills_versions_create.md",
+        "en_api_beta_skills_versions_delete.md",
+        "en_api_beta_skills_versions_list.md",
+        "en_api_beta_skills_versions_retrieve.md",
+        "en_api_canceling-message-batches.md",
+        "en_api_client-sdks.md",
+        "en_api_completions.md",
+        "en_api_completions_create.md",
+        "en_api_creating-message-batches.md",
+        "en_api_deleting-message-batches.md",
+        "en_api_errors.md",
+        "en_api_files-content.md",
+        "en_api_files-create.md",
+        "en_api_ip-addresses.md",
+        "en_api_listing-message-batches.md",
+        "en_api_messages-batches.md",
+        "en_api_messages-count-tokens.md",
+        "en_api_messages.md",
+        "en_api_messages_batches_cancel.md",
+        "en_api_messages_batches_create.md",
+        "en_api_messages_batches_delete.md",
+        "en_api_messages_batches_list.md",
+        "en_api_messages_batches_results.md",
+        "en_api_messages_batches_retrieve.md",
+        "en_api_messages_count_tokens.md",
+        "en_api_messages_create.md",
+        "en_api_models-list.md",
+        "en_api_models.md",
+        "en_api_models_list.md",
+        "en_api_models_retrieve.md",
+        "en_api_openai-sdk.md",
+        "en_api_overview.md",
+        "en_api_rate-limits.md",
+        "en_api_retrieving-message-batch-results.md",
+        "en_api_retrieving-message-batches.md",
+        "en_api_service-tiers.md",
+        "en_api_shared.md",
+        "en_api_skills_create-skill-version.md",
+        "en_api_skills_create-skill.md",
+        "en_api_skills_list-skill-versions.md",
+        "en_api_skills_list-skills.md",
+        "en_api_supported-regions.md",
+        "en_api_versioning.md"
+      ],
+      "Release Notes": [
+        "en_release-notes_api.md",
+        "en_release-notes_claude-apps.md",
+        "en_release-notes_claude-code.md",
+        "en_release-notes_overview.md",
+        "en_release-notes_system-prompts.md"
+      ],
+      "For Claude": [
+        "for-claude.md"
+      ],
+      "Agent SDK": [
+        "en_agent-sdk_cost-tracking.md",
+        "en_agent-sdk_custom-tools.md",
+        "en_agent-sdk_file-checkpointing.md",
+        "en_agent-sdk_hooks.md",
+        "en_agent-sdk_hosting.md",
+        "en_agent-sdk_mcp.md",
+        "en_agent-sdk_migration-guide.md",
+        "en_agent-sdk_modifying-system-prompts.md",
+        "en_agent-sdk_overview.md",
+        "en_agent-sdk_permissions.md",
+        "en_agent-sdk_plugins.md",
+        "en_agent-sdk_python.md",
+        "en_agent-sdk_quickstart.md",
+        "en_agent-sdk_secure-deployment.md",
+        "en_agent-sdk_sessions.md",
+        "en_agent-sdk_skills.md",
+        "en_agent-sdk_slash-commands.md",
+        "en_agent-sdk_streaming-vs-single-mode.md",
+        "en_agent-sdk_structured-outputs.md",
+        "en_agent-sdk_subagents.md",
+        "en_agent-sdk_todo-tracking.md",
+        "en_agent-sdk_typescript-v2-preview.md",
+        "en_agent-sdk_typescript.md",
+        "en_agent-sdk_user-input.md"
+      ],
+      "Build with Claude": [
+        "en_build-with-claude_batch-processing.md",
+        "en_build-with-claude_citations.md",
+        "en_build-with-claude_claude-in-microsoft-foundry.md",
+        "en_build-with-claude_claude-on-vertex-ai.md",
+        "en_build-with-claude_context-editing.md",
+        "en_build-with-claude_context-windows.md",
+        "en_build-with-claude_effort.md",
+        "en_build-with-claude_embeddings.md",
+        "en_build-with-claude_extended-thinking.md",
+        "en_build-with-claude_files.md",
+        "en_build-with-claude_handling-stop-reasons.md",
+        "en_build-with-claude_multilingual-support.md",
+        "en_build-with-claude_overview.md",
+        "en_build-with-claude_pdf-support.md",
+        "en_build-with-claude_prompt-caching.md",
+        "en_build-with-claude_prompt-engineering.md",
+        "en_build-with-claude_prompt-engineering_be-clear-and-direct.md",
+        "en_build-with-claude_prompt-engineering_chain-of-thought.md",
+        "en_build-with-claude_prompt-engineering_chain-prompts.md",
+        "en_build-with-claude_prompt-engineering_extended-thinking-tips.md",
+        "en_build-with-claude_prompt-engineering_long-context-tips.md",
+        "en_build-with-claude_prompt-engineering_multishot-prompting.md",
+        "en_build-with-claude_prompt-engineering_overview.md",
+        "en_build-with-claude_prompt-engineering_prefill-claudes-response.md",
+        "en_build-with-claude_prompt-engineering_system-prompts.md",
+        "en_build-with-claude_prompt-engineering_use-xml-tags.md",
+        "en_build-with-claude_search-results.md",
+        "en_build-with-claude_skills-guide.md",
+        "en_build-with-claude_streaming.md",
+        "en_build-with-claude_structured-outputs.md",
+        "en_build-with-claude_token-counting.md",
+        "en_build-with-claude_tool-use.md",
+        "en_build-with-claude_usage-cost-api.md",
+        "en_build-with-claude_vision.md",
+        "en_build-with-claude_working-with-messages.md",
+        "en_build-with-claude_workspaces.md"
+      ],
+      "Resources": [
+        "en_resources_glossary.md",
+        "en_resources_overview.md",
+        "en_resources_prompt-library_library.md"
+      ],
+      "Agents & Tools": [
+        "en_agents-and-tools_agent-skills_best-practices.md",
+        "en_agents-and-tools_agent-skills_overview.md",
+        "en_agents-and-tools_agent-skills_quickstart.md",
+        "en_agents-and-tools_computer-use.md",
+        "en_agents-and-tools_mcp-connector.md",
+        "en_agents-and-tools_mcp.md",
+        "en_agents-and-tools_remote-mcp-servers.md",
+        "en_agents-and-tools_tool-use_bash-tool.md",
+        "en_agents-and-tools_tool-use_code-execution-tool.md",
+        "en_agents-and-tools_tool-use_computer-use-tool.md",
+        "en_agents-and-tools_tool-use_fine-grained-tool-streaming.md",
+        "en_agents-and-tools_tool-use_implement-tool-use.md",
+        "en_agents-and-tools_tool-use_memory-tool.md",
+        "en_agents-and-tools_tool-use_overview.md",
+        "en_agents-and-tools_tool-use_programmatic-tool-calling.md",
+        "en_agents-and-tools_tool-use_text-editor-tool.md",
+        "en_agents-and-tools_tool-use_tool-search-tool.md",
+        "en_agents-and-tools_tool-use_web-fetch-tool.md",
+        "en_agents-and-tools_tool-use_web-search-tool.md"
+      ],
+      "Support Articles": [
+        "en_articles_10015870-what-certifications-has-anthropic-obtained.md",
+        "en_articles_10023646-i-think-a-user-is-infringing-my-copyright-or-other-intellectual-property-how-do.md",
+        "en_articles_10035659-where-can-i-learn-more-about-anthropic-s-privacy-practices.md",
+        "en_articles_10065433-installing-claude-desktop.md",
+        "en_articles_10065434-using-dictation-on-claude-mobile.md",
+        "en_articles_10181068-configuring-and-using-styles.md",
+        "en_articles_10185728-understanding-claude-s-personalization-features.md",
+        "en_articles_10185996-how-to-change-your-pro-plan-from-monthly-to-annual-billing.md",
+        "en_articles_10186004-api-console-roles-and-permissions.md",
+        "en_articles_10186004-claude-console-roles-and-permissions.md",
+        "en_articles_10263469-using-claude-app-intents-shortcuts-and-widgets-on-ios.md",
+        "en_articles_10276682-important-considerations-before-enabling-single-sign-on-sso-and-jit-scim-provis.md",
+        "en_articles_10280779-how-do-i-learn-more-about-amazon-and-anthropic-s-strategic-collaboration.md",
+        "en_articles_10280791-what-aws-regions-are-claude-models-available-in-amazon-bedrock.md",
+        "en_articles_10302511-accessing-claude-app-on-ios-lock-screen-control-center-and-action-button.md",
+        "en_articles_10310342-how-do-i-log-out-of-all-active-sessions.md",
+        "en_articles_10366376-how-can-i-delete-my-claude-console-account.md",
+        "en_articles_10366389-how-can-i-advance-my-claude-api-usage-to-tier-2.md",
+        "en_articles_10366432-i-m-getting-an-api-connection-error-how-can-i-fix-it.md",
+        "en_articles_10416553-official-anthropic-marketing-email-addresses.md",
+        "en_articles_10440198-custom-data-retention-controls-for-claude-enterprise.md",
+        "en_articles_10440198-custom-data-retention-controls-for-enterprise-plans.md",
+        "en_articles_10504844-managing-user-feedback-settings-on-team-and-enterprise-plans.md",
+        "en_articles_10534883-using-the-claude-widget-on-android.md",
+        "en_articles_10574485-using-extended-thinking.md",
+        "en_articles_10593882-sharing-and-unsharing-chats.md",
+        "en_articles_10684626-enabling-and-using-web-search.md",
+        "en_articles_10684638-reporting-blocking-and-removing-content-from-claude.md",
+        "en_articles_10722177-sharing-prompts-in-the-claude-console.md",
+        "en_articles_10949351-getting-started-with-local-mcp-servers-on-claude-desktop.md",
+        "en_articles_11049741-what-is-the-max-plan.md",
+        "en_articles_11049752-how-do-i-sign-up-for-the-max-plan.md",
+        "en_articles_11049762-choosing-a-claude-plan.md",
+        "en_articles_11088861-using-research-on-claude.md",
+        "en_articles_11095361-when-should-i-use-web-search-extended-thinking-and-research.md",
+        "en_articles_11095361.md",
+        "en_articles_11101545-using-research-and-google-workspace.md",
+        "en_articles_11106443-using-research.md",
+        "en_articles_11139144-faqs-on-using-claude-for-education-at-your-university.md",
+        "en_articles_11140763-claude-4-invite-sweepstakes-official-rules.md",
+        "en_articles_11145838-using-claude-code-with-your-pro-or-max-plan.md",
+        "en_articles_11174108-about-the-development-partner-program.md",
+        "en_articles_11174660-online-safety-contacts.md",
+        "en_articles_11175166-getting-started-with-custom-connectors-using-remote-mcp.md",
+        "en_articles_11199177-anthropic-s-ai-for-science-program.md",
+        "en_articles_11408405-claude-4-invite-contest.md",
+        "en_articles_11427875-public-vulnerability-reporting.md",
+        "en_articles_11473015-retrieval-augmented-generation-rag-for-projects.md",
+        "en_articles_11503834-building-custom-connectors-via-remote-mcp-servers.md",
+        "en_articles_11595103-designated-point-of-contact-for-users-in-the-eu.md",
+        "en_articles_11596036-anthropic-connectors-directory-faq.md",
+        "en_articles_11647753-understanding-usage-and-length-limits.md",
+        "en_articles_11697081-anthropic-mcp-directory-terms-and-conditions.md",
+        "en_articles_11697096-anthropic-mcp-directory-policy.md",
+        "en_articles_11725091-when-to-use-desktop-and-web-connectors.md",
+        "en_articles_11732894-who-owns-and-manages-the-data-of-my-claude-for-education-account.md",
+        "en_articles_11817273-using-claude-s-chat-search-and-memory-to-build-on-previous-context.md",
+        "en_articles_11825384-how-to-update-claude-for-ios.md",
+        "en_articles_11825394-how-to-update-claude-for-android.md",
+        "en_articles_11845131-using-claude-code-with-your-team-or-enterprise-plan.md",
+        "en_articles_11869619-using-claude-with-ios-apps.md",
+        "en_articles_11869629-using-claude-with-android-apps.md",
+        "en_articles_11932705-automated-security-reviews-in-claude-code.md",
+        "en_articles_11940350-claude-code-model-configuration.md",
+        "en_articles_12004354-purchasing-and-managing-seats.md",
+        "en_articles_12005017-using-agents-according-to-our-usage-policy.md",
+        "en_articles_12005970-extra-usage-for-team-and-enterprise-plans.md",
+        "en_articles_12012173-getting-started-with-claude-for-chrome.md",
+        "en_articles_12012173-getting-started-with-claude-in-chrome.md",
+        "en_articles_12053672-what-happens-to-a-user-s-data-when-they-are-removed-from-a-team-or-enterprise-o.md",
+        "en_articles_12083917-how-to-change-your-team-plan-from-monthly-to-annual-billing.md",
+        "en_articles_12111783-create-and-edit-files-with-claude.md",
+        "en_articles_12123587-importing-and-exporting-your-memory-from-claude.md",
+        "en_articles_12138966-release-notes.md",
+        "en_articles_12157520-claude-code-usage-analytics.md",
+        "en_articles_12166798-getting-started-with-claude-for-enterprise.md",
+        "en_articles_12220277-prompting-strategies-for-financial-analysis.md",
+        "en_articles_12220298-financial-analysis-workflows-with-claude.md",
+        "en_articles_12260368-using-incognito-chats.md",
+        "en_articles_12304248-managing-api-key-environment-variables-in-claude-code.md",
+        "en_articles_12326764-can-i-use-my-outputs-to-train-an-ai-model.md",
+        "en_articles_12335811-report-a-concern-australian-dis-standard-compliance.md",
+        "en_articles_12386328-requesting-a-refund-for-a-paid-claude-plan.md",
+        "en_articles_12386420-claude-code-faq.md",
+        "en_articles_12449294-understanding-sonnet-4-5-s-api-safety-filters.md",
+        "en_articles_12461605-using-claude-in-slack.md",
+        "en_articles_12512176-what-are-skills.md",
+        "en_articles_12512180-using-skills-in-claude.md",
+        "en_articles_12512198-creating-custom-skills.md",
+        "en_articles_12512198-how-to-create-custom-skills.md",
+        "en_articles_12542951-enabling-and-using-the-microsoft-365-connector.md",
+        "en_articles_12592343-enabling-and-using-the-desktop-extension-allowlist.md",
+        "en_articles_12611117-deploy-claude-desktop-for-macos.md",
+        "en_articles_12618689-claude-code-on-the-web.md",
+        "en_articles_12622667-enterprise-configuration.md",
+        "en_articles_12622703-deploy-claude-desktop-for-windows.md",
+        "en_articles_12626668-use-quick-entry-with-claude-desktop-on-mac.md",
+        "en_articles_12650343-claude-in-excel.md",
+        "en_articles_12684923-microsoft-365-connector-security-guide.md",
+        "en_articles_12702546-deploying-enterprise-grade-mcp-servers-with-desktop-extensions.md",
+        "en_articles_12738598-adapting-to-new-model-personas-after-deprecations.md",
+        "en_articles_12893767-getting-started-with-claude-for-nonprofits.md",
+        "en_articles_12902405-claude-in-chrome-troubleshooting.md",
+        "en_articles_12902428-using-claude-for-chrome-safely.md",
+        "en_articles_12902428-using-claude-in-chrome-safely.md",
+        "en_articles_12902446-claude-for-chrome-permissions-guide.md",
+        "en_articles_12902446-claude-in-chrome-permissions-guide.md",
+        "en_articles_12922490-remote-mcp-server-submission-guide.md",
+        "en_articles_12922832-local-mcp-server-submission-guide.md",
+        "en_articles_12922929-building-desktop-extensions-with-mcpb.md",
+        "en_articles_12923221-using-the-blackbaud-connector-in-claude.md",
+        "en_articles_12923227-using-the-benevity-connector-in-claude.md",
+        "en_articles_12923235-using-the-candid-connector-in-claude.md",
+        "en_articles_12923668-claude-for-nonprofits-partnership-success-guide-for-admins.md",
+        "en_articles_12923901-claude-for-nonprofits-partnership-guide-for-all-users.md",
+        "en_articles_12938627-how-to-gift-a-claude-subscription.md",
+        "en_articles_12938695-how-to-redeem-a-claude-gift-subscription.md",
+        "en_articles_12997130-understanding-your-billing-address-and-tax-calculation.md",
+        "en_articles_12997503-team-plan-billing-faqs.md",
+        "en_articles_13047024-how-to-get-support-for-claude-for-government.md",
+        "en_articles_13065128-claude-for-chrome-admin-controls.md",
+        "en_articles_13065128-claude-in-chrome-admin-controls.md",
+        "en_articles_13117299-minimum-age-requirement-access-restriction.md",
+        "en_articles_13119606-managing-skills-as-an-admin.md",
+        "en_articles_13119606-provisioning-and-managing-skills-for-your-organization.md",
+        "en_articles_13124001-managing-your-active-sessions.md",
+        "en_articles_13132885-setting-up-single-sign-on-sso-for-claude-and-claude-console.md",
+        "en_articles_13132885-setting-up-single-sign-on-sso.md",
+        "en_articles_13133195-setting-up-jit-or-scim-provisioning-to-manage-user-assignments-on-team-or-enter.md",
+        "en_articles_13133195-setting-up-jit-or-scim-provisioning.md",
+        "en_articles_13133750-managing-members-on-team-and-enterprise-plans.md",
+        "en_articles_13145338-anthropic-software-directory-terms.md",
+        "en_articles_13145358-anthropic-software-directory-policy.md",
+        "en_articles_13163666-holiday-2025-usage-promotion.md",
+        "en_articles_13171706-crisis-helpline-support-in-claude.md",
+        "en_articles_13189465-logging-in-to-your-claude-account.md",
+        "en_articles_13198485-enforce-network-level-access-control-with-tenant-restrictions.md",
+        "en_articles_13325567-account-management-faqs.md",
+        "en_articles_13346458-customizing-your-console-appearance-settings.md",
+        "en_articles_7996845-what-are-some-things-i-can-use-claude-for.md",
+        "en_articles_7996862-how-do-i-view-and-sign-your-data-processing-addendum-dpa.md",
+        "en_articles_7996906-reporting-blocking-and-removing-content-from-claude.md",
+        "en_articles_7996918-what-is-amazon-bedrock.md",
+        "en_articles_7996921-i-use-claude-in-amazon-bedrock-who-do-i-contact-for-customer-support-inquiries.md",
+        "en_articles_8106465-our-approach-to-user-safety.md",
+        "en_articles_8114491-getting-started-with-claude.md",
+        "en_articles_8114494-how-up-to-date-is-claude-s-training-data.md",
+        "en_articles_8114513-business-associate-agreements-baa-for-commercial-customers.md",
+        "en_articles_8114521-how-can-i-access-the-anthropic-api.md",
+        "en_articles_8114521-how-can-i-access-the-claude-api.md",
+        "en_articles_8114523-how-can-i-learn-more-about-claude-api-pricing.md",
+        "en_articles_8114526-how-will-i-be-billed-for-claude-api-use.md",
+        "en_articles_8114531-i-created-a-claude-console-organization-how-do-i-start-using-the-claude-api.md",
+        "en_articles_8114533-i-ve-been-using-other-large-language-models-llms-to-power-my-product-how-should-.md",
+        "en_articles_8114535-where-can-i-go-for-claude-api-support-and-assistance.md",
+        "en_articles_8241216-i-m-planning-to-launch-a-product-using-the-claude-api-what-steps-should-i-take-t.md",
+        "en_articles_8241253-safeguards-warnings-and-appeals.md",
+        "en_articles_8287232-verifying-your-phone-number.md",
+        "en_articles_8325606-what-is-the-pro-plan.md",
+        "en_articles_8325609-how-do-i-sign-up-for-the-pro-plan.md",
+        "en_articles_8325617-how-do-i-cancel-my-paid-claude-subscription.md",
+        "en_articles_8325618-paid-plan-billing-faqs.md",
+        "en_articles_8325621-i-would-like-to-input-sensitive-data-into-my-chats-with-claude-who-can-view-my-c.md",
+        "en_articles_8452276-how-do-i-change-the-email-address-associated-with-my-account.md",
+        "en_articles_8525154-claude-is-providing-incorrect-or-misleading-responses-what-s-going-on.md",
+        "en_articles_8606394-how-large-is-the-context-window-on-paid-claude-plans.md",
+        "en_articles_8606395-how-large-is-the-claude-api-s-context-window.md",
+        "en_articles_8664678-how-can-i-change-the-model-version-that-i-m-chatting-with.md",
+        "en_articles_8887527-customizing-your-appearance-settings.md",
+        "en_articles_8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler.md",
+        "en_articles_8977456-how-do-i-pay-for-my-api-usage.md",
+        "en_articles_8977456-how-do-i-pay-for-my-claude-api-usage.md",
+        "en_articles_8987223-can-i-have-a-claude-account-and-a-console-account.md",
+        "en_articles_9002504-can-claude-produce-images.md",
+        "en_articles_9015913-how-to-get-support.md",
+        "en_articles_9020328-csam-detection-and-reporting.md",
+        "en_articles_9028421-how-can-i-delete-my-claude-account.md",
+        "en_articles_9035075-law-enforcement-requests.md",
+        "en_articles_9125743-what-is-the-external-researcher-access-program.md",
+        "en_articles_9199617-api-safeguards-tools.md",
+        "en_articles_9264804-how-can-i-cancel-my-claude-pro-subscription-on-the-claude-app-for-ios.md",
+        "en_articles_9265372-who-owns-and-manages-the-data-of-my-team.md",
+        "en_articles_9266495-how-do-i-sign-up-for-claude-pro-on-the-claude-app-for-ios.md",
+        "en_articles_9266767-what-is-the-team-plan.md",
+        "en_articles_9267276-roles-and-permissions.md",
+        "en_articles_9267289-how-is-my-team-plan-bill-calculated.md",
+        "en_articles_9267385-does-anthropic-act-as-a-data-processor-or-controller.md",
+        "en_articles_9307344-responsible-use-of-anthropic-s-models-guidelines-for-organizations-serving-minor.md",
+        "en_articles_9450526-how-can-i-export-my-claude-data.md",
+        "en_articles_9487310-what-are-artifacts-and-how-do-i-use-them.md",
+        "en_articles_9517075-what-are-projects.md",
+        "en_articles_9519177-how-can-i-create-and-manage-projects.md",
+        "en_articles_9519189-project-visibility-and-sharing.md",
+        "en_articles_9519291-what-is-anthropic-s-policy-for-handling-governmental-requests-for-user-informati.md",
+        "en_articles_9534590-cost-and-usage-reporting-in-the-claude-console.md",
+        "en_articles_9547008-discovering-publishing-customizing-and-sharing-artifacts.md",
+        "en_articles_9612889-how-can-i-uninstall-claude-for-android.md",
+        "en_articles_9612892-how-do-i-sign-up-for-claude-pro-on-claude-for-android.md",
+        "en_articles_9612898-how-can-i-cancel-my-claude-pro-subscription-on-claude-for-android.md",
+        "en_articles_9612901-why-can-t-i-find-claude-for-android-in-the-play-store.md",
+        "en_articles_9612904-what-versions-of-android-are-supported.md",
+        "en_articles_9796617-can-you-delete-data-that-i-sent-via-team-and-enterprise-plans.md",
+        "en_articles_9796807-creating-and-managing-workspaces-in-the-claude-console.md",
+        "en_articles_9797531-what-is-the-enterprise-plan.md",
+        "en_articles_9797557-usage-limit-best-practices.md",
+        "en_articles_9876003-i-have-a-paid-claude-subscription-pro-max-team-or-enterprise-plans-why-do-i-have.md",
+        "en_articles_9927533-how-can-i-disable-public-projects.md",
+        "en_articles_9970975-how-to-access-audit-logs.md"
+      ],
+      "About Claude": [
+        "en_about-claude_glossary.md",
+        "en_about-claude_model-deprecations.md",
+        "en_about-claude_models.md",
+        "en_about-claude_models_choosing-a-model.md",
+        "en_about-claude_models_overview.md",
+        "en_about-claude_pricing.md",
+        "en_about-claude_use-case-guides_content-moderation.md",
+        "en_about-claude_use-case-guides_customer-support-chat.md",
+        "en_about-claude_use-case-guides_overview.md",
+        "en_about-claude_use-case-guides_ticket-routing.md"
+      ],
+      "Prompt Generator": [
+        "en_prompt-generator.md"
+      ],
+      "Collections": [
+        "en_collections_4078534-privacy-and-legal.md",
+        "en_collections_4078537-amazon-bedrock.md",
+        "en_collections_9387370-team-and-enterprise-plans.md",
+        "en_collections_9879000-claude-for-ios.md",
+        "en_collections_9879004-claude-for-android.md"
+      ],
+      "Test & Evaluate": [
+        "en_test-and-evaluate_define-success.md",
+        "en_test-and-evaluate_develop-tests.md",
+        "en_test-and-evaluate_eval-tool.md",
+        "en_test-and-evaluate_strengthen-guardrails_handle-streaming-refusals.md",
+        "en_test-and-evaluate_strengthen-guardrails_increase-consistency.md",
+        "en_test-and-evaluate_strengthen-guardrails_mitigate-jailbreaks.md",
+        "en_test-and-evaluate_strengthen-guardrails_reduce-hallucinations.md",
+        "en_test-and-evaluate_strengthen-guardrails_reduce-latency.md",
+        "en_test-and-evaluate_strengthen-guardrails_reduce-prompt-leak.md"
+      ],
+      "Home": [
+        "en_home.md"
+      ],
+      "Intro": [
+        "en_intro.md"
+      ],
+      "Mcp": [
+        "en_mcp.md"
+      ],
+      "Get Started": [
+        "en_get-started.md"
+      ]
+    }
+  }
+}

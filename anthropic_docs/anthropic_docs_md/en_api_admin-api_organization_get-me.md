@@ -1,24 +1,22 @@
 # Get Current Organization
 
-**Source:** https://platform.claude.com/docs/en/api/admin-api/organization/get-me
+**Source:** http://platform.claude.com/docs/en/api/admin-api/organization/get-me
 
 Copy page
 
 # Get Current Organization
 
-get/v1/organizations/me
+GET/v1/organizations/me
 
 Retrieve information about the organization associated with the authenticated API key.
 
 # ReturnsExpand Collapse
 
-Organization = object { id, name, type }
+Organization object { id, name, type }
 
 id: string
 
 ID of the Organization.
-
-formatuuid
 
 name: string
 
@@ -30,14 +28,11 @@ Object type.
 
 For Organizations, this is always `"organization"`.
 
-Accepts one of the following:
-
-"organization"
-
 Get Current Organization
 
 ```
 curl https://api.anthropic.com/v1/organizations/me \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 

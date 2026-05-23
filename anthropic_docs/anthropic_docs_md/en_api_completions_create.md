@@ -1,6 +1,6 @@
 # Create a Text Completion
 
-**Source:** https://platform.claude.com/docs/en/api/completions/create
+**Source:** http://platform.claude.com/docs/en/api/completions/create
 
 Copy page
 
@@ -8,7 +8,7 @@ cURL
 
 # Create a Text Completion
 
-post/v1/complete
+POST/v1/complete
 
 [Legacy] Create a Text Completion.
 
@@ -22,13 +22,13 @@ Future models and features will not be compatible with Text Completions. See our
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 16 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -68,7 +68,19 @@ Accepts one of the following:
 
 "skills-2025-10-02"
 
-# Body ParametersExpand Collapse
+"fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
+
+"advisor-tool-2026-03-01"
+
+"managed-agents-2026-04-01"
+
+"cache-diagnosis-2026-04-07"
+
+# Body ParametersJSONExpand Collapse
 
 max\_tokens\_to\_sample: number
 
@@ -84,97 +96,85 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-7"
 
-Premium model combining maximum intelligence with practical performance
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-3-7-sonnet-latest"
+"claude-opus-4-5-20251101"
 
-High-performance model with early extended thinking
+Premium model combining maximum intelligence with practical performance
 
-"claude-3-7-sonnet-20250219"
+"claude-sonnet-4-5"
 
-High-performance model with early extended thinking
+High-performance model for agents and coding
 
-"claude-3-5-haiku-latest"
+"claude-sonnet-4-5-20250929"
 
-Fastest and most compact model for near-instant responsiveness
+High-performance model for agents and coding
 
-"claude-3-5-haiku-20241022"
+"claude-opus-4-1"
 
-Our fastest model
+Exceptional model for specialized complex tasks
 
-"claude-haiku-4-5"
+"claude-opus-4-1-20250805"
 
-Hybrid model, capable of near-instant responses and extended thinking
+Exceptional model for specialized complex tasks
 
-"claude-haiku-4-5-20251001"
+"claude-opus-4-0"
 
-Hybrid model, capable of near-instant responses and extended thinking
+Powerful model for complex tasks
 
-"claude-sonnet-4-20250514"
+"claude-opus-4-20250514"
 
-High-performance model with extended thinking
+Powerful model for complex tasks
 
 "claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-4-sonnet-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-5"
-
-Our best model for real-world agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-Our best model for real-world agents and coding
-
-"claude-opus-4-0"
-
-Our most capable model
-
-"claude-opus-4-20250514"
-
-Our most capable model
-
-"claude-4-opus-20250514"
-
-Our most capable model
-
-"claude-opus-4-1-20250805"
-
-Our most capable model
-
-"claude-3-opus-latest"
-
-Excels at writing and complex tasks
-
-"claude-3-opus-20240229"
-
-Excels at writing and complex tasks
-
 "claude-3-haiku-20240307"
 
-Our previous most fast and cost-effective
+Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 prompt: string
 
@@ -208,7 +208,7 @@ An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-maxLength256
+maxLength512
 
 stop\_sequences: optional array of string
 
@@ -224,9 +224,11 @@ Whether to incrementally stream the response using server-sent events.
 
 See [streaming](https://docs.claude.com/en/api/streaming) for details.
 
-temperature: optional number
+Deprecatedtemperature: optional number
 
 Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
 Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
@@ -236,23 +238,27 @@ maximum1
 
 minimum0
 
-top\_k: optional number
+Deprecatedtop\_k: optional number
 
 Only sample from the top K options for each subsequent token.
 
+Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any value will be rejected with a 400 error.
+
 Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+Recommended for advanced use cases only.
 
 minimum0
 
-top\_p: optional number
+Deprecatedtop\_p: optional number
 
 Use nucleus sampling.
 
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
+
+Recommended for advanced use cases only.
 
 maximum1
 
@@ -260,7 +266,7 @@ minimum0
 
 # ReturnsExpand Collapse
 
-Completion = object { id, completion, model, 2 more }
+Completion object { id, completion, model, 2 more }
 
 id: string
 
@@ -278,97 +284,85 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-7"
 
-Premium model combining maximum intelligence with practical performance
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-3-7-sonnet-latest"
+"claude-opus-4-5-20251101"
 
-High-performance model with early extended thinking
+Premium model combining maximum intelligence with practical performance
 
-"claude-3-7-sonnet-20250219"
+"claude-sonnet-4-5"
 
-High-performance model with early extended thinking
+High-performance model for agents and coding
 
-"claude-3-5-haiku-latest"
+"claude-sonnet-4-5-20250929"
 
-Fastest and most compact model for near-instant responsiveness
+High-performance model for agents and coding
 
-"claude-3-5-haiku-20241022"
+"claude-opus-4-1"
 
-Our fastest model
+Exceptional model for specialized complex tasks
 
-"claude-haiku-4-5"
+"claude-opus-4-1-20250805"
 
-Hybrid model, capable of near-instant responses and extended thinking
+Exceptional model for specialized complex tasks
 
-"claude-haiku-4-5-20251001"
+"claude-opus-4-0"
 
-Hybrid model, capable of near-instant responses and extended thinking
+Powerful model for complex tasks
 
-"claude-sonnet-4-20250514"
+"claude-opus-4-20250514"
 
-High-performance model with extended thinking
+Powerful model for complex tasks
 
 "claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-4-sonnet-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-5"
-
-Our best model for real-world agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-Our best model for real-world agents and coding
-
-"claude-opus-4-0"
-
-Our most capable model
-
-"claude-opus-4-20250514"
-
-Our most capable model
-
-"claude-4-opus-20250514"
-
-Our most capable model
-
-"claude-opus-4-1-20250805"
-
-Our most capable model
-
-"claude-3-opus-latest"
-
-Excels at writing and complex tasks
-
-"claude-3-opus-20240229"
-
-Excels at writing and complex tasks
-
 "claude-3-haiku-20240307"
 
-Our previous most fast and cost-effective
+Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 stop\_reason: string
 
@@ -385,9 +379,118 @@ Object type.
 
 For Text Completions, this is always `"completion"`.
 
-Accepts one of the following:
+Completion object { id, completion, model, 2 more }
 
-"completion"
+id: string
+
+Unique object identifier.
+
+The format and length of IDs may change over time.
+
+completion: string
+
+The resulting completion up to and excluding the stop sequences.
+
+model: [Model](/docs/en/api/messages#model)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+string
+
+stop\_reason: string
+
+The reason that we stopped.
+
+This may be one the following values:
+
+* `"stop_sequence"`: we reached a stop sequence — either provided by you via the `stop_sequences` parameter, or a stop sequence built into the model
+* `"max_tokens"`: we exceeded `max_tokens_to_sample` or the model's maximum
+
+type: "completion"
+
+Object type.
+
+For Text Completions, this is always `"completion"`.
 
 Create a Text Completion
 
@@ -398,10 +501,14 @@ curl https://api.anthropic.com/v1/complete \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    --max-time 600 \
     -d '{
           "max_tokens_to_sample": 256,
-          "model": "claude-opus-4-5-20251101",
-          "prompt": "\\n\\nHuman: Hello, world!\\n\\nAssistant:"
+          "model": "claude-2.1",
+          "prompt": "\\n\\nHuman: Hello, world!\\n\\nAssistant:",
+          "temperature": 1,
+          "top_k": 5,
+          "top_p": 0.7
         }'
 ```
 

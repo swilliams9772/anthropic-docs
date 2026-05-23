@@ -1,0 +1,702 @@
+========================================================================
+Anthropic docs change report  (Jan 9, 2026 (previous scrape) → May 23, 2026 (current scrape))
+========================================================================
+Old directory: anthropic_docs_backup_20260523_124122/anthropic_docs_md  (692 files)
+New directory: anthropic_docs/anthropic_docs_md  (1138 files)
+
+Net change: +446 files (446 added, 0 removed, 427 modified, 265 unchanged)
+
+
+## Added files (446)
+
+### API Reference (130)
+  - en_api_admin_mcp_tunnels.md
+  - en_api_admin_mcp_tunnels_archive.md
+  - en_api_admin_mcp_tunnels_list.md
+  - en_api_admin_mcp_tunnels_retrieve.md
+  - en_api_admin_mcp_tunnels_reveal_token.md
+  - en_api_admin_mcp_tunnels_rotate_token.md
+  - en_api_admin_mcp_tunnels_tunnel_certificates_archive.md
+  - en_api_admin_mcp_tunnels_tunnel_certificates_create.md
+  - en_api_admin_mcp_tunnels_tunnel_certificates_list.md
+  - en_api_admin_mcp_tunnels_tunnel_certificates_retrieve.md
+  - en_api_admin_rate_limits_list.md
+  - en_api_admin_workspaces_rate_limits_list.md
+  - en_api_authentication_overview.md
+  - en_api_beta_agents_archive.md
+  - en_api_beta_agents_create.md
+  - en_api_beta_agents_list.md
+  - en_api_beta_agents_retrieve.md
+  - en_api_beta_agents_update.md
+  - en_api_beta_agents_versions_list.md
+  - en_api_beta_environments_archive.md
+  - en_api_beta_environments_create.md
+  - en_api_beta_environments_delete.md
+  - en_api_beta_environments_list.md
+  - en_api_beta_environments_retrieve.md
+  - en_api_beta_environments_update.md
+  ... and 105 more
+
+### About Claude (4)
+  - en_about-claude_models_migration-guide.md
+  - en_about-claude_models_model-ids-and-versions.md
+  - en_about-claude_models_whats-new-claude-4-6.md
+  - en_about-claude_models_whats-new-claude-4-7.md
+
+### Agent SDK (6)
+  - en_agent-sdk_agent-loop.md
+  - en_agent-sdk_claude-code-features.md
+  - en_agent-sdk_observability.md
+  - en_agent-sdk_session-storage.md
+  - en_agent-sdk_streaming-output.md
+  - en_agent-sdk_tool-search.md
+
+### Agents & Tools (24)
+  - en_agents-and-tools_agent-skills_claude-api-skill.md
+  - en_agents-and-tools_agent-skills_enterprise.md
+  - en_agents-and-tools_mcp-tunnels_console.md
+  - en_agents-and-tools_mcp-tunnels_deploy-compose.md
+  - en_agents-and-tools_mcp-tunnels_deploy-helm.md
+  - en_agents-and-tools_mcp-tunnels_overview.md
+  - en_agents-and-tools_mcp-tunnels_quickstart.md
+  - en_agents-and-tools_mcp-tunnels_reference.md
+  - en_agents-and-tools_mcp-tunnels_security.md
+  - en_agents-and-tools_mcp-tunnels_troubleshooting.md
+  - en_agents-and-tools_tool-use_advisor-tool.md
+  - en_agents-and-tools_tool-use_build-a-tool-using-agent.md
+  - en_agents-and-tools_tool-use_define-tools.md
+  - en_agents-and-tools_tool-use_handle-tool-calls.md
+  - en_agents-and-tools_tool-use_how-tool-use-works.md
+  - en_agents-and-tools_tool-use_manage-tool-context.md
+  - en_agents-and-tools_tool-use_parallel-tool-use.md
+  - en_agents-and-tools_tool-use_server-tools.md
+  - en_agents-and-tools_tool-use_strict-tool-use.md
+  - en_agents-and-tools_tool-use_tool-combinations.md
+  - en_agents-and-tools_tool-use_tool-reference.md
+  - en_agents-and-tools_tool-use_tool-runner.md
+  - en_agents-and-tools_tool-use_tool-use-with-prompt-caching.md
+  - en_agents-and-tools_tool-use_troubleshooting-tool-use.md
+
+### Build with Claude (11)
+  - en_build-with-claude_adaptive-thinking.md
+  - en_build-with-claude_api-and-data-retention.md
+  - en_build-with-claude_cache-diagnostics.md
+  - en_build-with-claude_claude-in-amazon-bedrock.md
+  - en_build-with-claude_claude-on-amazon-bedrock-legacy.md
+  - en_build-with-claude_claude-platform-on-aws.md
+  - en_build-with-claude_compaction.md
+  - en_build-with-claude_fast-mode.md
+  - en_build-with-claude_prompt-engineering_claude-prompting-best-practices.md
+  - en_build-with-claude_prompt-engineering_prompting-tools.md
+  - en_build-with-claude_task-budgets.md
+
+### Claude (1)
+  - en_claude_api_primer.md
+
+### Collections (6)
+  - en_collections_10351014-security-and-compliance.md
+  - en_collections_18901831-analytics-and-usage.md
+  - en_collections_18901835-get-started.md
+  - en_collections_9811414-capabilities.md
+  - en_collections_9811436-billing.md
+  - en_collections_9811449-admin-management.md
+
+### Manage Claude (25)
+  - en_manage-claude_admin-api.md
+  - en_manage-claude_api-and-data-retention.md
+  - en_manage-claude_authentication.md
+  - en_manage-claude_claude-code-analytics-api.md
+  - en_manage-claude_compliance-activity-feed.md
+  - en_manage-claude_compliance-api-access.md
+  - en_manage-claude_compliance-api.md
+  - en_manage-claude_compliance-content-data.md
+  - en_manage-claude_compliance-errors.md
+  - en_manage-claude_compliance-faq.md
+  - en_manage-claude_compliance-integration-patterns.md
+  - en_manage-claude_compliance-org-data.md
+  - en_manage-claude_data-residency.md
+  - en_manage-claude_rate-limits-api.md
+  - en_manage-claude_usage-cost-api.md
+  - en_manage-claude_wif-providers_aws.md
+  - en_manage-claude_wif-providers_azure.md
+  - en_manage-claude_wif-providers_gcp.md
+  - en_manage-claude_wif-providers_github-actions.md
+  - en_manage-claude_wif-providers_kubernetes.md
+  - en_manage-claude_wif-providers_okta.md
+  - en_manage-claude_wif-providers_spiffe.md
+  - en_manage-claude_wif-reference.md
+  - en_manage-claude_workload-identity-federation.md
+  - en_manage-claude_workspaces.md
+
+### Managed Agents (23)
+  - en_managed-agents_agent-setup.md
+  - en_managed-agents_cloud-containers.md
+  - en_managed-agents_define-outcomes.md
+  - en_managed-agents_dreams.md
+  - en_managed-agents_environments.md
+  - en_managed-agents_events-and-streaming.md
+  - en_managed-agents_files.md
+  - en_managed-agents_github.md
+  - en_managed-agents_mcp-connector.md
+  - en_managed-agents_memory.md
+  - en_managed-agents_migration.md
+  - en_managed-agents_multi-agent.md
+  - en_managed-agents_onboarding.md
+  - en_managed-agents_overview.md
+  - en_managed-agents_permission-policies.md
+  - en_managed-agents_quickstart.md
+  - en_managed-agents_self-hosted-sandboxes-security.md
+  - en_managed-agents_self-hosted-sandboxes.md
+  - en_managed-agents_sessions.md
+  - en_managed-agents_skills.md
+  - en_managed-agents_tools.md
+  - en_managed-agents_vaults.md
+  - en_managed-agents_webhooks.md
+
+### Overview (1)
+  - en_overview.md
+
+### Support Articles (214)
+  - en_articles_10065433-install-claude-desktop.md
+  - en_articles_10166901-use-google-workspace-connectors.md
+  - en_articles_10276682.md
+  - en_articles_10440198-configure-custom-data-retention-controls-for-enterprise-plans.md
+  - en_articles_10504844-manage-user-feedback-settings-on-team-and-enterprise-plans.md
+  - en_articles_10504853-manage-user-feedback-settings-on-claude-console.md
+  - en_articles_10769299-how-to-use-claude-in-your-preferred-language.md
+  - en_articles_11049762-choose-a-claude-plan.md
+  - en_articles_11101966-.md
+  - en_articles_11101966-use-voice-mode.md
+  - en_articles_11139094-get-started-with-claude-for-education-at-your-university-for-owners-admins.md
+  - en_articles_11145838-use-claude-code-with-your-pro-or-max-plan.md
+  - en_articles_11175166-get-started-with-custom-connectors-using-remote-mcp.md
+  - en_articles_11175166.md
+  - en_articles_11176164-use-connectors-to-extend-claude-s-capabilities.md
+  - en_articles_11503834-build-custom-connectors-via-remote-mcp-servers.md
+  - en_articles_11506255-get-started-with-claude-in-slack.md
+  - en_articles_11526368-how-am-i-billed-for-my-enterprise-plan.md
+  - en_articles_11526368-usage-based-enterprise-plans.md
+  - en_articles_11647753-how-do-usage-and-length-limits-work.md
+  - en_articles_11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context.md
+  - en_articles_11825384-.md
+  - en_articles_11845131-use-claude-code-with-your-team-or-enterprise-plan.md
+  - en_articles_11845131.md
+  - en_articles_11869619-use-claude-with-ios-apps.md
+  ... and 189 more
+
+### Troubleshooting (1)
+  - en_troubleshooting.md
+
+## Modified files (427)
+
+### API Reference (102)
+  - en_api_beta.md
+  - en_api_messages.md
+  - en_api_beta_messages_create.md
+  - en_api_messages_create.md
+  - en_api_creating-message-batches.md
+  - en_api_messages_batches_create.md
+  - en_api_messages-count-tokens.md
+  - en_api_messages_count_tokens.md
+  - en_api_beta_messages_batches_create.md
+  - en_api_beta_messages_count_tokens.md
+  - en_api_models.md
+  - en_api_admin.md
+  - en_api_messages_batches_results.md
+  - en_api_retrieving-message-batch-results.md
+  - en_api_beta_messages_batches_results.md
+  - en_api_beta_models_list.md
+  - en_api_models-list.md
+  - en_api_models_list.md
+  - en_api_beta_models_retrieve.md
+  - en_api_models_retrieve.md
+  - en_api_errors.md
+  - en_api_admin_workspaces_create.md
+  - en_api_completions_create.md
+  - en_api_rate-limits.md
+  - en_api_admin-api_usage-cost_get-messages-usage-report.md
+  ... and 77 more
+
+### About Claude (10)
+  - en_about-claude_pricing.md
+  - en_about-claude_model-deprecations.md
+  - en_about-claude_models.md
+  - en_about-claude_models_overview.md
+  - en_about-claude_use-case-guides_customer-support-chat.md
+  - en_about-claude_models_choosing-a-model.md
+  - en_about-claude_use-case-guides_content-moderation.md
+  - en_about-claude_use-case-guides_ticket-routing.md
+  - en_about-claude_use-case-guides_overview.md
+  - en_about-claude_glossary.md
+
+### Agent SDK (24)
+  - en_agent-sdk_typescript.md
+  - en_agent-sdk_python.md
+  - en_agent-sdk_custom-tools.md
+  - en_agent-sdk_mcp.md
+  - en_agent-sdk_sessions.md
+  - en_agent-sdk_modifying-system-prompts.md
+  - en_agent-sdk_overview.md
+  - en_agent-sdk_subagents.md
+  - en_agent-sdk_user-input.md
+  - en_agent-sdk_permissions.md
+  - en_agent-sdk_hooks.md
+  - en_agent-sdk_cost-tracking.md
+  - en_agent-sdk_structured-outputs.md
+  - en_agent-sdk_todo-tracking.md
+  - en_agent-sdk_skills.md
+  - en_agent-sdk_slash-commands.md
+  - en_agent-sdk_quickstart.md
+  - en_agent-sdk_secure-deployment.md
+  - en_agent-sdk_plugins.md
+  - en_agent-sdk_hosting.md
+  - en_agent-sdk_streaming-vs-single-mode.md
+  - en_agent-sdk_migration-guide.md
+  - en_agent-sdk_file-checkpointing.md
+  - en_agent-sdk_typescript-v2-preview.md
+
+### Agents & Tools (19)
+  - en_agents-and-tools_remote-mcp-servers.md
+  - en_agents-and-tools_tool-use_implement-tool-use.md
+  - en_agents-and-tools_mcp-connector.md
+  - en_agents-and-tools_tool-use_overview.md
+  - en_agents-and-tools_tool-use_fine-grained-tool-streaming.md
+  - en_agents-and-tools_tool-use_bash-tool.md
+  - en_agents-and-tools_tool-use_tool-search-tool.md
+  - en_agents-and-tools_tool-use_text-editor-tool.md
+  - en_agents-and-tools_agent-skills_overview.md
+  - en_agents-and-tools_tool-use_programmatic-tool-calling.md
+  - en_agents-and-tools_mcp.md
+  - en_agents-and-tools_tool-use_web-search-tool.md
+  - en_agents-and-tools_tool-use_code-execution-tool.md
+  - en_agents-and-tools_tool-use_web-fetch-tool.md
+  - en_agents-and-tools_computer-use.md
+  - en_agents-and-tools_tool-use_computer-use-tool.md
+  - en_agents-and-tools_agent-skills_quickstart.md
+  - en_agents-and-tools_agent-skills_best-practices.md
+  - en_agents-and-tools_tool-use_memory-tool.md
+
+### Build with Claude (36)
+  - en_build-with-claude_prompt-engineering_long-context-tips.md
+  - en_build-with-claude_prompt-engineering_multishot-prompting.md
+  - en_build-with-claude_prompt-engineering_be-clear-and-direct.md
+  - en_build-with-claude_prompt-engineering_use-xml-tags.md
+  - en_build-with-claude_prompt-engineering_chain-of-thought.md
+  - en_build-with-claude_prompt-engineering_system-prompts.md
+  - en_build-with-claude_prompt-engineering_chain-prompts.md
+  - en_build-with-claude_prompt-engineering_extended-thinking-tips.md
+  - en_build-with-claude_prompt-engineering.md
+  - en_build-with-claude_prompt-caching.md
+  - en_build-with-claude_extended-thinking.md
+  - en_build-with-claude_overview.md
+  - en_build-with-claude_effort.md
+  - en_build-with-claude_claude-on-vertex-ai.md
+  - en_build-with-claude_tool-use.md
+  - en_build-with-claude_structured-outputs.md
+  - en_build-with-claude_vision.md
+  - en_build-with-claude_batch-processing.md
+  - en_build-with-claude_handling-stop-reasons.md
+  - en_build-with-claude_usage-cost-api.md
+  - en_build-with-claude_workspaces.md
+  - en_build-with-claude_streaming.md
+  - en_build-with-claude_search-results.md
+  - en_build-with-claude_claude-in-microsoft-foundry.md
+  - en_build-with-claude_embeddings.md
+  ... and 11 more
+
+### Collections (5)
+  - en_collections_9387370-team-and-enterprise-plans.md
+  - en_collections_9879000-claude-for-ios.md
+  - en_collections_9879004-claude-for-android.md
+  - en_collections_4078534-privacy-and-legal.md
+  - en_collections_4078537-amazon-bedrock.md
+
+### For Claude (1)
+  - for-claude.md
+
+### Get Started (1)
+  - en_get-started.md
+
+### Home (1)
+  - en_home.md
+
+### Intro (1)
+  - en_intro.md
+
+### Mcp (1)
+  - en_mcp.md
+
+### Prompt Generator (1)
+  - en_prompt-generator.md
+
+### Release Notes (5)
+  - en_release-notes_claude-code.md
+  - en_release-notes_claude-apps.md
+  - en_release-notes_api.md
+  - en_release-notes_overview.md
+  - en_release-notes_system-prompts.md
+
+### Resources (3)
+  - en_resources_prompt-library_library.md
+  - en_resources_overview.md
+  - en_resources_glossary.md
+
+### Support Articles (208)
+  - en_articles_12138966-release-notes.md
+  - en_articles_12922490-remote-mcp-server-submission-guide.md
+  - en_articles_12922832-local-mcp-server-submission-guide.md
+  - en_articles_12220298-financial-analysis-workflows-with-claude.md
+  - en_articles_12220277-prompting-strategies-for-financial-analysis.md
+  - en_articles_11106443-using-research.md
+  - en_articles_11101545-using-research-and-google-workspace.md
+  - en_articles_11596036-anthropic-connectors-directory-faq.md
+  - en_articles_12922929-building-desktop-extensions-with-mcpb.md
+  - en_articles_8114513-business-associate-agreements-baa-for-commercial-customers.md
+  - en_articles_12542951-enabling-and-using-the-microsoft-365-connector.md
+  - en_articles_9797531-what-is-the-enterprise-plan.md
+  - en_articles_12650343-claude-in-excel.md
+  - en_articles_11503834-building-custom-connectors-via-remote-mcp-servers.md
+  - en_articles_11697096-anthropic-mcp-directory-policy.md
+  - en_articles_11869629-using-claude-with-android-apps.md
+  - en_articles_11869619-using-claude-with-ios-apps.md
+  - en_articles_13133750-managing-members-on-team-and-enterprise-plans.md
+  - en_articles_12893767-getting-started-with-claude-for-nonprofits.md
+  - en_articles_13133195-setting-up-jit-or-scim-provisioning-to-manage-user-assignments-on-team-or-enter.md
+  - en_articles_13133195-setting-up-jit-or-scim-provisioning.md
+  - en_articles_12512180-using-skills-in-claude.md
+  - en_articles_11145838-using-claude-code-with-your-pro-or-max-plan.md
+  - en_articles_9266767-what-is-the-team-plan.md
+  - en_articles_13119606-managing-skills-as-an-admin.md
+  ... and 183 more
+
+### Test & Evaluate (9)
+  - en_test-and-evaluate_define-success.md
+  - en_test-and-evaluate_develop-tests.md
+  - en_test-and-evaluate_strengthen-guardrails_increase-consistency.md
+  - en_test-and-evaluate_strengthen-guardrails_reduce-prompt-leak.md
+  - en_test-and-evaluate_strengthen-guardrails_handle-streaming-refusals.md
+  - en_test-and-evaluate_strengthen-guardrails_reduce-latency.md
+  - en_test-and-evaluate_strengthen-guardrails_reduce-hallucinations.md
+  - en_test-and-evaluate_eval-tool.md
+  - en_test-and-evaluate_strengthen-guardrails_mitigate-jailbreaks.md
+
+========================================================================
+Top 5 biggest content changes (diff snippets)
+========================================================================
+
+--- en_api_beta.md  (539,537 → 1,301,183 chars, +761,646)
+--- old/en_api_beta.md
++++ new/en_api_beta.md
+@@ -11,11 +11,11 @@
+ 
+-AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 16 more
+-
+-Accepts one of the following:
+-
+-UnionMember0 = string
+-
+-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 16 more
+-
+-Accepts one of the following:
++AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
++
++One of the following:
++
++string
++
++"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
++
++One of the following:
+ 
+@@ -59,3 +59,15 @@
+ 
+-BetaAPIError = object { message, type }
++"fast-mode-2026-02-01"
++
++"output-300k-2026-03-24"
++
++"user-profiles-2026-03-24"
++
++"advisor-tool-2026-03-01"
++
++"managed-agents-2026-04-01"
++
++"cache-diagnosis-2026-04-07"
++
++BetaAPIError object { message, type }
+ 
+@@ -65,7 +77,3 @@
+ 
+-Accepts one of the following:
+-
+-"api\_error"
+-
+-BetaAuthenticationError = object { message, type }
++BetaAuthenticationError object { message, type }
+ 
+@@ -75,7 +83,3 @@
+ 
+-Accepts one of the following:
+-
+-"authentication\_error"
+-
+-BetaBillingError = object { message, type }
++BetaBillingError object { message, type }
+ 
+@@ -85,11 +89,7 @@
+ 
+... (62877 more diff lines)
+
+--- en_api_messages.md  (239,384 → 508,503 chars, +269,119)
+--- old/en_api_messages.md
++++ new/en_api_messages.md
+@@ -11,3 +11,3 @@
+ 
+-post/v1/messages
++POST/v1/messages
+ 
+@@ -15,3 +15,3 @@
+ 
+-post/v1/messages/count\_tokens
++POST/v1/messages/count\_tokens
+ 
+@@ -19,3 +19,3 @@
+ 
+-Base64ImageSource = object { data, media\_type, type }
++Base64ImageSource object { data, media\_type, type }
+ 
+@@ -25,3 +25,3 @@
+ 
+-Accepts one of the following:
++One of the following:
+ 
+@@ -37,7 +37,3 @@
+ 
+-Accepts one of the following:
+-
+-"base64"
+-
+-Base64PDFSource = object { data, media\_type, type }
++Base64PDFSource object { data, media\_type, type }
+ 
+@@ -47,19 +43,141 @@
+ 
+-Accepts one of the following:
+-
+-"application/pdf"
+-
+ type: "base64"
+ 
+-Accepts one of the following:
+-
+-"base64"
+-
+-CacheControlEphemeral = object { type, ttl }
++BashCodeExecutionOutputBlock object { file\_id, type }
++
++file\_id: string
++
++type: "bash\_code\_execution\_output"
++
++BashCodeExecutionOutputBlockParam object { file\_id, type }
++
++file\_id: string
++
++type: "bash\_code\_execution\_output"
++
++BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
++
++content: array of [BashCodeExecutionOutputBlock](/docs/en/api/messages#bash_code_execution_output_block) { file\_id, type }
++
+... (26749 more diff lines)
+
+--- en_release-notes_claude-code.md  (63,747 → 327,739 chars, +263,992)
+--- old/en_release-notes_claude-code.md
++++ new/en_release-notes_claude-code.md
+@@ -4,2 +4,2625 @@
+ # Changelog
++
++# 2.1.150
++
++* Internal infrastructure improvements (no user-facing changes)
++
++# 2.1.149
++
++* `/usage` now shows a per-category breakdown of what's driving your limits usage — skills, subagents, plugins, and per-MCP-server cost
++* `/diff` detail view can now be scrolled with the keyboard (arrows, `j`/`k`, `PgUp`/`PgDn`, `Space`, `Home`/`End`)
++* Markdown output now renders GFM task list checkboxes (`- [ ] todo` / `- [x] done`) instead of plain bullets
++* Enterprise: added the `allowAllClaudeAiMcps` managed setting to load claude.ai cloud MCP connectors alongside `managed-mcp.json`
++* Fixed a PowerShell permission bypass: built-in `cd` functions (`cd..`, `cd\`, `cd~`, `X:`) changed the working directory undetected, letting a later command read outside the workspace
++* Fixed the sandbox write allowlist in git worktrees covering the entire main repository root instead of only the shared `.git` directory (with `hooks/` and `config` denied)
++* Fixed PowerShell prefix/wildcard allow rules (e.g. `PowerShell(dotnet.exe build *)`) not pre-approving native executables and scripts
++* Fixed a permission-analysis gap where the parser trusted stale variable-tracking values for `PWD`/`OLDPWD`/`DIRSTACK` across `cd`/`pushd`/`popd`
++* Fixed `find` in the Bash tool exhausting the macOS system file/vnode table and crashing the host on large directory trees
++* Fixed the managed-settings approval dialog leaving the terminal frozen after accepting at startup
++* Fixed `/ultraplan` and remote session creation failing with "Could not capture uncommitted changes" when the working tree has no real changes
++* Fixed `otelHeadersHelper` failing silently when the script path contains spaces; helper failures are now reported in `/doctor` and the debug log
++* Fixed the thinking spinner staying amber across tool calls and onto fresh thinking bursts
++* Fixed collapsed Bash output reporting the wrong hidden-line count for outputs with many short lines
++* Fixed slash-command argument-hint clipping trailing typed characters when the hint overflows the input box
++* Fixed argument-hint and progressive arg suggestions not appearing after Tab-completing a skill whose frontmatter `name:` differs from its directory basename
++* Fixed the status bar showing the user's baseline `/effort` setting instead of the effort level applied by skill/agent `effort:` frontmatter
++* Fixed Ctrl+O transcript view freezing at the moment it was opened instead of tailing new messages
++* Fixed editing a recalled prompt-history entry losing the edit when navigating further up/down with arrow keys
++* Fixed `/config` exit summary reporting phantom changes to auto-compact and theme when toggling unrelated settings
++* Fixed `/insights` crashing when cached session-meta files are missing optional fields
++* Fixed malformed PowerShell and History tool calls with missing input being misclassified as reads in transcript collapsing
++* Fixed renaming a Remote Control session from claude.ai or the Claude mobile app not updating the local session name for `claude --resume`
++* Fixed a race where a just-submitted prompt could appear twice in the up-arrow history
++* Fixed tapping the "Jump to bottom" pill in fullscreen mode not dismissing it immediately
++* Improved `/feedback` reports to include the conversation that happened before context compaction, making issues from earlier in long sessions easier to triage
++
++# 2.1.148
++
++* Fixed the Bash tool returning exit code 127 on every command for some users (a regression introduced in 2.1.147)
++
++# 2.1.147
++
++* Pinned background sessions (`Ctrl+T` in `claude agents`) now stay alive when idle, are restarted in place to apply Claude Code updates, and are shed under memory pressure only after non-pinned sessions
++* Renamed `/simplify` to `/code-review`. It now reports correctness bugs at a chosen effort level (e.g., `/code-review high`); pass `--comment` to post findings as inline GitHub PR comments. The old cleanup-and-fix behavior has been removed
++* Improved auto-updater: retries transient network failures, reports specific error categories and OS error codes on failure, and shows the current version when an update fails
++* Improved diff rendering performance for large file edits
++* Prompt history no longer records consecutive duplicate entries — recalling a prompt with arrow-up and submitting it again won't add another copy
++* Fixed enterprise login restrictions (`forceLoginOrgUUID` and `forceLoginMethod` managed-settings) not being enforced against third-party-provider and API-key sessions
++* Fixed `&` in `!` command output displaying as `&amp;`, which broke copy-pasting URLs from commands like `gcloud auth login` on headless machines
++* Fixed unknown slash commands silently doing nothing in headless/SDK mode — they now show an error message
++* Fixed `/help` rendering a broken tab header and showing only one command per page on small terminals when not in fullscreen mode
++* Fixed shell snapshot dropping user functions whose names start with a single underscore, which broke aliases referencing them
++* Fixed plugin agents that declare multiple `Agent(...)` types in `tools:` frontmatter dropping all but the last entry
++* Fixed hook `if` conditions like `PowerShell(git push*)` never matching — only `PowerShell(*)` worked
++* Fixed PowerShell tool dropping output for commands that rely on the default formatter
++* Fixed: on Windows, "Yes, and don't ask again" for a PowerShell script invocation now writes a rule that actually matches on subsequent runs
++* Fixed PowerShell tool failing on Windows with exit code 1 when `pwsh` is installed via winget or the Microsoft Store
++* Fixed `/effort` opening with the slider on the wrong level — it now starts at your current effort
+... (2573 more diff lines)
+
+--- for-claude.md  (56,204 → 166,573 chars, +110,369)
+--- old/for-claude.md
++++ new/for-claude.md
+@@ -16,14 +16,14 @@
+ 
+-- English (en) - 532 pages - /docs - Content included below
+-- German (Deutsch) (de) - 181 pages - /docs/de - Visit website for content
+-- Spanish (Español) (es) - 181 pages - /docs/es - Visit website for content
+-- French (Français) (fr) - 181 pages - /docs/fr - Visit website for content
+-- Italian (Italiano) (it) - 181 pages - /docs/it - Visit website for content
+-- Japanese (日本語) (ja) - 181 pages - /docs/ja - Visit website for content
+-- Korean (한국어) (ko) - 181 pages - /docs/ko - Visit website for content
+-- Portuguese (Português) (pt-BR) - 181 pages - /docs/pt-BR - Visit website for content
+-- Russian (Русский) (ru) - 181 pages - /docs/ru - Visit website for content
+-- Chinese Simplified (简体中文) (zh-CN) - 181 pages - /docs/zh-CN - Visit website for content
+-- Chinese Traditional (繁體中文) (zh-TW) - 181 pages - /docs/zh-TW - Visit website for content
+-- Indonesian (Bahasa Indonesia) (id) - 181 pages - /docs/id - Visit website for content
++- English (en) - 1541 pages - /docs - Content included below
++- German (Deutsch) (de) - 132 pages - /docs/de - Visit website for content
++- Spanish (Español) (es) - 132 pages - /docs/es - Visit website for content
++- French (Français) (fr) - 132 pages - /docs/fr - Visit website for content
++- Italian (Italiano) (it) - 132 pages - /docs/it - Visit website for content
++- Japanese (日本語) (ja) - 132 pages - /docs/ja - Visit website for content
++- Korean (한국어) (ko) - 132 pages - /docs/ko - Visit website for content
++- Portuguese (Português) (pt-BR) - 132 pages - /docs/pt-BR - Visit website for content
++- Russian (Русский) (ru) - 132 pages - /docs/ru - Visit website for content
++- Chinese Simplified (简体中文) (zh-CN) - 132 pages - /docs/zh-CN - Visit website for content
++- Chinese Traditional (繁體中文) (zh-TW) - 132 pages - /docs/zh-TW - Visit website for content
++- Indonesian (Bahasa Indonesia) (id) - 132 pages - /docs/id - Visit website for content
+ 
+@@ -33,5 +33,4 @@
+ 
+-# Developer Guide
+-
+-- [Overview](https://platform.claude.com/docs/en/agent-sdk/overview.md) - Agent SDK overview
++# Messages
++
+ - [Overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview.md) - Agent Skills
+@@ -41,95 +40,122 @@
+ - [Intro to Claude](https://platform.claude.com/docs/en/intro.md)
+-- [Models overview](https://platform.claude.com/docs/en/about-claude/models/overview.md)
+-- [Overview](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview.md) - Prompt engineering overview
+-- [Quickstart](https://platform.claude.com/docs/en/agent-sdk/quickstart.md)
++- [Overview](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/overview.md) - MCP tunnels
++- [Quickstart](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/quickstart.md) - MCP tunnels quickstart
+ - [Overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview.md) - Tool use with Claude
+-- [Admin API overview](https://platform.claude.com/docs/en/build-with-claude/administration-api.md)
+-- [Python SDK](https://platform.claude.com/docs/en/agent-sdk/python.md) - Agent SDK reference - Python
+-- [TypeScript SDK](https://platform.claude.com/docs/en/agent-sdk/typescript.md) - Agent SDK reference - TypeScript
+-- [Agent Skills in the SDK](https://platform.claude.com/docs/en/agent-sdk/skills.md)
+-- [Prompt generator](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompt-generator.md) - Automatically generate first draft prompt templates
++- [Adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md)
++- [Advisor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool.md)
+ - [Bash tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool.md)
+ - [Batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing.md)
+-- [Be clear and direct](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/be-clear-and-direct.md) - Be clear, direct, and detailed
+ - [Extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking.md) - Building with extended thinking
+-- [Chain complex prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/chain-prompts.md) - Chain complex prompts for stronger performance
+-- [Choosing a model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model.md) - Choosing the right model
++- [Cache diagnostics (beta)](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics.md) - Cache diagnostics
+ - [Citations](https://platform.claude.com/docs/en/build-with-claude/citations.md)
+... (1725 more diff lines)
+
+--- en_api_beta_messages_create.md  (127,741 → 234,776 chars, +107,035)
+--- old/en_api_beta_messages_create.md
++++ new/en_api_beta_messages_create.md
+@@ -9,3 +9,3 @@
+ 
+-post/v1/messages
++POST/v1/messages
+ 
+@@ -23,9 +23,9 @@
+ 
+-Accepts one of the following:
+-
+-UnionMember0 = string
+-
+-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 16 more
+-
+-Accepts one of the following:
++One of the following:
++
++string
++
++"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
++
++One of the following:
+ 
+@@ -69,3 +69,15 @@
+ 
+-# Body ParametersExpand Collapse
++"fast-mode-2026-02-01"
++
++"output-300k-2026-03-24"
++
++"user-profiles-2026-03-24"
++
++"advisor-tool-2026-03-01"
++
++"managed-agents-2026-04-01"
++
++"cache-diagnosis-2026-04-07"
++
++# Body ParametersJSONExpand Collapse
+ 
+@@ -77,5 +89,7 @@
+ 
++Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
++
+ Different models have different maximum values for this parameter. See [models](https://docs.claude.com/en/docs/models-overview) for details.
+ 
+-minimum1
++minimum0
+ 
+@@ -134,11 +148,11 @@
+ 
+-Accepts one of the following:
+-
+-UnionMember0 = string
+-
+-UnionMember1 = array of [BetaContentBlockParam](/docs/en/api/beta#beta_content_block_param)
+-
+-Accepts one of the following:
+-
+... (10427 more diff lines)
+
+Wrote changes_report.json

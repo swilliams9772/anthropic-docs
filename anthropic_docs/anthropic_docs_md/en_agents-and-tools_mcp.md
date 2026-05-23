@@ -4,7 +4,7 @@
 
 [Skip to main content](#content-area)
 
-[Model Context Protocol home page![light logo](https://mintcdn.com/mcp/4ZXF1PrDkEaJvXpn/logo/light.svg?fit=max&auto=format&n=4ZXF1PrDkEaJvXpn&q=85&s=4498cb8a57d574005f3dca62bdd49c95)![dark logo](https://mintcdn.com/mcp/4ZXF1PrDkEaJvXpn/logo/dark.svg?fit=max&auto=format&n=4ZXF1PrDkEaJvXpn&q=85&s=c0687c003f8f2cbdb24772ab4c8a522c)](/)
+[Model Context Protocol home page![light logo](https://mintcdn.com/mcp/2BMHnlNW5OqOohXZ/logo/light.svg?fit=max&auto=format&n=2BMHnlNW5OqOohXZ&q=85&s=a5ac61ce77858fb1ddaf6de761c39499)![dark logo](https://mintcdn.com/mcp/2BMHnlNW5OqOohXZ/logo/dark.svg?fit=max&auto=format&n=2BMHnlNW5OqOohXZ&q=85&s=1227cb7feb8344f9f6288c6b5b0a6d80)](/)
 
 Search...
 
@@ -18,7 +18,7 @@ Get started
 
 What is the Model Context Protocol (MCP)?
 
-[Documentation](/docs/getting-started/intro)[Specification](/specification/2025-11-25)[Community](/community/communication)
+[Documentation](/docs/getting-started/intro)[Extensions](/extensions/overview)[Specification](/specification/2025-11-25)[Registry](/registry/about)[SEPs](/seps)[Community](/community/contributing)
 
 # Get started
 
@@ -29,22 +29,33 @@ What is the Model Context Protocol (MCP)?
 * [Architecture](/docs/learn/architecture)
 * [Servers](/docs/learn/server-concepts)
 * [Clients](/docs/learn/client-concepts)
-* [Versioning](/specification/versioning)
+* [Versioning](/docs/learn/versioning)
 
 # Develop with MCP
 
 * [Connect to local MCP servers](/docs/develop/connect-local-servers)
 * [Connect to remote MCP Servers](/docs/develop/connect-remote-servers)
+* [Build with Agent Skills](/docs/develop/build-with-agent-skills)
 * [Build an MCP server](/docs/develop/build-server)
-* [Build an MCP client](/docs/develop/build-client)
+* Clients
 * [SDKs](/docs/sdk)
 * Security
 
 # Developer tools
 
 * [MCP Inspector](/docs/tools/inspector)
+* [Debugging](/docs/tools/debugging)
 
-On this page
+# Examples
+
+* [Example Clients](/clients)
+* [Example Servers](/examples)
+
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://modelcontextprotocol.io/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
 
 MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems.
 Using MCP, AI applications like Claude or ChatGPT can connect to data sources (e.g. local files, databases), tools (e.g. search engines, calculators) and workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.
@@ -67,13 +78,23 @@ Depending on where you sit in the ecosystem, MCP can have a range of benefits.
 * **AI applications or agents**: MCP provides access to an ecosystem of data sources, tools and apps which will enhance capabilities and improve the end-user experience.
 * **End-users**: MCP results in more capable AI applications or agents which can access your data and take actions on your behalf when necessary.
 
+# [​](#broad-ecosystem-support) Broad ecosystem support
+
+MCP is an open protocol supported across a wide range of clients and servers. AI assistants like [Claude](https://claude.com/docs/connectors/building) and [ChatGPT](https://developers.openai.com/api/docs/mcp/), development tools like [Visual Studio Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers), [Cursor](https://cursor.com/docs/context/mcp), [MCPJam](https://docs.mcpjam.com/getting-started), and [many others](/clients) all support MCP — making it easy to build once and integrate everywhere.
+
 # [​](#start-building) Start Building
 
 [## Build servers
 
-Create MCP servers to expose your data and tools](/docs/develop/build-server)[## Build clients
+Create MCP servers to expose your data and tools](/docs/develop/build-server)
+
+[## Build clients
 
 Develop applications that connect to MCP servers](/docs/develop/build-client)
+
+[## Build MCP Apps
+
+Build interactive apps that run inside AI clients](/extensions/apps/overview)
 
 # [​](#learn-more) Learn more
 
@@ -88,9 +109,5 @@ YesNo
 [Architecture](/docs/learn/architecture)
 
 ⌘I
-
-Assistant
-
-Responses are generated using AI and may contain mistakes.
 
 ![](https://mintcdn.com/mcp/bEUxYpZqie0DsluH/images/mcp-simple-diagram.png?w=1100&fit=max&auto=format&n=bEUxYpZqie0DsluH&q=85&s=341b88d6308188ab06bf05748c80a494)

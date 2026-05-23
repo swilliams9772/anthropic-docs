@@ -1,6 +1,6 @@
 # Beta headers
 
-**Source:** https://platform.claude.com/docs/en/api/beta-headers
+**Source:** http://platform.claude.com/docs/en/api/beta-headers
 
 Copy page
 
@@ -23,26 +23,22 @@ anthropic-beta: BETA_FEATURE_NAME
 
 When using the SDK, you can specify beta headers in the request options:
 
-Python
+cURLCLIPythonTypeScript
 
 ```
-from anthropic import Anthropic
-
 client = Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-7",
     max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "Hello, Claude"}
-    ],
-    betas=["beta-feature-name"]
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+    betas=["files-api-2025-04-14"],
 )
 ```
 
 Beta features are experimental and may:
 
-* Have breaking changes without notice
+* Have breaking changes with notice
 * Be deprecated or removed
 * Have different rate limits or pricing
 * Not be available in all regions
@@ -55,6 +51,16 @@ To use multiple beta features in a single request, include all feature names in 
 anthropic-beta: feature1,feature2,feature3
 ```
 
+# Endpoint-specific headers
+
+Some beta features are scoped to specific endpoints rather than individual request parameters and require a feature-specific beta header on every request:
+
+| Endpoints | Beta header |
+| --- | --- |
+| `/v1/agents`, `/v1/sessions`, `/v1/environments` | `managed-agents-2026-04-01` |
+
+See the [Managed Agents overview](/docs/en/managed-agents/overview) for details.
+
 # Version naming conventions
 
 Beta feature names typically follow the pattern: `feature-name-YYYY-MM-DD`, where the date indicates when the beta version was released. Always use the exact beta feature name as documented.
@@ -62,6 +68,8 @@ Beta feature names typically follow the pattern: `feature-name-YYYY-MM-DD`, wher
 # Error handling
 
 If you use an invalid or unavailable beta header, you'll receive an error response:
+
+Output
 
 ```
 {
@@ -82,3 +90,5 @@ For questions about beta features:
 3. Contact support for assistance with production usage
 
 Remember that beta features are provided "as-is" and may not have the same SLA guarantees as stable API features.
+
+Was this page helpful?

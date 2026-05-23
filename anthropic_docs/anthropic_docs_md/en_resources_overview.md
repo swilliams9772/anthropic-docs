@@ -1,18 +1,22 @@
 # Documentation
 
-**Source:** https://platform.claude.com/docs/en/resources/overview
+**Source:** http://platform.claude.com/docs/en/resources/overview
 
 # Model cards
 
-[Claude Opus 4.5 System Card
+[Claude Opus 4.7 System Card
 
-Detailed documentation of Claude Opus 4.5.](http://www.anthropic.com/claude-opus-4-5-system-card)[Claude Haiku 4.5 System Card
+Detailed documentation of Claude Opus 4.7.](https://www.anthropic.com/claude-opus-4-7-system-card)[Claude Sonnet 4.6 System Card
 
-Detailed documentation of Claude Haiku 4.5.](http://www.anthropic.com/claude-haiku-4-5-system-card)[Claude Sonnet 4.5 System Card
+Detailed documentation of Claude Sonnet 4.6.](https://www.anthropic.com/claude-sonnet-4-6-system-card)[Claude Opus 4.5 System Card
 
-Detailed documentation of Claude Sonnet 4.5.](http://www.anthropic.com/claude-sonnet-4-5-system-card)[Claude Opus 4.1 System Card
+Detailed documentation of Claude Opus 4.5.](https://www.anthropic.com/claude-opus-4-5-system-card)[Claude Haiku 4.5 System Card
 
-Detailed documentation of Claude Opus 4.1.](http://www.anthropic.com/claude-opus-4-1-system-card)[Claude 4 System Card
+Detailed documentation of Claude Haiku 4.5.](https://www.anthropic.com/claude-haiku-4-5-system-card)[Claude Sonnet 4.5 System Card
+
+Detailed documentation of Claude Sonnet 4.5.](https://www.anthropic.com/claude-sonnet-4-5-system-card)[Claude Opus 4.1 System Card
+
+Detailed documentation of Claude Opus 4.1.](https://www.anthropic.com/claude-opus-4-1-system-card)[Claude 4 System Card
 
 Detailed documentation of Claude 4 models.](https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf)[Claude Sonnet 3.7 System Card
 
@@ -24,13 +28,11 @@ Detailed documentation of Claude 3 models including latest 3.5 addendum.](https:
 
 [Quickstarts
 
-Deployable applications built with our API.](https://github.com/anthropics/anthropic-quickstarts)[Courses
+Deployable applications built with the API.](https://github.com/anthropics/anthropic-quickstarts)[Courses
 
 Step by step lessons on building with Claude.](https://anthropic.skilljar.com/)[Cookbook
 
-Replicable code samples and implementations.](https://platform.claude.com/cookbooks)[Prompt library
-
-Explore optimized prompts for a breadth of business and personal tasks.](/docs/en/resources/prompt-library/library)[Use case guides
+Replicable code samples and implementations.](https://platform.claude.com/cookbooks)[Use case guides
 
 In-depth production guides for building common use cases with Claude.](/docs/en/about-claude/use-case-guides/overview)[Glossary
 
@@ -40,10 +42,8 @@ Key terms and concepts for working with Claude and language models.](/docs/en/ab
 
 [API primer for Claude ingestion
 
-Concise API guide meant for ingestion by Claude.](/docs/en/claude_api_primer.md)[Claude API Docs Overview
+Concise API guide meant for ingestion by Claude.](/docs/en/claude_api_primer)[Claude API Docs Overview
 
 Concise overview of Claude API documentation, optimized for LLM ingestion.](/docs/for-claude)[llms.txt
 
-LLM-optimized documentation index.](/llms.txt)[llms-full.txt
-
-Complete LLM-optimized documentation.](/llms-full.txt)
+LLM-optimized documentation index.](/llms.txt)

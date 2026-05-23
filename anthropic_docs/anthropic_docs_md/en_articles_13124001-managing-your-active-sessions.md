@@ -2,8 +2,6 @@
 
 **Source:** https://support.claude.com/en/articles/13124001-managing-your-active-sessions
 
-**Note:** This feature is currently rolling out to users on all Claude plans. If you don't see it yet, check back soon.
-
 Claude lets you view and manage all the devices and browsers where you're currently logged in. This helps you stay in control of your account security — if you notice a session you don't recognize, or you want to log out of a device you no longer use, you can terminate that session directly.
 
 # What you'll see
@@ -57,4 +55,4 @@ If you ever notice a session from a location you don't recognize or a device you
 
 Related Articles
 
-[How do I log out of all active sessions?](https://support.claude.com/en/articles/10310342-how-do-i-log-out-of-all-active-sessions)[Using Claude Code with your Pro or Max plan](https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan)[Using Claude Code with your Team or Enterprise plan](https://support.claude.com/en/articles/11845131-using-claude-code-with-your-team-or-enterprise-plan)[Managing API Key Environment Variables in Claude Code](https://support.claude.com/en/articles/12304248-managing-api-key-environment-variables-in-claude-code)[Logging in to your Claude account](https://support.claude.com/en/articles/13189465-logging-in-to-your-claude-account)
+[How do I log out of all active sessions?](https://support.claude.com/en/articles/10310342-how-do-i-log-out-of-all-active-sessions)[Use Claude Code with your Pro or Max plan](https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan)[Manage API key environment variables in Claude Code](https://support.claude.com/en/articles/12304248-manage-api-key-environment-variables-in-claude-code)[Log in to your Claude account](https://support.claude.com/en/articles/13189465-log-in-to-your-claude-account)[Logging in to your Console account](https://support.claude.com/en/articles/13371040-logging-in-to-your-console-account)

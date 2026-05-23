@@ -65,7 +65,7 @@ Key Resources:
 
 * Build a weekly use case spotlight schedule
 * Track activity metrics using audit logs and success metrics through other collection methods such as surveys
-* Identify and enable appropriate connectors and capabilities (in admin settings)
+* Identify and enable appropriate connectors and capabilities (in organization settings)
 * Participate in monthly webinar series every third week of the month (email will be sent with invites to all registered admin)
 
 |  |
@@ -100,4 +100,4 @@ Remember, there's no "right" timeline for implementation. Whether you're moving 
 
 Related Articles
 
-[Claude Code Usage Analytics](https://support.claude.com/en/articles/12157520-claude-code-usage-analytics)[Claude Code on the web](https://support.claude.com/en/articles/12618689-claude-code-on-the-web)[Getting Started with Claude for Nonprofits](https://support.claude.com/en/articles/12893767-getting-started-with-claude-for-nonprofits)[Claude for Nonprofits Partnership Guide for All Users](https://support.claude.com/en/articles/12923901-claude-for-nonprofits-partnership-guide-for-all-users)[Claude in Chrome Admin Controls](https://support.claude.com/en/articles/13065128-claude-in-chrome-admin-controls)
+[Getting started with Claude for Nonprofits](https://support.claude.com/en/articles/12893767-getting-started-with-claude-for-nonprofits)[Claude for Nonprofits Partnership Guide for All Users](https://support.claude.com/en/articles/12923901-claude-for-nonprofits-partnership-guide-for-all-users)[Get started with the Claude Enterprise Analytics API](https://support.claude.com/en/articles/13694757-get-started-with-the-claude-enterprise-analytics-api)[Claude Design admin guide for Team and Enterprise plans](https://support.claude.com/en/articles/14604406-claude-design-admin-guide-for-team-and-enterprise-plans)[Get started with Claude Compliance API integrations](https://support.claude.com/en/articles/15167101-get-started-with-claude-compliance-api-integrations)

@@ -1,28 +1,26 @@
 # Create Invite
 
-**Source:** https://platform.claude.com/docs/en/api/admin/invites/create
+**Source:** http://platform.claude.com/docs/en/api/admin/invites/create
 
 Copy page
 
 # Create Invite
 
-post/v1/organizations/invites
+POST/v1/organizations/invites
 
 Create Invite
 
-# Body ParametersExpand Collapse
+# Body ParametersJSONExpand Collapse
 
 email: string
 
 Email of the User.
 
-formatemail
-
 role: "user" or "developer" or "billing" or "claude\_code\_user"
 
 Role for the invited User. Cannot be "admin".
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -34,7 +32,7 @@ Accepts one of the following:
 
 # ReturnsExpand Collapse
 
-Invite = object { id, email, expires\_at, 4 more }
+Invite object { id, email, expires\_at, 4 more }
 
 id: string
 
@@ -48,19 +46,15 @@ expires\_at: string
 
 RFC 3339 datetime string indicating when the Invite expires.
 
-formatdate-time
-
 invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
-
-formatdate-time
 
 role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -76,7 +70,7 @@ status: "accepted" or "expired" or "deleted" or "pending"
 
 Status of the Invite.
 
-Accepts one of the following:
+One of the following:
 
 "accepted"
 
@@ -92,15 +86,12 @@ Object type.
 
 For Invites, this is always `"invite"`.
 
-Accepts one of the following:
-
-"invite"
-
 Create Invite
 
 ```
 curl https://api.anthropic.com/v1/organizations/invites \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
     -d '{
           "email": "user@emaildomain.com",

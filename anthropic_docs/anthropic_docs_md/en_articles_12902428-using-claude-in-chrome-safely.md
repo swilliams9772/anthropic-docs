@@ -1,14 +1,14 @@
-# Using Claude in Chrome Safely
+# Using Claude in Chrome safely
 
 **Source:** https://support.claude.com/en/articles/12902428-using-claude-in-chrome-safely
 
-Claude in Chrome is available in beta for all paid plans (Pro, Max, Team, and Enterprise) on the Chrome web browser.
-
 This article explains the risks of using Claude in Chrome and provides best practices for protecting yourself and your data.
+
+Claude in Chrome is available in beta for all paid plans (Pro, Max, Team, and Enterprise) on the Chrome web browser.
 
 Claude in Chrome allows Claude to interact directly with websites on your behalf, which carries inherent risks. Understanding these risks helps you use the extension safely.
 
-# Understanding the Risks
+# Understanding the risks
 
 # Prompt injection attacks
 
@@ -19,6 +19,16 @@ Our testing has identified scenarios where Claude could be manipulated to:
 * Extract and share sensitive information with bad actors
 * Delete important files
 * Perform unintended actions on websites that could result in harm
+
+# JavaScript execution on web pages
+
+Claude in Chrome includes the ability to run JavaScript code directly on the websites you visit. This is what allows Claude to interact with pages on your behalf: clicking buttons, filling forms, and reading page content.
+
+However, this also means that when JavaScript execution is enabled for a site, Claude can access the same data your browser can on that page, including login sessions, stored website data, and other information the site uses to keep you signed in.
+
+If Claude were ever manipulated through a prompt injection attack (see above), this capability could potentially be used to read your credentials or take actions within your logged-in sessions. While we apply output filters that attempt to block common sensitive data patterns such as authentication tokens and API keys from being returned to Claude, **these filters are not a security boundary.**
+
+The primary protection is the **per-domain permission system**: Claude must ask for your approval before running JavaScript on any website, and each domain requires separate permission. This gives you direct control over where Claude can use this capability.
 
 # Other risks
 
@@ -32,7 +42,7 @@ Our testing has identified scenarios where Claude could be manipulated to:
 
 ---
 
-# Our Safety Measures
+# Our safety measures
 
 We've implemented multiple layers of protection:
 
@@ -43,7 +53,7 @@ We've implemented multiple layers of protection:
 * **Action confirmations** for certain high-risk actions such as purchasing.
 * **Ongoing red teaming:** Human security researchers continuously probe for vulnerabilities. We participate in external challenges that benchmark robustness across the industry.
 
-Our testing shows that Claude Opus 4.5 demonstrates significantly stronger prompt injection robustness than previous models. Our current configuration reduces attack success rates to approximately 1% against our internal testing that combines known effective attack techniques. For more details on our approach, see our[blog post on prompt injection defenses](https://www.anthropic.com/news/prompt-injection-defenses).
+Our testing shows that Claude Opus 4.5 demonstrates significantly stronger prompt injection robustness than previous models. Our current configuration reduces attack success rates to approximately 1% against our internal testing that combines known effective attack techniques. For more details on our approach, see our **[blog post on prompt injection defenses](https://www.anthropic.com/news/prompt-injection-defenses)**.
 
 **Important:** While we've enacted these safety measures to reduce risks, the chances of an attack are still non-zero. Always exercise caution when using Claude in Chrome.
 
@@ -64,11 +74,11 @@ It’s unlikely that we’ve captured all sites in these categories, so please r
 # Protecting yourself from malicious attackers
 
 1. **Start with trusted sites:** Begin with websites you trust. Avoid unfamiliar websites or those containing user-generated content from unknown sources.
-2. **Understand permissions:** Always confirm before Claude handles sensitive or high-risk tasks. Refer to our [Claude in Chrome Permissions Guide](https://support.claude.com/en/articles/12902446-claude-for-chrome-permissions-guide) to learn more.
+2. **Understand permissions:** Always confirm before Claude handles sensitive or high-risk tasks. Refer to our **[Claude in Chrome permissions guide](https://support.claude.com/en/articles/12902446-claude-for-chrome-permissions-guide)** to learn more.
 3. **Stay alert for suspicious behavior:** If Claude suddenly starts discussing unrelated topics, accessing unexpected websites, or requesting sensitive information, stop the task immediately. This could indicate a prompt injection attempt.
 4. **Report issues immediately:** Help us improve by flagging any concerning behavior through the in-chat feedback options.
 
-# Safeguarding Personal Data
+# Safeguarding personal data
 
 When you open the Claude side panel, Claude takes screenshots of your active browser tab to understand webpage content. This means Claude can see any information visible on your screen, including personal data, sensitive documents, or private information belonging to you or others.
 
@@ -88,7 +98,7 @@ When you open the Claude side panel, Claude takes screenshots of your active bro
 * Start with simple tasks like research or form-filling rather than complex multi-step workflows.
 * Make sure your prompts are specific and carefully tailored to avoid Claude doing things you didn't intend.
 
-# What to Avoid
+# What to avoid
 
 We strongly advise against using Claude in Chrome to manage or take actions on sensitive information including but not limited to:
 
@@ -100,7 +110,7 @@ We strongly advise against using Claude in Chrome to manage or take actions on s
 
 ---
 
-# Your Responsibility
+# Your responsibility
 
 You remain responsible for all browser actions taken by Claude performed on your behalf. This includes:
 
@@ -109,7 +119,7 @@ You remain responsible for all browser actions taken by Claude performed on your
 * Data accessed or modified
 * Respecting third-party website terms of service, including any restrictions on automated access
 
-For more information about using AI agents safely, please review our [Acceptable Use Policy for Agents](https://support.claude.com/en/articles/12005017-using-agents-according-to-our-usage-policy).
+For more information about using AI agents safely, please review our **[Acceptable Use Policy for Agents](https://support.claude.com/en/articles/12005017-using-agents-according-to-our-usage-policy)**.
 
 ---
 
@@ -122,10 +132,10 @@ If you're on a Team or Enterprise plan, your organization's admin can configure 
 
 These controls add an extra layer of protection beyond Claude's default safeguards. If you have questions about which sites are permitted in your organization, contact your admin.
 
-For admin documentation, see [Claude in Chrome Admin Controls](https://support.claude.com/en/articles/13065128-claude-for-chrome-admin-controls).
+For admin documentation, see **[Claude in Chrome admin controls](https://support.claude.com/en/articles/13065128-claude-for-chrome-admin-controls)**.
 
 ---
 
 Related Articles
 
-[Getting Started with Claude in Chrome](https://support.claude.com/en/articles/12012173-getting-started-with-claude-in-chrome)[Claude in Chrome Release Notes](https://support.claude.com/en/articles/12306336-claude-in-chrome-release-notes)[Claude in Chrome Troubleshooting](https://support.claude.com/en/articles/12902405-claude-in-chrome-troubleshooting)[Claude in Chrome Permissions Guide](https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide)[Claude in Chrome Admin Controls](https://support.claude.com/en/articles/13065128-claude-in-chrome-admin-controls)
+[Get started with Claude in Chrome](https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome)[Claude in Chrome Troubleshooting](https://support.claude.com/en/articles/12902405-claude-in-chrome-troubleshooting)[Claude in Chrome Permissions Guide](https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide)[Claude in Chrome admin controls](https://support.claude.com/en/articles/13065128-claude-in-chrome-admin-controls)[Use Claude Cowork safely](https://support.claude.com/en/articles/13364135-use-claude-cowork-safely)

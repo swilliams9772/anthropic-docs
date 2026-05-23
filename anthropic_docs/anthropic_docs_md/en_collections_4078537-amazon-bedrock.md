@@ -2,10 +2,6 @@
 
 **Source:** https://support.claude.com/en/collections/4078537-amazon-bedrock
 
-[All Collections](/en/)
-
-Amazon Bedrock
-
 ![](https://intercom.help/anthropic-6f71807d7c3e/assets/svg/icon:nature-cloud/F0F0EB)
 
 # Amazon Bedrock

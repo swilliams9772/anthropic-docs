@@ -23,8 +23,12 @@ Please note:
 * The download link will expire 24 hours after delivery.
 * If your link expires, you can always request a new one by repeating the export process.
 
+# Can I import or migrate this data to another Claude account?
+
+We do not support migrating data between separate accounts at this time.
+
 ---
 
 Related Articles
 
-[I would like to input sensitive data into my chats with Claude. Who can view my conversations?](https://support.claude.com/en/articles/8325621-i-would-like-to-input-sensitive-data-into-my-chats-with-claude-who-can-view-my-conversations)[Who owns and manages the data of my Claude for Education account?](https://support.claude.com/en/articles/11732894-who-owns-and-manages-the-data-of-my-claude-for-education-account)[Using Claude’s chat search and memory to build on previous context](https://support.claude.com/en/articles/11817273-using-claude-s-chat-search-and-memory-to-build-on-previous-context)[Using the 10x Genomics Extension in Claude](https://support.claude.com/en/articles/12614803-using-the-10x-genomics-extension-in-claude)[How can I export my organization's data?](https://support.claude.com/en/articles/13346720-how-can-i-export-my-organization-s-data)
+[I would like to input sensitive data into my chats with Claude. Who can view my conversations?](https://support.claude.com/en/articles/8325621-i-would-like-to-input-sensitive-data-into-my-chats-with-claude-who-can-view-my-conversations)[Who owns and manages the data of my Claude for Education account?](https://support.claude.com/en/articles/11732894-who-owns-and-manages-the-data-of-my-claude-for-education-account)[Use Claude’s chat search and memory to build on previous context](https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context)[Export your organization's data](https://support.claude.com/en/articles/13346720-export-your-organization-s-data)[Use Claude for PowerPoint](https://support.claude.com/en/articles/13521390-use-claude-for-powerpoint)

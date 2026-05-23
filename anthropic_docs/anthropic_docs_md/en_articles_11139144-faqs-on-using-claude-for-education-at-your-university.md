@@ -10,7 +10,7 @@ This guide helps you use Claude for Education through your university-sponsored 
 
 Your university-sponsored Claude for Education account includes:
 
-* **Enhanced context window:** Upload hundreds of pages of text (up to 500k tokens with Claude Sonnet 4) for analyzing lengthy academic papers, research documents, and datasets.
+* **Enhanced context window:** Upload hundreds of pages of text (up to 500k tokens when using specific models) for analyzing lengthy academic papers, research documents, and datasets.
 * **Advanced models:** Access to the newest, most advanced Claude models.
 * **Projects feature:** Create and organize multiple related conversations with shared knowledge bases.
 * **Increased usage limits:** More messages per day compared to individual plans.
@@ -141,4 +141,4 @@ Review these resources and visit the [Privacy Center](https://privacy.anthropic.
 
 Related Articles
 
-[Getting Started with Claude](https://support.claude.com/en/articles/8114491-getting-started-with-claude)[Using the Google Drive Integration](https://support.claude.com/en/articles/10166901-using-the-google-drive-integration)[Getting Started with Claude for Education at Your University (for Owners/Admins)](https://support.claude.com/en/articles/11139094-getting-started-with-claude-for-education-at-your-university-for-owners-admins)[Who owns and manages the data of my Claude for Education account?](https://support.claude.com/en/articles/11732894-who-owns-and-manages-the-data-of-my-claude-for-education-account)[Logging in to your Claude account](https://support.claude.com/en/articles/13189465-logging-in-to-your-claude-account)
+[Get started with Claude for Education at your university (for Owners/Admins)](https://support.claude.com/en/articles/11139094-get-started-with-claude-for-education-at-your-university-for-owners-admins)[Log in to your Claude account](https://support.claude.com/en/articles/13189465-log-in-to-your-claude-account)[Claude Code user FAQ](https://support.claude.com/en/articles/14554922-claude-code-user-faq)[Open Claude Desktop with a link](https://support.claude.com/en/articles/14729294-open-claude-desktop-with-a-link)[Open the Claude mobile app with a link](https://support.claude.com/en/articles/14898120-open-the-claude-mobile-app-with-a-link)

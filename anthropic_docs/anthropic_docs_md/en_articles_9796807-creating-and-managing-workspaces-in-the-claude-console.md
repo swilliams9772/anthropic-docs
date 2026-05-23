@@ -4,12 +4,16 @@
 
 This guide will walk you through the process of creating, editing, and managing Workspaces in your Claude Console organization.
 
-# Creating a New Workspace
+# What are Workspaces?
+
+Workspaces are collaborative spaces within Console organizations where teams can separate API resources by use case.
+
+# How to create a new Workspace
 
 **Note:** Only Organization Admins can create new Workspaces.
 
 1. Log in to your [Claude Console account](https://platform.claude.com/login).
-2. Navigate to the Workspaces section by clicking on "Settings" in the top level menu and selecting “Workspaces” from the left side bar ([Settings > Workspaces](https://platform.claude.com/settings/workspaces)).
+2. Navigate to the **Workspaces** section by clicking on "Settings" in the top level menu and selecting “Workspaces” from the left side bar ([Settings > Workspaces](https://platform.claude.com/settings/workspaces)).
 3. Click the "Add Workspace" button near the top right of the page.
 4. In the modal that appears, enter a name for your new Workspace, and select a color assignment. This color assignment will be used to help visually identify your workspace in the Claude Console.
 5. Click "Create" to finalize the new Workspace.
@@ -20,7 +24,7 @@ Your new Workspace will now appear in the list of Workspaces.
 
 # Editing Workspace Settings
 
-1. From the Workspaces list, click on the ellipsis next to the Workspace you want to edit.
+1. From the **Workspaces** list, click on the ellipsis next to the Workspace you want to edit.
 2. Select “Edit details."
 3. You can modify the following settings:
 
@@ -30,7 +34,9 @@ Your new Workspace will now appear in the list of Workspaces.
 
 **Note:** The default Workspace is not editable and cannot be removed.
 
-# Adding members in a Workspace
+# Adding members to a Workspace
+
+**Note:** You must add members to your Console organization by following [these instructions](https://support.claude.com/en/articles/13443764-inviting-members-to-the-claude-console) before you can add them to a Workspace.
 
 1. Navigate to the desired Workspace's details page by clicking on it from the Workspaces list.
 2. Click on the “Members” tab.
@@ -41,7 +47,7 @@ Your new Workspace will now appear in the list of Workspaces.
 
 **Note:** Organization Admins are automatically added as Workspace Admin to every Workspace. Organization Billing role holders are automatically granted ability to see cost, usage, and limit values for all Workspaces, but can be upgraded to the Organization Admin role.
 
-# Deleting members in a Workspace
+# Deleting members from a Workspace
 
 Click the trash can icon next to the member to remove them from your Workspace.
 
@@ -49,7 +55,7 @@ Click the trash can icon next to the member to remove them from your Workspace.
 
 # Managing API Keys in a Workspace
 
-1. Navigate to the desired Workspace's details page by clicking on it from the Workspaces list.
+1. Navigate to the desired Workspace's details page by clicking on it from the **Workspaces** list.
 2. Click on the "API Keys" tab.
 3. To create a new API key for this Workspace:
 
@@ -62,14 +68,14 @@ Click the trash can icon next to the member to remove them from your Workspace.
    * Click the ellipsis next to it
    * Select "Disable API Key" or “Delete API Key”
 
-     + **Please note:** Deleting an API key is a permanent action and cannot be undone.
+     + **Note:** Deleting an API key is a permanent action and cannot be undone.
    * Confirm the action
 
 **Note:** API keys are tied to the Workspace they're created in and cannot be moved between Workspaces.
 
 # Setting Workspace Rate Limits
 
-1. Navigate to the desired Workspace's details page by clicking on it from the Workspaces list.
+1. Navigate to the desired Workspace's details page by clicking on it from the **Workspaces** list.
 2. Click on the "Limits" tab.
 3. Set a limit for each model tier and limit type by clicking on the pencil icon next to each option.
 4. Workspace Spend Limits can be reset to the organization rate limit by clicking the “Refresh” icon next to the rate limit you previously set for the Workspace.
@@ -78,13 +84,13 @@ Click the trash can icon next to the member to remove them from your Workspace.
 
 # Setting Workspace Spend Limits or Notifications
 
-1. Navigate to the desired Workspace's details page by clicking on it from the Workspaces list.
+1. Navigate to the desired Workspace's details page by clicking on it from the **Workspaces** list.
 2. Click on the "Limits" tab.
 3. Choose one of the following:
 
    * Select “Change Limit” to set a specific spend limit for this Workspace.
 
-     + **Please note:** You can only set a spend limit that is lower than your organization’s limit. If unset, your spend limit defaults to the organization’s limit.
+     + **Note:** You can only set a spend limit that is lower than your organization’s limit. If unset, your spend limit defaults to the organization’s limit.
    * Select “Add notification” to set up an email notification when the Workspace spend reaches a specific amount.
 
 # Viewing Workspace Usage and Costs
@@ -96,7 +102,7 @@ Click the trash can icon next to the member to remove them from your Workspace.
 
 If you no longer need a Workspace but want to retain its historical data:
 
-1. Navigate to the Workspaces page.
+1. Navigate to the **Workspaces** page.
 2. Click the ellipsis next to the Workspace you would like to archive.
 3. Confirm that you want to archive the Workspace.
 
@@ -106,13 +112,13 @@ If you no longer need a Workspace but want to retain its historical data:
 
 Every organization has a default Workspace that cannot be renamed, archived, or deleted. To view API keys associated with the default Workspace:
 
-1. Navigate to the Workspaces list.
+1. Navigate to the **Workspaces** list.
 2. Click on "Default" in the list.
 
-**Note:** You can view your default Workspace’s limits from the [Limits settings](https://console.staging.ant.dev/settings/limits).
+**Note:** You can view your default Workspace’s limits from the [Limits settings](https://platform.claude.com/settings/limits).
 
 ---
 
 Related Articles
 
-[Cost and Usage Reporting in the Claude Console](https://support.claude.com/en/articles/9534590-cost-and-usage-reporting-in-the-claude-console)[Claude Console Roles and Permissions](https://support.claude.com/en/articles/10186004-claude-console-roles-and-permissions)[Getting Started with Claude in Slack](https://support.claude.com/en/articles/11506255-getting-started-with-claude-in-slack)[Claude Code FAQ](https://support.claude.com/en/articles/12386420-claude-code-faq)[Claude in Chrome Admin Controls](https://support.claude.com/en/articles/13065128-claude-in-chrome-admin-controls)
+[Cost and Usage Reporting in the Claude Console](https://support.claude.com/en/articles/9534590-cost-and-usage-reporting-in-the-claude-console)[Claude Console roles and permissions](https://support.claude.com/en/articles/10186004-claude-console-roles-and-permissions)[Sharing Prompts in the Claude Console](https://support.claude.com/en/articles/10722177-sharing-prompts-in-the-claude-console)[Claude Code FAQ](https://support.claude.com/en/articles/12386420-claude-code-faq)[Inviting members to the Claude Console](https://support.claude.com/en/articles/13443764-inviting-members-to-the-claude-console)

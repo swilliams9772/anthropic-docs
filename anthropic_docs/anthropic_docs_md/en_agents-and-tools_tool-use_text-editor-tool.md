@@ -1,40 +1,25 @@
 # Text editor tool
 
-**Source:** https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool
+**Source:** http://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool
 
 Copy page
 
-Claude can use an Anthropic-defined text editor tool to view and modify text files, helping you debug, fix, and improve your code or other text documents. This allows Claude to directly interact with your files, providing hands-on assistance rather than just suggesting changes.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-# Model compatibility
+Claude can use an Anthropic-schema text editor tool to view and modify text files, helping you debug, fix, and improve your code or other text documents. This allows Claude to directly interact with your files, providing hands-on assistance rather than just suggesting changes.
 
-| Model | Tool Version |
-| --- | --- |
-| Claude 4.x models | `text_editor_20250728` |
-| Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) | `text_editor_20250124` |
-
-The `text_editor_20250728` tool for Claude 4 models does not include the `undo_edit` command. If you require this functionality, you'll need to use Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)).
-
-Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 # When to use the text editor tool
 
 Some examples of when to use the text editor tool are:
 
-* **Code debugging**: Have Claude identify and fix bugs in your code, from syntax errors to logic issues.
-* **Code refactoring**: Let Claude improve your code structure, readability, and performance through targeted edits.
-* **Documentation generation**: Ask Claude to add docstrings, comments, or README files to your codebase.
-* **Test creation**: Have Claude create unit tests for your code based on its understanding of the implementation.
+* **Code debugging:** Have Claude identify and fix bugs in your code, from syntax errors to logic issues.
+* **Code refactoring:** Let Claude improve your code structure, readability, and performance through targeted edits.
+* **Documentation generation:** Ask Claude to add docstrings, comments, or README files to your codebase.
+* **Test creation:** Have Claude create unit tests for your code based on its understanding of the implementation.
 
 # Use the text editor tool
-
-Claude 4
-
-Claude 4
-
-Claude Sonnet 3.7
-
-Claude Sonnet 3.7
 
 Provide the text editor tool (named `str_replace_based_edit_tool`) to Claude using the Messages API.
 
@@ -42,30 +27,30 @@ You can optionally specify a `max_characters` parameter to control truncation wh
 
 `max_characters` is only compatible with `text_editor_20250728` and later versions of the text editor tool.
 
-Shell
+cURLCLIPythonTypeScriptJava
 
 ```
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-sonnet-4-5",
-    "max_tokens": 1024,
-    "tools": [
-      {
-        "type": "text_editor_20250728",
-        "name": "str_replace_based_edit_tool",
-        "max_characters": 10000
-      }
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=[
+        {
+            "type": "text_editor_20250728",
+            "name": "str_replace_based_edit_tool",
+            "max_characters": 10000,
+        }
     ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "There'\''s a syntax error in my primes.py file. Can you help me fix it?"
-      }
-    ]
-  }'
+    messages=[
+        {
+            "role": "user",
+            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
+        }
+    ],
+)
+
+print(response)
 ```
 
 The text editor tool can be used in the following way:
@@ -159,68 +144,44 @@ Parameters:
 * `command`: Must be "insert"
 * `path`: The path to the file to modify
 * `insert_line`: The line number after which to insert the text (0 for beginning of file)
-* `new_str`: The text to insert
+* `insert_text`: The text to insert
 
 # Example insert command
 
-# undo\_edit
-
-The `undo_edit` command allows Claude to revert the last edit made to a file.
-
-This command is only available in Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)). It is not supported in Claude 4 models using the `text_editor_20250728`.
-
-Parameters:
-
-* `command`: Must be "undo\_edit"
-* `path`: The path to the file whose last edit should be undone
-
-# Example undo\_edit command
-
 # Example: Fixing a syntax error with the text editor tool
 
-Claude 4
-
-Claude 4
-
-Claude Sonnet 3.7
-
-Claude Sonnet 3.7
-
-This example demonstrates how Claude 4 models use the text editor tool to fix a syntax error in a Python file.
+This example demonstrates how Claude uses the text editor tool to fix a syntax error in a Python file.
 
 First, your application provides Claude with the text editor tool and a prompt to fix a syntax error:
 
-Shell
+cURLCLIPythonTypeScriptJava
 
 ```
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-sonnet-4-5",
-    "max_tokens": 1024,
-    "tools": [
-      {
-        "type": "text_editor_20250728",
-        "name": "str_replace_based_edit_tool"
-      }
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
+    messages=[
+        {
+            "role": "user",
+            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
+        }
     ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "There'\''s a syntax error in my primes.py file. Can you help me fix it?"
-      }
-    ]
-  }'
+)
+
+print(response)
 ```
 
-Claude will use the text editor tool first to view the file:
+Claude uses the text editor tool first to view the file:
+
+Output
 
 ```
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-7",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -243,44 +204,32 @@ Claude will use the text editor tool first to view the file:
 
 Your application should then read the file and return its contents to Claude:
 
-Shell
+cURLCLIPythonTypeScriptJava
 
 ```
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-sonnet-4-5",
-    "max_tokens": 1024,
-    "tools": [
-      {
-        "type": "text_editor_20250728",
-        "name": "str_replace_based_edit_tool"
-      }
-    ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "There'\''s a syntax error in my primes.py file. Can you help me fix it?"
-      },
-      {
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
+    messages=[
+        {
+            "role": "user",
+            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
+        },
+        {
             "role": "assistant",
             "content": [
                 {
                     "type": "text",
-                    "text": "I'\''ll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue."
+                    "text": "I'll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue.",
                 },
                 {
                     "type": "tool_use",
                     "id": "toolu_01AbCdEfGhIjKlMnOpQrStU",
                     "name": "str_replace_based_edit_tool",
-                    "input": {
-                        "command": "view",
-                        "path": "primes.py"
-                    }
-                }
-            ]
+                    "input": {"command": "view", "path": "primes.py"},
+                },
+            ],
         },
         {
             "role": "user",
@@ -288,24 +237,28 @@ curl https://api.anthropic.com/v1/messages \
                 {
                     "type": "tool_result",
                     "tool_use_id": "toolu_01AbCdEfGhIjKlMnOpQrStU",
-                    "content": "1: def is_prime(n):\n2:     \"\"\"Check if a number is prime.\"\"\"\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     \"\"\"Generate a list of prime numbers up to the given limit.\"\"\"\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     \"\"\"Main function to demonstrate prime number generation.\"\"\"\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f\"Prime numbers up to {limit}:\")\n29:     print(prime_list)\n30:     print(f\"Found {len(prime_list)} prime numbers.\")\n31: \n32: if __name__ == \"__main__\":\n33:     main()"
+                    "content": '1: def is_prime(n):\n2:     """Check if a number is prime."""\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     """Generate a list of prime numbers up to the given limit."""\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     """Main function to demonstrate prime number generation."""\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f"Prime numbers up to {limit}:")\n29:     print(prime_list)\n30:     print(f"Found {len(prime_list)} prime numbers.")\n31: \n32: if __name__ == "__main__":\n33:     main()',
                 }
-            ]
-        }
-    ]
-  }'
+            ],
+        },
+    ],
+)
+
+print(response)
 ```
 
 **Line numbers**
 
 In the example above, the `view` tool result includes file contents with line numbers prepended to each line (e.g., "1: def is\_prime(n):"). Line numbers are not required, but they are essential for successfully using the `view_range` parameter to examine specific sections of files and the `insert_line` parameter to add content at precise locations.
 
-Claude will identify the syntax error and use the `str_replace` command to fix it:
+Claude identifies the syntax error and uses the `str_replace` command to fix it:
+
+Output
 
 ```
 {
   "id": "msg_01VwXyZAbCdEfGhIjKlMnO",
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-7",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -330,18 +283,13 @@ Claude will identify the syntax error and use the `str_replace` command to fix i
 
 Your application should then make the edit and return the result:
 
-Python
+CLIPythonTypeScriptJava
 
 ```
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-7",
     max_tokens=1024,
-    tools=[
-        {
-            "type": "text_editor_20250728",
-            "name": "str_replace_based_edit_tool"
-        }
-    ],
+    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
         # Previous messages...
         {
@@ -349,7 +297,7 @@ response = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you."
+                    "text": "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you.",
                 },
                 {
                     "type": "tool_use",
@@ -359,10 +307,10 @@ response = client.messages.create(
                         "command": "str_replace",
                         "path": "primes.py",
                         "old_str": "    for num in range(2, limit + 1)",
-                        "new_str": "    for num in range(2, limit + 1):"
-                    }
-                }
-            ]
+                        "new_str": "    for num in range(2, limit + 1):",
+                    },
+                },
+            ],
         },
         {
             "role": "user",
@@ -370,20 +318,24 @@ response = client.messages.create(
                 {
                     "type": "tool_result",
                     "tool_use_id": "toolu_01PqRsTuVwXyZAbCdEfGh",
-                    "content": "Successfully replaced text at exactly one location."
+                    "content": "Successfully replaced text at exactly one location.",
                 }
-            ]
-        }
-    ]
+            ],
+        },
+    ],
 )
+
+print(response)
 ```
 
-Finally, Claude will provide a complete explanation of the fix:
+Finally, Claude provides a complete explanation of the fix:
+
+Output
 
 ```
 {
   "id": "msg_01IjKlMnOpQrStUvWxYzAb",
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-7",
   "stop_reason": "end_turn",
   "role": "assistant",
   "content": [
@@ -395,16 +347,11 @@ Finally, Claude will provide a complete explanation of the fix:
 }
 ```
 
----
-
 # Implement the text editor tool
 
 The text editor tool is implemented as a schema-less tool. When using this tool, you don't need to provide an input schema as with other tools; the schema is built into Claude's model and can't be modified.
 
-The tool type depends on the model version:
-
-* **Claude 4**: `type: "text_editor_20250728"`
-* **Claude Sonnet 3.7**: `type: "text_editor_20250124"`
+The tool type is `type: "text_editor_20250728"` for Claude 4 models.
 
 1. 1
 
@@ -418,28 +365,22 @@ The tool type depends on the model version:
    Create a function that processes tool calls from Claude based on the command type:
 
    ```
-   def handle_editor_tool(tool_call, model_version):
+   def handle_editor_tool(tool_call):
        input_params = tool_call.input
-       command = input_params.get('command', '')
-       file_path = input_params.get('path', '')
+       command = input_params.get("command", "")
+       file_path = input_params.get("path", "")
 
-       if command == 'view':
+       if command == "view":
            # Read and return file contents
            pass
-       elif command == 'str_replace':
+       elif command == "str_replace":
            # Replace text in file
            pass
-       elif command == 'create':
+       elif command == "create":
            # Create new file
            pass
-       elif command == 'insert':
+       elif command == "insert":
            # Insert text at location
-           pass
-       elif command == 'undo_edit':
-           # Check if it's a Claude 4 model
-           if 'str_replace_based_edit_tool' in model_version:
-               return {"error": "undo_edit command is not supported in Claude 4"}
-           # Restore from backup for Claude 3.7
            pass
    ```
 3. 3
@@ -469,16 +410,16 @@ The tool type depends on the model version:
            tool_result = {
                "type": "tool_result",
                "tool_use_id": content.id,
-               "content": result
+               "content": result,
            }
    ```
 
 When implementing the text editor tool, keep in mind:
 
-1. **Security**: The tool has access to your local filesystem, so implement proper security measures.
-2. **Backup**: Always create backups before allowing edits to important files.
-3. **Validation**: Validate all inputs to prevent unintended changes.
-4. **Unique matching**: Make sure replacements match exactly one location to avoid unintended edits.
+1. **Security:** The tool has access to your local filesystem, so implement proper security measures.
+2. **Backup:** Always create backups before allowing edits to important files.
+3. **Validation:** Validate all inputs to prevent unintended changes.
+4. **Unique matching:** Make sure replacements match exactly one location to avoid unintended edits.
 
 # Handle errors
 
@@ -515,7 +456,6 @@ In addition to the base tokens, the following additional input tokens are needed
 | Tool | Additional input tokens |
 | --- | --- |
 | `text_editor_20250429` (Claude 4.x) | 700 tokens |
-| `text_editor_20250124` (Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))) | 700 tokens |
 
 For more detailed information about tool pricing, see [Tool use pricing](/docs/en/agents-and-tools/tool-use/overview#pricing).
 
@@ -545,10 +485,12 @@ Here are some ideas for how to use the text editor tool in more convenient and p
 * **Implement file format conversion**: Let Claude help you convert files from one format to another
 * **Automate documentation**: Set up workflows for Claude to automatically document your code
 
-As you build applications with the text editor tool, we're excited to see how you leverage Claude's capabilities to enhance your development workflow and productivity.
+The text editor tool enables Claude to work directly with your codebase, supporting workflows from debugging to automated documentation.
 
 [Tool use overview
 
 Learn how to implement tool workflows for use with Claude.](/docs/en/agents-and-tools/tool-use/overview)[Bash tool
 
 Execute shell commands with Claude.](/docs/en/agents-and-tools/tool-use/bash-tool)
+
+Was this page helpful?

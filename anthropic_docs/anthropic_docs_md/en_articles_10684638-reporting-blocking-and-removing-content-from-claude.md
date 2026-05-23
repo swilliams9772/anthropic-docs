@@ -32,16 +32,16 @@ This [form](https://docs.google.com/forms/d/1bjD-H30kVJAbIHnFXKzFcSjkUNjE-mwRHSF
 |  |  |
 | --- | --- |
 | Report content in-product | Applicable: all content within a shared Claude conversation    Use the “report” button on the shared content. |
-| Report content through our standalone reporting form | Applicable: all content within a shared Claude conversation    Please report it through [this form](https://docs.google.com/forms/d/e/1FAIpQLSeO9Hzkyf_hQ2fYkfP_cqAcJG5kdlkg1wF4drQEFK9Z6db7jg/viewform?usp=sharing) |
+| Report content through our standalone reporting form | Applicable: all content within a shared Claude conversation    Please report it through [this form](https://claude.com/form/anthropic-content-reporting). |
 
 # Blocking or removing content from Claude outputs or shared Claude content
 
 |  |  |
 | --- | --- |
-| Report content | Applicable: all content types    If you believe content violates Anthropic’s usage policies or local laws and should be removed or restricted, you can report it through [this form](https://docs.google.com/forms/d/e/1FAIpQLSeO9Hzkyf_hQ2fYkfP_cqAcJG5kdlkg1wF4drQEFK9Z6db7jg/viewform?usp=sharing).    For copyright and trademark disputes, please follow the instructions [here](https://support.anthropic.com/en/articles/10023646-i-think-a-user-is-infringing-my-copyright-or-other-intellectual-property-how-do-i-report-it). |
+| Report content | Applicable: all content types    If you believe content violates Anthropic’s usage policies or local laws and should be removed or restricted, you can report it through [this form](https://claude.com/form/anthropic-content-reporting).    For copyright and trademark disputes, please follow the instructions [here](https://support.anthropic.com/en/articles/10023646-i-think-a-user-is-infringing-my-copyright-or-other-intellectual-property-how-do-i-report-it). |
 
 ---
 
 Related Articles
 
-[Reporting, Blocking, and Removing Content from Claude](https://support.claude.com/en/articles/7996906-reporting-blocking-and-removing-content-from-claude)[I’m planning to launch a product using the Claude API. What steps should I take to ensure I’m not violating Anthropic’s Usage Policy?](https://support.claude.com/en/articles/8241216-i-m-planning-to-launch-a-product-using-the-claude-api-what-steps-should-i-take-to-ensure-i-m-not-violating-anthropic-s-usage-policy)[Claude is providing incorrect or misleading responses. What’s going on?](https://support.claude.com/en/articles/8525154-claude-is-providing-incorrect-or-misleading-responses-what-s-going-on)[Does Anthropic crawl data from the web, and how can site owners block the crawler?](https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler)[Claude in Chrome Troubleshooting](https://support.claude.com/en/articles/12902405-claude-in-chrome-troubleshooting)
+[Reporting, Blocking, and Removing Content from Claude](https://support.claude.com/en/articles/7996906-reporting-blocking-and-removing-content-from-claude)[Claude is providing incorrect or misleading responses. What’s going on?](https://support.claude.com/en/articles/8525154-claude-is-providing-incorrect-or-misleading-responses-what-s-going-on)[Does Anthropic crawl data from the web, and how can site owners block the crawler?](https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler)[What is the External Researcher Access Program?](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program)[Claude in Chrome Troubleshooting](https://support.claude.com/en/articles/12902405-claude-in-chrome-troubleshooting)
